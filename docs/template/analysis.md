@@ -9,7 +9,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 ### _Conceptual Class Category List_ ###
 
 **Business Transactions**
-
+a
 *
 
 ---
