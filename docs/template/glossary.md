@@ -26,7 +26,7 @@
 | **Stores**        | **Lojas**           | It refers to a large shop where you can buy many different types of goods.                                                                                                                         |
 | **...**           | **...**             | ...                                                                                                                                                                                                |
 | **...**           | **...**             | ...                                                                                                                                                                                                |
-| **...**           | **...**             | ...                                                                                                                                                                                                |
+| **...**           | **...**             | ..                                                                                                                                                                                                 |
 
 
 
