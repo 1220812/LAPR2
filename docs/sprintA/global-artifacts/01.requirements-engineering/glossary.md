@@ -2,18 +2,49 @@
 
 **Terms, Expressions and Acronyms (TEA) must be organized alphabetically.**
 
-(To complete according the provided example)
-
-| **_TEA_** (EN) | **_Description_** (EN)                                                                    |                                       
-|:---------------|:------------------------------------------------------------------------------------------|
-| **Clerk**      | Person responsible for carrying out various business supporting activities on the system. |
-| **CLK**        | Acronym for _Clerk_.                                                                      |
-| **...**        | ...                                                                                       |
-
-
-
-
-
+| **_TEA_** (EN)      | **_TEA_** (PT)          | **_Description_** (EN)                                                                                                                                                                             |                                       
+|:--------------------|:------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Advertisement**   | **Publicidade**         | It refers toa public communication that promotes a product, service, brand or event.                                                                                                               |
+| **Agency**          | **Agência**             | It refers to a business or organization providing a particular service on behalf of another business, person, or group.                                                                            |
+| **Agent**           | **Agente**              | It refers to a person who acts for or represents another.                                                                                                                                          |
+| **Air conditioned** | **Ar condicionado**     | It refers to an air-conditioned building, room, or vehicle has special equipment that keeps the air in it cool.                                                                                    |
+| **Apartment**       | **Apartamento**         | It refers to a set of rooms for living in, especially on one floor of a building.                                                                                                                  |
+| **Area**            | **Área**                | It refers to a particular part of a place, piece of land, or country.                                                                                                                              |
+| **Available**       | **Disponível**          | It refers to be able to be bought or used.                                                                                                                                                         |
+| **Basement**        | **Porão**               | It refers to a part of a building consisting of rooms that are partly or completely below the level of the ground.                                                                                 |
+| **Bathroom**        | **Casa de banho**       | It refers to a room with a bath and/or shower and often a toilet.                                                                                                                                  |
+| **Bedroom**         | **Quarto**              | It refers to a room used for sleeping in.                                                                                                                                                          |
+| **Business**        | **Negócios**            | It refers to the activity of buying and selling goods and services.                                                                                                                                |
+| **Buy**             | **Comprar**             | It refers to to get something by paying money for it.                                                                                                                                              |
+| **Branch**          | **Filial**              | It refers to a location, other than the main office, where a business is conducted.                                                                                                                |
+| **Central heating** | **Aquecimento central** | It refers to a system of heating buildings by warming air or water at one place and then sending it to different rooms in pipes.                                                                   |
+| **City**            | **Cidade**              | It refers to a large town.                                                                                                                                                                         |
+| **Client**          | **Cliente**             | It refers to a customer or someone who receives services.                                                                                                                                          |
+| **Company**         | **Empresa**             | It refers to an organization that sells goods or services in order to make money.                                                                                                                  |
+| **Customer**        | **Cliente**             | It refers to aperson who buys goods or a service.                                                                                                                                                  |
+| **Deal**            | **Negócio**             | It refers to an agreement or an arrangement, especially in business.                                                                                                                               |
+| **Employee**        | **Funcionário(a)**      | It refers to someone who is paid to work for someone else.                                                                                                                                         |
+| **Equipment**       | **Equipamento**         | It refers to a set of necessary tools, clothing, etc. for a particular purpose.                                                                                                                    |
+| **Exposure**        | **Exposição**           | It refers to a fact of experiencing something or being affected by it because of being in a particular situation or place                                                                          |
+| **House**           | **Casa**                | It refers to a building that people, usually one family, live in.                                                                                                                                  |
+| **inhabitable**     | **Habitável**           | It refers to be able to be lived in or on.                                                                                                                                                         |
+| **Land**            | **Terreno**             | It refers to an area of ground, especially when used for a particular purpose such as farming or building.                                                                                         |
+| **Lease**           | **Alugar**              | It refers to make a legal agreement by which money is paid in order to use land, a building, a vehicle, or a piece of equipment for an agreed period of time.                                      |
+| **Location**        | **Localização**         | It refers to a place or position.                                                                                                                                                                  |
+| **Loft**            | **Sótão**               | It refers to a space at the top of a building under the roof used for storing things and usually entered by a ladder, or sometimes made into a room for living in.                                 |
+| **Manager**         | **Gerente**             | It refers to a person who is responsible for managing an organization.                                                                                                                             |
+| **Network**         | **Rede**                | It refers to a large system consisting of many similar parts that are connected together to allow movement or communication between or along the parts, or between the parts and a control centre. |
+| **Owner**           | **Proprietário(a)**     | It refers to someone who owns something                                                                                                                                                            |
+| **Photograph**      | **Fotografia**          | It refers to a picture produced using a camera.                                                                                                                                                    |
+| **Price**           | **Preço**               | It refers to an amount of money for which something is sold.                                                                                                                                       |
+| **Project**         | **Projeto**             | It refers to a piece of planned work or an activity that is finished over a period of time and intended to achieve a particular purpose                                                            |
+| **Propriety**       | **Propiedade**          | It refers to a quality or state of being proper or suitable.                                                                                                                                       |
+| **Request**         | **Pedido**              | It refers to an act of politely or officially asking for something.                                                                                                                                |
+| **Scheduling**      | **Agendamento**         | It refers to a job or activity of planning the times at which particular tasks will be done or events will happen.                                                                                 |
+| **Sale**            | **Venda**               | It refers to an act of exchanging something for money.                                                                                                                                             |
+| **Schedule**        | **Agendar**             | It refers to a list of planned activities or things to be done showing the times or dates when they are intended to happen or be done.                                                             |
+| **Stores**          | **Lojas**               | It refers to a large shop where you can buy many different types of goods.                                                                                                                         |
+| **Streamline**      | **Simplificar**         | It refers to improve the effectiveness of an organization such as a business or government, often by making the way activities are performed simpler                                               |
 
 
 
