@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Agent Sequence Diagram (SSD) - Owner
+
+autonumber
+
+actor "Owner" as Owner
+actor "Agent" as Agent
+
+activate Owner
+
+    Owner -> Agent : property characteristics and requested price
+    activate Agent
+
+        Agent --> Owner : requests data
+    deactivate Agent
+
+    Owner -> Agent : types requested data (reference, description, \ninformal description, technical description,\nduration, cost)
+    activate Agent
+
+        Agent --> Owner : shows task category list and asks to select one
+    deactivate Agent
+
+    Owner -> Agent : selects a task category
+    activate Agent
+
+        Agent --> Owner : shows selected category
+    deactivate Agent
+
+    Owner -> Agent : submits data
+    activate Agent
+
+        Agent --> Owner : displays operation success
+    deactivate Agent
+
+@enduml
