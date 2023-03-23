@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Unregistered User" as Customer
+participant ":System" as System
+
+activate Customer
+
+    Customer -> System : asks to display properties
+    activate System
+
+        System --> Customer : requests specific (type of property) data
+    deactivate System
+
+    Customer -> System : types requested data (type of business (renting or buying), \ntype of property, number of rooms)
+    activate System
+
+        System --> Customer : shows list of properties that correspond to the data
+    deactivate System
+
+@enduml
