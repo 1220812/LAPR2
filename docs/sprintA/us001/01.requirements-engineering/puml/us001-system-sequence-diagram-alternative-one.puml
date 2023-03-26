@@ -17,11 +17,20 @@ activate Customer
 
         System --> Customer : requests specific (type of property) data
     deactivate System
-
+alt 1
     Customer -> System : types requested data (type of business (renting or buying), \ntype of property, number of rooms)
     activate System
 
         System --> Customer : shows list of properties that correspond to the data
     deactivate System
+end
+
+alt 2
+    Customer -> System : decides not to type the required data
+        activate System
+
+            System --> Customer : allows the client to sort through all properties that are on \nsale or renting
+        deactivate System
+end
 
 @enduml

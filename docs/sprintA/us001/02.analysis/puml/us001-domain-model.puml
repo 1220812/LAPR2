@@ -1,7 +1,7 @@
 @startuml
-skinparam monochrome true
+skinparam monochrome false
 skinparam packageStyle rectangle
-skinparam shadowing false
+skinparam shadowing true
 
 'left to right direction
 
@@ -10,52 +10,49 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-'title Domain Model
+title Domain Model
 
 'class Platform {
-'  -description
+' -description
 '}
 
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
-}
-
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
-}
-
-class Category {
-    description
-}
-
-class Employee {
+class User {
     name
     email
-    position
-    phone
+    password
 }
 
-'class User {
-'    name
+class Application {
+
+}
+
+'class System {
+'}
+
+'class Properties {
+   'type of business
+   ' type of property
+   'number of rooms
+'}
+
+
+
+'class Employee {
+''    name
 '    email
-'    password
+'    position
+'    phone
 '}
 
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
+
+User - Application: requests to \nshow properties >
+''System - User: asks for filters >
+'Platform "1" -- "*" App : has registered >
+'Platform "1" -- "*" System : defines >
+'App "1" - "0..*" Employee : has >
+''Application "1" - System: has >
 'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
+'Employee "1" -- "*" Task : creates >
 'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
+''Properties - System: are registered in >
 @enduml
