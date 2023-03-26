@@ -1,23 +1,21 @@
 @startuml
 left to right direction
 
-actor "Unregistered user" as unUser #green
-actor "Agent" as Agent #purple
-actor "System Administrator" as Admin #orange
-actor "Owner" as Owner #yellow
+actor "Unregistered user" as unUser #grey
+actor "Agent" as Agent #grey
+actor "System Administrator" as Admin #grey
+actor "Owner" as Owner #grey
 
-rectangle "RealEstate USA App" #Salmon{
+rectangle "RealEstate USA App"{
  usecase "US1 - Display Listed Properties" as UC1
  usecase "US2 - Publish the Announcements on the System" as UC2
- usecase "US3 - Register the Employees" as UC3
  usecase "US4 - Submit a request" as UC4
  usecase "US5 - Register a store" as UC5
- usecase "US6 - Specify Districts, Municipalities and Parishes in the System" as UC6
+ usecase "US3 - Register the Employees" as UC3
  }
  unUser -- UC1
  Agent -- UC2
- Admin -- UC3
  Admin -- UC5
- Admin -- UC6
+ Admin -- UC3
  Owner -- UC4
 @enduml

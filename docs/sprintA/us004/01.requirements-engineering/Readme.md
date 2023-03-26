@@ -6,7 +6,7 @@
 ### 1.1. User Story Description
 
 
-As an owner, I intend to submit a request for listing a property sale or rent, choosing the responsible agent
+As an owner, I intend to submit a request for listing a property sale or rent, choosing the responsible agent.
 
 
 

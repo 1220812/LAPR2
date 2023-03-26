@@ -3,37 +3,84 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Agent Sequence Diagram (SSD) - Owner
+title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
 actor "Owner" as Owner
-actor "Agent" as Agent
+participant ":System" as System
 
 activate Owner
 
-    Owner -> Agent : property characteristics and requested price
-    activate Agent
+    Owner -> System : asks to sell or rent his property
+    activate System
 
-        Agent --> Owner : requests data
-    deactivate Agent
+        System --> Owner : shows a list of options (sell or rent the property) and asks to select one
+    deactivate System
 
-    Owner -> Agent : types requested data (reference, description, \ninformal description, technical description,\nduration, cost)
-    activate Agent
+    Owner -> System : selects an option (sell or rent)
+    activate System
 
-        Agent --> Owner : shows task category list and asks to select one
-    deactivate Agent
+        System --> Owner : shows agency list and asks to select one
+    deactivate System
 
-    Owner -> Agent : selects a task category
-    activate Agent
+    Owner -> System : selects an agency
+    activate System
 
-        Agent --> Owner : shows selected category
-    deactivate Agent
+        System --> Owner : shows agents list and asks to select one
+    deactivate System
 
-    Owner -> Agent : submits data
-    activate Agent
+    Owner -> System : selects an agent
+    activate System
 
-        Agent --> Owner : displays operation success
-    deactivate Agent
+        System --> Owner : asks to select the type of property (house, apartment or land)
+    deactivate System
+    Owner -> System : selects the type of property
+        activate System
+
+        System --> Owner : requests data
+
+    deactivate System
+    Owner -> System : inserts data (area (m2), location, distance from the city centre, and photographs)
+    alt Rent property
+    activate System
+
+         System --> Owner : requests data
+
+    deactivate System
+
+        Owner -> System : inserts data (price (per month), contract duration)
+
+      end
+
+        activate System
+ alt Sell property
+            System --> Owner : requests data
+        deactivate System
+
+        Owner -> System : inserts data (price)
+        end
+        alt Property is an Apartament or house
+
+                System --> Owner : requests data
+            deactivate System
+
+            Owner -> System : inserts data (number of number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipement)
+            activate System
+            alt Property is a House
+               System --> Owner : requests data
+                        deactivate System
+
+                        Owner -> System : inserts data ()
+                        activate System
+          end
+
+
+
+        end
+        activate System
+
+            System --> Owner : asks to select the type of property (house, apartment or land)
+        deactivate System
 
 @enduml
