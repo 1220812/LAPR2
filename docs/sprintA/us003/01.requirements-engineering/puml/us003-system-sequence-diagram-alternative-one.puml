@@ -3,16 +3,19 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD)
 
 autonumber
 
 actor "System Administrator" as Employee
 participant ":System" as System
 
-activate Employee
+System <-- Employee :  Administrator opens the application
+         deactivate System
+ Employee <- System :  Administrator needs to be logged in the application
+        activate System
 
-    Employee -> System : register a new employee.
+    Employee -> System : ask to register a new employee.
     activate System
 
         System --> Employee : show a list of the role of the employee (agente, \nstore manager, store network, manager).
@@ -28,11 +31,13 @@ activate Employee
     Employee -> System : types the information about employee.
     activate System
 
-        System --> Employee : specify the branch of the network (designation, \nlocation, locar manager).
+        System --> Employee : request to specify the branch of the network (designation, \nlocation, locar manager).
     deactivate System
 
     Employee -> System : types the information about the brach of network.
     activate System
+    System --> Employee : Generate a password to the new employee
+            deactivate System
 
         System --> Employee : displays operation success.
     deactivate System
