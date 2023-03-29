@@ -103,16 +103,14 @@ As an owner, I intend to submit a request for listing a property sale or rent, c
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** The owner must provide properties type, area, location, distance from the city centre, photos and price
-* **AC2:** For rents, the owner must also provide the price (per month) and the contract duration 
-* **AC3:** For houses or apartments, the owner must aditionally provide the number os bedrooms, bathrooms and parking spaces, as well as any available equipment
-* **AC4:** For houses, the owner provide info on the existence of a basement, inhabitable loft, as well as the sun exposure
+* **AC1:** All required files must be filled in.
+* **AC2:** When listing a property with an already existing property listed, the system must reject such operation and the user must have the change to modify the typed information.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is a dependency to "US003" since at least an agent must be registered for owner to select.
+* There is no dependency to any other US.
 
 
 ### 1.5 Input and Output Data
@@ -121,20 +119,44 @@ As an owner, I intend to submit a request for listing a property sale or rent, c
 **Input Data:**
 
 * Typed data:
-	* a reference, 
-	* a designation, 
-	* an informal description
-	* a technical description
-	* an estimated duration
-	* an estimated cost
-	
+	* Owner data:
+		* the name
+		* the citizen's card number
+		* the tax number
+		* the address
+		* the email address
+		* the telephone number
+
+	* Property Data:
+		* the area in m2
+		* the address
+		* the distance from the city centre
+		* the requested price
+		* one or more photographs URL
+
+		* Additional Data for apartment or a house:
+			* the number of bedrooms
+			* the number of bathrooms
+			* the number of parking spaces
+			* the available equipment (central heating and/or air conditioning)
+
+		* Additional Data for house:
+			* the existence of a basement
+			* an inhabitable loft
+			* sun exposure
+
 * Selected data:
-	* Classifying task category 
+	* Listing options (rent or sale)
+	* The type property (apartment, house or land)
+	* The Agency
+	* The Agent
 
 
 **Output Data:**
-
-* List of existing task categories
+* Listing options (rent or sale)
+* Type of properties (apartment, house or land)
+* List of Agencies
+* List of Agents
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -151,4 +173,4 @@ As an owner, I intend to submit a request for listing a property sale or rent, c
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* There are no other relevant remarks.
