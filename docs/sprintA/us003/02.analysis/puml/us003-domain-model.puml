@@ -8,34 +8,16 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-'title Domain Model
 
-'class Platform {
-'  -description
-'}
-
-class System {
-     Regist
-     Login into the application
-     List of all the registed employers
-     Generate a password to the new employee
-     Send the password for email to the new employee
-}
-
-class List_of_Registed_Employers {
-    Employers
-}
-
-class Administrator{
-  responsible for registering all employees
-   has to specify the role of the employee
-   request information about the employee
+class SystemAdministrator{
+  name
 }
 
 
 class Employee {
     name
-    citizen card number
+    citizen
+    card number
     adress
     email
     telephone number
@@ -44,9 +26,5 @@ class Employee {
     agency
 }
 
-Administrator -- List_of_Registed_Employers: that make the
-System  -- Administrator: has to be used for
-System "1" -- List_of_Registed_Employers: owns >
-List_of_Registed_Employers "1" - "*" Employee: cataloged as >
-
+SystemAdministrator "1"--"1...*" Employee: registed by <
 @enduml
