@@ -77,6 +77,29 @@ As an owner, I intend to submit a request for listing a property sale or rent, c
 >
 > **Answer:** Please use USD.
 
+
+> **Question:** In the case of listing a land property, shall the owner refer if there is a building permit already approved?
+> **Answer:** No.
+
+
+> **Question:** If the owner doesn't select an agent will the platform randomly assign one or the request cannot move to revision? If not, must we assume that all information slots must be filled?
+> 
+> **Answer:** When filling the property data, the owner should select one agent from the list of agents working in the selected agency. Moreover, the application should include a feature to randomly assign one agent. The address of the owner is not mandatory.
+
+
+> **Question:** When renting does the owner have any space to clarify any prohibitions or obligations with the property?
+> 
+> **Answer:** No.
+
+
+> **Question:** Does the owner have a limit of requests they can do?
+> 
+> **Answer:** No.
+
+
+> **Question:** Regarding the property's photographs, is that considered selected data?
+> 
+> **Answer:** The owner should input the URI of each file/photograph.
 ### 1.3. Acceptance Criteria
 
 

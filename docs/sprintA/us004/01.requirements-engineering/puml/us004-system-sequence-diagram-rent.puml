@@ -42,6 +42,7 @@ activate Owner
 
     deactivate System
     Owner -> System : inserts data (area (m2), location, distance from the city centre, \nsome photographs, price (per month) and contract duration)
+    activate System
     alt Property is Apartament or House
 
         System --> Owner : requests data
@@ -57,13 +58,19 @@ activate Owner
 
         Owner -> System : inserts data (existence of a basement and/or inhabitable loft and sun exposure)
         activate System
-
         end
 
     end
+              System --> Owner : requests data
+              deactivate System
 
-               System --> Owner : shows requested data and selected property movement
-        deactivate System
+
+              Owner -> System : Inserts their name, citizen's card number, tax number, address, \nemail address, telephone number
+              activate System
+
+              System --> Owner : shows requested data and selected property movement
+
+              deactivate System
 
         Owner -> System : submits data
         activate System
