@@ -34,5 +34,4 @@ class Address {
 SystemAdministrator "1" -- "0..*" Store : registers >
 Store "1" -- "0...*" Address : has an >
 
-
 @enduml
