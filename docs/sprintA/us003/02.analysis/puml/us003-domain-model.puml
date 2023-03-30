@@ -11,20 +11,24 @@ hide methods
 
 class SystemAdministrator{
   name
+  email
+  citizenCardNumber
+  taxNumber
+  physycalAdress
+  phoneNumber
 }
 
 
 class Employee {
     name
-    citizen
-    card number
+    citizenCardNumber
     adress
     email
-    telephone number
-    tax number
+    phoneNumber
+    taxNumber
     branch of network
     agency
 }
 
-SystemAdministrator "1"--"1...*" Employee: registed by <
+SystemAdministrator "1"--"0...*" Employee: registed by <
 @enduml

@@ -16,7 +16,7 @@ class Store {
     emailAddress
 }
 
-class SystemAdmistrator {
+class SystemAdministrator {
     name
     phoneNumber
     emailAddress
@@ -31,8 +31,8 @@ class Address {
     state
 }
 
-SystemAdmistrator "1" -- "0..*" Store : registers >
-Store "1" -- "0..*" Address : has an >
+SystemAdministrator "1" -- "0..*" Store : registers >
+Store "1" -- "0...*" Address : has an >
 
 
 @enduml

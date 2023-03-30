@@ -2,83 +2,121 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-'skinparam linetype ortho
+
 'left to right direction
+
 skinparam classAttributeIconSize 0
+
 hide circle
 hide methods
 
-'title Domain Model
+title US004 - Domain Model
 
-'class Platform {
-'  -description
-'}
+abstract class Property {
+    area
+    localization
+    distanceFromTheCityCentre
+    price
+    photographs
+}
 
-class Organization {
+class Owner {
     name
-    vatNumber
-    website
+    citizenCardNumber
+    taxNumber
+    address
+    emailAddress
+    telephoneNumber
+}
+
+class Land{
+
+}
+
+class House{
+    bedroomsNumber
+    bathroomsNumber
+    parkingSpacesNumber
+    availableEquipment
+    sunExposure
+}
+
+class Apartment{
+    bedroomsNumber
+    bathroomsNumber
+    parkingSpacesNumber
+    availableEquipment
+}
+class Agent{
+    name
+    agencyName
+}
+class Store {
+    storeName
     phoneNumber
-    email
+    emailAddress
 }
+class SystemAdministrator {
+      name
+      email
+      citizenCardNumber
+      taxNumber
+      physycalAdress
+      phoneNumber
+    }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
+class Role{
+roleType
+
 }
-
-class Category {
-    description
+class Address {
+    street
+    postalCode
+    doorNumber
+    floorNumber
+    city
+    state
 }
-
 class Employee {
     name
+    citizen
+    card number
+    adress
+    emails
+    telephone number
+    tax number
+    branch of network
+    agency
+}
+class User {
+    name
     email
-    position
-    phone
+    password
 }
 
-class TechnicalSkill{
-    shortDescription
-    fullDescription
+class Application {
+
 }
 
-class ActivityArea{
-    shortDescription
-    fullDescription
-}
+Property "1" --|> "1" Owner : has an >
+Property "1" --|> "1" Agent : has an >
 
-class FeatureTS{
-    mandatory
-}
+Property "1" -R-|> "0" Apartment : can be >
+Property "1" -R-|> "0" House : can be >
+Property "1" -R-----> "0" Land : can be >
 
-'class User {
-'    name
-'    email
-'    password
-'}
-class PostalAddress{
-    street
-    zipCode
-    city
-}
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
-TechnicalSkill "*" - "1" ActivityArea: regarding an >
+SystemAdministrator "1" -- "0..*" Store : registers >
+Store "1" -- "0...*" Address : has an >
 
-Category "*" - "*" TechnicalSkill :  : requires >
-(Category, TechnicalSkill) . FeatureTS
+SystemAdministrator "1"--"0...*" Employee: registed by <
 
-Organization "1" -left "1" PostalAddress : located At >
+User - Application: requests to \nshow properties >
+
+SystemAdministrator "1" -- "1" Role : has >
+
+Employee "1" -- "1" Role : has >
+
+
+
 
 @enduml
