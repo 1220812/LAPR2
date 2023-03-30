@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title US001 - System Sequence Diagram (SSD)
 
 autonumber
 
@@ -17,7 +17,7 @@ activate Customer
 
         System --> Customer : requests specific (type of property) data
     deactivate System
-alt 1
+opt data is given
     Customer -> System : types requested data (type of business (renting or buying), \ntype of property, number of rooms)
     activate System
 
@@ -25,7 +25,7 @@ alt 1
     deactivate System
 end
 
-alt 2
+opt no data is given
     Customer -> System : decides not to type the required data
         activate System
 
