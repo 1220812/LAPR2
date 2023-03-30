@@ -10,91 +10,78 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title US004 - Domain Model
+title Project - Domain Model
 
-abstract class Property {
-    area
-    localization
-    distanceFromTheCityCentre
-    price
-    photographs
+class District {
 }
 
-class Owner {
+
+class Branch {
+    designation
+    location
+    localManager
+}
+
+class Agent {
     name
     citizenCardNumber
-    taxNumber
+    tax number
     address
-    emailAddress
-    telephoneNumber
+    email
+    phoneNumber
+    agency
 }
 
-class Land{
-
+class Property {
+    area
+    location
+    distanceFromCityCentre
+    requestedPrice
+    typeOfProperty
 }
 
-class House{
-    bedroomsNumber
-    bathroomsNumber
-    parkingSpacesNumber
+class Advertisement {
+    date
+}
+
+class AppartmentOrHouse {
+    numberBedrooms
+    numberBathrooms
+    numberParking
     availableEquipment
+}
+
+class House {
+    basement
+    inhabitableLoft
     sunExposure
 }
 
-class Apartment{
-    bedroomsNumber
-    bathroomsNumber
-    parkingSpacesNumber
-    availableEquipment
+class Comission {
+    fixed
+    percentage
 }
-class Agent{
-    name
-    agencyName
-}
-class Store {
-    storeName
-    phoneNumber
-    emailAddress
-}
-class SystemAdministrator {
-      name
-      email
-      citizenCardNumber
-      taxNumber
-      physycalAdress
-      phoneNumber
-    }
 
-class Role{
-roleType
+class SystemAdministrator{
+  name
+  email
+  citizenCardNumber
+  taxNumber
+  physycalAddress
+  phoneNumber
+}
 
-}
-class Address {
-    street
-    postalCode
-    doorNumber
-    floorNumber
-    city
-    state
-}
+
 class Employee {
     name
     citizenCardNumber
-    adress
+    address
     email
-    Phonenumber
+    phoneNumber
     taxNumber
-
-}
-class User {
-    name
-    email
-    password
+    agency
 }
 
-class Application {
-
-}
 class CompanyBranch{
 id
 name
@@ -103,28 +90,48 @@ phoneNumber
 email
 }
 
-Property "1" --|> "1" Owner : has an >
-Property "1" --|> "1" Agent : has an >
+class Role{
+}
 
-Property "1" -R-|> "0" Apartment : can be >
-Property "1" -R-|> "0" House : can be >
-Property "1" -R-----> "0" Land : can be >
+
+class Store {
+    storeName
+    phoneNumber
+    emailAddress
+}
+
+class Address {
+    street
+    postalCode
+    doorNumber
+    floorNumber
+    city
+    doorNr
+    floorNr
+    state
+}
 
 SystemAdministrator "1" -- "0..*" Store : registers >
-Store "1" -- "0...*" Address : has an >
+Store "1" -- "1" Address : has an >
 
 SystemAdministrator "1"--"0...*" Employee: registed by <
-
-User - Application: requests to \nshow properties >
-
-SystemAdministrator "1" -- "1" Role : has >
-
-Employee "1" -- "1" Role : has >
-
-Agent  --|>  Employee
 SystemAdministrator "1"--"1" Employee: is >
-Employee "1"--"1" CompanyBranch: manages >
 Employee "1"--"1" CompanyBranch: works for >
+Employee "0...*"--"1...*" Role: has >
+
+
+Branch "1" -- "*" Agent : has >
+Agent "1" -- "*" Advertisement : creates >
+Owner "1" -- "1" Property : owns >
+Advertisement "1" - "1" Property : has >
+Property "1" -- "1" AppartmentOrHouse : can be >
+AppartmentOrHouse "1" - "1" House : can be >
+Advertisement "1" -- "1" Comission : has >
+Agent "1" - "1" Comission : defines >
+Owner "1" -- "1" Agent: talks to >
+
+Store "1"-- "*" Advertisement : displays >
+Address "1" -- "1" District : is in >
 
 
 
