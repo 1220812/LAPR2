@@ -22,7 +22,7 @@ As an unregistered user, I want to display listed properties.
 
 **From the client clarifications:**
 
-> **Question:** In the project's documentation it's mentioned that "All those who wish to use the application must be authenticated", but in the US1 it said that an unregistered user can see a list of properties. Can users who aren't authenticated do this?
+> **Question:** In the project's documentation it is mentioned that "All those who wish to use the application must be authenticated", but in the US1 it said that an unregistered user can see a list of properties. Can users who aren't authenticated do this?
 >  
 > **Answer:** Non-authenticated users can only list properties.
 
