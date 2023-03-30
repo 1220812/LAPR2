@@ -13,10 +13,15 @@ As an owner, I intend to submit a request for listing a property sale or rent, c
 
 **From the specifications document:**
 
-> The real estate agent reviews advertisement requests (...) it is **visible to all clients** who visit the agency and use the application.
+> Owner can use the application to sell or rent one or more properties
+> The owner must provide property characteristics and the requested price
+> The request is sent to an agent of their choosing
 
-> All registered information, except the agency commission, can be accessed by the client who intends to buy or rent the property.
+> If the owner wants to sell a property, he must provide information about the type of property (apartment, house or land), the area (m2), location, distance from city centre, price and photos
 
+> For apartments and houses, the owner must also provide the number of bedrooms, bathrooms and parking spaces, as well as any available equipment (central heating and/or air conditioning)
+
+> For houses the owner must additionally register the existence of a basement, inhabitable loft and also register sun exposure
 
 **From the client clarifications:**
 

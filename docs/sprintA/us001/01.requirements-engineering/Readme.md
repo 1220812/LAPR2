@@ -14,10 +14,9 @@ As an unregistered user, I want to display listed properties.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost as well as its classifying task category. 
+> The real estate agent reviews advertisement requests (...) it is **visible to all clients** who visit the agency and use the application.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
-
+> All registered information, except the agency commission, can be accessed by the client who intends to buy or rent the property.
 
 
 **From the client clarifications:**
