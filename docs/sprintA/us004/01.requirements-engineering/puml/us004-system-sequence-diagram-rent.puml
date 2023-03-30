@@ -43,7 +43,7 @@ activate Owner
     deactivate System
     Owner -> System : inserts data (area (m2), location, distance from the city centre, \nsome photographs, price (per month) and contract duration)
     activate System
-    alt Property is Apartament or House
+    opt Property is Apartament or House
 
         System --> Owner : requests data
     deactivate System
@@ -51,31 +51,31 @@ activate Owner
     Owner -> System : inserts data (number of number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipement)
     activate System
 
-        alt Property is a House
+    end
+    opt Property is a House
 
-               System --> Owner : requests data
-        deactivate System
+         System --> Owner : requests data
+    deactivate System
 
-        Owner -> System : inserts data (existence of a basement and/or inhabitable loft and sun exposure)
-        activate System
-        end
+    Owner -> System : inserts data (existence of a basement and/or inhabitable loft and sun exposure)
+    activate System
 
     end
-              System --> Owner : requests data
-              deactivate System
+          System --> Owner : requests data
+    deactivate System
 
 
-              Owner -> System : Inserts their name, citizen's card number, tax number, address, \nemail address, telephone number
-              activate System
+    Owner -> System : Inserts their name, citizen's card number, tax number, address, \nemail address, telephone number
+    activate System
 
-              System --> Owner : shows requested data and selected property movement
+           System --> Owner : shows requested data and selected property movement
 
-              deactivate System
+    deactivate System
 
-        Owner -> System : submits data
-        activate System
+    Owner -> System : submits data
+    activate System
 
-               System --> Owner : shows operation sucess
-        deactivate System
+            System --> Owner : shows operation success
+    deactivate System
 
 @enduml
