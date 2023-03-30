@@ -2,23 +2,33 @@
 
 ## Functionality
 
-> **Audit and Reporting:**
-* Create an application to manage the business (lease and sale) of real estate;
-* Property owners contact Real Estate USA with the purpose of selling or renting their properties; 
-* If the owner wants to sale a property, he must provide information about: the type of property (house, apartment or land), the area (m2), the location, the distance to the city center, the requested price and one or more photographs;
-* If the property is a house or an apartment, he also provides: the number of bedrooms, bathrooms, parking spaces, and the available equipment (central heating and/or air conditioning);
-* In case the property is a house, some more information must be registered, such as: the existence of basement, and inhabitable loft and sun exposure;
-* The agents should be able to review advertisement requests, register information, publish offers visible to all clients, record visits to properties and indicate whether they think a deal will take place;
-* The client should be able to sort the list of properties by type of property, number of bedrooms, price and location;
-* The client should also be able to ask for a visit to the property and the agent need to confirm and schedule the visit;
-* If the property is sold or rented it should disappear from the listing of properties;
-* The Store Manager needs to be able to oversee the deals of every agent on his store;
-* The Network Manager has access to the data from every store in order to analyse it;
-* The System administrator needs to insert every relevant information about the employees and each store.
+* Authentication: Most of the sensitive information must only be available by authorized users.
 
-> **Security:**
-* All those who wish to use the application must be authenticated with a password (seven alphanumeric characters, including three capital letters and two digits);
-* Every information about the property should be visible to the client except the commission of the agent.
+* Communication: Alerts regarding relevant occurrences should be sent to the user.
+
+* Error management: Error messages should be clear and give information to the user regarding what caused it and how to possibly avoid it.
+
+* Event management: Users should be able to create, delete and edit events they have permissions to (i.e. setting up an advertising)
+
+* Licensing: The application should be fully licensed to be used legally.
+
+* Localisation: The application should be available in English as its current use is in the USA Real Estate Market but more languages should be implemented as it progresses to be used in other countries.
+
+* Online help: There must be FAQs, tutorials and manuals available for download online regarding the use of the application.
+
+* Persistence: The persistence should be reliable, all information should be secure and easily retrievable.
+
+* Printing: The application information should be easily printable by the user.
+
+* Reporting: Reporting isn't exactly a must in the application, but some aspects of the system should be available to be generated.
+
+* Scheduling: Users should be notified in case of a relevant response/notification about the state of an advertisement for example.
+
+* Security: Register and login systems: Secure password system (passwords should be over seven alphanumeric characters, including three capital letters and two digits).
+
+* Transaction management: All transactions should be tracked and recorded, to ensure they're safe and fair.
+
+* Workflow: Workflow should be efficient to all users, so it must be customizable enough to any users needs.
 
 ## Usability 
 

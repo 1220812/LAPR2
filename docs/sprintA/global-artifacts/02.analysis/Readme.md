@@ -1,22 +1,17 @@
 # Analysis
 
-The construction process of the domain model is based on the client specifications, especially the nouns (for _concepts_) and verbs (for _relations_) used. 
-
 ## Rationale to identify domain conceptual classes ##
-To identify domain conceptual classes, start by making a list of candidate conceptual classes inspired by the list of categories suggested in the book "Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development". 
-
 
 ### _Conceptual Class Category List_ ###
 
 **Business Transactions**
 
-*
-
----
+* Publication of rental and sale advertisements 
+* Registration of a business (lease or sale)
 
 **Transaction Line Itemss**
 
-*
+* 
 
 ---
 
