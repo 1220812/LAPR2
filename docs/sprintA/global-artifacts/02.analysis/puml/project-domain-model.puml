@@ -38,13 +38,14 @@ class Property {
     distanceFromCityCentre
     requestedPrice
     typeOfProperty
+    photographs
 }
 
 class Advertisement {
     date
 }
 
-class AppartmentOrHouse {
+class Residence {
     numberBedrooms
     numberBathrooms
     numberParking
@@ -106,31 +107,85 @@ class Address {
     doorNumber
     floorNumber
     city
-    doorNr
-    floorNr
     state
 }
+class Owner{
+name
+citizenCardNumber
+taxNumber
+email
+phoneNumber
+}
+
+class Apartment{
+}
+
+class Company{
+designation
+}
+
+class InitialData{
+propertiesNumber
+propertyType
+saleOrRent
+}
+
+class PropertyType{
+land
+house
+apartment
+}
+
+class Rent{
+pricePerMonth
+contractDuration
+}
+
+class Sale{
+price
+}
+
+CompanyBranch "0...*" -- "1" Company : is owned >
+CompanyBranch "1    " -- "0...*" Agent : employs >
+CompanyBranch "1 " -- "0...*" Address : has an >
 
 SystemAdministrator "1" -- "0..*" Store : registers >
-Store "1" -- "1" Address : has an >
-
 SystemAdministrator "1"--"0...*" Employee: registed by <
 SystemAdministrator "1"--"1" Employee: is >
+
+Store "1" -- "1" Address : has an >
+Store "1"-- "*" Advertisement : displays >
+
 Employee "1"--"1" CompanyBranch: works for >
 Employee "0...*"--"1...*" Role: has >
 
-
-Branch "1" -- "*" Agent : has >
-Agent "1" -- "*" Advertisement : creates >
-Owner "1" -- "1" Property : owns >
-Advertisement "1" - "1" Property : has >
-Property "1" -- "1" AppartmentOrHouse : can be >
-AppartmentOrHouse "1" - "1" House : can be >
-Advertisement "1" -- "1" Comission : has >
+Agent "1" -- "1  " Address : has an >
+Agent "1" -- "*" Advertisement : reviews and publishes >
 Agent "1" - "1" Comission : defines >
+
+Owner "1" -- "0...*" InitialData : specify >
+Owner "1" -- "1" Property : creates request for >
+Owner "1" -- "1" Property : owns >
 Owner "1" -- "1" Agent: talks to >
 
-Store "1"-- "*" Advertisement : displays >
+InitialData "1  " -- "1" PropertyType : includes >
+InitialData "1" -- "      1" Advertisement : is included in >
+
+PropertyType <-- Residence
+
+Residence <-- Appartment
+
+Advertisement --> Sale : can announce >
+Advertisement --> Rent : can announce >
+Advertisement "1" -- "1" Comission : has >
+Advertisement "1" - "1" Property : has >
+
+Branch "1" -- "*" Agent : has >
+
+Property "1" -- "1" Residence : can be >
+
+Residence "1" - "1" House : can be >
+
 Address "1" -- "1" District : is in >
 
 
