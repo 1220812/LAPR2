@@ -79,14 +79,12 @@ class Address {
 }
 class Employee {
     name
-    citizen
-    card number
+    citizenCardNumber
     adress
-    emails
-    telephone number
-    tax number
-    branch of network
-    agency
+    email
+    Phonenumber
+    taxNumber
+
 }
 class User {
     name
@@ -96,6 +94,13 @@ class User {
 
 class Application {
 
+}
+class CompanyBranch{
+id
+name
+location
+phoneNumber
+email
 }
 
 Property "1" --|> "1" Owner : has an >
@@ -115,6 +120,13 @@ User - Application: requests to \nshow properties >
 SystemAdministrator "1" -- "1" Role : has >
 
 Employee "1" -- "1" Role : has >
+
+Agent  --|>  Employee
+SystemAdministrator "1"--"1" Employee: is >
+Employee "1"--"1" CompanyBranch: manages >
+Employee "1"--"1" CompanyBranch: works for >
+
+
 
 
 
