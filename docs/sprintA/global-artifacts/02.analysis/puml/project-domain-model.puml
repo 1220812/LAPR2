@@ -12,10 +12,26 @@ hide methods
 
 title Project - Domain Model
 
+class Adress{
+street
+city
+doorNr
+floorNr
+state
+postalCode
+}
+
 class District {
 }
 
+class Advertisement {
+}
 
+class Store {
+    storeName
+    phoneNumber
+    emailAddress
+}
 class Branch {
     designation
     location
@@ -40,35 +56,34 @@ class Property {
     typeOfProperty
     photographs
 }
+class Residence{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpaces
+availableEquipment
+}
 
 class Advertisement {
     date
 }
 
-class Residence {
+class AppartmentOrHouse {
     numberBedrooms
     numberBathrooms
     numberParking
     availableEquipment
 }
 
-class House {
-    basement
-    inhabitableLoft
-    sunExposure
-}
-
 class Comission {
     fixed
     percentage
 }
-
 class SystemAdministrator{
   name
   email
   citizenCardNumber
   taxNumber
-  physycalAddress
+  physycalAdress
   phoneNumber
 }
 
@@ -76,7 +91,7 @@ class SystemAdministrator{
 class Employee {
     name
     citizenCardNumber
-    address
+    adress
     email
     phoneNumber
     taxNumber
@@ -91,24 +106,6 @@ phoneNumber
 email
 }
 
-class Role{
-}
-
-
-class Store {
-    storeName
-    phoneNumber
-    emailAddress
-}
-
-class Address {
-    street
-    postalCode
-    doorNumber
-    floorNumber
-    city
-    state
-}
 class Owner{
 name
 citizenCardNumber
@@ -117,80 +114,65 @@ email
 phoneNumber
 }
 
-class Apartment{
+class Role{
 }
-
-class Company{
-designation
+class Address {
+    street
+    postalCode
+    doorNumber
+    floorNumber
+    city
+    state
 }
-
 class InitialData{
 propertiesNumber
 propertyType
 saleOrRent
 }
-
-class PropertyType{
-land
-house
-apartment
+class House{
+basement
+loft
+sunExposure
 }
 
-class Rent{
-pricePerMonth
-contractDuration
+class Apartment{
+}
+class Land{
 }
 
-class Sale{
-price
-}
-
-CompanyBranch "0...*" -- "1" Company : is owned >
-CompanyBranch "1    " -- "0...*" Agent : employs >
-CompanyBranch "1 " -- "0...*" Address : has an >
 
 SystemAdministrator "1" -- "0..*" Store : registers >
+Store "1" -- "1" Address : has  >
+
 SystemAdministrator "1"--"0...*" Employee: registed by <
 SystemAdministrator "1"--"1" Employee: is >
-
-Store "1" -- "1" Address : has an >
-Store "1"-- "*" Advertisement : displays >
-
 Employee "1"--"1" CompanyBranch: works for >
 Employee "0...*"--"1...*" Role: has >
-
-Agent "1" -- "1  " Address : has an >
-Agent "1" -- "*" Advertisement : reviews and publishes >
+Branch "1" -- "*" Agent : has >
+Agent "1" -- "*" Advertisement : creates >
+Owner "1" -- "1" Property : owns >
+Advertisement "1" - "1" Property : has >
+Property "1" -- "1" AppartmentOrHouse : can be >
+AppartmentOrHouse "1" - "1" House : can be >
+AppartmentOrHouse "1" - "1" Apartment : can be >
+Advertisement "1" -- "1" Comission : has >
 Agent "1" - "1" Comission : defines >
 
+Store "1"-- "*" Advertisement : displays >
+Store "1" -- "1" Adress : has  >
+Adress "1" -- "1" District : is in >
+
+Agent "1" -- "1  " Address : has  >
+
 Owner "1" -- "0...*" InitialData : specify >
-Owner "1" -- "1" Property : creates request for >
-Owner "1" -- "1" Property : owns >
-Owner "1" -- "1" Agent: talks to >
+Owner "1" -- "1" Agent : selects >
+Owner "1" -- "1" Address : has  >
 
-InitialData "1  " -- "1" PropertyType : includes >
-InitialData "1" -- "      1" Advertisement : is included in >
+InitialData "1" -- "1" Property : includes >
 
-PropertyType <-- Residence
+Property <|--  Residence
+Property <|-- Land
 
-Residence <-- Appartment
-
-Advertisement --> Sale : can announce >
-Advertisement --> Rent : can announce >
-Advertisement "1" -- "1" Comission : has >
-Advertisement "1" - "1" Property : has >
-
-Branch "1" -- "*" Agent : has >
-
-Property "1" -- "1" Residence : can be >
-
-Residence "1" - "1" House : can be >
-
-Address "1" -- "1" District : is in >
-
-
-
-
-
-
+Residence <|-- House
+Residence <|-- Apartment
 @enduml
