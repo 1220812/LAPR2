@@ -29,16 +29,6 @@ state
 postalCode
 }
 
-class CompanyBranch{
-location
-email
-phoneNumber
-}
-
-class Company{
-designation
-}
-
 class Agent{
 name
 citizenCardNumber
@@ -53,22 +43,7 @@ propertyType
 saleOrRent
 }
 
-class PropertyType{
-land
-house
-apartment
-}
-
-class Rent{
-pricePerMonth
-contractDuration
-}
-
-class Sale{
-price
-}
-
-class PropertyRequest{
+class Property{
 location
 area
 distanceFromCityCenter
@@ -90,30 +65,22 @@ sunExposure
 
 class Apartment{
 }
-
-class Announcement{
+class Land{
 }
 
-CompanyBranch "0...*" -- "1" Company : is owned >
-CompanyBranch "1    " -- "0...*" Agent : employs >
-CompanyBranch "1 " -- "0...*" Address : has an >
 
-Agent "1" -- "                                  0...*" Announcement : reviews and publishes >
 Agent "1" -- "1  " Address : has an >
-Agent "1" --- "1" PropertyRequest : creates >
 
 Owner "1" -- "0...*" InitialData : specify >
-Owner "1" -- "1" PropertyRequest : creates >
+Owner "1" -- "1" Agent : selects >
+Owner "1" -- "1" Address : has an >
 
-InitialData "1  " -- "1" PropertyType : includes >
-InitialData "1" -- "      1" Announcement : is included in >
+InitialData "1" -- "1" Property : includes >
 
-PropertyType <-- Residence
+Property <|--  Residence
+Property <|-- Land
 
-Residence <-- House
-Residence <-- Apartment
-
-Announcement --> Sale : can announce >
-Announcement --> Rent : can announce >
+Residence <|-- House
+Residence <|-- Apartment
 
 @enduml
