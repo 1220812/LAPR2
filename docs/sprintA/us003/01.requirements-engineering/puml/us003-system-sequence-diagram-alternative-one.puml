@@ -10,11 +10,6 @@ autonumber
 actor "System Administrator" as Employee
 participant ":System" as System
 
-System <-- Employee :  Administrator opens the application
-         deactivate System
- Employee <- System :  Administrator needs to be logged in the application
-        activate System
-
     Employee -> System : ask to register a new employee.
     activate System
 
@@ -34,11 +29,8 @@ System <-- Employee :  Administrator opens the application
         System --> Employee : request to specify the branch of the network (designation, \nlocation, locar manager).
     deactivate System
 
-    Employee -> System : types the information about the brach of network.
+    Employee -> System : types the information about the branch of network.
     activate System
-    System --> Employee : Generate a password to the new employee
+    System --> Employee : Generate a password to the new employee \nand displays operation success.
             deactivate System
-
-        System --> Employee : displays operation success.
-    deactivate System
 @enduml

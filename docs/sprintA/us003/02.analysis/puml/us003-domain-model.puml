@@ -26,9 +26,27 @@ class Employee {
     email
     phoneNumber
     taxNumber
-    branch of network
     agency
 }
 
+class CompanyBranch{
+id
+name
+location
+phoneNumber
+email
+}
+
+class Role{
+}
+
 SystemAdministrator "1"--"0...*" Employee: registed by <
+SystemAdministrator "1"--"1" Employee: is >
+Employee "1"--"1" CompanyBranch: manages >
+Employee "1"--"1" CompanyBranch: works for >
+Employee "0...*"--"1...*" Role: has >
+
+
+
+
 @enduml
