@@ -1,4 +1,4 @@
-# US 004 - 
+# US 004
 
 ## 1. Requirements Engineering
 
@@ -100,6 +100,10 @@ As an owner, I intend to submit a request for listing a property sale or rent, c
 > **Question:** Regarding the property's photographs, is that considered selected data?
 > 
 > **Answer:** The owner should input the URI of each file/photograph.
+ 
+> **Question:** Also, since the only way that an agent can receive sale announcement request is through a phone call, wouldn't that contradict what was stated in the project description: "Owners go to one of "
+> 
+> **Answer:** 
 ### 1.3. Acceptance Criteria
 
 
