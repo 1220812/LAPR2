@@ -15,8 +15,9 @@ activate Customer
     Customer -> System : asks to display properties
     activate System
 
-        System --> Customer : requests specific (type of property) data
+        System --> Customer : asks if the user wants to filter the specific (type of property) \ndata or not
     deactivate System
+
 opt data is given
     Customer -> System : types requested data (type of business (renting or buying), \ntype of property, number of rooms)
     activate System
@@ -29,7 +30,7 @@ opt no data is given
     Customer -> System : decides not to type the required data
         activate System
 
-            System --> Customer : allows the client to sort through all properties that are on \nsale or renting
+            System --> Customer : allows the client to sort through all properties that are on \nsale or renting ordered by most recent (by default)
         deactivate System
 end
 
