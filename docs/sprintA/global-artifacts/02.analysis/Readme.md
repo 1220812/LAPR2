@@ -6,14 +6,16 @@
 
 **Business Transactions**
 
-* Publication of rental and sale advertisements 
-* Registration of a business (lease or sale)
+* 
 
 **Transaction Line Items**
 
-* 
+* House
+* Apartment
+* Land
 
 ---
+
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
@@ -31,36 +33,48 @@
 
 **Roles of People or Organizations**
 
-* 
-
+* System Administrator
+* Agent
+* Owner
+* Store
+* Client
+* Unregistered user
 
 ---
 
 
 **Places**
 
-*  
+* Property 
+* Store 
+* Residence
+* House
+* Adress
 
 ---
 
+
 **Noteworthy Events**
 
-* 
+* Announcement
+* Visit
 
 ---
 
 
 **Physical Objects**
 
-*
+* House
+* Apartment
+* Store
 
 ---
 
 
 **Descriptions of Things**
 
-*  
-
+* Announcement
+* Type of property
 
 ---
 
@@ -74,14 +88,16 @@
 
 **Containers**
 
-*  
+* Property
 
 ---
 
 
 **Elements of Containers**
 
-*  
+* House
+* Apartment
+* Land
 
 ---
 
@@ -114,7 +130,7 @@
 ---
 
 
-**Documents mentioned/used to perform some work/**
+**Documents mentioned/used to perform some work**
 
 * 
 ---
