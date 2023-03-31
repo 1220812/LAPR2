@@ -9,7 +9,7 @@
 * Publication of rental and sale advertisements 
 * Registration of a business (lease or sale)
 
-**Transaction Line Itemss**
+**Transaction Line Items**
 
 * 
 
@@ -43,7 +43,7 @@
 
 ---
 
-** Noteworthy Events**
+**Noteworthy Events**
 
 * 
 
@@ -125,11 +125,11 @@
 
 An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations: 
 
-+ **_A_** is physically or logically part of **_B_**
-+ **_A_** is physically or logically contained in/on **_B_**
++ **_Adress_** is physically or logically part of **_Property_**
++ **_Property_** is physically or logically contained in/on **_Adress_**
 + **_A_** is a description for **_B_**
 + **_A_** known/logged/recorded/reported/captured in **_B_**
-+ **_A_** uses or manages or owns **_B_**
++ **_Owner_** uses or manages or owns **_Property_**
 + **_A_** is related with a transaction (item) of **_B_**
 + etc.
 
@@ -143,11 +143,6 @@ An association is a relationship between instances of objects that indicates a r
 
 
 ## Domain Model
-
-**Do NOT forget to identify concepts atributes too.**
-
-**Insert below the Domain Model Diagram in a SVG format**
-
 ![Domain Model](svg/project-domain-model.svg)
 
 
