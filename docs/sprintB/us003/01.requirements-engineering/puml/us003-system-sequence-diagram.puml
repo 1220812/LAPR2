@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD)
+
+autonumber
+
+actor "System Administrator" as Employee
+participant ":System" as System
+
+    Employee -> System : ask to register a new employee.
+    activate System
+
+        System --> Employee : show a list of the role of the employee (agente, \nstore manager, store network, manager).
+
+    deactivate System
+
+    Employee -> System : select the role of the employee.
+    activate System
+
+        System --> Employee : request information about employee (name, \ncitizen´s card number, tax number, physycal address, \nemail , contact telephone, number and agency).
+    deactivate System
+
+    Employee -> System : types the information about employee.
+    activate System
+
+        System --> Employee : request to specify the company branch (id, name, \nlocation, phone number, email).
+    deactivate System
+
+    Employee -> System : types the information about the company branch.
+    activate System
+    System --> Employee : Generate a password to the new employee \nand displays operation success.
+            deactivate System
+@enduml

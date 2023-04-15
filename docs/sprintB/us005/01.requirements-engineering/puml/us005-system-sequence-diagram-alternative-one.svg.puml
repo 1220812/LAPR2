@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - USS005
+
+autonumber
+
+actor "Organization Employee" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to register a store
+    activate System
+
+        System --> Employee : requests data for store
+    deactivate System
+
+    Employee -> System : types requested data (location, designation, email adress, contact)
+    activate System
+
+        System --> Employee : shows store preview and asks for confirmed submition
+    deactivate System
+
+    Employee -> System : confirms submition
+    activate System
+
+        System --> Employee : registers the store
+    deactivate System
+
+        System --> Employee : displays operation success
+    deactivate System
+
+@enduml

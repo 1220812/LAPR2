@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+'skinparam linetype ortho
+'left to right direction
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+
+class SystemAdministrator{
+  name
+  email
+  citizenCardNumber
+  taxNumber
+  physycalAdress
+  phoneNumber
+}
+
+
+class Employee {
+    name
+    citizenCardNumber
+    adress
+    email
+    phoneNumber
+    taxNumber
+    agency
+}
+
+class CompanyBranch{
+id
+name
+location
+phoneNumber
+email
+}
+
+class Role{
+}
+
+SystemAdministrator "1"--"0...*" Employee: registed by <
+SystemAdministrator "1"--"1" Employee: is >
+Employee "1"--"1" CompanyBranch: works for >
+Employee "0...*"--"1...*" Role: has >
+@enduml
