@@ -8,6 +8,7 @@ actor "Owner" as Owner #grey
 
 rectangle "RealEstate USA App"{
  usecase "US1 - Display Listed Properties" as UC1
+ usecase "US7 - Register in the system" as UC7
  usecase "US2 - Publish the Announcements on the System" as UC2
  usecase "US4 - Submit a request" as UC4
  usecase "US5 - Register a store" as UC5
@@ -18,4 +19,5 @@ rectangle "RealEstate USA App"{
  Admin -- UC5
  Admin -- UC3
  Owner -- UC4
+ unUser -- UC7
 @enduml
