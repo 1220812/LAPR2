@@ -12,63 +12,45 @@ participant ":System" as System
 
 activate Agent
 
-    Agent -> System : asks to register a new announcement
+    Agent -> System : asks to view the available announcements
 
     activate System
 
-        System --> Agent : requests type of property
+        System --> Agent : shows the announcements
 
     deactivate System
 
-    Agent -> System : selects one of the types given (apartment, house or land)
+    Agent -> System : selects one of the announcements
 
     activate System
 
-        System --> Agent : requests data
+        System --> Agent : requests type of comission
 
     deactivate System
 
-    Agent -> System : types the requested data (area in m2, location, distance from the city centre, requested price, comission on the sale, one or more photos)
-
-    opt property is an Apartment/House
-
-        activate System
-
-        System --> Agent : requests data
-
-        deactivate System
-
-        Agent -> System : types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)
-
-        opt property is a House
-
-            activate System
-
-            System --> Agent : requests data
-
-            deactivate System
-
-            Agent -> System : types the requested data (existence of a basement and inhabitable loft, sun exposure)
-
-            activate System
-
-        end opt
-
-    end opt
-
-        System --> Agent : presents all the data inserted
-
-    deactivate System
-
-    Agent -> System : confirms inserted data
+    Agent -> System : inserts type of comission
 
     activate System
 
-        System --> Agent : analyses the data and, if approved, sends a confirmation request before posting
+        System --> Agent : requests the comission
 
     deactivate System
 
-    Agent -> System : confirms publishment
+    Agent -> System : inserts comission
+
+    activate System
+
+        System --> Agent : shows all the information for confirmation
+
+    deactivate System
+
+    Agent -> System : confirms the information
+
+    activate System
+
+        System --> Agent : publishes announcement
+
+    deactivate System
 
 deactivate Agent
 
