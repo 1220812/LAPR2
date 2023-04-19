@@ -40,31 +40,50 @@ As an organization employee, I want to register a new employee .
 >
 > **Answer:** For now, the System Administrator can only do what is specified in the Project Requirements.
 
+
 > **Question:** Can an employee be registered to more than one agency?
 >
 > **Answer:** No.
+
 
 > **Question:**  What would be the attributes of the System Administrator, Agency and the Roles?
 > 
 > **Answer:** The System Administrator is an employee. You can get the roles from the project description. Please check the project description.
 Moreover, I just answered a question to clarify what are the attributes of an agency/store.
 
+
+> **Question:** The statement specifies 3 different types of employees. 
+The admnistrator, the agent and the store manager. Do we consider that there are only that  functions for employees or are there more?
+>
+> **Answer:** On this subject everything has already been clarified. 
+Please check the project description and the posts I wrote in this forum.
+
+
+**Question:** To register a system administrator, beyond the characteristics already defined on project description, the system administrator should have a list of the agencys available?
+> 
+> **Answer:** I do not understand your question.
+
 ### 1.3. Acceptance Criteria
 
 
 * **AC1:** The password of the new employee should have eight characters in length.
-* **AC2:** 
-* **AC3:** 
+* **AC2**: The name entered must be valid. 
+* **AC3**: The citizen´s card number entered must be valid.
+* **AC4**: The tax number entered must be valid.
+* **AC5**: The adress entered must be valid.
+* **AC6**: The email adress entered must be valid.
+* **AC7**: The contact telephone number entered must be valid.
+* **AC8**: The agency entered must be valid.
+* **AC9**: The designation entered must be valid.
+* **AC10**: The location entered must be valid.
+* **AC11**: The local manager entered must be valid.
 
 ### 1.4. Found out Dependencies
-
 
 * There is a dependency to "US005 Register a store " because you need a store to be possible to register an employee.
 
 
 ### 1.5 Input and Output Data
-
-
 **Input Data:**
 
 * Typed data:
@@ -75,6 +94,9 @@ Moreover, I just answered a question to clarify what are the attributes of an ag
     * the email address of the employee
     * the telephone number of the employee
     * the agency to which the employee is assigned.
+    * the location of employee
+    * the local manager
+    * 
    
 
 * Selected data:
@@ -94,3 +116,4 @@ Moreover, I just answered a question to clarify what are the attributes of an ag
 ### 1.7 Other Relevant Remarks
 
 * The state of the employee stays in "unregisterd" state in order to distinguish from "registered" state.
+* Only the system administrator can register a new employee.
