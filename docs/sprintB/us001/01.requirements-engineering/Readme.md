@@ -65,7 +65,8 @@ As an unregistered user, I want to display listed properties.
 ### 1.3. Acceptance Criteria
 
 * *AC1:* Not all required fiels must be filled in.
-* *AC2:* There must be at least one listed property to list the properties. Else, it displays no properties.
+* *AC2:* There must be at least one listed property to list the properties. Else, the app displays no properties.
+* *AC3:* If the user doesn't select any specific data, the app will show all the listed properties in alphabetical order.
 
 ### 1.4. Found out Dependencies
 
@@ -79,6 +80,9 @@ As an unregistered user, I want to display listed properties.
 **Input Data:**
 
 * Typed data:
+	* parish
+    * price
+* Selected data:
 	* sale/rental
 	* area
 	* distance from center

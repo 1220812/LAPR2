@@ -25,10 +25,32 @@ class District {
 class Advertisement {
 }
 
-class Store{
+class Store {
+}
+
+class Property {
+location
+area
+distanceFromCityCenter
+photographs
+}
+
+class AvailableEquipment {
+centralHeating
+airConditioning
+}
+
+class SunExposure {
+North
+East
+South
+West
 }
 
 Store "1"-- "*" Advertisement : displays >
-Store "1" -- "1" Adress : has an >
+Store "1" -- "1" Adress : has >
 Adress "1" -- "1" District : is in >
+Advertisement "1" -- "1" Property : about >
+Property "1" -- "1" AvailableEquipment : has >
+Property "1" -- "1" SunExposure : has >
 @enduml
