@@ -29,7 +29,7 @@ class Employee {
     agency
 }
 
-class CompanyBranch{
+class Store{
 id
 name
 location
@@ -42,6 +42,6 @@ class Role{
 
 SystemAdministrator "1"--"0...*" Employee: registed by <
 SystemAdministrator "1"--"1" Employee: is >
-Employee "1"--"1" CompanyBranch: works for >
+Employee "1"--"1" Store: works for >
 Employee "0...*"--"1...*" Role: has >
 @enduml
