@@ -22,24 +22,10 @@ As an agent, I can publish any sale announcement on the system, for example rece
 
 **From the client clarifications:**
 
-> **Question:** We are having a little issue defining what the sun exposure might be. We are not sure what it will be as a value. If it's a number that defines how much exposure the house has or if it is just a text saying if it has or hasn't sun exposure.
->  
-> **Answer:** Sun exposure will take the following values: North, South, East, or West.
-
-
-> **Question:** Is the phone call the only way the agent can receive the sale announcement? Or he can receive them via e-mail/letter/etc?
->  
-> **Answer:** For now this is the only way.
-
 
 > **Question:** How does the agent determine whether it is a fixed commission or a percentage commission?
 > 
 > **Answer:** The agent should choose the type of commission and enter the value.
-
-
-> **Question:** Is the phone call the only way the agent can receive the sale announcement? Or he can receive them via e-mail/letter/etc
->
-> **Answer:** For now this is the only way.
 
 
 > **Question:** The act of publishing a sale announcement means that the agent is publishing a new property for sale in the system (receiving the information of the seller and publishing the new property for sale) or is it the buyer giving positive feedback to the agent with intent to buy the property(actually closing a sale, buying a property and de-listing said property)?
@@ -77,11 +63,6 @@ As an agent, I can publish any sale announcement on the system, for example rece
 > **Answer:** In US2 we get "As an agent, I can publish any sale announcement on the system, for example received through a phone call". This will be a feature/functionality of the system. The agent may receive the information by any means.
 
 
-> **Question:** Does the owner who contacts the company provide the information during the call or is it just for setting up a meeting, "scheduling"?
->
-> **Answer:** The owner provides the information. Where did you saw that the goal is "setting up a meeting"?????
- 
-
 > **Question:** Is it necessary to publish the owner atributes on the sale announcement?
 >
 > **Answer:** No.
@@ -97,11 +78,6 @@ As an agent, I can publish any sale announcement on the system, for example rece
 > **Answer:** The commission is one value/percentage paid when the transaction is made.
 
 
-> **Question:** In the case of listing a land property, shall the owner refer if there is a building permit already approved?
->
-> **Answer:** No.
-
-
 > **Question:** Is it mandatory for the agent to input the commission value before publishing an announcement?
 >
 > **Answer:** Yes.
@@ -112,39 +88,9 @@ As an agent, I can publish any sale announcement on the system, for example rece
 > **Answer:** For now we only have two types of commissions.
 
 
-> **Question:** When renting, does the owner have any space to clarify any prohibitions or obligations with the property?
->
-> **Answer:** No.
-
-
-> **Question:** Regarding the property’s photographs, is that considered selected data?
->
-> **Answer:** The owner should input the URI of each file/photograph.
-
-
-> **Question:** In one of the previous questions you have stated that for now the only way that a agent can receive the request to publish an announcement is through a phone call, however in the primary data necessary to create an announcement it's said that it's necessary to upload at least one photo of the property. Taking that into consideration, the announcement can't be fully made by only communicating with the owner through a phone call, how is it possible for an agent to publish an announcement without all the necessary data?
->
-> **Answer:** The owner can send the photograph by e-mail or any other means. The owner can even deliver the photograph to the store.
-
-
-> **Question:** Another doubt that has emmerged is related to the identification of the owner of the property, isn't it required that the owner identifies themselves in the announcement?
->
-> **Answer:** Info about the owner is not published.
-
-
-> **Question:** If so, should it be possible to change each value/detail on its own, or would the only options be to cancel or submit the request?
->
-> **Answer:** If there are any errors, the application should allow the owner to correct the errors.
-
-
 > **Question:** Also, since the only way that an agent can receive sale announcement request is through a phone call, wouldn't that contradict what was stated in the project description: "Owners go to one of the company's branches and meet with a real estate agent to sell or rent one or more properties, or they can use the company's application for the same purposes."?
 >
 > **Answer:** US2: As an agent, I can publish any sale announcement on the system, for example received through a phone call. For example...
-
-
-> **Question:** In one of the previous questions you have stated that for now the only way that an agent can receive the sale announcement request is through a phone call. However, US004 states that "As an owner, I intend to submit a request for listing a property sale or rent, choosing the responsible agent". Isn't submitting a request for listing a property the same as a sale announcement request? If not, can you clarify?
->
-> **Answer:** In my previous answer, when I said "...the only way that an agent can receive the sale announcement..." I was talking about the agent as an actor of the system that introduces in the system property data.
 
 
 > **Question:** In USS02 are all the criteria for publishing the sale of a property in the system mandatory, or is there any data that the owner can choose not to give? such as not saying the direction of sun exposure in the case of a house.
@@ -173,7 +119,8 @@ As an agent, I can publish any sale announcement on the system, for example rece
 ### 1.4. Found out Dependencies
 
 
-* There are no dependencies
+* US3
+* US4 
 
 
 ### 1.5 Input and Output Data
@@ -182,29 +129,17 @@ As an agent, I can publish any sale announcement on the system, for example rece
 **Input Data:**
 
 * Typed data:
-    * Area in m2
-    * Location
-    * Distance from the city centre
-    * Requested price
-    * Number of bedrooms
-    * Number of bathrooms
-    * Number of parking spaces
-    * Available equipment
     * Comission
 	
 * Selected data:
-	* Type of property
-    * Existence of a basement
-    * Existence of an inhabitable loft
-    * Sun exposure
-
-* Other data:
-    * One or more photographs
+	* Comission type
 
 
 **Output Data:**
 
 * All the data
+* Available announcements
+* Sucess message
 
 
 ### 1.6. System Sequence Diagram (SSD)
