@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Rent Property
+title System Sequence Diagram (SSD)
 
 autonumber
 
@@ -12,13 +12,7 @@ participant ":System" as System
 
 activate Owner
 
-    Owner -> System : asks to sell or rent his property
-    activate System
-
-        System --> Owner : shows a list of options (sell or rent the property) and asks to select one
-    deactivate System
-
-    Owner -> System : selects the rent option
+    Owner -> System : asks to create a new request
     activate System
 
         System --> Owner : shows agency list and asks to select one
@@ -33,19 +27,43 @@ activate Owner
     Owner -> System : selects an agent
     activate System
 
-        System --> Owner : asks to select the type of property (house, apartment or land)
+
+        System --> Owner : ask to select the type of property
     deactivate System
+
     Owner -> System : selects the type of property
+
         activate System
 
         System --> Owner : requests data
 
     deactivate System
-    Owner -> System : inserts data (area (m2), location, distance from the city centre, \nsome photographs, price (per month) and contract duration)
+
+    Owner -> System : inserts data (area (m2), location, distance from the city centre)
+
     activate System
-    opt Property is Apartament or House
+
+    System --> Owner : asks for property photos
+    deactivate System
+
+    loop at least 1 photo and at most 30 photos
+
+    Owner -> System : inserts property photos (URI)
+    activate System
+
+    end
+
+    System --> Owner : ask for the type of business (rent or sell)
+    deactivate System
+
+
+    Owner -> System : inserts type of business
+   activate System
+
+    opt Property is Apartment or House
 
         System --> Owner : requests data
+
     deactivate System
 
     Owner -> System : inserts data (number of number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipement)
@@ -61,9 +79,35 @@ activate Owner
     activate System
 
     end
-          System --> Owner : requests data
+
+    System --> Owner : request the type of operation (sell or rent)
     deactivate System
 
+
+    Owner -> System : inserts type of operation
+
+    alt the owner intends to rent a property
+    activate System
+
+    System --> Owner : asks for the contract duration and the price (per month)
+    deactivate System
+
+    Owner -> System : submits data
+    activate System
+
+    alt the owner intends to sell a property
+    System --> Owner : asks for the property price
+
+    deactivate System
+
+    Owner -> System : submits data
+    activate System
+    end
+
+    end
+
+          System --> Owner : requests data
+    deactivate System
 
     Owner -> System : Inserts their name, citizen's card number, tax number, address, \nemail address, telephone number
     activate System
