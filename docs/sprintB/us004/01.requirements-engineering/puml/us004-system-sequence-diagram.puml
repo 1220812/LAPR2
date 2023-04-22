@@ -105,7 +105,7 @@ activate Owner
 
     end
 
-          System --> Owner : requests data (name, citizen's card number, tax number, address, \nemail address, telephone number)
+          System --> Owner : requests data (name, passport number, tax number, address, email address, telephone number)
     deactivate System
 
     Owner -> System : Inserts data
