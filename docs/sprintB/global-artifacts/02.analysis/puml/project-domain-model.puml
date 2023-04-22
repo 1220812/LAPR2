@@ -12,7 +12,7 @@ hide methods
 
 title Project - Domain Model
 
-class Adress{
+class Address{
 street
 city
 doorNr

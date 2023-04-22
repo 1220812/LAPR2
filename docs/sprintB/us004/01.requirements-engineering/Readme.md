@@ -108,14 +108,19 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 > **Answer:** 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** When listing a property with an already existing property listed, the system must reject such operation and the user must have the change to modify the typed information.
-* **AC2:** 
+* **AC1**: All required files must be filled in.
+* **AC2**: Must be provided the type of property.
+* **AC3**: The area must be in m^2.
+* **AC4**: The location and the distance from the city centre must be known.
+* **AC5**: Must have the requested price and one or more photographs.
+* **AC6**: The photos must be in URI format.
+* **AC7**: The prices must be in USD currency.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is dependency to the US3, the US5 and the US6.
+* There is dependency to the "US3 - register an employee" since that has to be, at least one employee to review the advertisement request, the "US5-register a store" since that has to be , at least, one store (agency) to be selected by the owner and the "US6-specify states, districts and cities in the System" since that the property listed by the owner has an address (is in a state, in a district and in a city)
 
 
 ### 1.5 Input and Output Data

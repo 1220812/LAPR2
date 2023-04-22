@@ -12,4 +12,6 @@
 | US 003 | [Register a new employee](../../us003/Readme.md)                        |
 | US 004 | [Request a list of properties for sale or lease](../../us004/Readme.md) |
 | US 005 | [Register a store](../../us005/Readme.md)                               |
+| US 006 | [Specify states, districts and cities in the system] (../..)            |         
+| US 007 | [Register in the system to buy, sell or rent properties] (../..)        |                 
 
