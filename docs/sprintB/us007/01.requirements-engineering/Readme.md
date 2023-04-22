@@ -1,42 +1,38 @@
-# US 004 - Readme
+# US 007 - To register a user
+US 004
 
 ## 1. Requirements Engineering
+
 
 ### 1.1. User Story Description
 
 As an owner, I intend to submit a request for listing a property sale or rent, choosing the responsible agent.
 
 
-### 1.2. Customer Specifications and Clarifications 
+### 1.2. Customer Specifications and Clarifications
 
 
 **From the specifications document:**
 
- From time to time, property owners contact Real Estate USA with the aim of selling or renting their
-properties. Owners go to one of the company's branches and meet with a real estate agent to sell or
-rent one or more properties, or they can use the company's application for the same purposes. The
-owner provides property characteristics and the requested price and sends the request to an agent.
- 
-In the case of a request for the sale of a property, the owner must provide information on: the type of property (apartment, house or land),
-the area in m2, the location, the distance from the city centre, the requested price and one or more
-photographs. 
- 
-If the property is an apartment or a house, the owner also provides: the number of
-bedrooms, the number of bathrooms, the number of parking spaces and the available equipment,
-such as central heating and/or air conditioning. 
- 
-In case the property is a house, the existence of a
-basement, an inhabitable loft, and sun exposure must be registered as well.
+> Owner can use the application to sell or rent one or more properties
+> The owner must provide property characteristics and the requested price
+> The request is sent to an agent of their choosing
+
+> If the owner wants to sell a property, he must provide information about the type of property (apartment, house or land), the area (m2), location, distance from city centre, price and photos
+
+> For apartments and houses, the owner must also provide the number of bedrooms, bathrooms and parking spaces, as well as any available equipment (central heating and/or air conditioning)
+
+> For houses the owner must additionally register the existence of a basement, inhabitable loft and also register sun exposure
 
 **From the client clarifications:**
 
 > **Question:** We are having a little issue defining what the sun exposure might be. We are not sure what it will be as a value. If it's a number that defines how much exposure the house has or if it is jusr a text saying if it has or hasn't sun exposure.
->  
+>
 > **Answer:** Sun exposure will take the following values: North, South, East or West.
 
 
 > **Question:** In the Project description, there are only specifications for a sale. What are the required characteristics for a rental?
->  
+>
 > **Answer:** The characteristics for a rental are the same as the ones for the sale of a property. The rent value is per month. Additionally, we have to define the contract duration.
 
 
@@ -71,7 +67,7 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 
 
 > **Question:** Does an owner need to be registered in the system to submit a request for a property listing?
-> 
+>
 > **Answer:** No. When making the request to list a property, the owner should introduce his own data. The Owner attributes are: the name, the citizen's card number, the tax number, the address, the email address and the telephone number.
 
 
@@ -85,42 +81,38 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 
 
 > **Question:** If the owner doesn't select an agent will the platform randomly assign one or the request cannot move to revision? If not, must we assume that all information slots must be filled?
-> 
+>
 > **Answer:** When filling the property data, the owner should select one agent from the list of agents working in the selected agency. Moreover, the application should include a feature to randomly assign one agent. The address of the owner is not mandatory.
 
 
 > **Question:** When renting does the owner have any space to clarify any prohibitions or obligations with the property?
-> 
+>
 > **Answer:** No.
 
 
 > **Question:** Does the owner have a limit of requests they can do?
-> 
+>
 > **Answer:** No.
 
 
 > **Question:** Regarding the property's photographs, is that considered selected data?
-> 
+>
 > **Answer:** The owner should input the URI of each file/photograph.
- 
+
 > **Question:** Also, since the only way that an agent can receive sale announcement request is through a phone call, wouldn't that contradict what was stated in the project description: "Owners go to one of "
-> 
-> **Answer:** 
+>
+> **Answer:**
 ### 1.3. Acceptance Criteria
 
-* **AC1**: All required files must be filled in.
-* **AC2**: Must be provided the type of property.
-* **AC3**: The area must be in m^2.
-* **AC4**: The location and the distance from the city centre must be known.
-* **AC5**: Must have the requested price and one or more photographs.
-* **AC6**: The photos must be in URI format.
-* **AC7**: The prices must be in USD currency.
+
+* **AC1:** All required files must be filled in.
+* **AC2:** When listing a property with an already existing property listed, the system must reject such operation and the user must have the change to modify the typed information.
 
 
 ### 1.4. Found out Dependencies
 
 
-* There is dependency to the "US3 - register an employee" since that has to be, at least one employee to review the advertisement request, the "US5-register a store" since that has to be , at least, one store (agency) to be selected by the owner and the "US6-specify states, districts and cities in the System" since that the property listed by the owner has an address (is in a state, in a district and in a city)
+* There is no dependency to any other US.
 
 
 ### 1.5 Input and Output Data
@@ -129,39 +121,37 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 **Input Data:**
 
 * Typed data:
-	* Owner data:
-		* the name
-		* the citizen's card number
-		* the tax number
-		* the address
-		* the email address
-		* the telephone number
+   * Owner data:
+      * the name
+      * the citizen's card number
+      * the tax number
+      * the address
+      * the email address
+      * the telephone number
 
-	* Property Data:
-		* the area in m2
-		* the address
-		* the distance from the city centre
-		* the requested price
-		* one or more photographs in URI
+   * Property Data:
+      * the area in m2
+      * the address
+      * the distance from the city centre
+      * the requested price
+      * one or more photographs URL
 
-		* Additional Data for apartment or a house:
-			* the number of bedrooms
-			* the number of bathrooms
-			* the number of parking spaces
-			* the available equipment:
-               * central heating
-               * air conditioning
+      * Additional Data for apartment or a house:
+         * the number of bedrooms
+         * the number of bathrooms
+         * the number of parking spaces
+         * the available equipment (central heating and/or air conditioning)
 
-		* Additional Data for house:
-			* the existence of a basement
-			* an inhabitable loft
+      * Additional Data for house:
+         * the existence of a basement
+         * an inhabitable loft
+         * sun exposure
 
 * Selected data:
-	* Listing options (rent or sale)
-	* The type property (apartment, house or land)
-	* The Agency
-	* The Agent
-    * Sun exposure
+   * Listing options (rent or sale)
+   * The type property (apartment, house or land)
+   * The Agency
+   * The Agent
 
 
 **Output Data:**
@@ -170,10 +160,9 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 * List of Agencies
 * List of Agents
 * (In)Success of the operation
-
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram - Rent](svg/us004-System_Sequence_Diagram__SSD.svg)
+![System Sequence Diagram - Rent](svg/us007-System_Sequence_Diagram__SSD_.svg)
 
 ### 1.7 Other Relevant Remarks
 

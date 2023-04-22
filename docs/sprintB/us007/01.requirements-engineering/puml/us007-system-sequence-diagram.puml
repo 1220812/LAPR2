@@ -1,0 +1,25 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Rent Property
+
+autonumber
+
+actor "Unregistered user" as unregisteredUser
+participant ":System" as System
+activate unregisteredUser
+
+    unregisteredUser -> System : asks to register in the system
+    activate System
+
+        System --> unregisteredUser : requests data
+    deactivate System
+
+    unregisteredUser -> System : inserts data (name, citizen's card number, tax number,\n address, email address and telephone number)
+    activate System
+
+        System --> unregisteredUser : shows confirmation of successful registration
+    deactivate System
+@enduml

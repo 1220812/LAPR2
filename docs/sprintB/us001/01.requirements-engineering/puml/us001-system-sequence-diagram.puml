@@ -13,25 +13,37 @@ participant ":System" as System
 activate Customer
 
     Customer -> System : asks to display properties
+
     activate System
 
         System --> Customer : asks if the user wants to filter the specific (type of property) \ndata or not
     deactivate System
 
-opt data is given
-    Customer -> System : types requested data (type of business (renting or buying), \ntype of property, number of rooms)
+opt data is specified
+    Customer -> System : selects requested data (type of business (renting or buying), \ntype of property, number of rooms)
+
     activate System
 
         System --> Customer : shows list of properties that correspond to the data
     deactivate System
 end
 
-opt no data is given
-    Customer -> System : decides not to type the required data
-        activate System
+opt no data is specified
+    Customer -> System : decides not to select the required data
+
+    activate System
 
             System --> Customer : allows the client to sort through all properties that are on \nsale or renting ordered by most recent (by default)
-        deactivate System
+    deactivate System
+end
+
+opt no properties are available
+    Customer -> System : selects requested data (type of business (renting or buying), \ntype of property, number of rooms)
+
+    activate System
+
+            System --> Customer : shows the client an empty list of properties
+    deactivate System
 end
 
 @enduml
