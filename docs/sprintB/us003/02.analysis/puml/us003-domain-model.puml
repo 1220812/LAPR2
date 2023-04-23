@@ -10,38 +10,45 @@ hide methods
 
 
 class SystemAdministrator{
-  name
-  email
-  citizenCardNumber
-  taxNumber
-  physycalAdress
-  phoneNumber
+}
+
+class employeeAddress{
+street
+doorNumber
+city
+state
+zipCode
+country
 }
 
 
 class Employee {
-    name
-    citizenCardNumber
-    adress
-    email
-    phoneNumber
-    taxNumber
-    agency
+    employeeName
+    employeeEmail
+    employeePhoneNumber
+    employeeTaxNumber
+    employeeAgency
+    passportCardNumber
 }
 
+
 class Store{
-id
-name
-location
-phoneNumber
-email
+storeName
+storeLocation
+storePhoneNumber
+storeEmail
 }
 
 class Role{
 }
 
+
 SystemAdministrator "1"--"0...*" Employee: registed by <
-SystemAdministrator "1"--"1" Employee: is >
+SystemAdministrator --|> Employee: is an
+employeeAddress --|> Employee
+
 Employee "1"--"1" Store: works for >
 Employee "0...*"--"1...*" Role: has >
+
+
 @enduml
