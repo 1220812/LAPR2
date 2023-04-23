@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD)
+title System Sequence Diagram (SSD) - US 004
 
 autonumber
 
@@ -35,11 +35,11 @@ activate Owner
 
         activate System
 
-        System --> Owner : requests data
+        System --> Owner : requests data (area (m2), location, distance from the city centre)
 
     deactivate System
 
-    Owner -> System : inserts data (area (m2), location, distance from the city centre)
+    Owner -> System : inserts data
 
     activate System
 
@@ -62,27 +62,27 @@ activate Owner
 
     opt Property is Apartment or House
 
-        System --> Owner : requests data
+        System --> Owner : requests data (number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
 
     deactivate System
 
-    Owner -> System : inserts data (number of number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipement)
+    Owner -> System : inserts data
+    activate System
+
+    opt Property is a House
+
+         System --> Owner : requests data (existence of a basement and/or inhabitable loft and sun exposure)
+    deactivate System
+
+    Owner -> System : inserts data
     activate System
 
     end
-    opt Property is a House
-
-         System --> Owner : requests data
-    deactivate System
-
-    Owner -> System : inserts data (existence of a basement and/or inhabitable loft and sun exposure)
-    activate System
 
     end
 
     System --> Owner : request the type of operation (sell or rent)
     deactivate System
-
 
     Owner -> System : inserts type of operation
 
@@ -95,28 +95,27 @@ activate Owner
     Owner -> System : submits data
     activate System
 
-    alt the owner intends to sell a property
+    else the owner intends to sell a property
     System --> Owner : asks for the property price
 
     deactivate System
 
     Owner -> System : submits data
     activate System
-    end
 
     end
 
-          System --> Owner : requests data
+          System --> Owner : requests data (name, passport number, tax number, address, email address, telephone number)
     deactivate System
 
-    Owner -> System : Inserts their name, citizen's card number, tax number, address, \nemail address, telephone number
+    Owner -> System : Inserts data
     activate System
 
-           System --> Owner : shows requested data and selected property movement
+           System --> Owner : shows requested data, selected property movement and asks for confirmation
 
     deactivate System
 
-    Owner -> System : submits data
+    Owner -> System : confirm data
     activate System
 
             System --> Owner : shows operation success
