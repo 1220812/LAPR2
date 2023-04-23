@@ -10,13 +10,20 @@ hide methods
 
 
 class SystemAdministrator{
+}
 
+class employeeAddress{
+street
+doorNumber
+city
+state
+zipCode
+country
 }
 
 
 class Employee {
     employeeName
-    employeeAddress
     employeeEmail
     employeePhoneNumber
     employeeTaxNumber
@@ -38,6 +45,7 @@ class Role{
 
 SystemAdministrator "1"--"0...*" Employee: registed by <
 SystemAdministrator --|> Employee: is an
+employeeAddress --|> Employee
 
 Employee "1"--"1" Store: works for >
 Employee "0...*"--"1...*" Role: has >
