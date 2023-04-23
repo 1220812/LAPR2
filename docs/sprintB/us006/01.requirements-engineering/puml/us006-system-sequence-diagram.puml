@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - USS006
+
+autonumber
+
+actor "System Administrator" as SystemAdministrator
+participant ":System" as System
+
+activate SystemAdministrator
+
+    SystemAdministrator -> System : asks to register a location
+    activate System
+
+        System --> SystemAdministrator : requests data (state)
+    deactivate System
+
+    SystemAdministrator -> System : inserts requested data
+    activate System
+
+        System --> SystemAdministrator : requests data (district)
+    deactivate System
+
+    SystemAdministrator -> System : inserts requested data
+    activate System
+
+        System --> SystemAdministrator : requests data (city)
+    deactivate System
+
+        SystemAdministrator -> System : inserts requested data
+    activate System
+
+    System --> SystemAdministrator : asks for data confirmation
+    deactivate System
+
+    SystemAdministrator -> System : confirms data inserted
+    activate System
+
+    System --> SystemAdministrator : shows operation success
+    deactivate System
+
+@enduml
