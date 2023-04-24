@@ -75,10 +75,6 @@ class Rent{
 contractDuration
 }
 
-class Commission{
-percentageValue
-}
-
 class Photographs{
 URI
 }
@@ -102,7 +98,6 @@ Agent "1" -- "1" Address : has >
 Agent "1" -- "1...*" Request : reviews and publishes >
 Agent "1" -- "1" TaxNumber : has >
 Agent "1" -- "1" Contacts : has >
-Agent "1" -- "1" Commission : defines >
 Agent "1" -- "1" CompanyBranch : works for >
 
 Property "1" -- "1" Address : has >
