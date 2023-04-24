@@ -1,0 +1,139 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Owner" as Owner
+participant ":CreateRequestUI" as UI
+participant ":CreateRequestController" as CTRL
+participant ":Repositories" as Repositories
+participant "repositories:\nRepositories" as RR
+participant "agencyRepository:\nAgencyRepository" as AgencyR
+participant "agentsRepository:\nAgentsRepository" as AgentR
+participant "requestRepository:\nAnnouncementRepository" as RR
+participant "propertyRepository:\nPropertyRepository" as PR
+participant "businessRepository:\nBusinessRepository" as BR
+
+activate Owner
+
+        Owner -> UI : asks to create a new request
+
+        activate UI
+
+            UI -> CTRL** : getAgencyList
+            activate CTRL
+
+                CTRL -> Repositories : getInstance()
+                activate Repositories
+
+                    Repositories --> CTRL: repositories
+                deactivate Repositories
+
+                CTRL -> RR : getAgencyRepository()
+                activate RR
+
+                    RR --> CTRL: agencyRepository
+                deactivate RR
+
+                CTRL ->  AgencyR : getAgencies()
+                activate AgencyR
+
+                    AgencyR --> CTRL : agencyList
+                deactivate AgencyR
+
+                CTRL --> UI : agencyList
+            deactivate CTRL
+
+            UI --> Owner : shows agency list\n and asks to select one
+
+            Owner -> UI : selects an agency
+
+            UI -> CTRL : getAgentsList()
+            activate CTRL
+
+            CTRL -> RR : getAgentsRepository()
+            activate RR
+
+            RR --> CTRL : agentsRepository
+
+            deactivate RR
+
+            CTRL -> AgentR : getAgents()
+            activate AgentR
+
+            AgentR --> CTRL : agentsList
+            deactivate AgentR
+
+            CTRL --> UI : agentsList
+            deactivate
+
+            deactivate CTRL
+
+            UI --> Owner : shows agents list \n and asks to select one
+
+            Owner -> UI : selects an agent
+
+            UI --> Owner : asks to select the type of property
+
+            UI -> CTRL : getPropertyTypesList()
+            activate CTRL
+
+            CTRL -> RR : getPropertyTypesListRepository()
+            activate RR
+
+            RR --> CTRL : propertyTypesRepository
+            deactivate RR
+
+            CTRL -> PR : getPropertyTypes()
+            activate PR
+
+            PR --> CTRL : propertyTypesList
+            deactivate PR
+            CTRL --> UI : propertyTypesList
+            deactivate CTRL
+
+            Owner -> UI : selects the type of property
+
+            UI --> Owner : requests data (area(m^2), location, distance from the city centre)
+
+            Owner -> UI : inserts data
+
+            UI --> Owner : asks for property photos
+
+            loop at least 1 photo and at most 30 photos
+
+            Owner -> UI : inserts property photos (URI)
+
+            end
+            UI --> Owner : asks for the type of business
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Owner -> UI : confirms data
+            deactivate CTRL
+            UI --> Owner: shows operation success
+    deactivate UI
+
+deactivate Owner
+@enduml
