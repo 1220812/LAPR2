@@ -4,7 +4,7 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 autonumber
-
+title Sequence Diagram (SD) - US 004
 'hide footbox
 actor "Owner" as Owner
 participant ":CreateRequestUI" as UI
@@ -76,7 +76,7 @@ activate Owner
 
             Owner -> UI : selects an agent
 
-            UI --> Owner : asks to select the type of property
+            UI --> Owner : shows type of property \nand asks to select one
 
             UI -> CTRL : getPropertyTypesList()
             activate CTRL
@@ -108,27 +108,62 @@ activate Owner
             Owner -> UI : inserts property photos (URI)
 
             end
-            UI --> Owner : asks for the type of business
 
 
+    opt Property is Apartment or House
 
+        UI --> Owner : requests data (number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
 
+    Owner -> UI : inserts data
 
+    opt Property is a House
 
+         UI --> Owner : requests data (existence of a basement and/or inhabitable loft and sun exposure)
 
+    Owner -> UI : inserts data
 
+    end
 
+    end
 
+    UI --> Owner : shows the type of operation list and asks to select one
+    UI -> CTRL : getTypesOfOperationList()
+    activate CTRL
 
+    CTRL -> RR : getTypesOfOperationRepository()
+    activate RR
 
+    RR --> CTRL : typesOfOperationRepository
+    deactivate RR
 
+    CTRL -> BR : getTypesOfOperation()
+    activate BR
 
+    BR --> CTRL : typesOfOperationList
+    deactivate BR
 
+    CTRL --> UI : typeOfOperationList
+    deactivate CTRL
 
+    Owner -> UI : inserts type of operation
 
+    alt the owner intends to rent a property
 
+    UI --> Owner : asks for the contract duration and the price (per month)
 
+    Owner -> UI : submits data
 
+    else the owner intends to sell a property
+    UI --> Owner : asks for the property price
+
+    Owner -> UI : submits data
+
+    end
+          UI --> Owner : requests data (name, passport number, tax number, address, email address, telephone number)
+
+    Owner -> UI : Inserts data
+
+           UI --> Owner : shows requested data, selected property movement and asks for confirmation
 
             Owner -> UI : confirms data
             deactivate CTRL
