@@ -12,31 +12,38 @@ skinparam classAttributeIconSize 0
 class SystemAdministrator {
 }
 
+class employeeAddress{
+-String street
+-Integer doorNumber
+-String city
+-String state
+-Integer zipCode
+-String country
+}
+ class RegisterEmployeeUI{
+
+ }
+ class RegisterEmployeeController{
+getAgencies()
+ }
 class Employee {
     -String EmployeeName
-    -String EmployeeAddress
     -String EmployeeEmail
     -Integer EmployeePhoneNumber
     -Integer TaxNumber
-    -String EmployeeAgency
     -Integer passportCardNumber
-}
-
-class Store {
-    -String storeName
-    -String storeLocation
-    -Integer storePhoneNumber
-    -String storeEmail
 
 }
 
+class Agency {
 
+}
 
-
-SystemAdministrator "1"--"0...*" Employee: registed by <
+SystemAdministrator "1"--"0...*" Employee: registe >
 SystemAdministrator --|> Employee: is an
+Employee --|> employeeAddress
 
-Employee "1"--"1" Store: works for >
+Employee "1"--"1" Agency: works for >
 Employee "0...*"--"1...*" Role: has >
 
 @enduml

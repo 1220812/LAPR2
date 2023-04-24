@@ -12,15 +12,6 @@ hide methods
 class SystemAdministrator{
 }
 
-class employeeAddress{
-street
-doorNumber
-city
-state
-zipCode
-country
-}
-
 
 class Employee {
     employeeName
@@ -29,6 +20,7 @@ class Employee {
     employeeTaxNumber
     employeeAgency
     passportCardNumber
+    employeeAddress
 }
 
 
@@ -43,9 +35,9 @@ class Role{
 }
 
 
-SystemAdministrator "1"--"0...*" Employee: registed by <
+SystemAdministrator "1"--"0...*" Employee: registe >
 SystemAdministrator --|> Employee: is an
-employeeAddress --|> Employee
+
 
 Employee "1"--"1" Store: works for >
 Employee "0...*"--"1...*" Role: has >
