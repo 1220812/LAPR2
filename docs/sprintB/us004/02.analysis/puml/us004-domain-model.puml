@@ -50,7 +50,6 @@ date
 class Property{
 area
 distanceFromTheCityCentre
-price
 }
 
 class Residence{
@@ -69,9 +68,11 @@ class Land{
 }
 
 class Sell{
+price
 }
 
 class Rent{
+pricePerMonth
 contractDuration
 }
 
