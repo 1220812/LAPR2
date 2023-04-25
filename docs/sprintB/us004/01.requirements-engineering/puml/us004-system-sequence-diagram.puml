@@ -28,7 +28,7 @@ activate Owner
     activate System
 
 
-        System --> Owner : ask to select the type of property
+        System --> Owner : shows type of property list and asks to select one
     deactivate System
 
     Owner -> System : selects the type of property
@@ -52,12 +52,6 @@ activate Owner
     activate System
 
     end
-
-    System --> Owner : ask for the type of business (rent or sell)
-    deactivate System
-
-
-    Owner -> System : inserts type of business
    activate System
 
     opt Property is Apartment or House
@@ -81,7 +75,7 @@ activate Owner
 
     end
 
-    System --> Owner : request the type of operation (sell or rent)
+    System --> Owner : shows the type of operation list and asks to select one
     deactivate System
 
     Owner -> System : inserts type of operation
