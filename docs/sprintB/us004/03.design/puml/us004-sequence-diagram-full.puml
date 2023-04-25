@@ -16,7 +16,6 @@ participant "agentsRepository:\nAgentsRepository" as AgentR
 participant "requestRepository:\nAnnouncementRepository" as RR
 participant "propertyRepository:\nPropertyRepository" as PR
 participant "businessRepository:\nBusinessRepository" as BR
-participant "addressRepository:\nAddressRepository" as AR
 
 activate Owner
 
@@ -99,18 +98,24 @@ activate Owner
             Owner -> UI : selects the type of property
 
             UI -> CTRL : set
+
             UI --> Owner : requests data (area(m^2), location, distance from the city centre)
 
             Owner -> UI : inserts data
 
-            UI --> Owner : asks for property photos
+            UI -> UI : save provided data
 
-            loop at least 1 photo and at most 30 photos
+            UI --> Owner : asks for the number of property photos \nthat the owner intends to insert
+
+            Owner -> UI : inserts the number of photos
+
+            loop from 1 to the number defined by the owner
 
             Owner -> UI : inserts property photos (URI)
 
-            end
+            UI -> UI : save provided data
 
+            end
 
     opt Property is Apartment or House
 
@@ -118,11 +123,15 @@ activate Owner
 
     Owner -> UI : inserts data
 
+    UI -> UI : save provided data
+
     opt Property is a House
 
          UI --> Owner : requests data (existence of a basement and/or inhabitable loft and sun exposure)
 
     Owner -> UI : inserts data
+
+    UI -> UI : save provided data
 
     end
 
@@ -155,15 +164,21 @@ activate Owner
 
     Owner -> UI : submits data
 
+    UI -> UI : save provided data
+
     else the owner intends to sell a property
     UI --> Owner : asks for the property price
 
     Owner -> UI : submits data
 
+    UI -> UI : submits provided data
+
     end
           UI --> Owner : requests data (name, passport number, tax number, address, email address, telephone number)
 
     Owner -> UI : Inserts data
+
+    UI -> UI : submits provided data
 
            UI --> Owner : shows requested data, selected property movement and asks for confirmation
 
