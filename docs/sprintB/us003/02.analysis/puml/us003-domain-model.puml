@@ -47,8 +47,8 @@ SystemAdministrator "1"--"0...*" Employee: registe >
 Employee --|> SystemAdministrator: is an <
 Employee "1"--"1" Password: sent to <
 Employee "1"<|--"1" Store: works for >
-Employee "1"<|--"1" Role: has >
-SystemAdministrator -- Password: give a >
+Employee "1"<|--"1...*" Role: has >
+SystemAdministrator -- Password: generate a >
 
 
 @enduml

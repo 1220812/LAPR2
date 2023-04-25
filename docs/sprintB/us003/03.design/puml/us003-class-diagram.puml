@@ -1,49 +1,106 @@
 @startuml
-'skinparam monochrome true
-skinparam packageStyle rectangle
-skinparam shadowing false
-skinparam linetype polyline
-'skinparam linetype orto
-
 skinparam classAttributeIconSize 0
 
-'left to right direction
-
-class SystemAdministrator {
+class RegisteremployeeController{
+    -getAgencies()
+    -getEmployeeRoles()
+    -getStores()
+    -registerEmployee(data)
 }
 
-class employeeAddress{
--String street
--Integer doorNumber
--String city
--String state
--Integer zipCode
--String country
+class Repositories{
+    getInstance() : Repositories
+    -getAgencyRepositories()
+    -getRoleRepositories()
+    -getStoreRepositories()
 }
- class RegisterEmployeeUI{
 
- }
- class RegisterEmployeeController{
-getAgencies()
- }
+class AgencyRepository{
+    -getAllAgencies()
+}
+
+class RoleRepository{
+    -getEmployeeRoles()
+}
+
+class StoreRepository{
+    -getAllAgencyStores(agency)
+}
+
+class passwordGenerator{
+    -generate()
+}
+
+class emailService{
+    -sendRegisteredUserEmail(employee.email(), employee.password())
+}
+
+class user{
+-register(data, role, pass)
+}
+
+class userRepository{
+-save(user)
+}
+
+class RegisterEmpployeeUI{
+}
+
+
+
+
 class Employee {
-    -String EmployeeName
-    -String EmployeeEmail
-    -Integer EmployeePhoneNumber
-    -Integer TaxNumber
-    -Integer passportCardNumber
+    -String email
+    -String telephone_number
+    -String agency
+    -String name
+    -String citize_number
+    -String tax_number
 
 }
 
-class Agency {
-
+class Address {
+    -String City
+    -String Street
+    -String District
+    -String State
+    -double Zipcode
 }
 
+class Role{
+    - String description
+    - String permissions
+}
+
+class Store{
+    -String designation
+    }
+
+
+class Password {
+    -String password
+}
+
+
+
+RegisterEmpployeeUI .>RegisteremployeeController
+RegisteremployeeController .>Repositories :repositories
+RegisteremployeeController .>AgencyRepository
+RegisteremployeeController .>RoleRepository
+RegisteremployeeController .>StoreRepository
+RegisteremployeeController .>passwordGenerator
+RegisteremployeeController .>emailService
+
+
+
+
+
+
+Address --|> Employee: has an
 SystemAdministrator "1"--"0...*" Employee: registe >
-SystemAdministrator --|> Employee: is an
-Employee --|> employeeAddress
-
-Employee "1"--"1" Agency: works for >
-Employee "0...*"--"1...*" Role: has >
-
+Employee --|> SystemAdministrator: is an <
+Employee "1"--"1" Password: sent to <
+Employee "1"<|--"1" Store: works for >
+Employee "1"<|--"1" Role: has >
+SystemAdministrator -- Password: give a >
 @enduml

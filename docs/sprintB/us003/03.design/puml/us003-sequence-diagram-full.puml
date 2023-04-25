@@ -58,7 +58,7 @@ activate ADM
             UI --> ADM : Requests data
        deactivate UI
 
-       ADM -> UI : Types requested data (name,passport's card number,\n tax number, address,  email, contact, phone number)
+       ADM -> UI : Types requested data (name,passport's card number,\n tax number, address,  email, phone number)
 
        activate UI
             UI -> UI : save provided data
