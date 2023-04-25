@@ -15,35 +15,27 @@ activate Owner
     Owner -> System : asks to create a new request
     activate System
 
-        System --> Owner : shows agency list and asks to select one
+        System --> Owner : shows type of request list and asks to select one
     deactivate System
 
-    Owner -> System : selects an agency
+    Owner -> System : selects a type of request
     activate System
 
-        System --> Owner : shows agents list and asks to select one
+        System --> Owner : shows list of property type \nand asks to select one
     deactivate System
 
-    Owner -> System : selects an agent
+    Owner -> System : selects type of property
     activate System
 
 
-        System --> Owner : shows type of property list and asks to select one
-    deactivate System
-
-    Owner -> System : selects the type of property
-
-        activate System
-
-        System --> Owner : requests data (area (m2), location, distance from the city centre)
-
+        System --> Owner : requests data(area(m^2), location, price, distanceFromCityCentre)
     deactivate System
 
     Owner -> System : inserts data
 
-    activate System
+        activate System
 
-    System --> Owner : asks for the number of property photos \nthat the owner intends to insert
+        System --> Owner : requests the number of photos \nthat the owner intends to submit
 
     deactivate System
 
@@ -51,22 +43,31 @@ activate Owner
 
     activate System
 
-    System --> Owner : asks for the property photos
+    loop from 1 to the number of photos defined
 
+    System --> Owner : asks for the photos URI
     deactivate System
-    loop at least 1 photo and at most 30 photos
-
-    Owner -> System : inserts property photos (URI)
+    Owner -> System : inserts photos URI
     activate System
 
     end
-   activate System
+
+    opt Rent a Property
+
+    System --> Owner : requests data (contract duration)
+
+    deactivate System
+
+    Owner -> System : inserts data
+
+    activate System
+
+    end
 
     opt Property is Apartment or House
 
         System --> Owner : requests data (number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
-
-    deactivate System
+        deactivate System
 
     Owner -> System : inserts data
     activate System
@@ -83,41 +84,23 @@ activate Owner
 
     end
 
-    System --> Owner : shows the type of operation list and asks to select one
+    System --> Owner : shows agency list and asks to select one
     deactivate System
 
-    Owner -> System : inserts type of operation
-
-    alt the owner intends to rent a property
+    Owner -> System : selects agency
     activate System
 
-    System --> Owner : asks for the contract duration and the price (per month)
+    System --> Owner : shows agent list and asks to select one
     deactivate System
 
-    Owner -> System : submits data
+    Owner -> System : selects agent
     activate System
 
-    else the owner intends to sell a property
-    System --> Owner : asks for the property price
+    System --> Owner : shows all the data related to the request \nand asks to confirm
 
     deactivate System
 
-    Owner -> System : submits data
-    activate System
-
-    end
-
-          System --> Owner : requests data (name, passport number, tax number, address, email address, telephone number)
-    deactivate System
-
-    Owner -> System : Inserts data
-    activate System
-
-           System --> Owner : shows requested data, selected property movement and asks for confirmation
-
-    deactivate System
-
-    Owner -> System : confirm data
+    Owner -> System : confirms data
     activate System
 
             System --> Owner : shows operation success

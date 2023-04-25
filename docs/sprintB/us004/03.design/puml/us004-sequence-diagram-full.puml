@@ -4,240 +4,287 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 autonumber
-title Sequence Diagram (SD) - US 004
+
 'hide footbox
-actor "Owner" as Owner
+actor "Owner" as ADM
 participant ":CreateRequestUI" as UI
 participant ":CreateRequestController" as CTRL
-participant ":Repositories" as Repositories
-participant "repositories:\nRepositories" as RR
-participant "agencyRepository:\nAgencyRepository" as AgencyR
-participant "agentsRepository:\nAgentsRepository" as AgentR
-participant "requestRepository:\nAnnouncementRepository" as RR
-participant "propertyRepository:\nPropertyRepository" as PR
-participant "businessRepository:\nBusinessRepository" as BR
+participant ":Repositories" as Rep
+participant "repositories\n:Repositories" as PLAT
+participant "RequestTypeRepository:\nRequestTypeRepository" as TaskCategoryRepository
+participant "PropertyTypeRepository" as ProType
+participant "agency: \nAgency" as A
+participant "agencyRepository:\nAgencyRepository" as ARep
+participant "request: \nRequest" as Req
+participant "property: \nProperty" as Prop
+participant "Agent:\nAgent" as Agent
+participant "agentList:\nAgentList" as AgList
+participant "residence:\nResidence" as R
+participant "house:\nHouse" as House
+participant "photographList" as PhotoList
+participant "area(m^2)\nfloat"
+participant "distanceFromTheCityCentre\nfloat"
+participant "location\nstring"
+participant "numberOfPropertyPhotos\ninteger"
+participant "numberOfBedrooms\ninteger"
+participant "numberOfBathrooms\ninteger"
+participant "numberOfParkingSpaces\ninteger"
+participant "availableEquipment\nstring"
+participant "basement\nboolean"
+participant "inhabitableLoft\nboolean"
+participant "sunExposure\nstring"
+participant "price\nfloat"
+participant "contractDuration\ninteger"
 
-activate Owner
+activate ADM
 
-        Owner -> UI : asks to create a new request
+        ADM -> UI : asks to create a new request
 
         activate UI
 
-            UI -> CTRL** : getAgencyList
+            UI -> CTRL : getRequestCategories()
             activate CTRL
 
-                CTRL -> Repositories : getInstance()
-                activate Repositories
+                CTRL -> Rep : getInstance()
+                activate Rep
 
-                    Repositories --> CTRL: repositories
-                deactivate Repositories
+                    Rep --> CTRL: repositories
+                deactivate Rep
 
-                CTRL -> RR : getAgencyRepository()
-                activate RR
+                CTRL -> PLAT : getRequestCategoryRepository()
+                activate PLAT
 
-                    RR --> CTRL: agencyRepository
-                deactivate RR
+                    PLAT --> CTRL: requestCategoryRepository
+                deactivate PLAT
 
-                CTRL ->  AgencyR : getAgencies()
-                activate AgencyR
+                CTRL -> TaskCategoryRepository : getRequestTypeRepository()
+                activate TaskCategoryRepository
 
-                    AgencyR --> CTRL : agencyList
-                deactivate AgencyR
+                    TaskCategoryRepository --> CTRL : requestTypeList
+                deactivate TaskCategoryRepository
 
-                CTRL --> UI : agencyList
+                CTRL --> UI : requestCategoryList
             deactivate CTRL
 
-            UI --> Owner : shows agency list\n and asks to select one
-
-            deactivate UI
-
-            Owner -> UI : selects an agency
-
-            activate UI
-
-            UI -> CTRL : getAgentsList()
-            activate CTRL
-
-            CTRL -> RR : getAgentsRepository()
-            activate RR
-
-            RR --> CTRL : agentsRepository
-
-            deactivate RR
-
-            CTRL -> AgentR : getAgents()
-            activate AgentR
-
-            AgentR --> CTRL : agentsList
-            deactivate AgentR
-
-            CTRL --> UI : agentsList
-            deactivate CTRL
-
-            UI --> Owner : shows agents list, \n and asks to select one
-
-            deactivate UI
-
-            Owner -> UI : selects an agent
-
-            activate UI
-
-            UI --> Owner : shows type of property \nand asks to select one
-
-            UI -> CTRL : getPropertyTypesList()
-            activate CTRL
-
-            CTRL -> RR : getPropertyTypesListRepository()
-            activate RR
-
-            RR --> CTRL : propertyTypesRepository
-            deactivate RR
-
-            CTRL -> PR : getPropertyTypes()
-            activate PR
-
-            PR --> CTRL : propertyTypesList
-            deactivate PR
-
-            CTRL --> UI : propertyTypesList
-            deactivate UI
-            deactivate CTRL
-
-            Owner -> UI : selects the type of property
-            activate UI
-
-            UI -> CTRL : set
-
-            UI --> Owner : requests data (area(m^2), location, distance from the city centre)
-
-            deactivate UI
-
-            Owner -> UI : inserts data
-
-            activate UI
-
-            UI -> UI : save provided data
-
-            UI --> Owner : asks for the number of property photos \nthat the owner intends to insert
-
-           deactivate UI
-
-            Owner -> UI : inserts the number of photos
-
-            activate UI
-
-            UI --> Owner : asks for the property photos
-
-            deactivate UI
-
-            loop from 1 to the number defined by the owner
-
-            Owner -> UI : inserts property photos (URI)
-
-            activate UI
-
-            UI -> UI : save provided data
-
-            end
-
-    opt Property is Apartment or House
-
-        UI --> Owner : requests data (number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
-
+            UI --> ADM : shows type of request list \nand asks to select one
         deactivate UI
 
-    Owner -> UI : inserts data
-
+    ADM -> UI : selects a type of request
     activate UI
 
-    UI -> UI : save provided data
+    UI -> CTRL : create a request type
+        activate CTRL
 
-    opt Property is a House
+    CTRL --> A : create a request type
+    activate A
 
-         UI --> Owner : requests data (existence of a basement and/or inhabitable loft and sun exposure)
+    A -> Req** : create
+    activate Req
 
-    deactivate UI
+    Req --> A : request
+    deactivate Req
 
-    Owner -> UI : inserts data
+    A -> A : add Request
 
-    activate UI
+    deactivate A
 
-    UI -> UI : save provided data
 
-    end
+    UI -> CTRL : getPropertyType()
 
-    end
+    CTRL -> PLAT : getPropertyTypeProperty()
+    activate PLAT
 
-    UI --> Owner : shows the type of operation list and asks to select one
+    PLAT --> CTRL : PropertyTypeRepository
+    deactivate PLAT
 
-    UI -> CTRL : getTypesOfOperationList()
-    activate CTRL
+    CTRL -> ProType :getPropertyType()
+    activate ProType
 
-    CTRL -> RR : getTypesOfOperationRepository()
-    activate RR
+    ProType --> CTRL : Property Type
+    deactivate ProType
 
-    RR --> CTRL : typesOfOperationRepository
-    deactivate RR
-
-    CTRL -> BR : getTypesOfOperation()
-    activate BR
-
-    BR --> CTRL : typesOfOperationList
-    deactivate BR
-
-    CTRL --> UI : typeOfOperationList
+    CTRL --> UI : propert Type List
     deactivate CTRL
 
+        UI --> ADM : shows list of property type \nand asks to select one
+    deactivate A
     deactivate UI
 
-    Owner -> UI : inserts type of operation
-
-    alt the owner intends to rent a property
-
+    ADM -> UI : selects type of property
     activate UI
 
-    UI --> Owner : asks for the contract duration and the price (per month)
+        UI -> CTRL : create property
+        activate CTRL
+
+        CTRL --> Req :selects Property Type
+        activate Req
+
+        deactivate Req
+        deactivate CTRL
+
+        UI --> ADM : request data( area(m^2), location, price, distanceFromCityCentre)
+    deactivate UI
+
+    ADM -> UI : inserts data
+    activate UI
+
+        UI -> CTRL : create property(area(m^2), location, price, distanceFromCityCentre, photograph)
+        activate CTRL
+
+        CTRL -> Req : create property(area(m^2), location, price, distanceFromCityCentre, photograph)
+        deactivate CTRL
+    activate Req
+
+    Req -> Prop**: create
+    activate Prop
+
+    Prop -> Req:  property
+    Req -> Req :add property
+    deactivate Prop
+    deactivate Req
+
+    UI --> ADM :  request the number of photos \nthat the owner intends to submit
+    deactivate UI
+
+    ADM -> UI : inserts the number of photos
+
+    activate UI
+    loop from 1 to the number of photos defined
+    UI --> ADM : asks for the photos URI
 
     deactivate UI
 
-    Owner -> UI : submits data
-
+    ADM -> UI : inserts photo URI
     activate UI
 
-    UI -> UI : save provided data
+    UI -> CTRL : create Photograph
+    activate CTRL
 
-    else the owner intends to sell a property
-    UI --> Owner : asks for the property price
-
-    deactivate UI
-
-    Owner -> UI : submits data
-
-    activate UI
-
-    UI -> UI : submits provided data
-
-    end
-          UI --> Owner : requests data (name, passport number, tax number, address, email address, telephone number)
-
-   deactivate UI
-
-    Owner -> UI : Inserts data
-
-    activate UI
-
-    UI -> UI : submits provided data
-
-           UI --> Owner : shows requested data, selected property movement and asks for confirmation
-           deactivate UI
-
-            Owner -> UI : confirms data
-
-            activate UI
+            CTRL -> Prop: creates Photograph
             deactivate CTRL
 
-            UI --> Owner: shows operation success
-    deactivate UI
+    activate Prop
 
-deactivate Owner
-@enduml
+
+    Prop -> PhotoList :  add photograph to PhotoList
+    activate PhotoList
+    deactivate Prop
+    deactivate PhotoList
+    end
+
+    opt Rent a Property
+    UI-->ADM : request data (contract duration)
+    deactivate UI
+    ADM -> UI : inserts data
+    activate UI
+    UI-> CTRL : set contractDuration()
+    activate CTRL
+
+    CTRL -> Req : set contractDuration()
+    deactivate CTRL
+    end
+
+    opt Property Apartment or House
+
+        UI--> ADM : request data(number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+     deactivate UI
+
+     ADM -> UI : inserts data
+     activate UI
+     UI-> CTRL : create Residence(number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+     activate CTRL
+
+     CTRL -> Req : create Residence(number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+     activate Req
+    deactivate CTRL
+
+    Req -> R** : create
+    activate R
+
+    R --> Req : residence
+    deactivate R
+    Req-> Req : add Property
+     deactivate Req
+
+
+    opt Property is a House
+    UI --> ADM : request data (existence of a basement and/or inhabitableLoft and sunExposure)
+    deactivate UI
+    ADM-> UI : inserts data
+    activate UI
+    UI-> CTRL : create house (existence of a basement and/or inhabitableLoft and sunExposure)
+    activate CTRL
+
+    CTRL -> Req : create house (existence of a basement and/or inhabitableLoft and sunExposure)
+    activate Req
+
+    Req -> House** : create
+    activate House
+
+    House --> Req: house
+    deactivate House
+    Req -> Req :add Property (house)
+    deactivate Req
+    deactivate CTRL
+    end
+
+    end
+
+
+    UI -> CTRL : getAgency()
+    activate CTRL
+
+    CTRL -> PLAT : getAgency()
+    activate PLAT
+    PLAT--> CTRL : agencyRepositories
+    deactivate PLAT
+    CTRL -> ARep : getAgencyList()
+    activate ARep
+
+    ARep -> CTRL : agency list
+    deactivate ARep
+    CTRL --> UI : agency list
+ deactivate CTRL
+ UI --> ADM : shows agency list and asks to select one
+
+ deactivate UI
+
+    ADM -> UI : selects agency
+    activate UI
+
+    UI -> A : getAgentList(selected Agency)
+    activate A
+    loop For each employee
+    A-> Agent : has an agent
+    activate Agent
+
+    Agent --> A : true / false
+    deactivate Agent
+    alt true
+    A-> AgList :add agent to the list
+    activate AgList
+
+    AgList --> A : agent list
+    deactivate AgList
+    end
+
+    end
+    A --> CTRL : Agent List
+    activate CTRL
+    deactivate A
+    CTRL --> UI : agent List
+    UI --> ADM : shows agent List and asks to select one
+    deactivate CTRL
+    deactivate UI
+    ADM -> UI : selects agent
+    activate UI
+
+    UI --> ADM : shows all the data related to the request \nand asks to confirm
+    deactivate UI
+    ADM -> UI : confirms data
+    activate UI
+
+    UI --> ADM : shows operation success
+    deactivate UI
+    deactivate ADM
+    @enduml
