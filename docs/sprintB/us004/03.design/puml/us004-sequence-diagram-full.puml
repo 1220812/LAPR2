@@ -49,7 +49,11 @@ activate Owner
 
             UI --> Owner : shows agency list\n and asks to select one
 
+            deactivate UI
+
             Owner -> UI : selects an agency
+
+            activate UI
 
             UI -> CTRL : getAgentsList()
             activate CTRL
@@ -68,13 +72,15 @@ activate Owner
             deactivate AgentR
 
             CTRL --> UI : agentsList
-            deactivate
-
             deactivate CTRL
 
             UI --> Owner : shows agents list, \n and asks to select one
 
+            deactivate UI
+
             Owner -> UI : selects an agent
+
+            activate UI
 
             UI --> Owner : shows type of property \nand asks to select one
 
@@ -92,26 +98,43 @@ activate Owner
 
             PR --> CTRL : propertyTypesList
             deactivate PR
+
             CTRL --> UI : propertyTypesList
+            deactivate UI
             deactivate CTRL
 
             Owner -> UI : selects the type of property
+            activate UI
 
             UI -> CTRL : set
 
             UI --> Owner : requests data (area(m^2), location, distance from the city centre)
 
+            deactivate UI
+
             Owner -> UI : inserts data
+
+            activate UI
 
             UI -> UI : save provided data
 
             UI --> Owner : asks for the number of property photos \nthat the owner intends to insert
 
+           deactivate UI
+
             Owner -> UI : inserts the number of photos
+
+            activate UI
+
+            UI --> Owner : asks for the property photos
+
+            deactivate UI
 
             loop from 1 to the number defined by the owner
 
             Owner -> UI : inserts property photos (URI)
+
+            activate UI
 
             UI -> UI : save provided data
 
@@ -121,7 +144,11 @@ activate Owner
 
         UI --> Owner : requests data (number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
 
+        deactivate UI
+
     Owner -> UI : inserts data
+
+    activate UI
 
     UI -> UI : save provided data
 
@@ -129,7 +156,11 @@ activate Owner
 
          UI --> Owner : requests data (existence of a basement and/or inhabitable loft and sun exposure)
 
+    deactivate UI
+
     Owner -> UI : inserts data
+
+    activate UI
 
     UI -> UI : save provided data
 
@@ -138,6 +169,7 @@ activate Owner
     end
 
     UI --> Owner : shows the type of operation list and asks to select one
+
     UI -> CTRL : getTypesOfOperationList()
     activate CTRL
 
@@ -156,34 +188,54 @@ activate Owner
     CTRL --> UI : typeOfOperationList
     deactivate CTRL
 
+    deactivate UI
+
     Owner -> UI : inserts type of operation
 
     alt the owner intends to rent a property
 
+    activate UI
+
     UI --> Owner : asks for the contract duration and the price (per month)
 
+    deactivate UI
+
     Owner -> UI : submits data
+
+    activate UI
 
     UI -> UI : save provided data
 
     else the owner intends to sell a property
     UI --> Owner : asks for the property price
 
+    deactivate UI
+
     Owner -> UI : submits data
+
+    activate UI
 
     UI -> UI : submits provided data
 
     end
           UI --> Owner : requests data (name, passport number, tax number, address, email address, telephone number)
 
+   deactivate UI
+
     Owner -> UI : Inserts data
+
+    activate UI
 
     UI -> UI : submits provided data
 
            UI --> Owner : shows requested data, selected property movement and asks for confirmation
+           deactivate UI
 
             Owner -> UI : confirms data
+
+            activate UI
             deactivate CTRL
+
             UI --> Owner: shows operation success
     deactivate UI
 

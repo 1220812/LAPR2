@@ -43,9 +43,17 @@ activate Owner
 
     activate System
 
-    System --> Owner : asks for property photos
+    System --> Owner : asks for the number of property photos \nthat the owner intends to insert
+
     deactivate System
 
+    Owner -> System : inserts the number of photos
+
+    activate System
+
+    System --> Owner : asks for the property photos
+
+    deactivate System
     loop at least 1 photo and at most 30 photos
 
     Owner -> System : inserts property photos (URI)
