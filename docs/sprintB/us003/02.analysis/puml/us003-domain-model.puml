@@ -9,38 +9,46 @@ hide circle
 hide methods
 
 
-class SystemAdministrator{
-}
-
-
 class Employee {
-    employeeName
-    employeeEmail
-    employeePhoneNumber
-    employeeTaxNumber
-    employeeAgency
+    email
+    phoneNumber
+    agency
+    name
     passportCardNumber
-    employeeAddress
+    taxNumber
+
 }
 
-
-class Store{
-storeName
-storeLocation
-storePhoneNumber
-storeEmail
+class Address {
+    City
+    Street
+    District
+    State
+    Zipcode
 }
 
 class Role{
+    description
+    permissions
 }
 
+class Store{
+    name
+    designation
+    }
 
+
+class Password {
+    password
+}
+
+Address --|> Employee: has an
 SystemAdministrator "1"--"0...*" Employee: registe >
-SystemAdministrator --|> Employee: is an
-
-
-Employee "1"--"1" Store: works for >
-Employee "0...*"--"1...*" Role: has >
+Employee --|> SystemAdministrator: is an <
+Employee "1"--"1" Password: sent to <
+Employee "1"<|--"1" Store: works for >
+Employee "1"<|--"1" Role: has >
+SystemAdministrator -- Password: give a >
 
 
 @enduml
