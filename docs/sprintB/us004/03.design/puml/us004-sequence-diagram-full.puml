@@ -16,6 +16,7 @@ participant "agentsRepository:\nAgentsRepository" as AgentR
 participant "requestRepository:\nAnnouncementRepository" as RR
 participant "propertyRepository:\nPropertyRepository" as PR
 participant "businessRepository:\nBusinessRepository" as BR
+participant "addressRepository:\nAddressRepository" as AR
 
 activate Owner
 
@@ -72,7 +73,7 @@ activate Owner
 
             deactivate CTRL
 
-            UI --> Owner : shows agents list \n and asks to select one
+            UI --> Owner : shows agents list, \n and asks to select one
 
             Owner -> UI : selects an agent
 
@@ -97,6 +98,7 @@ activate Owner
 
             Owner -> UI : selects the type of property
 
+            UI -> CTRL : set
             UI --> Owner : requests data (area(m^2), location, distance from the city centre)
 
             Owner -> UI : inserts data
