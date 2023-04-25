@@ -8,6 +8,9 @@ import java.util.List;
 public class storeRepository {
     private List<Store> listOfStores;
 
+    public void setListOfStores(List<Store> listOfStores) {
+        this.listOfStores = listOfStores;
+    }
 
 
     public storeRepository(){

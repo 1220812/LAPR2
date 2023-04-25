@@ -89,7 +89,7 @@ activate ADM
 
             activate CTRL
 
-                CTRL -> RREPO : getEmployeeRoles()
+                CTRL -> RREPO : getRoles()
 
                 activate RREPO
 
@@ -124,7 +124,7 @@ activate ADM
 
                 activate CTRL
 
-                    CTRL -> SREPO : getAllAgencyStores(agency)
+                    CTRL -> SREPO : getAllAgencies(agency)
 
                     activate SREPO
 

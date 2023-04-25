@@ -14,7 +14,7 @@ public class agencyRepository {
     public agencyRepository(){
         listOfAgencies = new ArrayList<>();
     }
-    public List<Agency> getListOfStores() {
+    public List<Agency> getAllAgencies() {
         return listOfAgencies;
     }
 }
