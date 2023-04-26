@@ -9,12 +9,12 @@ actor "Admninistrator" as ADM
 participant ":RegisterStoreUI" as UI
 participant ":RegisterStoreController" as CTRL
 participant ":Repositories" as REP
-participant ":repositories:Repositories" as rep
+participant "repositories:Repositories" as rep
+participant "StateRepository" as STATEREP
 participant ":StoreRepository" as STOREREP
 participant ":store:Store" as STORE
 participant "AddressRepository" as ADRESSREP
 participant "address:Address" as ADRESS
-participant "StateRepository" as STATEREP
 
 activate ADM
 
@@ -32,10 +32,11 @@ rep -> STATEREP : isStateListEmpty()
 activate STATEREP
 deactivate STATEREP
 deactivate rep
+alt answer = true
 CTRL -> UI : answer
 deactivate CTRL
 
-alt answer = false
+else answer = false
 UI-> CTRL: getStateList()
 activate CTRL
 CTRL-> STATEREP: getStateList()
@@ -90,16 +91,12 @@ deactivate CTRL
 STOREREP->STORE**:new Store (ID, designation, phoneNumber, email, adressInstance)
 deactivate STOREREP
 deactivate rep
-UI->ADM : request confirmation
-deactivate UI
-ADM->UI: confirms
-activate UI
 UI->CTRL : getRegisterStore()
 activate CTRL
 CTRL-> STOREREP : registerStore(storeInstance)
 activate STOREREP
 deactivate CTRL
-STOREREP->STOREREP:validadeStore(storeInstance)
+STOREREP->STOREREP:validityStore(storeInstance)
 STOREREP->STOREREP:add(storeClone)
 UI->ADM: displays operation success
 deactivate STOREREP

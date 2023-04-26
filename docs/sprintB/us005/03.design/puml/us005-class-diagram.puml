@@ -34,7 +34,7 @@ class Repositories
 -AddressRepository addressRepository
 -StateRepository stateRepository
 +Repositories()
-+getInstance() : Repositories
++{static}getInstance() : Repositories
 +getStoreRepository()
 +getAddressRepository()
 +getStateRepository()
@@ -111,7 +111,7 @@ RegisterStoreController ..> Repositories
 Repositories "1"-- "1" AddressRepository : has
 Repositories "1"-- "1" StateRepository : has
 Repositories "1"--"1" StoreRepository : has
-StoreRepository "1"--"*" Store :has
-StateRepository "1"-- "*" State :has
-AddressRepository "1" -- "*" Address :has
+StoreRepository "1" o--"*" Store :has
+StateRepository "1" o--"*" State :has
+AddressRepository "1" o-- "*" Address :has
 @enduml
