@@ -14,19 +14,19 @@ activate unregisteredUser
     unregisteredUser -> System : asks to register in the system
     activate System
 
-        System --> unregisteredUser : requests data (name, passport number, tax number, \naddress, email address and telephone number)
+        System --> unregisteredUser : requests data (name, passport number, tax number, \naddress, email address, telephone number and the password)
     deactivate System
 
     unregisteredUser -> System : inserts data
     activate System
 
-        System --> unregisteredUser : shows the role types (owner or client) \nand asks to select one
+    System --> unregisteredUser : shows all the data inserted and asks for confirmation
     deactivate System
 
-    unregisteredUser -> System : selects the role
+    unregisteredUser -> System : confirms data
     activate System
 
     System --> unregisteredUser : shows confirmation of successful registration
-    deactivate System
+        deactivate System
 
 @enduml
