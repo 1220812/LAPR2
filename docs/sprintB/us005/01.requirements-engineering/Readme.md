@@ -62,21 +62,16 @@ of employees.
 
 ### 1.3. Acceptance Criteria
 
-
-* **AC1:** The ID entered must be valid (should be an integer).
-* **AC2:** The designation/name must be valid.
-* **AC3:** The location must be valid. 
-* **AC4:** The local manager must be valid. 
-* **AC5:** The phone number must be valid. 
-* **AC6:** The e-mail address must be valid. 
+* **AC1:** Declaring the obligatory data to register a store.
+* **AC2:** The designation/name should be at most forty characters.
+* **AC3:** The phone number must have 10 digits. The first 3 digits must correspond to the "area code", the next 3 correspond to the geographical area and the last four can be random.
 
 ### 1.4. Found out Dependencies
 
-
-* There is a dependency to "US003: As a system administrator, I want to register a new employee" since the system administrator that in US005 will be responsible for registering a store will also be responsible for registering employees. 
+* There is a dependency to "US003: As a system administrator, I want to register a new employee" since the system administrator that in US005 will be responsible for registering a store will also be responsible for registering employees.
+* There is a dependency linked to "US006: As a system administrator, I want to specify states, districts and cities in the system" due to the fact that US005 demands a location with state, district and city that are specified and implement on US6.
 
 ### 1.5 Input and Output Data
-
 
 **Input Data:**
 
@@ -90,7 +85,6 @@ of employees.
 	
 * Selected data:
 	* Classifying task category 
-
 
 **Output Data:**
 
