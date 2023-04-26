@@ -1,0 +1,32 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 007
+
+autonumber
+
+actor "Unregistered user" as unregisteredUser
+participant ":System" as System
+activate unregisteredUser
+
+    unregisteredUser -> System : asks to register in the system
+    activate System
+
+        System --> unregisteredUser : requests data (name, passport number, tax number, \naddress, email address and telephone number)
+    deactivate System
+
+    unregisteredUser -> System : inserts data
+    activate System
+
+        System --> unregisteredUser : shows the role types (owner or client) \nand asks to select one
+    deactivate System
+
+    unregisteredUser -> System : selects the role
+    activate System
+
+    System --> unregisteredUser : shows confirmation of successful registration
+    deactivate System
+
+@enduml

@@ -12,7 +12,7 @@ hide methods
 
 title Project - Domain Model
 
-class Adress{
+class Address{
 street
 city
 doorNr
@@ -31,6 +31,9 @@ class Store {
     storeName
     phoneNumber
     emailAddress
+    id
+    name
+    location
 }
 class Branch {
     designation
@@ -98,13 +101,7 @@ class Employee {
     agency
 }
 
-class CompanyBranch{
-id
-name
-location
-phoneNumber
-email
-}
+
 
 class Owner{
 name
@@ -146,7 +143,7 @@ Store "1" -- "1" Address : has  >
 
 SystemAdministrator "1"--"0...*" Employee: registed by <
 SystemAdministrator "1"--"1" Employee: is >
-Employee "1"--"1" CompanyBranch: works for >
+Employee "1"--"1" Store: works for >
 Employee "0...*"--"1...*" Role: has >
 Branch "1" -- "*" Agent : has >
 Agent "1" -- "*" Advertisement : creates >

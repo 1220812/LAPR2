@@ -13,24 +13,32 @@ participant ":System" as System
     Employee -> System : ask to register a new employee.
     activate System
 
-        System --> Employee : show a list of the role of the employee (agente, \nstore manager, store network, manager).
+        System --> Employee : show a list of the role of the employee (agent, store manager, store network manager).
 
     deactivate System
 
     Employee -> System : select the role of the employee.
     activate System
 
-        System --> Employee : request information about employee (name, \ncitizen´s card number, tax number, physycal address, \nemail , contact telephone, number and agency).
+    System --> Employee : show a list of agencies.
+       deactivate System
+
+        Employee -> System : select the agency.
+        activate System
+
+        System --> Employee : request information about employee (employeeName, passaportCardNumber, \nemployeeTaxNumber, employeeAddress, employeeEmail , employeePhoneNumber).
     deactivate System
 
     Employee -> System : types the information about employee.
     activate System
 
-        System --> Employee : request to specify the company branch (id, name, \nlocation, phone number, email).
-    deactivate System
+    System --> Employee : Ask to confirm the operation.
+           deactivate System
 
-    Employee -> System : types the information about the company branch.
-    activate System
-    System --> Employee : Generate a password to the new employee \nand displays operation success.
+            Employee -> System : Confirms.
+            activate System
+
+    System --> Employee : Send a generated password to the employeeEmail and displays operation success.
             deactivate System
+
 @enduml

@@ -59,8 +59,6 @@
 * The software should be compatible with future updates;
 * The software application should also be conceived having in mind that it can be further commercialized to other companies.
 
-## +
-
 ### Design Constraints
 
 * The programming language will be Java;
