@@ -31,12 +31,7 @@ class TaxNumber{
 taxNumber
 }
 
-class Role{
-roleType
-}
-
 UnregisteredUser "1" -- "1" Address : has >
 UnregisteredUser "1" -- "1" TaxNumber : has >
-UnregisteredUser "1" -- "1" Role : defines >
 
 @enduml
