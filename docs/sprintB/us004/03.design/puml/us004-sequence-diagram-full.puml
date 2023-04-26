@@ -11,13 +11,13 @@ participant ":CreateRequestUI" as UI
 participant ":CreateRequestController" as CTRL
 participant ":Repositories" as Rep
 participant "repositories\n:Repositories" as PLAT
-participant "RequestTypeRepository:\nRequestTypeRepository" as TaskCategoryRepository
-participant "PropertyTypeRepository" as ProType
+participant "requestTypeRepository:\nRequestTypeRepository" as TaskCategoryRepository
+participant "propertyTypeRepository:\nPropertyTypeRepository" as ProType
 participant "agency: \nAgency" as A
 participant "agencyRepository:\nAgencyRepository" as ARep
 participant "request: \nRequest" as Req
 participant "property: \nProperty" as Prop
-participant "Agent:\nAgent" as Agent
+participant "agent:\nAgent" as Agent
 participant "agentList:\nAgentList" as AgList
 participant "residence:\nResidence" as R
 participant "house:\nHouse" as House
