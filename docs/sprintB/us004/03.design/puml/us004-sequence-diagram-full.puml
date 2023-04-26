@@ -42,6 +42,7 @@ activate ADM
 
         activate UI
 
+            UI -> CTRL** : create
             UI -> CTRL : getRequestCategories()
             activate CTRL
 
