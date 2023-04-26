@@ -111,6 +111,10 @@ Request --> Property : has
 Request --> Owner : createdBy
 Rent --> RequestTypeRepository : can be >
 
+Repositories --> AgencyTypeRepository
+Repositories --> PropertyTypeRepository
+Repositories --> RequestTypeRepository
+
 House --|> Residence
 
 Residence --|> Property
