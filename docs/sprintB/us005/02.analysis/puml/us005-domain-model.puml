@@ -16,22 +16,24 @@ class Store {
     emailAddress
 }
 
-class SystemAdministrator {
-    name
-    phoneNumber
-    emailAddress
-}
-
 class Address {
     street
     postalCode
     doorNumber
     floorNumber
-    city
-    state
 }
 
-SystemAdministrator "1" -- "0..*" Store : registers >
+class State {
+}
+
+class District {
+}
+
+class City {
+}
+
+
 Store "1" -- "1" Address : has an >
 
 @enduml
+
