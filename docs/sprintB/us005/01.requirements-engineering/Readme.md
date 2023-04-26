@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 005 - To create a Task 
 
 ## 1. Requirements Engineering
 
@@ -30,30 +30,50 @@ of employees.
 
 **From the client clarifications:**
 
+
+24th April 
+
+> **Question:**  While a store is being registered, does the system have to provide a list of state, districts and cities?
+> 
+> **Answer:**  No. Even so, if your team developed US6, you should provide such list. 
+
+
+23rd March
+
 > **Question:**  How will the designation of new stores be made, is there a pattern perhaps?
->  
+>
 > **Answer:**  There is no pattern. The System Administrator can introduce any designation/name. The designation/name should have at most forty characters.
 
-
 > **Question:**  Will the System Administrator be able to choose a location from a list of available locations (defined elsewhere in the application) or will he be able to submit any location he wants?
->  
+>
 > **Answer:** The System Administrator can submit any location.
 
+> **Question:**  Are the local managers restricted to their initial location or can they be re-registered/reassigned to other locations?
+>
+> **Answer:**  For now this is not a problem.
 
- > **Question:**  Are the local managers restricted to their initial location or can they be re-registered/reassigned to other locations?
- >
- > **Answer:**  For now this is not a problem.
+> **Question:**  Could you please share how will the designation of new stores be made, is there a pattern perhaps?
+> 
+> **Answer:**  There is no pattern. The System Administrator can introduce any designation/name. The designation/name should have at most forty characters.
 
+> **Question:**  Will the System Administrator be able to choose a location from a list of available locations (defined elsewhere in the application) or will he be able to submit any location he wants?
+> 
+> **Answer:**  The System Administrator can submit any location.
+
+> **Question:**  Are the local managers restricted to their initial location or can they be re-registered/reassigned to other locations?
+> 
+> **Answer:**  For now this is not a problem.
+
+
+21st March 
 
 > **Question:**  Does a store designation have to be detailed? If so, will the system administrator have to register the name, email, phone number or anything else? Does the location of a store have to be detailed as well? If yes, will the system administrator have to record the address, postcode or something else? To register the store manager, does the system administrator only register the manager's name? If not, will the system administrator have to register the manager as if he were an employee (except the agent he is assigned to)?
 > 
 > **Answer:**  When registering a store, the System Administrator should introduce the following information: an ID, a designation/name, a location, a local manager, a phone number and an e-mail address. The ID is an integer number.
 
-
 > **Question:**  When a System Administrator (admin) makes a request to register a new employee or a new network branch (or any other alteration), does the System ask for the admin credentials (login, password)?
 > 
 > **Answer:**  The System Administrator should be logged in the application.
-
 
 > **Question:** Can there be more than one admin? 
 > 
