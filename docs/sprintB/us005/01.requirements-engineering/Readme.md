@@ -86,7 +86,6 @@ of employees.
 * Selected data:
 	* Classifying task category 
 
-
 **Output Data:**
 
 * (In)Success of the operation
