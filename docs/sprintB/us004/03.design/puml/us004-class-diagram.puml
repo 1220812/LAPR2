@@ -7,6 +7,11 @@ class CreateRequestUI{
 
 class CreateRequestController{
 + createRequestController(requestTypeRepository, propertyTypeRepository, agencyRepository)
++ getRequestCategories()
++ getPropertyType()
++ setContractDuration()
++ getAgency()
++ getAgentList()
 }
 
 class Repositories{
