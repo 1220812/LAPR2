@@ -109,7 +109,7 @@ Agency --> Employee : employs
 AgencyTypeRepository --> Agency
 Request --> Property : has
 Request --> Owner : createdBy
-Rent --> RequestTypeRepository : can be >
+RequestTypeRepository --> Rent: can be >
 
 Repositories --> AgencyTypeRepository
 Repositories --> PropertyTypeRepository
