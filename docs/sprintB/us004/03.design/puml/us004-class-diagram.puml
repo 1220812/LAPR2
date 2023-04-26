@@ -43,8 +43,8 @@ class RequestTypeRepository{
 
 class Request{
 - requestState: Boolean
-- date:
-- requestOwner: Owner
+- date: String
+- requestOwner: String
 + setPropertyType(propertyType)
 + createProperty(area, location, distanceFromTheCityCentre, price, photographList)
 + addProperty(property)
