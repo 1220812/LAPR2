@@ -1,0 +1,109 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+title US005 Sequence Diagram
+actor "Admninistrator" as ADM
+
+participant ":RegisterStoreUI" as UI
+participant ":RegisterStoreController" as CTRL
+participant ":Repositories" as REP
+participant ":repositories:Repositories" as rep
+participant ":StoreRepository" as STOREREP
+participant ":store:Store" as STORE
+participant "AddressRepository" as ADRESSREP
+participant "address:Address" as ADRESS
+participant "StateRepository" as STATEREP
+
+activate ADM
+
+ADM-> UI  : asks to register a store
+activate UI
+UI -> CTRL : answer = checkIfStateListIsEmpty()
+
+activate CTRL
+CTRL -> REP: repositories = getInstance()
+activate REP
+CTRL-> rep : state= getStateRepository()
+deactivate REP
+activate rep
+rep -> STATEREP : isStateListEmpty()
+activate STATEREP
+deactivate STATEREP
+deactivate rep
+CTRL -> UI : answer
+deactivate CTRL
+
+alt answer = false
+UI-> CTRL: getStateList()
+activate CTRL
+CTRL-> STATEREP: getStateList()
+activate STATEREP
+deactivate STATEREP
+
+CTRL -> UI :stateList
+deactivate CTRL
+
+UI -> ADM : lists states and asks to select one
+deactivate UI
+
+ADM-> UI : chooses what state he wants for the store
+activate UI
+
+UI-> ADM : requests data (street, door number, floor number \n and the postal code)
+deactivate UI
+
+ADM-> UI: types requested data of the store
+activate UI
+
+UI-> CTRL: getCreateAddress(street, doorNumber, floorNumber, postalCode)
+activate CTRL
+
+CTRL->REP :repositories = getInstance()
+activate REP
+deactivate REP
+CTRL-> rep : adress=getAdressRepository()
+activate rep
+deactivate rep
+CTRL-> ADRESSREP : adressInstance= createAdress(street, floorNumber, postalCode, stateInstance)
+activate ADRESSREP
+deactivate CTRL
+ADRESSREP-> ADRESS** : new Address(street, doorNumber, floorNumber, postalCode, stateInstance)
+deactivate ADRESSREP
+UI-> ADM: requests data (ID, designation, phone number, email)
+deactivate ADRESSREP
+deactivate UI
+ADM->UI: types data
+activate UI
+UI -> CTRL : getCreateStore (ID,designation, phone number, email)
+activate CTRL
+CTRL->REP: repositories = getInstance()
+activate REP
+deactivate REP
+CTRL-> rep : store=getStoreRepository()
+activate rep
+deactivate rep
+CTRL-> STOREREP: storeInstance = createStore(ID, designation, phoneNumber, email, addressInstance)
+activate STOREREP
+deactivate CTRL
+STOREREP->STORE**:new Store (ID, designation, phoneNumber, email, adressInstance)
+deactivate STOREREP
+deactivate rep
+UI->ADM : request confirmation
+deactivate UI
+ADM->UI: confirms
+activate UI
+UI->CTRL : getRegisterStore()
+activate CTRL
+CTRL-> STOREREP : registerStore(storeInstance)
+activate STOREREP
+deactivate CTRL
+STOREREP->STOREREP:validadeStore(storeInstance)
+STOREREP->STOREREP:add(storeClone)
+UI->ADM: displays operation success
+deactivate STOREREP
+deactivate ADRESSREP
+deactivate UI
+end alt
+@enduml

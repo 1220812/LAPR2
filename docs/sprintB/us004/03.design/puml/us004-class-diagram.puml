@@ -7,6 +7,11 @@ class CreateRequestUI{
 
 class CreateRequestController{
 + createRequestController(requestTypeRepository, propertyTypeRepository, agencyRepository)
++ getRequestCategories()
++ getPropertyType()
++ setContractDuration()
++ getAgency()
++ getAgentList()
 }
 
 class Repositories{
@@ -43,8 +48,8 @@ class RequestTypeRepository{
 
 class Request{
 - requestState: Boolean
-- date:
-- requestOwner: Owner
+- date: String
+- requestOwner: String
 + setPropertyType(propertyType)
 + createProperty(area, location, distanceFromTheCityCentre, price, photographList)
 + addProperty(property)
@@ -92,6 +97,10 @@ class TaxNumber{
 - taxNumber
 }
 
+class Rent{
+- contractDuration: integer
+}
+
 CreateRequestUI -.-> CreateRequestController
 
 CreateRequestController -.-> Repositories : repositories
@@ -105,6 +114,11 @@ Agency --> Employee : employs
 AgencyTypeRepository --> Agency
 Request --> Property : has
 Request --> Owner : createdBy
+RequestTypeRepository --> Rent: can be >
+
+Repositories --> AgencyTypeRepository
+Repositories --> PropertyTypeRepository
+Repositories --> RequestTypeRepository
 
 House --|> Residence
 

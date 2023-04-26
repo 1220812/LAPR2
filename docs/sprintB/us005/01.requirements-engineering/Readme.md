@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 005 - To create a Task 
 
 ## 1. Requirements Engineering
 
@@ -30,30 +30,50 @@ of employees.
 
 **From the client clarifications:**
 
+
+24th April 
+
+> **Question:**  While a store is being registered, does the system have to provide a list of state, districts and cities?
+> 
+> **Answer:**  No. Even so, if your team developed US6, you should provide such list. 
+
+
+23rd March
+
 > **Question:**  How will the designation of new stores be made, is there a pattern perhaps?
->  
+>
 > **Answer:**  There is no pattern. The System Administrator can introduce any designation/name. The designation/name should have at most forty characters.
 
-
 > **Question:**  Will the System Administrator be able to choose a location from a list of available locations (defined elsewhere in the application) or will he be able to submit any location he wants?
->  
+>
 > **Answer:** The System Administrator can submit any location.
 
+> **Question:**  Are the local managers restricted to their initial location or can they be re-registered/reassigned to other locations?
+>
+> **Answer:**  For now this is not a problem.
 
- > **Question:**  Are the local managers restricted to their initial location or can they be re-registered/reassigned to other locations?
- >
- > **Answer:**  For now this is not a problem.
+> **Question:**  Could you please share how will the designation of new stores be made, is there a pattern perhaps?
+> 
+> **Answer:**  There is no pattern. The System Administrator can introduce any designation/name. The designation/name should have at most forty characters.
 
+> **Question:**  Will the System Administrator be able to choose a location from a list of available locations (defined elsewhere in the application) or will he be able to submit any location he wants?
+> 
+> **Answer:**  The System Administrator can submit any location.
+
+> **Question:**  Are the local managers restricted to their initial location or can they be re-registered/reassigned to other locations?
+> 
+> **Answer:**  For now this is not a problem.
+
+
+21st March 
 
 > **Question:**  Does a store designation have to be detailed? If so, will the system administrator have to register the name, email, phone number or anything else? Does the location of a store have to be detailed as well? If yes, will the system administrator have to record the address, postcode or something else? To register the store manager, does the system administrator only register the manager's name? If not, will the system administrator have to register the manager as if he were an employee (except the agent he is assigned to)?
 > 
 > **Answer:**  When registering a store, the System Administrator should introduce the following information: an ID, a designation/name, a location, a local manager, a phone number and an e-mail address. The ID is an integer number.
 
-
 > **Question:**  When a System Administrator (admin) makes a request to register a new employee or a new network branch (or any other alteration), does the System ask for the admin credentials (login, password)?
 > 
 > **Answer:**  The System Administrator should be logged in the application.
-
 
 > **Question:** Can there be more than one admin? 
 > 
@@ -62,21 +82,16 @@ of employees.
 
 ### 1.3. Acceptance Criteria
 
-
-* **AC1:** The ID entered must be valid (should be an integer).
-* **AC2:** The designation/name must be valid.
-* **AC3:** The location must be valid. 
-* **AC4:** The local manager must be valid. 
-* **AC5:** The phone number must be valid. 
-* **AC6:** The e-mail address must be valid. 
+* **AC1:** Declaring the obligatory data to register a store.
+* **AC2:** The designation/name should be at most forty characters.
+* **AC3:** The phone number must have 10 digits. The first 3 digits must correspond to the "area code", the next 3 correspond to the geographical area and the last four can be random.
 
 ### 1.4. Found out Dependencies
 
-
-* There is a dependency to "US003: As a system administrator, I want to register a new employee" since the system administrator that in US005 will be responsible for registering a store will also be responsible for registering employees. 
+* There is a dependency to "US003: As a system administrator, I want to register a new employee" since the system administrator that in US005 will be responsible for registering a store will also be responsible for registering employees.
+* There is a dependency linked to "US006: As a system administrator, I want to specify states, districts and cities in the system" due to the fact that US005 demands a location with state, district and city that are specified and implement on US6.
 
 ### 1.5 Input and Output Data
-
 
 **Input Data:**
 
@@ -90,7 +105,6 @@ of employees.
 	
 * Selected data:
 	* Classifying task category 
-
 
 **Output Data:**
 
