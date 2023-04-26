@@ -92,6 +92,10 @@ class TaxNumber{
 - taxNumber
 }
 
+class Rent{
+- contractDuration: integer
+}
+
 CreateRequestUI -.-> CreateRequestController
 
 CreateRequestController -.-> Repositories : repositories
@@ -105,6 +109,7 @@ Agency --> Employee : employs
 AgencyTypeRepository --> Agency
 Request --> Property : has
 Request --> Owner : createdBy
+Rent --> RequestTypeRepository : can be >
 
 House --|> Residence
 

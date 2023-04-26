@@ -88,8 +88,13 @@ activate ADM
 
     deactivate A
 
-
     UI -> CTRL : getPropertyType()
+
+    CTRL -> Rep : getInstance()
+                    activate Rep
+
+                        Rep --> CTRL: repositories
+                    deactivate Rep
 
     CTRL -> PLAT : getPropertyTypeProperty()
     activate PLAT
@@ -229,11 +234,13 @@ activate ADM
     end
 
     end
-
-
     UI -> CTRL : getAgency()
     activate CTRL
+    CTRL -> Rep : getInstance()
+                    activate Rep
 
+                        Rep --> CTRL: repositories
+                    deactivate Rep
     CTRL -> PLAT : getAgency()
     activate PLAT
     PLAT--> CTRL : agencyRepositories
