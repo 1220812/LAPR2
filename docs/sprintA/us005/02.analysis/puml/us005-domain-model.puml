@@ -11,15 +11,22 @@ hide circle
 hide methods
 
 class Store {
-    storeName
+    designation
+    ID
     phoneNumber
     emailAddress
 }
 
-class SystemAdministrator {
-    name
-    phoneNumber
-    emailAddress
+class State {
+    stateName
+}
+
+class District {
+    districtName
+}
+
+class City {
+    cityName
 }
 
 class Address {
@@ -27,11 +34,11 @@ class Address {
     postalCode
     doorNumber
     floorNumber
-    city
-    state
 }
 
-SystemAdministrator "1" -- "0..*" Store : registers >
+Address "1" -- "1" City : in >
+City "1" -- "1" State : in >
+State "1" -- "1" District : in >
 Store "1" -- "1" Address : has an >
 
 @enduml

@@ -3,42 +3,64 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD)
+title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
 actor "System Administrator" as Employee
 participant ":System" as System
 
-    Employee -> System : ask to register a new employee.
-    activate System
+activate Employee
 
-        System --> Employee : show a list of the role of the employee (agent, store manager, store network manager).
+Employee -> System : Asks to register a new employee
+activate System
 
-    deactivate System
+System --> Employee : Requests data
+deactivate System
+Employee -> System : Types requested data (the name, the citizen's card number,\n the tax number, the address, the email address, \nthe contact, telephone number and the agency)
+activate System
 
-    Employee -> System : select the role of the employee.
-    activate System
+System --> Employee : Shows user roles and asks to select one
+deactivate System
+Employee -> System : Selects an user role
+activate System
 
-    System --> Employee : show a list of agencies.
-       deactivate System
+System --> Employee : return role
+deactivate System
 
-        Employee -> System : select the agency.
-        activate System
+alt Is selected role not System Administrator
+Employee -> System : Asks to select an agency
+activate System
 
-        System --> Employee : request information about employee (employeeName, passaportCardNumber, \nemployeeTaxNumber, employeeAddress, employeeEmail , employeePhoneNumber).
-    deactivate System
+System --> Employee : Shows the list of agencies and asks to select one
+deactivate System
+Employee -> System: Selects a user agency
+activate System
 
-    Employee -> System : types the information about employee.
-    activate System
+System --> Employee : return agency
+deactivate System
+alt Is Agent or StoreManager
+Employee -> System : Asks to list all agency Stores
+activate System
 
-    System --> Employee : Ask to confirm the operation.
-           deactivate System
+System --> Employee :  Lists the stores and asks to pick one
+deactivate System
+Employee -> System : Selects a store
+activate System
 
-            Employee -> System : Confirms.
-            activate System
+System --> Employee : Return store
+deactivate System
+end
 
-    System --> Employee : Send a generated password to the employeeEmail and displays operation success.
-            deactivate System
+end
+Employee -> System : Asks to save employee
+activate System
+
+System --> "System" : Generate a new password to the new employee
+System --> Employee : Employee created
+
+System --> "System" : Sends an email to the new employee
+System --> Employee: Informs of the operation Success
+deactivate System
 
 @enduml

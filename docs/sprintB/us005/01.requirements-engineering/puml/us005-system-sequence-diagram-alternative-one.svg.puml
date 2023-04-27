@@ -18,7 +18,19 @@ activate Employee
         System --> Employee : requests data for store
     deactivate System
 
-    Employee -> System : types requested data (location, designation, email adress, contact)
+    Employee -> System : types requested data (designation, email adress, contact)
+    activate System
+
+        System --> Employee : asks for address data
+    deactivate System
+
+    Employee -> System: types requested address data (street, postal code, door number,floor number)
+    activate System
+
+        System --> Employee : requests location data
+    deactivate System
+
+    Employee -> System : types requested location data (city, district, state)
     activate System
 
         System --> Employee : shows store preview and asks for confirmed submition
