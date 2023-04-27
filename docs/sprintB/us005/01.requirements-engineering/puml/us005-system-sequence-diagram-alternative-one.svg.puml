@@ -24,7 +24,7 @@ activate Employee
         System --> Employee : asks for address data
     deactivate System
 
-    Employee -> System: types requested address data (street, postal code, door number,floor number)
+    Employee -> System: types requested address data (street, postal code, door number)
     activate System
 
         System --> Employee : requests location data
