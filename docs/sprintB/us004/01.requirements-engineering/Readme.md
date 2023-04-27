@@ -120,7 +120,8 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 ### 1.4. Found out Dependencies
 
 
-* There is dependency to the "US3 - register an employee" since that has to be, at least one employee to review the advertisement request, the "US5-register a store" since that has to be , at least, one store (agency) to be selected by the owner and the "US6-specify states, districts and cities in the System" since that the property listed by the owner has an address (is in a state, in a district and in a city)
+* There is dependency to the "US3 - register an employee" since that has to be, at least one employee to review the advertisement request, the "US5-register a store" since that has to be , at least, one store (agency) to be selected by the owner, to the "US6-specify states, districts and cities in the System" since that the property listed by the owner has an address (is in a state, in a district and in a city) and to the "US7 -  want to register in the system to buy, sell or rent
+  properties."
 
 
 ### 1.5 Input and Output Data
@@ -173,7 +174,7 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram - Rent](svg/us004-System_Sequence_Diagram__SSD.svg)
+![System Sequence Diagram - Rent](svg/us004-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
 
