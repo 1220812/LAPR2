@@ -14,15 +14,17 @@ class RegisterStoreController
 - Repositories repositories
 -Store storeInstance
 -State stateInstance
+-City cityInstance
 -Address addressInstance
 +getStoreInstance()
 +getStateInstance()
++getCityInstance()
 +getAddressInstance()
 +set stateInstance(State state)
 +getCheckIfStateListIsEmpty()
 +getStateList()
 +getCreateStore(int ID, String designation, String phoneNumber, String email)
-+getCreateAddress(String street, String doorNumber, String floorNumber, String postalCode)
++getCreateAddress(String street, String doorNumber, String postalCode)
 +getRegisterStore()
 +getRegisterAddress()
 }
@@ -32,11 +34,13 @@ class Repositories
 -description
 -StoreRepository storeRepository
 -AddressRepository addressRepository
+-CityRepository cityRepository
 -StateRepository stateRepository
 +Repositories()
 +{static}getInstance() : Repositories
 +getStoreRepository()
 +getAddressRepository()
++getCityRepository()
 +getStateRepository()
 }
 
@@ -55,6 +59,15 @@ class Store
 }
 
 class State
+{
+-String name
++State (String name)
++hasCode()
++equals(Object o)
++toString()
+}
+
+class City
 {
 -String name
 +State (String name)
@@ -91,6 +104,15 @@ class AddressRepository
 +getAddressList()
 +registerAddress(Address address)
 +createAddress(String street, String doorNumber, String floorNumber, String postalCode, State state)
+}
+
+class CityRepository
+{
+-List <City> cityList
++getCityList()
++registerCity (Cit city)
++createCity (String name)
++checkIfDesignationExists()
 }
 
 class StateRepository
