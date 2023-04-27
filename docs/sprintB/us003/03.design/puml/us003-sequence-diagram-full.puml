@@ -160,7 +160,7 @@ activate ADM
 
             activate CTRL
 
-                CTRL -> PASSGEN : generate()
+                CTRL -> PASSGEN : generatePass()
 
                 activate PASSGEN
 
