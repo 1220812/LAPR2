@@ -1,106 +1,166 @@
 @startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+'skinparam linetype orto
+
 skinparam classAttributeIconSize 0
 
-class RegisteremployeeController{
-    -getAgencies()
-    -getEmployeeRoles()
-    -getStores()
-    -registerEmployee(data)
+'left to right direction
+class RegisterEmployeeUI {
+- keepBaseData(name,passport's card number,\n tax number, address,  email, contact, phone number)
+- keepRole(role)
+- keepAgency(agency)
+- keepStore(store)
+}
+class RegisterEmployeeController {
++ getAgencies()
++ getEmployeeRoles()
++ getStores()
++ registerEmployee(data)
+
 }
 
-class Repositories{
-    getInstance() : Repositories
-    -getAgencyRepositories()
-    -getRoleRepositories()
-    -getStoreRepositories()
+class Repositories {
++ {static} getInstance()
++ getAgencyRepository()
++ getRoleRepository()
++ getStoreRepository()
+
 }
 
-class AgencyRepository{
-    -getAllAgencies()
+class AgencyRepository {
+
++ getAll()
 }
 
-class RoleRepository{
-    -getEmployeeRoles()
+class RoleRepository {
++ getEmployeeRoles()
 }
 
-class StoreRepository{
-    -getAllAgencyStores(agency)
+class StoreRepository {
++ getAgencyStores(agency)
 }
 
-class passwordGenerator{
-    -generate()
+class PasswordGenerator {
++ generate()
 }
 
-class emailService{
-    -sendRegisteredUserEmail(employee.email(), employee.password())
+class User {
+- name
+- email
+- phone number
+- password
++ User(data, role, password)
++ email()
++ password()
+
 }
 
-class user{
--register(data, role, pass)
+class Passport {
+- number
 }
 
-class userRepository{
--save(user)
+class TaxNumber {
+- number
 }
 
-class RegisterEmpployeeUI{
+class Adress {
+- street
+- city
+- district
+- state
+- zipcode
 }
 
+class Agency {
+- designation
+- email
+- phone number
+}
 
+class Agent {
+}
 
+class Store {
+- name
+- designation
+- telephone
+- email
+}
+
+class Role {
+- description
+- permissions
+}
+
+class UserRepository {
++ save(user)
+}
+
+class SystemAdministrator {
+}
+
+class StoreManager {
+}
+
+class StoreNetworkManager {
+}
 
 class Employee {
-    -String email
-    -String telephone_number
-    -String agency
-    -String name
-    -String citize_number
-    -String tax_number
 
 }
 
-class Address {
-    -String City
-    -String Street
-    -String District
-    -String State
-    -double Zipcode
+class EmailService {
+- sendEmail()
++ sendRegisteredUserEmail(email, password)
+}
+class StoreEmployee {
 }
 
-class Role{
-    - String description
-    - String permissions
-}
-
-class Store{
-    -String designation
-    }
-
-
-class Password {
-    -String password
+class AgencyEmployee {
 }
 
 
 
-RegisterEmpployeeUI .>RegisteremployeeController
-RegisteremployeeController .>Repositories :repositories
-RegisteremployeeController .>AgencyRepository
-RegisteremployeeController .>RoleRepository
-RegisteremployeeController .>StoreRepository
-RegisteremployeeController .>passwordGenerator
-RegisteremployeeController .>emailService
+RegisterEmployeeUI ..> RegisterEmployeeController
+
+RegisterEmployeeController .left.> Repositories
+
+RegisterEmployeeController .right.> EmailService
+
+Repositories .up.> AgencyRepository
+Repositories ..up> RoleRepository
+Repositories ..> StoreRepository
+Repositories ..> PasswordGenerator
+Repositories ..> UserRepository
 
 
+AgencyRepository .left.> Agency
+RoleRepository ..> Role
+StoreRepository ..> Store
 
+UserRepository ..> User
+Agent --up|> User
+SystemAdministrator --|> Employee
 
+AgencyEmployee --up|> Employee
+AgencyEmployee ..> Agency
+StoreEmployee ..left> Store
+Agent --|> StoreEmployee
+StoreManager --|> StoreEmployee
+StoreNetworkManager --|> AgencyEmployee
 
+StoreEmployee -up|> AgencyEmployee
 
-Address --|> Employee: has an
-SystemAdministrator "1"--"0...*" Employee: registe >
-Employee --|> SystemAdministrator: is an <
-Employee "1"--"1" Password: sent to <
-Employee "1"<|--"1" Store: works for >
-Employee "1"<|--"1" Role: has >
-SystemAdministrator -- Password: give a >
+Employee --up|> User
+
+Adress <..left User
+Role <.. User
+Passport <.. User
+TaxNumber <.. User
+Store <..right Agent
+
+Agency <.. Store
 @enduml
