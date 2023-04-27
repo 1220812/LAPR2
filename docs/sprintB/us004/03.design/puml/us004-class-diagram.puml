@@ -23,7 +23,7 @@ class Repositories{
 }
 
 class PropertyTypeRepository{
-- propertyTypeList: List <String>
+- String List<PropertyType> propertyTypeList
 + getPropertyType()
 }
 
@@ -33,23 +33,23 @@ class AgencyTypeRepository{
 }
 
 class Agency{
-- location: String
-- designation: String
-- requestList: List<Request>
-- employeeList: List<Employee>
+- String location
+- String designation
+- String List<Request> requestList
+- String List<Employee> employeeList
 + createRequest(requestType)
 + getAgentList(selectedAgency)
 }
 
 class RequestTypeRepository{
-- requestTypeList: List<String>
+- String List<RequestType> requestTypeList
 + getRequestType()
 }
 
 class Request{
-- requestState: Boolean
-- date: String
-- requestOwner: String
+- boolean requestState
+- String date
+- String requestOwner
 + setPropertyType(propertyType)
 + createProperty(area, location, distanceFromTheCityCentre, price, photographList)
 + addProperty(property)
@@ -58,47 +58,47 @@ class Request{
 }
 
 class Property{
-- area:Integer
-- location: String
-- distanceFromTheCityCentre: Double
-- price: Integer
-- photograph: List<String>
+- Integer area
+- String location
+- double distanceFromTheCityCentre
+- Integer price
+- String List<photograph> photographList
 }
 
 class Owner{
-- name: String
-- passportCardNumber: Integer
+- String name
+- Integer passportCardNumber
 }
 
 class Residence{
-- numberOfBedrooms: Integer
-- numberOfBathrooms: Integer
-- numberOfParkingSpaces: Integer
-- availableEquipment: String
+- Integer numberOfBedrooms
+- Integer numberOfBathrooms
+- Integer numberOfParkingSpaces
+- String availableEquipment
 }
 
 class House{
-- basement: boolean
-- inhabitableLoft: boolean
-- sunExposure: String
+- boolean basement
+- boolean inhabitableLoft
+- string sunExposure
 }
 
 class Contacts{
-- phoneNumber: Integer
-- emailAddress: String
+- Integer phoneNumber
+- String emailAddress
 }
 
 class Employee{
-- name: String
-- passportCardNumber: Integer
+- String name
+- Integer passportCardNumber
 }
 
 class TaxNumber{
-- taxNumber
+- Integer taxNumber
 }
 
 class Rent{
-- contractDuration: integer
+- Integer contractDuration
 }
 
 CreateRequestUI -.-> CreateRequestController
