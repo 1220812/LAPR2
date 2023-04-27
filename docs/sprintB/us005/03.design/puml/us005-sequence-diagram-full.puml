@@ -52,13 +52,13 @@ deactivate UI
 ADM-> UI : chooses what state he wants for the store
 activate UI
 
-UI-> ADM : requests data (street, door number, floor number \n and the postal code)
+UI-> ADM : requests data (street, door number \n and the postal code)
 deactivate UI
 
 ADM-> UI: types requested data of the store
 activate UI
 
-UI-> CTRL: getCreateAddress(street, doorNumber, floorNumber, postalCode)
+UI-> CTRL: getCreateAddress(street, doorNumber, postalCode)
 activate CTRL
 
 CTRL->REP :repositories = getInstance()
@@ -67,10 +67,10 @@ deactivate REP
 CTRL-> rep : adress=getAdressRepository()
 activate rep
 deactivate rep
-CTRL-> ADRESSREP : adressInstance= createAdress(street, floorNumber, postalCode, stateInstance)
+CTRL-> ADRESSREP : adressInstance= createAdress(street, postalCode, stateInstance)
 activate ADRESSREP
 deactivate CTRL
-ADRESSREP-> ADRESS** : new Address(street, doorNumber, floorNumber, postalCode, stateInstance)
+ADRESSREP-> ADRESS** : new Address(street, doorNumber, postalCode, stateInstance)
 deactivate ADRESSREP
 UI-> ADM: requests data (ID, designation, phone number, email)
 deactivate ADRESSREP
