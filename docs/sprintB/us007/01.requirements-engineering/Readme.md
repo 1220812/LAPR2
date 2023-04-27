@@ -39,7 +39,7 @@ Roles:
       * the tax number
       * the address
       * the email address
-      * the telephone
+      * the telephone number
 
 * Selected data:
      * role type

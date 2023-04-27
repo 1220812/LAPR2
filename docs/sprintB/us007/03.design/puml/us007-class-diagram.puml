@@ -1,0 +1,38 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class CreateUserUI{
+creatUserController
+}
+
+class CreateUserController{
++getTypeOfUsers()
++setData(name, passportCardNumber, taxNumber, emailAddress, address, phoneNumber, password)
++createUser(name, passportCardNumber, taxNumber, emailAddress, address, phoneNumber, password)
++saveUser
+}
+
+class UserRepositories{
+List <User> userList
++ addUser
++ getUserByUserEmail(emailAddress)
+}
+
+class Repositories{
+-Repositories()
++getInstance() : Repositories
++getUserRepository()
++getAgencyRepository()
+}
+
+class User{
+}
+@enduml

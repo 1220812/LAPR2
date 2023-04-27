@@ -13,12 +13,10 @@ rectangle "RealEstate USA App"{
  usecase "US4 - Submit a request" as UC4
  usecase "US5 - Register a store" as UC5
  usecase "US3 - Register the Employees" as UC3
- usecase "US6 - specify states, districts and cities in the system" as UC6
  }
  unUser -- UC1
  Agent -- UC2
  Admin -- UC5
- Admin -- UC6
  Admin -- UC3
  Owner -- UC4
  unUser -- UC7

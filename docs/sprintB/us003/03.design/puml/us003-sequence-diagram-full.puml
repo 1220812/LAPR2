@@ -58,63 +58,71 @@ activate ADM
             UI --> ADM : Requests data
        deactivate UI
 
-       ADM -> UI : Types requested data (name,passport's card number,\n tax number, address,  email, phone number)
+       ADM -> UI : Types requested data (name,passport's card number,\n tax number, address,  email, contact, phone number)
 
        activate UI
-            UI -> UI : save provided data
-            UI --> CTRL : getAgencies()
-            activate CTRL
+        UI -> UI : keepBaseData(name,passport's card number,\n tax number, address,  email, contact, phone number)
+          UI -> CTRL : getEmployeeRoles()
 
-                CTRL -> AREPO : getAllAgencies()
+          activate CTRL
 
-                activate AREPO
+              CTRL -> RREPO : getEmployeeRoles()
 
-                    AREPO --> CTRL : listOfAllAgencies
+              activate RREPO
 
-                deactivate AREPO
+                  RREPO --> CTRL : listOfEmployeeRoles
 
-                CTRL --> UI : listOfAllAgencies
+              deactivate RREPO
 
-            deactivate CTRL
-            UI --> ADM : Shows the list of agencies and asks to select one
+              CTRL --> UI : listOfEmployeeRoles
 
-       deactivate UI
+          deactivate CTRL
 
-       ADM -> UI : Selects an agency
-
-       activate UI
-
-            UI -> UI : save provided data
-            UI -> CTRL : getEmployeeRoles()
-
-            activate CTRL
-
-                CTRL -> RREPO : getRoles()
-
-                activate RREPO
-
-                    RREPO --> CTRL : listOfEmployeeRoles
-
-                deactivate RREPO
-
-                CTRL --> UI : listOfEmployeeRoles
-
-            deactivate CTRL
-
-            UI --> ADM : Shows user roles and asks to select one
+           UI --> ADM : Shows user roles and asks to select one
 
        deactivate UI
 
        ADM -> UI : Selects a user role
 
-       activate UI
+            activate UI
 
-            UI -> UI : save provived data
-
-
-       alt Is selected role Agent or StoreManager
-            UI --> ADM : return role
+                UI -> UI : keepRole(role)
+                UI --> ADM : return role
             deactivate UI
+
+       alt Is selected role not System Administrator
+
+              ADM -> UI : Asks to select an agency
+
+              activate UI
+
+                    UI --> CTRL : getAgencies()
+                    activate CTRL
+
+                        CTRL -> AREPO : getAll()
+
+                        activate AREPO
+
+                            AREPO --> CTRL : listOfAllAgencies
+
+                        deactivate AREPO
+
+                        CTRL --> UI : listOfAllAgencies
+
+                    deactivate CTRL
+                    UI --> ADM : Shows the list of agencies and asks to select one
+              deactivate UI
+
+            ADM -> UI : Selects a user agency
+
+            activate UI
+
+                UI -> UI : keepAgency(agency)
+                UI --> ADM : return agency
+            deactivate UI
+
+
+        alt Is selected role Agent or StoreManager
 
        ADM -> UI : Asks to list all agency Stores
 
@@ -124,7 +132,7 @@ activate ADM
 
                 activate CTRL
 
-                    CTRL -> SREPO : getAllAgencies(agency)
+                    CTRL -> SREPO : getAgencyStores(agency)
 
                     activate SREPO
 
@@ -136,7 +144,7 @@ activate ADM
 
                 deactivate CTRL
 
-                UI --> ADM : Lists the stores and asks to select one
+                UI --> ADM : Lists the stores and asks to pick one
 
                 deactivate UI
 
@@ -144,13 +152,14 @@ activate ADM
 
             activate UI
 
-                UI -> UI : save provived data
-                UI --> ADM :
-       else
-            UI --> ADM : return role
+                UI -> UI : keepStore(store)
+                UI --> ADM : return store
+       deactivate UI
+
+            end
+
        end
 
-       deactivate UI
 
     ADM -> UI : Asks to save employee
 
@@ -168,7 +177,7 @@ activate ADM
 
                 deactivate PASSGEN
 
-                CTRL -> EMPLOYEE** : register(data, role, pass)
+                CTRL -> EMPLOYEE** : create(data, role, pass)
 
                 CTRL -> EMREPO : save(user)
 
@@ -182,7 +191,7 @@ activate ADM
 
                 activate EMSERV
 
-                    EMSERV --> EMSERV : sendEmail()
+                    EMSERV -> EMSERV : sendEmail()
                     EMSERV --> CTRL
 
 

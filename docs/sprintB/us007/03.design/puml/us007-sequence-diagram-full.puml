@@ -1,0 +1,133 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "UnregisteredUser" as UU
+participant ":CreateUserUI" as UI
+participant ":CreateUserController" as CTRL
+participant ":User" as user
+participant ":UserRepositories" as UR
+participant ":Repositories" as R
+participant "repositories:\nRepositories"
+participant ":Register" as RE
+
+activate UU
+
+        UU -> UI : asks to register in the system
+
+        activate UI
+
+        UI -> CTRL** : create
+
+        UI -> CTRL : getTypeOfUsers()
+
+        activate CTRL
+
+        CTRL -> R : getInstance()
+
+        activate R
+
+        R --> CTRL : repositories
+        deactivate R
+
+        CTRL -> UR : getUserRepository()
+        activate UR
+
+        UR --> CTRL : usersRepository
+
+        CTRL --> UI : typeOfUser List
+
+        deactivate UR
+
+        deactivate R
+        deactivate CTRL
+
+            UI --> UU : requests data (name, passportCardNumber, taxNumber,\n emailAddress, address, phoneNumber, password)
+
+    deactivate UI
+    UU -> UI : inserts data
+    activate UI
+
+    UI -> CTRL : setData(name, passportCardNumber, taxNumber,\n emailAddress, address, phoneNumber, password)
+    activate CTRL
+
+    CTRL -> RE : setName(name)
+    activate RE
+
+    CTRL -> RE : setPassportCardNumber(passportCardNumber)
+    CTRL -> RE : setTaxNumber(taxNumber)
+    CTRL -> RE : setEmailAddress(emailAddress)
+    CTRL -> RE : setTelephoneNumber(telephoneNumber)
+
+    deactivate RE
+    UI -> CTRL : create user (name, passportCardNumber, taxNumber,\n emailAddress, address, phoneNumber, password)
+
+            CTRL -> R : getInstance()
+
+            activate R
+
+            R --> CTRL : repositories
+            deactivate R
+
+            CTRL -> UR : getUserRepository()
+            activate UR
+
+            UR --> CTRL : usersRepository
+
+            CTRL -> UR : getUsers()
+
+            UR --> CTRL : users
+            deactivate UR
+            opt user doesn't exist
+
+            CTRL -> RE : checks if the user already exists
+
+            activate RE
+
+
+            end
+
+            deactivate RE
+
+
+
+
+
+    CTRL -> user : create user (name, passportCardNumber, taxNumber,\n emailAddress, address, phoneNumber, password)
+    activate user
+    CTRL -> CTRL : validateUser()
+
+    deactivate user
+
+        UI --> UU : shows all the data inserted \nand asks for confirmation
+        deactivate CTRL
+    deactivate UI
+
+    UU -> UI : confirms data
+    activate UI
+
+    UI -> CTRL : saveUser(user)
+    activate CTRL
+
+    CTRL -> R :
+
+    activate R
+
+    R --> UR : addUser(user)
+    deactivate R
+    activate UR
+
+    deactivate UR
+
+    deactivate R
+        UI --> UU : shows confirmation of successful registration
+        deactivate CTRL
+    deactivate UI
+
+deactivate UU
+
+@enduml

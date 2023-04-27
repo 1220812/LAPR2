@@ -10,7 +10,7 @@ actor "Owner" as ADM
 participant ":CreateRequestUI" as UI
 participant ":CreateRequestController" as CTRL
 participant ":Repositories" as Rep
-participant "repositories\n:Repositories" as PLAT
+participant "repositories\n:Repository" as PLAT
 participant "requestTypeRepository:\nRequestTypeRepository" as TaskCategoryRepository
 participant "propertyTypeRepository:\nPropertyTypeRepository" as ProType
 participant "agency: \nAgency" as A
@@ -22,19 +22,6 @@ participant "agentList:\nAgentList" as AgList
 participant "residence:\nResidence" as R
 participant "house:\nHouse" as House
 participant "photographList" as PhotoList
-participant "area(m^2)\nfloat"
-participant "distanceFromTheCityCentre\nfloat"
-participant "location\nstring"
-participant "numberOfPropertyPhotos\ninteger"
-participant "numberOfBedrooms\ninteger"
-participant "numberOfBathrooms\ninteger"
-participant "numberOfParkingSpaces\ninteger"
-participant "availableEquipment\nstring"
-participant "basement\nboolean"
-participant "inhabitableLoft\nboolean"
-participant "sunExposure\nstring"
-participant "price\nfloat"
-participant "contractDuration\ninteger"
 
 activate ADM
 
@@ -42,6 +29,7 @@ activate ADM
 
         activate UI
 
+            UI -> CTRL** : create
             UI -> CTRL : getRequestCategories()
             activate CTRL
 
@@ -121,10 +109,14 @@ activate ADM
         UI -> CTRL : create property
         activate CTRL
 
-        CTRL --> Req :selects Property Type
+        CTRL -> Req :selects Property Type
         activate Req
 
+        Req --> CTRL : property type
+
         deactivate Req
+
+        CTRL --> UI : property type
         deactivate CTRL
 
         UI --> ADM : request data( area(m^2), location, price, distanceFromCityCentre)
@@ -143,10 +135,18 @@ activate ADM
     Req -> Prop**: create
     activate Prop
 
-    Prop -> Req:  property
+    Prop --> Req:  property
     Req -> Req :add property
+
     deactivate Prop
+
+    Req --> CTRL : property
     deactivate Req
+    activate CTRL
+
+    CTRL --> UI : property
+
+    deactivate CTRL
 
     UI --> ADM :  request the number of photos \nthat the owner intends to submit
     deactivate UI
@@ -172,9 +172,25 @@ activate ADM
 
 
     Prop -> PhotoList :  add photograph to PhotoList
+
     activate PhotoList
-    deactivate Prop
+
+    PhotoList --> Prop : photograph list
+
     deactivate PhotoList
+
+    Prop --> CTRL : photograph
+
+    deactivate Prop
+
+    activate CTRL
+
+    CTRL --> UI : photograph
+
+    deactivate CTRL
+
+    deactivate CTRL
+
     end
 
     opt Rent a Property
@@ -186,6 +202,14 @@ activate ADM
     activate CTRL
 
     CTRL -> Req : set contractDuration()
+    activate Req
+
+    Req --> CTRL : contract duration
+
+    deactivate Req
+
+    CTRL --> UI : contract duration
+
     deactivate CTRL
     end
 
@@ -196,12 +220,13 @@ activate ADM
 
      ADM -> UI : inserts data
      activate UI
+
      UI-> CTRL : create Residence(number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
      activate CTRL
 
      CTRL -> Req : create Residence(number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+     deactivate CTRL
      activate Req
-    deactivate CTRL
 
     Req -> R** : create
     activate R
@@ -209,8 +234,14 @@ activate ADM
     R --> Req : residence
     deactivate R
     Req-> Req : add Property
-     deactivate Req
 
+    Req --> CTRL : created residence
+    deactivate Req
+
+    activate CTRL
+
+    CTRL --> UI : created residence
+    deactivate CTRL
 
     opt Property is a House
     UI --> ADM : request data (existence of a basement and/or inhabitableLoft and sunExposure)
@@ -221,21 +252,28 @@ activate ADM
     activate CTRL
 
     CTRL -> Req : create house (existence of a basement and/or inhabitableLoft and sunExposure)
+    deactivate CTRL
     activate Req
 
     Req -> House** : create
     activate House
 
-    House --> Req: house
+    House --> Req : house
     deactivate House
     Req -> Req :add Property (house)
-    deactivate Req
+
+    Req --> CTRL : created house
+    activate CTRL
+
+    CTRL --> UI : created house
     deactivate CTRL
+    deactivate Req
     end
 
     end
     UI -> CTRL : getAgency()
     activate CTRL
+
     CTRL -> Rep : getInstance()
                     activate Rep
 
