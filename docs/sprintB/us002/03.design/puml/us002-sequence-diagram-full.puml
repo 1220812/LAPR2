@@ -78,6 +78,9 @@ activate AGENT
         activate RegistedUsersREP
         RegistedUsersREP --> CTRL : registeredUsers
         deactivate RegistedUsersREP
+        loop while user not registered
+        CTRL --> CTRL : user is registered
+        end loop
         CTRL --> UI : user is registered
         deactivate CTRL
         UI --> AGENT : requests data
