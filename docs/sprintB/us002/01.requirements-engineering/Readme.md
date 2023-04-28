@@ -165,7 +165,7 @@ As an agent, I can publish any sale announcement on the system, for example rece
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** The user must be a real estate agent to proceed with a properrty registration.
+* **AC1:** The user must be a real estate agent to proceed with a property registration.
 * **AC2:** All required fields must be filled in.
 * **AC3:** The property can't already exist in the system.
 
@@ -173,7 +173,7 @@ As an agent, I can publish any sale announcement on the system, for example rece
 ### 1.4. Found out Dependencies
 
 
-* There are no dependencies
+* US3 - US2 needs the agent to exist
 
 
 ### 1.5 Input and Output Data
@@ -197,6 +197,7 @@ As an agent, I can publish any sale announcement on the system, for example rece
     * Existence of a basement
     * Existence of an inhabitable loft
     * Sun exposure
+    * Type of comission
 
 * Other data:
     * One or more photographs
@@ -205,6 +206,7 @@ As an agent, I can publish any sale announcement on the system, for example rece
 **Output Data:**
 
 * All the data
+* Success message
 
 
 ### 1.6. System Sequence Diagram (SSD)
