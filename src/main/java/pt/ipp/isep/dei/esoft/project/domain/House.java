@@ -1,54 +1,86 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class House extends Residence {
+public class House {
 
-    private boolean basement;
-    private String sunEsposure;
-    private boolean inhabitableLoft;
+    /**
+     * Existence of basement.
+     */
+    private String basement;
 
-    private static final boolean BASEMENT_POR_OMISSAO = false;
-    private static final String SUN_ESPOSURE__POR_OMISSAO = "no sun esposure";
-    private static final boolean INHABITABLE_LOFT_POR_OMISSAO = false;
+    /**
+     * Existence of inhabitable loft.
+     */
+    private String inhabitableLoft;
 
-    public House(String designation, float area, float distanceCityCenter, float price, String typeOfProperty, int numberOfRooms, int numberOfBathroooms, int numberOfParkingSpace, boolean centralHeating, boolean airCondition, boolean basement, String sunEsposure, boolean inhabitableLoft) {
-        super(designation, area, distanceCityCenter, price, typeOfProperty, numberOfRooms, numberOfBathroooms, numberOfParkingSpace, centralHeating, airCondition);
+    /**
+     * Existence of sun exposure.
+     */
+    private String sunExposure;
+
+    /**
+     * Constructs a house instance receiving the existence of basement, inhabitable loft and sun exposure.
+     *
+     * @param basement   existence of basement
+     * @param inhabitableLoft existence of inhabitable loft
+     * @param sunExposure     existence of sun exposure
+     */
+    public House(String basement, String inhabitableLoft, String sunExposure) {
         this.basement = basement;
-        this.sunEsposure = sunEsposure;
         this.inhabitableLoft = inhabitableLoft;
-
+        this.sunExposure = sunExposure;
     }
 
-    public boolean isBasement() {
+    /**
+     * Returns the existence of basement.
+     *
+     * @return existence of basement
+     */
+    public String getBasement() {
         return basement;
     }
 
-    public String getSunEsposure() {
-        return sunEsposure;
-    }
-
-    public boolean isInhabitableLoft() {
+    /**
+     * Returns the existence of inhabitable loft.
+     *
+     * @return existence of inhabitable
+     */
+    public String getInhabitableLoft() {
         return inhabitableLoft;
     }
 
-    public void setBasement(boolean basement) {
+    /**
+     * Returns the existence of sun exposure.
+     *
+     * @return existence of sun exposure
+     */
+    public String getSunExposure() {
+        return sunExposure;
+    }
+
+    /**
+     * Modifies the existence of basement.
+     *
+     * @param basement existence of basement
+     */
+    public void setExistBasement(String basement) {
         this.basement = basement;
     }
 
-    public void setSunEsposure(String sunEsposure) {
-        this.sunEsposure = sunEsposure;
-    }
-
-    public void setInhabitableLoft(boolean inhabitableLoft) {
+    /**
+     * Modifies the existence of inhabitable loft.
+     *
+     * @param inhabitableLoft existence of inhabitable loft
+     */
+    public void setInhabitableLoft(String inhabitableLoft) {
         this.inhabitableLoft = inhabitableLoft;
     }
 
-    @Override
-    public String toString() {
-        return (super.toString() +
-                "\nHouse:\n" +
-                "basement - " + basement + ";\n" +
-                "sunEsposure - " + sunEsposure + ";\n" +
-                "inhabitableLoft " + inhabitableLoft + ";\n");
+    /**
+     * Modifies the existence of sun exposure.
+     *
+     * @param sunExposure existence of sun exposure
+     */
+    public void setSunExposure(String sunExposure) {
+        this.sunExposure = sunExposure;
     }
-
 }
