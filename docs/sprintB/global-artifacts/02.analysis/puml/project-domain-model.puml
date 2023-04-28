@@ -3,37 +3,40 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
-
-skinparam classAttributeIconSize 0
+left to right direction
 
 hide circle
 hide methods
 
-title Project - Domain Model
+title US001 Domain Model
 
-class Address{
-street
-city
-doorNr
-floorNr
-state
-postalCode
-}
 
 class District {
 }
 
-class Advertisement {
+class Announcement {
 }
 
 class Store {
-    storeName
-    phoneNumber
-    emailAddress
-    id
-    name
-    location
+}
+
+class Property {
+location
+area
+distanceFromCityCenter
+photographs
+}
+
+class AvailableEquipment {
+centralHeating
+airConditioning
+}
+
+class SunExposure {
+North
+East
+South
+West
 }
 class Branch {
     designation
@@ -43,7 +46,7 @@ class Branch {
 
 class Agent {
     name
-    citizenCardNumber
+    passportCardNumber
     tax number
     address
     email
@@ -57,16 +60,9 @@ class Property {
     distanceFromCityCentre
     requestedPrice
     typeOfProperty
-    photographs
-}
-class Residence{
-numberOfBedrooms
-numberOfBathrooms
-numberOfParkingSpaces
-availableEquipment
 }
 
-class Advertisement {
+class Announcement {
     date
 }
 
@@ -77,99 +73,241 @@ class AppartmentOrHouse {
     availableEquipment
 }
 
+class House {
+    basement
+    inhabitableLoft
+    sunExposure
+}
+
 class Comission {
     fixed
     percentage
 }
-class SystemAdministrator{
-  name
-  email
-  citizenCardNumber
-  taxNumber
-  physycalAdress
-  phoneNumber
+class User {
+name
+email
+phone number
+password
+}
+class Passport {
+number
+}
+class TaxNumber {
+number
 }
 
+class Agency {
+designation
+email
+phone number
+}
+class Agent {
+}
 
+class Store {
+name
+designation
+telephone
+email
+}
+class Role {
+description
+permissions
+}
+class SystemAdministrator {
+}
+class StoreManager {
+}
+class StoreNetworkManager {
+}
 class Employee {
-    name
-    citizenCardNumber
-    adress
-    email
-    phoneNumber
-    taxNumber
-    agency
+
+}
+class StoreEmployee {
 }
 
-
+class AgencyEmployee {
+}
 
 class Owner{
 name
-citizenCardNumber
-taxNumber
-email
-phoneNumber
+passportNumber
+}
+class CompanyBranch{
+ID
+designation
 }
 
-class Role{
+class Contacts{
+phoneNumber
+emailAddress
 }
-class Address {
-    street
-    postalCode
-    doorNumber
-    floorNumber
-    city
-    state
+
+class Address{
+doorNumber
+floorNumber
+street
+state
+district
+postalCode
 }
-class InitialData{
-propertiesNumber
-propertyType
-saleOrRent
+
+class Request{
+status
+date
 }
+
+class Property{
+area
+distanceFromTheCityCentre
+}
+
+class Residence{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpaces
+availableEquipment
+}
+
 class House{
-basement
-loft
-sunExposure
+existenceOfABasement
+inhabitableLoft
+}
+
+class Land{
+}
+
+class Sell{
+price
+}
+
+class Rent{
+pricePerMonth
+contractDuration
+}
+
+class Photographs{
+URI
+}
+
+class TaxNumber{
+taxNumber
 }
 
 class Apartment{
 }
-class Land{
+
+class SunExposure{
+direction
+}
+
+class PropertyType{
+propertyType
 }
 
 
-SystemAdministrator "1" -- "0..*" Store : registers >
-Store "1" -- "1" Address : has  >
+class Store {
+    designation
+    ID
+    phoneNumber
+    emailAddress
+}
 
-SystemAdministrator "1"--"0...*" Employee: registed by <
-SystemAdministrator "1"--"1" Employee: is >
-Employee "1"--"1" Store: works for >
-Employee "0...*"--"1...*" Role: has >
-Branch "1" -- "*" Agent : has >
-Agent "1" -- "*" Advertisement : creates >
-Owner "1" -- "1" Property : owns >
-Advertisement "1" - "1" Property : has >
-Property "1" -- "1" AppartmentOrHouse : can be >
-AppartmentOrHouse "1" - "1" House : can be >
-AppartmentOrHouse "1" - "1" Apartment : can be >
-Advertisement "1" -- "1" Comission : has >
-Agent "1" - "1" Comission : defines >
+class State {
+    stateName
+}
 
-Store "1"-- "*" Advertisement : displays >
-Store "1" -- "1" Adress : has  >
-Adress "1" -- "1" District : is in >
+class District {
+    districtName
+}
 
-Agent "1" -- "1  " Address : has  >
+class City {
+    cityName
+}
 
-Owner "1" -- "0...*" InitialData : specify >
-Owner "1" -- "1" Agent : selects >
-Owner "1" -- "1" Address : has  >
 
-InitialData "1" -- "1" Property : includes >
 
-Property <|--  Residence
-Property <|-- Land
+
+class UnregisteredUser{
+name
+passportNumber
+}
+
+
+
+class TaxNumber{
+taxNumber
+}
+
+
+UnregisteredUser "1" -- "1" Address : has >
+UnregisteredUser "1" -- "1" TaxNumber : has >
+
+Address "1" -- "1" City : in >
+City "1" -- "1" State : in >
+State "1" -- "1" District : in >
+
+Owner "1" --- "1" Address : has >
+Owner "1" -- "1...*" Request : creates >
+Owner "1" -- "1" TaxNumber : has >
+Owner "1" -- "1" Contacts : has >
+
+Agent "1" --- "1" Address : has >
+Agent "1" --- "1...*" Request : reviews and publishes >
+Agent "1" --- "1" TaxNumber : has >
+Agent "1" --- "1" Contacts : has >
+Agent "1" --- "1" CompanyBranch : works for >
+
+Property "1" -- "1" PropertyType : has >
+Property "1" --- "1...30" Photographs : has
+
+Property "1" --- "1" Address : has >
+PropertyType --> Residence : can be
+PropertyType --> Land : can be
+
+CompanyBranch "1" --- "1" Address : has >
+CompanyBranch "1" -- "1" Contacts : has >
 
 Residence <|-- House
 Residence <|-- Apartment
+
+Request --> Sell : can be
+Request --> Rent : can be
+Request "1"--"1...*" Property : announces >
+
+SunExposure -- House : has <
+
+User "1" -- "1" Passport: has a >
+User "1" -- "1" TaxNumber: has a >
+User "1" -left- "1" Role: has a >
+Agency "1" -right- "1" Store: has a >
+SystemAdministrator  --|> Employee
+Agent  --|>   StoreEmployee
+StoreManager  --left|> StoreEmployee
+
+AgencyEmployee "1" -left- "1" Agency: runs >
+StoreEmployee "1" -right- "1" Store: belongs to >
+Agent "*" -left- "1" Store : has an <
+StoreNetworkManager --|> AgencyEmployee
+Employee --|> User
+AgencyEmployee --|> Employee
+StoreEmployee --|> AgencyEmployee
+
+Store "1" -- "1" Address: has a >
+
+Store "1"-- "*" Announcement : displays >
+Store "1" -- "1" Address : has >
+Address "1" -- "1" District : is in >
+Announcement "1" -- "1" Property : about >
+Property "1" -- "1" AvailableEquipment : has >
+Property "1" -- "1" SunExposure : has >
+Branch "1" -- "*" Agent : has >
+Agent "1" -- "*" Announcement : creates >
+Owner "1" -- "1" Property : owns >
+Announcement "1" - "1" Property : has >
+Property "1" -- "1" AppartmentOrHouse : can be >
+AppartmentOrHouse "1" - "1" House : can be >
+Announcement "1" -- "1" Comission : has >
+Agent "1" - "1" Comission : defines >
+Owner "1" -- "1" Agent: talks to >
 @enduml
