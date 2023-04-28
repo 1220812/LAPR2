@@ -24,6 +24,7 @@ class Repositories{
 
 class UserRepository{
 + List <user> user
++ createUser(name, passportCardNumber, taxNumber, address, emailAddress, phoneNumber, password)
 +addUser()
 +checkIfUserAlreadyExists
 +validateUser
@@ -37,7 +38,6 @@ class User{
 - String emailAddress
 - integer phoneNumber
 - String password
-+ getUserCreated
 }
 
 CreateUserUI .-> CreateUserController
