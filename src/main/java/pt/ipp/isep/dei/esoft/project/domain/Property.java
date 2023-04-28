@@ -1,120 +1,122 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.util.Objects;
-public abstract class Property {
+public class Property {
+
+    /**
+     * Area of property.
+     */
+    private Double area;
+
+    /**
+     * Distance from the center of property.
+     */
+    private Double distanceFromCityCenter;
+
+    /**
+     * Price of property.
+     */
+    private Double price;
+
+    /**
+     * Photographs of property.
+     */
+    private String photograph;
 
 
-    private String designation;
-    private float area;
-    private float distanceCityCenter;
-    private float price;
-    private String typeOfProperty;
-
-    private String typeOfBusiness;
-
-    private static final String DESIGNATION_POR_OMISSAO = "no designation";
-    private static final float AREA_POR_OMISSAO = 0;
-    private static final float DISTANCE_CITY_CENTER_POR_OMISSAO = 0;
-    private static final float PRICE_POR_OMISSAO = 0;
-    private static final String TYPE_OF_PROPERTY_POR_OMISSAO = "no type of property";
-    private static final String TYPE_OF_BUSINESS = "no type of business";
-
-
-    public Property(String designation, float area, float distanceCityCenter, float price, String typeOfProperty, String typeOfBusiness) {
-        this.designation = designation;
+    /**
+     * Constructs a property instance receiving the area, the distance from the city center, the price and photographs.
+     *
+     * @param area               area of property
+     * @param distanceFromCityCenter distance from the center of property
+     * @param price     price of the property
+     * @param photographs        photographs of property
+     */
+    public Property(double area, double distanceFromCityCenter, double price, String photographs) {
         this.area = area;
-        this.distanceCityCenter = distanceCityCenter;
+        this.distanceFromCityCenter = distanceFromCityCenter;
         this.price = price;
-        this.typeOfProperty = typeOfProperty;
-        this.typeOfBusiness = typeOfBusiness;
+        this.photograph = photographs;
     }
 
     public Property() {
-        super();
-        designation = DESIGNATION_POR_OMISSAO;
-        area = AREA_POR_OMISSAO;
-        distanceCityCenter = DISTANCE_CITY_CENTER_POR_OMISSAO;
-        price = PRICE_POR_OMISSAO;
-        typeOfProperty = TYPE_OF_PROPERTY_POR_OMISSAO;
-        typeOfBusiness = TYPE_OF_BUSINESS;
+
     }
 
-    public Property(String typeOfBusiness, String typeOfProperty) {
-        this.typeOfBusiness = typeOfBusiness;
-        this.typeOfProperty = typeOfProperty;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public float getArea() {
+    /**
+     * Returns the area of property.
+     *
+     * @return area of property
+     */
+    public Double getArea() {
         return area;
     }
 
-    public float getDistanceCityCenter() {
-        return distanceCityCenter;
+    /**
+     * Returns the distance from city center of property.
+     *
+     * @return distance from the city center
+     */
+    public Double getDistanceFromCityCenter() {
+        return distanceFromCityCenter;
     }
 
-    public float getPrice() {
+    /**
+     * Returns the price of property.
+     *
+     * @return price of property
+     */
+    public Double getPrice() {
         return price;
     }
 
-    public String getTypeOfProperty() {
-        return typeOfProperty;
+    /**
+     * Returns the photographs of property.
+     *
+     * @return photographs of property
+     */
+    public String getPhotographs() {
+        return photograph;
     }
 
-    public String getTypeOfBusiness(){
-        return typeOfBusiness;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public void setArea(float area) {
+    /**
+     * Modifies the area of property.
+     *
+     * @param area area of property
+     */
+    public void setArea(Double area) {
         this.area = area;
     }
 
-    public void setDistanceCityCenter(float distanceCityCenter) {
-        this.distanceCityCenter = distanceCityCenter;
+    /**
+     * Modifies the distance from the city center.
+     *
+     * @param distanceFromCityCenter distance from the city center
+     */
+    public void setDistanceFromCityCenter(Double distanceFromCityCenter) {
+        this.distanceFromCityCenter = distanceFromCityCenter;
     }
 
-    public void setPrice(float price) {
+    /**
+     * Modifies the price of the property.
+     *
+     * @param price price of the property
+     */
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public void setTypeOfProperty(String typeOfProperty) {
-        this.typeOfProperty = typeOfProperty;
+    /**
+     * Modifies the photographs of the property.
+     *
+     * @param photographs photographs of the property
+     */
+    public void setPhotographs(String photographs) {
+        this.photograph = photographs;
     }
+
 
     @Override
     public String toString() {
-        return (super.toString() +
-                "\nProperty:\n" +
-                "designation - " + designation + ";\n" +
-                "area - " + area + ";\n" +
-                "distance City Center - " + distanceCityCenter + ";\n" +
-                "price - " + price + ";\n" +
-                "type Of Property - " + typeOfProperty + ";\n" +
-                "type Of Bussines - " + typeOfBusiness + ";\n");
+        return String.format("Area: " + area + "%nCity Center Distance: " + distanceFromCityCenter + "%nRequested Price: " + price + "%nPhotographs" + photograph);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Property)) {
-            return false;
-        }
-        Property that = (Property) o;
-        return designation.equals(that.designation);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(designation);
-    }
-
 }

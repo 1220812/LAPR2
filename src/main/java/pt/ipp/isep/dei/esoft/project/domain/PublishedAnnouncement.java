@@ -1,19 +1,19 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
-public class Announcement {
+public class PublishedAnnouncement {
 
     private Property property;
 
     private String date;
     private static final String DATE_POR_OMISSAO = "without date";
 
-    public Announcement(Property property,String date) {
+    public PublishedAnnouncement(Property property, String date) {
         this.property=property;
         this.date = date;
     }
 
-    public Announcement() {
+    public PublishedAnnouncement() {
         date = DATE_POR_OMISSAO;
     }
 
@@ -30,10 +30,10 @@ public class Announcement {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Announcement)) {
+        if (!(o instanceof PublishedAnnouncement)) {
             return false;
         }
-        Announcement that = (Announcement) o;
+        PublishedAnnouncement that = (PublishedAnnouncement) o;
         return date.equals(that.date);
     }
 

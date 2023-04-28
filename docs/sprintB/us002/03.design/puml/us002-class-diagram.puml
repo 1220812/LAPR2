@@ -13,6 +13,19 @@ class RegisterAnnouncementUI
 
 class RegisterAnnouncementController
 {
+    -area: double
+    -distance: integer
+    -price: double
+    -photos: String
+    -bedrooms: integer
+    -bathrooms: integer
+    -parking: interger
+    -equipment: String
+    -basement: String
+    -loft: String
+    -sun: String
+    -comissionType: String
+    -comission: double
     +getPropertyType()
     +setPropertyType(propertyType)
     +getRegisteredUsers()
@@ -42,6 +55,7 @@ class RegistedUsersRepository
 
 class Announcement
 {
+    -date
     +createAnnouncement()
     +setDate(date)
 }

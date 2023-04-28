@@ -19,4 +19,16 @@ public class storeRepository {
     public List<Store> getListOfStores() {
         return listOfStores;
     }
+
+    public void registerStore(Store store) {
+        if (validateStore(store)) {
+            listOfStores.add(store);
+        } else {
+            throw new IllegalArgumentException("Store is not valid");
+        }
+    }
+
+    private boolean validateStore(Store store) {
+        return true;
+    }
 }
