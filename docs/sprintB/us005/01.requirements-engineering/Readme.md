@@ -40,18 +40,6 @@ of employees.
 
 23rd March
 
-> **Question:**  How will the designation of new stores be made, is there a pattern perhaps?
->
-> **Answer:**  There is no pattern. The System Administrator can introduce any designation/name. The designation/name should have at most forty characters.
-
-> **Question:**  Will the System Administrator be able to choose a location from a list of available locations (defined elsewhere in the application) or will he be able to submit any location he wants?
->
-> **Answer:** The System Administrator can submit any location.
-
-> **Question:**  Are the local managers restricted to their initial location or can they be re-registered/reassigned to other locations?
->
-> **Answer:**  For now this is not a problem.
-
 > **Question:**  Could you please share how will the designation of new stores be made, is there a pattern perhaps?
 > 
 > **Answer:**  There is no pattern. The System Administrator can introduce any designation/name. The designation/name should have at most forty characters.
