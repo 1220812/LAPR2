@@ -102,7 +102,7 @@ activate AGENT
     AGENT -> UI : types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)
         activate UI
 
-    UI -> CTRL : saveDataResidence(bedrooms, bathrooms, parking, equipment
+    UI -> CTRL : saveDataResidence(bedrooms, bathrooms, parking, equipment)
     activate CTRL
     CTRL --> UI : data saved
     deactivate CTRL
