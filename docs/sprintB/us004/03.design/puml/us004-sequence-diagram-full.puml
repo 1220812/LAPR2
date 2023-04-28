@@ -29,9 +29,9 @@ activate ADM
 
         activate UI
 
-            UI -> CTRL** : create
-            UI -> CTRL : getRequestCategories()
+            UI -> CTRL : create
             activate CTRL
+            UI -> CTRL : getRequestCategories()
 
                 CTRL -> Rep : getInstance()
                 activate Rep
@@ -74,9 +74,9 @@ activate ADM
 
     A -> A : addRequest
 
-    deactivate A
-
     UI -> CTRL : getPropertyType()
+
+    deactivate A
 
     CTRL -> Rep : getInstance()
                     activate Rep
@@ -107,7 +107,7 @@ activate ADM
     ADM -> UI : selects type of property
     activate UI
 
-        UI -> CTRL : createProperty
+        UI -> CTRL : createPropertyType
         activate CTRL
 
         CTRL -> Req :selectsPropertyType

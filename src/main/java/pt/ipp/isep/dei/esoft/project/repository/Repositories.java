@@ -10,6 +10,9 @@ public class Repositories {
     private pt.ipp.isep.dei.esoft.project.repository.storeRepository storeRepository;
     private pt.ipp.isep.dei.esoft.project.repository.agencyRepository agencyRepository;
 
+    AnnouncementsRepository announcementsRepository = new AnnouncementsRepository();
+
+
     private Repositories() {
     }
 
@@ -36,4 +39,9 @@ public class Repositories {
     public OrganizationRepository getOrganizationRepository() {
         return organizationRepository;
     }
+
+    public AnnouncementsRepository getAnnouncementsRepository() {
+        return announcementsRepository;
+    }
+
 }

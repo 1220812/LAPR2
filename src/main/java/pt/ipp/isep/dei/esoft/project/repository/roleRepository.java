@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class roleRepository {
-    private final List Role = new ArrayList<>(Arrays.asList("Agent","Store Manager","Network Manager"));
+    private final List Role = new ArrayList<>();
 
     public List getRole() {
         return Role;

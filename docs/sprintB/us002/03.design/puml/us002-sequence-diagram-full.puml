@@ -102,7 +102,7 @@ activate AGENT
     AGENT -> UI : types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)
         activate UI
 
-    UI -> CTRL : saveDataResidence(bedrooms, bathrooms, parking, equipment
+    UI -> CTRL : saveDataResidence(bedrooms, bathrooms, parking, equipment)
     activate CTRL
     CTRL --> UI : data saved
     deactivate CTRL
@@ -161,15 +161,20 @@ deactivate UI
 AGENT -> UI : confirms inserted data
 
 activate UI
-UI -> ANCMT** : create()
-UI -> ANCMT : createAnnouncement()
+UI -> CTRL : createAnnouncement
+activate CTRL
+CTRL -> ANCMT** : create()
+CTRL -> ANCMT : createAnnouncement()
 activate ANCMT
-ANCMT --> UI : announcement created
+ANCMT --> CTRL : announcement created
 deactivate ANCMT
-UI -> ANCMT : setDate(date)
+CTRL -> ANCMT : setDate(date)
 activate ANCMT
-ANCMT --> UI : announcement created sucessfully
+ANCMT --> CTRL : announcement created sucessfully
 deactivate ANCMT
+
+CTRL --> UI : announcement creted sucessfully
+deactivate CTRL
 
 
 UI --> AGENT : announcement created sucessfully
