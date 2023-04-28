@@ -11,6 +11,8 @@
 | Step 1  		     |	... interacting with the actor? | DisplayPropertiesUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 | 			  		        |	... coordinating the US? | DisplayPropertiesController | Controller                                                                                                    |
 | 			  		        |	... creating a new announcements List? | announcementsRepository           | Creator (Rule 1): in the DM one Announcement has just one Property.                                                         |
+|                          |           Announcement                    |                        |                                                  |
+|                          |           Announcement                    |                        |                                                    |
 | Step 2  		     |	...knowing the specific characteristics to select?						 |                             |                                                                                                               |
 | Step 3  		     |	...saving the inputted data? | Task                        | IE: object created in step 1 has its own data.                                                                |
 | Step 4  		     |	...knowing the task categories to show? | System                      | IE: Task Categories are defined by the Administrators.                                                        |
