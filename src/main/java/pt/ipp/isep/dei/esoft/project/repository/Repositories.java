@@ -19,6 +19,7 @@ public class Repositories {
     public static Repositories getInstance() {
         return instance;
     }
+
     public TaskCategoryRepository getTaskCategoryRepository() {
         return taskCategoryRepository;
     }
@@ -26,13 +27,16 @@ public class Repositories {
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
     }
+
     public roleRepository roleRepository() {
         return roleRepository;
     }
-    public storeRepository storeRepository(){
+
+    public storeRepository storeRepository() {
         return storeRepository;
     }
-    public agencyRepository agencyRepository(){
+
+    public agencyRepository agencyRepository() {
         return agencyRepository;
     }
 
@@ -44,5 +48,19 @@ public class Repositories {
         return announcementsRepository;
     }
 
+    public storeRepository getStoreRepository() {
+        return storeRepository;
+    }
 
+    public StateRepository getStateRepository() {
+        return StateRepository;
+    }
+
+    public CityRepository getCityRepository() {
+        return CityRepository;
+    }
+
+    public DistrictRepository getDistrictDepository(){
+        return DistrictRepository;
+    }
 }
