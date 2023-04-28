@@ -9,7 +9,7 @@
 | Interaction ID | Question: Which class is responsible for...  | Answer                  | Justification (with patterns)                                                                                |
 |:---------------|:---------------------------------------------|:------------------------|:-------------------------------------------------------------------------------------------------------------|
 | Step 1  		     | 	... interacting with the actor?             | RegisterStoreUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model |
-| 			  		        | 	... coordinating the US?                    | RegisterStoreController | Pure Fabrication: Controller                                                                                 |
+| 			  		        | 	... coordinating the US?                    | RegisterStoreController |  Controller                                                                                 |
 | 			  		        | 	... instantiating a new Task?               | Organization            | Creator (Rule 1): in the DM Organization has a Task                                                          |
 | 			  		        | 							                                      | Organization            | IE: knows/has its own Employees                                                                              |
 | 			  		        | 							                                      | Employee                | IE: knows its own data (e.g. email)                                                                          |
