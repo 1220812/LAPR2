@@ -24,4 +24,7 @@ public class CityRepository {
         return false;
     }
 
+    public void getCityByName(String cityName) {
+
+    }
 }

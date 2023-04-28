@@ -6,30 +6,52 @@
 
 **SSD**
 
-| Interaction ID                                                                                                      | Question: Which class is responsible for... | Answer       | Justification (with patterns)                                                                                 |
-|:--------------------------------------------------------------------------------------------------------------------|:--------------------------------------------|:-------------|:--------------------------------------------------------------------------------------------------------------|
-| Asks to register a new announcement                                                                                 | 	... interacting with the actor?            | CreateTaskUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| Selects a property type (land, house, appartment)                                                                   | 	                                           |              |                                                                                                               |
-| types the requested data (owner's name)                                                                             | 	... instantiating a new Task?              | Organization | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| types the requested data (area in m2, location, distance from the city centre, requested price, one or more photos) | ... knowing the user using the system?      | UserSession  | IE: cf. A&A component documentation.                                                                          |
-| types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)                    | 							                                     | Organization | IE: knows/has its own Employees                                                                               |
-| selects comission type                                                                                              | 							                                     | Employee     | IE: knows its own data (e.g. email)                                                                           |
-| requests comission percentage                                                                                       | 							                                     |              |                                                                                                               |
-| confirms inserted data                                                                                              | 	...saving the inputted data?               | Task         | IE: object created in step 1 has its own data.                                                                |
-|                                                                                                                     | 	                                           |              |                                                                                                               |
+| Interaction ID                                           | Question: Which class is responsible for... | Answer                         | Justification (with patterns)             |
+|:---------------------------------------------------------|:--------------------------------------------|:-------------------------------|:------------------------------------------|
+| Step 1: Asks to register a new announcement              | ... interacting with the user?              | RegisterAnnouncementUI         | Pure fabrication                          |
+|                                                          | ... coordinating with the US?               | RegisterAnnouncementController | Controller                                |
+|                                                          | ... initiating a new announcement?          | Repositories                   | Creator                                   |
+|                                                          | ... get property type repository?           | Repository                     | Information Expert, Pure Fabrication      |
+|                                                          | ... get property type list?                 | PropertyTypeRepository         | Information Expert, Pure Fabrication      |
+| Step 2: Shows property type list and asks to sleect one  | ... displaying the list?                    | RegisterAnnouncementUI         | IE : is responsible with user interaction |
+| Step 3: Selects a property type                          | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+| Step 4: Requests data to verify if the owner is registed | ... displaying the request?                 | RegisterAnnouncementUI         | IE : is responsible with user interaction |
+|                                                          | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+|                                                          | ... verify is user is registed?             | Repositories                   | Information Expert, Pure Fabrication      |
+|                                                          | ... get registed users repository?          | Repository                     | Information Expert, Pure Fabrication      |
+|                                                          | ... get registed users list?                | RegistedUserRepository         | Information Expert, Pure Fabrication      |
+|                                                          | ... verify if user is registed?             | RegisterAnnouncementController | IE : is responsible with user interaction | 
+| Step 5: Types the requested data                         | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+| Step 6: Requests property data                           | ... displaying the request?                 | RegisterAnnouncementUI         | IE : is responsible with user interaction |
+| Step 7: Types the requested data                         | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+| Step 8: Requests residency data                          | ... displaying the request?                 | RegisterAnnouncementUI         | IE : is responsible with user interaction |
+| Step 9: Types the requested data                         | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+| Step 10: Requests appartment data                        | ... displaying the request?                 | RegisterAnnouncementUI         | IE : is responsible with user interaction |
+| Step 11: Types the requested data                        | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+| Step 12: Requests comission type                         | ... displaying the request?                 | RegisterAnnouncementUI         | IE : is responsible with user interaction |
+| Step 13: Selects comission type                          | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+| Step 14: Requests comission                              | ... displaying the request?                 | RegisterAnnouncementUI         | IE : is responsible with user interaction |
+| Step 15: Types comission                                 | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+| Step 16: Presents all the data inserted                  | ... displaying the data?                    | RegisterAnnouncementUI         | IE : is responsible with user interaction |
+| Step 17: Confirms inserted data                          | ... set the answer?                         | RegisterAnnouncementController | IE : is responsible with user interaction |
+|                                                          | ... iniciate announcement?                  | RegisterAnnouncementController | IE : is responsible with user interaction |
+|                                                          | ... create announcement and set date?       | Announcement                   | Creator                                   |
+| Step 18: Announcement created sucessfully                | ... display sucess?                         | RegisterAnnouncementUI         | IE : is responsible with user interaction |
 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Task
+ * Announcement
+ * Repository
+ * PropertyTypeRepository
+ * RegistedUserRepository
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * RegisterAnnouncementUI  
+ * RegisterAnnouncementController
 
 
 ## 3.2. Sequence Diagram (SD)

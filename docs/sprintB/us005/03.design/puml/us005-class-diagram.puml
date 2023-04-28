@@ -77,7 +77,7 @@ class Repositories {
     + getStoreRepository()
     + getStateRepository()
     + getDistrictRepository()
-    + getDistrictRepository()
+    + getCityRepository()
 }
 
 class RegisterStoreController {
