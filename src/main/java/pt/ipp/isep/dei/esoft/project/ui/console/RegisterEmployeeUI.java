@@ -10,6 +10,8 @@ public class RegisterEmployeeUI implements Runnable {
         String taxNumberEmployee= Utils.readLineFromConsole("Tax number:");
         String emailEmployee= Utils.readLineFromConsole("Employee email:");
         String phoneNumberEmployeee= Utils.readLineFromConsole("Employee phone number:");
+        String addressEmployee= Utils.readLineFromConsole("Employee address:");
+
 
     }
 }

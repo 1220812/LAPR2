@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.repository;
+package pt.ipp.isep.dei.esoft.project.domain.Places;
 
 public class PasswordGenerator {
 
