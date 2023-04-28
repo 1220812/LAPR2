@@ -23,4 +23,8 @@ public class DistrictRepository {
         }
         return false;
     }
+
+    public void getDistrictByName(String districtName){
+
+    }
 }

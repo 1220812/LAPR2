@@ -24,4 +24,7 @@ public class StateRepository {
         return false;
     }
 
+    public void getStateByName (String stateName){
+
+    }
 }

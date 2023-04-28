@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Places.State;
 import pt.ipp.isep.dei.esoft.project.domain.Places.Store;
 
 import java.util.ArrayList;
@@ -30,5 +31,35 @@ public class storeRepository {
 
     private boolean validateStore(Store store) {
         return true;
+    }
+
+    List<Store>stores;
+
+    public List<Store> getStores() {
+        return stores;
+    }
+
+    public List<Store> getStoreByID( String ID){
+        return stores;
+    }
+
+    public List<Store> getStoreByPhoneNumber (int phoneNumber) {
+        return stores;
+    }
+
+    public List<Store> getStoreByEmail (String email) {
+        return stores;
+    }
+
+    public boolean registerStore (String store){
+       return true;
+    }
+
+    public List<Store> createStore(int ID, String designation, String emailAddress, int phoneNumber){
+        return stores;
+    }
+
+    public List<Store> createStore (int ID, String desingnation, String location, String emailAddress, int phoneNumber){
+        return stores;
     }
 }
