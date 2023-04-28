@@ -6,175 +6,421 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Organization Employee" as ADM
-participant ":CreateTaskUI" as UI
-participant ":CreateTaskController" as CTRL
+actor "Unregistered User" as User
+participant ":DisplayPropertiesUI" as System
+participant ":DisplayPropertiesController" as Controller
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
-
-activate ADM
-
-        ADM -> UI : asks to create a new task
-
-        activate UI
-
-'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
-            'create CTRL
-            UI -> CTRL** : create
-
-            UI -> CTRL : getTaskCategories()
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getTaskCategoryRepository()
-                activate PLAT
-
-                    PLAT --> CTRL: taskCategoryRepository
-                deactivate PLAT
-
-                CTRL -> TaskCategoryRepository : getTaskCategories()
-                activate TaskCategoryRepository
-
-                    TaskCategoryRepository --> CTRL : taskCategoryList
-                deactivate TaskCategoryRepository
-
-                CTRL --> UI : taskCategoryList
-            deactivate CTRL
-
-            UI --> ADM : shows task category list\n and asks to sleect one
-        deactivate UI
-
-    ADM -> UI : selects a task category
-    activate UI
-
-        UI --> ADM : requests data
-    deactivate UI
-
-    ADM -> UI : types requested data (reference, description, \ninformal description, technical description,\nduration, cost)
-    activate UI
-
-        UI --> ADM : shows selected category and requested data
-    deactivate UI
-
-    ADM -> UI : submits data
-    activate UI
-
-        UI -> CTRL : createTask(reference,\ndescription,\ninformalDescription,\ntechnicalDescription,\nduration, cost,\ntaskCategoryDescription)
-        activate CTRL
-
-            CTRL -> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getTaskCategoryRepository()
-                activate PLAT
-
-                    PLAT -> CTRL : taskCategoryRepository
-                deactivate PLAT
-
-                CTRL -> TaskCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
-                activate TaskCategoryRepository
-
-                    TaskCategoryRepository --> CTRL : taskCategory
-                deactivate TaskCategoryRepository
-                    CTRL --> CTRL : taskCategory
-            deactivate CTRL
-
-            |||
-            CTRL -> CTRL : getEmployeeFromSession()
-            activate CTRL
-
-                CTRL -> _APP: getInstance()
-                activate _APP
-                    _APP -> CTRL: appSession
-                deactivate _APP
+participant "repositories\n:Repositories" as repositories
+participant "publishedAnnouncementsRepository\n:PublishedAnnouncementsRepository" as PropertyRepository
+participant "PublishedAnnouncement" as publishedAnnouncement
+participant "Property" as property
+participant "Comparator" as comparator
+participant "City" as city
+participant "State" as state
 
 
-                CTRL -> APP: getCurrentSession()
-                activate APP
 
-                    APP --> CTRL: currentSession
-                deactivate APP
-
-                CTRL -> SESSAO: email = getUserEmail()
-                activate SESSAO
-
-                    SESSAO --> CTRL: email
-                deactivate SESSAO
+activate User
 
 
-                CTRL -> PLAT: getOrganizationRepository(email)
-                activate PLAT
-
-                    PLAT --> CTRL: organizationRepository
-                deactivate PLAT
+User->System: asks to display list of properties
+activate System
 
 
-                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
-                activate OrganizationRepository
+System->Controller**: create
 
-                    loop [for each organization
-                        OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                        activate ORG
+System->Controller: getPublishedAnnouncements()
+activate Controller
 
-                             ORG --> OrganizationRepository : true/false
-                        deactivate ORG
-                    end
-                    OrganizationRepository --> CTRL : organization
-                deactivate OrganizationRepository
+Controller->RepositorySingleton: getInstance()
+activate RepositorySingleton
 
-                CTRL -> ORG: getEmployeeByEmail(email)
-                activate ORG
+RepositorySingleton-->Controller: repositories
+deactivate RepositorySingleton
 
-                    ORG --> CTRL : employee
-                deactivate ORG
+Controller -> repositories : getPublishedAnnouncementsRepository()
+activate repositories
 
-                CTRL --> CTRL : employee
-            deactivate CTRL
+repositories --> Controller: publishedAnnouncementsRepository
+deactivate repositories
 
-            |||
-            CTRL -> ORG: createTask(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, , taskCategory, employee)
-            activate ORG
+Controller -> PropertyRepository : getPublishedAnnouncements()
+activate PropertyRepository
 
-                ORG -> TAREFA**: create(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
-                ORG -> ORG: addTask (task)
+PropertyRepository --> Controller : announcementsList
+deactivate PropertyRepository
+
+Controller --> System : announcementsList
+deactivate Controller
+
+System --> User : displays list of properties sorted by most\nrecently added and asks the user if they want to \nsearch for properties with specific characteristics \nor select a sorting option
+deactivate System
+
+opt property data is specified by the user
+
+User -> System : asks to display properties with the specific characteristics
+activate System
+
+System --> User : asks to specify the characteristics
+deactivate System
+
+User -> System : selects (type of business, type of property)\nand types in (number of rooms).
+activate System
+
+System->Controller: displayProperties(number of rooms,\ntype of business,\ntype of property)
+activate Controller
+
+Controller->RepositorySingleton: getInstance()
+activate RepositorySingleton
+
+RepositorySingleton-->Controller: repositories
+deactivate RepositorySingleton
+
+Controller -> repositories : getPublishedAnnouncementsRepository()
+activate repositories
+
+repositories --> Controller: publishedAnnouncementsRepository
+deactivate repositories
+
+Controller -> PropertyRepository : displayProperties(number of rooms, type of business, type of property)
+activate PropertyRepository
+
+loop for each publishedAnnouncement
+
+PropertyRepository -> publishedAnnouncement : getAnnouncementByCharacteristics(number of rooms, type of business, type of property)
+activate publishedAnnouncement
+
+publishedAnnouncement -> property : getPropertyByCharacteristics(number of rooms, type of business, type of property)
+activate property
+
+property --> publishedAnnouncement : property
+deactivate property
+
+publishedAnnouncement --> PropertyRepository : publishedAnnouncement
+deactivate publishedAnnouncement
+
+end
+
+PropertyRepository --> Controller : announcementsList
+deactivate PropertyRepository
+
+Controller --> System : announcementsList
+deactivate Controller
+
+System --> User : displays list of properties with the specific data \nsorted by most recently added (by default) and asks \nwhat sorting option the user wants to select
+deactivate System
+
+end
 
 
-                activate ORG
-                    ORG -> ORG: validateTask(task)
-                    activate ORG
-                        ORG --> ORG
-                    deactivate ORG
+User -> System : sorts properties by price/city/state (ascending or descending).
+activate System
 
-                    ORG --> ORG
-                deactivate ORG
 
-                ORG --> CTRL : task
+alt In case the option is price (ascending or descending)
 
-            deactivate ORG
+System -> Controller: sortPropertiesPrice()
+activate Controller
 
-            CTRL --> UI: task
-            deactivate CTRL
-            UI --> ADM: displays operation success
-    deactivate UI
+Controller->RepositorySingleton: getInstance()
+activate RepositorySingleton
 
-deactivate ADM
+RepositorySingleton-->Controller: repositories
+deactivate RepositorySingleton
+
+Controller -> repositories : getAnnouncementsRepository()
+activate repositories
+
+repositories --> Controller: announcementsRepository
+deactivate repositories
+
+alt In case the chosen option is price (ascending order)
+
+Controller -> PropertyRepository: sortPropertiesByPriceAscending()
+activate PropertyRepository
+
+
+
+PropertyRepository -> publishedAnnouncement: sortPropertiesByPriceAscending()
+activate publishedAnnouncement
+
+loop
+
+publishedAnnouncement -> property: getProperty()
+activate property
+
+property -> property: getPrice()
+
+property --> publishedAnnouncement: property
+deactivate property
+
+publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+activate comparator
+
+comparator-->publishedAnnouncement: comparisonResult
+deactivate comparator
+
+end
+
+publishedAnnouncement-->PropertyRepository: announcementsListByPriceAscending
+deactivate publishedAnnouncement
+
+PropertyRepository-->Controller: announcementsListByPriceAscending
+deactivate PropertyRepository
+
+
+
+
+else In case the chosen option is price (descending order)
+
+Controller -> PropertyRepository: sortPropertiesByPriceDescending()
+activate PropertyRepository
+
+PropertyRepository -> publishedAnnouncement: sortPropertiesByPriceDescending()
+activate publishedAnnouncement
+
+loop
+
+publishedAnnouncement -> property: getProperty()
+activate property
+
+property -> property: getPrice()
+
+property --> publishedAnnouncement: property
+deactivate property
+
+publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+activate comparator
+
+comparator-->publishedAnnouncement: comparisonResult
+deactivate comparator
+
+end
+
+publishedAnnouncement-->PropertyRepository: announcementsListByPriceDescending
+deactivate publishedAnnouncement
+
+PropertyRepository-->Controller: announcementsListByPriceDescending
+deactivate PropertyRepository
+
+end
+
+Controller-->System: announcementsListByPrice
+deactivate Controller
+
+
+else In case the option is city (ascending or descending)
+
+System -> Controller: sortPropertiesCity()
+activate Controller
+
+Controller->RepositorySingleton: getInstance()
+activate RepositorySingleton
+
+RepositorySingleton-->Controller: repositories
+deactivate RepositorySingleton
+
+Controller -> repositories : getAnnouncementsRepository()
+activate repositories
+
+repositories --> Controller: announcementsRepository
+deactivate repositories
+
+alt In case the chosen option is city (ascending order)
+
+Controller -> PropertyRepository: sortPropertiesByCityAscending(price)
+activate PropertyRepository
+
+PropertyRepository -> publishedAnnouncement: sortPropertiesByCityAscending()
+activate publishedAnnouncement
+
+loop
+
+publishedAnnouncement -> property: getProperty()
+activate property
+
+property -> city: getCity()
+activate city
+
+city-->property: cityName
+deactivate city
+
+property -> state: getState()
+activate state
+
+state-->property: stateName
+deactivate state
+
+property --> publishedAnnouncement: property
+deactivate property
+
+publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+activate comparator
+
+comparator-->publishedAnnouncement: comparisonResult
+deactivate comparator
+
+end
+
+publishedAnnouncement-->PropertyRepository: announcementsListByCityAscending
+deactivate publishedAnnouncement
+
+PropertyRepository-->Controller: announcementsListByCityAscending
+deactivate PropertyRepository
+
+
+else In case the chosen option is city name (descending order)
+
+Controller -> PropertyRepository: sortPropertiesByCityDescending()
+activate PropertyRepository
+
+PropertyRepository -> publishedAnnouncement: sortPropertiesByCityDescending()
+activate publishedAnnouncement
+
+loop
+
+publishedAnnouncement -> property: getProperty()
+activate property
+
+property -> city: getCity()
+activate city
+
+city-->property: cityName
+deactivate city
+
+property -> state: getState()
+activate state
+
+state-->property: stateName
+deactivate state
+
+property --> publishedAnnouncement: property
+deactivate property
+
+publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+activate comparator
+
+comparator-->publishedAnnouncement: comparisonResult
+deactivate comparator
+
+end
+
+publishedAnnouncement-->PropertyRepository: announcementsListByCityDescending
+deactivate publishedAnnouncement
+
+PropertyRepository-->Controller: announcementsListByCityDescending
+deactivate PropertyRepository
+
+end
+
+Controller-->System: announcementsListByCity
+deactivate Controller
+
+
+
+else In case the option is state (ascending or descending)
+
+System -> Controller: sortPropertiesState()
+activate Controller
+
+Controller->RepositorySingleton: getInstance()
+activate RepositorySingleton
+
+RepositorySingleton-->Controller: repositories
+deactivate RepositorySingleton
+
+Controller -> repositories : getAnnouncementsRepository()
+activate repositories
+
+repositories --> Controller: announcementsRepository
+deactivate repositories
+
+
+alt In case the chosen option is state (ascending order)
+
+Controller -> PropertyRepository: sortPropertiesByStateAscending()
+activate PropertyRepository
+
+PropertyRepository -> publishedAnnouncement: sortPropertiesByStateAscending()
+activate publishedAnnouncement
+
+loop
+
+publishedAnnouncement -> property: getProperty()
+activate property
+
+property -> state: getState()
+activate state
+
+state-->property: stateName
+deactivate state
+
+property --> publishedAnnouncement: property
+deactivate property
+
+publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+activate comparator
+
+comparator-->publishedAnnouncement: comparisonResult
+deactivate comparator
+
+end
+
+publishedAnnouncement-->PropertyRepository: announcementsListByStateAscending
+deactivate publishedAnnouncement
+
+PropertyRepository-->Controller: announcementsListByStateAscending
+deactivate PropertyRepository
+
+
+else In case the chosen option is state (descending order)
+
+Controller -> PropertyRepository: sortPropertiesByStateDescending()
+activate PropertyRepository
+
+PropertyRepository -> publishedAnnouncement: sortPropertiesByStateDescending()
+activate publishedAnnouncement
+
+loop
+
+publishedAnnouncement -> property: getProperty()
+activate property
+
+property -> state: getState()
+activate state
+
+state-->property: stateName
+deactivate state
+
+property --> publishedAnnouncement: property
+deactivate property
+
+publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+activate comparator
+
+comparator-->publishedAnnouncement: comparisonResult
+deactivate comparator
+
+end
+
+publishedAnnouncement-->PropertyRepository: announcementsListByStateDescending
+deactivate publishedAnnouncement
+
+PropertyRepository-->Controller: announcementsListByStateDescending
+deactivate PropertyRepository
+
+
+end
+
+Controller-->System: announcementsListByState
+deactivate Controller
+
+
+end
+
+System --> User : displays a list of the properties sorted by the sorting \noption chosen by the user.
+deactivate System
+
+
 
 @enduml

@@ -11,9 +11,9 @@ participant ":RegisterAnnouncementUI" as UI
 participant ":RegisterAnnouncementController" as CTRL
 participant ":Repositories" as REP
 participant ":Announcement" as ANCMT
-participant "repositories\n:Repositories" as PLAT
+participant "repositories\n:Repository" as PLAT
 participant "PropertyTypeRepository\n:PropertyTypeRepository" as PropertyTypeREP
-participant "RegistedUsers\n:RegistedUsers" as RegistedUsersREP
+participant "RegistedUsersRepository\n:RegistedUsersRepository" as RegistedUsersREP
 
 
 activate AGENT
@@ -78,6 +78,9 @@ activate AGENT
         activate RegistedUsersREP
         RegistedUsersREP --> CTRL : registeredUsers
         deactivate RegistedUsersREP
+        loop while user not registered
+        CTRL --> CTRL : user is registered
+        end loop
         CTRL --> UI : user is registered
         deactivate CTRL
         UI --> AGENT : requests data
@@ -85,7 +88,7 @@ activate AGENT
 
         AGENT -> UI : types the requested data (area in m2, location, distance from the city centre, requested price, one or more photos)
         activate UI
-        UI -> CTRL : saveData(area, location, distance, price, photos)
+        UI -> CTRL : saveDataProperty(area, location, distance, price, photos)
         activate CTRL
         CTRL --> UI : data saved
         deactivate CTRL
@@ -99,7 +102,7 @@ activate AGENT
     AGENT -> UI : types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)
         activate UI
 
-    UI -> CTRL : saveData(bedrooms, bathrooms, parking, equipment
+    UI -> CTRL : saveDataResidence(bedrooms, bathrooms, parking, equipment
     activate CTRL
     CTRL --> UI : data saved
     deactivate CTRL
@@ -111,7 +114,7 @@ activate AGENT
     deactivate UI
 AGENT -> UI : types the requested data (existence of a basement and inhabitable loft, sun exposure)
 activate UI
-UI -> CTRL : saveData(basement, loft, sun)
+UI -> CTRL : saveDataHouse(basement, loft, sun)
 activate CTRL
 CTRL --> UI : data saved
 deactivate CTRL
@@ -122,7 +125,7 @@ UI --> AGENT : requests comission type
 deactivate UI
 AGENT -> UI : selects comission type
 activate UI
-UI -> CTRL : saveData(comissionType)
+UI -> CTRL : saveDataComissionType(comissionType)
 activate CTRL
 CTRL --> UI : data saved
 deactivate CTRL
@@ -131,7 +134,7 @@ UI --> AGENT : requests comission percentage
 deactivate UI
 AGENT -> UI : types comission
 activate UI
-UI -> CTRL : saveData(comission)
+UI -> CTRL : saveDataComission(comission)
 activate CTRL
 CTRL --> UI : data saved
 deactivate CTRL
@@ -144,7 +147,7 @@ UI --> AGENT : requests comission value
 deactivate UI
 AGENT -> UI : types comission
 activate UI
-UI -> CTRL : saveData(comission)
+UI -> CTRL : saveDataComission(comission)
 activate CTRL
 CTRL --> UI : data saved
 deactivate CTRL

@@ -29,83 +29,97 @@ In case the property is a house, the existence of a
 basement, an inhabitable loft, and sun exposure must be registered as well.
 
 **From the client clarifications:**
-
-> **Question:** We are having a little issue defining what the sun exposure might be. We are not sure what it will be as a value. If it's a number that defines how much exposure the house has or if it is jusr a text saying if it has or hasn't sun exposure.
->  
-> **Answer:** Sun exposure will take the following values: North, South, East or West.
+> **Question:** We are having a little issue defining what the sun exposure might be. We are not sure what it will be as a value. If it's a number that defines how much exposure the house has or if it is just a text saying if it has or hasn't sun exposure. 
+> 
+> **Answer (17 March 2023):** Sun exposure will take the following values: North, South, East or West.
 
 
 > **Question:** In the Project description, there are only specifications for a sale. What are the required characteristics for a rental?
 >  
-> **Answer:** The characteristics for a rental are the same as the ones for the sale of a property. The rent value is per month. Additionally, we have to define the contract duration.
+> **Answer (17 March 2023):** The characteristics for a rental are the same as the ones for the sale of a property. The rent value is per month. Additionally, we have to define the contract duration.
 
 
 > **Question:** Are there any restrictions on the choice of an Agent
 >
-> **Answer:** No
+> **Answer (17 March 2023):** No
 
 
 > **Question:** In case the submission of the listing is online may the owner choose any agent?
 >
-> **Answer:** Yes.
+> **Answer (17 March 2023):** Yes.
 
 
 > **Question:** Is it possible to submit multiple listing for the same property and type of listing?
 >
-> **Answer:** No
+> **Answer (20 March 2023):** No
 
 
 > **Question:** Does that imply that a seller can choose the agency/branch/store independently of the location of the property?
 >
-> **Answer:** Yes
+> **Answer (20 March 2023):** Yes
 
 
 > **Question:** Also another question, when publishing a property, if the owner leaves the listing unfinished, can it be saved or stay as a sketch to be finished later?
 >
-> **Answer:** No
+> **Answer (20 March 2023):** No
 
 
 > **Question:** When assigning an agent to a property listing, are the available agents shown by the system for the owner to pick? Or does the owner need to provide the agent's information (name, agency, etc)?
 >
-> **Answer:** The owner should select one agent from a list of agents that work in the selected agency. The owner should select the agency before selecting the agent.
+> **Answer (23 March 2023):** The owner should select one agent from a list of agents that work in the selected agency. The owner should select the agency before selecting the agent.
 
 
 > **Question:** Does an owner need to be registered in the system to submit a request for a property listing?
 > 
-> **Answer:** No. When making the request to list a property, the owner should introduce his own data. The Owner attributes are: the name, the citizen's card number, the tax number, the address, the email address and the telephone number.
+> **Answer (23 March 2023):** No. When making the request to list a property, the owner should introduce his own data. The Owner attributes are: the name, the citizen's card number, the tax number, the address, the email address and the telephone number.
 
 
 > **Question:** Is there a designated currency for this business, or should we use USD?
 >
-> **Answer:** Please use USD.
+> **Answer (23 March 2023):** Please use USD.
 
 
 > **Question:** In the case of listing a land property, shall the owner refer if there is a building permit already approved?
-> **Answer:** No.
+> **Answer (23 March 2023):** No.
 
 
-> **Question:** If the owner doesn't select an agent will the platform randomly assign one or the request cannot move to revision? If not, must we assume that all information slots must be filled?
-> 
-> **Answer:** When filling the property data, the owner should select one agent from the list of agents working in the selected agency. Moreover, the application should include a feature to randomly assign one agent. The address of the owner is not mandatory.
-
-
-> **Question:** When renting does the owner have any space to clarify any prohibitions or obligations with the property?
+> **Question (28 March 2023):** When renting does the owner have any space to clarify any prohibitions or obligations with the property?
 > 
 > **Answer:** No.
 
 
-> **Question:** Does the owner have a limit of requests they can do?
+> **Question (28 March 2023):** Does the owner have a limit of requests they can do?
 > 
 > **Answer:** No.
 
 
 > **Question:** Regarding the property's photographs, is that considered selected data?
 > 
-> **Answer:** The owner should input the URI of each file/photograph.
- 
-> **Question:** Also, since the only way that an agent can receive sale announcement request is through a phone call, wouldn't that contradict what was stated in the project description: "Owners go to one of "
+> **Answer (28 March 2023):** The owner should input the URI of each file/photograph.
+
+
+> **Question:** In one of the previous questions you have stated that for now the only way that an agent can receive the sale announcement request is through a phone call. However, US004 states that "As an owner, I intend to submit a request for listing a property sale or rent, choosing the responsible agent". Isn't submitting a request for listing a property the same as a sale announcement request? If not, can you clarify?
 > 
-> **Answer:** 
+> **Answer (29 March 2023):** In my previous answer, when I said "...the only way that an agent can receive the sale announcement..." I was talking about the agent as an actor of the system that introduces in the system property data.
+
+> **Question:** Is the owner able to edit an already active listing of a property? If so, do the edits need to be accepted by the agent before being published?
+> 
+> **Answer (24 April 2023):** No.
+
+> **Question:**  When the owner is going to make the request for listing a property for sale or rent, is he (owner) already registered in the system? If yes, before placing the order, does he need to enter any of his data, for example, email address?
+> 
+> **Answer (24 April 2023):**  Yes. The data is available in the system.
+
+> **Question:** It was previously stated that an unregistered user could do a property listing request. However, with the introduction of US007, I want to clarify and make sure that now a user needs to be registered in order to buy, sell or rent properties, or if they can still do it unregistered.
+> 
+> **Answer (15 April 2023):** In Sprint B we introduce US7 and now, in US4, the owner needs to be registered in the system to submit a request for listing. You should update all artifacts to include this change.
+
+
+> **Question:** In the project description it is mentioned that in the case of a request for the sale of a property, the owner must provide "one or more photographs". Taking that into account, is there a maximum number of photos that can be submitted when publishing an announcement? If so, how many?
+> 
+> **Answer (20 April 2023):** The maximum number of photos is 30.
+
+
 ### 1.3. Acceptance Criteria
 
 * **AC1**: All required files must be filled in.
@@ -130,13 +144,6 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 **Input Data:**
 
 * Typed data:
-	* Owner data:
-		* the name
-		* the citizen's card number
-		* the tax number
-		* the address
-		* the email address
-		* the telephone number
 
 	* Property Data:
 		* the area in m2
@@ -175,7 +182,3 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 ### 1.6. System Sequence Diagram (SSD)
 
 ![System Sequence Diagram - Rent](svg/us004-system-sequence-diagram.svg)
-
-### 1.7 Other Relevant Remarks
-
-* There are no other relevant remarks.

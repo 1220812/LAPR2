@@ -60,10 +60,10 @@ activate ADM
     ADM -> UI : selects a type of request
     activate UI
 
-    UI -> CTRL : create a request type
+    UI -> CTRL : createARequestType
         activate CTRL
 
-    CTRL --> A : create a request type
+    CTRL --> A : createARequestType
     activate A
 
     A -> Req** : create
@@ -72,7 +72,7 @@ activate ADM
     Req --> A : request
     deactivate Req
 
-    A -> A : add Request
+    A -> A : addRequest
 
     deactivate A
 
@@ -96,39 +96,40 @@ activate ADM
     ProType --> CTRL : Property Type
     deactivate ProType
 
-    CTRL --> UI : propert Type List
+    CTRL --> UI : propertyTypeList
     deactivate CTRL
 
         UI --> ADM : shows list of property type \nand asks to select one
     deactivate A
+
     deactivate UI
 
     ADM -> UI : selects type of property
     activate UI
 
-        UI -> CTRL : create property
+        UI -> CTRL : createProperty
         activate CTRL
 
-        CTRL -> Req :selects Property Type
+        CTRL -> Req :selectsPropertyType
         activate Req
 
-        Req --> CTRL : property type
+        Req --> CTRL : propertyType
 
         deactivate Req
 
-        CTRL --> UI : property type
+        CTRL --> UI : propertyType
         deactivate CTRL
 
-        UI --> ADM : request data( area(m^2), location, price, distanceFromCityCentre)
+        UI --> ADM : request data( area, location, price, distanceFromCityCentre)
     deactivate UI
 
     ADM -> UI : inserts data
     activate UI
 
-        UI -> CTRL : create property(area(m^2), location, price, distanceFromCityCentre, photograph)
+        UI -> CTRL : createProperty(area, location, price, distanceFromCityCentre, photograph)
         activate CTRL
 
-        CTRL -> Req : create property(area(m^2), location, price, distanceFromCityCentre, photograph)
+        CTRL -> Req : createProperty(area, location, price, distanceFromCityCentre, photograph)
         deactivate CTRL
     activate Req
 
@@ -136,7 +137,7 @@ activate ADM
     activate Prop
 
     Prop --> Req:  property
-    Req -> Req :add property
+    Req -> Req :addProperty
 
     deactivate Prop
 
@@ -162,7 +163,7 @@ activate ADM
     ADM -> UI : inserts photo URI
     activate UI
 
-    UI -> CTRL : create Photograph
+    UI -> CTRL : createPhotograph()
     activate CTRL
 
             CTRL -> Prop: creates Photograph
@@ -171,11 +172,11 @@ activate ADM
     activate Prop
 
 
-    Prop -> PhotoList :  add photograph to PhotoList
+    Prop -> PhotoList :  addPhotographToPhotoList
 
     activate PhotoList
 
-    PhotoList --> Prop : photograph list
+    PhotoList --> Prop : photographList
 
     deactivate PhotoList
 
@@ -198,10 +199,10 @@ activate ADM
     deactivate UI
     ADM -> UI : inserts data
     activate UI
-    UI-> CTRL : set contractDuration()
+    UI-> CTRL : setContractDuration()
     activate CTRL
 
-    CTRL -> Req : set contractDuration()
+    CTRL -> Req : setContractDuration()
     activate Req
 
     Req --> CTRL : contract duration
@@ -215,16 +216,16 @@ activate ADM
 
     opt Property Apartment or House
 
-        UI--> ADM : request data(number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+        UI--> ADM : request data(numberOfBedrooms, numberOfBathrooms, \nnumberOfParkingSpaces and availableEquipment)
      deactivate UI
 
      ADM -> UI : inserts data
      activate UI
 
-     UI-> CTRL : create Residence(number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+     UI-> CTRL : createResidence(numberOfBedrooms, numberOfBathrooms, \nnumberOfParkingSpaces and availableEquipment)
      activate CTRL
 
-     CTRL -> Req : create Residence(number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+     CTRL -> Req : createResidence(numberOfBedrooms, numberOfBathrooms, \nnumberOfParkingSpaces and availableEquipment)
      deactivate CTRL
      activate Req
 
@@ -233,25 +234,25 @@ activate ADM
 
     R --> Req : residence
     deactivate R
-    Req-> Req : add Property
+    Req-> Req : addProperty
 
-    Req --> CTRL : created residence
+    Req --> CTRL : successfully created operation
     deactivate Req
 
     activate CTRL
 
-    CTRL --> UI : created residence
+    CTRL --> UI : successfully created operation
     deactivate CTRL
 
     opt Property is a House
-    UI --> ADM : request data (existence of a basement and/or inhabitableLoft and sunExposure)
+    UI --> ADM : request data (existenceOfABasement, inhabitableLoft and sunExposure)
     deactivate UI
     ADM-> UI : inserts data
     activate UI
-    UI-> CTRL : create house (existence of a basement and/or inhabitableLoft and sunExposure)
+    UI-> CTRL : createHouse(existenceOfABasement, inhabitableLoft and sunExposure)
     activate CTRL
 
-    CTRL -> Req : create house (existence of a basement and/or inhabitableLoft and sunExposure)
+    CTRL -> Req : createHouse(existenceOfABasement, inhabitableLoft and sunExposure)
     deactivate CTRL
     activate Req
 
@@ -260,12 +261,13 @@ activate ADM
 
     House --> Req : house
     deactivate House
-    Req -> Req :add Property (house)
+    Req -> Req :addProperty(house)
 
-    Req --> CTRL : created house
+    Req --> CTRL : successfully created house
+    deactivate Req
     activate CTRL
 
-    CTRL --> UI : created house
+    CTRL --> UI : successfully created house
     deactivate CTRL
     deactivate Req
     end
@@ -297,29 +299,31 @@ activate ADM
     ADM -> UI : selects agency
     activate UI
 
-    UI -> A : getAgentList(selected Agency)
+    UI -> A : getAgentList(selectedAgency)
     activate A
     loop For each employee
-    A-> Agent : has an agent
+    A-> Agent : checkForAgents()
     activate Agent
 
-    Agent --> A : true / false
+    Agent --> A : returns true / false
     deactivate Agent
-    alt true
-    A-> AgList :add agent to the list
+    opt if false
+    A-> AgList :addAgent()
     activate AgList
 
-    AgList --> A : agent list
+    AgList --> A : agentList
     deactivate AgList
     end
 
     end
-    A --> CTRL : Agent List
-    activate CTRL
+    A --> CTRL : agentList
     deactivate A
-    CTRL --> UI : agent List
-    UI --> ADM : shows agent List and asks to select one
+
+    activate CTRL
+
+    CTRL --> UI : agentList
     deactivate CTRL
+    UI --> ADM : shows agentList and asks to select one
     deactivate UI
     ADM -> UI : selects agent
     activate UI
