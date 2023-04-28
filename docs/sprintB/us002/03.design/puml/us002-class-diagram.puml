@@ -13,20 +13,19 @@ class RegisterAnnouncementUI
 
 class RegisterAnnouncementController
 {
-    -area
-    -location
-    -distance
-    -price
-    -photos
-    -bedrooms
-    -bathrooms
-    -parking
-    -equipment
-    -basement
-    -loft
-    -sun
-    -comissionType
-    -comission
+    -area: double
+    -distance: integer
+    -price: double
+    -photos: String
+    -bedrooms: integer
+    -bathrooms: integer
+    -parking: interger
+    -equipment: String
+    -basement: String
+    -loft: String
+    -sun: String
+    -comissionType: String
+    -comission: double
     +getPropertyType()
     +setPropertyType(propertyType)
     +getRegisteredUsers()
