@@ -5,11 +5,11 @@ import java.util.List;
 
 public class agencyRepository {
     private static List<String> agency=new ArrayList<String>(){{
-        add("agency1");
-        add("agency2");
-        add("agency3");
-        add("agency4");
-        add("agency5");
+        add("1. agency1");
+        add("2. agency2");
+        add("3. agency3");
+        add("4. agency4");
+        add("5. agency5");
 
     }
     };
