@@ -11,7 +11,7 @@ public abstract class Property {
     private List<String> photographs;
     private Address address;
 
-    public Property(double area, double distanceFromTheCityCentre, Address address, List<String> photographs, int numberOfPhotos) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, List<String> photographs) {
         if (area <= 0)
             throw new IllegalArgumentException("Inputed value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
