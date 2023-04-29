@@ -51,5 +51,4 @@ public class Agency {
     }
 
     public Agency clone(){ return new Agency(this.id, this.designation, this.address, this.emailAddress, this.phoneNumber, this.administrator); }
-
 }
