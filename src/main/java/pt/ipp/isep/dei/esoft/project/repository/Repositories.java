@@ -7,11 +7,16 @@ public class Repositories {
     OrganizationRepository organizationRepository = new OrganizationRepository();
     AuthenticationRepository authenticationRepository = new AuthenticationRepository();
 
+    static roleRepository roleRepository = new roleRepository();
+
     private Repositories() {
     }
 
     public static Repositories getInstance() {
         return instance;
+    }
+    public static pt.ipp.isep.dei.esoft.project.repository.roleRepository getRoleRepository(){
+        return roleRepository;
     }
 
     public OrganizationRepository getOrganizationRepository() {
