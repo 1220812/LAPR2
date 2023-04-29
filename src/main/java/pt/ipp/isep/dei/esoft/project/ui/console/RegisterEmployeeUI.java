@@ -24,6 +24,7 @@ public class RegisterEmployeeUI implements Runnable {
         name = Utils.readLineFromConsole("Employee name:");
         email = Utils.readLineFromConsole("Employe email:");
         phone = Utils.readIntegerFromConsole("Phone number:");
+        passportCardNumber = Utils.readIntegerFromConsole("Passport card number:");
         System.out.print("####### Create Address #######");
         city = Utils.readLineFromConsole("City:");
         zipCode = Utils.readIntegerFromConsole("zipCode:");
@@ -43,13 +44,19 @@ public class RegisterEmployeeUI implements Runnable {
             System.out.print("Select one agency:");
             String inputAgency = "";
             inputAgency = Input.next();
-            if (inputAgency.equals("1") || inputAgency.equals("2") || inputAgency.equals("3") || inputAgency.equals("4") || inputAgency.equals("5")){
+            if (inputAgency.equals("1") || inputAgency.equals("2") || inputAgency.equals("3") || inputAgency.equals("4") || inputAgency.equals("5")) {
                 System.out.println("####### List of Stores #######");
                 controller.getStoreRepository();
                 System.out.println("Select one store");
+                String inputStore = "";
+                inputStore = Input.next();
+                if (inputStore.equals("1") || inputStore.equals("2") || inputStore.equals("3") || inputStore.equals("4") || inputStore.equals("5")) {
 
-
-
+                } else {
+                    System.out.println("invalide store");
+                }
+            } else {
+                System.out.println("Invalid agency");
             }
 
 
