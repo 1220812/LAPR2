@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 public class SystemAdministrator extends Employee {
-    public SystemAdministrator(String name, String email, String phoneNumber, String passportCardNumber, String taxNumber) {
+    public SystemAdministrator(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber) {
         super(name, email, phoneNumber, passportCardNumber, taxNumber);
 
     }

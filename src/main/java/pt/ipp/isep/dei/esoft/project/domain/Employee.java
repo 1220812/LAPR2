@@ -5,28 +5,28 @@ import java.util.Objects;
 public class Employee {
     private String name;
     private String email;
-    private String phoneNumber;
-    private String passportCardNumber;
-    private String taxNumber;
+    private int phoneNumber;
+    private int passportCardNumber;
+    private int taxNumber;
 
 
     private static final String DEFAULT_NOME = "No name";
     private static final String DEFAULT_EMAIL = "No email";
-    private static final String DEFAULT_PHONENUMBER = "0";
-    private static final String DEFAULT_PASSPORTNUMBER = "0000000000";
-    private static final String DEFAULT_TAXNUMBER = "0";
+    private static final int DEFAULT_PHONENUMBER = 0;
+    private static final int DEFAULT_PASSPORTNUMBER = 0;
+    private static final int DEFAULT_TAXNUMBER = 0;
 
 
-    public Employee(String name, String emailAddress, String phoneNumber, String citizenPassportNumber, String taxNumber) {
+    public Employee(String name, String emailAddress, int phoneNumber, int PassportCardNumber, int taxNumber) {
         this.name = name;
         this.email = emailAddress;
         this.phoneNumber = phoneNumber;
-        this.passportCardNumber = citizenPassportNumber;
+        this.passportCardNumber = passportCardNumber;
         this.taxNumber = taxNumber;
     }
 
 
-    public Employee(String s) {
+    public Employee() {
         this.name = DEFAULT_NOME;
         this.email = DEFAULT_EMAIL;
         this.phoneNumber = DEFAULT_PHONENUMBER;
@@ -51,27 +51,27 @@ public class Employee {
     }
 
 
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPassportCardNumber() {
+    public int getPassportCardNumber() {
         return passportCardNumber;
     }
 
-    public void setPassportCardNumber(String passportCardNumber) {
+    public void setPassportCardNumber(int passportCardNumber) {
         this.passportCardNumber = passportCardNumber;
     }
 
-    public String getTaxNumber() {
+    public int getTaxNumber() {
         return taxNumber;
     }
 
-    public void setTaxNumber(String taxNumber) {
+    public void setTaxNumber(int taxNumber) {
         this.taxNumber = taxNumber;
     }
 
