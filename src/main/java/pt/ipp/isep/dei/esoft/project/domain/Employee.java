@@ -25,6 +25,7 @@ public abstract class Employee {
         this.taxNumber = taxNumber;
     }
 
+
     public Employee() {
         this.name = DEFAULT_NOME;
         this.email = DEFAULT_EMAIL;
