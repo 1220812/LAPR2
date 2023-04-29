@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
-public abstract class Employee {
+public class Employee {
     private String name;
     private String email;
     private String phoneNumber;
@@ -26,7 +26,7 @@ public abstract class Employee {
     }
 
 
-    public Employee() {
+    public Employee(String s) {
         this.name = DEFAULT_NOME;
         this.email = DEFAULT_EMAIL;
         this.phoneNumber = DEFAULT_PHONENUMBER;
@@ -98,6 +98,7 @@ public abstract class Employee {
      *
      * @return A clone of the current instance.
      */
-    public abstract Employee clone();
-
+    public Employee clone() {
+        return null;
+    }
 }
