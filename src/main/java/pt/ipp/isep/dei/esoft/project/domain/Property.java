@@ -11,14 +11,14 @@ public abstract class Property {
     private List<String> photographs;
     private Address address;
 
-    public Property(double area, double distanceFromTheCityCentre, Address address) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, List<String> photographs, int numberOfPhotos) {
         if (area <= 0)
             throw new IllegalArgumentException("Inputed value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
             throw new IllegalArgumentException("Inputed value for distanceFromTheCityCentre from the city centre must be greater than 0");
         if (address == null)
             throw new IllegalArgumentException("Address must not be null");
-        if(numberOfPhotos <1 || numberOfPhotos>30){
+        if( numberOfPhotos < 1 || numberOfPhotos >= 30){
             throw new IllegalArgumentException("The number of photos to insert must be between 1 and 30");
         }
         this.area = area;
@@ -48,8 +48,16 @@ public abstract class Property {
         return photographs;
     }
 
-    public void setPhotoNumber(List<String> photographs) {
+    public void setPhotos(List<String> photographs) {
         this.photographs = photographs;
+    }
+
+    public int getNumberOfPhotos() {
+        return numberOfPhotos;
+    }
+
+    public void setNumberOfPhotos(int numberOfPhotos) {
+        this.numberOfPhotos = numberOfPhotos;
     }
 
     public Address getAddress() {
@@ -74,6 +82,12 @@ public abstract class Property {
 
     @Override
     public String toString() {
-        return "Property\n\tArea=" + area + "\n\tDistance=" + distanceFromTheCityCentre + "\n\tAddress=" + address + "\n\tCurrentOwner=";
+        return "Property{" +
+                "area=" + area +
+                ", distanceFromTheCityCentre=" + distanceFromTheCityCentre +
+                ", numberOfPhotos=" + numberOfPhotos +
+                ", photographs=" + photographs +
+                ", address=" + address +
+                '}';
     }
 }
