@@ -1,10 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 
-import org.w3c.dom.ls.LSOutput;
-import pt.ipp.isep.dei.esoft.project.ui.console.CreateTaskUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.RegisterEmployeeUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.ShowTextUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
