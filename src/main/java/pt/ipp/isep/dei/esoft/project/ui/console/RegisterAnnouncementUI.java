@@ -3,11 +3,18 @@ import java.io.Closeable;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.RegisterAnnouncementController;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Photographs;
 import pt.ipp.isep.dei.esoft.project.domain.Photographs;
+import pt.ipp.isep.dei.esoft.project.domain.Address;
 
-public class RegisterAnnouncementUI {
+public class RegisterAnnouncementUI implements Runnable{
+
+    private final RegisterAnnouncementController controller = new RegisterAnnouncementController();
+    private RegisterAnnouncementController getController() {
+        return controller;
+    }
     private int propertyType;
     private String ownerName;
     private double area;
@@ -52,6 +59,7 @@ public class RegisterAnnouncementUI {
         }
 
         System.out.println("Street:");
+        ler.nextLine();
         street = ler.nextLine();
 
         System.out.println("Door Number:");
@@ -72,6 +80,7 @@ public class RegisterAnnouncementUI {
         }
 
         System.out.println("State:");
+        ler.nextLine();
         state = ler.nextLine();
 
         System.out.println("Distance from city centre:");
@@ -89,9 +98,10 @@ public class RegisterAnnouncementUI {
         }
 
         System.out.println("Photographs:");
+        ler.nextLine();
         photos = ler.nextLine();
 
-        if(propertyType == 1 || propertyType == 2) {
+        if(propertyType == 2 || propertyType == 3) {
             System.out.println("Number of bedrooms:");
             bedrooms = ler.nextInt();
             while (bedrooms < 0) {
@@ -100,18 +110,22 @@ public class RegisterAnnouncementUI {
             }
 
             System.out.println("Number of bathrooms:");
+            bathrooms = ler.nextInt();
             while (bathrooms < 0) {
                 System.out.println("Please select a valid number of bathrooms.");
                 bathrooms = ler.nextInt();
             }
 
             System.out.println("Number of parking spaces:");
+            parking = ler.nextInt();
             while (parking < 0) {
                 System.out.println("Please select a valid number of parking spaces.");
                 parking = ler.nextInt();
             }
 
             System.out.println("Available equipment:");
+            ler.nextLine();
+            equipment = ler.nextLine();
 
             if(propertyType == 3) {
                 System.out.println("Existence of basement:");
@@ -183,5 +197,7 @@ public class RegisterAnnouncementUI {
             System.out.println("Please select a valid answer.");
             dataConfirmation = ler.nextInt();
         }
+
+
     }
 }
