@@ -11,7 +11,6 @@ public class Property {
     private int numberOfPhotos;
     private List<String> photographs;
     private Address address;
-    private float price;
     private String typeOfProperty;
 
     private String typeOfBusiness;
