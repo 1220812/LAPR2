@@ -11,8 +11,8 @@ public class House extends Residence {
     private String sunExposure;
     private String inhabitableLoft;
 
-    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces,double price,  List<String> photographs, String availableEquipment, String basement, String sunExposure, String inhabitableLoft) {
-        super(address, area, distanceFromCityCentre, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, price, photographs, availableEquipment);
+    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String> photographs, String availableEquipment, String basement, String sunExposure, String inhabitableLoft) {
+        super(address, area, distanceFromCityCentre, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, photographs, availableEquipment);
         this.basement = basement;
         this.sunExposure = sunExposure;
         this.inhabitableLoft = inhabitableLoft;

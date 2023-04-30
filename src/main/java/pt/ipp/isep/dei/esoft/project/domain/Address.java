@@ -118,4 +118,5 @@ public class Address {
     public Address clone() {
         return new Address(this.street, this.doorNumber, this.floorNumber, this.postalCode, this.state);
     }
+
 }
