@@ -126,7 +126,7 @@ public class RegisterEmployeeController {
      * @return the boolean
      */
     public boolean checkZipCode(int zipCode) {
-        return Employee.existsPhone(zipCode);
+        return Employee.existsZipCode(zipCode);
 
     }
 

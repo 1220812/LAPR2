@@ -112,15 +112,32 @@ public class RegisterEmployeeUI implements Runnable {
 
 
         city = Utils.readLineFromConsole("City:");
-        district = Utils.readLineFromConsole("District:");
-        street = Utils.readLineFromConsole("Street:");
-        state = Utils.readLineFromConsole("State:");
-        zipCode = Utils.readIntegerFromConsole("zipCode:");
-        while (!controller.checkEmail(email)) {
-            email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
+        while (city.trim().isEmpty()) {
+            city= Utils.readLineFromConsole("Invalid city \nInsert city:");
         }
 
-        address = state +"   "+ city+"   "+  district +"   "+ zipCode +"   "+ street;
+        district = Utils.readLineFromConsole("District:");
+        while (district.trim().isEmpty()) {
+            district = Utils.readLineFromConsole("Invalid district \nInsert district:");
+        }
+
+        street = Utils.readLineFromConsole("Street:");
+        while (street.trim().isEmpty()) {
+            street = Utils.readLineFromConsole("Invalid street \nInsert street:");
+        }
+
+        state = Utils.readLineFromConsole("State:");
+        while (state.trim().isEmpty()) {
+            state = Utils.readLineFromConsole("Invalid state \nInsert employee state:");
+        }
+
+
+        zipCode = Utils.readIntegerFromConsole("zipCode:");
+        while (!controller.checkZipCode(zipCode)) {
+            zipCode = Utils.readIntegerFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
+        }
+
+        address = "state:"+state +"   city:"+ city+"   district:"+  district +"   zipCode:"+ zipCode +"   street:"+ street;
         System.out.println("Created adress:" + address);
 
 
