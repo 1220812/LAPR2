@@ -51,9 +51,12 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE,
                 AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_OWNER, AuthenticationController.ROLE_OWNER);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_AGENT, AuthenticationController.ROLE_AGENT);
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
+        authenticationRepository.addUserWithRole("Agent", "agent@this.app", "agent",
+                AuthenticationController.ROLE_AGENT);
 
         authenticationRepository.addUserWithRole("Owner", "owner@this.app","owner", AuthenticationController.ROLE_OWNER);
 
