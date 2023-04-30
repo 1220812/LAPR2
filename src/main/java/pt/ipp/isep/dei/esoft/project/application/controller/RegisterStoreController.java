@@ -15,6 +15,5 @@ public class RegisterStoreController {
     private CityRepository cityRepository=null;
 
     public RegisterStoreController(){
-        getOrgani
     }
 }
