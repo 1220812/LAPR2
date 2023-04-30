@@ -53,16 +53,26 @@ public class Address {
     }
 
     /**
-     * Method to sow
-     * @return
+     * Method to show the door number
+     * @return door number
      */
     public String getDoorNumber() {
         return doorNumber;
     }
 
+    /**
+     * Method to show the floor number
+     * @return floor number
+     */
+
     public String getFloorNumber() {
         return floorNumber;
     }
+
+    /**
+     * Method to show the po
+     * @return
+     */
 
     public String getPostalCode() {
         return postalCode;

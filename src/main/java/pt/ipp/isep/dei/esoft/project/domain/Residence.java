@@ -9,8 +9,8 @@ public class Residence extends Property{
     private int numberOfParkingSpaces;
     private String availableEquipment;
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String>photographs, String availableEquipment) {
-        super(area, distanceFromCityCentre, address, photographs);
+    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String>photographs, String availableEquipment, double price) {
+        super(area, distanceFromCityCentre, address, photographs,price);
         if (numberOfBedrooms < 0 | numberOfBathrooms < 0 | numberOfParkingSpaces < 0) {
             throw new IllegalArgumentException("Provide the actual number of Bathrooms, Bedrooms and Parking Spaces" +
                     "(>=0)");
