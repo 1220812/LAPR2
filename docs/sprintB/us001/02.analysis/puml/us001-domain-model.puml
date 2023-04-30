@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-left to right direction
+'left to right direction
 
 hide circle
 hide methods
@@ -19,20 +19,36 @@ state
 postalCode
 }
 
+class State {
+}
+
 class District {
 }
 
-class Announcement {
+class City {
 }
 
-class Store {
+class PublishedAnnouncement {
+date
+photos
+price
 }
+
 
 class Property {
-location
 area
 distanceFromCityCenter
-photographs
+}
+
+class Residence {
+number of bedrooms
+number of bathrooms
+number of parking spaces
+}
+
+class House {
+basement
+inhabitable loft
 }
 
 class AvailableEquipment {
@@ -41,16 +57,18 @@ airConditioning
 }
 
 class SunExposure {
-North
-East
-South
-West
+Direction
 }
 
-Store "1"-- "*" Announcement : displays >
-Store "1" -- "1" Adress : has >
-Adress "1" -- "1" District : is in >
-Announcement "1" -- "1" Property : about >
-Property "1" -- "1" AvailableEquipment : has >
-Property "1" -- "1" SunExposure : has >
+
+City "1" -- "1" Adress : has >
+State "1" -- "1" District : has >
+District "1" -- "1" City : has >
+PublishedAnnouncement "1" -- "1" Property : about >
+Residence "1" -- "1" AvailableEquipment : has >
+House "1" -- "1" SunExposure : has >
+Property "1" -- "1" Adress : located at >
+Residence <|-- House
+Property <|-- Residence
+
 @enduml

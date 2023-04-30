@@ -1,122 +1,102 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class Property {
+    private double area;
+    private double price;
+    private double distanceFromTheCityCentre;
+    private int numberOfPhotos;
+    private List<String> photographs;
+    private Address address;
 
-    /**
-     * Area of property.
-     */
-    private Double area;
-
-    /**
-     * Distance from the center of property.
-     */
-    private Double distanceFromCityCenter;
-
-    /**
-     * Price of property.
-     */
-    private Double price;
-
-    /**
-     * Photographs of property.
-     */
-    private String photograph;
-
-
-    /**
-     * Constructs a property instance receiving the area, the distance from the city center, the price and photographs.
-     *
-     * @param area               area of property
-     * @param distanceFromCityCenter distance from the center of property
-     * @param price     price of the property
-     * @param photographs        photographs of property
-     */
-    public Property(double area, double distanceFromCityCenter, double price, String photographs) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, List<String> photographs, double price) {
+        if (area <= 0)
+            throw new IllegalArgumentException("Inputed value for area must be greater than 0");
+        if (distanceFromTheCityCentre <= 0)
+            throw new IllegalArgumentException("Inputed value for distanceFromTheCityCentre from the city centre must be greater than 0");
+        if (address == null)
+            throw new IllegalArgumentException("Address must not be null");
+        if(price<0){
+            throw new IllegalArgumentException("The price must be greater than 0");
+        }
         this.area = area;
-        this.distanceFromCityCenter = distanceFromCityCenter;
+        this.distanceFromTheCityCentre = distanceFromTheCityCentre;
+        this.numberOfPhotos = numberOfPhotos;
+        this.photographs = new ArrayList<>();
+        this.address = address;
         this.price = price;
-        this.photograph = photographs;
     }
 
-    public Property() {
-
-    }
-
-    /**
-     * Returns the area of property.
-     *
-     * @return area of property
-     */
-    public Double getArea() {
+    public double getArea() {
         return area;
     }
 
-    /**
-     * Returns the distance from city center of property.
-     *
-     * @return distance from the city center
-     */
-    public Double getDistanceFromCityCenter() {
-        return distanceFromCityCenter;
-    }
-
-    /**
-     * Returns the price of property.
-     *
-     * @return price of property
-     */
-    public Double getPrice() {
-        return price;
-    }
-
-    /**
-     * Returns the photographs of property.
-     *
-     * @return photographs of property
-     */
-    public String getPhotographs() {
-        return photograph;
-    }
-
-    /**
-     * Modifies the area of property.
-     *
-     * @param area area of property
-     */
-    public void setArea(Double area) {
+    public void setArea(double area) {
         this.area = area;
     }
 
-    /**
-     * Modifies the distance from the city center.
-     *
-     * @param distanceFromCityCenter distance from the city center
-     */
-    public void setDistanceFromCityCenter(Double distanceFromCityCenter) {
-        this.distanceFromCityCenter = distanceFromCityCenter;
+    public double getDistance() {
+        return distanceFromTheCityCentre;
     }
 
-    /**
-     * Modifies the price of the property.
-     *
-     * @param price price of the property
-     */
-    public void setPrice(Double price) {
+    public void setDistance(double distanceFromTheCityCentre) {
+        this.distanceFromTheCityCentre = distanceFromTheCityCentre;
+    }
+
+    public List<String> getPhotos() {
+        return photographs;
+    }
+
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    /**
-     * Modifies the photographs of the property.
-     *
-     * @param photographs photographs of the property
-     */
-    public void setPhotographs(String photographs) {
-        this.photograph = photographs;
+    public double getPrice() {
+        return price;
+    }
+    public void setPhotos(List<String> photographs) {
+        this.photographs = photographs;
     }
 
+    public int getNumberOfPhotos() {
+        return numberOfPhotos;
+    }
+
+    public void setNumberOfPhotos(int numberOfPhotos) {
+        this.numberOfPhotos = numberOfPhotos;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Property)) return false;
+        Property property = (Property) o;
+        return address.equals(property.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(area, distanceFromTheCityCentre, photographs, address);
+    }
 
     @Override
     public String toString() {
-        return String.format("Area: " + area + "%nCity Center Distance: " + distanceFromCityCenter + "%nRequested Price: " + price + "%nPhotographs" + photograph);
+        return "Property{" +
+                "area=" + area +
+                ", distanceFromTheCityCentre=" + distanceFromTheCityCentre +
+                ", numberOfPhotos=" + numberOfPhotos +
+                ", photographs=" + photographs +
+                ", address=" + address +
+                '}';
     }
 }

@@ -52,7 +52,7 @@ class Repositories{
 +getAnnouncementsRepository()
 }
 
-class PublishedAnnouncementsRepository{
+class AnnouncementsRepository{
 -ArrayList<Announcement> announcements
 +getAnnouncementByCharacteristics(number of rooms, type of business, type of property)
 +getAnnouncement()
@@ -70,11 +70,11 @@ Repositories -> Repositories : instance
 DisplayPropertiesUI .> DisplayPropertiesController
 DisplayPropertiesController .> Repositories : repositories
 
-Repositories -> "1" PublishedAnnouncementsRepository
+Repositories -> "1" AnnouncementsRepository
 
-DisplayPropertiesController ..> PublishedAnnouncementsRepository : publishedAnnouncementsRepository
+DisplayPropertiesController ..> AnnouncementsRepository : publishedAnnouncementsRepository
 
-PublishedAnnouncementsRepository "1" --> "*" PublishedAnnouncement
+AnnouncementsRepository "1" --> "*" PublishedAnnouncement
 DisplayPropertiesController ..> "1" PublishedAnnouncement : announcement
 PublishedAnnouncement "1" --> "1" Property : contains
 Property <|-- Residence

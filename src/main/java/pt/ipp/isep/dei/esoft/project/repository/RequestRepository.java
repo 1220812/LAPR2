@@ -1,52 +1,41 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Address;
+import pt.ipp.isep.dei.esoft.project.domain.Property;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
+import pt.ipp.isep.dei.esoft.project.domain.State;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 public class RequestRepository {
-
-    List<Request> announcements = new ArrayList<>();
-
-    public Request getAnnouncementByDescription(String description) {
-        Request newAnnouncement = new Request(description);
-        Request announcement = null;
-        if (announcements.contains(newAnnouncement)) {
-            announcement = announcements.get(announcements.indexOf(newAnnouncement));
+    List<Request> requestList;
+    public RequestRepository (){
+        requestList = new ArrayList<>();
+    }
+    public List<Request> getRequestList() { return List.copyOf(this.requestList);
+    }
+    public boolean request(Request request) {
+        if(this.requestList.contains(request)) {
+            return false;
         }
-
-        if (announcement == null) {
-            throw new IllegalArgumentException(
-                    "Announcement requested for [" + description + "] does not exist.");
+        else {
+            Request newRequest = request.clone();
+            this.requestList.add(newRequest);
+            return true;
         }
-        return newAnnouncement;
     }
 
-    public Optional<Request> add(Request announcement) {
-
-        Optional<Request> newAnnouncement = Optional.empty();
-        boolean operationSuccess = false;
-
-        if (validateRequest(announcement)) {
-            newAnnouncement = Optional.of(announcement.clone());
-            operationSuccess = announcements.add(newAnnouncement.get());
+    public Request createRequest(Property property, double price, String type) {
+        Request request = null;
+        try {
+            request = new Request(property, price, type);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Attribute value is invalid.");
+            System.out.println(e.getMessage());
         }
-
-        if (!operationSuccess) {
-            newAnnouncement = Optional.empty();
-        }
-
-        return newAnnouncement;
-
+        return request;
     }
 
-    private boolean validateRequest(Request announcement) {
-        boolean isValid = !announcements.contains(announcement);
-        return isValid;
-    }
 
-    public List<Request> getAnnouncements() {
-        return List.copyOf(announcements);
-    }
 }

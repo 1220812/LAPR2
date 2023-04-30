@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.domain.Places;
+package pt.ipp.isep.dei.esoft.project.domain;
 
 public class PasswordGenerator {
 
@@ -23,6 +23,7 @@ public class PasswordGenerator {
             }
         }
         return passwordBuilder.toString();
+
     }
 
 }
