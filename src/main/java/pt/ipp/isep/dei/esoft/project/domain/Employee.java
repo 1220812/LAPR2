@@ -2,6 +2,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
+/**
+ * The type Employee.
+ */
 public class Employee {
     private String name;
     private String email;
@@ -45,7 +48,6 @@ public class Employee {
      * @param store              The store of the employee.
      * @param pass               The password of the employee.
      */
-
     public Employee(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber, String address, String role, String agency, String store, String pass) {
         this.name = name;
         this.email = email;
@@ -105,83 +107,183 @@ public class Employee {
     }
 
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
 
+    /**
+     * Gets phone number.
+     *
+     * @return the phone number
+     */
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Sets phone number.
+     *
+     * @param phoneNumber the phone number
+     */
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Gets passport card number.
+     *
+     * @return the passport card number
+     */
     public int getPassportCardNumber() {
         return passportCardNumber;
     }
 
+    /**
+     * Sets passport card number.
+     *
+     * @param passportCardNumber the passport card number
+     */
     public void setPassportCardNumber(int passportCardNumber) {
         this.passportCardNumber = passportCardNumber;
     }
 
+    /**
+     * Gets tax number.
+     *
+     * @return the tax number
+     */
     public int getTaxNumber() {
         return taxNumber;
     }
 
+    /**
+     * Sets tax number.
+     *
+     * @param taxNumber the tax number
+     */
     public void setTaxNumber(int taxNumber) {
         this.taxNumber = taxNumber;
     }
 
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
     public String getAddress() {
         return Address;
     }
 
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
     public void setAddress(String address) {
         Address = address;
     }
 
+    /**
+     * Gets role.
+     *
+     * @return the role
+     */
     public String getRole() {
         return role;
     }
 
+    /**
+     * Sets role.
+     *
+     * @param role the role
+     */
     public void setRole(String role) {
         this.role = role;
     }
 
+    /**
+     * Gets agency.
+     *
+     * @return the agency
+     */
     public String getAgency() {
         return agency;
     }
 
+    /**
+     * Sets agency.
+     *
+     * @param agency the agency
+     */
     public void setAgency(String agency) {
         this.agency = agency;
     }
 
+    /**
+     * Gets store.
+     *
+     * @return the store
+     */
     public String getStore() {
         return store;
     }
 
+    /**
+     * Sets store.
+     *
+     * @param store the store
+     */
     public void setStore(String store) {
         this.store = store;
     }
 
+    /**
+     * Gets pass.
+     *
+     * @return the pass
+     */
     public String getPass() {
         return pass;
     }
 
+    /**
+     * Sets pass.
+     *
+     * @param pass the pass
+     */
     public void setPass(String pass) {
         this.pass = pass;
     }
@@ -220,6 +322,12 @@ public class Employee {
         return Objects.hash(email);
     }
 
+    /**
+     * Has email boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public boolean hasEmail(String email) {
         return this.email.equals(this.email);
     }
@@ -246,6 +354,7 @@ public class Employee {
         }
         return true;
     }
+
     /**
      * Chech if phone number is valid
      *
@@ -259,6 +368,7 @@ public class Employee {
             return true;
         }
     }
+
     /**
      * Chech if tax number is valid
      *
@@ -277,9 +387,8 @@ public class Employee {
      * Chech if passport number  is valid
      *
      * @param passportCardNumber the passport number of the employee
-     * @return boolean
+     * @return boolean boolean
      */
-
     public static boolean existsPassportCardNumber(int passportCardNumber) {
         if (passportCardNumber < 1000000 || passportCardNumber > 10000000) {
             return false;
@@ -301,5 +410,6 @@ public class Employee {
             return true;
         }
     }
+
 
 }
