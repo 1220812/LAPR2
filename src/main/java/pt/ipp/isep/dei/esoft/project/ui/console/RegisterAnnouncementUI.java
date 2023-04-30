@@ -3,6 +3,8 @@ import java.io.Closeable;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
+import pt.ipp.isep.dei.esoft.project.domain.Address;
+import pt.ipp.isep.dei.esoft.project.domain.Photographs;
 import pt.ipp.isep.dei.esoft.project.domain.Photographs;
 
 public class RegisterAnnouncementUI {
@@ -181,6 +183,5 @@ public class RegisterAnnouncementUI {
             System.out.println("Please select a valid answer.");
             dataConfirmation = ler.nextInt();
         }
-
     }
 }
