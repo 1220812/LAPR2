@@ -11,6 +11,17 @@ public class Property {
     private int numberOfPhotos;
     private List<String> photographs;
     private Address address;
+    private float price;
+    private String typeOfProperty;
+
+    private String typeOfBusiness;
+
+    private static final float AREA_POR_OMISSAO = 0;
+    private static final float DISTANCE_CITY_CENTER_POR_OMISSAO = 0;
+    private static final int N_OF_PHOTOS_POR_OMISSAO = 0;
+    private static Address ADRESS_POR_OMISSAO;
+    private static final float PRICE_POR_OMISSAO = 0;
+    private static final String TYPE_OF_PROPERTY_POR_OMISSAO = "no type of property";
 
     public Property(double area, double distanceFromTheCityCentre, Address address, List<String> photographs, double price) {
         if (area <= 0)
@@ -29,6 +40,16 @@ public class Property {
         this.address = address;
         this.price = price;
     }
+
+    public Property() {
+        area = AREA_POR_OMISSAO;
+        distanceFromTheCityCentre = DISTANCE_CITY_CENTER_POR_OMISSAO;
+        numberOfPhotos = N_OF_PHOTOS_POR_OMISSAO;
+        address = ADRESS_POR_OMISSAO;
+        price = PRICE_POR_OMISSAO;
+        typeOfProperty = TYPE_OF_PROPERTY_POR_OMISSAO;
+    }
+
 
     public double getArea() {
         return area;
