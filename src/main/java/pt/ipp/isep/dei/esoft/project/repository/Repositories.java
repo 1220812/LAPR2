@@ -7,7 +7,7 @@ public class Repositories {
     OrganizationRepository organizationRepository = new OrganizationRepository();
     AuthenticationRepository authenticationRepository = new AuthenticationRepository();
     private pt.ipp.isep.dei.esoft.project.repository.roleRepository roleRepository;
-    private pt.ipp.isep.dei.esoft.project.repository.storeRepository storeRepository;
+    private StoreRepository storeRepository;
     private pt.ipp.isep.dei.esoft.project.repository.agencyRepository agencyRepository;
 
     AnnouncementsRepository announcementsRepository = new AnnouncementsRepository();
@@ -32,7 +32,7 @@ public class Repositories {
         return roleRepository;
     }
 
-    public storeRepository storeRepository() {
+    public StoreRepository storeRepository() {
         return storeRepository;
     }
 
@@ -48,7 +48,7 @@ public class Repositories {
         return announcementsRepository;
     }
 
-    public storeRepository getStoreRepository() {
+    public StoreRepository getStoreRepository() {
         return storeRepository;
     }
 

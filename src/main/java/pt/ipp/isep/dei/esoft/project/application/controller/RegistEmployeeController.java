@@ -4,7 +4,7 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 
 public class RegistEmployeeController {
     private pt.ipp.isep.dei.esoft.project.repository.roleRepository roleRepository = null;
-    private pt.ipp.isep.dei.esoft.project.repository.storeRepository storeRepository=null;
+    private StoreRepository storeRepository=null;
     private pt.ipp.isep.dei.esoft.project.repository.agencyRepository agencyRepository=null;
 
 
@@ -18,7 +18,7 @@ public class RegistEmployeeController {
 
 
     //Allows receiving the repositories as parameters for testing purposes
-    public RegistEmployeeController(roleRepository Role, storeRepository Store) {
+    public RegistEmployeeController(roleRepository Role, StoreRepository Store) {
         this.roleRepository= roleRepository;
         this.storeRepository= storeRepository;
         this.agencyRepository=agencyRepository;
@@ -35,7 +35,7 @@ public class RegistEmployeeController {
         return roleRepository;
     }
 
-    public storeRepository storeRepository(){
+    public StoreRepository storeRepository(){
         if (storeRepository == null){
             Repositories repository = Repositories.getInstance();
 

@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 005 - To register a store
 
 # 4. Tests 
 
