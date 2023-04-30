@@ -58,9 +58,9 @@ public class RegisterEmployeeUI implements Runnable {
         district=Utils.readLineFromConsole("District:");
         street=Utils.readLineFromConsole("Street:");
         state=Utils.readLineFromConsole("State:");
-
         zipCode = Utils.readIntegerFromConsole("zipCode:");
-        address = city + zipCode;
+
+        address = state+city+district + zipCode+street;
         System.out.println("Created adress:" + address);
 
 
