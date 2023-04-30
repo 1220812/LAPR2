@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.District;
+
 public class Repositories {
     // From the template
     private static final Repositories instance = new Repositories();
@@ -24,13 +26,23 @@ public class Repositories {
      */
     RequestRepository requestRepository = new RequestRepository();
 
+    LocationRepository locationRepository = new LocationRepository();
+
+    StateRepository stateRepository = new StateRepository();
+
+    CityRepository cityRepository = new CityRepository();
+
+    StoreRepository storeRepository = new StoreRepository();
+
+
     private Repositories() {
     }
 
     public static Repositories getInstance() {
         return instance;
     }
-    public static RoleRepository getRoleRepository(){
+
+    public static RoleRepository getRoleRepository() {
         return roleRepository;
     }
 
@@ -51,6 +63,7 @@ public class Repositories {
 
     /**
      * Method to show the agencyRepository
+     *
      * @return agencyRepository
      */
     public AgencyRepository getAgencyRepository() {
@@ -59,6 +72,7 @@ public class Repositories {
 
     /**
      * Method to show the addressRepository
+     *
      * @return addressRepository
      */
     public AddressRepository getAddressRepository() {
@@ -68,12 +82,16 @@ public class Repositories {
 
     /**
      * Method to show the requestRepository
+     *
      * @return requestRepository
      */
     public RequestRepository getRequestRepository() {
         return requestRepository;
     }
+
+    public LocationRepository getLocationRepository(){return locationRepository;}
+
+    public StoreRepository getStoreRepository() {return storeRepository;}
+
+    public StateRepository getStateRepository() {return stateRepository;}
 }
-
-
-
