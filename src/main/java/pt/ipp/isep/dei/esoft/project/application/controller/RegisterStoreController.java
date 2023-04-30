@@ -68,7 +68,7 @@ public class RegisterStoreController {
     public boolean getCheckIfStateListIsEmpty(){
         return repositories.getStateRepository().getStateList().isEmpty();
     }
-    public List<String> getStateList(){
+    public List<State> getStateList(){
         return repositories.getStateRepository().getStateList();
     }
     public Store getCreateStore(int ID, String designation, int phoneNumber, String emailAddress, String location, Localization localization){
