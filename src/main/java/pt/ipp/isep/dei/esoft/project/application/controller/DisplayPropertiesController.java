@@ -9,8 +9,8 @@ public class DisplayPropertiesController {
 
     private AnnouncementRepository announcementRepository = null;
 
-    public DisplayPropertiesController() {
-        getAnnouncementRepository();
+    public AnnouncementRepository getAnnouncementRepository() {
+        return announcementRepository;
     }
 
     public DisplayPropertiesController(AnnouncementRepository announcementRepository) {
@@ -30,5 +30,4 @@ public class DisplayPropertiesController {
         AnnouncementRepository announcementRepository = getAnnouncementRepository();
         return announcementRepository.getSpecificAnnouncements(typeOfBusiness, typeOfProperty, numberOfRooms);
     }
-
 }

@@ -27,7 +27,6 @@ public class StoreRepository {
             System.out.println(item);
         }
     }
-    public class StoreRepository {
         private List<Store> storeList;
         public StoreRepository() {
             storeList = new ArrayList<>();
@@ -43,8 +42,8 @@ public class StoreRepository {
             }
         }
 
-        public Store createStore(String designation,String location, int ID, String phoneNumber, String emailAddress, Localization localization) {
-            Store store = new Store (designation,location,ID,phoneNumber, emailAddress, localization);
+        public Store createStore(String designation,String location, int ID, int phoneNumber, String emailAddress, Localization localization) {
+            Store store = new Store (designation,location,phoneNumber,emailAddress,ID,localization);
             registerStore(store);
             return store;
         }
@@ -61,4 +60,3 @@ public class StoreRepository {
             return true;
         }
     }
-}

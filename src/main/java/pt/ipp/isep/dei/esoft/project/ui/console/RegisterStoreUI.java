@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.controller.RegisterStoreController;
+import pt.ipp.isep.dei.esoft.project.domain.Localization;
 
 import java.util.Scanner;
 public class RegisterStoreUI implements Runnable{
@@ -16,7 +17,7 @@ public class RegisterStoreUI implements Runnable{
         System.out.println("Enter store's designation:");
         String storeDesignation = ler.nextLine();
         System.out.println("Enter store's phone number:");
-        String storePhoneNumber = ler.nextLine();
+        int storePhoneNumber = ler.nextInt();
         System.out.println("Enter store's email:");
         String storeEmail = ler.nextLine();
         System.out.println("Enter store's location (street):");
@@ -33,8 +34,9 @@ public class RegisterStoreUI implements Runnable{
         String district = ler.nextLine();
         System.out.println("Enter store location (state):");
         String state = ler.nextLine();
+        String location = "ISEP";
         controller.getCreateLocation(street,doorNumber,floorNumber,postalCode,city,district,state);
-        controller.getCreateStore(storeID,storeDesignation,storePhoneNumber,storeEmail);
+        controller.getCreateStore(storeID,storeDesignation,storePhoneNumber,storeEmail,location,new Localization(street,doorNumber,floorNumber,postalCode,city,district,state));
         controller.getRegisterStore();
         controller.getRegisterLocation();
         System.out.println("Store registered successfully.");
