@@ -38,4 +38,26 @@ public class RegisterEmployeeController {
     }
 
 
+    public boolean checkEmail(String email) {
+        return (Employee.existsEmail(email)) ;
+    }
+
+    public boolean checkPhone(int phone) {
+       return Employee.existsPhone(phone);
+
+    }
+
+    public boolean checkTaxNumber(int taxNumber){
+        return Employee.existsTaxNumber(taxNumber);
+    }
+    public boolean checkPassportCardNumber(int passportCardNumber){
+        return Employee.existsPassportCardNumber(passportCardNumber);
+    }
+
+    public boolean checkZipCode(int zipCode) {
+        return Employee.existsPhone(zipCode);
+
+    }
+
+
 }

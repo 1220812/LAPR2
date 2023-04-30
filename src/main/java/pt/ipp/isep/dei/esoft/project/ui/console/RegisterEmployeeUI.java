@@ -19,9 +19,9 @@ public class RegisterEmployeeUI implements Runnable {
 
     int taxNumber = 0;
     String pass = null;
-    String district=null;
-    String street=null;
-    String state=null;
+    String district = null;
+    String street = null;
+    String state = null;
 
 
     RegisterEmployeeController controller = new RegisterEmployeeController();
@@ -41,26 +41,44 @@ public class RegisterEmployeeUI implements Runnable {
         String agency = null;
 
         name = Utils.readLineFromConsole("Employee name:");
+        while (name.trim().isEmpty()) {
+            name = Utils.readLineFromConsole("Invalid Name \nInsert employee name:");
+        }
 
         email = Utils.readLineFromConsole("Employe email:");
+        while (!controller.checkEmail(email)) {
+            email = Utils.readLineFromConsole("Invalid Email (format: XXX@XXX.XX) \nInsert new Email - ");
+        }
 
         phone = Utils.readIntegerFromConsole("Phone number:");
+        while (!controller.checkPhone(phone)) {
+            phone = Utils.readIntegerFromConsole("Invalid Phone number (format: xxxxxxxxxx) \nInsert new phone number: ");
+        }
+
 
         taxNumber = Utils.readIntegerFromConsole("tax number:");
+        while (!controller.checkTaxNumber(taxNumber)) {
+            taxNumber = Utils.readIntegerFromConsole("Invalid tax number (format: xxxxxxxx) \nInsert new tax number: ");
+        }
 
         passportCardNumber = Utils.readIntegerFromConsole("Passport card number:");
+        while (!controller.checkPassportCardNumber(passportCardNumber)) {
+            passportCardNumber = Utils.readIntegerFromConsole("Invalid Passport card number (format: xxxxxxxx) \nInsert new passport card number number: ");
+        }
 
         System.out.print("####### Create Address #######");
 
 
-
         city = Utils.readLineFromConsole("City:");
-        district=Utils.readLineFromConsole("District:");
-        street=Utils.readLineFromConsole("Street:");
-        state=Utils.readLineFromConsole("State:");
+        district = Utils.readLineFromConsole("District:");
+        street = Utils.readLineFromConsole("Street:");
+        state = Utils.readLineFromConsole("State:");
         zipCode = Utils.readIntegerFromConsole("zipCode:");
+        while (!controller.checkEmail(email)) {
+            email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
+        }
 
-        address = state+city+district + zipCode+street;
+        address = state + city + district + zipCode + street;
         System.out.println("Created adress:" + address);
 
 
@@ -85,7 +103,7 @@ public class RegisterEmployeeUI implements Runnable {
 
             System.out.println("####### List of Agencies #######");
             controller.getAgencyRepository();
-            System.out.print("Select one agency:");
+            System.out.print("Select one agency (write the name):");
 
 
             inputAgency = Input.next();
@@ -95,17 +113,19 @@ public class RegisterEmployeeUI implements Runnable {
             if (inputAgency.equals("agency1") || inputAgency.equals("agency2") || inputAgency.equals("agency3") || inputAgency.equals("agency4") || inputAgency.equals("agency5")) {
                 System.out.println("####### List of Stores #######");
                 controller.getStoreRepository();
-                System.out.println("Select one store");
+                System.out.println("Select one store (write the name)");
                 inputStore = Input.next();
                 if (inputStore.equals("store1") || inputStore.equals("store2") || inputStore.equals("store3") || inputStore.equals("store4") || inputStore.equals("store5")) {
 
                     store = inputStore;
                 } else {
-                    System.out.println("invalide store");
+                    System.out.println("invalid store");
 
                 }
             } else {
                 System.out.println("Invalid agency");
+
+
             }
 
 

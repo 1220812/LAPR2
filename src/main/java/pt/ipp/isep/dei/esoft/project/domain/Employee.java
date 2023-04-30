@@ -32,17 +32,18 @@ public class Employee {
     private static final String DEFAULT_PASSWORD = "No password";
 
     /**
-     Creates a new Employee object with the given attributes.
-     @param name The name of the employee.
-     @param email The email address of the employee.
-     @param phoneNumber The phone number of the employee.
-     @param passportCardNumber The passport or card number of the employee.
-     @param taxNumber The tax number of the employee.
-     @param address The address of the employee.
-     @param role The role of the employee.
-     @param agency The agency of the employee.
-     @param store The store of the employee.
-     @param pass The password of the employee.
+     * Creates a new Employee object with the given attributes.
+     *
+     * @param name               The name of the employee.
+     * @param email              The email address of the employee.
+     * @param phoneNumber        The phone number of the employee.
+     * @param passportCardNumber The passport or card number of the employee.
+     * @param taxNumber          The tax number of the employee.
+     * @param address            The address of the employee.
+     * @param role               The role of the employee.
+     * @param agency             The agency of the employee.
+     * @param store              The store of the employee.
+     * @param pass               The password of the employee.
      */
 
     public Employee(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber, String address, String role, String agency, String store, String pass) {
@@ -59,15 +60,16 @@ public class Employee {
     }
 
     /**
-     Creates a new Employee object with the given attributes.
-     @param email The email address of the employee.
+     * Creates a new Employee object with the given attributes.
+     *
+     * @param email The email address of the employee.
      */
     public Employee(String email) {
         this.email = email;
     }
 
     /**
-     Creates a new Employee object with no attributes.
+     * Creates a new Employee object with no attributes.
      */
     public Employee() {
         this.name = DEFAULT_NOME;
@@ -77,26 +79,28 @@ public class Employee {
         this.taxNumber = DEFAULT_TAXNUMBER;
         this.Address = DEFAULT_ADDRESS;
         this.role = DEFAULT_ROLE;
-        this.agency=DEFAULT_AGENCY;
-        this.store=DEFAULT_STORE;
-        this.pass=DEFAULT_PASSWORD;
+        this.agency = DEFAULT_AGENCY;
+        this.store = DEFAULT_STORE;
+        this.pass = DEFAULT_PASSWORD;
     }
+
     /**
-     Creates a new Employee object with the given information and returns it.
-     @param name the name of the employee
-     @param email the email address of the employee
-     @param phoneNumber the phone number of the employee
-     @param passportCardNumber the passport or card number of the employee
-     @param taxNumber the tax number of the employee
-     @param address the address of the employee
-     @param role the role of the employee in the company
-     @param agency the agency the employee is associated with
-     @param store the store the employee works in
-     @param pass the password for the employee account
-     @return a new Employee object with the given information
+     * Creates a new Employee object with the given information and returns it.
+     *
+     * @param name               the name of the employee
+     * @param email              the email address of the employee
+     * @param phoneNumber        the phone number of the employee
+     * @param passportCardNumber the passport or card number of the employee
+     * @param taxNumber          the tax number of the employee
+     * @param address            the address of the employee
+     * @param role               the role of the employee in the company
+     * @param agency             the agency the employee is associated with
+     * @param store              the store the employee works in
+     * @param pass               the password for the employee account
+     * @return a new Employee object with the given information
      */
     public static Employee newEmployee(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber, String address, String role, String agency, String store, String pass) {
-        Employee newEmployee= new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
+        Employee newEmployee = new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
         return newEmployee;
     }
 
@@ -183,9 +187,9 @@ public class Employee {
     }
 
     /**
-
-     Returns a string representation of the Employee object, including all of its fields.
-     @return a string representation of the Employee object
+     * Returns a string representation of the Employee object, including all of its fields.
+     *
+     * @return a string representation of the Employee object
      */
     @Override
     public String toString() {
@@ -227,6 +231,75 @@ public class Employee {
      */
     public Employee clone() {
         return null;
+    }
+
+
+    /**
+     * Chech if email is valid
+     *
+     * @param email the email of the employee
+     * @return boolean
+     */
+    public static boolean existsEmail(String email) {
+        if (!(email.contains("@") && email.contains("."))) {
+            return false;
+        }
+        return true;
+    }
+    /**
+     * Chech if phone number is valid
+     *
+     * @param phone the phone number of the employee
+     * @return boolean
+     */
+    public static boolean existsPhone(int phone) {
+        if (phone < 100000000 || phone > 1000000000) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    /**
+     * Chech if tax number is valid
+     *
+     * @param taxNumber the tax Number of the employee
+     * @return boolean
+     */
+    public static boolean existsTaxNumber(int taxNumber) {
+        if (taxNumber < 10000000 || taxNumber > 100000000) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Chech if passport number  is valid
+     *
+     * @param passportCardNumber the passport number of the employee
+     * @return boolean
+     */
+
+    public static boolean existsPassportCardNumber(int passportCardNumber) {
+        if (passportCardNumber < 1000000 || passportCardNumber > 10000000) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Chech if zipCode  is valid
+     *
+     * @param zipCode the zipCode of the employee
+     * @return boolean
+     */
+    public static boolean existsZipCode(int zipCode) {
+        if (zipCode < 1000 || zipCode > 100000) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
