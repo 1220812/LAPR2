@@ -120,7 +120,7 @@ public class RegisterEmployeeUI implements Runnable {
             email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
         }
 
-        address = state + city + district + zipCode + street;
+        address = state +"   "+ city+"   "+  district +"   "+ zipCode +"   "+ street;
         System.out.println("Created adress:" + address);
 
 
