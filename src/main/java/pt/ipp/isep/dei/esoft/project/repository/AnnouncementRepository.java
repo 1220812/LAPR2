@@ -1,13 +1,31 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
-import pt.ipp.isep.dei.esoft.project.domain.PropertyType;
-import pt.ipp.isep.dei.esoft.project.domain.User;
+import pt.ipp.isep.dei.esoft.project.domain.Residence;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnnouncementRepository {
 
-    public Announcement createAnnouncement(PropertyType propertyType, User user, String descriptionOfProperty, String street, String state, String city, String district, String zipCodeEnd, String zipCodeStart, double distanceFromCityCenter, double area, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, String availableEquipment, boolean inhabitableLoft, boolean basement, String sunExposureLevel, int priceOfSale, int comissionType, double comissionValue,) {
-        Announcement announcement = new Announcement(propertyType, user, descriptionOfProperty, street, state, city, district, zipCodeEnd, zipCodeStart, distanceFromCityCenter, area, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, availableEquipment, inhabitableLoft, basement, sunExposureLevel, priceOfSale, comissionValue);
-        return announcement;
+    List<Announcement> announcements = new ArrayList<>();
+
+    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
+        List<Announcement> announcementsSpecific = announcements;
+        for (int j = 0; j < announcementsSpecific.size(); j++) {
+            if (typeOfBusiness.equals(announcementsSpecific.get(j).getProperty().getTypeOfBusiness()) && typeOfProperty.equals(announcementsSpecific.get(j).getProperty().getTypeOfProperty()) && numberOfRooms == ((Residence) announcementsSpecific.get(j).getProperty()).getNumberOfBedrooms()) {
+                j++;
+            } else if (typeOfBusiness.equals(announcementsSpecific.get(j).getProperty().getTypeOfBusiness()) && typeOfProperty.equals(announcementsSpecific.get(j).getProperty().getTypeOfProperty()) && announcementsSpecific.get(j).getProperty().getTypeOfBusiness().equals("Land")) {
+                j++;
+            } else {
+                announcementsSpecific.remove(j);
+                j--;
+            }
+        }
+        return announcementsSpecific;
     }
+
+    public List<Announcement> getAnnouncements() {
+        return announcements;
+    }
+
 }

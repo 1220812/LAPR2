@@ -9,6 +9,8 @@ public class Repositories {
     OrganizationRepository organizationRepository = new OrganizationRepository();
     AuthenticationRepository authenticationRepository = new AuthenticationRepository();
 
+    AnnouncementRepository announcementRepository = new AnnouncementRepository();
+
     // Added after by the Team
 
     static RoleRepository roleRepository = new RoleRepository();
@@ -94,4 +96,8 @@ public class Repositories {
     public StoreRepository getStoreRepository() {return storeRepository;}
 
     public StateRepository getStateRepository() {return stateRepository;}
+
+    public AnnouncementRepository getAnnouncementRepository() {
+        return announcementRepository;
+    }
 }
