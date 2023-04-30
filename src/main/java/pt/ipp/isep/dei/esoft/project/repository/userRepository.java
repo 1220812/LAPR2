@@ -2,20 +2,36 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents UserRepository
+ * @author Francisco Silveira
+ */
 public class userRepository {
-    private static List<String> user=new ArrayList<String>(){{
-       user = Employee.toString();
-       add(user);
-    }
-    };
+    /**
+     * Represents the List of Users in the Repository
+     */
+    private static List<Employee> userList = new ArrayList<Employee>();
 
-    public static void save(){
-        for (String item : user){
-            System.out.println(item);
-        }
+    /**
+     * Adds a user to the repository list
+     * @param user User object to be added to the user list
+     */
+    public static void setUser(Employee user) {
+        userList.add(user);
     }
+
+    /**
+     * Gets a copy of the current list of users
+     * @return Copy of the list of users
+     */
+    public static List<Employee> getUserList() {
+        return List.copyOf(userList);
+    }
+
+
+
 }
