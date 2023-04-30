@@ -19,6 +19,10 @@ public class RegisterEmployeeUI implements Runnable {
 
     int taxNumber = 0;
     String pass = null;
+    String district=null;
+    String street=null;
+    String state=null;
+
 
     RegisterEmployeeController controller = new RegisterEmployeeController();
 
@@ -27,40 +31,38 @@ public class RegisterEmployeeUI implements Runnable {
 
         Scanner Input = new Scanner(System.in);
 
-        String inputStore = "";
-        String inputRole = "";
-        String inputAgency = "";
+        String inputStore = null;
+        String inputRole = null;
+        String inputAgency = null;
 
 
-        Employee RegisterEmployee = controller.RegisterEmployee(name, address, phone, email, passportCardNumber, taxNumber, inputRole, inputAgency, inputStore, pass);
-
-
+        String role = null;
+        String store = null;
+        String agency = null;
 
         name = Utils.readLineFromConsole("Employee name:");
-        RegisterEmployee.setName(name);
 
         email = Utils.readLineFromConsole("Employe email:");
-        RegisterEmployee.setEmail(email);
 
         phone = Utils.readIntegerFromConsole("Phone number:");
-        RegisterEmployee.setPhoneNumber(phone);
 
         taxNumber = Utils.readIntegerFromConsole("tax number:");
-        RegisterEmployee.setTaxNumber(taxNumber);
 
         passportCardNumber = Utils.readIntegerFromConsole("Passport card number:");
-        RegisterEmployee.setPassportCardNumber(passportCardNumber);
 
         System.out.print("####### Create Address #######");
 
-        city = Utils.readLineFromConsole("City:");
-        RegisterEmployee.setPassportCardNumber(passportCardNumber);
 
+
+        city = Utils.readLineFromConsole("City:");
+        district=Utils.readLineFromConsole("District:");
+        street=Utils.readLineFromConsole("Street:");
+        state=Utils.readLineFromConsole("State:");
         zipCode = Utils.readIntegerFromConsole("zipCode:");
-        address = city + zipCode;
+
+        address = state+city+district + zipCode+street;
         System.out.println("Created adress:" + address);
 
-        RegisterEmployee.setAddress(address);
 
         System.out.println();
         System.out.println("####### List of Roles #######");
@@ -68,23 +70,26 @@ public class RegisterEmployeeUI implements Runnable {
 
         inputRole = Input.next();
         if (inputRole.equals("1")) {
-            RegisterEmployee.setRole("System Administrator");
+            role = "System administrator";
+            store = "";
+            agency = "";
 
         } else if (inputRole.equals("2") || inputRole.equals("3")) {
+
+            if (inputRole.equals("2")) {
+                role = "Agent";
+
+            } else if (inputRole.equals("3")) {
+                role = "Store manager";
+            }
+
             System.out.println("####### List of Agencies #######");
             controller.getAgencyRepository();
             System.out.print("Select one agency:");
 
-            if (inputRole.equals("2")) {
-                RegisterEmployee.setRole("Agent");
-
-
-            } else if (inputRole.equals("3")) {
-                RegisterEmployee.setRole("Store manager");
-            }
 
             inputAgency = Input.next();
-            RegisterEmployee.setAgency(inputAgency);
+            agency = inputAgency;
 
 
             if (inputAgency.equals("agency1") || inputAgency.equals("agency2") || inputAgency.equals("agency3") || inputAgency.equals("agency4") || inputAgency.equals("agency5")) {
@@ -94,11 +99,10 @@ public class RegisterEmployeeUI implements Runnable {
                 inputStore = Input.next();
                 if (inputStore.equals("store1") || inputStore.equals("store2") || inputStore.equals("store3") || inputStore.equals("store4") || inputStore.equals("store5")) {
 
-                    RegisterEmployee.setAgency(inputStore);
-
-
+                    store = inputStore;
                 } else {
                     System.out.println("invalide store");
+
                 }
             } else {
                 System.out.println("Invalid agency");
@@ -109,16 +113,17 @@ public class RegisterEmployeeUI implements Runnable {
             System.out.println("####### List of Agencies #######");
             controller.getAgencyRepository();
             inputAgency = Input.next();
-            RegisterEmployee.setRole("Network Manager");
+            agency = inputAgency;
 
 
         } else {
             System.out.println("invalid role");
         }
 
-        System.out.println(controller.RegisterEmployee(name, address, phone, email, passportCardNumber, taxNumber, inputRole, inputAgency, inputStore, pass));
+        System.out.println(controller.RegisterEmployee(name, address, phone, email, passportCardNumber, taxNumber, role, agency, store, pass));
         controller.getUserRepository();
-
         controller.sendRegisteredUserEmail(email, pass);
+        System.out.println();
+        System.out.println("####### Operation sucess ######");
     }
 }
