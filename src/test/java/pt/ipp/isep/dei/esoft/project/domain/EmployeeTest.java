@@ -41,43 +41,43 @@ public class EmployeeTest {
 
     @Test
     public void testEmployeeNewEmployeeMethod() {
-        Employee employee = Employee.newEmployee("João Manuel", "João@example.com", 123456789, 98765432, 1234567, "123 Main St", "Store manager", "agency2", "store3", "password"");
+        Employee employee = Employee.newEmployee("António Carlos", "António@example.com", 987654321, 12345678, 98765, "123 Main St", "Store manager", "agency4", "store1", "password123");
         assertNotNull(employee);
-        assertEquals("", employee.getName());
-        assertEquals("janedoe@example.com", employee.getEmail());
+        assertEquals("António Carlos", employee.getName());
+        assertEquals("António@example.com", employee.getEmail());
         assertEquals(987654321, employee.getPhoneNumber());
-        assertEquals(123456789, employee.getPassportCardNumber());
-        assertEquals(987654321, employee.getTaxNumber());
+        assertEquals(12345678, employee.getPassportCardNumber());
+        assertEquals(98765, employee.getTaxNumber());
         assertEquals("456 Main St", employee.getAddress());
         assertEquals("Salesperson", employee.getRole());
-        assertEquals("Agency B", employee.getAgency());
-        assertEquals("Store Y", employee.getStore());
+        assertEquals("agency4", employee.getAgency());
+        assertEquals("store1", employee.getStore());
         assertEquals("password123", employee.getPass());
     }
 
     @Test
     public void testEmployeeSetters() {
         Employee employee = new Employee();
-        employee.setName("John Doe");
-        employee.setEmail("johndoe@example.com");
+        employee.setName("Carlos Monteiro");
+        employee.setEmail("Carlos@example.com");
         employee.setPhoneNumber(123456789);
-        employee.setPassportCardNumber(987654321);
-        employee.setTaxNumber(123456789);
-        employee.setAddress("123 Main St");
-        employee.setRole("Manager");
-        employee.setAgency("Agency A");
-        employee.setStore("Store X");
+        employee.setPassportCardNumber(98765432);
+        employee.setTaxNumber(1234567);
+        employee.setAddress("123 St");
+        employee.setRole("System Administrator");
+        employee.setAgency("agency4");
+        employee.setStore("store3");
         employee.setPass("password");
         assertNotNull(employee);
-        assertEquals("John Doe", employee.getName());
-        assertEquals("johndoe@example.com", employee.getEmail());
+        assertEquals("Carlos Monteiro", employee.getName());
+        assertEquals("Carlos@example.com", employee.getEmail());
         assertEquals(123456789, employee.getPhoneNumber());
-        assertEquals(987654321, employee.getPassportCardNumber());
-        assertEquals(123456789, employee.getTaxNumber());
-        assertEquals("123 Main St", employee.getAddress());
-        assertEquals("Manager", employee.getRole());
-        assertEquals("Agency A", employee.getAgency());
-        assertEquals("Store X", employee.getStore());
+        assertEquals(98765432, employee.getPassportCardNumber());
+        assertEquals(1234567, employee.getTaxNumber());
+        assertEquals("123 St", employee.getAddress());
+        assertEquals("System Administrator", employee.getRole());
+        assertEquals("agency4", employee.getAgency());
+        assertEquals("store3", employee.getStore());
         assertEquals("password", employee.getPass());
     }
 
