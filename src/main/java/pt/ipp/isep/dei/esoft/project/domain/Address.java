@@ -70,37 +70,73 @@ public class Address {
     }
 
     /**
-     * Method to show the po
-     * @return
+     * Method to show the postal code
+     * @return postal code
      */
 
     public String getPostalCode() {
         return postalCode;
     }
 
+    /**
+     * Method to show the state
+     * @return state
+     */
+
     public State getState() {
         return state;
     }
+
+    /**
+     * Method to show the street
+     * @param street
+     */
 
     public void setStreet(String street) {
         this.street = street;
     }
 
+    /**
+     * Method to change the door number
+     * @param doorNumber
+     */
+
     public void setDoorNumber(String doorNumber) {
         this.doorNumber = doorNumber;
     }
+
+    /**
+     * Method to change the floor number
+     * @param floorNumber
+     */
 
     public void setFloorNumber(String floorNumber) {
         this.floorNumber = floorNumber;
     }
 
+    /**
+     * Method to change the postal code
+     * @param postalCode
+     */
+
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
+    /**
+     * Method to change the state
+     * @param state
+     */
+
     public void setState(State state) {
         this.state = state;
     }
+
+    /**
+     * Method to compare the attributes of the current object with those of another object
+     * @param o object that will be compared with
+     * @return boolean
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -114,16 +150,30 @@ public class Address {
                 Objects.equals(getState(), address.getState());
     }
 
+    /**
+     * Method to return a hash code for the object in order to ensure that this hash code will not collide with the others
+     * @return
+     */
+
     @Override
     public int hashCode() {
         return Objects.hash(getStreet(), getDoorNumber(), getFloorNumber(), getPostalCode(), getState());
     }
 
+    /**
+     * Method to show the Address characteristics
+     * @return String with te Address characteristics
+     */
     @Override
     public String toString() {
         return "Address\n\tStreet='" + street + '\'' + "\n\tDoorNumber='" + doorNumber + "\n\tFloorNumber=" +
                 floorNumber + "\n\tPostalCode='" + postalCode + "\n\tState=" + state + "\n";
     }
+
+    /**
+     * This method creates a new instance of the address object and initializes its attributes with the exact same values of the original object
+     * @return a clone of the address object
+     */
 
     public Address clone() {
         return new Address(this.street, this.doorNumber, this.floorNumber, this.postalCode, this.state);
