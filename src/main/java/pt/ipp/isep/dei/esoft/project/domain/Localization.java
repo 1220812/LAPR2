@@ -2,15 +2,12 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 /**
  * The Location class represents a location.
  */
-public class Location {
+public class Localization {
 
     private String city;
     private String floorNumber;
@@ -36,7 +33,7 @@ public class Location {
      * @param state The state of the location.
      * @throws IllegalArgumentException If any of the required parameters are blank or null, or if the postal code is invalid or the door/floor numbers contain non-numeric characters.
      */
-    public Location(String street,String doorNumber, String floorNumber, String postalCode, String city, String district,String state) {
+    public Localization(String street, String doorNumber, String floorNumber, String postalCode, String city, String district, String state) {
         if (StringUtils.isBlank(street) || StringUtils.isBlank(doorNumber) || StringUtils.isBlank(postalCode) ||city ==null ||district == null||  state == null) {
             throw new IllegalArgumentException("Invalid arguments.");
         }
@@ -197,8 +194,8 @@ public class Location {
         if(obj == null || getClass() !=obj.getClass()){
             return false;
         }
-        Location location = (Location) obj;
-        return Objects.equals(street, location.street) && Objects.equals(doorNumber, location.doorNumber)&& Objects.equals(floorNumber, location.floorNumber) && Objects.equals(postalCode,location.postalCode)&& Objects.equals(city,location.state)&&Objects.equals(district,location.district)&&  Objects.equals(state,location.state);
+        Localization localization = (Localization) obj;
+        return Objects.equals(street, localization.street) && Objects.equals(doorNumber, localization.doorNumber)&& Objects.equals(floorNumber, localization.floorNumber) && Objects.equals(postalCode, localization.postalCode)&& Objects.equals(city, localization.state)&&Objects.equals(district, localization.district)&&  Objects.equals(state, localization.state);
     }
     /**
      * Creates and returns a copy of the Location object.
@@ -206,7 +203,7 @@ public class Location {
      * @throws CloneNotSupportedException if the object's class does not support the clone.
      */
     @Override
-    protected Location clone() throws CloneNotSupportedException {
-        return new Location(this.street,this.doorNumber,this.floorNumber,this.postalCode,this.city,this.district,this.state);
+    protected Localization clone() throws CloneNotSupportedException {
+        return new Localization(this.street,this.doorNumber,this.floorNumber,this.postalCode,this.city,this.district,this.state);
     }
 }
