@@ -31,30 +31,44 @@ public class Employee {
 
     private static final String DEFAULT_PASSWORD = "No password";
 
+    /**
+     Creates a new Employee object with the given attributes.
+     @param name The name of the employee.
+     @param email The email address of the employee.
+     @param phoneNumber The phone number of the employee.
+     @param passportCardNumber The passport or card number of the employee.
+     @param taxNumber The tax number of the employee.
+     @param address The address of the employee.
+     @param role The role of the employee.
+     @param agency The agency of the employee.
+     @param store The store of the employee.
+     @param pass The password of the employee.
+     */
 
-    public Employee(String name, String emailAddress, int phoneNumber, int passportCardNumber, int taxNumber, String address, String role, String agency, String store, String pass) {
+    public Employee(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber, String address, String role, String agency, String store, String pass) {
         this.name = name;
-        this.email = emailAddress;
+        this.email = email;
         this.phoneNumber = phoneNumber;
         this.passportCardNumber = passportCardNumber;
         this.taxNumber = taxNumber;
         this.Address = address;
         this.role = role;
-        this.agency = role;
-        this.store = role;
+        this.agency = agency;
+        this.store = store;
         this.pass = pass;
     }
 
-
+    /**
+     Creates a new Employee object with the given attributes.
+     @param email The email address of the employee.
+     */
     public Employee(String email) {
         this.email = email;
     }
 
-
-
-
-
-
+    /**
+     Creates a new Employee object with no attributes.
+     */
     public Employee() {
         this.name = DEFAULT_NOME;
         this.email = DEFAULT_EMAIL;
@@ -67,7 +81,20 @@ public class Employee {
         this.store=DEFAULT_STORE;
         this.pass=DEFAULT_PASSWORD;
     }
-
+    /**
+     Creates a new Employee object with the given information and returns it.
+     @param name the name of the employee
+     @param email the email address of the employee
+     @param phoneNumber the phone number of the employee
+     @param passportCardNumber the passport or card number of the employee
+     @param taxNumber the tax number of the employee
+     @param address the address of the employee
+     @param role the role of the employee in the company
+     @param agency the agency the employee is associated with
+     @param store the store the employee works in
+     @param pass the password for the employee account
+     @return a new Employee object with the given information
+     */
     public static Employee newEmployee(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber, String address, String role, String agency, String store, String pass) {
         Employee newEmployee= new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
         return newEmployee;
@@ -155,7 +182,11 @@ public class Employee {
         this.pass = pass;
     }
 
+    /**
 
+     Returns a string representation of the Employee object, including all of its fields.
+     @return a string representation of the Employee object
+     */
     @Override
     public String toString() {
         return "Employee{" +

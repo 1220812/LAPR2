@@ -21,6 +21,8 @@ public class StateRepository {
         }
     }
 
+    public void getStateByName (String stateName) {
+
     public State createState(String name) {
         State state = null;
         try {

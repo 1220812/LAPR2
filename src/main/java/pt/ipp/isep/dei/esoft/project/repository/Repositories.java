@@ -6,6 +6,12 @@ public class Repositories {
     TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
     OrganizationRepository organizationRepository = new OrganizationRepository();
     AuthenticationRepository authenticationRepository = new AuthenticationRepository();
+<<<<<<< HEAD
+    private pt.ipp.isep.dei.esoft.project.repository.roleRepository roleRepository;
+    private StoreRepository storeRepository;
+    private pt.ipp.isep.dei.esoft.project.repository.agencyRepository agencyRepository;
+=======
+>>>>>>> 568a46155f1102bfde63cc913206d8a3986fc30f
 
     // Added after by the Team
 
@@ -48,11 +54,19 @@ public class Repositories {
 
     // Added after by the Team
 
+<<<<<<< HEAD
+    public StoreRepository storeRepository() {
+        return storeRepository;
+    }
+
+    public agencyRepository agencyRepository() {
+=======
     /**
      * Method to show the agencyRepository
      * @return agencyRepository
      */
     public AgencyRepository getAgencyRepository() {
+>>>>>>> 568a46155f1102bfde63cc913206d8a3986fc30f
         return agencyRepository;
     }
 
@@ -64,12 +78,17 @@ public class Repositories {
         return addressRepository;
     }
 
+<<<<<<< HEAD
+    public StoreRepository getStoreRepository() {
+        return storeRepository;
+=======
     /**
      * Method to show the requestRepository
      * @return requestRepository
      */
     public RequestRepository getRequestRepository() {
         return requestRepository;
+>>>>>>> 568a46155f1102bfde63cc913206d8a3986fc30f
     }
 }
 

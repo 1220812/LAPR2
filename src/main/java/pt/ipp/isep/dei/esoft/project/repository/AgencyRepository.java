@@ -3,6 +3,10 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * A static list of agency names.
+ */
 public class AgencyRepository {
     private static List<String> agency=new ArrayList<String>(){{
         add("1. agency1");
@@ -13,7 +17,9 @@ public class AgencyRepository {
 
     }
     };
-
+    /**
+     * Retrieves the list of agencies and prints them to the console.
+     */
     public static void getAgencies(){
         for (String item : agency){
             System.out.println(item);
