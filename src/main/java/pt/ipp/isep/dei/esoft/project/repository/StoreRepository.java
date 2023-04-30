@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class storeRepository {
+public class StoreRepository {
     private static List<String> store=new ArrayList<String>(){{
         add("1. store1");
         add("2. store2");

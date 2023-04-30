@@ -13,15 +13,15 @@ public class RegisterEmployeeController {
     }
 
     public void getRoleRepository() {
-        roleRepository.getEmployeeRoles();
+        RoleRepository.getEmployeeRoles();
     }
 
     public void getAgencyRepository() {
-        agencyRepository.getAgencies();
+        AgencyRepository.getAgencies();
     }
 
     public void getStoreRepository() {
-        storeRepository.getStores();
+        StoreRepository.getStores();
     }
 
     public Employee RegisterEmployee(String name, String address, int phone, String email, int passportCardNumber, int taxNumber, String role, String agency, String store, String pass) {
@@ -30,7 +30,7 @@ public class RegisterEmployeeController {
     }
 
     public void getUserRepository() {
-         userRepository.getUserList();
+         UserRepository.getUserList();
     }
     public void sendRegisteredUserEmail(String email, String pass){
         pass = PasswordGenerator.generatePassword();

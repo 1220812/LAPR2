@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class agencyRepository {
+public class AgencyRepository {
     private static List<String> agency=new ArrayList<String>(){{
         add("1. agency1");
         add("2. agency2");

@@ -44,6 +44,9 @@ public class Request {
     public void setType(String type) {
         this.type = type;
     }
+    public Request clone(){
+        return new Request(this.property, this.price, this.type);
+    }
 
     @Override
     public boolean equals(Object o) {

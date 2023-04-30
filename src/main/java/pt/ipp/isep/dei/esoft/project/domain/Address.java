@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 
 public class Address {
+     // ATTRIBUTES
     private String street;
     private String doorNumber;
     private String floorNumber;
@@ -12,6 +13,16 @@ public class Address {
     private State state;
     private static final int POSTAL_CODE_LENGTH = 5;
 
+    // CONSTRUCTORS
+
+    /**
+     *This method creates the Address object with attributes and verifies if the attributes inserted are valid
+     * @param street street
+     * @param doorNumber door number
+     * @param floorNumber floor number
+     * @param postalCode postal code
+     * @param state state
+     */
     public Address(String street, String doorNumber, String floorNumber, String postalCode, State state) {
         if (StringUtils.isBlank(street) || StringUtils.isBlank(doorNumber) || StringUtils.isBlank(postalCode) ||
                 state == null) {
@@ -33,10 +44,18 @@ public class Address {
         this.state = state;
     }
 
+    /**
+     * Method to show the street
+     * @return street
+     */
     public String getStreet() {
         return street;
     }
 
+    /**
+     * Method to sow
+     * @return
+     */
     public String getDoorNumber() {
         return doorNumber;
     }

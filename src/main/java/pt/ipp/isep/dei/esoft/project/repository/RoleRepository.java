@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class roleRepository {
+public class RoleRepository {
     private static List<String> role=new ArrayList<String>(){{
         add("1. System adminstrator");
         add("2. Agent");

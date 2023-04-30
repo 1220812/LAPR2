@@ -10,7 +10,7 @@ import java.util.List;
  * Represents UserRepository
  * @author Francisco Silveira
  */
-public class userRepository {
+public class UserRepository {
     /**
      * Represents the List of Users in the Repository
      */

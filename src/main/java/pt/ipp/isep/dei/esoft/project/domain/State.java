@@ -6,9 +6,6 @@ public class State {
     private String name;
 
     public State(String name) {
-        if (name == null || name.length() != 2 || !name.equals(name.toUpperCase())) {
-            throw new IllegalArgumentException("Name must be two capital letters.");
-        }
         this.name = name;
     }
 
@@ -18,6 +15,9 @@ public class State {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public State clone(){
+        return new State(this.name);
     }
 
     @Override

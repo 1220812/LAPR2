@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Property {
+public class Property {
     private double area;
     private double distanceFromTheCityCentre;
     private int numberOfPhotos;
