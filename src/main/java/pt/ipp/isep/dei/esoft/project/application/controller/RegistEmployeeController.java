@@ -5,7 +5,7 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 public class RegistEmployeeController {
     private pt.ipp.isep.dei.esoft.project.repository.roleRepository roleRepository = null;
     private StoreRepository storeRepository=null;
-    private pt.ipp.isep.dei.esoft.project.repository.agencyRepository agencyRepository=null;
+    private pt.ipp.isep.dei.esoft.project.repository.AgencyRepository agencyRepository=null;
 
 
 
