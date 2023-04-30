@@ -97,6 +97,22 @@ public class Property {
         this.address = address;
     }
 
+    public String getTypeOfBusiness() {
+        return typeOfBusiness;
+    }
+
+    public void setTypeOfBusiness(String typeOfBusiness) {
+        this.typeOfBusiness = typeOfBusiness;
+    }
+
+    public String getTypeOfProperty() {
+        return typeOfProperty;
+    }
+
+    public void setTypeOfProperty(String typeOfProperty) {
+        this.typeOfProperty = typeOfProperty;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Property)) return false;
