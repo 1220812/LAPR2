@@ -19,4 +19,8 @@ public class AgencyRepository {
             System.out.println(item);
         }
     }
+
+    public static List<String> getAgency() {
+        return agency;
+    }
 }

@@ -11,8 +11,9 @@ public class Agency {
     private int phoneNumber;
     private Employee administrator;
 
-    public Agency(int id){
+    public Agency(int id, String designation){
         this.id = id;
+        this.designation = designation;
     }
 
     public Agency(int id, String designation, Address address, String emailAddress, int phoneNumber, Employee administrator){
