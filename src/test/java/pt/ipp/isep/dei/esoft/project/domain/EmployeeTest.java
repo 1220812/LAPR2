@@ -1,72 +1,84 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Test;
+import pt.ipp.isep.dei.esoft.project.domain.Employee;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EmployeeTest {
+public class EmployeeTest {
 
-    @Test void ensureTwoEmployeesWithSameEmailEquals() {
-        Employee employee1 = new Employee("john.doe@this.company.com");
-        Employee employee2 = new Employee("john.doe@this.company.com");
-        assertEquals(employee1, employee2);
-    }
-
-    @Test void ensureEmployeeWithDifferentEmailNotEquals() {
-        Employee employee1 = new Employee("john.doe@this.company.com");
-        Employee employee2 = new Employee("jane.doe@this.company.com");
-        assertNotEquals(employee1, employee2);
-    }
-
-    @Test void ensureEmployeeDoesNotEqualNull() {
-        Employee employee1 = new Employee("john.doe@this.company.com");
-        assertNotEquals(employee1, null);
-    }
-
-    @Test void ensureEmployeeDoesNotEqualOtherObject() {
-        Employee employee1 = new Employee("john.doe@this.company.com");
-        assertNotEquals(employee1, new Object());
-    }
-
-    @Test void ensureTheSameObjectIsEqual() {
-        Employee employee1 = new Employee("john.doe@this.company.com");
-        assertEquals(employee1, employee1);
-    }
-
-    @Test void ensureHashCodeIsEqualForEqualObjects() {
-        String email = "john.doe@this.company.com";
-        Employee employee1 = new Employee(email);
-        Employee employee2 = new Employee(email);
-        assertEquals(employee1.hashCode(), employee2.hashCode());
-    }
-
-    @Test void ensureHashCodeIsNotEqualForDifferentObjects() {
-
-        Employee employee1 = new Employee("john.doe@this.company.com");
-        Employee employee2 = new Employee("jane.doe@this.company.com");
-        assertNotEquals(employee1.hashCode(), employee2.hashCode());
-    }
-
-    @Test void ensureHasEmailWorksForTheSameEmail() {
-        String email = "john.doe@this.compay.org";
-        Employee employee = new Employee(email);
-        assertTrue(employee.hasEmail(email));
-
-    }
-
-    @Test void ensureHasEmailFailsForDifferentEmails() {
-        String email = "john.doe@this.company.com";
-        Employee employee = new Employee(email);
-        assertFalse(employee.hasEmail("jane.doe@this.company.com"));
-
+    @Test
+    public void testEmployeeConstructor() {
+        Employee employee = new Employee("João Manuel", "João@example.com", 123456789, 98765432, 1234567, "123 Main St", "Store manager", "agency2", "store3", "password");
+        assertNotNull(employee);
+        assertEquals("João Manuel", employee.getName());
+        assertEquals("João@example.com", employee.getEmail());
+        assertEquals(123456789, employee.getPhoneNumber());
+        assertEquals(98765432, employee.getPassportCardNumber());
+        assertEquals(1234567, employee.getTaxNumber());
+        assertEquals("123 Main St", employee.getAddress());
+        assertEquals("Store manager", employee.getRole());
+        assertEquals("agency2", employee.getAgency());
+        assertEquals("store3", employee.getStore());
+        assertEquals("password", employee.getPass());
     }
 
     @Test
-    void ensureCloneWorks(){
-        String email = "john.doe@this.company.com";
-        Employee employee = new Employee(email);
-        Employee clone = employee.clone();
-        assertEquals(employee, clone);
+    public void testEmployeeDefaultConstructor() {
+        Employee employee = new Employee();
+        assertNotNull(employee);
+        assertEquals("No name", employee.getName());
+        assertEquals("No email", employee.getEmail());
+        assertEquals(0, employee.getPhoneNumber());
+        assertEquals(0, employee.getPassportCardNumber());
+        assertEquals(0, employee.getTaxNumber());
+        assertEquals("No passport", employee.getAddress());
+        assertEquals("No role", employee.getRole());
+        assertEquals("No agency", employee.getAgency());
+        assertEquals("No store", employee.getStore());
+        assertEquals("No password", employee.getPass());
+    }
+
+    @Test
+    public void testEmployeeNewEmployeeMethod() {
+        Employee employee = Employee.newEmployee("João Manuel", "João@example.com", 123456789, 98765432, 1234567, "123 Main St", "Store manager", "agency2", "store3", "password"");
+        assertNotNull(employee);
+        assertEquals("", employee.getName());
+        assertEquals("janedoe@example.com", employee.getEmail());
+        assertEquals(987654321, employee.getPhoneNumber());
+        assertEquals(123456789, employee.getPassportCardNumber());
+        assertEquals(987654321, employee.getTaxNumber());
+        assertEquals("456 Main St", employee.getAddress());
+        assertEquals("Salesperson", employee.getRole());
+        assertEquals("Agency B", employee.getAgency());
+        assertEquals("Store Y", employee.getStore());
+        assertEquals("password123", employee.getPass());
+    }
+
+    @Test
+    public void testEmployeeSetters() {
+        Employee employee = new Employee();
+        employee.setName("John Doe");
+        employee.setEmail("johndoe@example.com");
+        employee.setPhoneNumber(123456789);
+        employee.setPassportCardNumber(987654321);
+        employee.setTaxNumber(123456789);
+        employee.setAddress("123 Main St");
+        employee.setRole("Manager");
+        employee.setAgency("Agency A");
+        employee.setStore("Store X");
+        employee.setPass("password");
+        assertNotNull(employee);
+        assertEquals("John Doe", employee.getName());
+        assertEquals("johndoe@example.com", employee.getEmail());
+        assertEquals(123456789, employee.getPhoneNumber());
+        assertEquals(987654321, employee.getPassportCardNumber());
+        assertEquals(123456789, employee.getTaxNumber());
+        assertEquals("123 Main St", employee.getAddress());
+        assertEquals("Manager", employee.getRole());
+        assertEquals("Agency A", employee.getAgency());
+        assertEquals("Store X", employee.getStore());
+        assertEquals("password", employee.getPass());
     }
 
 }
