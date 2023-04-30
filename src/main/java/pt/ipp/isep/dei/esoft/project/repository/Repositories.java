@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.District;
-
 public class Repositories {
     // From the template
     private static final Repositories instance = new Repositories();
@@ -28,13 +26,26 @@ public class Repositories {
      */
     RequestRepository requestRepository = new RequestRepository();
 
-    LocationRepository locationRepository = new LocationRepository();
+    /**
+     * Creating the object localizationRepository
+     */
+    LocalizationRepository localizationRepository = new LocalizationRepository();
 
+    /**
+     * Creating the object stateRepository
+     */
     StateRepository stateRepository = new StateRepository();
 
+    /**
+     * Creating the object cityRepository
+     */
     CityRepository cityRepository = new CityRepository();
 
+    /**
+     * Creating the object storeRepository
+     */
     StoreRepository storeRepository = new StoreRepository();
+
 
 
     private Repositories() {
@@ -91,10 +102,26 @@ public class Repositories {
         return requestRepository;
     }
 
-    public LocationRepository getLocationRepository(){return locationRepository;}
+    /**
+     * Method to show the localizationRepository
+     *
+     * @return localizationRepository
+     */
+    public LocalizationRepository getLocationRepository(){return localizationRepository;}
+
+    /**
+     * Method to show the storeRepository
+     *
+     * @return storeRepository
+     */
 
     public StoreRepository getStoreRepository() {return storeRepository;}
 
+    /**
+     * Method to show the stateRepository
+     *
+     * @return stateRepository
+     */
     public StateRepository getStateRepository() {return stateRepository;}
 
     public AnnouncementRepository getAnnouncementRepository() {
