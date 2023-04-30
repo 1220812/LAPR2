@@ -21,10 +21,8 @@ public class StateRepository {
         }
     }
 
-<<<<<<< HEAD
     public void getStateByName (String stateName) {
 
-=======
     public State createState(String name) {
         State state = null;
         try {
@@ -34,6 +32,5 @@ public class StateRepository {
             System.out.println(e.getMessage());
         }
         return state;
->>>>>>> 568a46155f1102bfde63cc913206d8a3986fc30f
     }
 }

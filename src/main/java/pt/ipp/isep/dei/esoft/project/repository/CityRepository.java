@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Places.State;
+import pt.ipp.isep.dei.esoft.project.domain.State;
+import pt.ipp.isep.dei.esoft.project.domain.City;
 
 import java.util.List;
 import java.util.HashMap;
