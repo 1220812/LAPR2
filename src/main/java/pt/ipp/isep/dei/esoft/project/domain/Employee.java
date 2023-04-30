@@ -40,8 +40,8 @@ public class Employee {
         this.taxNumber = taxNumber;
         this.Address = address;
         this.role = role;
-        this.agency = role;
-        this.store = role;
+        this.agency = agency;
+        this.store = store;
         this.pass = pass;
     }
 
