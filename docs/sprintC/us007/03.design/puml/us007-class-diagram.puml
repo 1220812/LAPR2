@@ -1,0 +1,51 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class CreateUserUI{
+}
+
+class CreateUserController{
++createUser(name, passportCardNumber, taxNumber, address, emailAddress, phoneNumber, password)
+}
+
+class Repositories{
++Repositories()
++getInstance()
++getUserRepository()
+}
+
+class UserRepository{
++ List <user> user
++ createUser(name, passportCardNumber, taxNumber, address, emailAddress, phoneNumber, password)
++addUser()
++checkIfUserAlreadyExists
++validateUser
+}
+
+class User{
+- String name
+- Integer passportCardNumber
+- integer taxNumber
+- String address
+- String emailAddress
+- integer phoneNumber
+- String password
+}
+
+CreateUserUI .-> CreateUserController
+
+CreateUserController ..> Repositories
+
+Repositories --> UserRepository
+
+Repositories --> Repositories : instance
+UserRepository --> User
+@enduml

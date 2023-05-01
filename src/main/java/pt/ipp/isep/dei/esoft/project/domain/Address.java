@@ -53,26 +53,16 @@ public class Address {
     }
 
     /**
-     * Method to show the door number
-     * @return door number
+     * Method to sow
+     * @return
      */
     public String getDoorNumber() {
         return doorNumber;
     }
 
-    /**
-     * Method to show the floor number
-     * @return floor number
-     */
-
     public String getFloorNumber() {
         return floorNumber;
     }
-
-    /**
-     * Method to show the po
-     * @return
-     */
 
     public String getPostalCode() {
         return postalCode;
@@ -128,5 +118,4 @@ public class Address {
     public Address clone() {
         return new Address(this.street, this.doorNumber, this.floorNumber, this.postalCode, this.state);
     }
-
 }

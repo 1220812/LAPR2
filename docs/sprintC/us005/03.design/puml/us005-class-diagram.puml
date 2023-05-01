@@ -1,0 +1,129 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Location {
+    -String streetAddress
+    -City city
+    -District district
+    -State state
+    -String zipCode
+}
+
+class City{
+    -String name
+}
+
+class District{
+    -String name
+}
+
+class State{
+    -String name
+}
+
+class Store {
+    - String ID
+    - String designation
+    - Location location
+    - String emailAddress
+    - String phoneNumber
+
+    + Store(ID, designation,location, emailAddress, phoneNumber)
+    + Store(ID, designation, emailAddress, phoneNumber)
+    + setLocation(location)
+}
+
+class Organization {
+    - String name
+    - checkIfStoreExists(store) : boolean
+    + Organization(name)
+'  +saveTask(task)
+}
+
+class StoreRepository {
+    - List<Store> stores
+    - getStores() : List<Store>
+    - getStoreByID(ID) : Store
+    - getStoreByPhoneNumber(phoneNumber) : Store
+    - getStoreByEmail(email) : Store
+    - registerStore(store) : boolean
+    - createStore(ID, designation, emailAddress, phoneNumber) : Store
+    - createStore(ID, designation, location, emailAddress, phoneNumber) : Store
+}
+
+class StateRepository{
+    + getStateByName(stateName) : State
+}
+
+class DistrictRepository{
+    + getDistrictByName(districtName) : District
+}
+
+class CityRepository {
+    + getCityByName(cityName) : City
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getStoreRepository()
+    + getStateRepository()
+    + getDistrictRepository()
+    + getCityRepository()
+}
+
+class RegisterStoreController {
+    + RegisterStoreController(organizationRepository)
+    + getStores() : List<Store>
+    + createStore(ID, designation, emailAddress, phoneNumber) : Store
+    + createStore(ID, designation, location, emailAddress, phoneNumber) : Store
+    + registerStore(store) : void or boolean
+    + registerLocationAtStore(store, location) : void
+    - createStoreLocation(streetAddress, city, district, state, zipCode) : Location
+    - getSystemAdministratorFromSession()
+}
+
+class RegisterStoreUI {
+}
+
+Repositories -> Repositories : instance
+
+
+RegisterStoreUI .> RegisterStoreController
+
+RegisterStoreController .> Repositories : repositories
+
+Repositories -> "1" StoreRepository
+Repositories -> "1" StateRepository
+Repositories -> "1" DistrictRepository
+Repositories -> "1" CityRepository
+
+RegisterStoreController ..> Store
+RegisterStoreController ..> OrganizationRepository : organizationRepository
+RegisterStoreController ..> StoreRepository : StoreRepository
+
+Repositories --> "1" OrganizationRepository
+
+OrganizationRepository --> "*" Organization
+
+RegisterStoreController ..> "1" Organization : organization
+'Store "*" --> "1" TaskCategory : taskCategory
+StoreRepository "1" --> "*" Store : store
+StateRepository "1" --> "*" State : state
+DistrictRepository "1" --> "*" District : district
+CityRepository "1" --> "*" City : city
+
+Store --> Location : location
+Location --> StateRepository : state from
+Location --> DistrictRepository : district from
+Location --> CityRepository : city from
+
+@enduml

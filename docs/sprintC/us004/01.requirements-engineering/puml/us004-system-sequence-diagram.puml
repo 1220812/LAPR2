@@ -1,0 +1,109 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 004
+
+autonumber
+
+actor "Owner" as Owner
+participant ":System" as System
+
+activate Owner
+
+    Owner -> System : asks to create a new request
+    activate System
+
+        System --> Owner : shows type of request list and asks to select one
+    deactivate System
+
+    Owner -> System : selects a type of request
+    activate System
+
+        System --> Owner : shows list of property type \nand asks to select one
+    deactivate System
+
+    Owner -> System : selects type of property
+    activate System
+
+
+        System --> Owner : requests data(area(m^2), location, price, distanceFromCityCentre)
+    deactivate System
+
+    Owner -> System : inserts data
+
+        activate System
+
+        System --> Owner : requests the number of photos \nthat the owner intends to submit
+
+    deactivate System
+
+    Owner -> System : inserts the number of photos
+
+    activate System
+
+    loop from 1 to the number of photos defined
+
+    System --> Owner : asks for the photos URI
+    deactivate System
+    Owner -> System : inserts photos URI
+    activate System
+
+    end
+
+    opt Rent a Property
+
+    System --> Owner : requests data (contract duration)
+
+    deactivate System
+
+    Owner -> System : inserts data
+
+    activate System
+
+    end
+
+    opt Property is Apartment or House
+
+        System --> Owner : requests data (number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+        deactivate System
+
+    Owner -> System : inserts data
+    activate System
+
+    opt Property is a House
+
+         System --> Owner : requests data (existence of a basement and/or inhabitable loft and sun exposure)
+    deactivate System
+
+    Owner -> System : inserts data
+    activate System
+
+    end
+
+    end
+
+    System --> Owner : shows agency list and asks to select one
+    deactivate System
+
+    Owner -> System : selects agency
+    activate System
+
+    System --> Owner : shows agent list and asks to select one
+    deactivate System
+
+    Owner -> System : selects agent
+    activate System
+
+    System --> Owner : shows all the data related to the request \nand asks to confirm
+
+    deactivate System
+
+    Owner -> System : confirms data
+    activate System
+
+            System --> Owner : shows operation success
+    deactivate System
+
+@enduml

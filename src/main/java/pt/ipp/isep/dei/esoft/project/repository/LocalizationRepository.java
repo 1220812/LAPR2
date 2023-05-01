@@ -19,6 +19,6 @@ public class LocalizationRepository {
         Localization localization = new Localization(street, doorNumber,floorNumber, postalCode,city, district,state);
         registerLocation(localization);
         return localization;
-    }
+}
 
 }

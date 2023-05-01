@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Localization;
+import pt.ipp.isep.dei.esoft.project.domain.Store;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,36 @@ public class StoreRepository {
             System.out.println(item);
         }
     }
+        private List<Store> storeList;
+        public StoreRepository() {
+            storeList = new ArrayList<>();
+        }
+        public List<Store> getStoreList() {
+            return storeList;
+        }
+        public void registerStore(Store store) {
+            if(validateStore(store)) {
+                storeList.add(store);
+            }else{
+                throw new IllegalArgumentException ("Invalid Store");
+            }
+        }
 
-}
+        public Store createStore(String designation,String location, int ID, int phoneNumber, String emailAddress, Localization localization) {
+            Store store = new Store (designation,location,phoneNumber,emailAddress,ID,localization);
+            registerStore(store);
+            return store;
+        }
 
+        public boolean validateStore (Store store) {
+            if (this.storeList.contains(store)){
+                return false;
+            }
+            for (Store storeB : this.storeList){
+                if(storeB.equals(store)){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
