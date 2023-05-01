@@ -1,6 +1,5 @@
 @startuml
 skinparam monochrome true
-skinparam linetype ortho
 skinparam packageStyle rectangle
 skinparam shadowing false
 
@@ -15,42 +14,39 @@ title Domain Model - US004
 
 class Owner{
 name
-passportNumber
+emailAddress
+phoneNumber
 }
 
 class Agent{
 name
 passportNumber
+emailAddress
+phoneNumber
 }
 
 class CompanyBranch{
 ID
 designation
-}
-
-class Contacts{
-phoneNumber
 emailAddress
+phoneNumber
 }
 
 class Address{
 doorNumber
 floorNumber
 street
-city
-state
-district
 postalCode
 }
 
 class Request{
-status
 date
 }
 
 class Property{
 area
 distanceFromTheCityCentre
+price
 }
 
 class Residence{
@@ -65,19 +61,8 @@ existenceOfABasement
 inhabitableLoft
 }
 
-class Land{
-}
-
-class Sell{
-price
-}
-
-class Rent{
-pricePerMonth
-contractDuration
-}
-
 class Photographs{
+numberOfPhotographs
 URI
 }
 
@@ -85,8 +70,6 @@ class TaxNumber{
 taxNumber
 }
 
-class Apartment{
-}
 
 class SunExposure{
 direction
@@ -96,34 +79,65 @@ class PropertyType{
 propertyType
 }
 
+class PassportCardNumber{
+passportCardNumber
+}
+
+class District{
+districtName
+}
+
+class State{
+state
+}
+
+class City{
+cityName
+}
+
+class Comission{
+percentage
+}
+
+class Rent{
+contractDuration
+}
+
+class RequestType{
+requestTypeDescription
+}
+
+Owner "1" --- "1" PassportCardNumber : has >
+Owner "1" --- "1" TaxNumber : has >
+Owner "1" -- "1" CompanyBranch : selects >
 Owner "1" --- "1" Address : has >
-Owner "1" -- "1...*" Request : creates >
-Owner "1" -- "1" TaxNumber : has >
-Owner "1" -- "1" Contacts : has >
+Owner "1" ---"0...*" Request : submits
+Owner "1" ---"1" Agent : selects >
+Owner --- Property : owns >
 
+Agent "1" ---- "1" CompanyBranch : works for >
 Agent "1" --- "1" Address : has >
-Agent "1" --- "1...*" Request : reviews and publishes >
+Agent "1" --- "1" PassportCardNumber : has >
 Agent "1" --- "1" TaxNumber : has >
-Agent "1" --- "1" Contacts : has >
-Agent "1" --- "1" CompanyBranch : works for >
+Agent --- Request : validates >
+Agent --- Comission : defines
 
-Property "1" -- "1" PropertyType : has >
-Property "1" --- "1...30" Photographs : has
+Residence --|> Property : is a
+House --|> Residence : is a
+House -- SunExposure
 
-Property "1" --- "1" Address : has >
-PropertyType --> Residence : can be
-PropertyType --> Land : can be
+Property "1" -- "1" PropertyType : has a >
+Property "1" --- "1...30" Photographs : has >
 
-CompanyBranch "1" --- "1" Address : has >
-CompanyBranch "1" -- "1" Contacts : has >
+Address --- City : has a >
+City --- District : is in >
+District --- State : is in >
 
-Residence <|-- House
-Residence <|-- Apartment
+Request "1" -- "1" RequestType : has a >
+Request "1" -- "1" Property : announces >
+Rent --- RequestType : can be <
 
-Request --> Sell : can be
-Request --> Rent : can be
-Request "1"--"1...*" Property : announces >
 
-SunExposure -- House : has <
+
 
 @enduml
