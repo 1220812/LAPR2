@@ -7,23 +7,65 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.Scanner;
 
+/**
+ * The type Register employee ui.
+ */
 public class RegisterEmployeeUI implements Runnable {
 
+    /**
+     * The Name.
+     */
     String name = null;
+    /**
+     * The Address.
+     */
     String address = null;
+    /**
+     * The Phone.
+     */
     int phone = 0;
+    /**
+     * The Email.
+     */
     String email = null;
+    /**
+     * The Passport card number.
+     */
     int passportCardNumber = 0;
+    /**
+     * The Zip code.
+     */
     int zipCode = 0;
+    /**
+     * The City.
+     */
     String city = null;
 
+    /**
+     * The Tax number.
+     */
     int taxNumber = 0;
+    /**
+     * The Pass.
+     */
     String pass = null;
+    /**
+     * The District.
+     */
     String district = null;
+    /**
+     * The Street.
+     */
     String street = null;
+    /**
+     * The State.
+     */
     String state = null;
 
 
+    /**
+     * The Controller.
+     */
     RegisterEmployeeController controller = new RegisterEmployeeController();
 
 
@@ -78,7 +120,7 @@ public class RegisterEmployeeUI implements Runnable {
             email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
         }
 
-        address = state + city + district + zipCode + street;
+        address = state +"   "+ city+"   "+  district +"   "+ zipCode +"   "+ street;
         System.out.println("Created adress:" + address);
 
 
@@ -145,5 +187,6 @@ public class RegisterEmployeeUI implements Runnable {
         controller.sendRegisteredUserEmail(email, pass);
         System.out.println();
         System.out.println("####### Operation sucess ######");
+
     }
 }
