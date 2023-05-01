@@ -30,7 +30,7 @@ public class CityRepository {
     }
     public boolean checkDesignation(String designation) {
         for (State state : stateList) {
-            if (state.getStatename().equals(designation)) {
+            if (state.getName().equals(designation)) {
                 return true;
             }
         }

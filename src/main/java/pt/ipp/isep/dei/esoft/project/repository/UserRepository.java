@@ -31,7 +31,4 @@ public class UserRepository {
     public static List<Employee> getUserList() {
         return List.copyOf(userList);
     }
-
-
-
 }

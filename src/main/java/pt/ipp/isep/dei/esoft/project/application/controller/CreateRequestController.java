@@ -33,10 +33,10 @@ public class CreateRequestController {
         this.property = new Property(area,distanceFromCityCentre,this.address, photographs, price);
     }
     public void createResidence (int numberOfBedrooms, int numberOfBathrooms, int numberOfParkingSpaces, String availableEquipment, double distanceFromCityCentre, double area, List<String> photograph, double price){
-        this.residence = new Residence(this.address,area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,price,photograph,availableEquipment);
+        this.residence = new Residence(this.address,area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,photograph,availableEquipment,price);
     }
     public void createHouse (int numberOfBedrooms, int numberOfBathrooms, int numberOfParkingSpaces, String availableEquipment, double distanceFromCityCentre, double area, List<String> photograph, double price, String inhabitableLoft, String existenceOfAbasement, String sunExposure  ){
-        this.house = new House(this.address, area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,price,photograph,availableEquipment,existenceOfAbasement,sunExposure,inhabitableLoft);
+        this.house = new House(this.address, area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,photograph,availableEquipment,existenceOfAbasement,sunExposure,inhabitableLoft,price);
     }
     public List<String> getAgencyList(){
         return AgencyRepository.getAgency();

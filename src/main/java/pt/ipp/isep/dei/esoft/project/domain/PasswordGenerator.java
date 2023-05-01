@@ -1,7 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+/**
+ * The type Password generator.
+ */
 public class PasswordGenerator {
 
+    /**
+     * Generate password string.
+     *
+     * @return the string
+     */
     public static String generatePassword() {
         StringBuilder passwordBuilder = new StringBuilder();
         String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
@@ -25,5 +33,6 @@ public class PasswordGenerator {
         return passwordBuilder.toString();
 
     }
+
 
 }

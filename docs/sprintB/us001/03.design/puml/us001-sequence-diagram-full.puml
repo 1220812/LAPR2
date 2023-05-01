@@ -11,8 +11,8 @@ participant ":DisplayPropertiesUI" as System
 participant ":DisplayPropertiesController" as Controller
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as repositories
-participant "publishedAnnouncementsRepository\n:PublishedAnnouncementsRepository" as PropertyRepository
-participant "PublishedAnnouncement" as publishedAnnouncement
+participant "announcementsRepository\n:AnnouncementsRepository" as PropertyRepository
+participant "PublishedAnnouncement" as announcement
 participant "Property" as property
 participant "Comparator" as comparator
 participant "City" as city
@@ -29,7 +29,7 @@ activate System
 
 System->Controller**: create
 
-System->Controller: getPublishedAnnouncements()
+System->Controller: getAnnouncements()
 activate Controller
 
 Controller->RepositorySingleton: getInstance()
@@ -38,13 +38,13 @@ activate RepositorySingleton
 RepositorySingleton-->Controller: repositories
 deactivate RepositorySingleton
 
-Controller -> repositories : getPublishedAnnouncementsRepository()
+Controller -> repositories : getAnnouncementsRepository()
 activate repositories
 
-repositories --> Controller: publishedAnnouncementsRepository
+repositories --> Controller: announcementsRepository
 deactivate repositories
 
-Controller -> PropertyRepository : getPublishedAnnouncements()
+Controller -> PropertyRepository : getAnnouncements()
 activate PropertyRepository
 
 PropertyRepository --> Controller : announcementsList
@@ -76,28 +76,28 @@ activate RepositorySingleton
 RepositorySingleton-->Controller: repositories
 deactivate RepositorySingleton
 
-Controller -> repositories : getPublishedAnnouncementsRepository()
+Controller -> repositories : getAnnouncementsRepository()
 activate repositories
 
-repositories --> Controller: publishedAnnouncementsRepository
+repositories --> Controller: announcementsRepository
 deactivate repositories
 
 Controller -> PropertyRepository : displayProperties(number of rooms, type of business, type of property)
 activate PropertyRepository
 
-loop for each publishedAnnouncement
+loop for each announcement
 
-PropertyRepository -> publishedAnnouncement : getAnnouncementByCharacteristics(number of rooms, type of business, type of property)
-activate publishedAnnouncement
+PropertyRepository -> announcement : getAnnouncementByCharacteristics(number of rooms, type of business, type of property)
+activate announcement
 
-publishedAnnouncement -> property : getPropertyByCharacteristics(number of rooms, type of business, type of property)
+announcement -> property : getPropertyByCharacteristics(number of rooms, type of business, type of property)
 activate property
 
-property --> publishedAnnouncement : property
+property --> announcement : property
 deactivate property
 
-publishedAnnouncement --> PropertyRepository : publishedAnnouncement
-deactivate publishedAnnouncement
+announcement --> PropertyRepository : announcement
+deactivate announcement
 
 end
 
@@ -141,29 +141,29 @@ activate PropertyRepository
 
 
 
-PropertyRepository -> publishedAnnouncement: sortPropertiesByPriceAscending()
-activate publishedAnnouncement
+PropertyRepository -> announcement: sortPropertiesByPriceAscending()
+activate announcement
 
 loop
 
-publishedAnnouncement -> property: getProperty()
+announcement -> property: getProperty()
 activate property
 
 property -> property: getPrice()
 
-property --> publishedAnnouncement: property
+property --> announcement: property
 deactivate property
 
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+announcement -> comparator: compare(announcement1, announcement2)
 activate comparator
 
-comparator-->publishedAnnouncement: comparisonResult
+comparator-->announcement: comparisonResult
 deactivate comparator
 
 end
 
-publishedAnnouncement-->PropertyRepository: announcementsListByPriceAscending
-deactivate publishedAnnouncement
+announcement-->PropertyRepository: announcementsListByPriceAscending
+deactivate announcement
 
 PropertyRepository-->Controller: announcementsListByPriceAscending
 deactivate PropertyRepository
@@ -176,29 +176,29 @@ else In case the chosen option is price (descending order)
 Controller -> PropertyRepository: sortPropertiesByPriceDescending()
 activate PropertyRepository
 
-PropertyRepository -> publishedAnnouncement: sortPropertiesByPriceDescending()
-activate publishedAnnouncement
+PropertyRepository -> announcement: sortPropertiesByPriceDescending()
+activate announcement
 
 loop
 
-publishedAnnouncement -> property: getProperty()
+announcement -> property: getProperty()
 activate property
 
 property -> property: getPrice()
 
-property --> publishedAnnouncement: property
+property --> announcement: property
 deactivate property
 
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+announcement -> comparator: compare(announcement1, announcement2)
 activate comparator
 
-comparator-->publishedAnnouncement: comparisonResult
+comparator-->announcement: comparisonResult
 deactivate comparator
 
 end
 
-publishedAnnouncement-->PropertyRepository: announcementsListByPriceDescending
-deactivate publishedAnnouncement
+announcement-->PropertyRepository: announcementsListByPriceDescending
+deactivate announcement
 
 PropertyRepository-->Controller: announcementsListByPriceDescending
 deactivate PropertyRepository
@@ -231,12 +231,12 @@ alt In case the chosen option is city (ascending order)
 Controller -> PropertyRepository: sortPropertiesByCityAscending(price)
 activate PropertyRepository
 
-PropertyRepository -> publishedAnnouncement: sortPropertiesByCityAscending()
-activate publishedAnnouncement
+PropertyRepository -> announcement: sortPropertiesByCityAscending()
+activate announcement
 
 loop
 
-publishedAnnouncement -> property: getProperty()
+announcement -> property: getProperty()
 activate property
 
 property -> city: getCity()
@@ -251,19 +251,19 @@ activate state
 state-->property: stateName
 deactivate state
 
-property --> publishedAnnouncement: property
+property --> announcement: property
 deactivate property
 
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+announcement -> comparator: compare(announcement1, announcement2)
 activate comparator
 
-comparator-->publishedAnnouncement: comparisonResult
+comparator-->announcement: comparisonResult
 deactivate comparator
 
 end
 
-publishedAnnouncement-->PropertyRepository: announcementsListByCityAscending
-deactivate publishedAnnouncement
+announcement-->PropertyRepository: announcementsListByCityAscending
+deactivate announcement
 
 PropertyRepository-->Controller: announcementsListByCityAscending
 deactivate PropertyRepository
@@ -274,12 +274,12 @@ else In case the chosen option is city name (descending order)
 Controller -> PropertyRepository: sortPropertiesByCityDescending()
 activate PropertyRepository
 
-PropertyRepository -> publishedAnnouncement: sortPropertiesByCityDescending()
-activate publishedAnnouncement
+PropertyRepository -> announcement: sortPropertiesByCityDescending()
+activate announcement
 
 loop
 
-publishedAnnouncement -> property: getProperty()
+announcement -> property: getProperty()
 activate property
 
 property -> city: getCity()
@@ -294,19 +294,19 @@ activate state
 state-->property: stateName
 deactivate state
 
-property --> publishedAnnouncement: property
+property --> announcement: property
 deactivate property
 
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+announcement -> comparator: compare(announcement1, announcement2)
 activate comparator
 
-comparator-->publishedAnnouncement: comparisonResult
+comparator-->announcement: comparisonResult
 deactivate comparator
 
 end
 
-publishedAnnouncement-->PropertyRepository: announcementsListByCityDescending
-deactivate publishedAnnouncement
+announcement-->PropertyRepository: announcementsListByCityDescending
+deactivate announcement
 
 PropertyRepository-->Controller: announcementsListByCityDescending
 deactivate PropertyRepository
@@ -341,12 +341,12 @@ alt In case the chosen option is state (ascending order)
 Controller -> PropertyRepository: sortPropertiesByStateAscending()
 activate PropertyRepository
 
-PropertyRepository -> publishedAnnouncement: sortPropertiesByStateAscending()
-activate publishedAnnouncement
+PropertyRepository -> announcement: sortPropertiesByStateAscending()
+activate announcement
 
 loop
 
-publishedAnnouncement -> property: getProperty()
+announcement -> property: getProperty()
 activate property
 
 property -> state: getState()
@@ -355,19 +355,19 @@ activate state
 state-->property: stateName
 deactivate state
 
-property --> publishedAnnouncement: property
+property --> announcement: property
 deactivate property
 
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+announcement -> comparator: compare(announcement1, announcement2)
 activate comparator
 
-comparator-->publishedAnnouncement: comparisonResult
+comparator-->announcement: comparisonResult
 deactivate comparator
 
 end
 
-publishedAnnouncement-->PropertyRepository: announcementsListByStateAscending
-deactivate publishedAnnouncement
+announcement-->PropertyRepository: announcementsListByStateAscending
+deactivate announcement
 
 PropertyRepository-->Controller: announcementsListByStateAscending
 deactivate PropertyRepository
@@ -378,12 +378,12 @@ else In case the chosen option is state (descending order)
 Controller -> PropertyRepository: sortPropertiesByStateDescending()
 activate PropertyRepository
 
-PropertyRepository -> publishedAnnouncement: sortPropertiesByStateDescending()
-activate publishedAnnouncement
+PropertyRepository -> announcement: sortPropertiesByStateDescending()
+activate announcement
 
 loop
 
-publishedAnnouncement -> property: getProperty()
+announcement -> property: getProperty()
 activate property
 
 property -> state: getState()
@@ -392,19 +392,19 @@ activate state
 state-->property: stateName
 deactivate state
 
-property --> publishedAnnouncement: property
+property --> announcement: property
 deactivate property
 
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
+announcement -> comparator: compare(announcement1, announcement2)
 activate comparator
 
-comparator-->publishedAnnouncement: comparisonResult
+comparator-->announcement: comparisonResult
 deactivate comparator
 
 end
 
-publishedAnnouncement-->PropertyRepository: announcementsListByStateDescending
-deactivate publishedAnnouncement
+announcement-->PropertyRepository: announcementsListByStateDescending
+deactivate announcement
 
 PropertyRepository-->Controller: announcementsListByStateDescending
 deactivate PropertyRepository

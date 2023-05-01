@@ -53,90 +53,44 @@ public class Address {
     }
 
     /**
-     * Method to show the door number
-     * @return door number
+     * Method to sow
+     * @return
      */
     public String getDoorNumber() {
         return doorNumber;
     }
 
-    /**
-     * Method to show the floor number
-     * @return floor number
-     */
-
     public String getFloorNumber() {
         return floorNumber;
     }
-
-    /**
-     * Method to change the postal code
-     * @return postal code
-     */
 
     public String getPostalCode() {
         return postalCode;
     }
 
-    /**
-     * Method to show the state
-     * @return postal code
-     */
-
     public State getState() {
         return state;
     }
-
-    /**
-     * Method to change the street
-     * @param street
-     */
 
     public void setStreet(String street) {
         this.street = street;
     }
 
-    /**
-     * Method to change the door number
-     * @param doorNumber
-     */
-
     public void setDoorNumber(String doorNumber) {
         this.doorNumber = doorNumber;
     }
-
-    /**
-     * Method to change the floor number
-     * @param floorNumber floor number
-     */
 
     public void setFloorNumber(String floorNumber) {
         this.floorNumber = floorNumber;
     }
 
-    /**
-     * Method to change the postal code
-     * @param postalCode postal code
-     */
-
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
-    /**
-     * Method to change the state
-     * @param state state
-     */
-
     public void setState(State state) {
         this.state = state;
     }
-
-    /**
-     *
-     * @param o
-     * @return
-     */
 
     @Override
     public boolean equals(Object o) {

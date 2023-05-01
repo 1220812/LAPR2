@@ -14,6 +14,8 @@ public class AuthenticationController {
     public static final String ROLE_ADMIN = "ADMINISTRATOR";
     public static final String ROLE_EMPLOYEE = "EMPLOYEE";
     public static final String ROLE_OWNER = "OWNER";
+
+    public static final String ROLE_AGENT = "AGENT";
     //private final ApplicationSession applicationSession;
     private final AuthenticationRepository authenticationRepository;
 

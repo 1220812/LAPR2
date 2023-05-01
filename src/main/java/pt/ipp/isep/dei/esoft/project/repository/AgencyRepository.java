@@ -3,9 +3,8 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * A static list of agency names.
+ * The type Agency repository.
  */
 public class AgencyRepository {
     private static List<String> agency=new ArrayList<String>(){{
@@ -17,8 +16,9 @@ public class AgencyRepository {
 
     }
     };
+
     /**
-     * Retrieves the list of agencies and prints them to the console.
+     * Get agencies.
      */
     public static void getAgencies(){
         for (String item : agency){
@@ -26,7 +26,14 @@ public class AgencyRepository {
         }
     }
 
+
+    /**
+     * Gets agency.
+     *
+     * @return the agency
+     */
     public static List<String> getAgency() {
         return agency;
     }
+
 }

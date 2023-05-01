@@ -1,64 +1,62 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Places.Store;
+import pt.ipp.isep.dei.esoft.project.domain.Localization;
+import pt.ipp.isep.dei.esoft.project.domain.Store;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Store repository.
+ */
 public class StoreRepository {
-    private List<Store> listOfStores;
-
-    public void setListOfStores(List<Store> listOfStores) {
-        this.listOfStores = listOfStores;
+    private static List<String> store=new ArrayList<String>(){{
+        add("1. store1");
+        add("2. store2");
+        add("3. store3");
+        add("4. store5");
+        add("5. store5");
     }
+    };
 
-
-    public StoreRepository(){
-        listOfStores = new ArrayList<>();
-    }
-    public List<Store> getListOfStores() {
-        return listOfStores;
-    }
-
-    public void registerStore(Store store) {
-        if (validateStore(store)) {
-            listOfStores.add(store);
-        } else {
-            throw new IllegalArgumentException("Store is not valid");
+    /**
+     * Get stores.
+     */
+    public static void getStores(){
+        for (String item : store){
+            System.out.println(item);
         }
     }
+        private List<Store> storeList;
+        public StoreRepository() {
+            storeList = new ArrayList<>();
+        }
+        public List<Store> getStoreList() {
+            return storeList;
+        }
+        public void registerStore(Store store) {
+            if(validateStore(store)) {
+                storeList.add(store);
+            }else{
+                throw new IllegalArgumentException ("Invalid Store");
+            }
+        }
 
-    private boolean validateStore(Store store) {
-        return true;
+        public Store createStore(String designation,String location, int ID, int phoneNumber, String emailAddress, Localization localization) {
+            Store store = new Store (designation,location,phoneNumber,emailAddress,ID,localization);
+            registerStore(store);
+            return store;
+        }
+
+        public boolean validateStore (Store store) {
+            if (this.storeList.contains(store)){
+                return false;
+            }
+            for (Store storeB : this.storeList){
+                if(storeB.equals(store)){
+                    return false;
+                }
+            }
+            return true;
+        }
     }
-
-    List<Store>stores;
-
-    public List<Store> getStores() {
-        return stores;
-    }
-
-    public List<Store> getStoreByID( String ID){
-        return stores;
-    }
-
-    public List<Store> getStoreByPhoneNumber (int phoneNumber) {
-        return stores;
-    }
-
-    public List<Store> getStoreByEmail (String email) {
-        return stores;
-    }
-
-    public boolean registerStore (String store){
-       return true;
-    }
-
-    public List<Store> createStore(int ID, String designation, String emailAddress, int phoneNumber){
-        return stores;
-    }
-
-    public List<Store> createStore (int ID, String desingnation, String location, String emailAddress, int phoneNumber){
-        return stores;
-    }
-}
