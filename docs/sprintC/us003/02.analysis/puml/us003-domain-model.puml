@@ -1,0 +1,82 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+class User {
+name
+email
+phone number
+password
+}
+class Passport {
+number
+}
+class TaxNumber {
+number
+}
+class Adress {
+street
+city
+district
+state
+zipcode
+}
+
+class Agency {
+designation
+email
+phone number
+}
+class Agent {
+}
+
+class Store {
+name
+designation
+telephone
+email
+}
+class Role {
+description
+permissions
+}
+class SystemAdministrator {
+}
+class StoreManager {
+}
+class StoreNetworkManager {
+}
+class Employee {
+
+}
+class StoreEmployee {
+}
+
+class AgencyEmployee {
+}
+
+User "1" -- "1" Passport: has a >
+User "1" -- "1" TaxNumber: has a >
+User "1" -- "1" Adress: has an >
+User "1" -left- "1" Role: has a >
+Agency "1" -right- "1" Store: has a >
+SystemAdministrator  --|> Employee
+Agent  --|>   StoreEmployee
+StoreManager  --left|> StoreEmployee
+
+AgencyEmployee "1" -left- "1" Agency: runs >
+StoreEmployee "1" -right- "1" Store: belongs to >
+Agent "*" -left- "1" Store : has an <
+StoreNetworkManager --|> AgencyEmployee
+Employee --|> User
+AgencyEmployee --|> Employee
+StoreEmployee --|> AgencyEmployee
+
+Store "1" -- "1" Adress: has a >
+@enduml

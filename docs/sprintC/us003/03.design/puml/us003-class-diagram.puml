@@ -1,0 +1,166 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+class RegisterEmployeeUI {
+- keepBaseData(name,passport's card number,\n tax number, address,  email, contact, phone number)
+- keepRole(role)
+- keepAgency(agency)
+- keepStore(store)
+}
+class RegisterEmployeeController {
++ getAgencies()
++ getEmployeeRoles()
++ getStores()
++ registerEmployee(data)
+
+}
+
+class Repositories {
++ {static} getInstance()
++ getAgencyRepository()
++ getRoleRepository()
++ getStoreRepository()
+
+}
+
+class AgencyRepository {
+
++ getAll()
+}
+
+class RoleRepository {
++ getEmployeeRoles()
+}
+
+class StoreRepository {
++ getAgencyStores(agency)
+}
+
+class PasswordGenerator {
++ generate()
+}
+
+class User {
+- name
+- email
+- phone number
+- password
++ User(data, role, password)
++ email()
++ password()
+
+}
+
+class Passport {
+- number
+}
+
+class TaxNumber {
+- number
+}
+
+class Adress {
+- street
+- city
+- district
+- state
+- zipcode
+}
+
+class Agency {
+- designation
+- email
+- phone number
+}
+
+class Agent {
+}
+
+class Store {
+- name
+- designation
+- telephone
+- email
+}
+
+class Role {
+- description
+- permissions
+}
+
+class UserRepository {
++ save(user)
+}
+
+class SystemAdministrator {
+}
+
+class StoreManager {
+}
+
+class StoreNetworkManager {
+}
+
+class Employee {
+
+}
+
+class EmailService {
+- sendEmail()
++ sendRegisteredUserEmail(email, password)
+}
+class StoreEmployee {
+}
+
+class AgencyEmployee {
+}
+
+
+
+RegisterEmployeeUI ..> RegisterEmployeeController
+
+RegisterEmployeeController .left.> Repositories
+
+RegisterEmployeeController .right.> EmailService
+
+Repositories .up.> AgencyRepository
+Repositories ..up> RoleRepository
+Repositories ..> StoreRepository
+Repositories ..> PasswordGenerator
+Repositories ..> UserRepository
+
+
+AgencyRepository .left.> Agency
+RoleRepository ..> Role
+StoreRepository ..> Store
+
+UserRepository ..> User
+Agent --up|> User
+SystemAdministrator --|> Employee
+
+AgencyEmployee --up|> Employee
+AgencyEmployee ..> Agency
+StoreEmployee ..left> Store
+Agent --|> StoreEmployee
+StoreManager --|> StoreEmployee
+StoreNetworkManager --|> AgencyEmployee
+
+StoreEmployee -up|> AgencyEmployee
+
+Employee --up|> User
+
+Adress <..left User
+Role <.. User
+Passport <.. User
+TaxNumber <.. User
+Store <..right Agent
+
+Agency <.. Store
+@enduml

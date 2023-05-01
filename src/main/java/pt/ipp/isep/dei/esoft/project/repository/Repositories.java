@@ -10,8 +10,6 @@ public class Repositories {
     private pt.ipp.isep.dei.esoft.project.repository.roleRepository roleRepository;
     private StoreRepository storeRepository;
     private pt.ipp.isep.dei.esoft.project.repository.agencyRepository agencyRepository;
-=======
->>>>>>> 568a46155f1102bfde63cc913206d8a3986fc30f
 
     // Added after by the Team
 

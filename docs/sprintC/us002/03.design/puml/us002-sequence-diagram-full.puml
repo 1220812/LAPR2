@@ -1,0 +1,189 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Agent" as AGENT
+participant ":RegisterAnnouncementUI" as UI
+participant ":RegisterAnnouncementController" as CTRL
+participant ":Repositories" as REP
+participant ":Announcement" as ANCMT
+participant "repositories\n:Repository" as PLAT
+participant "PropertyTypeRepository\n:PropertyTypeRepository" as PropertyTypeREP
+participant "RegistedUsersRepository\n:RegistedUsersRepository" as RegistedUsersREP
+
+
+activate AGENT
+
+        AGENT -> UI : asks to register a new announcement
+
+        activate UI
+
+            create CTRL
+            UI -> CTRL** : create
+
+            UI -> CTRL : getPropertyType()
+            activate CTRL
+
+                CTRL -> REP : getInstance()
+                activate REP
+
+                    REP --> CTRL: repositories
+                deactivate REP
+
+                CTRL -> PLAT : getPropertyTypeRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: propertyTypeRepository
+                deactivate PLAT
+
+                CTRL -> PropertyTypeREP : getPropertyType()
+                activate PropertyTypeREP
+
+                    PropertyTypeREP --> CTRL : propertyTypeList
+                deactivate PropertyTypeREP
+
+                CTRL --> UI : propertyTypeList
+            deactivate CTRL
+
+            UI --> AGENT : shows property type list and asks to sleect one
+        deactivate UI
+
+    AGENT -> UI : selects a property type (land, house, appartment)
+    activate UI
+    UI -> CTRL : setPropertyType(propertyType)
+    activate CTRL
+    CTRL --> UI : propertyType selected
+    deactivate CTRL
+
+        UI --> AGENT : requests data to verify if the owner is registed
+    deactivate UI
+
+    AGENT -> UI : types the requested data (owner's name)
+    activate UI
+        UI -> CTRL : getRegisteredUsers()
+        activate CTRL
+        CTRL -> REP : getInstance()
+        activate REP
+        REP --> CTRL : repositories
+        deactivate REP
+        CTRL -> PLAT : getRegisteredUsersRepository()
+        activate PLAT
+        PLAT --> CTRL : registeredUsersRepository
+        deactivate PLAT
+        CTRL -> RegistedUsersREP : getRegisteredUsers()
+        activate RegistedUsersREP
+        RegistedUsersREP --> CTRL : registeredUsers
+        deactivate RegistedUsersREP
+        loop while user not registered
+        CTRL --> CTRL : user is registered
+        end loop
+        CTRL --> UI : user is registered
+        deactivate CTRL
+        UI --> AGENT : requests data
+        deactivate UI
+
+        AGENT -> UI : types the requested data (area in m2, location, distance from the city centre, requested price, one or more photos)
+        activate UI
+        UI -> CTRL : saveDataProperty(area, location, distance, price, photos)
+        activate CTRL
+        CTRL --> UI : data saved
+        deactivate CTRL
+
+
+        opt property is an Apartment/House
+
+        UI --> AGENT : requests data
+    deactivate UI
+
+    AGENT -> UI : types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)
+        activate UI
+
+    UI -> CTRL : saveDataResidence(bedrooms, bathrooms, parking, equipment)
+    activate CTRL
+    CTRL --> UI : data saved
+    deactivate CTRL
+
+
+        opt property is a House
+
+        UI --> AGENT : requests data
+    deactivate UI
+AGENT -> UI : types the requested data (existence of a basement and inhabitable loft, sun exposure)
+activate UI
+UI -> CTRL : saveDataHouse(basement, loft, sun)
+activate CTRL
+CTRL --> UI : data saved
+deactivate CTRL
+
+end opt
+end opt
+UI --> AGENT : requests comission type
+deactivate UI
+AGENT -> UI : selects comission type
+activate UI
+UI -> CTRL : saveDataComissionType(comissionType)
+activate CTRL
+CTRL --> UI : data saved
+deactivate CTRL
+opt comission is a percentage
+UI --> AGENT : requests comission percentage
+deactivate UI
+AGENT -> UI : types comission
+activate UI
+UI -> CTRL : saveDataComission(comission)
+activate CTRL
+CTRL --> UI : data saved
+deactivate CTRL
+
+
+end opt
+
+opt comission is a value
+UI --> AGENT : requests comission value
+deactivate UI
+AGENT -> UI : types comission
+activate UI
+UI -> CTRL : saveDataComission(comission)
+activate CTRL
+CTRL --> UI : data saved
+deactivate CTRL
+end opt
+
+
+UI --> AGENT : presents all the data inserted
+
+deactivate UI
+
+AGENT -> UI : confirms inserted data
+
+activate UI
+UI -> CTRL : createAnnouncement
+activate CTRL
+CTRL -> ANCMT** : create()
+CTRL -> ANCMT : createAnnouncement()
+activate ANCMT
+ANCMT --> CTRL : announcement created
+deactivate ANCMT
+CTRL -> ANCMT : setDate(date)
+activate ANCMT
+ANCMT --> CTRL : announcement created sucessfully
+deactivate ANCMT
+
+CTRL --> UI : announcement creted sucessfully
+deactivate CTRL
+
+
+UI --> AGENT : announcement created sucessfully
+deactivate UI
+
+
+
+
+
+deactivate AGENT
+
+@enduml
