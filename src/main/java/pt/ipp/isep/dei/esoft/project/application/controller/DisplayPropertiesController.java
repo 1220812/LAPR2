@@ -21,7 +21,7 @@ public class DisplayPropertiesController {
         if (announcementRepository == null) {
             Repositories repositories = Repositories.getInstance();
 
-            announcementRepository = repositories.getAnnouncementRepository();
+            announcementRepository = getAnnouncementsRepository();
         }
         return announcementRepository;
     }
