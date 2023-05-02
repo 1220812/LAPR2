@@ -29,9 +29,9 @@ activate ADM
 
         activate UI
 
-            UI -> CTRL : create
+            UI --> CTRL** : create
             activate CTRL
-            UI -> CTRL : getRequestCategories()
+            UI --> CTRL : getRequestCategories()
 
                 CTRL -> Rep : getInstance()
                 activate Rep
@@ -45,7 +45,7 @@ activate ADM
                     PLAT --> CTRL: requestCategoryRepository
                 deactivate PLAT
 
-                CTRL -> TaskCategoryRepository : getRequestTypeRepository()
+                CTRL -> TaskCategoryRepository : getRequestTypeList()
                 activate TaskCategoryRepository
 
                     TaskCategoryRepository --> CTRL : requestTypeList
@@ -54,7 +54,7 @@ activate ADM
                 CTRL --> UI : requestCategoryList
             deactivate CTRL
 
-            UI --> ADM : shows type of request list \nand asks to select one
+            UI --> ADM : shows the type of request list \nand asks to select one
         deactivate UI
 
     ADM -> UI : selects a type of request

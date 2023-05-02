@@ -29,7 +29,7 @@ activate ADM
 
         activate UI
 
-            UI -> CTRL : create
+            UI -> CTRL** : create
             activate CTRL
             UI -> CTRL : getRequestCategories()
 

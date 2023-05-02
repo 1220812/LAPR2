@@ -13,29 +13,34 @@ participant ":System" as System
 activate Owner
 
     Owner -> System : asks to create a new request
+
     activate System
 
-        System --> Owner : shows type of request list and asks to select one
+    System --> Owner : asks to select the type of request (Sell or rent)
+
     deactivate System
 
     Owner -> System : selects a type of request
+
     activate System
 
-        System --> Owner : shows list of property type \nand asks to select one
+    System --> Owner : asks to select the type of property (Land, House, Apartment)
+
     deactivate System
 
-    Owner -> System : selects type of property
+    Owner -> System : selects a type of property
+
     activate System
 
+    System --> Owner : requests data(area, location, price, distanceFromCityCentre)
 
-        System --> Owner : requests data(area(m^2), location, price, distanceFromCityCentre)
     deactivate System
 
     Owner -> System : inserts data
 
-        activate System
+    activate System
 
-        System --> Owner : requests the number of photos \nthat the owner intends to submit
+    System --> Owner : requests the number of photos \nthat the owner intends to submit
 
     deactivate System
 
@@ -46,8 +51,11 @@ activate Owner
     loop from 1 to the number of photos defined
 
     System --> Owner : asks for the photos URI
+
     deactivate System
+
     Owner -> System : inserts photos URI
+
     activate System
 
     end
@@ -66,34 +74,48 @@ activate Owner
 
     opt Property is Apartment or House
 
-        System --> Owner : requests data (number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
-        deactivate System
+    System --> Owner : requests data (number of bedrooms, number of bathrooms, \nnumber of parking spaces and available equipment)
+
+    deactivate System
 
     Owner -> System : inserts data
+
     activate System
 
     opt Property is a House
 
-         System --> Owner : requests data (existence of a basement and/or inhabitable loft and sun exposure)
+    System --> Owner : requests data (existence of a basement, inhabitable loft and sun exposure)
+
     deactivate System
 
     Owner -> System : inserts data
+
     activate System
 
     end
 
     end
 
-    System --> Owner : shows agency list and asks to select one
+    System --> Owner : shows agencies list and asks to select one
+
     deactivate System
 
-    Owner -> System : selects agency
+    Owner -> System : selects an agency
+
     activate System
 
-    System --> Owner : shows agent list and asks to select one
+    System --> Owner : shows branch list and asks to select one
+
     deactivate System
 
-    Owner -> System : selects agent
+    Owner -> System : selects a branch
+
+    System --> Owner : shows agents list and asks to select one
+
+    deactivate System
+
+    Owner -> System : selects an agent
+
     activate System
 
     System --> Owner : shows all the data related to the request \nand asks to confirm
@@ -101,9 +123,11 @@ activate Owner
     deactivate System
 
     Owner -> System : confirms data
+
     activate System
 
-            System --> Owner : shows operation success
+    System --> Owner : shows operation success
+
     deactivate System
 
 @enduml

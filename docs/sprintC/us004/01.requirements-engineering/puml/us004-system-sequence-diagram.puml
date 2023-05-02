@@ -16,7 +16,7 @@ activate Owner
 
     activate System
 
-    System --> Owner : asks to select the type of request (Sell or rent)
+    System --> Owner : shows the type of request list an asks to select one
 
     deactivate System
 
@@ -24,7 +24,7 @@ activate Owner
 
     activate System
 
-    System --> Owner : asks to select the type of property (Land, House, Apartment)
+    System --> Owner : shows the type of property list and asks to select one
 
     deactivate System
 
@@ -40,7 +40,7 @@ activate Owner
 
     activate System
 
-    System --> Owner : requests the number of photos \nthat the owner intends to submit
+    System --> Owner : requests the number of photos that the owner intends to submit
 
     deactivate System
 
