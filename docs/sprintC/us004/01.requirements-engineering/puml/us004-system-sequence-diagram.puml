@@ -16,14 +16,6 @@ activate Owner
 
     activate System
 
-    System --> Owner : shows the type of request list an asks to select one
-
-    deactivate System
-
-    Owner -> System : selects a type of request
-
-    activate System
-
     System --> Owner : shows the type of property list and asks to select one
 
     deactivate System
@@ -59,6 +51,14 @@ activate Owner
     activate System
 
     end
+
+    System --> Owner : shows type of request list an asks to select one
+
+    deactivate System
+
+    Owner -> System : selects the type of request
+
+    activate System
 
     opt Rent a Property
 
@@ -115,14 +115,6 @@ activate Owner
     deactivate System
 
     Owner -> System : selects an agent
-
-    activate System
-
-    System --> Owner : shows all the data related to the request \nand asks to confirm
-
-    deactivate System
-
-    Owner -> System : confirms data
 
     activate System
 
