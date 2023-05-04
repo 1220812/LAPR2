@@ -17,7 +17,7 @@ As an owner, I intend to submit a request for listing a property sale or rent, c
 > The owner must provide property characteristics and the requested price
 > The request is sent to an agent of their choosing
 
-> If the owner wants to sell a property, he must provide information about the type of property (apartment, house or land), the area (m2), location, distance from city centre, price and photos
+> If the owner wants to sell a property, he must provide information about the type of property (apartment, house or land), the area (m2), localization, distance from city centre, price and photos
 
 > For apartments and houses, the owner must also provide the number of bedrooms, bathrooms and parking spaces, as well as any available equipment (central heating and/or air conditioning)
 
@@ -50,7 +50,7 @@ As an owner, I intend to submit a request for listing a property sale or rent, c
 > **Answer:** No
 
 
-> **Question:** Does that imply that a seller can choose the agency/branch/store independently of the location of the property?
+> **Question:** Does that imply that a seller can choose the agency/branch/store independently of the localization of the property?
 >
 > **Answer:** Yes
 

@@ -121,7 +121,7 @@ This confused me, because it wasn't clear whether leaving out those two characte
 * **AC7**: The contact telephone number entered must be valid.
 * **AC8**: The agency entered must be valid.
 * **AC9**: The designation entered must be valid.
-* **AC10**: The location entered must be valid.
+* **AC10**: The localization entered must be valid.
 * **AC11**: The local manager entered must be valid.
 
 ### 1.4. Found out Dependencies
@@ -140,7 +140,7 @@ This confused me, because it wasn't clear whether leaving out those two characte
     * the email address of the employee
     * the telephone number of the employee
     * the agency to which the employee is assigned.
-    * the location of employee
+    * the localization of employee
     * the local manager
   
    

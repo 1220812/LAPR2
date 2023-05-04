@@ -14,13 +14,13 @@
 | 			  		        | 							                                      | Organization            | IE: knows/has its own Employees                                                                              |
 | 			  		        | 							                                      | Employee                | IE: knows its own data (e.g. email)                                                                          |
 | Step 2  		     | 							                                      |                         |                                                                                                              |
-| Step 3  		     | 	...saving the inputted data?                | Store                   | IE: Store has it's own data (ID, designation, location, email address, phone number)                         |
-| Step 4  		     | 	...saving the location?                     | Location                | IE: The location saves everything about the street address, city, district, state and zip Code               |
-| Step 5  		     | 	...registering the store location           | RegisterStoreController | IE: Regists and controls the stores information                                                              |
+| Step 3  		     | 	...saving the inputted data?                | Store                   | IE: Store has it's own data (ID, designation, localization, email address, phone number)                         |
+| Step 4  		     | 	...saving the localization?                     | Location                | IE: The localization saves everything about the street address, city, district, state and zip Code               |
+| Step 5  		     | 	...registering the store localization           | RegisterStoreController | IE: Regists and controls the stores information                                                              |
 | 		             | 	...showing the stores                       | StoreRepository         | Repository: Shows and knows all the stores                                                                   | 
 | Step 6  		     | 							                                      |                         |                                                                                                              |              
 | Step 7  		     | 	... validating all data (local validation)? | Store                   | IE: Store owns its data                                                                                      | 
-| 			  		        | 	... validating location?                    | StoreRepository         | Repository: Knows all stores and their locations                                                             | 
+| 			  		        | 	... validating localization?                    | StoreRepository         | Repository: Knows all stores and their locations                                                             | 
 | Step 8  		     | 	... informing operation success?            | RegisterStoreUI         | UI: responsible for the interactions with the user                                                           | 
 
 ### Systematization ##

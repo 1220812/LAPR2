@@ -7,65 +7,23 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.Scanner;
 
-/**
- * The type Register employee ui.
- */
 public class RegisterEmployeeUI implements Runnable {
 
-    /**
-     * The Name.
-     */
     String name = null;
-    /**
-     * The Address.
-     */
     String address = null;
-    /**
-     * The Phone.
-     */
     int phone = 0;
-    /**
-     * The Email.
-     */
     String email = null;
-    /**
-     * The Passport card number.
-     */
     int passportCardNumber = 0;
-    /**
-     * The Zip code.
-     */
     int zipCode = 0;
-    /**
-     * The City.
-     */
     String city = null;
 
-    /**
-     * The Tax number.
-     */
     int taxNumber = 0;
-    /**
-     * The Pass.
-     */
     String pass = null;
-    /**
-     * The District.
-     */
     String district = null;
-    /**
-     * The Street.
-     */
     String street = null;
-    /**
-     * The State.
-     */
     String state = null;
 
 
-    /**
-     * The Controller.
-     */
     RegisterEmployeeController controller = new RegisterEmployeeController();
 
 
@@ -112,32 +70,15 @@ public class RegisterEmployeeUI implements Runnable {
 
 
         city = Utils.readLineFromConsole("City:");
-        while (city.trim().isEmpty()) {
-            city= Utils.readLineFromConsole("Invalid city \nInsert city:");
-        }
-
         district = Utils.readLineFromConsole("District:");
-        while (district.trim().isEmpty()) {
-            district = Utils.readLineFromConsole("Invalid district \nInsert district:");
-        }
-
         street = Utils.readLineFromConsole("Street:");
-        while (street.trim().isEmpty()) {
-            street = Utils.readLineFromConsole("Invalid street \nInsert street:");
-        }
-
         state = Utils.readLineFromConsole("State:");
-        while (state.trim().isEmpty()) {
-            state = Utils.readLineFromConsole("Invalid state \nInsert employee state:");
-        }
-
-
         zipCode = Utils.readIntegerFromConsole("zipCode:");
-        while (!controller.checkZipCode(zipCode)) {
-            zipCode = Utils.readIntegerFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
+        while (!controller.checkEmail(email)) {
+            email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
         }
 
-        address = "state:"+state +"   city:"+ city+"   district:"+  district +"   zipCode:"+ zipCode +"   street:"+ street;
+        address = state + city + district + zipCode + street;
         System.out.println("Created adress:" + address);
 
 
@@ -204,6 +145,5 @@ public class RegisterEmployeeUI implements Runnable {
         controller.sendRegisteredUserEmail(email, pass);
         System.out.println();
         System.out.println("####### Operation sucess ######");
-
     }
 }
