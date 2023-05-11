@@ -187,40 +187,6 @@ activate ADM
     end
 
     end
-    UI -> CTRL : getAgency()
-    activate CTRL
-
-    CTRL -> Rep : getInstance()
-    activate Rep
-
-    Rep --> CTRL: repositories
-
-    deactivate Rep
-
-    CTRL -> PLAT : getAgencyRepository()
-
-    activate PLAT
-
-    PLAT--> CTRL : agencyRepositories
-
-    deactivate PLAT
-
-    CTRL -> ARep : getAgencyList()
-
-    activate ARep
-
-    ARep -> CTRL : agency list
-    deactivate ARep
-    CTRL --> UI : agency list
- deactivate CTRL
- UI --> ADM : shows agencies list and asks to select one
-
- deactivate UI
-
-    ADM -> UI : selects an agency
-    activate UI
-
-    UI --> UI : keepAgency (agencySelected)
 
     UI -> CTRL : getBranch()
 
@@ -299,7 +265,7 @@ activate ADM
     UI -> CTRL : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList)
     activate CTRL
 
-    CTRL -> Req : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList)
+    CTRL -> Req** : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList)
 
     deactivate CTRL
     activate Req

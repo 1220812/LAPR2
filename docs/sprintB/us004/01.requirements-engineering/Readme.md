@@ -18,7 +18,7 @@ rent one or more properties, or they can use the company's application for the s
 owner provides property characteristics and the requested price and sends the request to an agent.
  
 In the case of a request for the sale of a property, the owner must provide information on: the type of property (apartment, house or land),
-the area in m2, the localization, the distance from the city centre, the requested price and one or more
+the area in m2, the location, the distance from the city centre, the requested price and one or more
 photographs. 
  
 If the property is an apartment or a house, the owner also provides: the number of
@@ -54,7 +54,7 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 > **Answer (20 March 2023):** No
 
 
-> **Question:** Does that imply that a seller can choose the agency/branch/store independently of the localization of the property?
+> **Question:** Does that imply that a seller can choose the agency/branch/store independently of the location of the property?
 >
 > **Answer (20 March 2023):** Yes
 
@@ -125,7 +125,7 @@ basement, an inhabitable loft, and sun exposure must be registered as well.
 * **AC1**: All required files must be filled in.
 * **AC2**: Must be provided the type of property.
 * **AC3**: The area must be in m^2.
-* **AC4**: The localization and the distance from the city centre must be known.
+* **AC4**: The location and the distance from the city centre must be known.
 * **AC5**: Must have the requested price and one or more photographs.
 * **AC6**: The photos must be in URI format.
 * **AC7**: The prices must be in USD currency.
