@@ -57,7 +57,7 @@ activate ADM
 
     UI --> UI : keepTypeOfProperty (typeOfPropertySelected)
 
-    UI --> ADM : requests data (area(m^2), location, distanceFromCityCenter, price)
+    UI --> ADM : requests data (area(m^2), address, distance from the city center, price)
 
     deactivate UI
 
@@ -65,7 +65,7 @@ activate ADM
 
     activate UI
 
-    UI --> UI : keepData(area, location, distanceFromCityCenter, price)
+    UI --> UI : keepData(area, address, distanceFromCityCenter, price)
 
     UI --> ADM :  request the number of photos that the owner intends to submit
 
@@ -262,29 +262,29 @@ activate ADM
 
     alt the owner intends to list a land
 
-    UI -> CTRL : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList)
+    UI -> CTRL : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList)
     activate CTRL
 
-    CTRL -> Req** : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList)
+    CTRL -> Req** : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList)
 
     deactivate CTRL
     activate Req
 
     else the owner intends to list an apartment
 
-    UI -> CTRL : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
+    UI -> CTRL : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
         activate CTRL
 
-        CTRL -> Req : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
+        CTRL -> Req : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
 
         deactivate CTRL
 
     else the owner intends to list a house
 
-    UI -> CTRL : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment, existenceOfAbasement, inhabitableLoft, sunExposure)
+    UI -> CTRL : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment, existenceOfAbasement, inhabitableLoft, sunExposure)
             activate CTRL
 
-            CTRL -> Req : createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment, existenceOfAbasement, inhabitableLoft, sunExposure)
+            CTRL -> Req : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment, existenceOfAbasement, inhabitableLoft, sunExposure)
 
             deactivate CTRL
 

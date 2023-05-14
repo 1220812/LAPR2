@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+class Store {
+    designation
+    ID
+    phoneNumber
+    emailAddress
+}
+
+class State {
+    stateName
+}
+
+class District {
+    districtName
+}
+
+class City {
+    cityName
+}
+
+class Address {
+    street
+    postalCode
+    doorNumber
+}
+
+Address "1" -- "1" City : in >
+City "1" -- "1" State : in >
+State "1" -- "1" District : in >
+Store "1" -- "1" Address : has an >
+
+@enduml

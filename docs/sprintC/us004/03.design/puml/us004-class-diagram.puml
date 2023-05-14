@@ -78,7 +78,7 @@ class SunExposure{
 -String direction
 }
 
-class Location{
+class Address{
 -int doorNumber
 -int floorNumber
 -String zipCode
@@ -121,19 +121,16 @@ class PassportCardNumber{
 -int passportCardNumber
 }
 
-class Address{
-}
-
 CreateRequestUI -.-> CreateRequestController
 Repositories -.-> Repositories : instance
 CreateRequestController -.-> Repositories : repositories
 Repositories --> AgencyRepository
 Repositories --> RequestRepository
-Location --|> State
-Location --|> City
-Location --|> District
+Address --|> State
+Address --|> City
+Address --|> District
 Property <|-- Residence
-Property --> Location : has
+Property --> Address : has
 PhotographList --> Property
 Residence <|-- House
 Residence --> AvailableEquipment

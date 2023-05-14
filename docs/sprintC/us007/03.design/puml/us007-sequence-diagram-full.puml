@@ -42,7 +42,7 @@ activate UU
         CTRL --> UI : usersRepository
         deactivate CTRL
 
-            UI --> UU : requests data (name, passportCardNumber, taxNumber,\n emailAddress, address, phoneNumber, password)
+            UI --> UU : requests data (name, passport card number, tax number,\n email address, address, phone number, password)
 
     deactivate UI
     UU -> UI : inserts data

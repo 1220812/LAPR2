@@ -27,17 +27,42 @@ class UserRepository{
 + createUser(name, passportCardNumber, taxNumber, address, emailAddress, phoneNumber, password)
 +addUser()
 +checkIfUserAlreadyExists
-+validateUser
++validateUser()
 }
 
 class User{
 - String name
-- Integer passportCardNumber
-- integer taxNumber
-- String address
 - String emailAddress
-- integer phoneNumber
+- int phoneNumber
 - String password
++createUser(name, passportCardNumber, taxNumber, address, emailAddress, phoneNumber, password)
+}
+
+class PassportCardNumber{
+-int passportCardNumber
+}
+
+class TaxNumber{
+-int taxNumber
+}
+
+class Address{
+-int doorNumber
+-int floorNumber
+-String zipCode
+-String streetAddress
+}
+
+class State{
+-String stateName
+}
+
+class District{
+-String districtName
+}
+
+class City{
+-String cityName
 }
 
 CreateUserUI .-> CreateUserController
@@ -48,4 +73,12 @@ Repositories --> UserRepository
 
 Repositories --> Repositories : instance
 UserRepository --> User
+
+User ---> Address
+
+Address ---|> State
+Address --|> City
+Address --|> District
+User --|> TaxNumber : has
+User --|> PassportCardNumber : has
 @enduml

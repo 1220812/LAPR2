@@ -42,21 +42,18 @@ activate UU
         CTRL --> UI : usersRepository
         deactivate CTRL
 
-            UI --> UU : requests data (name, passportCardNumber, taxNumber,\n emailAddress, address, phoneNumber, password)
+            UI --> UU : requests data (name, passport card number, tax number,\n email address, address, phone number and password)
 
     deactivate UI
     UU -> UI : inserts data
     activate UI
 
-    UI -> UI : keep data (name, passportCardNumber, \ntaxNumber, emailAddress, phoneNumber, password)
+    UI -> UI : keep data (name, passportCardNumber, address, \ntaxNumber, emailAddress, phoneNumber, password)
 
-    UI --> UU : asks for data confirmation
-    deactivate UI
-    UU -> UI : confirms data
+    alt valid operation
 
-    activate UI
 
-    UI -> CTRL : createUser(name, passportCardNumber, taxNumber, \nemailAddress, phoneNumber, password)
+    UI -> CTRL : createUser(name, passportCardNumber, taxNumber, \nemailAddress, address, phoneNumber, password)
 
     activate CTRL
 
@@ -67,7 +64,7 @@ activate UU
 
     opt return is false
 
-    UR -> user ** : createUser(name, passportCardNumber, taxNumber, address, \nemailAddress, phoneNumber, password)
+    UR -> user** : createUser(name, passportCardNumber, taxNumber, address, \nemailAddress, phoneNumber, password)
     activate user
     user --> user : createdUser
 
@@ -83,10 +80,21 @@ activate UU
     deactivate CTRL
 
     deactivate R
-        UI --> UU : shows confirmation of successful registration
+        UI --> UU : shows operation success
         deactivate CTRL
     deactivate UI
 
-deactivate UU
+else invalid operation
+loop while the inserted data is wrong
 
+UI --> UU : asks to reinsert the invalid data
+activate UI
+
+UU -> UI : reinserts the data that the system asked for
+deactivate UI
+
+end
+
+end
+deactivate UU
 @enduml

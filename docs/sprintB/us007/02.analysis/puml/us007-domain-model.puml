@@ -12,26 +12,55 @@ hide methods
 
 title Domain Model - US007
 
-class UnregisteredUser{
-name
-passportNumber
-}
-
 class Address{
 doorNumber
 floorNumber
-street
-city
-state
-district
-postalCode
+zipCode
+streetAddress
+}
+
+class State{
+stateName
+}
+
+class District{
+districtName
+}
+
+class City{
+cityName
+}
+
+class UnregisteredUser{
+name
+emailAddress
+telephoneNumber
+password
+}
+
+class User{
+name
+emailAddress
+telephoneNumber
+}
+
+class PassportCardNumber{
+passportCardNumber
 }
 
 class TaxNumber{
 taxNumber
 }
 
-UnregisteredUser "1" -- "1" Address : has >
-UnregisteredUser "1" -- "1" TaxNumber : has >
+Address --|> State
+Address --|> City
+Address --|> District
+UnregisteredUser --- User : after registration becomes >
+UnregisteredUser -- Address : has
+User -- Address : has
+UnregisteredUser --- TaxNumber : has
+UnregisteredUser -- PassportCardNumber : has
+User -- TaxNumber : has
+User -- PassportCardNumber : has
 
 @enduml

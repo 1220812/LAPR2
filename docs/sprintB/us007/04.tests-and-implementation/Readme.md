@@ -27,7 +27,7 @@
 
 ## Class CreateTaskController 
 
-```java
+java
 public Task createTask(String reference, String description, String informalDescription,
 								 String technicalDescription, Integer duration, Double cost,
 								 String taskCategoryDescription) {
@@ -42,12 +42,11 @@ public Task createTask(String reference, String description, String informalDesc
     
 	return newTask;
 }
-```
 
 
 ## Class Organization
 
-```java
+java
 public Optional<Task> createTask(String reference, String description, String informalDescription,
                                      String technicalDescription, Integer duration, Double cost,
                                      TaskCategory taskCategory, Employee employee) {
@@ -59,7 +58,6 @@ public Optional<Task> createTask(String reference, String description, String in
         
         return task;
     }
-```
 
 # 6. Integration and Demo 
 

@@ -12,26 +12,37 @@ hide methods
 
 title Domain Model - US007
 
-class UnregisteredUser{
-name
-passportNumber
-}
-
 class Address{
-doorNumber
-floorNumber
-street
-city
-state
-district
-postalCode
+-int doorNumber
+-int floorNumber
+-String zipCode
+-String streetAddress
 }
 
-class TaxNumber{
-taxNumber
+class State{
+-String stateName
 }
 
-UnregisteredUser "1" -- "1" Address : has >
-UnregisteredUser "1" -- "1" TaxNumber : has >
+class District{
+-String districtName
+}
+
+class City{
+-String cityName
+}
+
+class UnregisteredUser{
+-String name
+
+}
+
+class PassportCardNumber{
+-int passportCardNumber
+}
+
+
+Address --|> State
+Address --|> City
+Address --|> District
 
 @enduml
