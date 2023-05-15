@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.util.List;
 
 public class CreateRequestController {
-    private State state;
+    /**private State state;
     private double area;
     private double distanceFromCityCentre;
     private double price;
@@ -40,5 +40,5 @@ public class CreateRequestController {
     }
     public List<String> getAgencyList(){
         return AgencyRepository.getAgency();
-    }
+    }*/
 }

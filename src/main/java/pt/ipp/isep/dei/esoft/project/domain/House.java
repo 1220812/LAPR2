@@ -1,45 +1,59 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class House extends Residence {
     /**
-     * List of the possible values that the sun exposure can have
+     * existence of a basement
      */
+    private boolean existenceOfABasement;
+    /**
+     * house sun exposure
+     */
+    private SunExpousure sunExposure;
+    /**
+     * existence of an inhabitable loft
+     */
+    private boolean inhabitableLoft;
 
-    private static final List<String> SUN_EXPOSURE = Arrays.asList("North", "South", "East", "West", "not specified");
-
-    // ATTRIBUTES
-
-    private String basement;
-    private String sunExposure;
-    private String inhabitableLoft;
-
-    // CONSTRUCTORS
-    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String> photographs, String availableEquipment, String basement, String sunExposure, String inhabitableLoft,double price) {
-        super(address, area, distanceFromCityCentre, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, photographs, availableEquipment,price);
-        this.basement = basement;
-        this.sunExposure = sunExposure;
+    /**
+     * this method creates a house object with all the attributes
+     * @param address house address
+     * @param area house area
+     * @param distanceFromCityCentre distance between the house and the city center
+     * @param numberOfBathrooms number of bathrooms
+     * @param numberOfBedrooms number of bedrooms
+     * @param numberOfParkingSpaces number of parking spaces
+     * @param photographs house photos
+     * @param availableEquipment available equipment
+     * @param basement basement
+     * @param sunExposure house exposure to the sun
+     * @param inhabitableLoft inhabitable loft
+     * @param price house price
+     * @param typeOfProperty type of property
+     */
+    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String> photographs, AvailableEquipment availableEquipment, boolean basement, SunExpousure sunExposure, boolean inhabitableLoft,double price, PropertyType typeOfProperty) {
+        super(address,area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,photographs,price,typeOfProperty,availableEquipment);
+        this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;
+        this.sunExposure = sunExposure;
     }
-
     /**
      * Method to show the basement
      * @return
      */
-
-    public String basement() {
-        return basement;
+    public boolean basement() {
+        return existenceOfABasement;
     }
 
     /**
      * Method to change the basement
-     * @param basement basement
+     * @param existenceOfABasement basement
      */
 
-    public void setBasement(String basement) {
-        this.basement = basement;
+    public void setExistenceOfABasement(boolean existenceOfABasement) {
+        this.existenceOfABasement = existenceOfABasement;
     }
 
     /**
@@ -47,7 +61,7 @@ public class House extends Residence {
      * @return inhabitable loft
      */
 
-    public String inhabitableLoft() {
+    public boolean inhabitableLoft() {
         return inhabitableLoft;
     }
 
@@ -56,7 +70,7 @@ public class House extends Residence {
      * @param inhabitableLoft inhabitable loft
      */
 
-    public void setInhabitableLoft(String inhabitableLoft) {
+    public void setInhabitableLoft(boolean inhabitableLoft) {
         this.inhabitableLoft = inhabitableLoft;
     }
 
@@ -65,10 +79,9 @@ public class House extends Residence {
      * @param sunExposure sun exposure
      */
 
-    public void setSunExposure(String sunExposure) {
+    public void setSunExposure(SunExpousure sunExposure) {
         this.sunExposure = sunExposure;
     }
-
     /**
      * Method tho show the characteristics from the house
      * @return String characteristics from the house
@@ -76,9 +89,28 @@ public class House extends Residence {
     @Override
     public String toString() {
         return "House{" +
-                "basement='" + basement + '\'' +
+                "basement='" + existenceOfABasement + '\'' +
                 ", sunExposure='" + sunExposure + '\'' +
                 ", inhabitableLoft='" + inhabitableLoft + '\'' +
                 '}';
+    }
+
+    /**
+     * Compares two instances of Owner
+     * @param o other instance of Owner
+     * @return true if the instances are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        House house = (House) o;
+        return existenceOfABasement == house.existenceOfABasement && inhabitableLoft == house.inhabitableLoft && sunExposure == house.sunExposure;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), existenceOfABasement, sunExposure, inhabitableLoft);
     }
 }

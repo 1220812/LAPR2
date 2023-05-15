@@ -1,56 +1,68 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
+
 public class TaxNumber {
-    // ATTRIBUTES
-
-    private int taxNumber;
-    private final int TAX_NUMBER_BY_DEFAULT = 0;
-
-    // CONSTRUCTORS
     /**
-     * This method creates the TaxNumber object without attributes
+     * tax number
      */
-    public TaxNumber(){
-        this.taxNumber = TAX_NUMBER_BY_DEFAULT;
-    }
+    private String taxNumber;
     /**
-     *
-     *  This method creates the TaxNumber object
+     * tax number length
+     */
+    private static final int TAX_NUMBER_LENGTH = 9;
+
+    /**
+     * This method creates the TaxNumber with tax number
      *
      * @param taxNumber tax number
      */
-    public TaxNumber(int taxNumber){
+    public TaxNumber(String taxNumber) {
+        if(taxNumber.length() != TAX_NUMBER_LENGTH || !StringUtils.isNumeric(taxNumber)){
+            throw new IllegalArgumentException("Invalid passport card number");
+        }
         this.taxNumber = taxNumber;
     }
-
-    //SETS AND GETS
-
     /**
-     *  This method returns the taxNumber of the taxNumber
-     *
-     * @return taxNumber
+     * This method shows the tax number
+     * @return tax number
      */
-    public int getTaxNumber() {
+    public String getTaxNumber() {
         return taxNumber;
     }
-
     /**
-     *  This method changes the passportNumber of the PassportCard
-     * @param taxNumber
+     * This method changes the tax number
+     * @param taxNumber changed tax number
      */
-    public void setTaxNumber(int taxNumber) {
+    public void setTaxNumber(String taxNumber) {
         this.taxNumber = taxNumber;
     }
 
     /**
-     * This method returns the characteristics of the taxNumber
-     * @return characteristics of the taxNumber
+     * Compares two instances of Owner
+     * @param o other instance of Owner
+     * @return true if the instances are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaxNumber taxNumber1 = (TaxNumber) o;
+        return Objects.equals(taxNumber, taxNumber1.taxNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taxNumber);
+    }
+
+    /**
+     * Textual representation of an instance of TaxNumber
      */
     @Override
     public String toString() {
-        return "TaxNumber{" +
-                "taxNumber=" + taxNumber +
-                ", TAX_NUMBER_BY_DEFAULT=" + TAX_NUMBER_BY_DEFAULT +
-                '}';
+        return " | Tax Number: " + taxNumber;
     }
 }

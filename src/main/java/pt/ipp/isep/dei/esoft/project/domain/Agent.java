@@ -2,72 +2,168 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
-public class Agent{
-    // ATTRIBUTES
+public class Agent {
+    /**
+     * name of the agent
+     */
     private String name;
+    /**
+     * phone number of the agent
+     */
+    private int phoneNumber;
+    /**
+     * email address of the agent
+     */
     private String emailAddress;
-    private int passportCardNumber;
+    /**
+     * tax number of the agent
+     */
     private TaxNumber taxNumber;
+    /**
+     * passport card number of the agent
+     */
+    private PassportCardNumber passportCardNumber;
+    /**
+     * address of the agent
+     */
     private Address address;
-    private String phoneNumber;
-    private Agency agency;
-
-    // CONSTRUCTORS
-
-    public Agent(String name, String emailAddress, int passportCardNumber, TaxNumber taxNumber, Address address, String phoneNumber, Agency agency){
-        this.name = name;
-        this.emailAddress = emailAddress;
-        this.passportCardNumber = passportCardNumber;
-        this.taxNumber = taxNumber;
-        this.address = address;
+    /**
+     * Method that shows the phone number
+     * @return phone number
+     */
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+    /**
+     * Method to change the phone number
+     * @param phoneNumber changed phone number
+     */
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
-        this.agency = agency;
     }
-
-    public Agent(String emailAddress){
+    /**
+     * Method to show the email address
+     * @return email address
+     */
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+    /**
+     * Method to change the email address
+     * @param emailAddress changed email address
+     */
+    public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
+    /**
+     * Method to show the name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
 
     /**
-     * Method to compare the attributes of the current object with those of another object
-     * @param o object that will be compared with
-     * @return boolean
+     * Method to change the name
+     * @param name changed name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Method to show the tax number
+     * @return tax number
+     */
+    public TaxNumber getTaxNumber() {
+        return taxNumber;
+    }
+
+    /**
+     * Method to show the passport card number
+     * @return passport card number
+     */
+    public PassportCardNumber getPassportCardNumber() {
+        return passportCardNumber;
+    }
+
+    /**
+     * Method to change the tax number
+     * @param taxNumber changed tax number
+     */
+    public void setTaxNumber(TaxNumber taxNumber) {
+        this.taxNumber = taxNumber;
+    }
+
+    /**
+     * Method to change the passport card number
+     * @param passportCardNumber changed passport card number
+     */
+    public void setPassportCardNumber(PassportCardNumber passportCardNumber) {
+        this.passportCardNumber = passportCardNumber;
+    }
+
+    /**
+     * Method to show the address
+     * @return address
+     */
+    public Address getAddress() {
+        return address;
+    }
+
+    /**
+     * Method to change the address
+     * @param address changed address
+     */
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    /**
+     * This method creates an owner with name, phone number and email address
+     * @param name name of the owner
+     * @param phoneNumber phone number of the owner
+     * @param emailAddress email address of the owner
      */
 
-
+    public Agent(String name, int phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.address = address;
+        this.taxNumber = taxNumber;
+        this.passportCardNumber = passportCardNumber;
+    }
+    /**
+     * Compares two instances of Owner
+     * @param o other instance of Owner
+     * @return true if the instances are equal, false otherwise
+     */
+    @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Agent)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Agent agent = (Agent) o;
-        return emailAddress.equals(agent.emailAddress);
+        return phoneNumber == agent.phoneNumber && Objects.equals(name, agent.name) && Objects.equals(emailAddress, agent.emailAddress) && Objects.equals(taxNumber, agent.taxNumber) && Objects.equals(passportCardNumber, agent.passportCardNumber) && Objects.equals(address, agent.address);
     }
 
-    /**
-     * Method to return a hash code for the object in order to ensure that this hash code will not collide with the others
-     * @return
-     */
-
+    @Override
     public int hashCode() {
-        return Objects.hash(emailAddress);
+        return Objects.hash(name, phoneNumber, emailAddress, taxNumber, passportCardNumber, address);
     }
 
     /**
-     * Method to verify the email of the agent
-     * @param email email agent
-     * @return email
+     * Textual representation of an instance of Owner
      */
-
-    public boolean hasEmail(String email) { return email.equalsIgnoreCase(this.emailAddress); }
-
-    /**
-     * This method creates a new instance of the agent object and initializes its attributes with the exact same values of the original object
-     * @return a clone of the agent object
-     */
-    public Employee clone() {
-        return new Agent(this.name, this.emailAddress, this.passportCardNumber, this.taxNumber, this.address, this.phoneNumber, this.agency ).clone();
+    @Override
+    public String toString() {
+        return "Agent{" +
+                "name='" + name + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", taxNumber=" + taxNumber +
+                ", passportCardNumber=" + passportCardNumber +
+                ", address=" + address +
+                '}';
     }
 }

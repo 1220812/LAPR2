@@ -2,20 +2,43 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Residence extends Property{
-
-    // ATTRIBUTES
+    /**
+     * Number of bedrooms
+     */
     private int numberOfBedrooms;
+    /**
+     * Number of bathrooms
+     */
     private int numberOfBathrooms;
+    /**
+     * Number of parking spaces
+     */
     private int numberOfParkingSpaces;
-    private String availableEquipment;
+    /**
+     * available equipment
+     */
+    private AvailableEquipment availableEquipment;
 
-    // CONSTRUCTORS
+    /**
+     *
+     * @param address residence address
+     * @param area residence area
+     * @param distanceFromCityCentre distance between the residence and the city center
+     * @param numberOfBathrooms number of bathrooms
+     * @param numberOfBedrooms number of bedrooms
+     * @param numberOfParkingSpaces number of parking spaces
+     * @param photographs photographs
+     * @param availableEquipment available equipment
+     * @param price price
+     * @param typeOfProperty type of property
+     */
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String>photographs, String availableEquipment, double price) {
-        super(area, distanceFromCityCentre, address, photographs,price);
-        if (numberOfBedrooms < 0 | numberOfBathrooms < 0 | numberOfParkingSpaces < 0) {
+    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String>photographs, double price, PropertyType typeOfProperty, AvailableEquipment availableEquipment) {
+        super(area, distanceFromCityCentre, address, photographs,price, typeOfProperty);
+        if (numberOfBedrooms < 0 || numberOfBathrooms < 0 || numberOfParkingSpaces < 0) {
             throw new IllegalArgumentException("Provide the actual number of Bathrooms, Bedrooms and Parking Spaces" +
                     "(>=0)");
         }
@@ -36,7 +59,7 @@ public class Residence extends Property{
 
     /**
      * Method to change the number of bedrooms
-     * @param numberOfBedrooms
+     * @param numberOfBedrooms changed number of bedrooms
      */
 
     public void setNumberOfBedrooms(int numberOfBedrooms) {
@@ -83,7 +106,7 @@ public class Residence extends Property{
      * Method to show the available equipment
      * @return available equipment
      */
-    public String getAvailableEquipment(){
+    public AvailableEquipment getAvailableEquipment(){
         return availableEquipment;
     }
 
@@ -91,7 +114,7 @@ public class Residence extends Property{
      * Method to change the available equipment
      * @param availableEquipment available equipment
      */
-    public void setAvailableEquipment(String availableEquipment) {
+    public void setAvailableEquipment(AvailableEquipment availableEquipment) {
         this.availableEquipment = availableEquipment;
     }
 
@@ -103,5 +126,24 @@ public class Residence extends Property{
     public String toString() {
         return super.toString() + "Residence\n\tNrBedrooms=" + numberOfBedrooms + "\n\tNrBathrooms=" + numberOfBathrooms +
                 "\n\tNrParkingSpaces=" + numberOfParkingSpaces + "\n\tavailableEquipment='" + availableEquipment + "\n";
+    }
+
+    /**
+     * Compares two instances of Owner
+     * @param o other instance of Owner
+     * @return true if the instances are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Residence residence = (Residence) o;
+        return numberOfBedrooms == residence.numberOfBedrooms && numberOfBathrooms == residence.numberOfBathrooms && numberOfParkingSpaces == residence.numberOfParkingSpaces && Objects.equals(availableEquipment, residence.availableEquipment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment);
     }
 }

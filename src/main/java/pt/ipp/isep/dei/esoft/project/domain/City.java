@@ -12,13 +12,12 @@ public class City {
     private String name;
 
     /**
-     * Contructs a City object with the given name.
+     * Creates a City object with the given name.
      * @param name the name of the city.
      */
     public City(String name) {
         this.name = name;
     }
-
     /**
      * Returns the name of the City.
      * @return the name of the City.
@@ -52,23 +51,16 @@ public class City {
         City city = (City) o;
         return Objects.equals(name, city.name);
     }
-
-    /**
-     * Returns the hash code of the City object based on its name field.
-     * @return the hash code of the City object
-     */
     @Override
     public int hashCode() {
         return Objects.hash(name);
     }
 
     /**
-     * Returns a string representation of the City object.
-     * @return a string representation of the City object
+     * Textual representation of an instance of Address
      */
     @Override
     public String toString() {
         return "City{" + name + "}";
     }
-
 }

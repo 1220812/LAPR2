@@ -66,13 +66,12 @@ public class District {
     }
 
     /**
-     * Creates and returns a copy of the District object.
-     *
-     * @return a copy of the District object
-     * @throws CloneNotSupportedException if the class does not support the clone.
+     * Textual representation of an instance of Address
      */
     @Override
-    protected District clone() throws CloneNotSupportedException {
-        return new District(this.name);
+    public String toString() {
+        return "District{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

@@ -8,10 +8,10 @@ public class AddressTest {
     @Test
     public void testConstructorWithValidArguments() {
         Address address = new Address("Example", "123", "2º Left", "12345", new State("NY"));
-        Assertions.assertEquals("Rua do Exemplo", address.getStreet());
+        Assertions.assertEquals("Rua do Exemplo", address.getStreetAddress());
         Assertions.assertEquals("123", address.getDoorNumber());
         Assertions.assertEquals("2º Esquerdo", address.getFloorNumber());
-        Assertions.assertEquals("12345", address.getPostalCode());
+        Assertions.assertEquals("12345", address.getZipCode());
         Assertions.assertEquals(new State("NY"), address.getState());
     }
 
