@@ -11,11 +11,19 @@ participant ":CreateRequestUI" as UI
 participant ":CreateRequestController" as CTRL
 participant ":Repositories" as Rep
 participant "repositories\n:Repository" as PLAT
-participant "requestRepository:\nRequestRepository" as RequestRepository
-participant "agencyRepository:\nAgencyRepository" as ARep
+participant "PropertyTypeListRepository" as PTLR
+participant "agencyRepository\n:AgencyRepository" as agencyRepository
+participant "agency: \nAgency" as agency
+participant "requestTypeRepository:\nRequestTypeRepository" as RequestRepository
+participant "property: \nProperty" as property
+participant "residence: \nResidence" as residence
+participant "house: \nHouse" as house
 participant "request: \nRequest" as Req
 participant "photograph: \nPhotograph" as Photo
 participant "photographList" as PhotoList
+participant "StateRepository:\nStateRepository" as StateRepository
+participant "DistrictRepository:\nDistrictRepository" as DistrictRepository
+participant "CityRepository:\nCityRepository" as CityRepository
 
 activate ADM
 
@@ -23,9 +31,9 @@ activate ADM
 
         activate UI
 
-            UI --> CTRL** : create
+            UI -> CTRL** : create
 
-            UI --> CTRL : getTypeOfRequest()
+            UI -> CTRL : getPropertyTypeList()
             activate CTRL
 
                 CTRL -> Rep : getInstance()
@@ -34,17 +42,17 @@ activate ADM
                     Rep --> CTRL: repositories
                 deactivate Rep
 
-                CTRL -> PLAT : getRequestRepository()
+                CTRL -> PLAT : getPropertyTypeListRepository()
                 activate PLAT
 
                     PLAT --> CTRL: requestRepository
                 deactivate PLAT
 
-                CTRL -> RequestRepository : getPropertyTypeList()
-                activate RequestRepository
+                CTRL -> PTLR : getPropertyTypeList()
+                activate PTLR
 
-                RequestRepository --> CTRL : propertyTypeList
-                deactivate RequestRepository
+                PTLR --> CTRL : propertyTypeList
+                deactivate PTLR
 
                 CTRL --> UI : propertyTypeList
             deactivate CTRL
@@ -55,9 +63,15 @@ activate ADM
     ADM -> UI : selects a type of property
     activate UI
 
-    UI --> UI : keepTypeOfProperty (typeOfPropertySelected)
+    UI -> CTRL : setPropertyType(propertyType)
 
-    UI --> ADM : requests data (area(m^2), address, distance from the city center, price)
+    activate CTRL
+
+    CTRL --> UI : propertyType selected
+
+    deactivate CTRL
+
+    UI --> ADM : requests data (area, distance from the city center, price)
 
     deactivate UI
 
@@ -65,7 +79,124 @@ activate ADM
 
     activate UI
 
-    UI --> UI : keepData(area, address, distanceFromCityCenter, price)
+   UI -> CTRL : getState()
+               activate CTRL
+
+                       CTRL -> Rep : getInstance()
+                       activate Rep
+
+                       Rep --> CTRL: repositories
+                       deactivate Rep
+
+                       CTRL -> PLAT : getStateRepository()
+
+                       activate PLAT
+
+                       PLAT --> CTRL : statesRepository
+
+                       deactivate PLAT
+
+                       CTRL -> StateRepository : getStateList()
+
+                       activate StateRepository
+
+                       StateRepository --> CTRL : stateList
+
+                       deactivate StateRepository
+
+               CTRL --> UI : stateList
+               deactivate CTRL
+
+    UI --> ADM : shows list of states and asks to select one
+                deactivate UI
+
+                ADM -> UI : selects a state
+                activate UI
+
+                UI -> CTRL : getDistrict()
+                activate CTRL
+
+                        CTRL -> Rep : getInstance()
+                        activate Rep
+
+                        Rep --> CTRL: repositories
+                        deactivate Rep
+
+                        CTRL -> PLAT : getDistrictRepository
+
+                        activate PLAT
+
+                        PLAT --> CTRL : districtRepository
+
+                        deactivate PLAT
+
+                        CTRL -> DistrictRepository : getDistrictList
+                        activate DistrictRepository
+
+                        DistrictRepository --> CTRL : districtList
+                        deactivate DistrictRepository
+
+
+                CTRL --> UI : districtList
+                deactivate CTRL
+
+                UI --> ADM : shows list of districts and asks to select one
+                deactivate UI
+
+                ADM -> UI : selects a district
+                activate UI
+
+                UI --> CTRL : getCity()
+                activate CTRL
+
+                    CTRL -> Rep : getInstance()
+                    activate Rep
+
+                    Rep --> CTRL: repositories
+                    deactivate Rep
+
+                    CTRL -> PLAT : getCityRepository
+                    activate PLAT
+
+                    PLAT --> CTRL : cityRepository
+                    deactivate PLAT
+
+                    CTRL -> CityRepository : getCityList
+
+                    activate CityRepository
+
+                    CityRepository --> CTRL : cityList
+
+                    deactivate CityRepository
+
+                CTRL --> UI : cityList
+                deactivate CTRL
+
+                UI --> ADM : show list of cities and asks to select one
+                deactivate UI
+
+                ADM -> UI: selects a city
+
+                activate UI
+
+                UI --> ADM : requests data (door number, floor number, zip code, street address)
+
+                deactivate UI
+
+                ADM -> UI : inserts data
+                activate UI
+
+                        UI -> CTRL :createAddress(doorNumber, floorNumber, zipCode, streetAddress, city, district, state)
+                        activate CTRL
+
+                        CTRL -> Address : createAddress(doorNumber, floorNumber, zipCode, streetAddress, city, district, state)
+                        activate Address
+
+                        Address --> CTRL : address
+                        deactivate Address
+
+                        CTRL --> UI : address
+                        deactivate CTRL
 
     UI --> ADM :  request the number of photos that the owner intends to submit
 
@@ -74,8 +205,6 @@ activate ADM
     ADM -> UI : inserts the number of photos
 
     activate UI
-
-    UI --> UI : keepNumberOfPhotos (numberOfPhotosInserted)
 
     loop from 1 to the number of photos defined
     UI --> ADM : asks for the photos URI
@@ -88,12 +217,12 @@ activate ADM
     UI -> CTRL : createPhotograph(URI)
     activate CTRL
 
-            CTRL -> Photo**: createPhotograph(URI)
+            CTRL -> Photo: createPhotograph(URI)
             deactivate CTRL
 
             activate Photo
 
-    Photo -> PhotoList** : addPhotographToPhotoList
+    Photo -> PhotoList : addPhotographToPhotoList
 
     activate PhotoList
 
@@ -113,7 +242,7 @@ activate ADM
 
     end
 
-    UI --> CTRL : getTypeOfRequest()
+    UI -> CTRL : getRequestTypeList()
                 activate CTRL
 
                     CTRL -> Rep : getInstance()
@@ -122,7 +251,7 @@ activate ADM
                         Rep --> CTRL: repositories
                     deactivate Rep
 
-                    CTRL -> PLAT : getRequestRepository()
+                    CTRL -> PLAT : getRequestTypeRepository()
                     activate PLAT
 
                         PLAT --> CTRL: requestRepository
@@ -149,7 +278,13 @@ activate ADM
 
    activate UI
 
-   UI --> UI : keepTypeOfRequest (typeOfRequestSelected)
+   UI -> CTRL : setRequestType(requestType)
+
+   activate CTRL
+
+   CTRL -->  UI : RequestType selected
+
+   deactivate CTRL
 
     opt Rent a Property
 
@@ -160,10 +295,24 @@ activate ADM
 
     activate UI
 
-    UI --> UI : keepContractDuration (contractDurationInserted)
-
     deactivate CTRL
     end
+
+    UI -> CTRL : CreateProperty(area, distanceFromCityCenter, address, price)
+
+    activate CTRL
+
+    CTRL -> property : CreateProperty(area, distanceFromCityCenter, address, price)
+
+    activate property
+
+    property --> CTRL : property
+
+    deactivate property
+
+    CTRL --> CTRL : addProperty(property)
+
+    deactivate CTRL
 
     opt Property Apartment or House
 
@@ -173,22 +322,52 @@ activate ADM
     ADM -> UI : inserts data
     activate UI
 
-    UI --> UI : keepData (numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
+    UI -> CTRL : CreateResidence(numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
 
+    activate CTRL
+
+    CTRL -> residence : CreateResidence(numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
+
+    activate residence
+
+    residence --> CTRL : residence
+
+    deactivate residence
+
+    CTRL --> CTRL : addProperty(residence)
+
+    deactivate CTRL
 
     opt Property is a House
+
     UI --> ADM : request data (existence of a basement, inhabitable loft and sun exposure)
+
     deactivate UI
     ADM-> UI : inserts data
 
     activate UI
 
-    UI --> UI : keepData (existenceOfAbasement, inhabitableLoft, sunExposure)
-    end
+    UI -> CTRL : CreateHouse(existenceOfBasement, inhabitableLoft, sunExposure)
+
+    activate CTRL
+
+    CTRL -> house : CreateHouse(existenceOfBasement, inhabitableLoft, sunExposure)
+
+    activate house
+
+    house --> CTRL : house
+
+    deactivate house
+
+    CTRL --> CTRL : addProperty(house)
+
+    deactivate CTRL
 
     end
 
-    UI -> CTRL : getBranch()
+    end
+
+    UI -> CTRL : getAgency()
 
     activate CTRL
 
@@ -204,24 +383,22 @@ activate ADM
                             PLAT --> CTRL: agencyRepository
                         deactivate PLAT
 
-                        CTRL -> RequestRepository : getBranchList()
+                        CTRL -> agencyRepository : getAgencyList()
 
-                        activate RequestRepository
+                        activate agencyRepository
 
-                        RequestRepository --> CTRL : branchList
-                        deactivate RequestRepository
+                        agencyRepository --> CTRL : agencyList
+                        deactivate agencyRepository
 
-                        CTRL --> UI : branchList
+                        CTRL --> UI : agencyList
                     deactivate CTRL
 
         deactivate CTRL
 
-    UI --> ADM : shows branch list and asks to select one
+    UI --> ADM : shows agency list and asks to select one
     deactivate UI
-    ADM -> UI : selects a branch
+    ADM -> UI : selects an agency
     activate UI
-
-    UI --> UI : keepBranch (branchSelected)
 
      UI -> CTRL : getAgent()
 
@@ -239,12 +416,12 @@ activate ADM
                                 PLAT --> CTRL: agencyRepository
                             deactivate PLAT
 
-                            CTRL -> RequestRepository : getAgentsList()
+                            CTRL -> agencyRepository : getAgentsList()
 
-                            activate RequestRepository
+                            activate agencyRepository
 
-                            RequestRepository --> CTRL : agentsList
-                            deactivate RequestRepository
+                            agencyRepository --> CTRL : agentsList
+                            deactivate agencyRepository
 
                             CTRL --> UI : agentsList
                         deactivate CTRL
@@ -258,58 +435,19 @@ activate ADM
 
     activate UI
 
-    UI --> UI : keepAgent (agentSelected)
+    UI -> CTRL : createRequest(propertyType, requestType, agency, agent, currentDate, photoList)
 
-    alt the owner intends to list a land
-
-    UI -> CTRL : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList)
     activate CTRL
 
-    CTRL -> Req** : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList)
-
-    deactivate CTRL
-    activate Req
-
-    else the owner intends to list an apartment
-
-    UI -> CTRL : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
-        activate CTRL
-
-        CTRL -> Req : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
-
-        deactivate CTRL
-
-    else the owner intends to list a house
-
-    UI -> CTRL : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment, existenceOfAbasement, inhabitableLoft, sunExposure)
-            activate CTRL
-
-            CTRL -> Req : createRequest(agentName, propertyType, area, address, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment, existenceOfAbasement, inhabitableLoft, sunExposure)
-
-            deactivate CTRL
-
-    end
-    activate Req
-
-    Req -> Req : addRequest (request)
+    CTRL -> Req : createRequest(propertyType, requestType, agency, agent, currentDate, photoList)
 
     activate Req
-
-    Req -> Req : validateRequest (request)
-
-    activate Req
-
-    deactivate Req
-
-    deactivate Req
 
     Req --> CTRL : request
 
     deactivate Req
 
-    activate CTRL
-
-    CTRL --> UI : request
+    CTRL --> CTRL : addRequest(request)
 
     deactivate CTRL
 

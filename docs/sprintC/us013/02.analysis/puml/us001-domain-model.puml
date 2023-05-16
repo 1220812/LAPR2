@@ -1,0 +1,74 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+hide circle
+hide methods
+
+title US001 Domain Model
+
+class Adress{
+street
+city
+doorNr
+floorNr
+state
+postalCode
+}
+
+class State {
+}
+
+class District {
+}
+
+class City {
+}
+
+class PublishedAnnouncement {
+date
+photos
+price
+}
+
+
+class Property {
+area
+distanceFromCityCenter
+}
+
+class Residence {
+number of bedrooms
+number of bathrooms
+number of parking spaces
+}
+
+class House {
+basement
+inhabitable loft
+}
+
+class AvailableEquipment {
+centralHeating
+airConditioning
+}
+
+class SunExposure {
+Direction
+}
+
+
+City "1" -- "1" Adress : has >
+State "1" -- "1" District : has >
+District "1" -- "1" City : has >
+PublishedAnnouncement "1" -- "1" Property : about >
+Residence "1" -- "1" AvailableEquipment : has >
+House "1" -- "1" SunExposure : has >
+Property "1" -- "1" Adress : located at >
+Residence <|-- House
+Property <|-- Residence
+
+@enduml

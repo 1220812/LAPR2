@@ -24,7 +24,39 @@ activate Owner
 
     activate System
 
-    System --> Owner : requests data(area, location, price, distanceFromCityCentre)
+    System --> Owner : requests data(area distanceFromCityCentre, price)
+
+    deactivate System
+
+    Owner -> System : inserts data
+
+    activate System
+
+    System --> Owner : shows list of states and asks to select one
+
+    deactivate System
+
+    Owner -> System : selects a state
+
+    activate System
+
+    System --> Owner : shows list of districts and asks to select one
+
+    deactivate System
+
+    Owner -> System : selects a district
+
+    activate System
+
+    System --> Owner : show list of cities and asks to select one
+
+    deactivate System
+
+    Owner -> System : selects a city
+
+    activate System
+
+    System --> Owner : requests data (door number, floor number, street address)
 
     deactivate System
 
@@ -52,7 +84,7 @@ activate Owner
 
     end
 
-    System --> Owner : shows type of request list an asks to select one
+    System --> Owner : shows type of request list and asks to select one
 
     deactivate System
 
@@ -103,12 +135,6 @@ activate Owner
     Owner -> System : selects an agency
 
     activate System
-
-    System --> Owner : shows branch list and asks to select one
-
-    deactivate System
-
-    Owner -> System : selects a branch
 
     System --> Owner : shows agents list and asks to select one
 

@@ -1,0 +1,51 @@
+# US 006 - To create a Task 
+
+## 3. Design - User Story Realization 
+
+### 3.1. Rationale
+
+**SSD - Alternative 1 is adopted.**
+
+| Interaction ID | Question: Which class is responsible for... | Answer                      | Justification (with patterns)                                                                                 |
+|:---------------|:--------------------- |:----------------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  		     |	... interacting with the actor? | DisplayPropertiesUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		        |	... coordinating the US? | DisplayPropertiesController | Controller                                                                                                    |
+| 			  		        |	... creating a new announcements List? | announcementsRepository           | Creator (Rule 1): in the DM one Announcement has just one Property.                                                         |
+|                          |           Announcement                    |                        |                                                  |
+|                          |           Announcement                    |                        |                                                    |
+| Step 2  		     |	...knowing the specific characteristics to select?						 |                             |                                                                                                               |
+| Step 3  		     |	...saving the inputted data? | Task                        | IE: object created in step 1 has its own data.                                                                |
+| Step 4  		     |	...knowing the task categories to show? | System                      | IE: Task Categories are defined by the Administrators.                                                        |
+| 
+
+
+### Systematization ##
+
+According to the taken rationale, the conceptual classes promoted to software classes are: 
+
+ * Announcement
+ * City
+ * District
+ * Property
+ * Residence
+ * State
+
+Other software classes (i.e. Pure Fabrication) identified: 
+
+ * CharacteristicsUI
+ * DisplayPropertiesUI
+ * DisplayPropertiesController
+ * SortingUI
+
+
+## 3.2. Sequence Diagram (SD)
+
+### Alternative 1 - Full Diagram
+
+This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
+
+![Sequence Diagram - Full](svg/us001-sequence-diagram-full.svg)
+
+## 3.3. Class Diagram (CD)
+
+![Class Diagram](svg/us001-class-diagram.svg)
