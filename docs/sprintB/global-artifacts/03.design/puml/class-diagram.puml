@@ -1,72 +1,613 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class ApplicationPOT
-{
-  +static getInstance()
-  +getCurrentSession()
+class Property{
+-float price
+-String typeOfProperty
++getPrice()
++getTypeOfProperty()
 }
 
-class UserSession
-{
-  +getUserEmail()
+class Location{
+-String city
+-String state
+-String streetAddress
+-String district
+-Integer zipCode
++getCity()
++getState()
 }
 
-class Task {
-  -String reference
-  -String designation
-  -String informalDescription
-  -String technicalDescription
-  -Integer duration
-  -Double cost
-  +Task(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+class Residence{
+-Integer numberOfRooms
+-double numberOfBedrooms
+-double numberOfBathrooms
+-double numberOfParkingSpaces
++getNumberOfRooms()
++createResidence(numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
 }
 
-class Category {
-  -String id
-  -String description
+class DisplayPropertiesUI{
+}
+
+class DisplayPropertiesController{
++DisplayPropertiesController(announcementsRepository)
++displayProperties(number of rooms, type of business, type of property)
++getAnnouncements()
++sortPropertiesCity()
++sortPropertiesPrice()
++sortPropertiesState()
+}
+
+class PublishedAnnouncement{
++compare(announcement1, announcement2)
++getProperty()
++getPropertyByCharacteristics(number of rooms, type of business, type of property)
+}
+
+class Repositories{
++getAnnouncementsRepository()
++getPropertyTypeRepository()
++getRegisteredUsersRepository()
++getInstance()
++getAgencyRepository()
++getRoleRepository()
++getStoreRepository()
++getPropertyTypeListRepository()
++getStateRepository()
++getDistrictRepository()
++getRequestTypeRepository()
++getCity()
++getState()
++getDistrict()
+-Repositories()
++getStoreRepository()
++getStateRepository()
++getDistrictRepository()
++getCityRepository()
++getUserRepository()
+}
+
+class AnnouncementsRepository{
+-ArrayList<Announcement> announcements
++getAnnouncementByCharacteristics(number of rooms, type of business, type of property)
++getAnnouncement()
++sortPropertiesCityAscending()
++sortPropertiesCityDescending()
++sortPropertiesPriceAscending()
++sortPropertiesPriceDescending()
++sortPropertiesStateAscending()
++sortPropertiesStateDescending()
+}
+
+class RegisterAnnouncementController{
+-area: double
+-distance: integer
+-price: double
+-photos: String
+-bedrooms: integer
+-bathrooms: integer
+-parking: interger
+-equipment: String
+-basement: String
+-loft: String
+-sun: String
+-comissionType: String
+-comission: double
++getPropertyType()
++setPropertyType(propertyType)
++getRegisteredUsers()
++saveDataProperty(area, location, distance, price, photos)
++saveDataResidence(bedrooms, bathrooms, parking, equipment
++saveDataHouse(basement, loft, sun)
++saveDataComissionType(comissionType)
++saveDataComission(comission)
+}
+
+class PropertyTypeRepository{
++getPropertyType()
+}
+
+class RegistedUsersRepository{
++getRegisteredUsers()
+}
+
+class Announcement{
+-date
++createAnnouncement()
++setDate(date)
+}
+
+class Comission{
+-value: double
+-percentage : double
+}
+
+class Agent{
+-String name
+-Integer phoneNumber
+-String emailAddress
+-Integer citizenCardNumber
+-Integer taxNumber
+-String address
+-String agency
+}
+
+class RegisterEmployeeUI {
+-keepBaseData(name,passport's card number,\n tax number, address,  email, contact, phone number)
+-keepRole(role)
+-keepAgency(agency)
+-keepStore(store)
+}
+class RegisterEmployeeController {
++getAgencies()
++getEmployeeRoles()
++getStores()
++registerEmployee(data)
+}
+
+class AgencyRepository {
+-int id
+-String designation
+-int phoneNumber
++getAll()
++getAgencyList()
++getAgentsList()
+}
+
+class RoleRepository {
++getEmployeeRoles()
+}
+
+class StoreRepository {
++getAgencyStores(agency)
+-List<Store> stores
+-getStores() : List<Store>
+-getStoreByID(ID) : Store
+-getStoreByPhoneNumber(phoneNumber) : Store
+-getStoreByEmail(email) : Store
+-registerStore(store) : boolean
+-createStore(ID, designation, emailAddress, phoneNumber) : Store
+-createStore(ID, designation, location, emailAddress, phoneNumber) : Store
+}
+
+class PasswordGenerator {
++generate()
+}
+
+class User {
+-String name
+-Integer phoneNumber
+-String password
++User(data, role, password)
++email()
++password()
+-String emailAddress
++createUser(name, passportCardNumber, taxNumber, address, emailAddress, phoneNumber, password)
+}
+
+class Passport {
+-number
+}
+
+class TaxNumber {
+-number
+}
+
+class Agency {
+-designation
+-email
+-phoneNumber
+}
+
+class Store {
+-name
+-designation
+-email
+-String ID
+-String designation
+-Location location
+-String emailAddress
+-String phoneNumber
++Store(ID, designation,location, emailAddress, phoneNumber)
++Store(ID, designation, emailAddress, phoneNumber)
++setLocation(location)
+}
+
+class Role {
+-description
+-permissions
+}
+
+class UserRepository {
++save(user)
++List <user> user
++createUser(name, passportCardNumber, taxNumber, address, emailAddress, phoneNumber, password)
++addUser()
++checkIfUserAlreadyExists
++validateUser()
+}
+
+class SystemAdministrator {
+}
+
+class StoreManager {
+}
+
+class StoreNetworkManager {
+}
+
+class Employee {
+}
+
+class EmailService {
+- sendEmail()
++ sendRegisteredUserEmail(email, password)
+}
+
+class StoreEmployee {
+}
+
+class AgencyEmployee {
+}
+
+class CreateRequestUI{
+}
+
+class CreateRequestController{
++getPropertyTypeList()
++setPropertyType(propertyType)
++getState()
++getDistrict()
++getCity()
++createAddress(doorNumber, floorNumber, zipCode, streetAddress, city, district, state)
++createPhotograph(URI)
++getRequestTypeList()
+setRequestType(requestType)
++createProperty(area, distanceFromCityCenter, address, price)
++createResidence(numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
++createHouse(existenceOfBasement, inhabitableLoft, sunExposure)
++getAgency()
++getAgent()
++CreateRequest(propertyType, requestType,agency, agent, currentDate, photoList)
+}
+
+class PropertyTypeListRepository{
++getPropertyTypeList()
+}
+
+class StateRepository{
++getStateList()
+}
+
+class DistrictRepository{
++getDistrictList()
+}
+
+class City{
++getCityList()
++City (cityName)
+-String cityName
+-String name
+}
+
+class RequestTypeRepository{
++getRequestTypeList()
+}
+
+class Photograph{
+- String URI
+}
+
+class PhotographList{
+-addPhotographToPhotoList
+}
+
+class Request{
+-String propertyType
+-String requestType
+-String currentDate
+}
+
+class Property{
+-double area
+-double distanceFromCityCenter
+-double price
++createProperty(area, distanceFromCityCenter, address, price)
+}
+
+class AvailableEquipment{
+-boolean equipment
+}
+
+class House{
+-boolean existenceOfABasement
+-boolean inhabitableLoft
++createHouse(existenceOfABasement, inhabitableLoft, sunExposure)
+}
+
+enum SunExposure{
+sunExposure
+}
+
+class Address{
+-String street
+-String city
+-String district
+-String state
+-Integer zipcode
+-Integer doorNumber
+-Integer floorNumber
+-String streetAddress
++createAddress(doorNumber, floorNumber, zipCode, streetAddress, city, district, state)
+}
+
+class State{
+-String stateName
++State(stateName)
+}
+
+class District{
+-String districtName
++District (districtName)
+}
+
+class Rent{
+-int contractDuration
+}
+
+class RequestType{
+-String requestType
++RequestType(requestType)
+}
+
+class Owner{
+-String name
+-int phoneNumber
+-String emailAddress
+}
+
+class TaxNumber{
+-int taxNumber
+}
+
+class PassportCardNumber{
+-int passportCardNumber
+}
+
+class PropertyType{
+-String name
++getPropertyTypeList(name)
 }
 
 class Organization {
-  -String name
-  -String VatNumber
-  -String website
-  -String phone
-  -String email
-  +Organization(name, VatNumber, webSite, phone, email, postalAddress, manager)
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-  +saveTask(task)
-  -addTask(task)
-  -validateTask(task)
+-String name
+-checkIfStoreExists(store) : boolean
++Organization(name)
+'  +saveTask(task)
 }
 
-class Platform {
-  -String designation
-  +getCategories()
-  +getCategoryById(catId)
-  +getOrganizationByUserEmail(email)
+class StateRepository{
++getStateByName(stateName) : State
 }
 
-class CreateTaskController {
-  +getCategories()
-  +createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
-  +saveTask()
+class DistrictRepository{
++getDistrictByName(districtName) : District
 }
 
-class CreateTaskUI {
-
+class CityRepository {
++getCityByName(cityName) : City
 }
 
-CreateTaskUI ..> CreateTaskController
-CreateTaskController ..> Platform
-CreateTaskController ..> Category
-CreateTaskController ..> Task
-CreateTaskController ..> Organization
-CreateTaskController ..> ApplicationPOT
-CreateTaskController ..> UserSession
-Task "*" -> "1" Category : classified in
-Platform "1" --> "*" Category : defines
-Organization "1" --> "*" Task : owns
+class RegisterStoreController {
++RegisterStoreController(organizationRepository)
++getStores() : List<Store>
++createStore(ID, designation, emailAddress, phoneNumber) : Store
++createStore(ID, designation, location, emailAddress, phoneNumber) : Store
++registerStore(store) : void or boolean
++registerLocationAtStore(store, location) : void
+-createStoreLocation(streetAddress, city, district, state, zipCode) : Location
+-getSystemAdministratorFromSession()
+}
+
+class RegisterStoreUI {
+}
+
+class CreateUserUI{
+}
+
+class CreateUserController{
++createUser(name, passportCardNumber, taxNumber, address, emailAddress, phoneNumber, password)
+}
+
+class PassportCardNumber{
+-int passportCardNumber
+}
+
+class TaxNumber{
+-int taxNumber
+}
+
+class District{
+-String districtName
+}
+
+CreateUserUI .-> CreateUserController
+
+CreateUserController ..> Repositories
+
+User ---> Address
+
+Address ---|> State
+Address --|> City
+Address --|> District
+User --|> PassportCardNumber : has
+
+
+
+RegisterStoreUI .> RegisterStoreController
+
+RegisterStoreController .> Repositories : repositories
+
+Repositories -> "1" StateRepository
+Repositories -> "1" DistrictRepository
+Repositories -> "1" CityRepository
+
+RegisterStoreController ..> Store
+RegisterStoreController ..> OrganizationRepository : organizationRepository
+RegisterStoreController ..> StoreRepository : StoreRepository
+
+Repositories --> "1" OrganizationRepository
+
+OrganizationRepository --> "*" Organization
+
+RegisterStoreController ..> "1" Organization : organization
+'Store "*" --> "1" TaskCategory : taskCategory
+StoreRepository "1" --> "*" Store : store
+StateRepository "1" --> "*" State : state
+DistrictRepository "1" --> "*" District : district
+CityRepository "1" --> "*" City : city
+
+Store --> Location : location
+Location --> StateRepository : state from
+Location --> DistrictRepository : district from
+Location --> CityRepository : city from
+
+CreateRequestUI -> CreateRequestController
+
+CreateRequestController -.-> Repositories
+CreateRequestController -.-> PropertyTypeListRepository
+CreateRequestController -.-> RequestTypeRepository
+CreateRequestController -.-> AgencyRepository
+CreateRequestController -.-> CityRepository
+CreateRequestController -.-> DistrictRepository
+CreateRequestController -.-> StateRepository
+
+Repositories --> PropertyTypeListRepository
+Repositories --> RequestTypeRepository
+
+PropertyTypeListRepository -> PropertyType
+
+House --|> Residence
+House --> SunExposure
+
+Residence --|> Property
+Residence --> AvailableEquipment
+
+Property --> PropertyType : has
+Property --> "1..30" Photograph : has
+Property --> Address : has
+
+
+Agency --> Address : has
+Agency --> Agent : employs
+
+Photograph --> PhotographList : is in
+
+
+DistrictRepository --> District
+
+CityRepository --> City
+
+Owner --> Property : owns
+Owner ---> Request : creates
+Owner --> Address : has
+Owner ---> TaxNumber : has
+Owner ---> PassportCardNumber : has
+Owner ---> Agent : selects
+
+RequestType --> Rent : can be
+Request --> RequestType
+
+RequestTypeRepository --> RequestType
+Agent --> Request : revises
+Agent ---> Address : has
+Agent ---> TaxNumber : has
+Agent ---> PassportCardNumber : has
+
+Request --> Property : announces
+
+Address --> StateRepository : state from
+
+Address --> District : district from
+
+Address --> City : city from
+
+AgencyRepository --> Agent
+
+
+
+RegisterEmployeeUI ..> RegisterEmployeeController
+
+RegisterEmployeeController .left.> Repositories
+
+RegisterEmployeeController .right.> EmailService
+
+Repositories .up.> AgencyRepository
+Repositories ..up> RoleRepository
+Repositories ..> StoreRepository
+Repositories ..> PasswordGenerator
+Repositories ..> UserRepository
+
+
+AgencyRepository .left.> Agency
+RoleRepository ..> Role
+
+UserRepository ..> User
+Agent --up|> User
+SystemAdministrator --|> Employee
+
+AgencyEmployee --up|> Employee
+AgencyEmployee ..> Agency
+StoreEmployee ..left> Store
+Agent --|> StoreEmployee
+StoreManager --|> StoreEmployee
+StoreNetworkManager --|> AgencyEmployee
+
+StoreEmployee -up|> AgencyEmployee
+
+Employee --up|> User
+
+Adress <..left User
+Role <.. User
+Passport <.. User
+TaxNumber <.. User
+Store <..right Agent
+
+Agency <.. Store
+
+
+RegisterAnnouncementUI -> RegisterAnnouncementController
+
+RegisterAnnouncementController .> Repositories
+
+Repositories -> Announcement
+
+Repositories -> RegistedUsersRepository
+Repositories -> PropertyTypeRepository
+RegisterAnnouncementController ---> Announcement
+RegisterAnnouncementController ..> RegistedUsersRepository
+RegisterAnnouncementController ..> PropertyTypeRepository
+Agent -> Announcement
+
+Announcement -> Comission
+Announcement -> "has" Location
+
+Repositories -> Repositories : instance
+
+DisplayPropertiesUI .> DisplayPropertiesController
+
+DisplayPropertiesController .> Repositories : repositories
+
+Repositories -> "1" AnnouncementsRepository
+
+DisplayPropertiesController ..> AnnouncementsRepository : publishedAnnouncementsRepository
+
+AnnouncementsRepository "1" --> "*" PublishedAnnouncement
+DisplayPropertiesController ..> "1" PublishedAnnouncement : announcement
+PublishedAnnouncement "1" --> "1" Property : contains
+Property <|-- Residence
+Property "1" --> "1" Location : has a
 
 
 @enduml
