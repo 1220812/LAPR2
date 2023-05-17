@@ -34,14 +34,13 @@ public class Property {
      * @param area area of property
      * @param distanceFromTheCityCentre distance between the property and the city center
      * @param address address of property
-     * @param photographs photo list of the property
      * @param price price of the property
      */
-    public Property(double area, double distanceFromTheCityCentre, Address address, List<String> photographs, double price, PropertyType propertyType) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, double price) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
-            throw new IllegalArgumentException("Inserted value for distanceFromTheCityCentre from the city centre must be greater than 0");
+            throw new IllegalArgumentException("Inserted value for distance from the city center from the city centre must be greater than 0");
         if (address == null)
             throw new IllegalArgumentException("Address must not be null");
         if(price<=0){
@@ -49,10 +48,8 @@ public class Property {
         }
         this.area = area;
         this.distanceFromTheCityCenter = distanceFromTheCityCentre;
-        this.photographs = photographs;
         this.address = address;
         this.price = price;
-        this.propertyType = propertyType;
     }
 
     /**
@@ -89,14 +86,6 @@ public class Property {
     }
 
     /**
-     * Method to show the list of photos
-     * @return list of photos
-     */
-    public List<String> getPhotos() {
-        return photographs;
-    }
-
-    /**
      * Method to change the price
      * @param price changed property price
      */
@@ -110,13 +99,6 @@ public class Property {
      */
     public double getPrice() {
         return price;
-    }
-    /**
-     * Method to add property photos to the list
-     * @param photographs photo added to the list
-     */
-    public void setPhotos(List<String> photographs) {
-        this.photographs = photographs;
     }
 
     /**
@@ -142,24 +124,12 @@ public class Property {
         this.distanceFromTheCityCenter = distanceFromTheCityCenter;
     }
 
-    /**
-     * Method to change the type of property
-     * @param typeOfProperty changed type of property
-     */
-    public void setTypeOfProperty(PropertyType typeOfProperty) {
-        this.propertyType = typeOfProperty;
-    }
-    /**
-     * Compares two instances of Owner
-     * @param o other instance of Owner
-     * @return true if the instances are equal, false otherwise
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Property property = (Property) o;
-        return Double.compare(property.area, area) == 0 && Double.compare(property.price, price) == 0 && Double.compare(property.distanceFromTheCityCenter, distanceFromTheCityCenter) == 0 && Objects.equals(photographs, property.photographs) && Objects.equals(address, property.address) && Objects.equals(property, property.propertyType);
+        return Double.compare(property.area, area) == 0 && Double.compare(property.price, price) == 0 && Double.compare(property.distanceFromTheCityCenter, distanceFromTheCityCenter) == 0 &&  Objects.equals(address, property.address);
     }
 
     @Override
@@ -180,4 +150,9 @@ public class Property {
                 ", typeOfProperty=" + propertyType +
                 '}';
     }
+    /**
+     * This method creates a new instance of the property object and initializes its attributes with the exact same values of the original object
+     * @return a clone of the property object
+     */
+    public Property clone(){ return new Property(this.area, this.distanceFromTheCityCenter,this.address,this.price); }
 }

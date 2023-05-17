@@ -4,20 +4,40 @@ import java.util.Objects;
 
 public class Agency {
 
-    // ATTRIBUTES
-
+    /**
+     * agency id
+     */
     private final int id;
+    /**
+     * agency designation
+     */
     private String designation;
+    /**
+     * agency address
+     */
     private Address address;
+    /**
+     * agency email address
+     */
     private String emailAddress;
+    /**
+     * agency phone number
+     */
     private int phoneNumber;
+    /**
+     * agency administrator
+     */
     private Employee administrator;
 
-    // CONSTRUCTORS
-
-    public Agency(int id){
-        this.id = id;
-    }
+    /**
+     * This method creates an agency instance with id, designation, address, emailAddress, phoneNumber and administrator
+     * @param id agency id
+     * @param designation agency designation
+     * @param address agency address
+     * @param emailAddress agency email address
+     * @param phoneNumber agency phone number
+     * @param administrator agency administrator
+     */
 
     public Agency(int id, String designation, Address address, String emailAddress, int phoneNumber, Employee administrator){
         this.id = id;

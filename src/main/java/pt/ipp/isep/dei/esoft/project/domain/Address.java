@@ -198,4 +198,10 @@ public class Address{
         return "Address\n\tStreet='" + streetAddress + '\'' + "\n\tDoorNumber='" + doorNumber + "\n\tFloorNumber=" +
                 floorNumber + "\n\tPostalCode='" + zipCode + "\n\tState=" + state + "\n";
     }
+
+    /**
+     * This method creates a clone/copy of the created address
+     * @return copy of address
+     */
+    public Address clone(){ return new Address(this.streetAddress, this.doorNumber,this.floorNumber,this.zipCode,this.state,this.district,this.city); }
 }

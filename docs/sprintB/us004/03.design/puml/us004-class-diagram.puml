@@ -15,46 +15,24 @@ class CreateRequestController{
 +createAddress(doorNumber, floorNumber, zipCode, streetAddress, city, district, state)
 +createPhotograph(URI)
 +getRequestTypeList()
-setRequestType(requestType)
++setRequestType(requestType)
 +createProperty(area, distanceFromCityCenter, address, price)
-+createResidence(numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
 +createHouse(existenceOfBasement, inhabitableLoft, sunExposure)
 +getAgency()
 +getAgent()
-+CreateRequest(propertyType, requestType,agency, agent, currentDate, photoList)
++createRequest(propertyType, requestType, agency, agent, currentDate, photoList)
 }
 
 class Repositories{
 +getInstance()
-+getPropertyTypeListRepository()
++getPropertyTypeRepository()
 +getStateRepository()
-+getDistrictRepository()
-+getCityRepository()
 +getRequestTypeRepository()
 +getAgencyRepository()
-+getCity()
-+getState()
-+getDistrict()
 }
 
 class PropertyTypeListRepository{
 +getPropertyTypeList()
-}
-
-class StateRepository{
-+getStateList()
-}
-
-class DistrictRepository{
-+getDistrictList()
-}
-
-class CityRepository{
-+getCityList()
-}
-
-class RequestTypeRepository{
-+getRequestTypeList()
 }
 
 class AgencyRepository{
@@ -62,181 +40,66 @@ class AgencyRepository{
 +getAgentsList()
 }
 
-class Photograph{
-- String URI
-}
-
-
-class PhotographList{
--addPhotographToPhotoList
-}
-
-class Request{
--String propertyType
--String requestType
--String currentDate
-}
-
 class Property{
--double area
--double distanceFromCityCenter
--double price
 +createProperty(area, distanceFromCityCenter, address, price)
 }
 
 class Residence{
--double numberOfBedrooms
--double numberOfBathrooms
--double numberOfParkingSpaces
 +createResidence(numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
 }
 
-class AvailableEquipment{
--boolean equipment
-}
-
 class House{
--boolean existenceOfABasement
--boolean inhabitableLoft
-+createHouse(existenceOfABasement, inhabitableLoft, sunExposure)
++createHouse(existenceOfBasement, inhabitableLoft, sunExposure)
 }
 
-enum SunExposure{
-sunExposure
+class Photograph{
++createPhotograph(URI)
+}
+
+class PhotographList{
++addPhotographToPhotoList()
+}
+
+class AddressRepository{
++getStateList()
++getDistrictList()
++getCityList()
+}
+
+class RequestTypeRepository{
++getRequestTypeList()
 }
 
 class Address{
--int doorNumber
--int floorNumber
--String zipCode
--String streetAddress
 +createAddress(doorNumber, floorNumber, zipCode, streetAddress, city, district, state)
 }
 
-class State{
--String stateName
-+State(stateName)
+class Request{
++createRequest(propertyType, requestType, agency, agent, currentDate, photoList)
 }
 
-class District{
--String districtName
-+District (districtName)
-}
+CreateRequestUI -.-> CreateRequestController
 
-class City{
--String cityName
-+City (cityName)
-}
-
-class Rent{
--int contractDuration
-}
-
-class RequestType{
--String requestType
-+RequestType(requestType)
-}
-
-class Owner{
--String name
--int phoneNumber
--String emailAddress
-}
-
-class Agent{
--String name
--int phoneNumber
--String emailAddress
-}
-
-class TaxNumber{
--int taxNumber
-}
-
-class PassportCardNumber{
--int passportCardNumber
-}
-
-class PropertyType{
--String name
-+getPropertyTypeList(name)
-}
-
-class Agency{
--int id
--String designation
--int phoneNumber
-}
-
-CreateRequestUI -> CreateRequestController
-
-CreateRequestController -.-> Repositories
-CreateRequestController -.-> PropertyTypeListRepository
+CreateRequestController --> Repositories
 CreateRequestController -.-> RequestTypeRepository
+CreateRequestController -.-> PropertyTypeListRepository
 CreateRequestController -.-> AgencyRepository
-CreateRequestController -.-> CityRepository
-CreateRequestController -.-> DistrictRepository
-CreateRequestController -.-> StateRepository
+CreateRequestController -.-> AddressRepository
 
-Repositories --> Repositories : instances
-Repositories --> PropertyTypeListRepository
 Repositories --> RequestTypeRepository
-Repositories ---> AgencyRepository
-Repositories --> CityRepository
-Repositories --> DistrictRepository
-Repositories --> StateRepository
+Repositories --> PropertyTypeListRepository
+Repositories --> AgencyRepository
+Repositories --> AddressRepository
 
-PropertyTypeListRepository -> PropertyType
+AddressRepository --> Address
 
-House --|> Residence
-House --> SunExposure
+CreateRequestController --> Property
+CreateRequestController --> Residence
+CreateRequestController --> House
 
 Residence --|> Property
-Residence --> AvailableEquipment
 
-Property --> PropertyType : has
-Property --> "1..30" Photograph : has
-Property --> Address : has
-
-AgencyRepository --> Agency
-
-Agency --> Address : has
-Agency --> Agent : employs
-
-Photograph --> PhotographList : is in
-
-StateRepository --> State
-
-DistrictRepository --> District
-
-CityRepository --> City
-
-Owner --> Property : owns
-Owner ---> Request : creates
-Owner --> Address : has
-Owner ---> TaxNumber : has
-Owner ---> PassportCardNumber : has
-Owner ---> Agent : selects
-
-RequestType --> Rent : can be
-Request --> RequestType
-
-RequestTypeRepository --> RequestType
-Agent --> Request : revises
-Agent ---> Address : has
-Agent ---> TaxNumber : has
-Agent ---> PassportCardNumber : has
-
-Request --> Property : announces
-
-Address --> StateRepository : state from
-
-Address --> District : district from
-
-Address --> City : city from
-
-AgencyRepository --> Agent
-
+House --|> Residence
 
 
 

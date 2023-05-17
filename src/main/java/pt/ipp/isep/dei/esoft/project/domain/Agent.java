@@ -166,4 +166,10 @@ public class Agent {
                 ", address=" + address +
                 '}';
     }
+
+    /**
+     * This method creates a new instance of the agent object and initializes its attributes with the exact same values of the original object
+     * @return a clone of the agent object
+     */
+    public Agent clone(){ return new Agent(this.name,this.phoneNumber, this.emailAddress,this.address,this.taxNumber,this.passportCardNumber); }
 }

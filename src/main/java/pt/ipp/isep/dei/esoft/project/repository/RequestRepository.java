@@ -1,40 +1,48 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.Property;
-import pt.ipp.isep.dei.esoft.project.domain.Request;
-import pt.ipp.isep.dei.esoft.project.domain.State;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RequestRepository {
-    List<Request> requestList;
-    public RequestRepository (){
-        requestList = new ArrayList<>();
-    }
-    public List<Request> getRequestList() { return List.copyOf(this.requestList);
-    }
-    public boolean request(Request request) {
-        if(this.requestList.contains(request)) {
-            return false;
+    /**
+     * List of property types that exists in the system
+     */
+    private static List<String> propertyTypeList = new ArrayList<>() {
+        {
+            add("1. land");
+            add("2. apartment");
+            add("3. house");
         }
-        else {
-            Request newRequest = request.clone();
-            this.requestList.add(newRequest);
-            return true;
+    };
+    /**
+     * Get property types
+     */
+    public static void getPropertyType() {
+        for (String item : propertyTypeList) {
+            System.out.println(item);
         }
     }
-
-    public Request createRequest(Property property, double price, String type) {
-        Request request = null;
-        try {
-            request = new Request(property, price, type);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Attribute value is invalid.");
-            System.out.println(e.getMessage());
-        }
-        return request;
+    private final List<PropertyType> propertyTypeeList = new ArrayList<>();
+    public List<PropertyType> getPropertyTypeList(){
+        return List.copyOf(propertyTypeeList);
     }
-
+    /**
+     * List of requests types that exists in the system
+     */
+    private static List<String> requestTypeList = new ArrayList<>() {
+        {
+            add("1. rent");
+            add("2. sale");
+        }
+    };
+    /**
+     * Get requests types by name
+     */
+    public static void getRequestType() {
+        for (String item : requestTypeList) {
+            System.out.println(item);
+        }
+    }
 }

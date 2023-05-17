@@ -23,6 +23,7 @@ public class Request {
         this.type = type;
     }
 
+
     /**
      * Method to show the property
      * @return property

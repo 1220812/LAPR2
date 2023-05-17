@@ -34,7 +34,7 @@ public class House extends Residence {
      * @param typeOfProperty type of property
      */
     public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String> photographs, AvailableEquipment availableEquipment, boolean basement, SunExpousure sunExposure, boolean inhabitableLoft,double price, PropertyType typeOfProperty) {
-        super(address,area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,photographs,price,typeOfProperty,availableEquipment);
+        super(address,area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,price,availableEquipment);
         this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;
         this.sunExposure = sunExposure;
