@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Agent" as Agent
+participant ":System" as System
+
+activate Agent
+
+    Agent -> System : asks to see the list of property announcement requests made to myself
+
+    activate System
+
+        System --> Agent : shows the list of property announcement requests
+
+    deactivate System
+
+    Agent -> System : selects one of the property announcement requests
+
+    activate System
+
+        System --> Agent : shows request and asks if they want to publish
+
+    deactivate System
+
+    Agent -> System : selects the data
+
+    activate System
+
+        System --> Agent : publishes announcement and confirms publishment
+
+    deactivate System
+
+deactivate Agent
+
+@enduml

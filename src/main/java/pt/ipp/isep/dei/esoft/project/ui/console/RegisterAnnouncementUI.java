@@ -197,7 +197,6 @@ public class RegisterAnnouncementUI implements Runnable{
             System.out.println("Please select a valid answer.");
             dataConfirmation = ler.nextInt();
         }
-
-
+        getController();
     }
 }
