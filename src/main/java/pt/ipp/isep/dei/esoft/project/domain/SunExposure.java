@@ -1,4 +1,4 @@
 package pt.ipp.isep.dei.esoft.project.domain;
- enum SunExpousure {
+ /**public class SunExpousure {
     North, West, East, South
-}
+}*/

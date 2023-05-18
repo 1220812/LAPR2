@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class City{
+public class RequestType {
     private String name;
-    public City (String name){
+    public RequestType (String name){
         this.name = name;
     }
     public String getName() {

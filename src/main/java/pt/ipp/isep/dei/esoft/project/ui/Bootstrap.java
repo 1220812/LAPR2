@@ -1,11 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.domain.Agency;
 import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
+
 
 
 
@@ -16,6 +16,10 @@ public class Bootstrap implements Runnable {
         addTaskCategories();
         addOrganization();
         addUsers();
+        addPropertyTypes();
+        addStates();
+        addDistricts();
+        addCities();
     }
 
     private void addOrganization() {
@@ -61,13 +65,34 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd",
                 AuthenticationController.ROLE_EMPLOYEE);
     }
-    private void addAddress(){
-        AddressRepository
+    private void addPropertyTypes(){
+        PropertyTypeListRepository propertyTypeListRepository = Repositories.getInstance().getPropertyTypeListRepository();
+        propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("House"));
+        propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("Apartment"));
+        propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("Land"));
     }
-    private void addAgency(){
-        AgencyRepository agencyList = Repositories.getInstance().getAgencyRepository();
-        Agency agency1 = new Agency(1,"agency1", "", )
+    private void addStates(){
+        StateRepository stateList = Repositories.getInstance().getStateRepository();
+        stateList.addState(stateList.CreateState("California"));
+        stateList.addState(stateList.CreateState("Oregon"));
+        stateList.addState(stateList.CreateState("Arizona"));
+        stateList.addState(stateList.CreateState("Alaska"));
     }
-
-
+    private void addDistricts(){
+        DistrictRepository districtList = Repositories.getInstance().getDistrictRepository();
+        districtList.addDistrict(districtList.CreateDistrict("Northem"));
+        districtList.addDistrict(districtList.CreateDistrict("Eastern"));
+        districtList.addDistrict(districtList.CreateDistrict("Western"));
+    }
+    private void addCities(){
+        CityRepository cityList = Repositories.getInstance().getCityRepository();
+        cityList.addCity(cityList.CreateCity("San Francisco"));
+        cityList.addCity(cityList.CreateCity("Los Angeles"));
+        cityList.addCity(cityList.CreateCity("Las Vegas"));
+    }
+    private void addRequestType(){
+        RequestTypeRepository requestTypeList = Repositories.getInstance().getRequestTypeRepository();
+        requestTypeList.addRequestType(requestTypeList.CreateRequestType("Sell"));
+        requestTypeList.addRequestType(requestTypeList.CreateRequestType("Rent"));
+    }
 }

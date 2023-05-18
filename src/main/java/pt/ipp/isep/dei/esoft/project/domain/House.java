@@ -7,15 +7,15 @@ public class House extends Residence {
     /**
      * existence of a basement
      */
-    private boolean existenceOfABasement;
+    private String existenceOfABasement;
     /**
      * house sun exposure
      */
-    private SunExpousure sunExposure;
+    private String sunExposure;
     /**
      * existence of an inhabitable loft
      */
-    private boolean inhabitableLoft;
+    private String inhabitableLoft;
 
     /**
      * this method creates a house object with all the attributes
@@ -25,15 +25,13 @@ public class House extends Residence {
      * @param numberOfBathrooms number of bathrooms
      * @param numberOfBedrooms number of bedrooms
      * @param numberOfParkingSpaces number of parking spaces
-     * @param photographs house photos
      * @param availableEquipment available equipment
      * @param basement basement
      * @param sunExposure house exposure to the sun
      * @param inhabitableLoft inhabitable loft
      * @param price house price
-     * @param typeOfProperty type of property
      */
-    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<String> photographs, AvailableEquipment availableEquipment, boolean basement, SunExpousure sunExposure, boolean inhabitableLoft,double price, PropertyType typeOfProperty) {
+    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, String availableEquipment, String basement, String sunExposure, String inhabitableLoft,double price) {
         super(address,area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,price,availableEquipment);
         this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;
@@ -43,7 +41,7 @@ public class House extends Residence {
      * Method to show the basement
      * @return
      */
-    public boolean basement() {
+    public String basement() {
         return existenceOfABasement;
     }
 
@@ -52,7 +50,7 @@ public class House extends Residence {
      * @param existenceOfABasement basement
      */
 
-    public void setExistenceOfABasement(boolean existenceOfABasement) {
+    public void setExistenceOfABasement(String existenceOfABasement) {
         this.existenceOfABasement = existenceOfABasement;
     }
 
@@ -61,7 +59,7 @@ public class House extends Residence {
      * @return inhabitable loft
      */
 
-    public boolean inhabitableLoft() {
+    public String inhabitableLoft() {
         return inhabitableLoft;
     }
 
@@ -70,7 +68,7 @@ public class House extends Residence {
      * @param inhabitableLoft inhabitable loft
      */
 
-    public void setInhabitableLoft(boolean inhabitableLoft) {
+    public void setInhabitableLoft(String inhabitableLoft) {
         this.inhabitableLoft = inhabitableLoft;
     }
 
@@ -79,7 +77,7 @@ public class House extends Residence {
      * @param sunExposure sun exposure
      */
 
-    public void setSunExposure(SunExpousure sunExposure) {
+    public void setSunExposure(String sunExposure) {
         this.sunExposure = sunExposure;
     }
     /**

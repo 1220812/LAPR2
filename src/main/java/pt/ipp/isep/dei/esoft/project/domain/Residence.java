@@ -20,7 +20,7 @@ public class Residence extends Property{
     /**
      * available equipment
      */
-    private AvailableEquipment availableEquipment;
+    private String availableEquipment;
 
     /**
      *
@@ -34,7 +34,7 @@ public class Residence extends Property{
      * @param price price
      */
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, AvailableEquipment availableEquipment) {
+    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, String availableEquipment) {
         super(area, distanceFromCityCentre, address,price);
         if (numberOfBedrooms < 0 || numberOfBathrooms < 0 || numberOfParkingSpaces < 0) {
             throw new IllegalArgumentException("Provide the actual number of Bathrooms, Bedrooms and Parking Spaces" +
@@ -104,7 +104,7 @@ public class Residence extends Property{
      * Method to show the available equipment
      * @return available equipment
      */
-    public AvailableEquipment getAvailableEquipment(){
+    public String getAvailableEquipment(){
         return availableEquipment;
     }
 
@@ -112,7 +112,7 @@ public class Residence extends Property{
      * Method to change the available equipment
      * @param availableEquipment available equipment
      */
-    public void setAvailableEquipment(AvailableEquipment availableEquipment) {
+    public void setAvailableEquipment(String availableEquipment) {
         this.availableEquipment = availableEquipment;
     }
 

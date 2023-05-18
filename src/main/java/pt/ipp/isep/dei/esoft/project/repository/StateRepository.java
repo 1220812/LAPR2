@@ -1,35 +1,22 @@
 package pt.ipp.isep.dei.esoft.project.repository;
-
-import pt.ipp.isep.dei.esoft.project.domain.Property;
-import pt.ipp.isep.dei.esoft.project.domain.Request;
 import pt.ipp.isep.dei.esoft.project.domain.State;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class StateRepository {
-    private List<State> stateList;
-    public List<State> getStateList() { return List.copyOf(this.stateList);
+    private static ArrayList<State> stateList = new ArrayList<>();
+    public static void addState(State state) {
+        stateList.add(state);
     }
-    public boolean request(State state) {
-        if(this.stateList.contains(state)) {
-            return false;
-        }
-        else {
-            State newState = state.clone();
-            this.stateList.add(newState);
-            return true;
-        }
+    /**
+     * Method to show the properties type list
+     * @return properties type list
+     */
+    public static ArrayList<State> getStateList() {
+        return stateList;
     }
 
-
-    public State createState(String name) {
-        State state = null;
-        try {
-            state = new State(name);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Attribute value is invalid.");
-            System.out.println(e.getMessage());
-        }
-        return state;
+    public static State CreateState(String name) {
+        return new State(name);
     }
 }
