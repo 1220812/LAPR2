@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+hide circle
+hide methods
+
+title US009 Domain Model
+
+class Client{
+name
+phoneNumber
+}
+
+class ListOfProperties{
+properties
+}
+
+class Date{
+}
+
+class TimeSlot{
+}
+
+class Agent{
+}
+
+
+Client "1" -- "0...*" TimeSlot : propose a >
+Client "1" -- "0...*" Date : propose a >
+Client "1" -- "1" Agent : send a message to an >
+Client "1" -- "1" ListOfProperties : choose one of >
+
+Agent "1" -- "1" ListOfProperties : show a >
+
+
+
+
+@enduml
