@@ -1,4 +1,4 @@
-# US 006 - To create a Task 
+# US 001 - Unregistered user to search for properties
 
 ## 3. Design - User Story Realization 
 
@@ -32,11 +32,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CharacteristicsUI
  * DisplayPropertiesUI
  * DisplayPropertiesController
- * SortingUI
-
 
 ## 3.2. Sequence Diagram (SD)
 
