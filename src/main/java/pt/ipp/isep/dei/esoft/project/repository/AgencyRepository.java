@@ -12,14 +12,22 @@ import java.util.List;
  * The type Agency repository.
  */
 public class AgencyRepository {
-    private static ArrayList<Agency> agencyList = new ArrayList<>();
-    public static void addAgency(Agency agency){
-        agencyList.add(agency);
+    private List<Agency> agencyList = new ArrayList<>();
+
+    public void addAgency(Agency agency){
+        if(validateAgency(agency))
+            agencyList.add(agency);
     }
-    public static ArrayList<Agency> getAgencyList(){
-        return agencyList;
+
+    public boolean validateAgency(Agency agency) {
+        return !this.agencyList.contains(agency);
     }
-    public static Agency CreateAgency(int id, String designation, Address address, String emailAddress, int phoneNumber, Employee administrator){
-        return new Agency(id, designation, address, emailAddress, phoneNumber, administrator);
+
+    public List<Agency> getAgencyList(){
+        return List.copyOf(this.agencyList);
+    }
+
+    public static Agency CreateAgency (int id, String designation, Address address, String emailAddress, String phoneNumber){
+        return new Agency(id, designation, address, emailAddress, phoneNumber);
     }
 }
