@@ -63,7 +63,7 @@ public class RegisterEmployeeController {
      * Gets user repository.
      */
     public void getUserRepository() {
-         UserRepository.getUserList();
+         UserRepository.getEmployeeList();
     }
 
     /**

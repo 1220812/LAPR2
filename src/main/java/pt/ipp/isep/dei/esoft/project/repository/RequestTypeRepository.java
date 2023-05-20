@@ -9,7 +9,7 @@ public class RequestTypeRepository {
     /**
      * request types list
      */
-    private static List<RequestType> requestTypes = new ArrayList<>();
+    private final List<RequestType> requestTypes = new ArrayList<>();
     /**
      * Method to show the request type list
      */

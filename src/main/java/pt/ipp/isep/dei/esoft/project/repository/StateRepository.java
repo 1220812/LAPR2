@@ -2,21 +2,22 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.State;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StateRepository {
-    private static ArrayList<State> stateList = new ArrayList<>();
-    public static void addState(State state) {
-        stateList.add(state);
+    private List<State> stateList = new ArrayList<>();
+    public void addState(State state) {
+        if(validateState(state)){
+            stateList.add(state);
+        }
     }
-    /**
-     * Method to show the properties type list
-     * @return properties type list
-     */
-    public static ArrayList<State> getStateList() {
-        return stateList;
+    public boolean validateState(State state){
+        return !this.stateList.contains(state);
     }
-
-    public static State CreateState(String name) {
+    public List<State> getStateList(){
+        return List.copyOf(this.stateList);
+    }
+    public static State CreateState(String name){
         return new State(name);
     }
 }

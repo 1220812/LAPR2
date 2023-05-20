@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.User;
 
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,38 +14,43 @@ import java.util.List;
  */
 public class UserRepository {
     /**
-     * Represents the List of Users in the Repository
+     * Represents the list of employees in the Repository
      */
-    private static List<Employee> userList;
-    private static List<User> userList2;
-
-    public UserRepository() {
-        userList = new ArrayList<Employee>();
-        userList2 = new ArrayList<User>();
-    }
-
+    private List<Employee> employeeList = new ArrayList<>();
+    /**
+     * Represents the list of users in the Repository
+     */
+    private List<User> userList = new ArrayList<>();
 
     /**
-     * Adds a user to the repository list
-     *
-     * @param user User object to be added to the user list
+     * Method to add a new employee to the list of employees
+     * @param employee employee added
      */
-    public static void setUser(Employee user) {
-        userList.add(user);
-    }
 
+    public void addEmployee(Employee employee) {
+        if (validateEmployee(employee)){
+            employeeList.add(employee);
+        }
+    }
     /**
-     * Gets a copy of the current list of users
-     *
-     * @return Copy of the list of users
+     * Method to add a new user to the list of users
+     * @param user user added
      */
-    public static List<Employee> getUserList() {
-        return List.copyOf(userList);
+    public void addUser(User user){
+        if(validateUser(user)){
+            userList.add(user);
+        }
     }
-
-    public static void addUser(User client) {
-        userList2.add(client);
+    public boolean validateEmployee(Employee employee){
+        return !this.employeeList.contains(employee);
     }
-
-
+    public boolean validateUser(User user){
+        return !this.userList.contains(user);
+    }
+    public List<Employee> getEmployeeList(){
+        return List.copyOf(this.employeeList);
+    }
+    public List<User> getUserList(){
+        return List.copyOf(this.userList);
+    }
 }

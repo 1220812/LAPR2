@@ -3,28 +3,25 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.District;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DistrictRepository {
     /**
      * Creating a list with the property types
      */
-    private static ArrayList<District> districtList = new ArrayList<>();
-    /**
-     * Method to add new district to the list
-     * @param district district
-     */
-    public static void addDistrict(District district) {
-        districtList.add(district);
+    private List<District> districtList = new ArrayList<>();
+    public void addDistrict(District district) {
+        if(validateDistrict(district)){
+            districtList.add(district);
+        }
     }
-    /**
-     * Method to show the properties type list
-     * @return properties type list
-     */
-    public static ArrayList<District> getDistrictList() {
-        return districtList;
+    public boolean validateDistrict(District district){
+        return !this.districtList.contains(district);
     }
-
-    public static District CreateDistrict(String name) {
+    public List<District> getDistrictList(){
+        return List.copyOf(this.districtList);
+    }
+    public static District CreateDistrict(String name){
         return new District(name);
     }
 }
