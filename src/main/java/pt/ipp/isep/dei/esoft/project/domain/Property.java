@@ -24,7 +24,7 @@ public class Property {
     /**
      * photograph list of the property
      */
-    private ArrayList<Photographs> photographsList = new ArrayList<>();
+    private List<Photographs> photographsList = new ArrayList<>();
     /**
      * Method that creates a Property with all the attributes
      * @param area area of property
@@ -33,7 +33,7 @@ public class Property {
      * @param price price of the property
      */
 
-    public Property(double area, double distanceFromTheCityCentre, Address address, double price, ArrayList<Photographs> photographsList) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
