@@ -10,7 +10,7 @@ public class Owner {
     /**
      * phone number of the owner
      */
-    private int phoneNumber;
+    private String phoneNumber;
     /**
      * email address of the owner
      */
@@ -31,14 +31,14 @@ public class Owner {
      * Method that shows the phone number
      * @return phone number
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
     /**
      * Method to change the phone number
      * @param phoneNumber changed phone number
      */
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     /**
@@ -129,7 +129,7 @@ public class Owner {
      * @param passportCardNumber Owner's passport card number
      */
 
-    public Owner(String name, int phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+    public Owner(String name, String phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;

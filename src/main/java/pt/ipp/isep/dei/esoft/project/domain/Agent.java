@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
-public class Agent extends Employee{
+public class Agent {
     /**
      * name of the agent
      */
@@ -10,7 +10,7 @@ public class Agent extends Employee{
     /**
      * phone number of the agent
      */
-    private int phoneNumber;
+    private String phoneNumber;
     /**
      * email address of the agent
      */
@@ -31,14 +31,14 @@ public class Agent extends Employee{
      * Method that shows the phone number
      * @return phone number
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
     /**
      * Method to change the phone number
      * @param phoneNumber changed phone number
      */
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     /**
@@ -126,7 +126,7 @@ public class Agent extends Employee{
      * @param emailAddress email address of the owner
      */
 
-    public Agent(String name, int phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+    public Agent(String name, String phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;

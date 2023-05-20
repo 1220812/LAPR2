@@ -1,13 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 public class SystemAdministrator extends Employee {
-    public SystemAdministrator(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber, String role, String agency, String store, String address, String pass ) {
-        super(name, email, phoneNumber, passportCardNumber, taxNumber, role, agency, store, address, pass );
-
+    public SystemAdministrator(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, String role, Address address, String pass ) {
+        super(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, pass);
     }
     @Override
     public Employee clone() {
-        return new SystemAdministrator(super.getName(),super.getEmail(),super.getPhoneNumber(),super.getPassportCardNumber(),super.getTaxNumber(), super.getRole(), super.getAgency(), super.getStore(), super.getAddress(), super.getPass());
+        return new SystemAdministrator(super.getName(),super.getEmail(),super.getPhoneNumber(),super.getPassportCardNumber(),super.getTaxNumber(), super.getRole(), super.getAddress(), super.getPass());
     }
 
 }

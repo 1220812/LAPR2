@@ -23,7 +23,7 @@ public class Agency {
     /**
      * agency phone number
      */
-    private int phoneNumber;
+    private String phoneNumber;
     /**
      * agency administrator
      */
@@ -36,7 +36,7 @@ public class Agency {
 
     private static final String DEFAULT_EMAILADRESS = "no agency email";
 
-    private static final int DEFAULT_PHONENUMBER = 0;
+    private static final String DEFAULT_PHONENUMBER = "000-000-000";
 
 
     /**
@@ -48,7 +48,7 @@ public class Agency {
      * @param phoneNumber agency phone number
      */
 
-    public Agency(int id, String designation, Address address, String emailAddress, int phoneNumber){
+    public Agency(int id, String designation, Address address, String emailAddress, String phoneNumber){
         this.id = id;
         this.designation = designation;
         this.address = address;
@@ -131,7 +131,7 @@ public class Agency {
         return id;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -155,7 +155,7 @@ public class Agency {
         this.id = id;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

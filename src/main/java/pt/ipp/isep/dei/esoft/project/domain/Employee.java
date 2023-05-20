@@ -8,14 +8,12 @@ import java.util.Objects;
 public class Employee {
     private String name;
     private String email;
-    private int phoneNumber;
+    private String phoneNumber;
     private PassportCardNumber passportCardNumber;
     private TaxNumber taxNumber;
     private String role;
     private Address address;
-
     private Agency agency;
-
     private Store store;
     private String pass;
 
@@ -37,7 +35,7 @@ public class Employee {
      * @param store              The store of the employee.
      * @param pass               The password of the employee.
      */
-    public Employee(String name, String email, int phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, Store store, String pass) {
+    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, Store store, String pass) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -50,7 +48,7 @@ public class Employee {
         this.pass = pass;
     }
 
-    public Employee(String name, String email, int phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, String pass) {
+    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, String pass) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -62,7 +60,7 @@ public class Employee {
         this.pass = pass;
     }
 
-    public Employee(String name, String email, int phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, String pass) {
+    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, String pass) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -100,7 +98,7 @@ public class Employee {
      * @param pass               the password for the employee account
      * @return a new Employee object with the given information
      */
-    public static Employee newEmployee(String name, String email, int phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, Store store, String pass) {
+    public static Employee newEmployee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, Store store, String pass) {
         Employee newEmployee = new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
         return newEmployee;
     }
@@ -148,7 +146,7 @@ public class Employee {
      *
      * @return the phone number
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -157,7 +155,7 @@ public class Employee {
      *
      * @param phoneNumber the phone number
      */
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

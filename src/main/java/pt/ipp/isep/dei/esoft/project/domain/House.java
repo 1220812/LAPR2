@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import javax.annotation.processing.SupportedAnnotationTypes;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ public class House extends Residence {
     /**
      * house sun exposure
      */
-    private String sunExposure;
+    private SunExposure sunExposure;
     /**
      * existence of an inhabitable loft
      */
@@ -31,7 +32,7 @@ public class House extends Residence {
      * @param inhabitableLoft inhabitable loft
      * @param price house price
      */
-    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, ArrayList<AvailableEquipment> availableEquipment, boolean basement, String sunExposure, boolean inhabitableLoft, double price, ArrayList<Photographs> photoList) {
+    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, ArrayList<AvailableEquipment> availableEquipment, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, ArrayList<Photographs> photoList) {
         super(address,area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,price,photoList,availableEquipment);
         this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;
@@ -76,7 +77,7 @@ public class House extends Residence {
      * @param sunExposure sun exposure
      */
 
-    public void setSunExposure(String sunExposure) {
+    public void setSunExposure(SunExposure sunExposure) {
         this.sunExposure = sunExposure;
     }
     /**
