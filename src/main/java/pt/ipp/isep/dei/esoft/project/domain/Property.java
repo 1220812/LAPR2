@@ -32,6 +32,7 @@ public class Property {
      * @param address address of property
      * @param price price of the property
      */
+
     public Property(double area, double distanceFromTheCityCentre, Address address, double price, ArrayList<Photographs> photographsList) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");

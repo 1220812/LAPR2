@@ -2,8 +2,6 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 public class Photographs {
 
-    // ATTRIBUTES
-
     private int photoID;
 
     private String photoURI;
@@ -12,8 +10,6 @@ public class Photographs {
 
     private int count=PHOTO_ID_BY_DEFAULT;
     private final String PATH_TO_PNG_BY_DEFAULT = "[NO DATA]";
-
-    // CONSTRUCTORS
 
     /**
      * This method creates the Photo object with default attributes
@@ -25,7 +21,7 @@ public class Photographs {
     }
 
     /**
-     *
+     * Creates a new photograph with ID and URI
      * @param photoURI
      */
     public Photographs(String photoURI){
@@ -34,7 +30,6 @@ public class Photographs {
         this.photoURI = photoURI;
     }
 
-    // SETS AND GETS
     /**
      *  Returns the photoID of the Photo
      *

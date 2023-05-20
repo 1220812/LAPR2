@@ -5,24 +5,48 @@ public class Request {
     // ATTRIBUTES
     private Property property;
     private double price;
-    private String type;
+    private String requestType;
+
+    private Agent agent;
+    private Store store;
+    private Owner owner;
     // CONSTRUCTORS
 
-    public Request(Property property, double price, String type) {
+    /**
+     * Creates a new request with all the attributes
+     * @param property property
+     * @param price property price
+     * @param requestType request type
+     * @param agent selected agent
+     * @param store selected store
+     * @param owner owner
+     */
+    public Request(Property property, double price, String requestType, Agent agent, Store store, Owner owner) {
         if (property == null){
             throw new IllegalArgumentException("Property must not be null");
         }
         if (price <= 0){
             throw new IllegalArgumentException("Price must be greater than 0");
         }
-        if (type == null ){
-            throw new IllegalArgumentException("Invalid property type");
+        if (requestType == null ){
+            throw new IllegalArgumentException("Invalid property requestType");
+        }
+        if(agent == null){
+            throw new IllegalArgumentException("Agent must not be null");
+        }
+        if(store == null){
+            throw new IllegalArgumentException("Store must not be null");
+        }
+        if(owner == null){
+            throw new IllegalArgumentException("Owner must not be null");
         }
         this.property = property;
         this.price = price;
-        this.type = type;
+        this.requestType = requestType;
+        this.agent = agent;
+        this.store = store;
+        this.owner = owner;
     }
-
 
     /**
      * Method to show the property
@@ -64,42 +88,44 @@ public class Request {
      * Method to show the type
      * @return type
      */
-    public String getType() {
-        return type;
+    public String getRequestType() {
+        return requestType;
     }
 
     /**
      * Method to change the type
-     * @param type type
+     * @param requestType type
      */
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Request clone(){
-        return new Request(this.property, this.price, this.type);
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Request that = (Request) o;
-        return Double.compare(that.price, price) == 0 && Objects.equals(property, that.property) && Objects.equals(type, that.type);
+        Request request = (Request) o;
+        return Double.compare(request.price, price) == 0 && Objects.equals(property, request.property) && Objects.equals(requestType, request.requestType) && Objects.equals(agent, request.agent) && Objects.equals(store, request.store) && Objects.equals(owner, request.owner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(property, price, type);
+        return Objects.hash(property, price, requestType, agent, store, owner);
     }
 
     @Override
     public String toString() {
-        return "AnnouncementRequest{" +
+        return "Request{" +
                 "property=" + property +
                 ", price=" + price +
-                ", type='" + type + '\'' +
+                ", requestType='" + requestType + '\'' +
+                ", agent=" + agent +
+                ", store=" + store +
+                ", owner=" + owner +
                 '}';
+    }
+    public Request clone() {
+        return new Request(this.property,this.price,this.requestType,this.agent,this.store,this.owner);
     }
 }
