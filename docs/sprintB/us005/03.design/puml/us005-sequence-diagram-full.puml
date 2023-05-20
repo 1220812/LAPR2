@@ -62,7 +62,7 @@ activate ADM
             deactivate UI
 
             ADM -> UI : selects a state
-            activate UI
+            activate UIl
 
             UI -> STRCTRL : getDistrict()
             activate STRCTRL

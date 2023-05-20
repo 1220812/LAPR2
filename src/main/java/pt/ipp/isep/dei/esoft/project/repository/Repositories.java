@@ -1,8 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.District;
-import pt.ipp.isep.dei.esoft.project.domain.RequestType;
-
 public class Repositories {
     // From the template
     private static final Repositories instance = new Repositories();
@@ -45,12 +42,9 @@ public class Repositories {
     /**
      * Creating the object storeRepository
      */
-    DistrictRepository districtRepository = new DistrictRepository();
     StoreRepository storeRepository = new StoreRepository();
 
-    PropertyTypeListRepository propertyTypeListRepository = new PropertyTypeListRepository();
 
-    RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
 
     private Repositories() {
     }
@@ -74,7 +68,6 @@ public class Repositories {
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
     }
-
 
     // Added after by the Team
 
@@ -128,18 +121,6 @@ public class Repositories {
      * @return stateRepository
      */
     public StateRepository getStateRepository() {return stateRepository;}
-    public PropertyTypeListRepository getPropertyTypeListRepository(){
-        return propertyTypeListRepository;
-    }
-    public CityRepository getCityRepository(){
-        return cityRepository;
-    }
-    public DistrictRepository getDistrictRepository(){
-        return districtRepository;
-    }
-    public RequestTypeRepository getRequestTypeRepository(){
-        return requestTypeRepository;
-    }
 }
 
 
