@@ -5,6 +5,7 @@ public class City{
      * City name
      */
     private String name;
+    private static final String DEFAULT_NAME = "no name";
 
     /**
      * Creates a new instance of City with name
@@ -12,6 +13,13 @@ public class City{
      */
     public City (String name){
         this.name = name;
+    }
+
+    /**
+     * Creates a new instance of City with name by default
+     */
+    public City(){
+        this.name = DEFAULT_NAME;
     }
 
     /**

@@ -6,12 +6,21 @@ public class District{
      */
     private String name;
 
+    private static final String DEFAULT_NAME="none";
+
     /**
      * Creates a new instance of district with name
      * @param name district name
      */
     public District (String name){
         this.name = name;
+    }
+
+    /**
+     * Creates a new instance of district with name by default
+     */
+    public District(){
+        this.name = DEFAULT_NAME;
     }
 
     /**

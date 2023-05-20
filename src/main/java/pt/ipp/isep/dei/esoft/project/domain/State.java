@@ -7,12 +7,20 @@ public class State {
      * State name
      */
     private String name;
+    private static final String DEFAULT_NAME="none";
     /**
      * Method that creates a State with name
      * @param name name of the state
      */
     public State(String name) {
         this.name = name;
+    }
+
+    /**
+     * Creates a new instance of state with name by default
+     */
+    public State(){
+        this.name = DEFAULT_NAME;
     }
     /**
      * Method to show the state name

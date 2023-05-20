@@ -12,11 +12,11 @@ public class Address{
     /**
      * door number
      */
-    private String doorNumber;
+    private int doorNumber;
     /**
      * floor number
      */
-    private String floorNumber;
+    private int floorNumber;
     /**
      * zip code
      */
@@ -37,6 +37,14 @@ public class Address{
      * zip code length
      */
     private static final int ZIP_CODE_LENGTH = 5;
+    private static final String DEFAULT_STREET="unregistered";
+    private static final String DEFAULT_ZIPCODE="none";
+    private City DEFAULT_CITY = new City();
+    private District DEFAULT_DISTRICT = new District();
+    private State DEFAULT_STATE = new State();
+    private static final int DEFAULT_FLOOR_NUMBER = 0;
+    private static final int DEFAULT_DOOR_NUMBER = 0;
+
 
     // CONSTRUCTORS
 
@@ -50,18 +58,18 @@ public class Address{
      * @param district district
      * @param city city
      */
-    public Address(String streetAddress, String doorNumber, String floorNumber, String zipCode, State state, District district, City city) {
-        if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(doorNumber) || StringUtils.isBlank(zipCode) || state == null || district == null || city == null) {
+    public Address(String streetAddress, int doorNumber, int floorNumber, String zipCode, State state, District district, City city) {
+        if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || district == null || city == null) {
             throw new IllegalArgumentException("Invalid arguments.");
         }
         if (zipCode.length() != ZIP_CODE_LENGTH || !StringUtils.isNumeric(zipCode)) {
             throw new IllegalArgumentException("Invalid zip code.");
         }
-        if(!StringUtils.isNumeric(doorNumber)) {
-            throw new IllegalArgumentException("Door Number must contain only numbers.");
+        if(doorNumber<=0) {
+            throw new IllegalArgumentException("Door Number must be a positive value");
         }
-        if(!StringUtils.isNumeric(floorNumber)) {
-            throw new IllegalArgumentException("Floor Number must contain only numbers.");
+        if(floorNumber<=0) {
+            throw new IllegalArgumentException("Floor Number must be a positive value");
         }
         this.streetAddress = streetAddress;
         this.doorNumber = doorNumber;
@@ -70,6 +78,19 @@ public class Address{
         this.state = state;
         this.city = city;
         this.district = district;
+    }
+
+    /**
+     * Creates a new instance of Address with attributes by default
+     */
+    public Address(){
+        this.district = DEFAULT_DISTRICT;
+        this.city = DEFAULT_CITY;
+        this.state = DEFAULT_STATE;
+        this.zipCode = DEFAULT_ZIPCODE;
+        this.floorNumber = DEFAULT_FLOOR_NUMBER;
+        this.streetAddress = DEFAULT_STREET;
+        this.doorNumber = DEFAULT_DOOR_NUMBER;
     }
     /**
      * Method to show the street
@@ -82,14 +103,14 @@ public class Address{
      * Method to show the door number
      * @return door number
      */
-    public String getDoorNumber() {
+    public int getDoorNumber() {
         return doorNumber;
     }
     /**
      * Method to show the floor number
      * @return floor number
      */
-    public String getFloorNumber() {
+    public int getFloorNumber() {
         return floorNumber;
     }
     /**
@@ -131,14 +152,14 @@ public class Address{
      * Method to change the door number
      * @param doorNumber changed door number
      */
-    public void setDoorNumber(String doorNumber) {
+    public void setDoorNumber(int doorNumber) {
         this.doorNumber = doorNumber;
     }
     /**
      * Method to change the floor number
      * @param floorNumber changed floor number
      */
-    public void setFloorNumber(String floorNumber) {
+    public void setFloorNumber(int floorNumber) {
         this.floorNumber = floorNumber;
     }
     /**
