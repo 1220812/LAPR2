@@ -4,13 +4,22 @@ import java.util.Objects;
 
 public class RequestType {
     private String requestType;
+    private double contractDuration;
+
+    private static final double DEFAULT_CONTRACTDURATION = 0;
 
     /**
      * Instantiates a new Request type
-     * @param name request type
+     * @param requestType request type
      */
-    public RequestType (String name){
-        this.requestType = name;
+    public RequestType (String requestType, double contractDuration){
+        this.requestType = requestType;
+        this.contractDuration = contractDuration;
+    }
+
+    public RequestType (String requestType) {
+        this.requestType = requestType;
+        contractDuration = DEFAULT_CONTRACTDURATION;
     }
 
     /**
@@ -34,6 +43,15 @@ public class RequestType {
                 "requestType='" + requestType + '\'' +
                 '}';
     }
+
+    public void setContractDuration(double contractDuration) {
+        this.contractDuration = contractDuration;
+    }
+
+    public double getContractDuration() {
+        return contractDuration;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
