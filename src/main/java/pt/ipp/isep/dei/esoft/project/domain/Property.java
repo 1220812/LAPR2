@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,18 +18,13 @@ public class Property {
      */
     private double distanceFromTheCityCenter;
     /**
-     * property photos list
-     */
-    private List<String> photographs;
-    /**
      * property address
      */
     private Address address;
     /**
-     * Type of the property
+     * photograph list of the property
      */
-    private PropertyType propertyType;
-
+    private ArrayList<Photographs> photographsList = new ArrayList<>();
     /**
      * Method that creates a Property with all the attributes
      * @param area area of property
@@ -36,7 +32,7 @@ public class Property {
      * @param address address of property
      * @param price price of the property
      */
-    public Property(double area, double distanceFromTheCityCentre, Address address, double price) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, double price, ArrayList<Photographs> photographsList) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
@@ -50,6 +46,7 @@ public class Property {
         this.distanceFromTheCityCenter = distanceFromTheCityCentre;
         this.address = address;
         this.price = price;
+        this.photographsList = photographsList;
     }
 
     /**
@@ -123,19 +120,18 @@ public class Property {
     public void setDistanceFromTheCityCenter(double distanceFromTheCityCenter) {
         this.distanceFromTheCityCenter = distanceFromTheCityCenter;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Property property = (Property) o;
-        return Double.compare(property.area, area) == 0 && Double.compare(property.price, price) == 0 && Double.compare(property.distanceFromTheCityCenter, distanceFromTheCityCenter) == 0 &&  Objects.equals(address, property.address);
+        return Double.compare(property.area, area) == 0 && Double.compare(property.price, price) == 0 && Double.compare(property.distanceFromTheCityCenter, distanceFromTheCityCenter) == 0 && Objects.equals(address, property.address) && Objects.equals(photographsList, property.photographsList);
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(area, price, distanceFromTheCityCenter, photographs, address, propertyType);
+        return Objects.hash(area, price, distanceFromTheCityCenter, address, photographsList);
     }
+
     /**
      * Textual representation of an instance of Owner
      */
@@ -145,14 +141,13 @@ public class Property {
                 "area=" + area +
                 ", price=" + price +
                 ", distanceFromTheCityCenter=" + distanceFromTheCityCenter +
-                ", photographs=" + photographs +
                 ", address=" + address +
-                ", typeOfProperty=" + propertyType +
+                ", photographsList=" + photographsList +
                 '}';
     }
     /**
      * This method creates a new instance of the property object and initializes its attributes with the exact same values of the original object
      * @return a clone of the property object
      */
-    public Property clone(){ return new Property(this.area, this.distanceFromTheCityCenter,this.address,this.price); }
+    public Property clone(){ return new Property(this.area, this.distanceFromTheCityCenter,this.address,this.price, this.photographsList); }
 }

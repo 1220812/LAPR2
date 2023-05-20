@@ -21,4 +21,17 @@ public class State {
     public String getName() {
         return name;
     }
+    /**
+     * Method to change the state name
+     * @param name changed state name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    @Override
+    public String toString() {
+        return "State{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

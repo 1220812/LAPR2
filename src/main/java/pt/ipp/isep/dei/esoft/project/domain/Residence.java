@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class Residence extends Property{
     /**
      * available equipment
      */
-    private String availableEquipment;
+    private ArrayList<AvailableEquipment> availableEquipment = new ArrayList<>();
 
     /**
      *
@@ -34,8 +35,8 @@ public class Residence extends Property{
      * @param price price
      */
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, String availableEquipment) {
-        super(area, distanceFromCityCentre, address,price);
+    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, ArrayList<Photographs> photographsList, ArrayList<AvailableEquipment> availableEquipment) {
+        super(area, distanceFromCityCentre, address,price, photographsList);
         if (numberOfBedrooms < 0 || numberOfBathrooms < 0 || numberOfParkingSpaces < 0) {
             throw new IllegalArgumentException("Provide the actual number of Bathrooms, Bedrooms and Parking Spaces" +
                     "(>=0)");
@@ -99,23 +100,6 @@ public class Residence extends Property{
     public void setNumberOfParkingSpaces(int numberOfParkingSpaces) {
         this.numberOfParkingSpaces = numberOfParkingSpaces;
     }
-
-    /**
-     * Method to show the available equipment
-     * @return available equipment
-     */
-    public String getAvailableEquipment(){
-        return availableEquipment;
-    }
-
-    /**
-     * Method to change the available equipment
-     * @param availableEquipment available equipment
-     */
-    public void setAvailableEquipment(String availableEquipment) {
-        this.availableEquipment = availableEquipment;
-    }
-
     /**
      * Method to show the characteristics of a residence
      * @return String with the residence characteristics

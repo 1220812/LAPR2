@@ -6,27 +6,27 @@ public class AvailableEquipment {
     /**
      * equipment available
      */
-    private Boolean equipment;
+    private String equipment;
 
     /**
      * Method that creates an AvailableEquipment object
      * @param equipment equipment available
      */
 
-    public AvailableEquipment(Boolean equipment) {
+    public AvailableEquipment(String equipment) {
        this.equipment = equipment;
     }
     /**
      * Method to show if the property has equipment
      */
-    public Boolean getEquipment() {
+    public String getEquipment() {
         return equipment;
     }
     /**
      * Method to change the truth value of available equipment
      * @param equipment changed value
      */
-    public void setEquipment(Boolean equipment) {
+    public void setEquipment(String equipment) {
         this.equipment = equipment;
     }
     /**

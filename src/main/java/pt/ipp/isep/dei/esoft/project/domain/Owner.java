@@ -120,10 +120,13 @@ public class Owner {
     }
 
     /**
-     * This method creates an owner with name, phone number and email address
-     * @param name name of the owner
-     * @param phoneNumber phone number of the owner
-     * @param emailAddress email address of the owner
+     * Creates an instance of Owner with name, phone number, email address, address, tax number and passport card number
+     * @param name Owner's name
+     * @param phoneNumber Owner´s phone number
+     * @param emailAddress Owner's email address
+     * @param address Owner's address
+     * @param taxNumber Owner's tax number
+     * @param passportCardNumber Owner's passport card number
      */
 
     public Owner(String name, int phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
