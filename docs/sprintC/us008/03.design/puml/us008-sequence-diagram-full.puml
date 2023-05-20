@@ -7,25 +7,24 @@ autonumber
 
 'hide footbox
 actor "Agent" as AGENT
-participant ":RegisterAnnouncementUI" as UI
-participant ":RegisterAnnouncementController" as CTRL
+participant ":SeeRequestsUI" as UI
+participant ":SeeRequestsController" as CTRL
 participant ":Repositories" as REP
 participant ":Announcement" as ANCMT
 participant "repositories\n:Repository" as PLAT
-participant "PropertyTypeRepository\n:PropertyTypeRepository" as PropertyTypeREP
-participant "RegistedUsersRepository\n:RegistedUsersRepository" as RegistedUsersREP
+participant "RequestsRepository\n:RequestsRepository" as RequestsREP
 
 
 activate AGENT
 
-        AGENT -> UI : asks to register a new announcement
+        AGENT -> UI : asks to see the list of property announcement requests made to myself
 
         activate UI
 
             create CTRL
             UI -> CTRL** : create
 
-            UI -> CTRL : getPropertyType()
+            UI -> CTRL : getRequestsList()
             activate CTRL
 
                 CTRL -> REP : getInstance()
@@ -34,35 +33,55 @@ activate AGENT
                     REP --> CTRL: repositories
                 deactivate REP
 
-                CTRL -> PLAT : getPropertyTypeRepository()
+                CTRL -> PLAT : getRequestsRepository()
                 activate PLAT
 
-                    PLAT --> CTRL: propertyTypeRepository
+                    PLAT --> CTRL: requestsRepository
                 deactivate PLAT
 
-                CTRL -> PropertyTypeREP : getPropertyType()
-                activate PropertyTypeREP
+                CTRL -> RequestsREP : getRequests()
+                activate RequestsREP
 
-                    PropertyTypeREP --> CTRL : propertyTypeList
-                deactivate PropertyTypeREP
+                    RequestsREP --> CTRL : requestsList
+                deactivate RequestsREP
 
-                CTRL --> UI : propertyTypeList
+                CTRL --> UI : requestsList
             deactivate CTRL
 
-            UI --> AGENT : shows property type list and asks to sleect one
+            UI --> AGENT : shows the list of property announcement requests
         deactivate UI
 
-    AGENT -> UI : selects a property type (land, house, appartment)
+    AGENT -> UI : selects one of the property announcement requests
     activate UI
-    UI -> CTRL : setPropertyType(propertyType)
+    UI -> CTRL : getRequestInfo(request)
     activate CTRL
-    CTRL --> UI : propertyType selected
+    CTRL -> REP : getInstance()
+    activate REP
+    REP --> CTRL : repositories
+    deactivate REP
+    CTRL -> PLAT : getRequestsRepository()
+    activate PLAT
+    PLAT --> CTRL : requestsRepository
+    deactivate PLAT
+    CTRL -> RequestsREP : getRequest(request)
+    activate RequestsREP
+    RequestsREP --> CTRL : requestInfo
+    deactivate RequestsREP
+    CTRL --> UI : requestInfo
     deactivate CTRL
 
-        UI --> AGENT : requests data to verify if the owner is registed
+        UI --> AGENT : shows request and asks if they want to publish
     deactivate UI
 
-    AGENT -> UI : types the requested data (owner's name)
+    AGENT -> UI : selects the publish option
+    activate UI
+
+    opt selects to publish
+
+
+
+    end opt
+
     activate UI
         UI -> CTRL : getRegisteredUsers()
         activate CTRL

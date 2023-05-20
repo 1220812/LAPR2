@@ -28,7 +28,23 @@ activate Agent
 
     deactivate System
 
-    Agent -> System : selects the data
+    Agent -> System : selects the publish option
+
+    activate System
+
+    System --> Agent : asks for comission type
+
+    deactivate System
+
+    Agent -> System : selects the comission type
+
+    activate System
+
+    System --> Agent : asks for the comission
+
+    deactivate System
+
+    Agent -> System : types comission
 
     activate System
 

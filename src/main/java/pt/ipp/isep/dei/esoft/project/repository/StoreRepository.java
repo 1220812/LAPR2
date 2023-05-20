@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Localization;
 import pt.ipp.isep.dei.esoft.project.domain.Store;
 
 import java.util.ArrayList;
