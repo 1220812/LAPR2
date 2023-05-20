@@ -7,7 +7,7 @@ public class Agency {
     /**
      * agency id
      */
-    private final int id;
+    private int id;
     /**
      * agency designation
      */

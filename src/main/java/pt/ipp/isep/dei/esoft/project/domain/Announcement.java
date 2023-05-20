@@ -1,52 +1,38 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 public class Announcement {
+    /**
+     * announcement publish date
+     */
+    private LocalDate date;
+    /**
+     * announcement property
+     */
+    private Property property;
+    /**
+     * announcement commision type
+     */
+    private String comissionType;
+    /**
+     * announcement comission
+     */
+    private double comission;
 
-    /**
-     * area of the property
-     */
-    private double area;
-    /**
-     * price of the property
-     */
-    private double price;
-    /**
-     * distance between the property and the city center
-     */
-    private double distanceFromTheCityCenter;
-    /**
-     * property photos list
-     */
-    private List<String> photographs;
-    /**
-     * property address
-     */
-    private Address address;
-    /**
-     * Type of the property
-     */
-    private PropertyType propertyType;
-    private Property property = new Property(area, distanceFromTheCityCenter, address,price);
-
-    private String date;
-    private static final String DATE_POR_OMISSAO = "no date";
-
-    public Announcement(Property property, String date) {
+    public Announcement(Property property, LocalDate date, String comissionType, double comission) {
         this.property = property;
         this.date = date;
+        this.comissionType = comissionType;
+        this.comission = comission;
     }
 
-    public Announcement() {
-        date = DATE_POR_OMISSAO;
-    }
-
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -54,12 +40,33 @@ public class Announcement {
         return property;
     }
 
-    @Override
-    public String toString() {
-        return (property.toString() +
-                "date - " + date + "\n");
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
+    public double getComission() {
+        return comission;
+    }
 
+    public void setComission(double comission) {
+        this.comission = comission;
+    }
 
+    public String getComissionType() {
+        return comissionType;
+    }
+
+    public void setComissionType(String comissionType) {
+        this.comissionType = comissionType;
+    }
+
+    @Override
+    public String toString() {
+        return "Announcement{" +
+                "date=" + date +
+                ", property=" + property +
+                ", comissionType='" + comissionType + '\'' +
+                ", comission=" + comission +
+                '}';
+    }
 }
