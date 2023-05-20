@@ -4,34 +4,31 @@ import java.util.Objects;
 
 public class Store {
     private String designation;
-    private String location;
+    private Address address;
     private int phoneNumber;
     private String emailAddress;
     private int ID;
 
-    private Localization localization;
+    private static final int DEFAULT_ID = 0;
+    private static final String DEFAULT_DESIGNATION = "no store designation";
+    private static final Address DEFAULT_ADRESS = new Address();
+    private static final String DEFAULT_EMAILADRESS = "no store email";
+    private static final int DEFAULT_PHONENUMBER = 0;
 
-    private static final String DEFAULT_DESIGNATION = "No name";
-    private static final String DEFAULT_LOCATION = "No location";
-    private static final int DEFAULT_PHONENUMBER = 000000000;
-    private static final String DEFAULT_EMAILADDRESS = "No name";
-    private static final int DEFAULT_ID = 00000000;
-
-    public Store(String designation, String location, int phoneNumber, String emailAddress, int ID, Localization localization) {
+    public Store(String designation, Address address, int phoneNumber, String emailAddress, int ID) {
         this.designation = designation;
-        this.location = location;
+        this.address = address;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.ID = ID;
-        this.localization = localization;
     }
 
     public Store(){
-        this.designation = DEFAULT_DESIGNATION;
-        this.location = DEFAULT_LOCATION;
-        this.phoneNumber = DEFAULT_PHONENUMBER;
-        this.emailAddress = DEFAULT_EMAILADDRESS;
-        this.ID = DEFAULT_ID;
+        designation = DEFAULT_DESIGNATION;
+        address = DEFAULT_ADRESS;
+        phoneNumber = DEFAULT_PHONENUMBER;
+        emailAddress = DEFAULT_EMAILADRESS;
+        ID = DEFAULT_ID;
     }
 
     public String getDesignation() {
@@ -42,12 +39,12 @@ public class Store {
         this.designation = designation;
     }
 
-    public String getLocation() {
-        return location;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public int getPhoneNumber() {
@@ -74,37 +71,32 @@ public class Store {
         this.ID = ID;
     }
 
-    public Localization getLocalization (){return localization;}
-
-    public void setLocalization (Localization localization){this.localization=localization;}
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Store store = (Store) o;
-        return phoneNumber == store.phoneNumber && ID == store.ID && Objects.equals(designation, store.designation) && Objects.equals(location, store.location) && Objects.equals(emailAddress, store.emailAddress) && Objects.equals(localization, store.localization);
+        return phoneNumber == store.phoneNumber && ID == store.ID && Objects.equals(designation, store.designation) && Objects.equals(address, store.address) && Objects.equals(emailAddress, store.emailAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(designation, location, phoneNumber, emailAddress, ID, localization);
+        return Objects.hash(designation, address, phoneNumber, emailAddress, ID);
     }
 
     @Override
     public String toString() {
-        return "Branch{" +
+        return "Store{" +
                 "designation='" + designation + '\'' +
-                ", location='" + location + '\'' +
+                ", address=" + address +
                 ", phoneNumber=" + phoneNumber +
                 ", emailAddress='" + emailAddress + '\'' +
-                ", ID=" + ID + '\'' +
-                ", localization=" + localization  +
+                ", ID=" + ID +
                 '}';
     }
 
     @Override
     protected Store clone() throws CloneNotSupportedException {
-        return new Store (this.designation, this.location, this.phoneNumber, this.emailAddress,this.ID, this.localization);
+        return new Store (this.designation, this.address, this.phoneNumber, this.emailAddress, this.ID);
     }
 }

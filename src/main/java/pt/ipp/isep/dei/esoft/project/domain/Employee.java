@@ -9,30 +9,19 @@ public class Employee {
     private String name;
     private String email;
     private int phoneNumber;
-    private int passportCardNumber;
-    private int taxNumber;
+    private PassportCardNumber passportCardNumber;
+    private TaxNumber taxNumber;
     private String role;
-    private String Address;
+    private Address address;
 
-    private String agency;
+    private Agency agency;
 
-    private String store;
+    private Store store;
     private String pass;
 
 
-    private static final String DEFAULT_NOME = "No name";
-    private static final String DEFAULT_EMAIL = "No email";
-    private static final int DEFAULT_PHONENUMBER = 0;
-    private static final int DEFAULT_PASSPORTNUMBER = 0;
-    private static final int DEFAULT_TAXNUMBER = 0;
-
-    private static final String DEFAULT_ROLE = "No role";
-
-    private static final String DEFAULT_AGENCY = "No agency";
-    private static final String DEFAULT_STORE = "No store";
-    private static final String DEFAULT_ADDRESS = "No passport";
-
-    private static final String DEFAULT_PASSWORD = "No password";
+    private static final Agency DEFAULT_AGENCY = new Agency();
+    private static final Store DEFAULT_STORE = new Store();
 
     /**
      * Creates a new Employee object with the given attributes.
@@ -48,18 +37,44 @@ public class Employee {
      * @param store              The store of the employee.
      * @param pass               The password of the employee.
      */
-    public Employee(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber, String address, String role, String agency, String store, String pass) {
+    public Employee(String name, String email, int phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, Store store, String pass) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.passportCardNumber = passportCardNumber;
         this.taxNumber = taxNumber;
-        this.Address = address;
+        this.address = address;
         this.role = role;
         this.agency = agency;
         this.store = store;
         this.pass = pass;
     }
+
+    public Employee(String name, String email, int phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, String pass) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.passportCardNumber = passportCardNumber;
+        this.taxNumber = taxNumber;
+        this.address = address;
+        this.role = role;
+        this.agency = agency;
+        this.pass = pass;
+    }
+
+    public Employee(String name, String email, int phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, String pass) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.passportCardNumber = passportCardNumber;
+        this.taxNumber = taxNumber;
+        this.address = address;
+        this.role = role;
+        this.pass = pass;
+    }
+
+
+
 
     /**
      * Creates a new Employee object with the given attributes.
@@ -68,22 +83,6 @@ public class Employee {
      */
     public Employee(String email) {
         this.email = email;
-    }
-
-    /**
-     * Creates a new Employee object with no attributes.
-     */
-    public Employee() {
-        this.name = DEFAULT_NOME;
-        this.email = DEFAULT_EMAIL;
-        this.phoneNumber = DEFAULT_PHONENUMBER;
-        this.passportCardNumber = DEFAULT_PASSPORTNUMBER;
-        this.taxNumber = DEFAULT_TAXNUMBER;
-        this.Address = DEFAULT_ADDRESS;
-        this.role = DEFAULT_ROLE;
-        this.agency = DEFAULT_AGENCY;
-        this.store = DEFAULT_STORE;
-        this.pass = DEFAULT_PASSWORD;
     }
 
     /**
@@ -101,7 +100,7 @@ public class Employee {
      * @param pass               the password for the employee account
      * @return a new Employee object with the given information
      */
-    public static Employee newEmployee(String name, String email, int phoneNumber, int passportCardNumber, int taxNumber, String address, String role, String agency, String store, String pass) {
+    public static Employee newEmployee(String name, String email, int phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, Store store, String pass) {
         Employee newEmployee = new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
         return newEmployee;
     }
@@ -167,7 +166,7 @@ public class Employee {
      *
      * @return the passport card number
      */
-    public int getPassportCardNumber() {
+    public PassportCardNumber getPassportCardNumber() {
         return passportCardNumber;
     }
 
@@ -176,7 +175,7 @@ public class Employee {
      *
      * @param passportCardNumber the passport card number
      */
-    public void setPassportCardNumber(int passportCardNumber) {
+    public void setPassportCardNumber(PassportCardNumber passportCardNumber) {
         this.passportCardNumber = passportCardNumber;
     }
 
@@ -185,7 +184,7 @@ public class Employee {
      *
      * @return the tax number
      */
-    public int getTaxNumber() {
+    public TaxNumber getTaxNumber() {
         return taxNumber;
     }
 
@@ -194,7 +193,7 @@ public class Employee {
      *
      * @param taxNumber the tax number
      */
-    public void setTaxNumber(int taxNumber) {
+    public void setTaxNumber(TaxNumber taxNumber) {
         this.taxNumber = taxNumber;
     }
 
@@ -203,8 +202,8 @@ public class Employee {
      *
      * @return the address
      */
-    public String getAddress() {
-        return Address;
+    public Address getAddress() {
+        return address;
     }
 
     /**
@@ -212,8 +211,7 @@ public class Employee {
      *
      * @param address the address
      */
-    public void setAddress(String address) {
-        Address = address;
+    public void setAddress(Address address) { this.address = address;
     }
 
     /**
@@ -239,7 +237,7 @@ public class Employee {
      *
      * @return the agency
      */
-    public String getAgency() {
+    public Agency getAgency() {
         return agency;
     }
 
@@ -248,7 +246,7 @@ public class Employee {
      *
      * @param agency the agency
      */
-    public void setAgency(String agency) {
+    public void setAgency(Agency agency) {
         this.agency = agency;
     }
 
@@ -257,7 +255,7 @@ public class Employee {
      *
      * @return the store
      */
-    public String getStore() {
+    public Store getStore() {
         return store;
     }
 
@@ -266,7 +264,7 @@ public class Employee {
      *
      * @param store the store
      */
-    public void setStore(String store) {
+    public void setStore(Store store) {
         this.store = store;
     }
 
@@ -288,11 +286,6 @@ public class Employee {
         this.pass = pass;
     }
 
-    /**
-     * Returns a string representation of the Employee object, including all of its fields.
-     *
-     * @return a string representation of the Employee object
-     */
     @Override
     public String toString() {
         return "Employee{" +
@@ -302,12 +295,20 @@ public class Employee {
                 ", passportCardNumber=" + passportCardNumber +
                 ", taxNumber=" + taxNumber +
                 ", role='" + role + '\'' +
-                ", Address='" + Address + '\'' +
-                ", agency='" + agency + '\'' +
-                ", store='" + store + '\'' +
+                ", address=" + address +
+                ", agency=" + agency +
+                ", store=" + store +
                 ", pass='" + pass + '\'' +
                 '}';
     }
+
+    /**
+     * Returns a string representation of the Employee object, including all of its fields.
+     *
+     * @return a string representation of the Employee object
+     */
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
-public class Agent {
+public class Agent extends Employee{
     /**
      * name of the agent
      */

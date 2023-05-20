@@ -27,7 +27,17 @@ public class Agency {
     /**
      * agency administrator
      */
-    private Employee administrator;
+
+    private static final int DEFAULT_ID = 0;
+
+    private static final String DEFAULT_DESIGNATION = "no agency designation";
+
+    private static final Address DEFAULT_ADRESS = new Address();
+
+    private static final String DEFAULT_EMAILADRESS = "no agency email";
+
+    private static final int DEFAULT_PHONENUMBER = 0;
+
 
     /**
      * This method creates an agency instance with id, designation, address, emailAddress, phoneNumber and administrator
@@ -36,16 +46,22 @@ public class Agency {
      * @param address agency address
      * @param emailAddress agency email address
      * @param phoneNumber agency phone number
-     * @param administrator agency administrator
      */
 
-    public Agency(int id, String designation, Address address, String emailAddress, int phoneNumber, Employee administrator){
+    public Agency(int id, String designation, Address address, String emailAddress, int phoneNumber){
         this.id = id;
         this.designation = designation;
         this.address = address;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
-        this.administrator = administrator;
+    }
+
+    public Agency(){
+        designation = DEFAULT_DESIGNATION;
+        address = DEFAULT_ADRESS;
+        phoneNumber = DEFAULT_PHONENUMBER;
+        emailAddress = DEFAULT_EMAILADRESS;
+        id = DEFAULT_ID;
     }
 
     /**
@@ -89,13 +105,15 @@ public class Agency {
      * @return String with te Agency characteristics
      */
 
-    public String toString(){
-        return String.format("Agency nº%d%n" +
-                        "Name: %s%n" +
-                        "Location: %s%n" +
-                        "Email Address: %s%n" +
-                        "Phone Number: %s%n"
-                , this.id, this.designation, this.address, this.emailAddress, this.phoneNumber);
+    @Override
+    public String toString() {
+        return "Agency{" +
+                "id=" + id +
+                ", designation='" + designation + '\'' +
+                ", address=" + address +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                '}';
     }
 
     /**
@@ -103,5 +121,41 @@ public class Agency {
      * @return a clone of the agency object
      */
 
-    public Agency clone(){ return new Agency(this.id, this.designation, this.address, this.emailAddress, this.phoneNumber, this.administrator); }
+    public Agency clone(){ return new Agency(this.id, this.designation, this.address, this.emailAddress, this.phoneNumber); }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
