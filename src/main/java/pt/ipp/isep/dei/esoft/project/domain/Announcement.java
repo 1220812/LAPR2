@@ -21,11 +21,15 @@ public class Announcement {
      */
     private double comission;
 
-    public Announcement(Property property, LocalDate date, String comissionType, double comission) {
+    private RequestType requestType;
+
+
+    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType) {
         this.property = property;
         this.date = date;
         this.comissionType = comissionType;
         this.comission = comission;
+        this.requestType = requestType;
     }
 
     public LocalDate getDate() {
