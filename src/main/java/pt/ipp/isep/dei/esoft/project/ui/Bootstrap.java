@@ -66,7 +66,7 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_EMPLOYEE);
     }
     private void addPropertyTypes(){
-        PropertyTypeListRepository propertyTypeListRepository = Repositories.getInstance().getPropertyTypeListRepository();
+        PropertyTypeRepository propertyTypeListRepository = Repositories.getInstance().getPropertyTypeListRepository();
         propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("House"));
         propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("Apartment"));
         propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("Land"));

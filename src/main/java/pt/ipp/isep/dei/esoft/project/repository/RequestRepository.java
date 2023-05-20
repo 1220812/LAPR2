@@ -4,45 +4,35 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class RequestRepository {
     /**
-     * List of property types that exists in the system
+     * List of requests
      */
-    private static List<String> propertyTypeList = new ArrayList<>() {
-        {
-            add("1. land");
-            add("2. apartment");
-            add("3. house");
-        }
+    private static List<Request> requests = new ArrayList<>() {
     };
     /**
      * Get property types
      */
-    public static void getPropertyType() {
-        for (String item : propertyTypeList) {
-            System.out.println(item);
-        }
+    public List<Request> getRequests(){
+        return List.copyOf(requests);
     }
-    private final List<PropertyType> propertyTypeeList = new ArrayList<>();
-    public List<PropertyType> getPropertyTypeList(){
-        return List.copyOf(propertyTypeeList);
+    private boolean validateRequest(Request request) {
+        boolean isValid = !requests.contains(request);
+        return isValid;
     }
-    /**
-     * List of requests types that exists in the system
-     */
-    private static List<String> requestTypeList = new ArrayList<>() {
-        {
-            add("1. rent");
-            add("2. sale");
+    public List<Request> add(Request request){
+        requests.add(request);
+        Optional<Request> newRequest = Optional.empty();
+        boolean operationSuccess = false;
+        if(validateRequest(request)){
+            newRequest = Optional.of(request.clone());
+            operationSuccess = requests.add(newRequest.get());
         }
-    };
-    /**
-     * Get requests types by name
-     */
-    public static void getRequestType() {
-        for (String item : requestTypeList) {
-            System.out.println(item);
+        if(!operationSuccess){
+            newRequest = Optional.empty();
         }
+        return requests;
     }
 }
