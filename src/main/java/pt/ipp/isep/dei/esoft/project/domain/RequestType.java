@@ -3,13 +3,13 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.Objects;
 
 public class RequestType {
-    private String requestType;
+    private RequestType requestType;
 
     /**
      * Instantiates a new Request type
      * @param name request type
      */
-    public RequestType (String name){
+    public RequestType (RequestType name){
         this.requestType = name;
     }
 
@@ -17,7 +17,7 @@ public class RequestType {
      * Shows the request type
      * @return
      */
-    public String getRequestType() {
+    public RequestType getRequestType() {
         return requestType;
     }
 
@@ -25,7 +25,7 @@ public class RequestType {
      * Changes the request type
      * @param requestType changed request type
      */
-    public void setRequestType(String requestType) {
+    public void setRequestType(RequestType requestType) {
         this.requestType = requestType;
     }
     @Override
