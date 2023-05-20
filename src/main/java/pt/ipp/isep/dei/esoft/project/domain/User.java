@@ -7,12 +7,12 @@ public class User {
     private String name;
     private String emailAddress;
 
-    private int phoneNumber;
+    private String phoneNumber;
     private String password;
 
     private final String NAME_BY_DEFAULT = "[NO DATA]";
 
-    private final int PHONE_NUMBER_BY_DEFAULT = 0000000000;
+    private final String PHONE_NUMBER_BY_DEFAULT = "000-000-000";
     private final String EMAIL_ADDRESS_BY_DEFAULT = "[NO DATA]";
     private final String PASSWORD_BY_DEFAULT = "[NO DATA]";
 
@@ -31,7 +31,7 @@ public class User {
      * @param emailAddress
      * @param password
      */
-    public User(String name, String emailAddress, String password, int phoneNumber) {
+    public User(String name, String emailAddress, String password, String phoneNumber) {
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
@@ -95,7 +95,7 @@ public class User {
      * @return phone number
      */
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -103,7 +103,7 @@ public class User {
      * Method to change the phoneNumber
      * @param phoneNumber
      */
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
     // TOSTRING

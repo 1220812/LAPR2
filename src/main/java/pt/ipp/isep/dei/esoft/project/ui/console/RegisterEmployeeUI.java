@@ -74,6 +74,8 @@ public class RegisterEmployeeUI implements Runnable {
         street = Utils.readLineFromConsole("Street:");
         state = Utils.readLineFromConsole("State:");
         zipCode = Utils.readIntegerFromConsole("zipCode:");
+
+
         while (!controller.checkEmail(email)) {
             email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
         }
