@@ -7,6 +7,8 @@ public class Repositories {
     OrganizationRepository organizationRepository = new OrganizationRepository();
     AuthenticationRepository authenticationRepository = new AuthenticationRepository();
 
+    UserRepository userRepository = new UserRepository();
+
     // Added after by the Team
 
     static RoleRepository roleRepository = new RoleRepository();
@@ -18,7 +20,7 @@ public class Repositories {
     /**
      * Creating the object addressRepository
      */
-    AddressRepository addressRepository = new AddressRepository();
+//    AddressRepository addressRepository = new AddressRepository();
     /**
      * Creating the object requestRepository
      */
@@ -32,7 +34,7 @@ public class Repositories {
     /**
      * Creating the object stateRepository
      */
-    StateRepository stateRepository = new StateRepository();
+//    StateRepository stateRepository = new StateRepository();
 
     /**
      * Creating the object cityRepository
@@ -43,6 +45,8 @@ public class Repositories {
      * Creating the object storeRepository
      */
     StoreRepository storeRepository = new StoreRepository();
+
+    StateRepository stateRepository = new StateRepository();
 
 
 
@@ -72,6 +76,14 @@ public class Repositories {
     // Added after by the Team
 
 
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     /**
      * Method to show the agencyRepository
      *
@@ -86,9 +98,9 @@ public class Repositories {
      *
      * @return addressRepository
      */
-    public AddressRepository getAddressRepository() {
-        return addressRepository;
-    }
+//    public AddressRepository getAddressRepository() {
+//        return addressRepository;
+//    }
 
 
     /**
