@@ -1,0 +1,102 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "System Administrator" as ADM
+participant ":ShowLegacyDataUI" as UI
+participant ":ShowLegacyDataController" as CTRL
+participant ":Repositories" as Repositories
+participant "repositories\n:Repositories" as repositories
+participant ":LegacyDataRepository" as legacyData
+participant ":agency" as agency
+participant ":Announcement" as Announcement
+
+    activate ADM
+
+        ADM --> UI : Asks to show LegacyDataFiles List
+
+        activate UI
+
+        UI --> CTRL : Asks to show LegacyDataFiles List
+
+        activate CTRL
+
+        CTRL --> Repositories : getInstance
+
+
+        activate Repositories
+
+           Repositories --> CTRL : repositories
+
+           deactivate Repositories
+
+           CTRL --> repositories : show LegacyDataRepository
+
+           activate repositories
+
+           repositories --> CTRL : LegacyDataRepository
+
+           deactivate repositories
+
+           CTRL --> legacyData : getLegacyDataList
+           activate legacyData
+
+           legacyData --> CTRL : LegacyDataList
+
+           deactivate legacyData
+
+           CTRL --> UI : LegacyDataList
+
+           deactivate CTRL
+
+           UI --> ADM : LegacyDataList
+
+deactivate UI
+
+
+ADM --> UI : Shows selected LegacyData
+        activate UI
+
+          loop  while (LegacyData.hasNextLine())
+
+
+
+            UI --> UI : create Request
+
+            UI --> CTRL : create Announcement
+
+            activate CTRL
+
+            CTRL --> Announcement** : create
+
+            activate Announcement
+
+            Announcement --> CTRL : Announcement
+
+            deactivate Announcement
+
+            CTRL --> agency : addAnnouncement
+
+            activate agency
+
+
+            deactivate CTRL
+            deactivate agency
+
+end loop
+
+        UI --> ADM : Show operation result
+        deactivate UI
+
+
+
+    deactivate ADM
+
+
+
+
+@enduml
