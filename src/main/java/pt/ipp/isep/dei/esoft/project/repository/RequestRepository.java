@@ -34,16 +34,16 @@ public class RequestRepository {
 
         requestList.add(request);
 
-        Optional<Request> newEquipment = Optional.empty();
+        Optional<Request> newRequest = Optional.empty();
         boolean operationSuccess = false;
 
         if (validateRequest(request)) {
-            newEquipment = Optional.of((Request) request.clone());
-            operationSuccess = requestList.add((Request) newEquipment.get());
+            newRequest = Optional.of((Request) request.clone());
+            operationSuccess = requestList.add((Request) newRequest.get());
         }
 
         if (!operationSuccess) {
-            newEquipment = Optional.empty();
+            newRequest = Optional.empty();
         }
         return requestList;
     }
