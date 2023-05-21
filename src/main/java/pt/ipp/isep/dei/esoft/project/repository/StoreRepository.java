@@ -1,11 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.Agency;
 import pt.ipp.isep.dei.esoft.project.domain.Store;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The type Store repository.
@@ -22,9 +22,6 @@ public class StoreRepository {
             storeList.add(store);
     }
 
-    public boolean validateStore(Store store) {
-        return !this.storeList.contains(store);
-    }
 
     public List<Store> getStoreList(){
         return List.copyOf(this.storeList);
@@ -35,4 +32,29 @@ public class StoreRepository {
         addStore(store);
         return store;
     }
+
+    public List<Store> add(Store store) {
+
+        storeList.add(store);
+
+        Optional<Store> newStore = Optional.empty();
+        boolean operationSuccess = false;
+
+        if (validateStore(store)) {
+            newStore = Optional.of((Store) store.clone());
+            operationSuccess = storeList.add((Store) newStore.get());
+        }
+
+        if (!operationSuccess) {
+            newStore = Optional.empty();
+        }
+        return storeList;
+    }
+
+    private boolean validateStore(Store store) {
+        boolean isValid = !storeList.contains(store);
+        return isValid;
+    }
+
+
 }
