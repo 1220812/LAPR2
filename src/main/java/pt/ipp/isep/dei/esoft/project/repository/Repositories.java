@@ -16,18 +16,9 @@ public class Repositories {
      */
     AgencyRepository agencyRepository = new AgencyRepository();
     /**
-     * Creating the object addressRepository
-     */
-    AddressRepository addressRepository = new AddressRepository();
-    /**
      * Creating the object requestRepository
      */
     RequestRepository requestRepository = new RequestRepository();
-
-    /**
-     * Creating the object localizationRepository
-     */
-    LocalizationRepository localizationRepository = new LocalizationRepository();
 
     /**
      * Creating the object stateRepository
@@ -43,6 +34,21 @@ public class Repositories {
      * Creating the object storeRepository
      */
     StoreRepository storeRepository = new StoreRepository();
+
+    AnnouncementRepository announcementRepository = new AnnouncementRepository();
+
+    DistrictRepository districtRepository = new DistrictRepository();
+
+    PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
+
+    RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
+
+    UserRepository userRepository = new UserRepository();
+
+    SunExposureRepository sunExposureRepository = new SunExposureRepository();
+
+    AvailableEquipmentRepository availableEquipmentRepository = new AvailableEquipmentRepository();
+
 
 
 
@@ -81,15 +87,6 @@ public class Repositories {
         return agencyRepository;
     }
 
-    /**
-     * Method to show the addressRepository
-     *
-     * @return addressRepository
-     */
-    public AddressRepository getAddressRepository() {
-        return addressRepository;
-    }
-
 
     /**
      * Method to show the requestRepository
@@ -99,13 +96,6 @@ public class Repositories {
     public RequestRepository getRequestRepository() {
         return requestRepository;
     }
-
-    /**
-     * Method to show the localizationRepository
-     *
-     * @return localizationRepository
-     */
-    public LocalizationRepository getLocationRepository(){return localizationRepository;}
 
     /**
      * Method to show the storeRepository
@@ -121,6 +111,38 @@ public class Repositories {
      * @return stateRepository
      */
     public StateRepository getStateRepository() {return stateRepository;}
+
+    public AnnouncementRepository getAnnouncementRepository() {
+        return announcementRepository;
+    }
+
+    public CityRepository getCityRepository() {
+        return cityRepository;
+    }
+
+    public DistrictRepository getDistrictRepository() {
+        return districtRepository;
+    }
+
+    public PropertyTypeRepository getPropertyTypeRepository() {
+        return propertyTypeRepository;
+    }
+
+    public RequestTypeRepository getRequestTypeRepository() {
+        return requestTypeRepository;
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public SunExposureRepository getSunExposureRepository() {
+        return sunExposureRepository;
+    }
+
+    public AvailableEquipmentRepository getAvailableEquipmentRepository() {
+        return availableEquipmentRepository;
+    }
 }
 
 
