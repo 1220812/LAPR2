@@ -14,13 +14,7 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 
 **From the specifications document:**
 
-> A list of available properties must be shown, sorted from the most recent entries to the oldest.
 
-> The message must also include the client's name, phone number, preferred date and time slot (from x hour to y hour) for the property visit.
-
-> A client may post multiple visit requests, but only if those do not overlap each other.
-
-> The client must receive a success message when the request is valid and registered in the system.
 
 
 **From the client clarifications:**
@@ -69,6 +63,18 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 >
 > **Answer:**  This quote is not from US9...Please be careful and rigorous!
 
+> **Question:** Can the client make multiple schedules in a single message for different properties, or can they only have 1 property per message with multiple schedules?
+>
+> **Answer:** The client can only schedule a visit to one property at a time. Each time the client schedules a visit, the client should specify, for each day, one or multiple time slots. The time slots should not overlap. If the client wants to visit more properties, the client should use/run again the visit scheduling feature available in the system.
+
+> **Question:** Should the scheduling be limited to a time interval ? e.g 08:00 - 20:00 ?
+>
+> **Answer:** No. I just answered this question. Please check previous questions before making a repeated question.
+
+> **Question:** When writing the information to schedule a meeting with the agent, the preferred date and the time slot of the visit should be checked. The client can choose any day of the year? And any time of the day?
+>
+> **Answer:** Any date and time can be specified. We are always available to our customers!
+
 > **Question:**
 >
 > **Answer:**
@@ -77,7 +83,13 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 >
 > **Answer:**
 
+> **Question:**
+>
+> **Answer:**
 
+> **Question:**
+>
+> **Answer:**
 
 
 
@@ -85,14 +97,26 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 
 ### 1.3. Acceptance Criteria
 
-* *AC1:* 
-* *AC2:* 
-* *AC3:* 
+* *AC1:* A list of available properties must be shown, sorted from the most recent entries to the oldest.
+* *AC2:* The message must also include the client's name, phone number, preferred date and time slot (from x hour to y hour) for the property visit.
+* *AC3:* A client may post multiple visit requests, but only if those do not overlap each other.
+* *AC4:* The client must receive a success message when the request is valid and registered in the system.
+* *AC5:* Time format must be 24-hour format.
+* *AC6:* 
+* *AC7:*
+* *AC8:*
+* *AC9:*
+* *AC10:*
+* *AC11:*
+* *AC12:*
+* *AC13:*
+
+
 
 ### 1.4. Found out Dependencies
 
 
-*
+* In US007 you to register a client
 
 
 ### 1.5 Input and Output Data
@@ -100,13 +124,26 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 
 **Input Data:**
 
-* 
+* Typed Data:
+  
+  * Preferred date for the visit
+  * Time slot of the visit
+
+* Selected data:
+  * chosen property for the visit
+
 
 **Output Data:**
 
-* 
+* List of properties sorted from the most recent entries to the oldest.
+* (In)Success of the operation
+* Show message: "Want to try more?"
+
+
+
+
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram](svg/us001-system-sequence-diagram.svg)
+![System Sequence Diagram](svg/us009-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
