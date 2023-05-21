@@ -61,4 +61,7 @@ public class Role {
                 "description='" + description + '\'' +
                 '}';
     }
+    public Role clone(){
+        return new Role(this.description);
+    }
 }

@@ -50,10 +50,7 @@ public class Bootstrap implements Runnable {
     }
 
     private void addPropertyTypes() {
-        PropertyTypeRepository propertyTypeListRepository = Repositories.getInstance().getPropertyTypeListRepository();
-        propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("House"));
-        propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("Apartment"));
-        propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("Land"));
+        PropertyType Land = new PropertyType()
     }
 
     private void addStates() {
