@@ -43,4 +43,7 @@ public class City{
                 "name='" + name + '\'' +
                 '}';
     }
+    public City clone(){
+        return new City(this.name);
+    }
 }

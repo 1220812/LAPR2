@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.domain.AvailableEquipment;
 import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
@@ -95,4 +96,11 @@ public class Bootstrap implements Runnable {
         requestTypeList.addRequestType(requestTypeList.CreateRequestType("Sell"));
         requestTypeList.addRequestType(requestTypeList.CreateRequestType("Rent"));
     }
+    private void addAvailableEquipment(){
+        AvailableEquipment e1 = new AvailableEquipment("central heating");
+        AvailableEquipment e2 = new AvailableEquipment("air conditioning");
+        AvailableEquipmentRepository.addAvailableEquipment(e1);
+        AvailableEquipmentRepository.addAvailableEquipment(e2);
+    }
+
 }

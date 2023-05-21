@@ -44,4 +44,7 @@ public class District{
                 "name='" + name + '\'' +
                 '}';
     }
+    public District clone(){
+        return new District(this.name);
+    }
 }

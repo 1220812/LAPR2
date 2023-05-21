@@ -42,4 +42,7 @@ public class State {
                 "name='" + name + '\'' +
                 '}';
     }
+    public State clone(){
+        return new State(this.name);
+    }
 }
