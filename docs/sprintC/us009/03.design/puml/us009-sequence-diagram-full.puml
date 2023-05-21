@@ -6,17 +6,14 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Unregistered User" as User
+actor "Client" as User
 participant ":ScheduleVisitUI" as System
 participant ":ScheduleVisitController" as Controller
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as repositories
 participant "publishedAnnouncementsRepository\n:PublishedAnnouncementsRepository" as PropertyRepository
-participant "PublishedAnnouncement" as publishedAnnouncement
-participant "Property" as property
-participant "Comparator" as comparator
-participant "City" as city
-participant "State" as state
+participant ":userRepository\nUserRepository" as UserRepository
+participant "messageRepository\n:MessageRepository" as Message
 
 
 
@@ -43,16 +40,22 @@ activate repositories
 repositories --> Controller: ListOfProperties
 deactivate repositories
 
-Controller -> PropertyRepository : getPublishedAnnouncements()
+Controller -> PropertyRepository : getSortedProperties()
 activate PropertyRepository
 
-PropertyRepository --> Controller : announcementsList
+PropertyRepository --> Controller : ListOfPropertiesSorted
 deactivate PropertyRepository
+loop while true
+
+Controller --> System : ListOfPropertiesSorted
+
+
+
 
 
 deactivate Controller
-loop
-System --> User : show a list of properties
+
+System --> User : show a list of properties sorted from the most recent entries to the oldest
 deactivate System
 
 
@@ -60,365 +63,64 @@ deactivate System
 User -> System : Select the property
 activate System
 
-System --> User : request data (client's name, phone number,  preferred date and \ntime slot (from x hour to y hour) for the property visit)
+System --> User : request data (preferred date and \ntime slot (from x hour to y hour) for the property visit)
 deactivate System
 
 User -> System : types requested data
 activate System
 
-System->Controller: displayProperties(number of rooms,\ntype of business,\ntype of property)
+
+System -> Controller: getUser()
 activate Controller
 
-Controller->RepositorySingleton: getInstance()
-activate RepositorySingleton
+Controller -> UserRepository: getUser()
+activate UserRepository
 
-RepositorySingleton-->Controller: repositories
-deactivate RepositorySingleton
+UserRepository --> Controller: User
+deactivate UserRepository
 
-Controller -> repositories : getPublishedAnnouncementsRepository()
-activate repositories
-
-repositories --> Controller: publishedAnnouncementsRepository
-deactivate repositories
-
-Controller -> PropertyRepository : displayProperties(number of rooms, type of business, type of property)
-activate PropertyRepository
-
-
-
-PropertyRepository -> publishedAnnouncement : getAnnouncementByCharacteristics(number of rooms, type of business, type of property)
-activate publishedAnnouncement
-
-publishedAnnouncement -> property : getPropertyByCharacteristics(number of rooms, type of business, type of property)
-activate property
-
-property --> publishedAnnouncement : property
-deactivate property
-
-publishedAnnouncement --> PropertyRepository : publishedAnnouncement
-deactivate publishedAnnouncement
-
-
-
-PropertyRepository --> Controller : announcementsList
-deactivate PropertyRepository
-
-Controller --> System : announcementsList
+System->Controller: User
 deactivate Controller
 
-System --> User : displays list of properties with the specific data \nsorted by most recently added (by default) and asks \nwhat sorting option the user wants to select
-deactivate System
+System -> System : save phoneNumber and name
 
-
-
-
-User -> System : sorts properties by price/city/state (ascending or descending).
-activate System
-
-
-
-
-System -> Controller: sortPropertiesPrice()
+System -> Controller : checkIfValid()
 activate Controller
 
-Controller->RepositorySingleton: getInstance()
-activate RepositorySingleton
+Controller -> Message : checkIfValid()
+activate Message
 
-RepositorySingleton-->Controller: repositories
-deactivate RepositorySingleton
+Message --> Controller: return boolean
+deactivate Message
 
-Controller -> repositories : getAnnouncementsRepository()
-activate repositories
-
-repositories --> Controller: announcementsRepository
-deactivate repositories
-
-alt In case the chosen option is price (ascending order)
-
-Controller -> PropertyRepository: sortPropertiesByPriceAscending()
-activate PropertyRepository
-
-
-
-PropertyRepository -> publishedAnnouncement: sortPropertiesByPriceAscending()
-activate publishedAnnouncement
-
-loop
-
-publishedAnnouncement -> property: getProperty()
-activate property
-
-property -> property: getPrice()
-
-property --> publishedAnnouncement: property
-deactivate property
-
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
-activate comparator
-
-comparator-->publishedAnnouncement: comparisonResult
-deactivate comparator
-
-end
-
-publishedAnnouncement-->PropertyRepository: announcementsListByPriceAscending
-deactivate publishedAnnouncement
-
-PropertyRepository-->Controller: announcementsListByPriceAscending
-deactivate PropertyRepository
-
-
-
-
-else In case the chosen option is price (descending order)
-
-Controller -> PropertyRepository: sortPropertiesByPriceDescending()
-activate PropertyRepository
-
-PropertyRepository -> publishedAnnouncement: sortPropertiesByPriceDescending()
-activate publishedAnnouncement
-
-loop
-
-publishedAnnouncement -> property: getProperty()
-activate property
-
-property -> property: getPrice()
-
-property --> publishedAnnouncement: property
-deactivate property
-
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
-activate comparator
-
-comparator-->publishedAnnouncement: comparisonResult
-deactivate comparator
-
-end
-
-publishedAnnouncement-->PropertyRepository: announcementsListByPriceDescending
-deactivate publishedAnnouncement
-
-PropertyRepository-->Controller: announcementsListByPriceDescending
-deactivate PropertyRepository
-
-end
-
-Controller-->System: announcementsListByPrice
+Controller --> System: return boolean
 deactivate Controller
 
 
-else In case the option is city (ascending or descending)
+alt if true
 
-System -> Controller: sortPropertiesCity()
+System -> Controller: addMessage()
 activate Controller
 
-Controller->RepositorySingleton: getInstance()
-activate RepositorySingleton
+Controller -> Message: addMessage()
+activate Message
 
-RepositorySingleton-->Controller: repositories
-deactivate RepositorySingleton
 
-Controller -> repositories : getAnnouncementsRepository()
-activate repositories
-
-repositories --> Controller: announcementsRepository
-deactivate repositories
-
-alt In case the chosen option is city (ascending order)
-
-Controller -> PropertyRepository: sortPropertiesByCityAscending(price)
-activate PropertyRepository
-
-PropertyRepository -> publishedAnnouncement: sortPropertiesByCityAscending()
-activate publishedAnnouncement
-
-loop
-
-publishedAnnouncement -> property: getProperty()
-activate property
-
-property -> city: getCity()
-activate city
-
-city-->property: cityName
-deactivate city
-
-property -> state: getState()
-activate state
-
-state-->property: stateName
-deactivate state
-
-property --> publishedAnnouncement: property
-deactivate property
-
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
-activate comparator
-
-comparator-->publishedAnnouncement: comparisonResult
-deactivate comparator
+System -> User: show sucess of operation
 
 end
-
-publishedAnnouncement-->PropertyRepository: announcementsListByCityAscending
-deactivate publishedAnnouncement
-
-PropertyRepository-->Controller: announcementsListByCityAscending
-deactivate PropertyRepository
-
-
-else In case the chosen option is city name (descending order)
-
-Controller -> PropertyRepository: sortPropertiesByCityDescending()
-activate PropertyRepository
-
-PropertyRepository -> publishedAnnouncement: sortPropertiesByCityDescending()
-activate publishedAnnouncement
-
-loop
-
-publishedAnnouncement -> property: getProperty()
-activate property
-
-property -> city: getCity()
-activate city
-
-city-->property: cityName
-deactivate city
-
-property -> state: getState()
-activate state
-
-state-->property: stateName
-deactivate state
-
-property --> publishedAnnouncement: property
-deactivate property
-
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
-activate comparator
-
-comparator-->publishedAnnouncement: comparisonResult
-deactivate comparator
-
-end
-
-publishedAnnouncement-->PropertyRepository: announcementsListByCityDescending
-deactivate publishedAnnouncement
-
-PropertyRepository-->Controller: announcementsListByCityDescending
-deactivate PropertyRepository
-
-end
-
-Controller-->System: announcementsListByCity
-deactivate Controller
+alt if false
 
 
 
-else In case the option is state (ascending or descending)
 
-System -> Controller: sortPropertiesState()
-activate Controller
-
-Controller->RepositorySingleton: getInstance()
-activate RepositorySingleton
-
-RepositorySingleton-->Controller: repositories
-deactivate RepositorySingleton
-
-Controller -> repositories : getAnnouncementsRepository()
-activate repositories
-
-repositories --> Controller: announcementsRepository
-deactivate repositories
-
-
-alt In case the chosen option is state (ascending order)
-
-Controller -> PropertyRepository: sortPropertiesByStateAscending()
-activate PropertyRepository
-
-PropertyRepository -> publishedAnnouncement: sortPropertiesByStateAscending()
-activate publishedAnnouncement
-
-loop
-
-publishedAnnouncement -> property: getProperty()
-activate property
-
-property -> state: getState()
-activate state
-
-state-->property: stateName
-deactivate state
-
-property --> publishedAnnouncement: property
-deactivate property
-
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
-activate comparator
-
-comparator-->publishedAnnouncement: comparisonResult
-deactivate comparator
-
-end
-
-publishedAnnouncement-->PropertyRepository: announcementsListByStateAscending
-deactivate publishedAnnouncement
-
-PropertyRepository-->Controller: announcementsListByStateAscending
-deactivate PropertyRepository
-
-
-else In case the chosen option is state (descending order)
-
-Controller -> PropertyRepository: sortPropertiesByStateDescending()
-activate PropertyRepository
-
-PropertyRepository -> publishedAnnouncement: sortPropertiesByStateDescending()
-activate publishedAnnouncement
-
-loop
-
-publishedAnnouncement -> property: getProperty()
-activate property
-
-property -> state: getState()
-activate state
-
-state-->property: stateName
-deactivate state
-
-property --> publishedAnnouncement: property
-deactivate property
-
-publishedAnnouncement -> comparator: compare(announcement1, announcement2)
-activate comparator
-
-comparator-->publishedAnnouncement: comparisonResult
-deactivate comparator
-
-end
-
-publishedAnnouncement-->PropertyRepository: announcementsListByStateDescending
-deactivate publishedAnnouncement
-
-PropertyRepository-->Controller: announcementsListByStateDescending
-deactivate PropertyRepository
+System -> User: show insucess of operation
 
 
 end
 
-Controller-->System: announcementsListByState
-deactivate Controller
-
-
+System -> User: Show message: "Want to try more?"
 end
-
-System --> User : displays a list of the properties sorted by the sorting \noption chosen by the user.
-deactivate System
 
 
 
