@@ -50,8 +50,6 @@ public class Repositories {
     AvailableEquipmentRepository availableEquipmentRepository = new AvailableEquipmentRepository();
 
 
-
-
     private Repositories() {
     }
 
