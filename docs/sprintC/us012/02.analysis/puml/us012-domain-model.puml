@@ -5,70 +5,89 @@ skinparam shadowing false
 
 'left to right direction
 
+skinparam classAttributeIconSize 0
+
 hide circle
 hide methods
 
-title US001 Domain Model
+'title Domain Model
 
-class Adress{
-street
-city
-doorNr
-floorNr
-state
-postalCode
+'class Platform {
+'  -description
+'}
+
+class Announcement{
+id
+publicationDate
+Agent_comission
+comissionType
 }
 
-class State {
-}
-
-class District {
-}
-
-class City {
-}
-
-class PublishedAnnouncement {
-date
-photos
+class Request{
+requestType
+propertyType
+agency
+agent
 price
 }
 
-
-class Property {
+class Property{
+Location
 area
 distanceFromCityCenter
+owner
+photos
 }
 
-class Residence {
-number of bedrooms
-number of bathrooms
-number of parking spaces
+class Building{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpacings
+equipment
 }
 
-class House {
+class Land{
+}
+
+class Apartment {
+
+}
+
+class House{
 basement
-inhabitable loft
+inhabitableLoft
+sunExposure
 }
 
-class AvailableEquipment {
-centralHeating
-airConditioning
+class User{
+name
+citizensCardNumber
+taxNumber
+address
+email
+telephoneNumber
+password
+role
 }
 
-class SunExposure {
-Direction
+class System_Administrator{
+
+}
+
+class Legacy_System_Files {
 }
 
 
-City "1" -- "1" Adress : has >
-State "1" -- "1" District : has >
-District "1" -- "1" City : has >
-PublishedAnnouncement "1" -- "1" Property : about >
-Residence "1" -- "1" AvailableEquipment : has >
-House "1" -- "1" SunExposure : has >
-Property "1" -- "1" Adress : located at >
-Residence <|-- House
-Property <|-- Residence
+System_Administrator --|> User
+System_Administrator --> Legacy_System_Files
+Legacy_System_Files "1" --> "0..*" Announcement : contains
+
+Property --|> Building
+Property --|> Land
+Building --|> Apartment
+Building --|> House
+Request --> Property : contains
+Announcement --> Request : contains
+
 
 @enduml
