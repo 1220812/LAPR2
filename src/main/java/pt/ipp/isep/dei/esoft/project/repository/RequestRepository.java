@@ -20,9 +20,6 @@ public class RequestRepository {
         return List.copyOf(requestList);
     }
 
-    private boolean validateRequest(Request request) {
-        return !this.requestList.contains(request);
-    }
 
     public void addRequest(Request request) {
         if (validateRequest(request)) {
@@ -31,5 +28,27 @@ public class RequestRepository {
     }
     public static Request CreateRequest(Property property, double price, String requestType, Agent agent, Store store, Owner owner){
         return new Request(property,price,requestType,agent,store,owner);
+    }
+
+    public List<Request> add(Request request) {
+
+        requestList.add(request);
+
+        Optional<Request> newEquipment = Optional.empty();
+        boolean operationSuccess = false;
+
+        if (validateRequest(request)) {
+            newEquipment = Optional.of((Request) request.clone());
+            operationSuccess = requestList.add((Request) newEquipment.get());
+        }
+
+        if (!operationSuccess) {
+            newEquipment = Optional.empty();
+        }
+        return requestList;
+    }
+    private boolean validateRequest(Request request) {
+        boolean isValid = !requestList.contains(request);
+        return isValid;
     }
 }
