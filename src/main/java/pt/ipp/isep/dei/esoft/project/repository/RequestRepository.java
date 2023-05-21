@@ -10,29 +10,26 @@ public class RequestRepository {
     /**
      * List of requests
      */
-    private static List<Request> requests = new ArrayList<>() {
+    private static List<Request> requestList = new ArrayList<>() {
     };
+
     /**
      * Get property types
      */
-    public List<Request> getRequests(){
-        return List.copyOf(requests);
+    public List<Request> getRequests() {
+        return List.copyOf(requestList);
     }
+
     private boolean validateRequest(Request request) {
-        boolean isValid = !requests.contains(request);
-        return isValid;
+        return !this.requestList.contains(request);
     }
-    public List<Request> add(Request request){
-        requests.add(request);
-        Optional<Request> newRequest = Optional.empty();
-        boolean operationSuccess = false;
-        if(validateRequest(request)){
-            newRequest = Optional.of(request.clone());
-            operationSuccess = requests.add(newRequest.get());
+
+    public void addRequest(Request request) {
+        if (validateRequest(request)) {
+            requestList.add(request);
         }
-        if(!operationSuccess){
-            newRequest = Optional.empty();
-        }
-        return requests;
+    }
+    public static Request CreateRequest(Property property, double price, String requestType, Agent agent, Store store, Owner owner){
+        return new Request(property,price,requestType,agent,store,owner);
     }
 }

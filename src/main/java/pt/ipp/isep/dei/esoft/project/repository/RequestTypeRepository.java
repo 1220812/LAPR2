@@ -6,13 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestTypeRepository {
-    /**
-     * request types list
-     */
     private final List<RequestType> requestTypes = new ArrayList<>();
-    /**
-     * Method to show the request type list
-     */
+
     public List<RequestType> getRequestTypeList(){
         return List.copyOf(requestTypes);
     }
@@ -25,5 +20,11 @@ public class RequestTypeRepository {
     public List<RequestType> add(RequestType requestType){
         getRequestTypeList().add(requestType);
         return requestTypes;
+    }
+    public boolean validateRequestType(RequestType requestType){
+        return !this.requestTypes.contains(requestType);
+    }
+    public List<RequestType> getRequestTypes(){
+        return List.copyOf(this.requestTypes);
     }
 }
