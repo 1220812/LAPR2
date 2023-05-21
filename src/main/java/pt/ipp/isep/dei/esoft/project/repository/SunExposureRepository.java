@@ -1,10 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Agency;
 import pt.ipp.isep.dei.esoft.project.domain.SunExposure;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SunExposureRepository {
     private List<SunExposure> sunExposureList = new ArrayList<>();
@@ -14,11 +14,31 @@ public class SunExposureRepository {
             sunExposureList.add(sunExposure);
     }
 
-    public boolean validateSunExposure(SunExposure sunExposure) {
-        return !this.sunExposureList.contains(sunExposure);
-    }
 
     public List<SunExposure> getSunExposureList(){
         return List.copyOf(this.sunExposureList);
+    }
+
+    public List<SunExposure> add(SunExposure sunExposure) {
+
+        sunExposureList.add(sunExposure);
+
+        Optional<SunExposure> newSunExposure = Optional.empty();
+        boolean operationSuccess = false;
+
+        if (validateSunExposure(sunExposure)) {
+            newSunExposure = Optional.of((SunExposure) sunExposure.clone());
+            operationSuccess = sunExposureList.add((SunExposure) newSunExposure.get());
+        }
+
+        if (!operationSuccess) {
+            newSunExposure = Optional.empty();
+        }
+        return sunExposureList;
+    }
+
+    private boolean validateSunExposure(SunExposure sunExposure) {
+        boolean isValid = !sunExposureList.contains(sunExposure);
+        return isValid;
     }
 }

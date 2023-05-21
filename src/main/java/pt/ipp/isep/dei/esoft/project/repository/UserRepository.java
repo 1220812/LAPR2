@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Represents UserRepository
@@ -44,13 +45,51 @@ public class UserRepository {
     public boolean validateEmployee(Employee employee){
         return !this.employeeList.contains(employee);
     }
-    public boolean validateUser(User user){
-        return !this.userList.contains(user);
-    }
     public List<Employee> getEmployeeList(){
         return List.copyOf(this.employeeList);
     }
     public List<User> getUserList(){
         return List.copyOf(this.userList);
+    }
+
+    public List<User> add(User user) {
+
+        userList.add(user);
+
+        Optional<User> newUser = Optional.empty();
+        boolean operationSuccess = false;
+
+        if (validateUser(user)) {
+            newUser = Optional.of((User) user.clone());
+            operationSuccess = userList.add((User) newUser.get());
+        }
+
+        if (!operationSuccess) {
+            newUser = Optional.empty();
+        }
+        return userList;
+    }
+
+    private boolean validateUser(User user) {
+        boolean isValid = !userList.contains(user);
+        return isValid;
+    }
+
+    public List<Employee> add(Employee employee) {
+
+        employeeList.add(employee);
+
+        Optional<Employee> newEmployee = Optional.empty();
+        boolean operationSuccess = false;
+
+        if (validateEmployee(employee)) {
+            newEmployee = Optional.of((Employee) employee.clone());
+            operationSuccess = employeeList.add((Employee) newEmployee.get());
+        }
+
+        if (!operationSuccess) {
+            newEmployee = Optional.empty();
+        }
+        return employeeList;
     }
 }
