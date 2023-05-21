@@ -1,26 +1,22 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.domain.AvailableEquipment;
-import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
-import pt.ipp.isep.dei.esoft.project.domain.Organization;
-import pt.ipp.isep.dei.esoft.project.domain.Employee;
-
-
 
 
 public class Bootstrap implements Runnable {
 
     //Add some task categories to the repository as bootstrap
     public void run() {
-        addTaskCategories();
         addOrganization();
         addUsers();
         addPropertyTypes();
         addStates();
         addDistricts();
         addCities();
+        addRequestType();
+        addAvailableEquipment();
     }
 
     private void addOrganization() {
@@ -31,20 +27,6 @@ public class Bootstrap implements Runnable {
         organization.addEmployee(new Employee("admin@this.app"));
         organization.addEmployee(new Employee("employee@this.app"));
         organizationRepository.add(organization);
-    }
-
-    private void addTaskCategories() {
-        //TODO: add bootstrap Task Categories here
-
-        //get task category repository
-        TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
-        taskCategoryRepository.add(new TaskCategory("Analysis"));
-        taskCategoryRepository.add(new TaskCategory("Design"));
-        taskCategoryRepository.add(new TaskCategory("Implementation"));
-        taskCategoryRepository.add(new TaskCategory("Development"));
-        taskCategoryRepository.add(new TaskCategory("Testing"));
-        taskCategoryRepository.add(new TaskCategory("Deployment"));
-        taskCategoryRepository.add(new TaskCategory("Maintenance"));
     }
 
     private void addUsers() {
@@ -61,46 +43,54 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("Agent", "agent@this.app", "agent",
                 AuthenticationController.ROLE_AGENT);
 
-        authenticationRepository.addUserWithRole("Owner", "owner@this.app","owner", AuthenticationController.ROLE_OWNER);
+        authenticationRepository.addUserWithRole("Owner", "owner@this.app", "owner", AuthenticationController.ROLE_OWNER);
 
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd",
                 AuthenticationController.ROLE_EMPLOYEE);
     }
-    private void addPropertyTypes(){
+
+    private void addPropertyTypes() {
         PropertyTypeRepository propertyTypeListRepository = Repositories.getInstance().getPropertyTypeListRepository();
         propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("House"));
         propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("Apartment"));
         propertyTypeListRepository.addPropertyType(propertyTypeListRepository.CreatePropertyType("Land"));
     }
-    private void addStates(){
-        StateRepository stateList = Repositories.getInstance().getStateRepository();
-        stateList.addState(stateList.CreateState("California"));
-        stateList.addState(stateList.CreateState("Oregon"));
-        stateList.addState(stateList.CreateState("Arizona"));
-        stateList.addState(stateList.CreateState("Alaska"));
-    }
-    private void addDistricts(){
-        DistrictRepository districtList = Repositories.getInstance().getDistrictRepository();
-        districtList.addDistrict(districtList.CreateDistrict("Northem"));
-        districtList.addDistrict(districtList.CreateDistrict("Eastern"));
-        districtList.addDistrict(districtList.CreateDistrict("Western"));
-    }
-    private void addCities(){
-        CityRepository cityList = Repositories.getInstance().getCityRepository();
-        cityList.addCity(cityList.CreateCity("San Francisco"));
-        cityList.addCity(cityList.CreateCity("Los Angeles"));
-        cityList.addCity(cityList.CreateCity("Las Vegas"));
-    }
-    private void addRequestType(){
-        RequestTypeRepository requestTypeList = Repositories.getInstance().getRequestTypeRepository();
-        requestTypeList.addRequestType(requestTypeList.CreateRequestType("Sell"));
-        requestTypeList.addRequestType(requestTypeList.CreateRequestType("Rent"));
-    }
-    private void addAvailableEquipment(){
-        AvailableEquipment e1 = new AvailableEquipment("central heating");
-        AvailableEquipment e2 = new AvailableEquipment("air conditioning");
-        AvailableEquipmentRepository.addAvailableEquipment(e1);
-        AvailableEquipmentRepository.addAvailableEquipment(e2);
+
+    private void addStates() {
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        State state3 = new State("Arizona");
+        Repositories.getInstance().getStateRepository().addState(state1);
+        Repositories.getInstance().getStateRepository().addState(state2);
+        Repositories.getInstance().getStateRepository().addState(state3);
     }
 
+    private void addDistricts() {
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        District district3 = new District("Western");
+        Repositories.getInstance().getDistrictRepository().addDistrict(district1);
+        Repositories.getInstance().getDistrictRepository().addDistrict(district2);
+        Repositories.getInstance().getDistrictRepository().addDistrict(district3);
+    }
+
+    private void addCities() {
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
+        Repositories.getInstance().getCityRepository().addCity(city1);
+        Repositories.getInstance().getCityRepository().addCity(city2);
+    }
+
+    private void addRequestType() {
+        RequestType requestType1 = new RequestType("Sell");
+        RequestType requestType2 = new RequestType("Rent");
+        Repositories.getInstance().getRequestTypeRepository().add(requestType1);
+        Repositories.getInstance().getRequestTypeRepository().add(requestType2);
+    }
+    private void addAvailableEquipment() {
+        AvailableEquipment e1 = new AvailableEquipment("central heating");
+        AvailableEquipment e2 = new AvailableEquipment("air conditioning");
+        Repositories.getInstance().getAvailableEquipmentRepository().add(e1);
+        Repositories.getInstance().getAvailableEquipmentRepository().add(e2);
+    }
 }

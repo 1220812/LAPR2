@@ -13,7 +13,7 @@ import java.util.Optional;
  * The type Agency repository.
  */
 public class AgencyRepository {
-    private List<Agency> agencyList = new ArrayList<>();
+    private final List<Agency> agencyList = new ArrayList<>();
 
     public List<Agency> addAgency(Agency agency){
         agencyList.add(agency);
