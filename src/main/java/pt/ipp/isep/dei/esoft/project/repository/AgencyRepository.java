@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.RequestType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The type Agency repository.
@@ -14,13 +15,23 @@ import java.util.List;
 public class AgencyRepository {
     private List<Agency> agencyList = new ArrayList<>();
 
-    public void addAgency(Agency agency){
-        if(validateAgency(agency))
-            agencyList.add(agency);
+    public List<Agency> addAgency(Agency agency){
+        agencyList.add(agency);
+        Optional<Agency> newAgency = Optional.empty();
+        boolean operationSuccess = false;
+        if(validateAgency(agency)){
+            newAgency = Optional.of(agency.clone());
+            operationSuccess = agencyList.add(newAgency.get());
+        }
+        if(!operationSuccess){
+            newAgency = Optional.empty();
+        }
+        return agencyList;
     }
 
     public boolean validateAgency(Agency agency) {
-        return !this.agencyList.contains(agency);
+        boolean isValid = !agencyList.contains(agency);
+        return isValid;
     }
 
     public List<Agency> getAgencyList(){

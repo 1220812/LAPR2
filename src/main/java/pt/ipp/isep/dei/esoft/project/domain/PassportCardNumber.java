@@ -63,4 +63,7 @@ public class PassportCardNumber {
     public String toString() {
         return " | Passport Card Number: " + passportCardNumber;
     }
+    public PassportCardNumber clone(){
+        return new PassportCardNumber(this.passportCardNumber);
+    }
 }

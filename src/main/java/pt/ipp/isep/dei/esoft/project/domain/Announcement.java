@@ -73,4 +73,7 @@ public class Announcement {
                 ", comission=" + comission +
                 '}';
     }
+    public Announcement clone(){
+        return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType);
+    }
 }

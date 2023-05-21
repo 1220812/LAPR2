@@ -125,6 +125,7 @@ public class User {
                 ", PASSWORD_BY_DEFAULT='" + PASSWORD_BY_DEFAULT + '\'' +
                 '}';
     }
-
-
+    public User clone(){
+        return new User(this.name,this.emailAddress,this.password,this.phoneNumber);
+    }
 }

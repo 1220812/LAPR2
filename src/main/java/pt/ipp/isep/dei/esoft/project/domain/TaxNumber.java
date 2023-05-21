@@ -65,4 +65,8 @@ public class TaxNumber {
     public String toString() {
         return " | Tax Number: " + taxNumber;
     }
+
+    public TaxNumber clone(){
+        return new TaxNumber(this.taxNumber);
+    }
 }

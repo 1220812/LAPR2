@@ -55,4 +55,8 @@ public class AvailableEquipment {
     public int hashCode() {
         return Objects.hash(equipment);
     }
+
+    public AvailableEquipment clone(){
+        return new AvailableEquipment(this.equipment);
+    }
 }
