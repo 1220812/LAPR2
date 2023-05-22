@@ -14,7 +14,7 @@ public class Repositories {
     /**
      * Creating the object agencyRepository
      */
-    AgencyRepository agencyRepository = new AgencyRepository();
+    static AgencyRepository agencyRepository = new AgencyRepository();
     /**
      * Creating the object requestRepository
      */
@@ -28,22 +28,22 @@ public class Repositories {
     /**
      * Creating the object cityRepository
      */
-    CityRepository cityRepository = new CityRepository();
+    static CityRepository cityRepository = new CityRepository();
 
     /**
      * Creating the object storeRepository
      */
-    StoreRepository storeRepository = new StoreRepository();
+    static StoreRepository storeRepository = new StoreRepository();
 
     AnnouncementRepository announcementRepository = new AnnouncementRepository();
 
-    DistrictRepository districtRepository = new DistrictRepository();
+    static DistrictRepository districtRepository = new DistrictRepository();
 
     PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
 
     RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
 
-    UserRepository userRepository = new UserRepository();
+    static UserRepository userRepository = new UserRepository();
 
     SunExposureRepository sunExposureRepository = new SunExposureRepository();
 
@@ -81,7 +81,7 @@ public class Repositories {
      *
      * @return agencyRepository
      */
-    public AgencyRepository getAgencyRepository() {
+    public static AgencyRepository getAgencyRepository() {
         return agencyRepository;
     }
 
@@ -101,7 +101,7 @@ public class Repositories {
      * @return storeRepository
      */
 
-    public StoreRepository getStoreRepository() {return storeRepository;}
+    public static StoreRepository getStoreRepository() {return storeRepository;}
 
     /**
      * Method to show the stateRepository
@@ -114,11 +114,11 @@ public class Repositories {
         return announcementRepository;
     }
 
-    public CityRepository getCityRepository() {
+    public static CityRepository getCityRepository() {
         return cityRepository;
     }
 
-    public DistrictRepository getDistrictRepository() {
+    public static DistrictRepository getDistrictRepository() {
         return districtRepository;
     }
 
@@ -130,7 +130,7 @@ public class Repositories {
         return requestTypeRepository;
     }
 
-    public UserRepository getUserRepository() {
+    public static UserRepository getUserRepository() {
         return userRepository;
     }
 
