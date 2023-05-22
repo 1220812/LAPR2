@@ -63,6 +63,10 @@ public class Agency {
         emailAddress = DEFAULT_EMAILADRESS;
         id = DEFAULT_ID;
     }
+    public Agency(int id, String designation){
+        this.id = id;
+        this.designation = designation;
+    }
 
     /**
      * Method to compare the attributes of the current object with those of another object

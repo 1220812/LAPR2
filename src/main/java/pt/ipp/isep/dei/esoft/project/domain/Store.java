@@ -30,6 +30,10 @@ public class Store {
         emailAddress = DEFAULT_EMAILADRESS;
         ID = DEFAULT_ID;
     }
+    public Store(String designation, int ID){
+        this.designation = designation;
+        this.ID = ID;
+    }
 
     public String getDesignation() {
         return designation;

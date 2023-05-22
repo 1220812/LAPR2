@@ -17,6 +17,8 @@ public class Bootstrap implements Runnable {
         addCities();
         addRequestType();
         addAvailableEquipment();
+        addStores();
+        addSunExposure();
     }
 
     private void addOrganization() {
@@ -49,45 +51,67 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_EMPLOYEE);
     }
 
-    private void addPropertyTypes() {
-        PropertyType Land = new PropertyType()
-    }
 
     private void addStates() {
+        StateRepository stateRepository = Repositories.getInstance().getStateRepository();
         State state1 = new State("California");
         State state2 = new State("Nevada");
         State state3 = new State("Arizona");
-        Repositories.getInstance().getStateRepository().addState(state1);
-        Repositories.getInstance().getStateRepository().addState(state2);
-        Repositories.getInstance().getStateRepository().addState(state3);
+        stateRepository.addState(state1);
+        stateRepository.addState(state2);
+        stateRepository.addState(state3);
     }
 
     private void addDistricts() {
+        DistrictRepository districtRepository = Repositories.getInstance().getDistrictRepository();
         District district1 = new District("Northem");
         District district2 = new District("Eastern");
         District district3 = new District("Western");
-        Repositories.getInstance().getDistrictRepository().addDistrict(district1);
-        Repositories.getInstance().getDistrictRepository().addDistrict(district2);
-        Repositories.getInstance().getDistrictRepository().addDistrict(district3);
+        districtRepository.addDistrict(district1);
+        districtRepository.addDistrict(district2);
+        districtRepository.addDistrict(district3);
     }
 
     private void addCities() {
+        CityRepository cityRepository = Repositories.getInstance().getCityRepository();
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Repositories.getInstance().getCityRepository().addCity(city1);
-        Repositories.getInstance().getCityRepository().addCity(city2);
+        cityRepository.addCity(city1);
+        cityRepository.addCity(city2);
     }
 
     private void addRequestType() {
+        RequestTypeRepository requestTypeRepository = Repositories.getInstance().getRequestTypeRepository();
         RequestType requestType1 = new RequestType("Sell");
         RequestType requestType2 = new RequestType("Rent");
-        Repositories.getInstance().getRequestTypeRepository().add(requestType1);
-        Repositories.getInstance().getRequestTypeRepository().add(requestType2);
+        requestTypeRepository.add(requestType1);
+        requestTypeRepository.add(requestType2);
     }
     private void addAvailableEquipment() {
+        AvailableEquipmentRepository availableEquipmentRepository = Repositories.getInstance().getAvailableEquipmentRepository();
         AvailableEquipment e1 = new AvailableEquipment("central heating");
         AvailableEquipment e2 = new AvailableEquipment("air conditioning");
-        Repositories.getInstance().getAvailableEquipmentRepository().add(e1);
-        Repositories.getInstance().getAvailableEquipmentRepository().add(e2);
+        availableEquipmentRepository.add(e1);
+        availableEquipmentRepository.add(e2);
+    }
+    private void addSunExposure(){
+        SunExposureRepository sunExposureRepository = Repositories.getInstance().getSunExposureRepository();
+        SunExposure s1 = new SunExposure("North");
+        SunExposure s2 = new SunExposure("South");
+        SunExposure s3 = new SunExposure("East");
+        SunExposure s4 = new SunExposure("West");
+        sunExposureRepository.add(s1);
+        sunExposureRepository.add(s2);
+        sunExposureRepository.add(s3);
+        sunExposureRepository.add(s4);
+    }
+    private void addStores(){
+        StoreRepository storeRepository = Repositories.getInstance().getStoreRepository();
+        Store store1 = new Store("Company",1);
+        Store store2 = new Store("Galo",2);
+        Store store3 = new Store("Holand", 3);
+        storeRepository.add(store1);
+        storeRepository.add(store2);
+        storeRepository.add(store3);
     }
 }
