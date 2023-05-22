@@ -26,7 +26,7 @@ public class Agent {
     /**
      * address of the agent
      */
-    private Address address;
+    private PropertyAddress propertyAddress;
     /**
      * Method that shows the phone number
      * @return phone number
@@ -107,16 +107,16 @@ public class Agent {
      * Method to show the address
      * @return address
      */
-    public Address getAddress() {
-        return address;
+    public PropertyAddress getAddress() {
+        return propertyAddress;
     }
 
     /**
      * Method to change the address
-     * @param address changed address
+     * @param propertyAddress changed address
      */
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(PropertyAddress propertyAddress) {
+        this.propertyAddress = propertyAddress;
     }
 
     /**
@@ -126,11 +126,11 @@ public class Agent {
      * @param emailAddress email address of the owner
      */
 
-    public Agent(String name, String phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+    public Agent(String name, String phoneNumber, String emailAddress, PropertyAddress propertyAddress, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
-        this.address = address;
+        this.propertyAddress = propertyAddress;
         this.taxNumber = taxNumber;
         this.passportCardNumber = passportCardNumber;
     }
@@ -144,12 +144,12 @@ public class Agent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Agent agent = (Agent) o;
-        return phoneNumber == agent.phoneNumber && Objects.equals(name, agent.name) && Objects.equals(emailAddress, agent.emailAddress) && Objects.equals(taxNumber, agent.taxNumber) && Objects.equals(passportCardNumber, agent.passportCardNumber) && Objects.equals(address, agent.address);
+        return phoneNumber == agent.phoneNumber && Objects.equals(name, agent.name) && Objects.equals(emailAddress, agent.emailAddress) && Objects.equals(taxNumber, agent.taxNumber) && Objects.equals(passportCardNumber, agent.passportCardNumber) && Objects.equals(propertyAddress, agent.propertyAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phoneNumber, emailAddress, taxNumber, passportCardNumber, address);
+        return Objects.hash(name, phoneNumber, emailAddress, taxNumber, passportCardNumber, propertyAddress);
     }
 
     /**
@@ -163,7 +163,7 @@ public class Agent {
                 ", emailAddress='" + emailAddress + '\'' +
                 ", taxNumber=" + taxNumber +
                 ", passportCardNumber=" + passportCardNumber +
-                ", address=" + address +
+                ", address=" + propertyAddress +
                 '}';
     }
 
@@ -171,5 +171,5 @@ public class Agent {
      * This method creates a new instance of the agent object and initializes its attributes with the exact same values of the original object
      * @return a clone of the agent object
      */
-    public Agent clone(){ return new Agent(this.name,this.phoneNumber, this.emailAddress,this.address,this.taxNumber,this.passportCardNumber); }
+    public Agent clone(){ return new Agent(this.name,this.phoneNumber, this.emailAddress,this.propertyAddress,this.taxNumber,this.passportCardNumber); }
 }
