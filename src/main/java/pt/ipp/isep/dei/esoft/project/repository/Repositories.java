@@ -3,52 +3,53 @@ package pt.ipp.isep.dei.esoft.project.repository;
 public class Repositories {
     // From the template
     private static final Repositories instance = new Repositories();
-    TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-    OrganizationRepository organizationRepository = new OrganizationRepository();
-    AuthenticationRepository authenticationRepository = new AuthenticationRepository();
+    private final TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
+    private final OrganizationRepository organizationRepository = new OrganizationRepository();
+    private final AuthenticationRepository authenticationRepository = new AuthenticationRepository();
 
     // Added after by the Team
 
-    static RoleRepository roleRepository = new RoleRepository();
+    private final RoleRepository roleRepository = new RoleRepository();
 
     /**
      * Creating the object agencyRepository
      */
-    static AgencyRepository agencyRepository = new AgencyRepository();
+    private final AgencyRepository agencyRepository = new AgencyRepository();
     /**
      * Creating the object requestRepository
      */
-    RequestRepository requestRepository = new RequestRepository();
+    private final RequestRepository requestRepository = new RequestRepository();
 
     /**
      * Creating the object stateRepository
      */
-    StateRepository stateRepository = new StateRepository();
+    private final StateRepository stateRepository = new StateRepository();
 
     /**
      * Creating the object cityRepository
      */
-    static CityRepository cityRepository = new CityRepository();
+    private final CityRepository cityRepository = new CityRepository();
 
     /**
      * Creating the object storeRepository
      */
-    static StoreRepository storeRepository = new StoreRepository();
+    private final StoreRepository storeRepository = new StoreRepository();
 
-    AnnouncementRepository announcementRepository = new AnnouncementRepository();
+    private final AnnouncementRepository announcementRepository = new AnnouncementRepository();
 
-    static DistrictRepository districtRepository = new DistrictRepository();
+    private final DistrictRepository districtRepository = new DistrictRepository();
 
-    PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
+    private final PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
 
-    RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
+    private final RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
 
-    static UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
 
-    SunExposureRepository sunExposureRepository = new SunExposureRepository();
+    private final SunExposureRepository sunExposureRepository = new SunExposureRepository();
 
-    AvailableEquipmentRepository availableEquipmentRepository = new AvailableEquipmentRepository();
+    private final AvailableEquipmentRepository availableEquipmentRepository = new AvailableEquipmentRepository();
 
+    private final AddressRepository addressRepository = new AddressRepository();
 
     private Repositories() {
     }
@@ -57,7 +58,7 @@ public class Repositories {
         return instance;
     }
 
-    public static RoleRepository getRoleRepository() {
+    public RoleRepository getRoleRepository() {
         return roleRepository;
     }
 
@@ -76,12 +77,16 @@ public class Repositories {
     // Added after by the Team
 
 
+    public AddressRepository getAddressRepository() {
+        return addressRepository;
+    }
+
     /**
      * Method to show the agencyRepository
      *
      * @return agencyRepository
      */
-    public static AgencyRepository getAgencyRepository() {
+    public AgencyRepository getAgencyRepository() {
         return agencyRepository;
     }
 
@@ -101,24 +106,28 @@ public class Repositories {
      * @return storeRepository
      */
 
-    public static StoreRepository getStoreRepository() {return storeRepository;}
+    public StoreRepository getStoreRepository() {
+        return storeRepository;
+    }
 
     /**
      * Method to show the stateRepository
      *
      * @return stateRepository
      */
-    public StateRepository getStateRepository() {return stateRepository;}
+    public StateRepository getStateRepository() {
+        return stateRepository;
+    }
 
     public AnnouncementRepository getAnnouncementRepository() {
         return announcementRepository;
     }
 
-    public static CityRepository getCityRepository() {
+    public CityRepository getCityRepository() {
         return cityRepository;
     }
 
-    public static DistrictRepository getDistrictRepository() {
+    public DistrictRepository getDistrictRepository() {
         return districtRepository;
     }
 
@@ -130,7 +139,7 @@ public class Repositories {
         return requestTypeRepository;
     }
 
-    public static UserRepository getUserRepository() {
+    public UserRepository getUserRepository() {
         return userRepository;
     }
 

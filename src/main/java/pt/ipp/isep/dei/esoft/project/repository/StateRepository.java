@@ -1,12 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.repository;
-import pt.ipp.isep.dei.esoft.project.domain.Role;
+
 import pt.ipp.isep.dei.esoft.project.domain.State;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static pt.ipp.isep.dei.esoft.project.repository.Repositories.roleRepository;
 
 public class StateRepository {
     private List<State> stateList = new ArrayList<>();
