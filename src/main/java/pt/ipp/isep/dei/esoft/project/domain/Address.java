@@ -3,14 +3,24 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.Objects;
 
 public class Address {
+    String street;
     State state;
     District district;
     City city;
 
-    public Address(State state, District district, City city) {
+    String zipCode;
+
+    public Address(String street, State state, District district, City city, String zipCode) {
+        validate(street, state, district, city, zipCode);
+        this.street = street;
         this.state = state;
         this.district = district;
         this.city = city;
+        this.zipCode = zipCode;
+    }
+
+    private void validate(String street, State state, District district, City city, String zipCode) {
+        // TODO: VALIDATE
     }
 
     @Override

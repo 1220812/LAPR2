@@ -63,9 +63,9 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address propertyAddress1 = new Address(state1, district1, city1);
-        Address propertyAddress2 = new Address(state2, district2, city2);
-        Address propertyAddress3 = new Address(state1, district3, city2);
+        Address propertyAddress1 = new Address("Street A", state1, district1, city1, "12345");
+        Address propertyAddress2 = new Address("Street B", state2, district2, city2, "12346");
+        Address propertyAddress3 = new Address("Street C", state1, district3, city2, "12347");
         addressRepository.add(propertyAddress1);
         addressRepository.add(propertyAddress2);
         addressRepository.add(propertyAddress3);
