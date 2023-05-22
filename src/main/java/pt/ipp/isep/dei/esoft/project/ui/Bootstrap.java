@@ -42,6 +42,8 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_OWNER, AuthenticationController.ROLE_OWNER);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_AGENT, AuthenticationController.ROLE_AGENT);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_CLIENT, AuthenticationController.ROLE_CLIENT);
+
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -52,6 +54,9 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd",
                 AuthenticationController.ROLE_EMPLOYEE);
+
+        authenticationRepository.addUserWithRole("Client", "client@this.app", "client",
+                AuthenticationController.ROLE_CLIENT);
     }
 
     private void addAddresses() {
@@ -120,8 +125,9 @@ public class Bootstrap implements Runnable {
         Role managerNetwork = new Role("Manager Network");
         roleRepository.add(systemAdministrator);
         roleRepository.add(agent);
-        roleRepository.add(managerNetwork);
         roleRepository.add(storeManager);
+        roleRepository.add(managerNetwork);
+
     }
 
     private void addAgency() {
