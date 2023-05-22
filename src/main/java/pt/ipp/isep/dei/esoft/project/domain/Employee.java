@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 /**
@@ -11,7 +13,7 @@ public class Employee {
     private String phoneNumber;
     private PassportCardNumber passportCardNumber;
     private TaxNumber taxNumber;
-    private String role;
+    private Role role;
     private Address address;
     private Agency agency;
     private Store store;
@@ -35,12 +37,12 @@ public class Employee {
      * @param store              The store of the employee.
      * @param pass               The password of the employee.
      */
-    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, Store store, String pass) {
+    public Employee(String name, String email, String phoneNumber, String passportCardNumber, String taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.passportCardNumber = passportCardNumber;
-        this.taxNumber = taxNumber;
+        this.passportCardNumber = new PassportCardNumber(passportCardNumber);
+        this.taxNumber = new TaxNumber(taxNumber);
         this.address = address;
         this.role = role;
         this.agency = agency;
@@ -48,7 +50,7 @@ public class Employee {
         this.pass = pass;
     }
 
-    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, String pass) {
+    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, String pass) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -60,7 +62,7 @@ public class Employee {
         this.pass = pass;
     }
 
-    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, String pass) {
+    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, String pass) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -98,7 +100,7 @@ public class Employee {
      * @param pass               the password for the employee account
      * @return a new Employee object with the given information
      */
-    public static Employee newEmployee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, String role, Agency agency, Store store, String pass) {
+    public static Employee newEmployee(String name, String email, String phoneNumber, String passportCardNumber, String taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         Employee newEmployee = new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
         return newEmployee;
     }
@@ -217,7 +219,7 @@ public class Employee {
      *
      * @return the role
      */
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -226,7 +228,7 @@ public class Employee {
      *
      * @param role the role
      */
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -374,12 +376,8 @@ public class Employee {
      * @param taxNumber the tax Number of the employee
      * @return boolean
      */
-    public static boolean existsTaxNumber(int taxNumber) {
-        if (taxNumber < 10000000 || taxNumber > 100000000) {
-            return false;
-        } else {
-            return true;
-        }
+    public static boolean existsTaxNumber(String taxNumber) {
+        return taxNumber.matches("[0-9]{9}");
     }
 
     /**
@@ -388,12 +386,8 @@ public class Employee {
      * @param passportCardNumber the passport number of the employee
      * @return boolean boolean
      */
-    public static boolean existsPassportCardNumber(int passportCardNumber) {
-        if (passportCardNumber < 1000000 || passportCardNumber > 10000000) {
-            return false;
-        } else {
-            return true;
-        }
+    public static boolean existsPassportCardNumber(String passportCardNumber) {
+      return passportCardNumber.length() == 8 && StringUtils.isNumeric(passportCardNumber);
     }
 
     /**
