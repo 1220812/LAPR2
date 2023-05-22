@@ -11,15 +11,18 @@ public class Bootstrap implements Runnable {
     public void run() {
         addOrganization();
         addUsers();
-        addStates();
-        addDistricts();
-        addCities();
+        addRoles();
+        addAddresses();
         addRequestType();
         addAvailableEquipment();
-        addStores();
+        try {
+            addStores();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
         addSunExposure();
-        addAgency();
     }
+
     private void addOrganization() {
         //TODO: add organizations bootstrap here
         //get organization repository
@@ -50,33 +53,25 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_EMPLOYEE);
     }
 
-
-    private void addStates() {
-        StateRepository stateRepository = Repositories.getInstance().getStateRepository();
+    private void addAddresses() {
+        AddressRepository addressRepository = Repositories.getInstance().getAddressRepository();
         State state1 = new State("California");
         State state2 = new State("Nevada");
         State state3 = new State("Arizona");
-        stateRepository.addState(state1);
-        stateRepository.addState(state2);
-        stateRepository.addState(state3);
-    }
-
-    private void addDistricts() {
-        DistrictRepository districtRepository = Repositories.getInstance().getDistrictRepository();
         District district1 = new District("Northem");
         District district2 = new District("Eastern");
         District district3 = new District("Western");
-        districtRepository.addDistrict(district1);
-        districtRepository.addDistrict(district2);
-        districtRepository.addDistrict(district3);
-    }
-
-    private void addCities() {
-        CityRepository cityRepository = Repositories.getInstance().getCityRepository();
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        cityRepository.addCity(city1);
-        cityRepository.addCity(city2);
+        Address propertyAddress1 = new Address(state1, district1, city1);
+        Address propertyAddress2 = new Address(state2, district2, city2);
+        Address propertyAddress3 = new Address(state1, district3, city2);
+        addressRepository.add(propertyAddress1);
+        addressRepository.add(propertyAddress2);
+        addressRepository.add(propertyAddress3);
+
+
+
     }
 
     private void addRequestType() {
@@ -86,6 +81,7 @@ public class Bootstrap implements Runnable {
         requestTypeRepository.add(requestType1);
         requestTypeRepository.add(requestType2);
     }
+
     private void addAvailableEquipment() {
         AvailableEquipmentRepository availableEquipmentRepository = Repositories.getInstance().getAvailableEquipmentRepository();
         AvailableEquipment e1 = new AvailableEquipment("central heating");
@@ -93,7 +89,8 @@ public class Bootstrap implements Runnable {
         availableEquipmentRepository.add(e1);
         availableEquipmentRepository.add(e2);
     }
-    private void addSunExposure(){
+
+    private void addSunExposure() {
         SunExposureRepository sunExposureRepository = Repositories.getInstance().getSunExposureRepository();
         SunExposure s1 = new SunExposure("North");
         SunExposure s2 = new SunExposure("South");
@@ -104,18 +101,19 @@ public class Bootstrap implements Runnable {
         sunExposureRepository.add(s3);
         sunExposureRepository.add(s4);
     }
-    private void addStores(){
+
+    private void addStores() throws CloneNotSupportedException {
         StoreRepository storeRepository = Repositories.getInstance().getStoreRepository();
-        Store store1 = new Store("Company",1);
-        Store store2 = new Store("Galo",2);
+        Store store1 = new Store("Company", 1);
+        Store store2 = new Store("Galo", 2);
         Store store3 = new Store("Holand", 3);
         storeRepository.add(store1);
         storeRepository.add(store2);
         storeRepository.add(store3);
     }
-    private void addAgency(){
-        AgencyRepository agencyRepository = Repositories.getInstance().getAgencyRepository();
-        Agency agency1 = new Agency(1,"Era");
-        agencyRepository.addAgency(agency1);
+    private void addRoles(){
+        RoleRepository roleRepository = Repositories.getInstance().getRoleRepository();
+        Role agent = new Role("Agent");
+        roleRepository.add(agent);
     }
 }
