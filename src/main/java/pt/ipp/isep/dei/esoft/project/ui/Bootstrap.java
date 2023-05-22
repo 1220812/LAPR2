@@ -113,7 +113,14 @@ public class Bootstrap implements Runnable {
     }
     private void addRoles(){
         RoleRepository roleRepository = Repositories.getInstance().getRoleRepository();
+        Role systemAdministrator = new Role("System Administrator");
         Role agent = new Role("Agent");
+        Role storeManager = new Role("Store Manager");
+        Role managerNetwork = new Role("Manager Network");
+        roleRepository.add(systemAdministrator);
         roleRepository.add(agent);
+        roleRepository.add(managerNetwork);
+        roleRepository.add(storeManager);
+
     }
 }
