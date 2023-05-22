@@ -21,6 +21,7 @@ public class Bootstrap implements Runnable {
             throw new RuntimeException(e);
         }
         addSunExposure();
+        addAgency();
     }
 
     private void addOrganization() {
@@ -71,7 +72,6 @@ public class Bootstrap implements Runnable {
         addressRepository.add(propertyAddress3);
 
 
-
     }
 
     private void addRequestType() {
@@ -111,7 +111,8 @@ public class Bootstrap implements Runnable {
         storeRepository.add(store2);
         storeRepository.add(store3);
     }
-    private void addRoles(){
+
+    private void addRoles() {
         RoleRepository roleRepository = Repositories.getInstance().getRoleRepository();
         Role systemAdministrator = new Role("System Administrator");
         Role agent = new Role("Agent");
@@ -121,6 +122,12 @@ public class Bootstrap implements Runnable {
         roleRepository.add(agent);
         roleRepository.add(managerNetwork);
         roleRepository.add(storeManager);
+    }
 
+    private void addAgency() {
+        AgencyRepository agencyRepository = Repositories.getInstance().getAgencyRepository();
+        Agency agency1 = new Agency("agency1");
+        Agency agency2 = new Agency("agency2");
+        Agency agency3 = new Agency("agency3");
     }
 }
