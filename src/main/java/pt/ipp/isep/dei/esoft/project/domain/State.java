@@ -38,9 +38,7 @@ public class State {
     }
     @Override
     public String toString() {
-        return "State{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
     public State clone(){
         return new State(this.name);

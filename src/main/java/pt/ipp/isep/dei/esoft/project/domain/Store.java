@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Store {
     private String designation;
-    private Address address;
+    private PropertyAddress propertyAddress;
     private int phoneNumber;
     private String emailAddress;
     private int ID;
 
     private static final int DEFAULT_ID = 0;
     private static final String DEFAULT_DESIGNATION = "no store designation";
-    private static final Address DEFAULT_ADRESS = new Address();
+    private static final PropertyAddress DEFAULT_ADRESS = new PropertyAddress();
     private static final String DEFAULT_EMAILADRESS = "no store email";
     private static final int DEFAULT_PHONENUMBER = 0;
 
-    public Store(String designation, Address address, int phoneNumber, String emailAddress, int ID) {
+    public Store(String designation, PropertyAddress propertyAddress, int phoneNumber, String emailAddress, int ID) {
         this.designation = designation;
-        this.address = address;
+        this.propertyAddress = propertyAddress;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.ID = ID;
@@ -25,7 +25,7 @@ public class Store {
 
     public Store(){
         designation = DEFAULT_DESIGNATION;
-        address = DEFAULT_ADRESS;
+        propertyAddress = DEFAULT_ADRESS;
         phoneNumber = DEFAULT_PHONENUMBER;
         emailAddress = DEFAULT_EMAILADRESS;
         ID = DEFAULT_ID;
@@ -43,12 +43,12 @@ public class Store {
         this.designation = designation;
     }
 
-    public Address getAddress() {
-        return address;
+    public PropertyAddress getAddress() {
+        return propertyAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(PropertyAddress propertyAddress) {
+        this.propertyAddress = propertyAddress;
     }
 
     public int getPhoneNumber() {
@@ -80,19 +80,19 @@ public class Store {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Store store = (Store) o;
-        return phoneNumber == store.phoneNumber && ID == store.ID && Objects.equals(designation, store.designation) && Objects.equals(address, store.address) && Objects.equals(emailAddress, store.emailAddress);
+        return phoneNumber == store.phoneNumber && ID == store.ID && Objects.equals(designation, store.designation) && Objects.equals(propertyAddress, store.propertyAddress) && Objects.equals(emailAddress, store.emailAddress);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(designation, address, phoneNumber, emailAddress, ID);
+        return Objects.hash(designation, propertyAddress, phoneNumber, emailAddress, ID);
     }
 
     @Override
     public String toString() {
         return "Store{" +
                 "designation='" + designation + '\'' +
-                ", address=" + address +
+                ", address=" + propertyAddress +
                 ", phoneNumber=" + phoneNumber +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", ID=" + ID +
@@ -101,6 +101,6 @@ public class Store {
 
     @Override
     public Store clone() throws CloneNotSupportedException {
-        return new Store (this.designation, this.address, this.phoneNumber, this.emailAddress, this.ID);
+        return new Store (this.designation, this.propertyAddress, this.phoneNumber, this.emailAddress, this.ID);
     }
 }

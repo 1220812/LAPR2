@@ -63,7 +63,7 @@ public class TaxNumber {
      */
     @Override
     public String toString() {
-        return " | Tax Number: " + taxNumber;
+        return taxNumber;
     }
 
     public TaxNumber clone(){
