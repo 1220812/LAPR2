@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static pt.ipp.isep.dei.esoft.project.repository.Repositories.roleRepository;
+
 public class RoleRepository {
     private List<Role> roleList = new ArrayList<>();
     public void addRole(Role role){
@@ -42,4 +44,7 @@ public class RoleRepository {
         boolean isValid = !roleList.contains(role);
         return isValid;
     }
+
+
+
 }
