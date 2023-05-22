@@ -129,5 +129,8 @@ public class Bootstrap implements Runnable {
         Agency agency1 = new Agency("agency1");
         Agency agency2 = new Agency("agency2");
         Agency agency3 = new Agency("agency3");
+        agencyRepository.addAgency(agency1);
+        agencyRepository.addAgency(agency2);
+        agencyRepository.addAgency(agency3);
     }
 }
