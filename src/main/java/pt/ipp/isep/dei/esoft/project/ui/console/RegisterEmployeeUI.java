@@ -71,29 +71,17 @@ public class RegisterEmployeeUI implements Runnable {
             passportCardNumber = Utils.readLineFromConsole("Invalid Passport card number (format: xxxxxxxx) \nInsert new passport card number number: ");
         }
 
-
-        address = Utils.listAndSelectOne(controller.getAddresses());
-
-        if (address == null) return;
-
-
-
-
-
-
-
-
         while (!controller.checkEmail(email)) {
             email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
         }
 
-
+        address = Utils.listAndSelectOne(controller.getAddresses());
+        if (address == null) return;
         System.out.println(address);
-
 
         System.out.println();
         System.out.println("####### List of Roles #######");
-        controller.getRoleRepository();
+        role=Utils.listAndSelectOne(controller.getRolesList());
 
 
 

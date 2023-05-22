@@ -57,9 +57,7 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" +
-                "description='" + description + '\'' +
-                '}';
+        return description;
     }
     public Role clone(){
         return new Role(this.description);

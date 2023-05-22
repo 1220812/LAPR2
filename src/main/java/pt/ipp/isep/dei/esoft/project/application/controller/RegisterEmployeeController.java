@@ -9,7 +9,7 @@ import java.util.List;
  * The type Register employee controller.
  */
 public class RegisterEmployeeController {
-    private RoleRepository roleRepository = null;
+    private RoleRepository roleRepository = Repositories.getInstance().getRoleRepository();
     private AgencyRepository agencyRepository = null;
     private State stateInstance = null;
 
@@ -20,25 +20,8 @@ public class RegisterEmployeeController {
         Repositories repositories = Repositories.getInstance();
     }
 
-    /**
-     * Gets role repository.
-     */
-    public void getRoleRepository() {
-        Repositories.getInstance().getRoleRepository().getRoleList();
-    }
-
-    /**
-     * Gets agency repository.
-     */
-    public void getAgencyRepository() {
-        Repositories.getInstance().getAgencyRepository().getAgencyList();
-    }
-
-    /**
-     * Gets store repository.
-     */
-    public void getStoreRepository() {
-        Repositories.getInstance().getStoreRepository().getStoreList();
+    public List<Role> getRolesList() {
+        return roleRepository.getRoleList();
     }
 
     /**
