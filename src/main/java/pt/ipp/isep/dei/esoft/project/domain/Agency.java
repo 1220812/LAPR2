@@ -114,6 +114,9 @@ public class Agency {
 
     @Override
     public String toString() {
+        return designation;
+    }
+    public String toString2(){
         return "Agency{" +
                 "id=" + id +
                 ", designation='" + designation + '\'' +
