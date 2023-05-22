@@ -99,7 +99,7 @@ public class Store {
                 ", phoneNumber=" + phoneNumber +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", ID=" + ID +
-                '}';;
+                '}';
     }
 
     @Override
