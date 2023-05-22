@@ -40,9 +40,7 @@ public class District{
     }
     @Override
     public String toString() {
-        return "District{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
     public District clone(){
         return new District(this.name);
