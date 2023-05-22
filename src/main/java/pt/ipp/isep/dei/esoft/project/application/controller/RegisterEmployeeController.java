@@ -9,34 +9,34 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
  * The type Register employee controller.
  */
 public class RegisterEmployeeController {
+    private RoleRepository roleRepository = null;
+    private AgencyRepository agencyRepository = null;
     /**
      * Register employee controller.
      */
     public void RegisterEmployeeController() {
         Repositories repositories = Repositories.getInstance();
-
-
     }
 
     /**
      * Gets role repository.
      */
     public void getRoleRepository() {
-        RoleRepository.getEmployeeRoles();
+        Repositories.getRoleRepository().getRoleList();
     }
 
     /**
      * Gets agency repository.
      */
     public void getAgencyRepository() {
-        AgencyRepository.getAgencies();
+        Repositories.getAgencyRepository().getAgencyList();
     }
 
     /**
      * Gets store repository.
      */
     public void getStoreRepository() {
-        StoreRepository.getStores();
+        Repositories.getStoreRepository.getStoreList();
     }
 
     /**
