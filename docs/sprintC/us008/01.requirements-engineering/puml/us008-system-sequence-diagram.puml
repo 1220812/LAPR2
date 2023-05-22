@@ -1,4 +1,4 @@
-@startuml
+5@startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
@@ -28,29 +28,51 @@ activate Agent
 
     deactivate System
 
-    Agent -> System : selects the publish option
+    Agent -> System : selects the option
 
     activate System
+
+    opt selects to publish
 
     System --> Agent : asks for comission type
 
+        deactivate System
+
+        Agent -> System : selects the comission type
+
+        activate System
+
+        System --> Agent : asks for the comission
+
+        deactivate System
+
+        Agent -> System : types comission
+
+        activate System
+
+        System --> Agent : shows all data and asks for confirmation
+        deactivate System
+
+        Agent -> System : confirms publishment
+        activate System
+        System --> Agent : publishes announcement and sends a confirmation email
+    end opt
+    opt selects to decline
+
+    System --> Agent : asks to write a justification
     deactivate System
-
-    Agent -> System : selects the comission type
-
+    Agent -> System : writes justification
     activate System
+    System --> Agent : shows all data and asks for confirmation
+            deactivate System
 
-    System --> Agent : asks for the comission
-
-    deactivate System
-
-    Agent -> System : types comission
-
+            Agent -> System : confirms information
     activate System
-
-        System --> Agent : publishes announcement and confirms publishment
-
+    System --> Agent : deletes request and sends justification email
     deactivate System
+
+
+    end opt
 
 deactivate Agent
 
