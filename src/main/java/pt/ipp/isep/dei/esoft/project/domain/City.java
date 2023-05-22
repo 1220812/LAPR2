@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class City{
     /**
      * City name
@@ -39,11 +42,15 @@ public class City{
     }
     @Override
     public String toString() {
-        return "City{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
     public City clone(){
         return new City(this.name);
     }
+
+
+
+
+
+
 }
