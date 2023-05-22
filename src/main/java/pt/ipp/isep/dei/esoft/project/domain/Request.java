@@ -5,7 +5,7 @@ public class Request {
     // ATTRIBUTES
     private Property property;
     private double price;
-    private String requestType;
+    private RequestType requestType;
 
     private Agent agent;
     private Store store;
