@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterEmployeeUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.ScheduleVisitUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ public class ClientUI implements Runnable {
     }
 
     public void run() {
-        List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("US009", new RegisterEmployeeUI()));
+        List<MenuItem> options = new ArrayList<>();
+        options.add(new MenuItem("US009-Schedule a visit", new ScheduleVisitUI()));
 
         int option = 0;
         do {
