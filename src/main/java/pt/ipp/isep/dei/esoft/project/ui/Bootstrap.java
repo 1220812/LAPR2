@@ -11,7 +11,6 @@ public class Bootstrap implements Runnable {
     public void run() {
         addOrganization();
         addUsers();
-        addPropertyTypes();
         addStates();
         addDistricts();
         addCities();
@@ -19,8 +18,8 @@ public class Bootstrap implements Runnable {
         addAvailableEquipment();
         addStores();
         addSunExposure();
+        addAgency();
     }
-
     private void addOrganization() {
         //TODO: add organizations bootstrap here
         //get organization repository
@@ -113,5 +112,10 @@ public class Bootstrap implements Runnable {
         storeRepository.add(store1);
         storeRepository.add(store2);
         storeRepository.add(store3);
+    }
+    private void addAgency(){
+        AgencyRepository agencyRepository = Repositories.getInstance().getAgencyRepository();
+        Agency agency1 = new Agency(1,"Era");
+        agencyRepository.addAgency(agency1);
     }
 }

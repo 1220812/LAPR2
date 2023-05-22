@@ -33,7 +33,7 @@ public class StoreRepository {
         return store;
     }
 
-    public List<Store> add(Store store) {
+    public List<Store> add(Store store) throws CloneNotSupportedException {
 
         storeList.add(store);
 
