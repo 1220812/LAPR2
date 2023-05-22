@@ -100,7 +100,7 @@ public class Store {
     }
 
     @Override
-    protected Store clone() throws CloneNotSupportedException {
+    public Store clone() throws CloneNotSupportedException {
         return new Store (this.designation, this.address, this.phoneNumber, this.emailAddress, this.ID);
     }
 }

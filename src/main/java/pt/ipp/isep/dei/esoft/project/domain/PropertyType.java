@@ -19,7 +19,4 @@ public class PropertyType extends Property{
         super(area,distanceFromCityCenter,address,price,photographsList);
         this.propertyTypeList = propertyTypeList;
     }
-    public PropertyType(){
-
-    }
 }
