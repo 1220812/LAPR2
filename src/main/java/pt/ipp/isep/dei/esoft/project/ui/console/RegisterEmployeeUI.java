@@ -11,9 +11,9 @@ public class RegisterEmployeeUI implements Runnable {
 
     String name = null;
     Address address = null;
-    String  phone = null;
+    String phone = null;
     String email = null;
-    String passportCardNumber =null;
+    String passportCardNumber = null;
     int zipCode = 0;
     City city = null;
 
@@ -39,8 +39,6 @@ public class RegisterEmployeeUI implements Runnable {
         String inputAgency = null;
 
 
-
-
         name = Utils.readLineFromConsole("Employee name:");
         while (name.trim().isEmpty()) {
             name = Utils.readLineFromConsole("Invalid Name \nInsert employee name:");
@@ -55,11 +53,6 @@ public class RegisterEmployeeUI implements Runnable {
         while (!controller.checkPhone(Integer.parseInt(phone))) {
             phone = Utils.readLineFromConsole("Invalid Phone number (format: xxxxxxxxxx) \nInsert new phone number: ");
         }
-
-
-
-
-
 
         taxNumber = Utils.readLineFromConsole("tax number:");
         while (!controller.checkTaxNumber(taxNumber)) {
@@ -81,14 +74,46 @@ public class RegisterEmployeeUI implements Runnable {
 
         System.out.println();
         System.out.println("####### List of Roles #######");
-        role=Utils.listAndSelectOne(controller.getRolesList());
+        role = Utils.listAndSelectOne(controller.getRolesList());
+        if (role == null) return;
+
+        inputRole = role.toString();
+        System.out.println(role);
+        System.out.println(inputRole);
+        if (inputRole.equals("Agent") || inputRole.equals("Manager Network") || inputRole.equals("Store Manager")) {
+
+            System.out.println("####### List of Agencies #######");
+            agency = Utils.listAndSelectOne(controller.getAgency());
+            if (agency == null) return;
 
 
+            if (inputRole.equals("Agent") || inputRole.equals("Store Manager")) {
 
+                System.out.println("####### List of Stores #######");
+                store = Utils.listAndSelectOne(controller.getStore());
+                if (store == null) return;
+
+            } else {
+                System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
+                controller.getUserRepository();
+                controller.sendRegisteredUserEmail(email, pass);
+                System.out.println();
+                System.out.println("####### Operation sucess ######");
+            }
+            System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
+            controller.getUserRepository();
+            controller.sendRegisteredUserEmail(email, pass);
+            System.out.println();
+            System.out.println("####### Operation sucess ######");
+
+        }
         System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
         controller.getUserRepository();
         controller.sendRegisteredUserEmail(email, pass);
         System.out.println();
         System.out.println("####### Operation sucess ######");
+
+
     }
 }
+
