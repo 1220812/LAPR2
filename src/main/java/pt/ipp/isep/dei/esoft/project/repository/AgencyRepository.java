@@ -1,13 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.Agency;
-import pt.ipp.isep.dei.esoft.project.domain.Employee;
-import pt.ipp.isep.dei.esoft.project.domain.RequestType;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static pt.ipp.isep.dei.esoft.project.repository.Repositories.roleRepository;
 
 /**
  * The type Agency repository.
@@ -41,4 +40,9 @@ public class AgencyRepository {
     public static Agency CreateAgency (int id, String designation, Address address, String emailAddress, String phoneNumber){
         return new Agency(id, designation, address, emailAddress, phoneNumber);
     }
+
+
+
+
+
 }
