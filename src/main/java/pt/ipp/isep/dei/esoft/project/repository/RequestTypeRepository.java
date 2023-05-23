@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import org.apache.commons.lang3.NotImplementedException;
 import pt.ipp.isep.dei.esoft.project.domain.RequestType;
 
 import java.util.ArrayList;
@@ -46,5 +47,18 @@ public class RequestTypeRepository {
     private boolean validateEquipment(RequestType requestType) {
         boolean isValid = !requestTypes.contains(requestType);
         return isValid;
+    }
+
+    public RequestType getRequestTypeByName(String name) {
+        for (RequestType requestType: requestTypes) {
+            if(requestType.getRequestType().equals(name)){
+                return requestType;
+            }
+        }
+        return null;
+    }
+
+    public RequestType createRequestType(String name) {
+        throw new NotImplementedException();
     }
 }

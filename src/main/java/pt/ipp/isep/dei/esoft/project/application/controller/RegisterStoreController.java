@@ -1,3 +1,4 @@
+
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
@@ -5,11 +6,12 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.List;
 
-public class RegisterStoreController {
+//public class RegisterStoreController {
+    /**
     private Repositories repositories;
     private Store storeInstance;
     private State stateInstance;
-    private Localization localizationInstance;
+    private PropertyAddress localizationInstance;
     private District districtInstance;
     private City cityInstance;
 
@@ -17,9 +19,9 @@ public class RegisterStoreController {
         repositories=Repositories.getInstance();
     }
 
-    public Store getStoreInstance(int ID, String designation, int phoneNumber, String emailAddress, String location, Localization localization) {
+    public Store getStoreInstance(int ID, String designation, int phoneNumber, String emailAddress, PropertyAddress localization) {
         if (storeInstance ==null){
-            storeInstance=new Store(designation, location, phoneNumber, emailAddress, ID, localization);
+            storeInstance=new Store(designation,localization , phoneNumber, emailAddress, ID);
         }
         return storeInstance;
     }
@@ -35,9 +37,9 @@ public class RegisterStoreController {
         this.stateInstance = state;
     }
 
-    public Localization getLocationInstance(String street, String doorNumber, String floorNumber, String postalCode, String city, String district, String state) {
+    public PropertyAddress getLocationInstance(String street, int doorNumber, int floorNumber, String postalCode, City city, District district, State state) {
         if (localizationInstance == null) {
-            localizationInstance = new Localization(street,doorNumber, floorNumber, postalCode, city, district, state);
+            localizationInstance = new PropertyAddress(street,doorNumber, floorNumber, postalCode, state, district, city);
         }
         return localizationInstance;
 
@@ -70,16 +72,15 @@ public class RegisterStoreController {
     public List<State> getStateList(){
         return repositories.getStateRepository().getStateList();
     }
-    public Store getCreateStore(int ID, String designation, int phoneNumber, String emailAddress, String location, Localization localization){
+    public Store getCreateStore(int ID, String designation, int phoneNumber, String emailAddress, String location, PropertyAddress localization){
         if (storeInstance == null) {
-            storeInstance = new Store(designation,location,phoneNumber,emailAddress,ID,localization);
+            storeInstance = new Store(designation,localization,phoneNumber,emailAddress,ID);
         }
         storeInstance.setID(ID);
         storeInstance.setDesignation(designation);
         storeInstance.setPhoneNumber(phoneNumber);
         storeInstance.setEmailAddress(emailAddress);
-        storeInstance.setLocation(location);
-        storeInstance.setLocalization(localization);
+        storeInstance.s
         return storeInstance;
 
     }
@@ -103,4 +104,4 @@ public class RegisterStoreController {
     public void getRegisterLocation(){
         repositories.getLocationRepository().registerLocation(this.localizationInstance);
     }
-}
+}*/

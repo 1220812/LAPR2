@@ -45,22 +45,14 @@ public class RegisterEmployeeUI implements Runnable {
         while (name.trim().isEmpty()) {
             name = Utils.readLineFromConsole("Invalid Name \nInsert employee name:");
         }
-
         email = Utils.readLineFromConsole("Employe email:");
         while (!controller.checkEmail(email)) {
             email = Utils.readLineFromConsole("Invalid Email (format: XXX@XXX.XX) \nInsert new Email - ");
         }
-
         phone = Utils.readLineFromConsole("Phone number:");
         while (!controller.checkPhone(Integer.parseInt(phone))) {
             phone = Utils.readLineFromConsole("Invalid Phone number (format: xxxxxxxxxx) \nInsert new phone number: ");
         }
-
-
-
-
-
-
         taxNumber = Utils.readLineFromConsole("tax number:");
         while (!controller.checkTaxNumber(taxNumber)) {
             taxNumber = Utils.readLineFromConsole("Invalid tax number (format: xxxxxxxx) \nInsert new tax number: ");
@@ -70,11 +62,9 @@ public class RegisterEmployeeUI implements Runnable {
         while (!controller.checkPassportCardNumber(passportCardNumber)) {
             passportCardNumber = Utils.readLineFromConsole("Invalid Passport card number (format: xxxxxxxx) \nInsert new passport card number number: ");
         }
-
         while (!controller.checkEmail(email)) {
             email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
         }
-
         address = Utils.listAndSelectOne(controller.getAddresses());
         if (address == null) return;
         System.out.println(address);

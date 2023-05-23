@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class House extends Residence {
@@ -32,7 +33,7 @@ public class House extends Residence {
      * @param inhabitableLoft inhabitable loft
      * @param price house price
      */
-    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, ArrayList<AvailableEquipment> availableEquipment, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, ArrayList<Photographs> photoList) {
+    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<AvailableEquipment> availableEquipment, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList) {
         super(address,area,distanceFromCityCentre,numberOfBathrooms,numberOfBedrooms,numberOfParkingSpaces,price,photoList,availableEquipment);
         this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;

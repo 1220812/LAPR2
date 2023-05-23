@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +20,7 @@ public class Residence extends Property{
     /**
      * available equipment
      */
-    private ArrayList<AvailableEquipment> availableEquipment = new ArrayList<>();
+    private List<AvailableEquipment> availableEquipment = new ArrayList<>();
 
     /**
      *
@@ -35,7 +34,7 @@ public class Residence extends Property{
      * @param price price
      */
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, ArrayList<Photographs> photographsList, ArrayList<AvailableEquipment> availableEquipment) {
+    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, List<AvailableEquipment> availableEquipment) {
         super(area, distanceFromCityCentre, address,price, photographsList);
         if (numberOfBedrooms < 0 || numberOfBathrooms < 0 || numberOfParkingSpaces < 0) {
             throw new IllegalArgumentException("Provide the actual number of Bathrooms, Bedrooms and Parking Spaces" +
