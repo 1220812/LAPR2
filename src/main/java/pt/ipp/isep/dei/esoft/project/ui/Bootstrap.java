@@ -143,7 +143,16 @@ public class Bootstrap implements Runnable {
 
     private void addAnnouncement(){
         AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
+    }
 
+    private void addPropertyType(){
+        PropertyTypeRepository propertyTypeRepository = Repositories.getInstance().getPropertyTypeRepository();
+        PropertyType p1 = new PropertyType("Land");
+        PropertyType p2 = new PropertyType("Appartment");
+        PropertyType p3 = new PropertyType("House");
+        propertyTypeRepository.addPropertyType(p1);
+        propertyTypeRepository.addPropertyType(p2);
+        propertyTypeRepository.addPropertyType(p3);
 
     }
 }
