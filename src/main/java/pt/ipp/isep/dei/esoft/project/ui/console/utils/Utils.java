@@ -27,7 +27,7 @@ public class Utils {
         do {
             showList(list, len);
             option = readIntegerFromConsole("Select one: ");
-        } while(option < 0 || option >= len);
+        } while(option < 0 || option > len);
 
         if (option == 0) {
             return null;

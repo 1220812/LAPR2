@@ -1,11 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-//import pt.ipp.isep.dei.esoft.project.application.controller.RegisterStoreController;
+import pt.ipp.isep.dei.esoft.project.application.controller.RegisterStoreController;
+import pt.ipp.isep.dei.esoft.project.domain.Localization;
 
 import java.util.Scanner;
-/**public class RegisterStoreUI implements Runnable{
-
-    private RegisterStoreController controller;
+public class RegisterStoreUI implements Runnable{
+    private RegisterStoreController controller = new RegisterStoreController();
     public RegisterStoreUI(){
         this.controller= new RegisterStoreController();
     }
@@ -39,10 +39,11 @@ import java.util.Scanner;
         controller.getCreateStore(storeID,storeDesignation,storePhoneNumber,storeEmail,location,new Localization(street,doorNumber,floorNumber,postalCode,city,district,state));
         controller.getRegisterStore();
         controller.getRegisterLocation();
+
         System.out.println("Store registered successfully.");
     }
     @Override
     public void run() {
         RequestedData();
     }
-}*/
+}
