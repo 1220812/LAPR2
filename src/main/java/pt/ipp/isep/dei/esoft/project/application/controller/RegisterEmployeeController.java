@@ -56,6 +56,12 @@ public class RegisterEmployeeController {
     public List<Address> getAddresses(){
         return Repositories.getInstance().getAddressRepository().getAddressList();
     }
+    public List<Agency> getAgency(){
+        return Repositories.getInstance().getAgencyRepository().getAgencyList();
+    }
+    public List<Store> getStore(){
+        return Repositories.getInstance().getStoreRepository().getStoreList();
+    }
 
 
     /**

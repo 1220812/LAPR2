@@ -67,6 +67,9 @@ public class Agency {
         this.id = id;
         this.designation = designation;
     }
+     public Agency(String designation){
+        this.designation=designation;
+     }
 
     /**
      * Method to compare the attributes of the current object with those of another object
@@ -111,6 +114,9 @@ public class Agency {
 
     @Override
     public String toString() {
+        return designation;
+    }
+    public String toString2(){
         return "Agency{" +
                 "id=" + id +
                 ", designation='" + designation + '\'' +

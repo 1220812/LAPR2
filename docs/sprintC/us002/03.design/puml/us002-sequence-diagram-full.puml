@@ -14,6 +14,7 @@ participant ":Announcement" as ANCMT
 participant "repositories\n:Repository" as PLAT
 participant "PropertyTypeRepository\n:PropertyTypeRepository" as PropertyTypeREP
 participant "RegistedUsersRepository\n:RegistedUsersRepository" as RegistedUsersREP
+participant "AnnouncementRepository\n:AnnouncementRepository" as AnnouncementREP
 
 
 activate AGENT
@@ -173,9 +174,30 @@ activate ANCMT
 ANCMT --> CTRL : announcement created sucessfully
 deactivate ANCMT
 
-CTRL --> UI : announcement creted sucessfully
+CTRL --> UI : announcement created sucessfully
 deactivate CTRL
+UI -> CTRL : addAnnouncement
+    activate CTRL
+    CTRL -> REP : getInstance()
+                    activate REP
 
+                        REP --> CTRL: repositories
+                    deactivate REP
+
+                    CTRL -> PLAT : getAnnouncementRepository()
+                    activate PLAT
+
+                        PLAT --> CTRL: announcementRepository
+                    deactivate PLAT
+
+                    CTRL -> AnnouncementREP : addAnnouncement(announcement)
+                    activate AnnouncementREP
+
+                        AnnouncementREP --> CTRL : addAnnouncement
+                    deactivate AnnouncementREP
+
+                    CTRL --> UI : announcement added
+                deactivate CTRL
 
 UI --> AGENT : announcement created sucessfully
 deactivate UI

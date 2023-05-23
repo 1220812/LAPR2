@@ -21,6 +21,8 @@ public class Bootstrap implements Runnable {
             throw new RuntimeException(e);
         }
         addSunExposure();
+        addAgency();
+        addAnnouncement();
     }
 
     private void addOrganization() {
@@ -41,6 +43,8 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_OWNER, AuthenticationController.ROLE_OWNER);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_AGENT, AuthenticationController.ROLE_AGENT);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_CLIENT, AuthenticationController.ROLE_CLIENT);
+
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -51,6 +55,9 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd",
                 AuthenticationController.ROLE_EMPLOYEE);
+
+        authenticationRepository.addUserWithRole("Client", "client@this.app", "client",
+                AuthenticationController.ROLE_CLIENT);
     }
 
     private void addAddresses() {
@@ -69,7 +76,6 @@ public class Bootstrap implements Runnable {
         addressRepository.add(propertyAddress1);
         addressRepository.add(propertyAddress2);
         addressRepository.add(propertyAddress3);
-
 
 
     }
@@ -111,9 +117,33 @@ public class Bootstrap implements Runnable {
         storeRepository.add(store2);
         storeRepository.add(store3);
     }
-    private void addRoles(){
+
+    private void addRoles() {
         RoleRepository roleRepository = Repositories.getInstance().getRoleRepository();
+        Role systemAdministrator = new Role("System Administrator");
         Role agent = new Role("Agent");
+        Role storeManager = new Role("Store Manager");
+        Role managerNetwork = new Role("Manager Network");
+        roleRepository.add(systemAdministrator);
         roleRepository.add(agent);
+        roleRepository.add(storeManager);
+        roleRepository.add(managerNetwork);
+
+    }
+
+    private void addAgency() {
+        AgencyRepository agencyRepository = Repositories.getInstance().getAgencyRepository();
+        Agency agency1 = new Agency("agency1");
+        Agency agency2 = new Agency("agency2");
+        Agency agency3 = new Agency("agency3");
+        agencyRepository.addAgency(agency1);
+        agencyRepository.addAgency(agency2);
+        agencyRepository.addAgency(agency3);
+    }
+
+    private void addAnnouncement(){
+        AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
+
+
     }
 }

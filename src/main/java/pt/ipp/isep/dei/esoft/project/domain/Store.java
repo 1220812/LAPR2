@@ -90,6 +90,9 @@ public class Store {
 
     @Override
     public String toString() {
+        return designation;
+    }
+    public String toString2(){
         return "Store{" +
                 "designation='" + designation + '\'' +
                 ", address=" + propertyAddress +

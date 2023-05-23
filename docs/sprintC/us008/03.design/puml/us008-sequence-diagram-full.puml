@@ -1,3 +1,4 @@
+
 @startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
@@ -8,11 +9,12 @@ autonumber
 'hide footbox
 actor "Agent" as AGENT
 participant ":SeeRequestsUI" as UI
-participant ":SeeRequestsController" as CTRL
+participant ":PublishRequestsController" as CTRL
 participant ":Repositories" as REP
 participant ":Announcement" as ANCMT
 participant "repositories\n:Repository" as PLAT
 participant "RequestsRepository\n:RequestsRepository" as RequestsREP
+participant "AnnouncementRepository\n:AnnouncementRepository" as AnnouncementREP
 
 
 activate AGENT
@@ -73,131 +75,142 @@ activate AGENT
         UI --> AGENT : shows request and asks if they want to publish
     deactivate UI
 
-    AGENT -> UI : selects the publish option
+    AGENT -> UI : selects the option
     activate UI
 
     opt selects to publish
 
 
-
-    end opt
-
-    activate UI
-        UI -> CTRL : getRegisteredUsers()
-        activate CTRL
-        CTRL -> REP : getInstance()
-        activate REP
-        REP --> CTRL : repositories
-        deactivate REP
-        CTRL -> PLAT : getRegisteredUsersRepository()
-        activate PLAT
-        PLAT --> CTRL : registeredUsersRepository
-        deactivate PLAT
-        CTRL -> RegistedUsersREP : getRegisteredUsers()
-        activate RegistedUsersREP
-        RegistedUsersREP --> CTRL : registeredUsers
-        deactivate RegistedUsersREP
-        loop while user not registered
-        CTRL --> CTRL : user is registered
-        end loop
-        CTRL --> UI : user is registered
-        deactivate CTRL
-        UI --> AGENT : requests data
-        deactivate UI
-
-        AGENT -> UI : types the requested data (area in m2, location, distance from the city centre, requested price, one or more photos)
-        activate UI
-        UI -> CTRL : saveDataProperty(area, location, distance, price, photos)
-        activate CTRL
-        CTRL --> UI : data saved
-        deactivate CTRL
-
-
-        opt property is an Apartment/House
-
-        UI --> AGENT : requests data
+    UI --> AGENT : requests comission type
     deactivate UI
-
-    AGENT -> UI : types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)
-        activate UI
-
-    UI -> CTRL : saveDataResidence(bedrooms, bathrooms, parking, equipment)
+    AGENT -> UI : selects comission type
+    activate UI
+    UI -> CTRL : saveDataComissionType(comissionType)
+    activate CTRL
+    CTRL --> UI : data saved
+    deactivate CTRL
+    opt comission is a percentage
+    UI --> AGENT : requests comission percentage
+    deactivate UI
+    AGENT -> UI : types comission
+    activate UI
+    UI -> CTRL : saveDataComission(comission)
     activate CTRL
     CTRL --> UI : data saved
     deactivate CTRL
 
 
-        opt property is a House
+    end opt
 
-        UI --> AGENT : requests data
+    opt comission is a value
+    UI --> AGENT : requests comission value
     deactivate UI
-AGENT -> UI : types the requested data (existence of a basement and inhabitable loft, sun exposure)
-activate UI
-UI -> CTRL : saveDataHouse(basement, loft, sun)
-activate CTRL
-CTRL --> UI : data saved
-deactivate CTRL
+    AGENT -> UI : types comission
+    activate UI
+    UI -> CTRL : saveDataComission(comission)
+    activate CTRL
+    CTRL --> UI : data saved
+    deactivate CTRL
+    end opt
+    UI --> AGENT : shows all the data and asks for confirmation
+    deactivate UI
+    AGENT -> UI : confirms publishment
+    activate UI
+    UI -> CTRL : createAnnouncement()
+    activate CTRL
+    CTRL -> ANCMT** : create()
+    CTRL -> ANCMT : createAnnouncement()
+    activate ANCMT
+    ANCMT --> CTRL : announcement created
+    deactivate ANCMT
+    CTRL -> ANCMT : setDate(date)
+    activate ANCMT
+    ANCMT --> CTRL : announcement created sucessfully
+    deactivate ANCMT
 
-end opt
-end opt
-UI --> AGENT : requests comission type
-deactivate UI
-AGENT -> UI : selects comission type
-activate UI
-UI -> CTRL : saveDataComissionType(comissionType)
-activate CTRL
-CTRL --> UI : data saved
-deactivate CTRL
-opt comission is a percentage
-UI --> AGENT : requests comission percentage
-deactivate UI
-AGENT -> UI : types comission
-activate UI
-UI -> CTRL : saveDataComission(comission)
-activate CTRL
-CTRL --> UI : data saved
-deactivate CTRL
+    CTRL --> UI : announcement creted sucessfully
+    deactivate CTRL
+    UI -> CTRL : addAnnouncement()
+    activate CTRL
+    CTRL -> REP : getInstance()
+                    activate REP
 
+                        REP --> CTRL: repositories
+                    deactivate REP
 
-end opt
+                    CTRL -> PLAT : getAnnouncementRepository()
+                    activate PLAT
 
-opt comission is a value
-UI --> AGENT : requests comission value
-deactivate UI
-AGENT -> UI : types comission
-activate UI
-UI -> CTRL : saveDataComission(comission)
-activate CTRL
-CTRL --> UI : data saved
-deactivate CTRL
-end opt
+                        PLAT --> CTRL: announcementRepository
+                    deactivate PLAT
 
+                    CTRL -> AnnouncementREP : addAnnouncement()
+                    activate AnnouncementREP
 
-UI --> AGENT : presents all the data inserted
+                        AnnouncementREP --> CTRL : addAnnouncement
+                    deactivate AnnouncementREP
 
-deactivate UI
-
-AGENT -> UI : confirms inserted data
-
-activate UI
-UI -> CTRL : createAnnouncement
-activate CTRL
-CTRL -> ANCMT** : create()
-CTRL -> ANCMT : createAnnouncement()
-activate ANCMT
-ANCMT --> CTRL : announcement created
-deactivate ANCMT
-CTRL -> ANCMT : setDate(date)
-activate ANCMT
-ANCMT --> CTRL : announcement created sucessfully
-deactivate ANCMT
-
-CTRL --> UI : announcement creted sucessfully
-deactivate CTRL
+                    CTRL --> UI : announcement added
+                deactivate CTRL
+                 UI -> CTRL : saveEmail()
+                 activate CTRL
+                 CTRL --> UI : email saved
+                 deactivate CTRL
+                 UI --> AGENT : announcement created sucessfully
 
 
-UI --> AGENT : announcement created sucessfully
-deactivate UI
+
+
+    end opt
+
+    opt selects to decline
+
+    UI --> AGENT : asks to type a justification
+    deactivate UI
+    AGENT -> UI : types justification
+    activate UI
+    UI -> CTRL : saveEmail()
+    activate CTRL
+    CTRL --> UI : email saved
+    deactivate CTRL
+    UI --> AGENT : shows all the data and asks for confirmation
+    deactivate UI
+    AGENT -> UI : confirms information
+    activate UI
+    UI -> CTRL : excludeRequest(request)
+            activate CTRL
+
+                CTRL -> REP : getInstance()
+                activate REP
+
+                    REP --> CTRL: repositories
+                deactivate REP
+
+                CTRL -> PLAT : getRequestsRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: requestsRepository
+                deactivate PLAT
+
+                CTRL -> RequestsREP : excludeRequest(request)
+                activate RequestsREP
+
+                    RequestsREP --> CTRL : request deleted
+                deactivate RequestsREP
+
+                CTRL --> UI : request excluded
+            deactivate CTRL
+            UI --> AGENT : request declined sucessfully
+            deactivate UI
+    end opt
+
+
+
+
+
+
+
+
 
 
 

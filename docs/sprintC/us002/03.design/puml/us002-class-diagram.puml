@@ -27,6 +27,7 @@ class RegisterAnnouncementController
     -comissionType: String
     -comission: double
     +getPropertyType()
+    +addAnnouncement(announcement)
     +setPropertyType(propertyType)
     +getRegisteredUsers()
     +saveDataProperty(area, location, distance, price, photos)
@@ -41,6 +42,7 @@ class Repositories
     +getInstance()
     +getPropertyTypeRepository()
     +getRegisteredUsersRepository()
+    +getAnnouncementRepository()
 }
 
 class PropertyTypeRepository
@@ -60,30 +62,29 @@ class Announcement
     +setDate(date)
 }
 
-class Comission
-{
-    -value: double
-    -percentage : double
-}
-
 class Agent
 {
     -name: String
     -citizenCardNumber: Integer
-    -taxNumber: Integer
-    -adress: String
+    -taxNumber: TaxNumber
+    -propertyAddress: PropertyAddress
     -email: String
-    -phoneNumber: Integer
-    -agency: String
+    -phoneNumber: String
+    -passportCardNumber: PassportCardNumber
 }
 
-Class Location
+Class Address
 {
     -street: String
-    -city: String
-    -district: String
-    -state: String
-    -zipCode: Integer
+    -city: City
+    -district: District
+    -state: State
+    -zipCode: String
+}
+
+class AnnouncementRepository
+{
+    +addAnnouncement(announcement)
 }
 
 
@@ -93,10 +94,13 @@ RegisterAnnouncementController .> Repositories
 Repositories -> Announcement
 Repositories -> RegistedUsersRepository
 Repositories -> PropertyTypeRepository
+Repositories -> AnnouncementRepository
 RegisterAnnouncementController ---> Announcement
 RegisterAnnouncementController ..> RegistedUsersRepository
 RegisterAnnouncementController ..> PropertyTypeRepository
+RegisterAnnouncementController ..> AnnouncementRepository
+AnnouncementRepository -> "has" Announcement
+
 Agent -> Announcement
-Announcement -> Comission
-Announcement -> "has" Location
+Announcement -> "has" Address
 @enduml
