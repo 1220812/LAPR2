@@ -24,6 +24,10 @@ public class Property {
     /**
      * photograph list of the property
      */
+    /**
+     * type of property
+     */
+    private String propertyType;
     private List<Photographs> photographsList = new ArrayList<>();
     /**
      * Method that creates a Property with all the attributes
@@ -33,7 +37,11 @@ public class Property {
      * @param price price of the property
      */
 
-    public Property(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList) {
+    public Property(double area,
+                    double distanceFromTheCityCentre,
+                    Address address,
+                    double price,
+                    List<Photographs> photographsList) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
@@ -143,12 +151,23 @@ public class Property {
                 ", price=" + price +
                 ", distanceFromTheCityCenter=" + distanceFromTheCityCenter +
                 ", address=" + address +
+                ", propertyType='" + propertyType + '\'' +
                 ", photographsList=" + photographsList +
                 '}';
     }
+
     /**
      * This method creates a new instance of the property object and initializes its attributes with the exact same values of the original object
      * @return a clone of the property object
      */
     public Property clone(){ return new Property(this.area, this.distanceFromTheCityCenter,this.address,this.price, this.photographsList); }
+
+
+    public String getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(String propertyType) {
+        this.propertyType = propertyType;
+    }
 }

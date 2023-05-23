@@ -39,8 +39,6 @@ public class Repositories {
 
     private final DistrictRepository districtRepository = new DistrictRepository();
 
-    private final PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
-
     private final RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
 
     private final UserRepository userRepository = new UserRepository();
@@ -129,10 +127,6 @@ public class Repositories {
 
     public DistrictRepository getDistrictRepository() {
         return districtRepository;
-    }
-
-    public PropertyTypeRepository getPropertyTypeRepository() {
-        return propertyTypeRepository;
     }
 
     public RequestTypeRepository getRequestTypeRepository() {

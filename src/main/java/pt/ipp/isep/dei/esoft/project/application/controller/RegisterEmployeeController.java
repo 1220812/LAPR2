@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.ipp.isep.dei.esoft.project.repository.*;
+import pt.ipp.isep.dei.esoft.project.repository.AgencyRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.repository.RoleRepository;
 
 import java.util.List;
 
@@ -48,13 +50,7 @@ public class RegisterEmployeeController {
      * Gets user repository.
      */
     public void getUserRepository() {
-         Repositories.getInstance().getUserRepository().getEmployeeList();
-    }
-    public List<City> getCityRepository(){
-        return Repositories.getInstance().getCityRepository().getCityList();
-    }
-    public List<District> getDistrictRepository(){
-        return Repositories.getInstance().getDistrictRepository().getDistrictList();
+        Repositories.getInstance().getUserRepository().getEmployeeList();
     }
 
     public List<Address> getAddresses(){

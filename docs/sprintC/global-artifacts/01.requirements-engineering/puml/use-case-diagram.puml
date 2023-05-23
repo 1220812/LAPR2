@@ -5,6 +5,8 @@ actor "Unregistered user" as unUser #grey
 actor "Agent" as Agent #grey
 actor "System Administrator" as Admin #grey
 actor "Owner" as Owner #grey
+actor "Network Manager" as NM #grey
+actor "Client" as C #grey
 
 rectangle "RealEstate USA App"{
  usecase "US1 - Display Listed Properties" as UC1
@@ -12,7 +14,13 @@ rectangle "RealEstate USA App"{
  usecase "US2 - Publish the Announcements on the System" as UC2
  usecase "US4 - Submit a request" as UC4
  usecase "US5 - Register a store" as UC5
+ usecase "US8 - See the list of property announcement request" as UC8
+ usecase "US9 - Leave a message to the agent to schedule a visit" as UC9
+ usecase "US10 - Place an order to purchase the property" as UC10
+ usecase "US12 - Import information from legacy system" as UC12
  usecase "US3 - Register the Employees" as UC3
+ usecase "US11 - List real estate purchase orders to \naccept or decline a purchase order" as UC11
+ usecase "US13 - List all employees working in every store" as UC13
  }
  unUser -- UC1
  Agent -- UC2
@@ -20,4 +28,10 @@ rectangle "RealEstate USA App"{
  Admin -- UC3
  Owner -- UC4
  unUser -- UC7
+ NM -- UC13
+ Agent -- UC11
+ Agent -- UC8
+ C -- UC9
+ C -- UC10
+Admin -- UC12
 @enduml

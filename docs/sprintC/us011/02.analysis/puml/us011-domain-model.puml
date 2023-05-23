@@ -1,0 +1,73 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model - US011
+
+class Property{
+area
+price
+distanceFromTheCityCenter
+}
+
+class Agent{
+   name
+   phoneNumber
+   emailAddress
+   taxNumber
+   passportCardNumber
+   propertyAddress
+}
+
+class Decision{
+decision
+}
+
+class PurchaseOrder{
+orderNumber
+price
+date
+property
+}
+
+class Address{
+streetAddress
+city
+district
+state
+zipCode
+}
+
+class Email{
+emailTo
+emailFrom
+emailSubject
+emailBody
+}
+
+class Client{
+name
+phoneNumber
+emailAddress
+taxNumber
+passportCardNumber
+}
+
+Property "1" -- "1" Agent
+
+Agent "1" -- "1" Address : has
+Agent "1" -- "1" Decision : makes
+
+
+
+
+
+@enduml

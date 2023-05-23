@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.RegisterStoreController;
+//import pt.ipp.isep.dei.esoft.project.application.controller.RegisterStoreController;
 
 import java.util.Scanner;
-public class RegisterStoreUI implements Runnable{
+/**public class RegisterStoreUI implements Runnable{
+
     private RegisterStoreController controller;
     public RegisterStoreUI(){
         this.controller= new RegisterStoreController();
@@ -44,4 +45,4 @@ public class RegisterStoreUI implements Runnable{
     public void run() {
         RequestedData();
     }
-}
+}*/
