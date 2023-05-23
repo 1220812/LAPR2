@@ -13,6 +13,7 @@ participant ":Repositories" as Rep
 participant "repositories\n:Repository" as PLAT
 participant "PropertyTypeListRepository" as PTLR
 participant "agencyRepository\n:AgencyRepository" as agencyRepository
+participant "agency: \nAgency" as agency
 participant "requestTypeRepository:\nRequestTypeRepository" as RequestRepository
 participant "property: \nProperty" as property
 participant "residence: \nResidence" as residence
@@ -20,7 +21,7 @@ participant "house: \nHouse" as house
 participant "request: \nRequest" as Req
 participant "photograph: \nPhotograph" as Photo
 participant "photographList" as PhotoList
-participant "addressRepository:\nAddressRepository" as address
+participant "AddressRepository:\naddressRepository" as AddressRepository
 
 activate ADM
 
@@ -93,13 +94,13 @@ activate ADM
 
                        deactivate PLAT
 
-                       CTRL -> address : getStateList()
+                       CTRL -> StateRepository : getStateList()
 
-                       activate address
+                       activate StateRepository
 
-                       address --> CTRL : stateList
+                       StateRepository --> CTRL : stateList
 
-                       deactivate address
+                       deactivate StateRepository
 
                CTRL --> UI : stateList
                deactivate CTRL
@@ -127,11 +128,11 @@ activate ADM
 
                         deactivate PLAT
 
-                        CTRL -> address : getDistrictList
-                        activate address
+                        CTRL -> DistrictRepository : getDistrictList
+                        activate DistrictRepository
 
-                        address --> CTRL : districtList
-                        deactivate address
+                        DistrictRepository --> CTRL : districtList
+                        deactivate DistrictRepository
 
 
                 CTRL --> UI : districtList
@@ -158,13 +159,13 @@ activate ADM
                     PLAT --> CTRL : cityRepository
                     deactivate PLAT
 
-                    CTRL -> address : getCityList
+                    CTRL -> CityRepository : getCityList
 
-                    activate address
+                    activate CityRepository
 
-                    address --> CTRL : cityList
+                    CityRepository --> CTRL : cityList
 
-                    deactivate address
+                    deactivate CityRepository
 
                 CTRL --> UI : cityList
                 deactivate CTRL
