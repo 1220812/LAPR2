@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddressRepository {
-    List<Address> propertyAddressList;
+    List<Address> AddressList;
 
     public AddressRepository(){
-        propertyAddressList = new ArrayList<>();
+        AddressList = new ArrayList<>();
     }
 
     public boolean add(Address address){
         if (address == null) throw new IllegalArgumentException("Impossible address");
-        if (propertyAddressList.contains(address)) throw new IllegalArgumentException("Already exist");
-        return propertyAddressList.add(address);
+        if (AddressList.contains(address)) throw new IllegalArgumentException("Already exist");
+        return AddressList.add(address);
     }
 
 
     public List<Address> getAddressList(){
-        return propertyAddressList;
+        return AddressList;
     }
 
 }

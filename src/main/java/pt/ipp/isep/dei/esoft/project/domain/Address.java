@@ -50,7 +50,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return String.format("Street: %s | City: %s | District: %s | State: %s | ZipCode: %s", street, city, district, state, zipCode);
+        return String.format("City: %s | District: %s| State: %s", city, district, state);
     }
 
     public static boolean existsZipCode(String zipCode){
