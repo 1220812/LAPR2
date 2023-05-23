@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class Address {
@@ -8,6 +10,8 @@ public class Address {
     District district;
     City city;
     String zipCode;
+
+    private static final int ZIP_CODE_LENGTH = 5;
 
     public Address(String street, State state, District district, City city, String zipCode) {
         validate(street, state, district, city, zipCode);
@@ -47,5 +51,15 @@ public class Address {
     @Override
     public String toString() {
         return String.format("City: %s | District: %s| State: %s", city, district, state);
+    }
+
+    public static boolean existsZipCode(String zipCode){
+        if ((zipCode.length() != ZIP_CODE_LENGTH) || (StringUtils.isBlank(zipCode)) || (!StringUtils.isNumeric(zipCode))) { return false; }
+        else return true;
+    }
+
+    public static boolean existsDoorNumber(int floorNumber){
+        if (floorNumber < 1) { return false; }
+        else return true;
     }
 }

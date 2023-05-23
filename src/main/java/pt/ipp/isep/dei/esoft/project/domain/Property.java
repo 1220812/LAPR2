@@ -170,4 +170,19 @@ public class Property {
     public void setPropertyType(String propertyType) {
         this.propertyType = propertyType;
     }
+
+    public static boolean existsArea(double area){
+        if (area < 1) { return false; }
+        else return true;
+    }
+
+    public static boolean existsPrice(double price){
+        if (price <= 0) { return false; }
+        else return true;
+    }
+
+    public static boolean existsDistanceFromCityCenter(double distanceFromTheCityCenter){
+        if (distanceFromTheCityCenter < 1) { return false; }
+        else return true;
+    }
 }

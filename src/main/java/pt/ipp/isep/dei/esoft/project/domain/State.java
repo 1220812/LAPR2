@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.repository.StateRepository;
+
 import java.util.Objects;
 
 public class State {
@@ -43,4 +45,5 @@ public class State {
     public State clone(){
         return new State(this.name);
     }
+
 }
