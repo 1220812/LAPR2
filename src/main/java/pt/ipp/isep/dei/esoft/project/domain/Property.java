@@ -20,7 +20,7 @@ public class Property {
     /**
      * property address
      */
-    private Address address;
+    private PropertyAddress address;
     /**
      * photograph list of the property
      */
@@ -39,7 +39,7 @@ public class Property {
 
     public Property(double area,
                     double distanceFromTheCityCentre,
-                    Address address,
+                    PropertyAddress address,
                     double price,
                     List<Photographs> photographsList) {
         if (area <= 0)
@@ -111,14 +111,14 @@ public class Property {
      * Method to show the address of the property
      * @return address
      */
-    public Address getAddress() {
+    public PropertyAddress getAddress() {
         return address;
     }
     /**
      * Method to change the address of the property
      * @param address changed address
      */
-    public void setAddress(Address address) {
+    public void setAddress(PropertyAddress address) {
         this.address = address;
     }
 

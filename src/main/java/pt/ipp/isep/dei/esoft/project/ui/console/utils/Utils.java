@@ -14,28 +14,6 @@ import java.util.logging.Logger;
  */
 public class Utils {
 
-    static private <T> void showList(List<T> list, int len) {
-        for (int i = 0; i < len; i++) {
-            System.out.printf("%d. %s\n", i+1, list.get(i));
-        }
-        System.out.println("0. Exit");
-    }
-
-    static public <T> T listAndSelectOne(List<T> list) {
-        int len = list.size();
-        int option;
-        do {
-            showList(list, len);
-            option = readIntegerFromConsole("Select one: ");
-        } while(option < 0 || option > len);
-
-        if (option == 0) {
-            return null;
-        } else {
-            return list.get(option-1);
-        }
-    }
-
     static public String readLineFromConsole(String prompt) {
         try {
             System.out.println("\n" + prompt);

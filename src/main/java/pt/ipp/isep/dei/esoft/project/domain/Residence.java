@@ -34,7 +34,7 @@ public class Residence extends Property{
      * @param price price
      */
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, List<AvailableEquipment> availableEquipment) {
+    public Residence (PropertyAddress address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, List<AvailableEquipment> availableEquipment) {
         super(area, distanceFromCityCentre, address,price, photographsList);
         if (numberOfBedrooms < 0 || numberOfBathrooms < 0 || numberOfParkingSpaces < 0) {
             throw new IllegalArgumentException("Provide the actual number of Bathrooms, Bedrooms and Parking Spaces" +

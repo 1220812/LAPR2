@@ -23,6 +23,7 @@ public class Bootstrap implements Runnable {
         addSunExposure();
         addAgency();
         addAnnouncement();
+        addPropertyType();
     }
 
     private void addOrganization() {
@@ -76,8 +77,6 @@ public class Bootstrap implements Runnable {
         addressRepository.add(propertyAddress1);
         addressRepository.add(propertyAddress2);
         addressRepository.add(propertyAddress3);
-
-
     }
 
     private void addRequestType() {
@@ -95,7 +94,26 @@ public class Bootstrap implements Runnable {
         availableEquipmentRepository.add(e1);
         availableEquipmentRepository.add(e2);
     }
-
+    private void addAgent(){
+        AgentRepository agentRepository = Repositories.getInstance().getAgentRepository();
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        State state3 = new State("Arizona");
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        District district3 = new District("Western");
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
+        Address propertyAddress1 = new Address("Street A", state1, district1, city1, "12345");
+        Address propertyAddress2 = new Address("Street B", state2, district2, city2, "12346");
+        Address propertyAddress3 = new Address("Street C", state1, district3, city2, "12347");
+        Agent agent1 = new Agent("agent1", "123456789", ", 123456789", propertyAddress1, new TaxNumber("123456789"), new PassportCardNumber("123456789"));
+        Agent agent2 = new Agent("agent2", "123456689", ", 123446789", propertyAddress2, new TaxNumber("123454789"), new PassportCardNumber("123457789"));
+        Agent agent3 = new Agent("agent3", "123406789", ", 123486789", propertyAddress3, new TaxNumber("123056789"), new PassportCardNumber("123456289"));
+        agentRepository.addAgent(agent1);
+        agentRepository.addAgent(agent2);
+        agentRepository.addAgent(agent3);
+    }
     private void addSunExposure() {
         SunExposureRepository sunExposureRepository = Repositories.getInstance().getSunExposureRepository();
         SunExposure s1 = new SunExposure("North");
@@ -148,11 +166,11 @@ public class Bootstrap implements Runnable {
     private void addPropertyType(){
         PropertyTypeRepository propertyTypeRepository = Repositories.getInstance().getPropertyTypeRepository();
         PropertyType p1 = new PropertyType("Land");
-        PropertyType p2 = new PropertyType("Appartment");
+        PropertyType p2 = new PropertyType("Apartment");
         PropertyType p3 = new PropertyType("House");
         propertyTypeRepository.addPropertyType(p1);
         propertyTypeRepository.addPropertyType(p2);
         propertyTypeRepository.addPropertyType(p3);
-
     }
+
 }

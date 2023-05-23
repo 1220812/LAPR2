@@ -19,14 +19,12 @@ public class RequestRepository {
     public List<Request> getRequests() {
         return List.copyOf(requestList);
     }
-
-
     public void addRequest(Request request) {
         if (validateRequest(request)) {
             requestList.add(request);
         }
     }
-    public static Request CreateRequest(Property property, double price, String requestType, Agent agent, Store store, Owner owner){
+    public static Request CreateRequest(Property property, double price, RequestType requestType, Agent agent, Store store, Owner owner){
         return new Request(property,price,requestType,agent,store,owner);
     }
 
