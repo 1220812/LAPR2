@@ -52,6 +52,8 @@ public class Repositories {
     private final PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
     private final OfferRepository offerRepository = new OfferRepository();
 
+    private final AgentRepository agentRepository = new AgentRepository();
+
 
 
 
@@ -157,6 +159,10 @@ public class Repositories {
 
     public OfferRepository getOfferRepository() {
         return offerRepository;
+    }
+
+    public AgentRepository getAgentRepository() {
+        return agentRepository;
     }
 }
 

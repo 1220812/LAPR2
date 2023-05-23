@@ -9,12 +9,14 @@ import pt.ipp.isep.dei.esoft.project.domain.Photographs;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
-public class RegisterAnnouncementUI implements Runnable{
+public class RegisterAnnouncementUI implements Runnable {
 
     private final RegisterAnnouncementController controller = new RegisterAnnouncementController();
+
     private RegisterAnnouncementController getController() {
         return controller;
     }
+
     private PropertyType propertyType;
     private String ownerEmail;
     private double area;
@@ -36,8 +38,9 @@ public class RegisterAnnouncementUI implements Runnable{
     private String comissionType;
     private int dataConfirmation;
     private double comission;
+
     public void run() {
-        Scanner ler = new Scanner(System.in);
+        /*Scanner ler = new Scanner(System.in);
 
         if (!ownerVerification()) {
             System.out.println("User not registed, please register user.");
@@ -204,10 +207,6 @@ public class RegisterAnnouncementUI implements Runnable{
 
         if(controller.)
 
-
-
-
+         */
     }
-
-    public
 }

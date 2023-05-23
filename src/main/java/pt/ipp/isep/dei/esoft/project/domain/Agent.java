@@ -1,6 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+<<<<<<< HEAD
 //import pt.ipp.isep.dei.esoft.project.repository.AgentRepository;
+=======
+import pt.ipp.isep.dei.esoft.project.repository.AgentRepository;
+>>>>>>> origin/master
 
 import java.util.Objects;
 

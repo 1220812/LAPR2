@@ -49,7 +49,11 @@ public class AuthenticationUI implements Runnable {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_OWNER, new OwnerUI()));
+<<<<<<< HEAD
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_AGENT, new OwnerUI()));
+=======
+//        rolesUI.add(new MenuItem(AuthenticationController.ROLE_AGENT, new OwnerUI()));
+>>>>>>> origin/master
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_CLIENT, new ClientUI()));
 
 

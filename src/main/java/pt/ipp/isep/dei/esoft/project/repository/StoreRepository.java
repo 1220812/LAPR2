@@ -56,10 +56,4 @@ public class StoreRepository {
         boolean isValid = !storeList.contains(store);
         return isValid;
     }
-
-
-
-
-
-
 }

@@ -68,13 +68,13 @@ public class RegisterEmployeeUI implements Runnable {
             email = Utils.readLineFromConsole("Invalid ZipCode (format: xxxxx) \nInsert new ZipCode:");
         }
 
-        address = Utils.listAndSelectOne(controller.getAddresses());
+        //address = Utils.listAndSelectOne(controller.getAddresses());
         if (address == null) return;
         System.out.println(address);
 
         System.out.println();
         System.out.println("####### List of Roles #######");
-        role = Utils.listAndSelectOne(controller.getRolesList());
+       // role = Utils.listAndSelectOne(controller.getRolesList());
         if (role == null) return;
 
         inputRole = role.toString();
@@ -83,14 +83,14 @@ public class RegisterEmployeeUI implements Runnable {
         if (inputRole.equals("Agent") || inputRole.equals("Manager Network") || inputRole.equals("Store Manager")) {
 
             System.out.println("####### List of Agencies #######");
-            agency = Utils.listAndSelectOne(controller.getAgency());
+         //   agency = Utils.listAndSelectOne(controller.getAgency());
             if (agency == null) return;
 
 
             if (inputRole.equals("Agent") || inputRole.equals("Store Manager")) {
 
                 System.out.println("####### List of Stores #######");
-                store = Utils.listAndSelectOne(controller.getStore());
+         //       store = Utils.listAndSelectOne(controller.getStore());
                 if (store == null) return;
 
             } else {

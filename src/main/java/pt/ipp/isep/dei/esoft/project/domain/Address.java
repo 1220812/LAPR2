@@ -48,25 +48,9 @@ public class Address {
         return city;
     }
 
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
     @Override
     public String toString() {
-        return String.format("Street: %s | City: %s | District: %s| State: %s | ZipCode: %s",street, city, district, state, zipCode);
+        return String.format("City: %s | District: %s| State: %s", city, district, state);
     }
 
     public static boolean existsZipCode(String zipCode){
