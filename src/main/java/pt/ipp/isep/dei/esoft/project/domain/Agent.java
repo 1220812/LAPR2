@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+//import pt.ipp.isep.dei.esoft.project.repository.AgentRepository;
+
 import java.util.Objects;
 
 public class Agent {
@@ -26,7 +28,7 @@ public class Agent {
     /**
      * address of the agent
      */
-    private PropertyAddress propertyAddress;
+    private Address address;
     /**
      * Method that shows the phone number
      * @return phone number
@@ -107,16 +109,16 @@ public class Agent {
      * Method to show the address
      * @return address
      */
-    public PropertyAddress getAddress() {
-        return propertyAddress;
+    public Address getAddress() {
+        return address;
     }
 
     /**
      * Method to change the address
-     * @param propertyAddress changed address
+     * @param address changed address
      */
-    public void setAddress(PropertyAddress propertyAddress) {
-        this.propertyAddress = propertyAddress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     /**
@@ -126,11 +128,11 @@ public class Agent {
      * @param emailAddress email address of the owner
      */
 
-    public Agent(String name, String phoneNumber, String emailAddress, PropertyAddress propertyAddress, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+    public Agent(String name, String phoneNumber, String emailAddress,Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
-        this.propertyAddress = propertyAddress;
+        this.address = address;
         this.taxNumber = taxNumber;
         this.passportCardNumber = passportCardNumber;
     }
@@ -144,12 +146,12 @@ public class Agent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Agent agent = (Agent) o;
-        return phoneNumber == agent.phoneNumber && Objects.equals(name, agent.name) && Objects.equals(emailAddress, agent.emailAddress) && Objects.equals(taxNumber, agent.taxNumber) && Objects.equals(passportCardNumber, agent.passportCardNumber) && Objects.equals(propertyAddress, agent.propertyAddress);
+        return phoneNumber == agent.phoneNumber && Objects.equals(name, agent.name) && Objects.equals(emailAddress, agent.emailAddress) && Objects.equals(taxNumber, agent.taxNumber) && Objects.equals(passportCardNumber, agent.passportCardNumber) && Objects.equals(address, agent.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phoneNumber, emailAddress, taxNumber, passportCardNumber, propertyAddress);
+        return Objects.hash(name, phoneNumber, emailAddress, taxNumber, passportCardNumber, address);
     }
 
     /**
@@ -163,7 +165,7 @@ public class Agent {
                 ", emailAddress='" + emailAddress + '\'' +
                 ", taxNumber=" + taxNumber +
                 ", passportCardNumber=" + passportCardNumber +
-                ", address=" + propertyAddress +
+                ", address=" + address +
                 '}';
     }
 
@@ -171,5 +173,10 @@ public class Agent {
      * This method creates a new instance of the agent object and initializes its attributes with the exact same values of the original object
      * @return a clone of the agent object
      */
-    public Agent clone(){ return new Agent(this.name,this.phoneNumber, this.emailAddress,this.propertyAddress,this.taxNumber,this.passportCardNumber); }
+    public Agent clone(){ return new Agent(this.name,this.phoneNumber, this.emailAddress,this.address,this.taxNumber,this.passportCardNumber); }
+
+    public static Agent newAgent(String name, String phoneNumber, String emailAddress,Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+        Agent newAgent = newAgent(name, phoneNumber, emailAddress, address, taxNumber, passportCardNumber);
+        return newAgent;
+    }
 }
