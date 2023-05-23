@@ -31,6 +31,10 @@ public class Announcement {
         this.comission = comission;
         this.requestType = requestType;
     }
+    public Announcement(Property property, LocalDate date){
+        this.property = property;
+        this.date = date;
+    }
 
     public LocalDate getDate() {
         return date;
@@ -73,6 +77,14 @@ public class Announcement {
                 ", comission=" + comission +
                 '}';
     }
+
+    public String toString2() {
+        return "Announcement{" +
+                "date=" + date +
+                ", property=" + property +
+                '}';
+    }
+
     public Announcement clone(){
         return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType);
     }
