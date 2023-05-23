@@ -21,7 +21,7 @@ public class Request {
      * @param store selected store
      * @param owner owner
      */
-    public Request(Property property, double price, String requestType, Agent agent, Store store, Owner owner) {
+    public Request(Property property, double price, RequestType requestType, Agent agent, Store store, Owner owner) {
         if (property == null){
             throw new IllegalArgumentException("Property must not be null");
         }
@@ -88,7 +88,7 @@ public class Request {
      * Method to show the type
      * @return type
      */
-    public String getRequestType() {
+    public RequestType getRequestType() {
         return requestType;
     }
 
@@ -97,7 +97,7 @@ public class Request {
      * @param requestType type
      */
 
-    public void setRequestType(String requestType) {
+    public void setRequestType(RequestType requestType) {
         this.requestType = requestType;
     }
 
