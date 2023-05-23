@@ -21,6 +21,7 @@ public class Request {
      * @param store selected store
      * @param owner owner
      */
+
     public Request(Property property, double price, RequestType requestType, Agent agent, Store store, Owner owner) {
         if (property == null){
             throw new IllegalArgumentException("Property must not be null");

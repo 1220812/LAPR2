@@ -15,24 +15,24 @@ public class AnnouncementRepository {
         return List.copyOf(this.announcements);
     }
 
-    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
-        List<Announcement> announcementsSpecific = announcements;
-        return announcements;
-    }
+//    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
+//        List<Announcement> announcementsSpecific = announcements;
+//        return announcements;
+//    }
 
 
     private final List<Announcement> annuncementsList = new ArrayList<>();
 
     public List<Announcement> addAnnouncement(Announcement announcement){
         annuncementsList.add(announcement);
-        Optional<Announcement> newAnnaucement = Optional.empty();
+        Optional<Announcement> newAnnoucement = Optional.empty();
         boolean operationSuccess = false;
         if(validateAnnaucement(announcement)){
-            newAnnaucement = Optional.of(announcement.clone());
-            operationSuccess = annuncementsList.add(newAnnaucement.get());
+            newAnnoucement = Optional.of(announcement.clone());
+            operationSuccess = annuncementsList.add(newAnnoucement.get());
         }
         if(!operationSuccess){
-            newAnnaucement = Optional.empty();
+            newAnnoucement = Optional.empty();
         }
         return annuncementsList;
     }
