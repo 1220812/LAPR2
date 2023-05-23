@@ -50,10 +50,7 @@ public class Repositories {
     private final AddressRepository addressRepository = new AddressRepository();
 
     private final PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
-
-
-
-
+    private final OfferRepository offerRepository = new OfferRepository();
 
 
 
@@ -156,6 +153,10 @@ public class Repositories {
 
     public PropertyTypeRepository getPropertyTypeRepository() {
         return propertyTypeRepository;
+    }
+
+    public OfferRepository getOfferRepository() {
+        return offerRepository;
     }
 }
 

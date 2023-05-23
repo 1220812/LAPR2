@@ -27,6 +27,11 @@ public class Offer {
         return offerPrice;
     }
 
+
+    public Offer clone() {
+        return new Offer(this.property, this.offerPrice);
+    }
+
     @Override
     public String toString() {
         return "Offer:" +
