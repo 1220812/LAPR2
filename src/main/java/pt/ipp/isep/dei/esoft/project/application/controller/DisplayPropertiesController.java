@@ -9,23 +9,13 @@ import java.util.List;
 
 public class DisplayPropertiesController {
 
-    private AnnouncementRepository announcementRepository = null;
 
-    public DisplayPropertiesController() {
-        getAnnouncementsRepository();
-    }
-
-    private AnnouncementRepository getAnnouncementsRepository() {
-        if (announcementRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-
-            announcementRepository = getAnnouncementsRepository();
-        }
-        return announcementRepository;
+    public AnnouncementRepository getAnnouncementRepository(){
+        return Repositories.getInstance().getAnnouncementRepository();
     }
 
     public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
-        AnnouncementRepository announcementRepository = getAnnouncementsRepository();
+          AnnouncementRepository announcementRepository = getAnnouncementsRepository();
         return announcementRepository.getSpecificAnnouncements(typeOfBusiness, typeOfProperty, numberOfRooms);
     }
 

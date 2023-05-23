@@ -11,14 +11,13 @@ import java.util.List;
 public class DisplayPropertiesUI implements Runnable{
 
     private final DisplayPropertiesController dpController = new DisplayPropertiesController();
-    private final AnnouncementRepository aRepository = new AnnouncementRepository();
+//    private final AnnouncementRepository aRepository = new AnnouncementRepository();
 
-
+    AnnouncementRepository announcementRepository = dpController.getAnnouncementRepository();
     @Override
     public void run() {
-
         System.out.println("List of Properties:");
-        dpController.DisplayAnnouncements(aRepository);
+        dpController.DisplayAnnouncements(announcementRepository);
         System.out.println();
         System.out.println("X - Cancel");
 

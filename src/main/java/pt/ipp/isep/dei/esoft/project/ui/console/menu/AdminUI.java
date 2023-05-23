@@ -20,6 +20,7 @@ public class AdminUI implements Runnable {
         List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("Register a new employee", new RegisterEmployeeUI()));
 
+
         int option = 0;
         do {
             option = Utils.showAndSelectIndex(options, "\n\nAdmin Menu:");

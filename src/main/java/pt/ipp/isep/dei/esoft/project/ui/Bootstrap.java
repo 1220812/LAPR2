@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.esoft.project.application.controller.authorization.Authen
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import java.time.LocalDate;
+
 
 public class Bootstrap implements Runnable {
 
@@ -23,6 +25,8 @@ public class Bootstrap implements Runnable {
         addSunExposure();
         addAgency();
         addAnnouncement();
+        addPropertyAdress();
+        addProperty();
     }
 
     private void addOrganization() {
@@ -78,6 +82,9 @@ public class Bootstrap implements Runnable {
         addressRepository.add(propertyAddress3);
 
 
+    }
+
+    private  void addPropertyAdress(){
     }
 
     private void addRequestType() {
@@ -141,9 +148,28 @@ public class Bootstrap implements Runnable {
         agencyRepository.addAgency(agency3);
     }
 
-    private void addAnnouncement(){
-        AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
-
+    private void addProperty(){
 
     }
+    private void addAnnouncement(){
+        AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        State state3 = new State("Arizona");
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        District district3 = new District("Western");
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
+
+        PropertyAddress propertyAddress1= new PropertyAddress("Sesame Street","12345",state1,district1, city1);
+        Property property1 = new Property(200, 200, propertyAddress1, 2000000,null);
+
+        RequestType requestType1= new RequestType("Sell");
+        Announcement announcement1 = new Announcement(property1,"2004/12/12" , "per", 5, requestType1 );
+        announcementRepository.addAnnouncement(announcement1);
+
+    }
+
+
 }
