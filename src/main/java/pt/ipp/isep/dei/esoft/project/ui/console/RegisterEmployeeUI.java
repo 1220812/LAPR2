@@ -99,6 +99,12 @@ public class RegisterEmployeeUI implements Runnable {
                 controller.sendRegisteredUserEmail(email, pass);
                 System.out.println();
                 System.out.println("####### Operation sucess ######");
+
+
+
+
+
+
             }
             System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
             controller.getUserRepository();

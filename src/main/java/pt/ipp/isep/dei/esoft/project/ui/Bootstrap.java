@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.esoft.project.application.controller.authorization.Authen
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import java.time.LocalDate;
+
 
 public class Bootstrap implements Runnable {
 
@@ -23,6 +25,9 @@ public class Bootstrap implements Runnable {
         addSunExposure();
         addAgency();
         addAnnouncement();
+        addPropertyAdress();
+        addProperty();
+        addPropertyType();
     }
 
     private void addOrganization() {
@@ -70,14 +75,17 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address propertyAddress1 = new Address("Street A", state1, district1, city1, "12345");
-        Address propertyAddress2 = new Address("Street B", state2, district2, city2, "12346");
-        Address propertyAddress3 = new Address("Street C", state1, district3, city2, "12347");
-        addressRepository.add(propertyAddress1);
-        addressRepository.add(propertyAddress2);
-        addressRepository.add(propertyAddress3);
+        Address address1 = new Address("Street A", state1, district1, city1, "12345");
+        Address address2 = new Address("Street B", state2, district2, city2, "12346");
+        Address address3 = new Address("Street C", state1, district3, city2, "12347");
+        addressRepository.add(address1);
+        addressRepository.add(address2);
+        addressRepository.add(address3);
 
 
+    }
+
+    private  void addPropertyAdress(){
     }
 
     private void addRequestType() {
@@ -141,18 +149,42 @@ public class Bootstrap implements Runnable {
         agencyRepository.addAgency(agency3);
     }
 
+    private void addProperty(){
+
+    }
     private void addAnnouncement(){
         AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
-    }
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        State state3 = new State("Arizona");
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        District district3 = new District("Western");
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
 
+
+
+        PropertyAddress propertyAddress1= new PropertyAddress("Sesame Street","12345",state1,district1, city1);
+//        Property property1 = new Property(200, 200, , 2000000,null);
+
+        RequestType requestType1= new RequestType("Sell");
+//        Announcement announcement1 = new Announcement(property1,"2004/12/12" , "per", 5, requestType1 );
+//        announcementRepository.addAnnouncement(announcement1);
+
+    }
     private void addPropertyType(){
         PropertyTypeRepository propertyTypeRepository = Repositories.getInstance().getPropertyTypeRepository();
         PropertyType p1 = new PropertyType("Land");
-        PropertyType p2 = new PropertyType("Appartment");
+        PropertyType p2 = new PropertyType("Apartment");
         PropertyType p3 = new PropertyType("House");
         propertyTypeRepository.addPropertyType(p1);
         propertyTypeRepository.addPropertyType(p2);
         propertyTypeRepository.addPropertyType(p3);
 
     }
+
+
+
+
 }
