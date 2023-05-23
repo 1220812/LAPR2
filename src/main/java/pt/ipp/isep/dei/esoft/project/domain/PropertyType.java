@@ -1,13 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public enum PropertyType {
-    HOUSE("House"), LAND("Land"), APARTMENT("Apartment");
+public class PropertyType {
 
-    PropertyType(String description) {
-        this.description = description;
-    }
+    private String propertyType;
 
     private String description;
+
+    public PropertyType(String propertyType) {
+        this.propertyType = propertyType;
+    }
 
     @Override
     public String toString() {
