@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.esoft.project.application.controller.RegisterStoreControl
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
-import java.util.Scanner;
 
 public class RegisterStoreUI implements Runnable {
 
