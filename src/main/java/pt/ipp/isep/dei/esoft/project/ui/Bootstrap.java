@@ -22,6 +22,7 @@ public class Bootstrap implements Runnable {
         }
         addSunExposure();
         addAgency();
+        addAnnouncement();
     }
 
     private void addOrganization() {
@@ -138,5 +139,11 @@ public class Bootstrap implements Runnable {
         agencyRepository.addAgency(agency1);
         agencyRepository.addAgency(agency2);
         agencyRepository.addAgency(agency3);
+    }
+
+    private void addAnnouncement(){
+        AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
+
+
     }
 }
