@@ -7,7 +7,6 @@ public class Address {
     State state;
     District district;
     City city;
-
     String zipCode;
 
     public Address(String street, State state, District district, City city, String zipCode) {
