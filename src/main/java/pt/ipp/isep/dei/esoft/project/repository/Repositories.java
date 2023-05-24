@@ -54,7 +54,7 @@ public class Repositories {
 
     private final AgentRepository agentRepository= new AgentRepository();
 
-
+    private  final OwnerRepository ownerRepository= new OwnerRepository();
     private Repositories() {
     }
 
@@ -162,6 +162,9 @@ public class Repositories {
         return propertyTypeRepository;
     }
 
+    public OwnerRepository getOwnerRepository() {
+        return ownerRepository;
+    }
 }
 
 
