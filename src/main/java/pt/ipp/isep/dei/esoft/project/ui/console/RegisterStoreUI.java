@@ -24,7 +24,6 @@ public class RegisterStoreUI implements Runnable {
 
 
     public void run() {
-        Scanner input = new Scanner(System.in);
 
         designation = Utils.readLineFromConsole("Designation name:");
         while (designation.trim() .isEmpty()){

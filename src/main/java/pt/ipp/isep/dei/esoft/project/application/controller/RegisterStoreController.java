@@ -1,9 +1,9 @@
-
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.AddressRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.repository.StoreRepository;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class RegisterStoreController {
     }
 
     public Store RegisterStore(String desigantion, String emailAddress, int phoneNumber, Address address, int ID){
-        return  Store.newStore(desigantion, emailAddress, phoneNumber, address, ID);
+        return  StoreRepository.createStore(desigantion, emailAddress, phoneNumber, address, ID);
 
     }
 }

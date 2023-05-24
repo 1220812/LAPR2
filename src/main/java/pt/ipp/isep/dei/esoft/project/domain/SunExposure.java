@@ -50,8 +50,6 @@ public class SunExposure {
 
     @Override
     public String toString() {
-        return "SunExposure{" +
-                "sunExposure='" + sunExposure + '\'' +
-                '}';
+        return sunExposure;
     }
 }

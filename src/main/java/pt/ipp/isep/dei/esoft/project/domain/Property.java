@@ -21,6 +21,7 @@ public class Property {
      * property address
      */
     private Address address;
+    private Store store;
     /**
      * photograph list of the property
      */
@@ -29,6 +30,11 @@ public class Property {
      */
     private String propertyType;
     private List<Photographs> photographsList = new ArrayList<>();
+
+    private Agent agent;
+
+    private RequestType requestType;
+
     /**
      * Method that creates a Property with all the attributes
      * @param area area of property
@@ -37,11 +43,8 @@ public class Property {
      * @param price price of the property
      */
 
-    public Property(double area,
-                    double distanceFromTheCityCentre,
-                    Address address,
-                    double price,
-                    List<Photographs> photographsList) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, double price,
+                    List<Photographs> photographsList, Store store,Agent agent,RequestType requestType) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
@@ -55,6 +58,31 @@ public class Property {
         this.distanceFromTheCityCenter = distanceFromTheCityCentre;
         this.address = address;
         this.price = price;
+        this.photographsList = photographsList;
+        this.store=store;
+        this.agent=agent;
+        this.requestType=requestType;
+
+
+    }
+
+    public double getDistanceFromTheCityCenter() {
+        return distanceFromTheCityCenter;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public List<Photographs> getPhotographsList() {
+        return photographsList;
+    }
+
+    public void setPhotographsList(List<Photographs> photographsList) {
         this.photographsList = photographsList;
     }
 
@@ -144,6 +172,7 @@ public class Property {
     /**
      * Textual representation of an instance of Owner
      */
+
     @Override
     public String toString() {
         return "Property{" +
@@ -151,8 +180,11 @@ public class Property {
                 ", price=" + price +
                 ", distanceFromTheCityCenter=" + distanceFromTheCityCenter +
                 ", address=" + address +
+                ", store=" + store +
                 ", propertyType='" + propertyType + '\'' +
                 ", photographsList=" + photographsList +
+                ", agent=" + agent +
+                ", requestType=" + requestType +
                 '}';
     }
 
@@ -160,7 +192,7 @@ public class Property {
      * This method creates a new instance of the property object and initializes its attributes with the exact same values of the original object
      * @return a clone of the property object
      */
-    public Property clone(){ return new Property(this.area, this.distanceFromTheCityCenter,this.address,this.price, this.photographsList); }
+    public Property clone(){ return new Property(this.area, this.distanceFromTheCityCenter,this.address,this.price, this.photographsList, this.store,this.agent,this.requestType); }
 
 
     public String getPropertyType() {

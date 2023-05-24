@@ -12,13 +12,13 @@ import java.util.Optional;
  * The type Store repository.
  */
 public class StoreRepository {
-    private List<Store> storeList = new ArrayList<>();
+    private static List<Store> storeList = new ArrayList<>();
 
     /**
      * Get stores.
      */
 
-    public void addStore(Store store){
+    public static void addStore(Store store){
         if(validateStore(store))
             storeList.add(store);
     }
@@ -28,7 +28,7 @@ public class StoreRepository {
         return List.copyOf(this.storeList);
     }
 
-    public Store createStore(String designation, Address address, int phoneNumber, String emailAddress, int ID) {
+    public static Store createStore(String designation, String emailAddress, int phoneNumber, Address address, int ID) {
         Store store = new Store (designation, address, phoneNumber, emailAddress, ID);
         addStore(store);
         return store;
@@ -52,7 +52,7 @@ public class StoreRepository {
         return storeList;
     }
 
-    private boolean validateStore(Store store) {
+    private static boolean validateStore(Store store) {
         boolean isValid = !storeList.contains(store);
         return isValid;
     }
