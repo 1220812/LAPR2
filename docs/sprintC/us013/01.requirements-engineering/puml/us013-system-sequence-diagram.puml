@@ -12,38 +12,11 @@ participant ":System" as System
 
 activate NM
 
-    NM -> System : asks to display properties
+    NM -> System : asks to display list of all employees
 
     activate System
 
-        System --> NM : asks if the user wants to filter the specific (type of property) \ndata or not
+        System --> NM : shows list of all employess
     deactivate System
-
-opt data is specified
-    NM -> System : selects requested data (type of business (renting or buying), \ntype of property, number of rooms)
-
-    activate System
-
-        System --> NM : shows list of properties that correspond to the data
-    deactivate System
-end
-
-opt no data is specified
-    NM -> System : decides not to select the required data
-
-    activate System
-
-            System --> NM : allows the client to sort through all properties that are on \nsale or renting ordered by most recent (by default)
-    deactivate System
-end
-
-opt no properties are available
-    NM -> System : selects requested data (type of business (renting or buying), \ntype of property, number of rooms)
-
-    activate System
-
-            System --> NM : shows the client an empty list of properties
-    deactivate System
-end
 
 @enduml
