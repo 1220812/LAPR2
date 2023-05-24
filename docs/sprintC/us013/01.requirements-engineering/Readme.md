@@ -1,4 +1,4 @@
-# US 001
+# US 013
 
 ## 1. Requirements Engineering
 
@@ -80,6 +80,6 @@ As a network manager, I want to list all employees working in every store of the
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram](svg/us001-system-sequence-diagram.svg)
+![System Sequence Diagram](svg/us013-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks

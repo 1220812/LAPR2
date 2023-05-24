@@ -46,9 +46,9 @@ public class RegisterStoreUI implements Runnable {
         }
 
 
-        //address= Utils.listAndSelectOne(controller.getAddresses());
-        //if (address==null) return;
-        //System.out.println(address);
+        address= Utils.listAndSelectOne(controller.getAddresses());
+        if (address==null) return;
+        System.out.println(address);
 
 
         System.out.println(controller.RegisterStore(designation, emailAddress, phoneNumber,address, ID));
