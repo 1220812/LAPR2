@@ -40,6 +40,13 @@ public class House extends Residence {
         this.inhabitableLoft = inhabitableLoft;
         this.sunExposure = sunExposure;
     }
+
+    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<AvailableEquipment> availableEquipment, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList, RequestType requestType) {
+        super(address,  area, distanceFromCityCentre,  numberOfBathrooms,  numberOfBedrooms,  numberOfParkingSpaces, price, photoList,availableEquipment,requestType );
+        this.existenceOfABasement = basement;
+        this.inhabitableLoft = inhabitableLoft;
+        this.sunExposure = sunExposure;
+    }
     /**
      * Method to show the basement
      */

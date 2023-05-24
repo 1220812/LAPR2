@@ -43,8 +43,7 @@ public class Property {
      * @param price price of the property
      */
 
-    public Property(double area, double distanceFromTheCityCentre, Address address, double price,
-                    List<Photographs> photographsList, Store store,Agent agent,RequestType requestType) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList, Store store,Agent agent,RequestType requestType) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
@@ -62,8 +61,24 @@ public class Property {
         this.store=store;
         this.agent=agent;
         this.requestType=requestType;
+    }
 
-
+    public Property(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList,RequestType requestType) {
+        if (area <= 0)
+            throw new IllegalArgumentException("Inserted value for area must be greater than 0");
+        if (distanceFromTheCityCentre <= 0)
+            throw new IllegalArgumentException("Inserted value for distance from the city center from the city centre must be greater than 0");
+        if (address == null)
+            throw new IllegalArgumentException("Address must not be null");
+        if(price<=0){
+            throw new IllegalArgumentException("The price must be greater than 0");
+        }
+        this.area = area;
+        this.distanceFromTheCityCenter = distanceFromTheCityCentre;
+        this.address = address;
+        this.price = price;
+        this.photographsList = photographsList;
+        this.requestType=requestType;
     }
 
     public double getDistanceFromTheCityCenter() {
