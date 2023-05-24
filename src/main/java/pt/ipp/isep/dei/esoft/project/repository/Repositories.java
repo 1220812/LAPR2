@@ -107,9 +107,9 @@ public class Repositories {
      *
      * @return requestRepository
      */
-    public RequestRepository getRequestRepository() {
-        return requestRepository;
-    }
+//    public RequestRepository getRequestRepository() {
+//        return requestRepository;
+//    }
 
     /**
      * Method to show the storeRepository
@@ -162,9 +162,6 @@ public class Repositories {
         return propertyTypeRepository;
     }
 
-    public AgentRepository getAgentRepository() {
-        return agentRepository;
-    }
 }
 
 
