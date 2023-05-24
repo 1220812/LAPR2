@@ -59,26 +59,10 @@ inhabitableLoft
 sunExposure
 }
 
-class User{
-name
-citizensCardNumber
-taxNumber
-address
-email
-telephoneNumber
-password
-role
-}
-
-class System_Administrator{
-
-}
-
 class Legacy_System_Files {
 }
 
 
-System_Administrator --|> User
 System_Administrator --> Legacy_System_Files
 Legacy_System_Files "1" --> "0..*" Announcement : contains
 

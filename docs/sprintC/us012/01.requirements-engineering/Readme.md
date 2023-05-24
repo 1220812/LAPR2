@@ -88,6 +88,6 @@ name=Legacy Agent; passport card number=000000000; tax number=000000000, email a
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram](svg/us001-system-sequence-diagram.svg)
+![System Sequence Diagram](svg/us012-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks

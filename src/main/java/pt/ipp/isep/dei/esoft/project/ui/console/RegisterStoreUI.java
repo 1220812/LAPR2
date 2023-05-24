@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.esoft.project.application.controller.RegisterStoreControl
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
-import java.util.Scanner;
 
 public class RegisterStoreUI implements Runnable {
 
@@ -47,9 +46,9 @@ public class RegisterStoreUI implements Runnable {
         }
 
 
-        address= Utils.listAndSelectOne(controller.getAddresses());
-        if (address==null) return;
-        System.out.println(address);
+        //address= Utils.listAndSelectOne(controller.getAddresses());
+        //if (address==null) return;
+        //System.out.println(address);
 
 
         System.out.println(controller.RegisterStore(designation, emailAddress, phoneNumber,address, ID));
