@@ -25,7 +25,8 @@ class Request {
 }
 
 class Offer {
-    orderAmount
+    offerPrice
+    property
 }
 
 

@@ -16,7 +16,7 @@ public class PublishOfferController {
     }
 
     /**
-     * new methods for publishing offers for apartment, house or land
+     * new methods for publishing offers for different types of property
      *
      * @return offer
      */

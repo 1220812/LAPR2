@@ -30,4 +30,6 @@ public class OfferRepository {
         boolean isValid = !offersList.contains(offer);
         return isValid;
     }
+
+
 }
