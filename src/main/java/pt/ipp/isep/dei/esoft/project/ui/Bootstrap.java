@@ -232,9 +232,11 @@ public class Bootstrap implements Runnable {
         City city2 = new City("New York");
         Address address1 = new Address("Street A", state1, district1, city1, "12345");
 
-        Owner owner1 = new Owner("Joao", "987654321", "Joao@this.app", address1, taxNumber1, passportCardNumber1);
+        Owner owner1 = new Owner("Joao", "987654321", "joao@this.app", address1, taxNumber1, passportCardNumber1);
         ownerRepository.add(owner1);
     }
+
+
 
 
 }
