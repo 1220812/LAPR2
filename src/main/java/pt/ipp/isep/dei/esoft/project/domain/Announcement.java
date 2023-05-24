@@ -88,4 +88,9 @@ public class Announcement {
     public Announcement clone(){
         return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType);
     }
+
+    public static boolean existsPrice(double price){
+        if (price < 1) { return false; }
+        else return true;
+    }
 }

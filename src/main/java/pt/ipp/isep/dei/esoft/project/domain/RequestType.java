@@ -39,9 +39,7 @@ public class RequestType {
     }
     @Override
     public String toString() {
-        return "RequestType{" +
-                "requestType='" + requestType + '\'' +
-                '}';
+        return requestType;
     }
 
     public void setContractDuration(double contractDuration) {

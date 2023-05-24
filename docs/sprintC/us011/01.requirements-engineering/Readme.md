@@ -78,7 +78,8 @@ request is accepted, the offer will not be shown again to clients using the appl
 	* Accept or reject an order
 	
 * Selected data:
-	*  List of purchase orders
+	*  property
+    *  purchase order
 
 **Output Data:**
 

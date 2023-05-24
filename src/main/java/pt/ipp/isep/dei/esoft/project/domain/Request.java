@@ -3,7 +3,7 @@ import java.util.Objects;
 
 public class Request {
     // ATTRIBUTES
-    private Property property;
+    private PropertyType propertyType;
     private double price;
     private RequestType requestType;
 
@@ -14,16 +14,14 @@ public class Request {
 
     /**
      * Creates a new request with all the attributes
-     * @param property property
+     * @param propertyType property
      * @param price property price
      * @param requestType request type
      * @param agent selected agent
      * @param store selected store
-     * @param owner owner
      */
-
-    public Request(Property property, double price, RequestType requestType, Agent agent, Store store, Owner owner) {
-        if (property == null){
+    public Request(PropertyType propertyType, double price, RequestType requestType, Agent agent, Store store) {
+        if (propertyType == null){
             throw new IllegalArgumentException("Property must not be null");
         }
         if (price <= 0){
@@ -38,10 +36,8 @@ public class Request {
         if(store == null){
             throw new IllegalArgumentException("Store must not be null");
         }
-        if(owner == null){
-            throw new IllegalArgumentException("Owner must not be null");
-        }
-        this.property = property;
+
+        this.propertyType = propertyType;
         this.price = price;
         this.requestType = requestType;
         this.agent = agent;
@@ -54,17 +50,17 @@ public class Request {
      * @return property
      */
 
-    public Property getProperty() {
-        return property;
+    public PropertyType getPropertyType() {
+        return propertyType;
     }
 
     /**
      * Method to change the property
-     * @param property property
+     * @param propertyType property
      */
 
-    public void setProperty(Property property) {
-        this.property = property;
+    public void setProperty(PropertyType propertyType) {
+        this.propertyType = propertyType;
     }
 
     /**
@@ -107,18 +103,18 @@ public class Request {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Request request = (Request) o;
-        return Double.compare(request.price, price) == 0 && Objects.equals(property, request.property) && Objects.equals(requestType, request.requestType) && Objects.equals(agent, request.agent) && Objects.equals(store, request.store) && Objects.equals(owner, request.owner);
+        return Double.compare(request.price, price) == 0 && Objects.equals(propertyType, request.propertyType) && Objects.equals(requestType, request.requestType) && Objects.equals(agent, request.agent) && Objects.equals(store, request.store) && Objects.equals(owner, request.owner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(property, price, requestType, agent, store, owner);
+        return Objects.hash(propertyType, price, requestType, agent, store, owner);
     }
 
     @Override
     public String toString() {
         return "Request{" +
-                "property=" + property +
+                "property=" + propertyType +
                 ", price=" + price +
                 ", requestType='" + requestType + '\'' +
                 ", agent=" + agent +
@@ -127,6 +123,6 @@ public class Request {
                 '}';
     }
     public Request clone() {
-        return new Request(this.property,this.price,this.requestType,this.agent,this.store,this.owner);
+        return new Request(this.propertyType,this.price,this.requestType,this.agent,this.store);
     }
 }

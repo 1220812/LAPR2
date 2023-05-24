@@ -155,4 +155,27 @@ public class Utils {
 
         return value - 1;
     }
+    public static Boolean readBooleanFromConsole(String s)
+    {
+        String input;
+        do {
+            input = String.valueOf(Utils.readLineFromConsole(s));
+        } while (!input.equalsIgnoreCase("s") && !input.equalsIgnoreCase("n"));
+
+        return input.equalsIgnoreCase("s");
+    }
+    static public <T> List<T> listAndSelectMany(List<T> list) {
+        int len = list.size();
+        int option;
+        do {
+            showList(list, len);
+            option = readIntegerFromConsole("Select one: ");
+        } while(option < 0 || option > len);
+
+        if (option == 0) {
+            return null;
+        } else {
+            return list.subList(0, option);
+        }
+    }
 }

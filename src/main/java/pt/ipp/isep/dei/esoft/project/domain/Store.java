@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.repository.StoreRepository;
+
 import java.util.Objects;
 
 public class Store {
@@ -116,9 +118,9 @@ public class Store {
         return new Store (this.designation, this.address, this.phoneNumber, this.emailAddress, this.ID);
     }
 
-    public static Store newStore(String desigantion, String emailAddress, int phoneNumber, Address address, int ID){
-        Store newStore = newStore(desigantion, emailAddress, phoneNumber, address, ID);
-        return newStore;
+    public static Store newStore(String designation, String emailAddress, int phoneNumber, Address address, int ID){
+       return StoreRepository.createStore(designation, emailAddress, phoneNumber, address, ID);
+
     }
 
 }

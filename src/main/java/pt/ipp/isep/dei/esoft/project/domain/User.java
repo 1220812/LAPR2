@@ -128,4 +128,13 @@ public class User {
     public User clone(){
         return new User(this.name,this.emailAddress,this.password,this.phoneNumber);
     }
+
+    public static boolean existsEmail(String email) {
+        if (!(email.contains("@") && email.contains("."))) {
+            return false;
+        }
+        return true;
+    }
+
+
 }

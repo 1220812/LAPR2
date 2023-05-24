@@ -16,11 +16,19 @@ activate Employee
 
         activate System
 
+        System --> Employee : displays the list of properties and \n asks to choose one
+
+        deactivate System
+
+        Employee -> System : selects property
+
+        activate System
+
             loop for all properties available for purchase
 
             alt if purchase orders > 0
 
-                System --> Employee : displays the list of purchase orders grouped by property
+                System --> Employee : displays the list of purchase orders for the selected property
 
         deactivate System
 
@@ -31,12 +39,12 @@ activate Employee
 
         activate System
 
-             System --> Employee : asks to
+             System --> Employee : asks for decision (accept or decline)
 
              deactivate System
 
 
-             Employee -> System : Accept or decline decision
+             Employee -> System : Makes the decision (accept or decline)
         activate System
 
              System -> System : Update purchase order decision

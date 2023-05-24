@@ -4,7 +4,6 @@ public class PropertyType {
 
     private String propertyType;
 
-    private String description;
 
     public PropertyType(String propertyType) {
         this.propertyType = propertyType;
@@ -12,6 +11,6 @@ public class PropertyType {
 
     @Override
     public String toString() {
-        return description;
+        return propertyType;
     }
 }

@@ -26,8 +26,8 @@ public class RequestRepository {
             requestList.add(request);
         }
     }
-    public static Request CreateRequest(Property property, double price, String requestType, Agent agent, Store store, Owner owner){
-        return new Request(property,price,requestType,agent,store,owner);
+    public static Request CreateRequest(PropertyType propertyType, double price, RequestType requestType, Agent agent, Store store){
+        return new Request(propertyType,price,requestType,agent,store);
     }
 
     public List<Request> add(Request request) {

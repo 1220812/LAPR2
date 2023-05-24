@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.PropertyAddress;
 import pt.ipp.isep.dei.esoft.project.domain.Agency;
 
@@ -39,8 +40,6 @@ public class AgencyRepository {
     public static Agency CreateAgency (int id, String designation, PropertyAddress propertyAddress, String emailAddress, String phoneNumber){
         return new Agency(id, designation, propertyAddress, emailAddress, phoneNumber);
     }
-
-
 
 
 

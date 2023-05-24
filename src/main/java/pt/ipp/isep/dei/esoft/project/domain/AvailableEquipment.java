@@ -34,9 +34,7 @@ public class AvailableEquipment {
      */
     @Override
     public String toString() {
-        return "AvailableEquipment{" +
-                "equipment=" + equipment +
-                '}';
+        return equipment;
     }
     /**
      * Compares two instances of Owner

@@ -18,7 +18,7 @@ public class Repositories {
     /**
      * Creating the object requestRepository
      */
-    private final RequestRepository requestRepository = new RequestRepository();
+//    private final RequestRepository requestRepository = new RequestRepository();
 
     /**
      * Creating the object stateRepository
@@ -50,9 +50,9 @@ public class Repositories {
     private final AddressRepository addressRepository = new AddressRepository();
 
     private final PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
-    private final OfferRepository offerRepository = new OfferRepository();
+    private final RequestRepository requestRepository = new RequestRepository();
 
-
+    private final AgentRepository agentRepository= new AgentRepository();
 
 
     private Repositories() {
@@ -60,6 +60,14 @@ public class Repositories {
 
     public static Repositories getInstance() {
         return instance;
+    }
+
+    public RequestRepository getRequestRepository() {
+        return requestRepository;
+    }
+
+    public AgentRepository getAgentRepository(){
+        return agentRepository;
     }
 
     public RoleRepository getRoleRepository() {
@@ -78,7 +86,6 @@ public class Repositories {
         return authenticationRepository;
     }
 
-    // Added after by the Team
 
 
     public AddressRepository getAddressRepository() {
@@ -155,8 +162,8 @@ public class Repositories {
         return propertyTypeRepository;
     }
 
-    public OfferRepository getOfferRepository() {
-        return offerRepository;
+    public AgentRepository getAgentRepository() {
+        return agentRepository;
     }
 }
 
