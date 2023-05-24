@@ -168,4 +168,6 @@ public class Owner {
                 ", address=" + address +
                 '}';
     }
+
+    public Owner clone(){ return new Owner(this.name,this.phoneNumber, this.emailAddress,this.address,this.taxNumber,this.passportCardNumber); }
 }

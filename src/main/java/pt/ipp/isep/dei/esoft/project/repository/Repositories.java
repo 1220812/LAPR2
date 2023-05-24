@@ -54,7 +54,7 @@ public class Repositories {
 
     private final AgentRepository agentRepository= new AgentRepository();
 
-
+    private  final OwnerRepository ownerRepository= new OwnerRepository();
     private Repositories() {
     }
 
@@ -107,9 +107,9 @@ public class Repositories {
      *
      * @return requestRepository
      */
-    public RequestRepository getRequestRepository() {
-        return requestRepository;
-    }
+//    public RequestRepository getRequestRepository() {
+//        return requestRepository;
+//    }
 
     /**
      * Method to show the storeRepository
@@ -162,8 +162,8 @@ public class Repositories {
         return propertyTypeRepository;
     }
 
-    public AgentRepository getAgentRepository() {
-        return agentRepository;
+    public OwnerRepository getOwnerRepository() {
+        return ownerRepository;
     }
 }
 

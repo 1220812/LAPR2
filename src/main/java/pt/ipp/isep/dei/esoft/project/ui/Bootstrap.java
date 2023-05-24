@@ -33,6 +33,11 @@ public class Bootstrap implements Runnable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+        try {
+            addOwner();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void addOrganization() {
@@ -204,12 +209,31 @@ public class Bootstrap implements Runnable {
         Address address1 = new Address("Street A", state1, district1, city1, "12345");
 
 
-
         TaxNumber taxNumber1 = new TaxNumber("987654321");
         PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
         Agent agent1 = new Agent("João", "987654321", "Joao@this.app", address1, taxNumber1, passportCardNumber1);
         agentRepository.add(agent1);
 
+    }
+
+
+    private void addOwner() throws CloneNotSupportedException {
+        OwnerRepository ownerRepository = Repositories.getInstance().getOwnerRepository();
+        TaxNumber taxNumber1 = new TaxNumber("987654321");
+        PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
+
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        State state3 = new State("Arizona");
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        District district3 = new District("Western");
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
+        Address address1 = new Address("Street A", state1, district1, city1, "12345");
+
+        Owner owner1 = new Owner("Joao", "987654321", "Joao@this.app", address1, taxNumber1, passportCardNumber1);
+        ownerRepository.add(owner1);
     }
 
 
