@@ -39,7 +39,7 @@ owner
 photos
 }
 
-class Building{
+class Residence{
 numberOfBedrooms
 numberOfBathrooms
 numberOfParkingSpacings
@@ -66,10 +66,10 @@ class Legacy_System_Files {
 System_Administrator --> Legacy_System_Files
 Legacy_System_Files "1" --> "0..*" Announcement : contains
 
-Property --|> Building
+Property --|> Residence
 Property --|> Land
-Building --|> Apartment
-Building --|> House
+Residence --|> Apartment
+Residence --|> House
 Request --> Property : contains
 Announcement --> Request : contains
 
