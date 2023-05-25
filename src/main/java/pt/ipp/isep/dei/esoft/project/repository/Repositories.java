@@ -55,6 +55,8 @@ public class Repositories {
     private final AgentRepository agentRepository= new AgentRepository();
 
     private  final OwnerRepository ownerRepository= new OwnerRepository();
+
+    private final OfferRepository offerRepository = new OfferRepository();
     private Repositories() {
     }
 
@@ -165,6 +167,7 @@ public class Repositories {
     public OwnerRepository getOwnerRepository() {
         return ownerRepository;
     }
+    public OfferRepository getOfferRepository(){return offerRepository;}
 }
 
 
