@@ -7,7 +7,7 @@ public class Announcement {
     /**
      * announcement publish date
      */
-    private String date;
+    private LocalDate date;
     /**
      * announcement property
      */
@@ -24,23 +24,23 @@ public class Announcement {
     private RequestType requestType;
 
 
-    public Announcement(Property property, String date, String comissionType, double comission, RequestType requestType) {
+    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType) {
         this.property = property;
         this.date = date;
         this.comissionType = comissionType;
         this.comission = comission;
         this.requestType = requestType;
     }
-    public Announcement(Property property, String date){
+    public Announcement(Property property, LocalDate date){
         this.property = property;
         this.date = date;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

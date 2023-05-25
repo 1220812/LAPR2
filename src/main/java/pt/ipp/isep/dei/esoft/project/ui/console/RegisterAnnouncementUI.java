@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import java.io.Closeable;
-import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,25 +22,28 @@ public class RegisterAnnouncementUI implements Runnable {
     private PropertyType propertyType;
     private String ownerEmail;
     private double area;
+    private LocalDate date;
     private Address address;
-    private String street;
     private int doorNumber;
     private int floorNumber;
-    private State state;
-    private String zipCode;
     private int distanceFromCityCenter;
     private double price;
-    private Photographs photos;
+    private Announcement announcement;
+    private List<Photographs> photos;
     private int numberOfBedrooms;
     private int numberOfBathrooms;
     private int parking;
-
+    private int numberOfPhotos;
+    private Property property;
     private boolean basement;
     private boolean loft;
+    private RequestType requestType;
     private SunExposure sunExposure;
     private String comissionType;
     private boolean dataConfirmation;
     private double comission;
+    private final String DEFAULT_REQUESTTYPE = "Sell";
+    private final double DEFAULT_CONTRACTDURATION = 0;
     List<AvailableEquipment> availableEquipment = new ArrayList<>();
 
     public void run() {
@@ -81,6 +83,12 @@ public class RegisterAnnouncementUI implements Runnable {
         price = Utils.readIntegerFromConsole("Price:");
         while (!controller.checkPrice(price)) {
             price = Utils.readIntegerFromConsole("Please write a valid price.");
+        }
+
+        numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
+        while (numberOfPhotos < 1 || numberOfPhotos > 30) {
+            System.out.println("please insert a number between 1 and 30");
+            numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
         }
 
         String inputPropertyType;
@@ -124,11 +132,11 @@ public class RegisterAnnouncementUI implements Runnable {
         }
 
         System.out.println("Comission Type:");
-        System.out.println("1. Percentage");
-        System.out.println("2. Value");
+        System.out.println("- Percentage");
+        System.out.println("- Value");
         comissionType = ler.next();
         while (!comissionType.equals("Percentage") && !comissionType.equals("Value")) {
-            System.out.println("Please select a valid option.");
+            System.out.println("Please write a valid option.");
             comissionType = ler.next();
         }
 
@@ -162,16 +170,19 @@ public class RegisterAnnouncementUI implements Runnable {
         dataConfirmation = Utils.readBooleanFromConsole("Confirm data? (y/n)");
 
         if(dataConfirmation) {
+            requestType = controller.createRequestType(DEFAULT_REQUESTTYPE,DEFAULT_CONTRACTDURATION);
             if (inputPropertyType.equals("Land")) {
-                controller.createProperty(area, distanceFromCityCenter, address, price, photos, requestType);
+                property = controller.createProperty(area, distanceFromCityCenter, address, price, photos, requestType);
             }
             else if (inputPropertyType.equals("Apartment")) {
-                controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, price, photos, requestType);
+                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, price, photos, requestType);
             }
             else if (inputPropertyType.equals("House")) {
-                controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, price, photos, requestType);
+                property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, price, photos, requestType);
             }
-            controller.createAnnouncement(property, date, comissionType, requestType);
+            announcement = controller.createAnnouncement(property, date, comissionType, comission, requestType);
+            controller.registerAnnouncement(announcement);
+            System.out.println("Announcement registed successfully");
         }
     }
 

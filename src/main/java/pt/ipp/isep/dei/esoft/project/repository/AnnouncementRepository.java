@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 
 import java.util.ArrayList;
@@ -8,11 +9,8 @@ import java.util.Optional;
 
 public class AnnouncementRepository {
 
-    List<Announcement> announcements = new ArrayList<>();
-
-
     public List<Announcement> getAnnouncements(){
-        return List.copyOf(this.announcements);
+        return List.copyOf(this.announcementsList);
     }
 
 //    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
@@ -21,28 +19,38 @@ public class AnnouncementRepository {
 //    }
 
 
-    private final List<Announcement> annuncementsList = new ArrayList<>();
+    private static List<Announcement> announcementsList = new ArrayList<>();
 
-    public List<Announcement> addAnnouncement(Announcement announcement){
-        annuncementsList.add(announcement);
-        Optional<Announcement> newAnnoucement = Optional.empty();
+    public List<Announcement> add(Announcement announcement) throws CloneNotSupportedException {
+
+        announcementsList.add(announcement);
+
+        Optional<Announcement> newAnnouncement = Optional.empty();
         boolean operationSuccess = false;
-        if(validateAnnaucement(announcement)){
-            newAnnoucement = Optional.of(announcement.clone());
-            operationSuccess = annuncementsList.add(newAnnoucement.get());
+
+        if (validateAnnouncement(announcement)) {
+            newAnnouncement = Optional.of((Announcement) announcement.clone());
+            operationSuccess = announcementsList.add((Announcement) newAnnouncement.get());
         }
-        if(!operationSuccess){
-            newAnnoucement = Optional.empty();
+
+        if (!operationSuccess) {
+            newAnnouncement = Optional.empty();
         }
-        return annuncementsList;
+        return announcementsList;
     }
 
-    public boolean validateAnnaucement(Announcement announcement) {
-        boolean isValid = !annuncementsList.contains(announcement);
+    public static boolean validateAnnouncement(Announcement announcement) {
+        boolean isValid = !announcementsList.contains(announcement);
         return isValid;
     }
 
     public List<Announcement> getAnnuncementsList(){
-        return List.copyOf(this.annuncementsList);
+        return List.copyOf(this.announcementsList);
+    }
+
+    public static Announcement addAnnouncement(Announcement announcement){
+        if(validateAnnouncement(announcement))
+            announcementsList.add(announcement);
+        return announcement;
     }
 }
