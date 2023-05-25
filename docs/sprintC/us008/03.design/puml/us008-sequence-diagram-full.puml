@@ -78,7 +78,7 @@ activate AGENT
     AGENT -> UI : selects the option
     activate UI
 
-    opt selects to publish
+    alt selects to publish
 
 
     UI --> AGENT : requests comission type
@@ -89,7 +89,7 @@ activate AGENT
     activate CTRL
     CTRL --> UI : data saved
     deactivate CTRL
-    opt comission is a percentage
+    alt comission is a percentage
     UI --> AGENT : requests comission percentage
     deactivate UI
     AGENT -> UI : types comission
@@ -100,9 +100,9 @@ activate AGENT
     deactivate CTRL
 
 
-    end opt
+    end alt
 
-    opt comission is a value
+    alt comission is a value
     UI --> AGENT : requests comission value
     deactivate UI
     AGENT -> UI : types comission
@@ -111,7 +111,7 @@ activate AGENT
     activate CTRL
     CTRL --> UI : data saved
     deactivate CTRL
-    end opt
+    end alt
     UI --> AGENT : shows all the data and asks for confirmation
     deactivate UI
     AGENT -> UI : confirms publishment
@@ -161,9 +161,9 @@ activate AGENT
 
 
 
-    end opt
+    end alt
 
-    opt selects to decline
+    alt selects to decline
 
     UI --> AGENT : asks to type a justification
     deactivate UI
@@ -202,7 +202,7 @@ activate AGENT
             deactivate CTRL
             UI --> AGENT : request declined sucessfully
             deactivate UI
-    end opt
+    end alt
 
 
 
