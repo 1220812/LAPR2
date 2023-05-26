@@ -1,86 +1,119 @@
 @startuml
-'skinparam monochrome true
-skinparam packageStyle rectangle
-skinparam shadowing false
-skinparam linetype polyline
-skinparam linetype orto
+'https://plantuml.com/sequence-diagram
 
-skinparam classAttributeIconSize 0
-
-'left to right direction
-
-class Property{
--float price
--String typeOfProperty
-+getPrice()
-+getTypeOfProperty()
-}
-
-class Announcement{
--String city
--String state
-+getCity()
-+getState()
-}
-
+@startuml
 
 class ScheduleVisitUI{
 }
-
-class MessageRepository{
-}
-
-class UserRepository{
-}
-
 class ScheduleVisitController{
-+DisplayPropertiesController(announcementsRepository)
-+displayProperties(number of rooms, type of business, type of property)
-+getAnnouncements()
-+sortPropertiesCity()
-+sortPropertiesPrice()
-+sortPropertiesState()
-}
+-Repositories repositories
 
++checkIfPropertiesIsEmpty()
++getSortedProperties()
++getPersonByUserSession()
++addMessage(...)
++checkIfValid(...)
++createVisit(...)
+}
 
 class Repositories{
--Repositories()
-+getInstance(): Repositories
-+getAnnouncementsRepository()
-}
 
-class AnnouncementsRepository{
--ArrayList<Announcement> announcements
-+getAnnouncementByCharacteristics(number of rooms, type of business, type of property)
-+getAnnouncement()
-+sortPropertiesCityAscending()
-+sortPropertiesCityDescending()
-+sortPropertiesPriceAscending()
-+sortPropertiesPriceDescending()
-+sortPropertiesStateAscending()
-+sortPropertiesStateDescending()
-}
++Repositories()
++getInstance()
++getUserRepository()
++getMessageRepository()
++getAdvertisementRepository()
++getAnnoucementsRepository()
 
+}
+class AuthenticationRepository{
++getCurrentUserSession()
+}
 class Message{
+-String message
+-String clientName
+-String clientPhoneNbr
+-Advertisement advertisement
+-LocalDateTime startTime
+-LocalDateTime endTime
+
++ClientToAgentMessage(...)
++getMessage()
++getClientName()
++getClientPhoneNbr()
++getStartTime()
++getEndTime()
++getAdvertisement()
++toString()
++equals(...)
 }
+
+class MessageRepository{
+-List<ClientToAgentMessage> clientToAgentMessage
+
++addMessage(...)
++overlapsWith(...)
++createMessage(...)
++checkDateFormat(...)
++checkTimeFormat(...)
+}
+
+class Property{
+}
+class House{
+}
+class Apartment{
+}
+class Land{
+}
+
 
 class User{
+-Sring name
+-String phoneNumber
++getName()
++getPhoneNumber()
 }
 
 
-ScheduleVisitUI -> ScheduleVisitController
+
+class UserRepository
+{
+-List<Person> personList
+
++getPersonByUserSession(...)
+}
+
+class Annoucement{
+Price
+Type
+Commission
+}
+
+class AnnoucementRepository{
++checkIfAdvertisementListIsEmpty()
+}
+
+
+
+ScheduleVisitUI --> ScheduleVisitController
 
 ScheduleVisitController --> Repositories
 
-Repositories --> AnnouncementsRepository
+Repositories ----> MessageRepository
+Repositories ---> AnnoucementRepository
 Repositories --> UserRepository
-Repositories --> MessageRepository
+Repositories --> AuthenticationRepository
+User --> UserRepository
 
-MessageRepository <- Message
+Message ->MessageRepository
 
-UserRepository <- User
 
-AnnouncementsRepository <- Announcement
 
-Property --> Announcement
+Annoucement -> AnnoucementRepository
+Property -> Annoucement
+Property --> House
+Property --> Apartment
+Property --> Land
+
 @enduml
