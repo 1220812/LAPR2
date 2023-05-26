@@ -25,7 +25,7 @@ class Store
 -String designation
 -String phoneNumber
 -String email
--List<Person> employees
+-List<Employee> employees
 -List<Advertisement> advertisements
 +Store(int ID, String designation, String phoneNumber, String email, String street, City city, String postalCode)
 +getEmployees()
