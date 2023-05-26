@@ -82,7 +82,7 @@ request is accepted, the offer will not be shown again to clients using the appl
     *  purchase order
 
 **Output Data:**
-
+* Email informing about the decision of the agent
 * Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)

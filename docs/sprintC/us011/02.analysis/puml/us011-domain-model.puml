@@ -16,16 +16,14 @@ class Property{
 area
 price
 distanceFromTheCityCenter
-adress
 }
 
-class Agent{
-   name
-   phoneNumber
-   emailAddress
-   taxNumber
-   passportCardNumber
-   propertyAddress
+class Employee{
+name
+phoneNumber
+emailAddress
+taxNumber
+passportCardNumber
 }
 
 class Decision{
@@ -39,22 +37,8 @@ date
 property
 }
 
-class Address{
-streetAddress
-city
-district
-state
-zipCode
-}
 
-class Email{
-emailTo
-emailFrom
-emailSubject
-emailBody
-}
-
-class Client{
+class User{
 name
 phoneNumber
 emailAddress
@@ -62,13 +46,26 @@ taxNumber
 passportCardNumber
 }
 
-Property "1" -- "1" Agent
+class Announcement{
+localDate
+property
+comissionType
+comission
+requestType
+}
 
-Agent "1" -- "1" Address : has
-Agent "1" -- "1" Decision : makes
+class EmailService{
+informationEmail
+}
 
 
-
-
+Employee "1" -- "*" Decision : makes >
+Announcement "1" -- "1" Property : announces >
+User "1" -- "1...*" PurchaseOrder : makes
+PurchaseOrder "*" -- "1" Announcement : <
+Employee "1" --"*" PurchaseOrder : analyzes
+Decision "1" -- "1" Announcement
+Decision -- EmailService : depending on <
+EmailService -- User : informing about the decision >
 
 @enduml
