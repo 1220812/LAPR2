@@ -1,4 +1,4 @@
-# US 001
+# US 009 - leave a message to the agent to schedule a visit to a property.
 
 ## 1. Requirements Engineering
 
@@ -14,7 +14,7 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 
 **From the specifications document:**
 
-
+>	The Client doesn't have any specifications for this user story.
 
 
 **From the client clarifications:**
@@ -92,9 +92,6 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 > **Answer:**
 
 
-
-
-
 ### 1.3. Acceptance Criteria
 
 * *AC1:* A list of available properties must be shown, sorted from the most recent entries to the oldest.
@@ -102,22 +99,12 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 * *AC3:* A client may post multiple visit requests, but only if those do not overlap each other.
 * *AC4:* The client must receive a success message when the request is valid and registered in the system.
 * *AC5:* Time format must be 24-hour format.
-* *AC6:* 
-* *AC7:*
-* *AC8:*
-* *AC9:*
-* *AC10:*
-* *AC11:*
-* *AC12:*
-* *AC13:*
-
 
 
 ### 1.4. Found out Dependencies
 
-
-* In US007 you to register a client
-
+* There is a dependency with US006, since the user that listed the property, and the property itself, need to have an Address associated with each of them, and to specify an Address there must be Cities registered in the system first.
+* There is a dependency with US007, since only users with the role CLIENT are able to submit schedule visits, so at least one CLIENT must be registered in the system.
 
 ### 1.5 Input and Output Data
 
@@ -128,10 +115,11 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
   
   * Preferred date for the visit
   * Time slot of the visit
+  * Message
+
 
 * Selected data:
   * chosen property for the visit
-
 
 **Output Data:**
 
@@ -140,10 +128,9 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 * Show message: "Want to try more?"
 
 
-
-
 ### 1.6. System Sequence Diagram (SSD)
 
 ![System Sequence Diagram](svg/us009-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks
+* The client must be able to schedule a visit to a property, but the visit must be accepted by the Agent of the property.
