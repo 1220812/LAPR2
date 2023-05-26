@@ -16,22 +16,24 @@ class Property{
 +getTypeOfProperty()
 }
 
-class Location{
+class Announcement{
 -String city
 -String state
 +getCity()
 +getState()
 }
 
-class Residence{
--int numberOfRooms
-+getNumberOfRooms()
+
+class ScheduleVisitUI{
 }
 
-class DisplayPropertiesUI{
+class MessageRepository{
 }
 
-class DisplayPropertiesController{
+class UserRepository{
+}
+
+class ScheduleVisitController{
 +DisplayPropertiesController(announcementsRepository)
 +displayProperties(number of rooms, type of business, type of property)
 +getAnnouncements()
@@ -40,11 +42,6 @@ class DisplayPropertiesController{
 +sortPropertiesState()
 }
 
-class PublishedAnnouncement{
-+compare(announcement1, announcement2)
-+getProperty()
-+getPropertyByCharacteristics(number of rooms, type of business, type of property)
-}
 
 class Repositories{
 -Repositories()
@@ -64,20 +61,26 @@ class AnnouncementsRepository{
 +sortPropertiesStateDescending()
 }
 
+class Message{
+}
 
-Repositories -> Repositories : instance
+class User{
+}
 
-DisplayPropertiesUI .> DisplayPropertiesController
-DisplayPropertiesController .> Repositories : repositories
 
-Repositories -> "1" AnnouncementsRepository
+ScheduleVisitUI -> ScheduleVisitController
 
-DisplayPropertiesController ..> AnnouncementsRepository : publishedAnnouncementsRepository
+ScheduleVisitController --> Repositories
 
-AnnouncementsRepository "1" --> "*" PublishedAnnouncement
-DisplayPropertiesController ..> "1" PublishedAnnouncement : announcement
-PublishedAnnouncement "1" --> "1" Property : contains
-Property <|-- Residence
-Property "1" --> "1" Location : has a
+Repositories --> AnnouncementsRepository
+Repositories --> UserRepository
+Repositories --> MessageRepository
 
+MessageRepository <- Message
+
+UserRepository <- User
+
+AnnouncementsRepository <- Announcement
+
+Property --> Announcement
 @enduml
