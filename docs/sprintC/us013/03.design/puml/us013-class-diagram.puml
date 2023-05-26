@@ -6,7 +6,6 @@
 class ListEmployeesUI
 class ListEmployeesController
 {
-+getEmployeesList()
 }
 
 
@@ -42,20 +41,20 @@ class StoreRepository
 +getEmployeesOfStore(Store store)
 }
 
-class PersonRepository {
--List<Person> personList
-+getPersonList()
+class EmployeeRepository {
+-List<Employee> employeeList
++getEmployeeList()
 +sortListAlphabetically()
 }
 
-class Person
+class Employee
 {
 - name
 - phoneNumber
 - email
 - passportNumber
 - taxNumber
-+ Person(String name, String phoneNumber, String email, String passportNumber, String taxNumber)
++ Employee (String name, String phoneNumber, String email, String passportNumber, String taxNumber)
 + getName()
 }
 
@@ -68,10 +67,10 @@ Repositories --> Repositories : instance
 ListEmployeesController ..> Repositories
 ListEmployeesUI ..> ListEmployeesController
 Repositories "1" -- "1" StoreRepository : has >
-Repositories "1" -- "1" PersonRepository : has >
+Repositories "1" -- "1" EmployeeRepository : has >
 StoreRepository "1" -- "*" Store : has >
-PersonRepository ..> SortAlphabeticallyComparator
-PersonRepository "1" -- "*" Person : has >
-Store "1" .. "*" Person : has >
+EmployeeRepository ..> SortAlphabeticallyComparator
+EmployeeRepository "1" -- "*" Employee : has >
+Store "1" .. "*" Employee : has >
 
 @enduml
