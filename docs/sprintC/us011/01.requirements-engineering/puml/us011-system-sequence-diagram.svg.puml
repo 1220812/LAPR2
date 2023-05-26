@@ -12,30 +12,17 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : requests properties that are available for purchase
+    Employee -> System : requests to see properties that are available for purchase
 
         activate System
 
-        System --> Employee : displays the list of properties and \n asks to choose one
-
-        deactivate System
-
-        Employee -> System : selects property
-
-        activate System
-
-            loop for all properties available for purchase
-
-            alt if purchase orders > 0
+            alt if that exists purchase orders
 
                 System --> Employee : displays the list of purchase orders for the selected property
 
         deactivate System
 
-
-        deactivate System
-
-             Employee -> System : selects purchase order
+             Employee -> System : selects a purchase order
 
         activate System
 
@@ -48,27 +35,25 @@ activate Employee
         activate System
 
              System -> System : Update purchase order decision
-             System -> System : Send email to the costumer
+             System -> System : Send email to the client
 
-        alt if the decision was accepted
+        opt if the decision was accepted
 
             loop propertie's other proposals
 
-                System -> System : Decline the purchase order for that property
+                System -> System : Decline purchase order for that property
 
-                System -> System : Message sent declining
+                System -> System : Email sent declining
 
             end
 
         end
 
-            System --> Employee : Informs of the operation Success
+            System --> Employee : Operation success
 
+  else if there's no purchase orders
 
-                 else if purchase orders = 0
-
-
-                    System --> Employee : Informs that there are no purchase orders\nand of the operation's end
+                    System --> Employee : shows an empty list \nand the operation ends
 
         deactivate System
     end

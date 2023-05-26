@@ -1,50 +1,42 @@
-# US 005 - To create a Task 
+# US 011 - To list real estate purchase orders to accept or decline a purchase order for a property 
 
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
-**SSD - Alternative 1 is adopted.**
-
-| Interaction ID | Question: Which class is responsible for...  | Answer                  | Justification (with patterns)                                                                                |
-|:---------------|:---------------------------------------------|:------------------------|:-------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?             | RegisterStoreUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model |
-| 			  		        | 	... coordinating the US?                    | RegisterStoreController |  Controller                                                                                 |
-| 			  		        | 	... instantiating a new Task?               | Organization            | Creator (Rule 1): in the DM Organization has a Task                                                          |
-| 			  		        | 							                                      | Organization            | IE: knows/has its own Employees                                                                              |
-| 			  		        | 							                                      | Employee                | IE: knows its own data (e.g. email)                                                                          |
-| Step 2  		     | 							                                      |                         |                                                                                                              |
-| Step 3  		     | 	...saving the inputted data?                | Store                   | IE: Store has it's own data (ID, designation, location, email address, phone number)                         |
-| Step 4  		     | 	...saving the location?                     | Location                | IE: The location saves everything about the street address, city, district, state and zip Code               |
-| Step 5  		     | 	...registering the store location           | RegisterStoreController | IE: Regists and controls the stores information                                                              |
-| 		             | 	...showing the stores                       | StoreRepository         | Repository: Shows and knows all the stores                                                                   | 
-| Step 6  		     | 							                                      |                         |                                                                                                              |              
-| Step 7  		     | 	... validating all data (local validation)? | Store                   | IE: Store owns its data                                                                                      | 
-| 			  		        | 	... validating location?                    | StoreRepository         | Repository: Knows all stores and their locations                                                             | 
-| Step 8  		     | 	... informing operation success?            | RegisterStoreUI         | UI: responsible for the interactions with the user                                                           | 
+| Interaction ID                                                         | Question: Which class is responsible for...                          | Answer                  | Justification (with patterns) |
+|:-----------------------------------------------------------------------|:---------------------------------------------------------------------|:------------------------|:------------------------------|
+| Step 1 : requests to see properties that are available for purchase 		 | 	... displaying the purchase order list?                             | OrderDecisionUI         | Pure Fabrication              |
+| Step 2 : displays the list of purchase orders grouped by property 		   | 	...have the property that is connected to the purchase order?						 | AnnouncementRepository  | Information Expert            |
+| Step 3 : selects a purchase order 		                                   | 	...Keep the chosen purchase order temporarily?                      | OrderDecisionUI         | Pure Fabrication              |
+| Step 4 : asks for decision(accept or decline) 		                       | 	                                                                    |                         |                               |
+| Step 5 : makes the decision (accept or decline) 		                     | ..Keep the response to the purchase order temporarily?               | OrderDecisionUI         | Pure Fabrication              |
+| Step 6 : Update purchase order decision                                | ...responsible for having the list always updated                    | OrderRepository         | Information Expert            |
+| Step 7 : Send email to the client                                      | ...Sending email to the client                                       | EmailService            | Pure Fabrication              |
+| Step 8 : Decline purchase order for that property                      | ...Displaying the button to decline or accept?                       | OrderDecisionUI         | Pure Fabrication              |
+| Step 9 : Email sent declining                                          | ...Sending email to the client                                       | EmailService            | Pure Fabrication              |
+| Step 6 : operation success  		                                         | 	...knowing the operation success?						                             | OrderDecisionController |                               | Pure Fabrication      |                     
+| Step 7 : shows an empty list and the operation ends 		                 |                                                                      | OrderDecisionUI         | Pure Fabrication              | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Store
- * State
- * Address
+ * Agent
+ * OrderRepository
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * RegisterStoreUI  
- * RegisterStoreController
+ * OrderDecisionUI  
+ * OrderDecisionController
 
 
 ## 3.2. Sequence Diagram (SD)
 
-### Alternative 1 - Full Diagram
-
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us005-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us011-sequence-diagram-full.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us005-class-diagram.svg)
+![Class Diagram](svg/us011-class-diagram.svg)
