@@ -57,18 +57,7 @@ activate AGENT
     activate UI
     UI -> CTRL : getRequestInfo(request)
     activate CTRL
-    CTRL -> REP : getInstance()
-    activate REP
-    REP --> CTRL : repositories
-    deactivate REP
-    CTRL -> PLAT : getRequestsRepository()
-    activate PLAT
-    PLAT --> CTRL : requestsRepository
-    deactivate PLAT
-    CTRL -> RequestsREP : getRequest(request)
-    activate RequestsREP
-    RequestsREP --> CTRL : requestInfo
-    deactivate RequestsREP
+
     CTRL --> UI : requestInfo
     deactivate CTRL
 
