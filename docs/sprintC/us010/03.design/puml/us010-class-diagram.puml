@@ -45,9 +45,9 @@ class AvailableEquipment {
 
 class Adress {
     - String street
-    - String state
-    - String district
-    - String city
+    - State state
+    - District district
+    - City city
     - String zipCode
     + Location(street,city,district,state,zipCode)
 }
