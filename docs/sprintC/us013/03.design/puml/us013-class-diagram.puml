@@ -1,83 +1,77 @@
 @startuml
-'skinparam monochrome true
-skinparam packageStyle rectangle
-skinparam shadowing false
-skinparam linetype polyline
-skinparam linetype orto
+'https://plantuml.com/sequence-diagram
 
-skinparam classAttributeIconSize 0
+@startuml
 
-'left to right direction
-
-class Property{
--float price
--String typeOfProperty
-+getPrice()
-+getTypeOfProperty()
-}
-
-class Location{
--String city
--String state
-+getCity()
-+getState()
-}
-
-class Residence{
--int numberOfRooms
-+getNumberOfRooms()
-}
-
-class DisplayPropertiesUI{
-}
-
-class DisplayPropertiesController{
-+DisplayPropertiesController(announcementsRepository)
-+displayProperties(number of rooms, type of business, type of property)
-+getAnnouncements()
-+sortPropertiesCity()
-+sortPropertiesPrice()
-+sortPropertiesState()
-}
-
-class PublishedAnnouncement{
-+compare(announcement1, announcement2)
-+getProperty()
-+getPropertyByCharacteristics(number of rooms, type of business, type of property)
-}
-
-class Repositories{
--Repositories()
-+getInstance(): Repositories
-+getAnnouncementsRepository()
-}
-
-class AnnouncementsRepository{
--ArrayList<Announcement> announcements
-+getAnnouncementByCharacteristics(number of rooms, type of business, type of property)
-+getAnnouncement()
-+sortPropertiesCityAscending()
-+sortPropertiesCityDescending()
-+sortPropertiesPriceAscending()
-+sortPropertiesPriceDescending()
-+sortPropertiesStateAscending()
-+sortPropertiesStateDescending()
+class ListEmployeesUI
+class ListEmployeesController
+{
++getEmployeesList()
 }
 
 
-Repositories -> Repositories : instance
+class Repositories
+{
+-description
+-StoreRepository storeRepository
++getInstance() : Repositories
++getStoreRepository()
+}
 
-DisplayPropertiesUI .> DisplayPropertiesController
-DisplayPropertiesController .> Repositories : repositories
 
-Repositories -> "1" AnnouncementsRepository
 
-DisplayPropertiesController ..> AnnouncementsRepository : publishedAnnouncementsRepository
+class Store
+{
+-int ID
+-String designation
+-String phoneNumber
+-String email
+-List<Person> employees
+-List<Advertisement> advertisements
++Store(int ID, String designation, String phoneNumber, String email, String street, City city, String postalCode)
++getEmployees()
++getAdvertisements()
+}
 
-AnnouncementsRepository "1" --> "*" PublishedAnnouncement
-DisplayPropertiesController ..> "1" PublishedAnnouncement : announcement
-PublishedAnnouncement "1" --> "1" Property : contains
-Property <|-- Residence
-Property "1" --> "1" Location : has a
+
+class StoreRepository
+{
+-List<Store> storeList
++getStoreList()
++sortStoreListByNumberOfAdvertisements()
++getEmployeesOfStore(Store store)
+}
+
+class PersonRepository {
+-List<Person> personList
++getPersonList()
++sortListAlphabetically()
+}
+
+class Person
+{
+- name
+- phoneNumber
+- email
+- passportNumber
+- taxNumber
++ Person(String name, String phoneNumber, String email, String passportNumber, String taxNumber)
++ getName()
+}
+
+class SortAlphabeticallyComparator
+{
+
+}
+
+Repositories --> Repositories : instance
+ListEmployeesController ..> Repositories
+ListEmployeesUI ..> ListEmployeesController
+Repositories "1" -- "1" StoreRepository : has >
+Repositories "1" -- "1" PersonRepository : has >
+StoreRepository "1" -- "*" Store : has >
+PersonRepository ..> SortAlphabeticallyComparator
+PersonRepository "1" -- "*" Person : has >
+Store "1" .. "*" Person : has >
 
 @enduml
