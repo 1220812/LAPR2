@@ -58,8 +58,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us002-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us008-sequence-diagram-full.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us002-class-diagram.svg)
+![Class Diagram](svg/us008-class-diagram.svg)
