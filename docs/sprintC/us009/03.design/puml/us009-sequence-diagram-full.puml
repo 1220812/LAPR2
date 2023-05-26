@@ -11,7 +11,7 @@ participant ":ScheduleVisitUI" as System
 participant ":ScheduleVisitController" as Controller
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as repositories
-participant "publishedAnnouncementsRepository\n:PublishedAnnouncementsRepository" as PropertyRepository
+participant "announcementsRepository\n:AnnouncementsRepository" as AnnoucementRepository
 participant ":userRepository\nUserRepository" as UserRepository
 participant "messageRepository\n:MessageRepository" as Message
 
@@ -34,18 +34,50 @@ activate RepositorySingleton
 RepositorySingleton-->Controller: repositories
 deactivate RepositorySingleton
 
-Controller -> repositories : getListOfProperties()
+
+Controller -> repositories : checkIfPropertiesEmpty()
 activate repositories
 
-repositories --> Controller: ListOfProperties
+repositories -> AnnoucementRepository : checkIfPropertiesEmpty()
+activate AnnoucementRepository
+
+AnnoucementRepository --> repositories : boolean
+deactivate AnnoucementRepository
+
+repositories --> Controller : boolean
 deactivate repositories
 
-Controller -> PropertyRepository : getSortedProperties()
-activate PropertyRepository
+Controller --> System : boolean
 
-PropertyRepository --> Controller : ListOfPropertiesSorted
-deactivate PropertyRepository
-loop while true
+alt if true (list of properties is empty)
+System --> User : Show message :"List of properties is empty"
+
+end
+alt if false (list of properties isn´t empty)
+
+System -> Controller : getSortedProperties()
+
+
+
+
+
+
+
+Controller -> repositories : getSortedProperties()
+activate repositories
+
+repositories -> AnnoucementRepository : getSortedProperties()
+activate AnnoucementRepository
+
+AnnoucementRepository --> repositories : ListOfPropertiesSorted
+deactivate AnnoucementRepository
+
+repositories --> Controller : ListOfPropertiesSorted
+deactivate repositories
+
+
+
+loop while true (yes)
 
 Controller --> System : ListOfPropertiesSorted
 
@@ -63,11 +95,25 @@ deactivate System
 User -> System : Select the property
 activate System
 
-System --> User : request data (preferred date and \ntime slot (from x hour to y hour) for the property visit)
+System --> User : request data (preferred date for the property visit)
 deactivate System
 
 User -> System : types requested data
 activate System
+
+System --> User : request data (starting time for the property visit)
+deactivate System
+
+User -> System : types requested data
+activate System
+
+
+System --> User : request data (ending time for the property visit)
+deactivate System
+
+User -> System : types requested data
+activate System
+
 
 
 System -> Controller: getUser()
@@ -82,7 +128,9 @@ deactivate UserRepository
 System->Controller: User
 deactivate Controller
 
-System -> System : save phoneNumber and name
+System -> System : save phoneNumber
+System -> System : save name
+
 
 System -> Controller : checkIfValid()
 activate Controller
@@ -105,6 +153,8 @@ activate Controller
 Controller -> Message: addMessage()
 activate Message
 
+deactivate Message
+deactivate Controller
 
 System -> User: show sucess of operation
 
@@ -120,6 +170,9 @@ System -> User: show insucess of operation
 end
 
 System -> User: Show message: "Want to try more?"
+
+User -> System : yes/no
+end
 end
 
 
