@@ -15,26 +15,24 @@ name
 phoneNumber
 }
 
-class ListOfProperties{
-properties
+class ListOfAnnouncements{
+annoucements
 }
 
-class Date{
-}
-
-class TimeSlot{
-}
 
 class Agent{
 }
 
+class Message{
+date
+timeSlot
+}
 
-Client "1" -- "0...*" TimeSlot : propose a >
-Client "1" -- "0...*" Date : propose a >
-Client "1" -- "1" Agent : send a message to an >
-Client "1" -- "1" ListOfProperties : choose one of >
 
-Agent "1" -- "1" ListOfProperties : show a >
+Client "1" -- "1" ListOfAnnouncements : choose one of >
+Client "1" -- "1" Message : send >
+Message "1" -- "1" Agent : recive <
+
 
 
 

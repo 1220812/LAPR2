@@ -22,14 +22,14 @@ activate Customer
 
     deactivate System
 
-    Customer -> System : selects requested data
+    Customer -> System : selects property
     activate System
 
-    System --> Customer : request data: preferred date and time slot (from x hour to y hour) for the property visit
+    System --> Customer : request data: preferred date, time slot (from x hour to y hour) for the property visit and message
 
     deactivate System
 
-    Customer -> System : Type request data (client's name, phone number,date and time slot)
+    Customer -> System : Type request data (date, time slot and message)
 
     activate System
 
