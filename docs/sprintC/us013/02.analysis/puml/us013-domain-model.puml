@@ -8,20 +8,42 @@ skinparam shadowing false
 hide circle
 hide methods
 
-title US013 Domain Model
+title US013 - Domain Model
 
-class NetworkManager {
+class Store{
+designation
+phoneNumber
+emailAddress
+ID
 }
 
-class Employee {
+class Agent{
+name
+phoneNumber
+emailAddress
 }
 
-class Store {
+class StoreManager{
+assignedStore
 }
 
+class Employee{
+name
+emailAddress
+phoneNumber
+}
 
-NetworkManager "1" -- Employee
+class NetworkManager{
+name
+emailAddress
+phoneNumber
+}
 
-
+StoreManager "1" -- "1" Store : manages >"
+Store "1" -- "*" Agent : employs >
+StoreManager -- Employee : is >
+Agent -- Employee : is >
+NetworkManager -- Employee : is >
+NetworkManager -- "*" Agent : lists >
 
 @enduml
