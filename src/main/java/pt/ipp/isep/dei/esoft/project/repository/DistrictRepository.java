@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.District;
+import pt.ipp.isep.dei.esoft.project.domain.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,4 +25,6 @@ public class DistrictRepository {
     public static District CreateDistrict(String name){
         return new District(name);
     }
+
+
 }
