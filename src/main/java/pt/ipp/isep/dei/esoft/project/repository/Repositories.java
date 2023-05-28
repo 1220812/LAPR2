@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+/**
+ * The type Repositories.
+ */
 public class Repositories {
     // From the template
     private static final Repositories instance = new Repositories();
@@ -58,44 +61,92 @@ public class Repositories {
     private  final OwnerRepository ownerRepository= new OwnerRepository();
 
     private final OfferRepository offerRepository = new OfferRepository();
+    /**
+     * The Get announcement repository.
+     */
     public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
 
     private Repositories() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static Repositories getInstance() {
         return instance;
     }
 
+    /**
+     * Gets request repository.
+     *
+     * @return the request repository
+     */
     public RequestRepository getRequestRepository() {
         return requestRepository;
     }
 
+    /**
+     * Get agent repository agent repository.
+     *
+     * @return the agent repository
+     */
     public AgentRepository getAgentRepository(){
         return agentRepository;
     }
 
+    /**
+     * Gets role repository.
+     *
+     * @return the role repository
+     */
     public RoleRepository getRoleRepository() {
         return roleRepository;
     }
 
+    /**
+     * Gets organization repository.
+     *
+     * @return the organization repository
+     */
     public OrganizationRepository getOrganizationRepository() {
         return organizationRepository;
     }
 
+    /**
+     * Gets task category repository.
+     *
+     * @return the task category repository
+     */
     public TaskCategoryRepository getTaskCategoryRepository() {
         return taskCategoryRepository;
     }
 
+    /**
+     * Gets authentication repository.
+     *
+     * @return the authentication repository
+     */
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
     }
+
+    /**
+     * Get message repository message repository.
+     *
+     * @return the message repository
+     */
     public MessageRepository getMessageRepository(){
         return messageRepository;
     }
 
 
-
+    /**
+     * Gets address repository.
+     *
+     * @return the address repository
+     */
     public AddressRepository getAddressRepository() {
         return addressRepository;
     }
@@ -103,7 +154,7 @@ public class Repositories {
     /**
      * Method to show the agencyRepository
      *
-     * @return agencyRepository
+     * @return agencyRepository agency repository
      */
     public AgencyRepository getAgencyRepository() {
         return agencyRepository;
@@ -122,9 +173,8 @@ public class Repositories {
     /**
      * Method to show the storeRepository
      *
-     * @return storeRepository
+     * @return storeRepository store repository
      */
-
     public StoreRepository getStoreRepository() {
         return storeRepository;
     }
@@ -132,47 +182,98 @@ public class Repositories {
     /**
      * Method to show the stateRepository
      *
-     * @return stateRepository
+     * @return stateRepository state repository
      */
     public StateRepository getStateRepository() {
         return stateRepository;
     }
 
+    /**
+     * Gets announcement repository.
+     *
+     * @return the announcement repository
+     */
     public AnnouncementRepository getAnnouncementRepository() {
         return announcementRepository;
     }
 
+    /**
+     * Gets city repository.
+     *
+     * @return the city repository
+     */
     public CityRepository getCityRepository() {
         return cityRepository;
     }
 
+    /**
+     * Gets district repository.
+     *
+     * @return the district repository
+     */
     public DistrictRepository getDistrictRepository() {
         return districtRepository;
     }
 
+    /**
+     * Gets request type repository.
+     *
+     * @return the request type repository
+     */
     public RequestTypeRepository getRequestTypeRepository() {
         return requestTypeRepository;
     }
 
+    /**
+     * Gets user repository.
+     *
+     * @return the user repository
+     */
     public UserRepository getUserRepository() {
         return userRepository;
     }
 
+    /**
+     * Gets sun exposure repository.
+     *
+     * @return the sun exposure repository
+     */
     public SunExposureRepository getSunExposureRepository() {
         return sunExposureRepository;
     }
 
+    /**
+     * Gets available equipment repository.
+     *
+     * @return the available equipment repository
+     */
     public AvailableEquipmentRepository getAvailableEquipmentRepository() {
         return availableEquipmentRepository;
     }
 
+    /**
+     * Gets property type repository.
+     *
+     * @return the property type repository
+     */
     public PropertyTypeRepository getPropertyTypeRepository() {
         return propertyTypeRepository;
     }
 
+    /**
+     * Gets owner repository.
+     *
+     * @return the owner repository
+     */
     public OwnerRepository getOwnerRepository() {
         return ownerRepository;
     }
+
+    /**
+     * Get offer repository offer repository.
+     *
+     * @return the offer repository
+     */
     public OfferRepository getOfferRepository(){return offerRepository;}
 
 
