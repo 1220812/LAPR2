@@ -251,4 +251,5 @@ public class Bootstrap implements Runnable {
         Owner owner1 = new Owner("Joao", "987654321", "joao@this.app", address1, taxNumber1, passportCardNumber1);
         ownerRepository.add(owner1);
     }
+
 }
