@@ -40,6 +40,7 @@ public class Bootstrap implements Runnable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+        addMessage();
     }
 
     private void addOrganization() {
@@ -250,5 +251,10 @@ public class Bootstrap implements Runnable {
 
         Owner owner1 = new Owner("Joao", "987654321", "joao@this.app", address1, taxNumber1, passportCardNumber1);
         ownerRepository.add(owner1);
+    }
+    private void addMessage(){
+        MessageRepository messageRepository =Repositories.getInstance().getMessageRepository();
+        Message message1=new Message(null, null);
+        messageRepository.add(message1);
     }
 }
