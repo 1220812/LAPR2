@@ -5,6 +5,8 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Bootstrap implements Runnable {
@@ -173,14 +175,28 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
+        Address address3 = new Address("Street C", state1, district3, city2, "12347");
+        Address address1= new Address("Street2",state2,district1, city1, "98765");
 
+        List<Photographs> photo = new ArrayList<>();
 
-        PropertyAddress propertyAddress1 = new PropertyAddress("Sesame Street", "12345", state1, district1, city1);
-//        Property property1 = new Property(200, 200, , 2000000,null);
+        Store store1 = new Store("Company", 1);
+        TaxNumber taxNumber1 = new TaxNumber("987654321");
+        PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
+        Agent agent1 = new Agent("João", "987654321", "Joao@this.app", address3, taxNumber1, passportCardNumber1);
 
         RequestType requestType1 = new RequestType("Sell");
-//        Announcement announcement1 = new Announcement(property1,"2004/12/12" , "per", 5, requestType1 );
-//        announcementRepository.addAnnouncement(announcement1);
+        RequestType requestType2 = new RequestType("Rent");
+
+        PropertyAddress propertyAddress1 = new PropertyAddress("Sesame Street", "12345", state1, district1, city1);
+        Property property1 = new Property(200.3, 200.6, address3, 2000000, photo, store1, agent1,requestType1);
+        Property property2 = new Property(100.0, 150.0, address1, 3450000, photo, store1, agent1,requestType2);
+
+
+        Announcement announcement1 = new Announcement(property1, "2004/12/12", "per", 5, requestType1);
+        Announcement announcement2 =new Announcement(property2,"2020/04/04","per", 5, requestType2);
+        announcementRepository.addAnnouncement(announcement1);
+        announcementRepository.addAnnouncement(announcement2);
 
     }
 
@@ -235,8 +251,4 @@ public class Bootstrap implements Runnable {
         Owner owner1 = new Owner("Joao", "987654321", "joao@this.app", address1, taxNumber1, passportCardNumber1);
         ownerRepository.add(owner1);
     }
-
-
-
-
 }

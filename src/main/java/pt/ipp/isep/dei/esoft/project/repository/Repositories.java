@@ -57,6 +57,8 @@ public class Repositories {
     private  final OwnerRepository ownerRepository= new OwnerRepository();
 
     private final OfferRepository offerRepository = new OfferRepository();
+    public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
+
     private Repositories() {
     }
 
