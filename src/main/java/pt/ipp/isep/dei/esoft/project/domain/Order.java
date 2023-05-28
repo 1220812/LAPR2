@@ -24,6 +24,11 @@ public class Order {
         this.propertyCode = propertyCode;
     }
     /**
+     * empty order constructor
+     */
+    public Order(){
+    }
+    /**
      * This method returns the age of the order
      * @return the age
      */

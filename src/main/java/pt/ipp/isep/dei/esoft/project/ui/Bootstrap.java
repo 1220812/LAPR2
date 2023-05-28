@@ -248,6 +248,7 @@ public class Bootstrap implements Runnable {
         Order order2 = new Order("property 2", 18);
         Order order3 = new Order("property 3", 5);
         Order order4 = new Order("property 4",3);
+        ArrayList<Double> emptyListOfOrders = new ArrayList<>();
         ArrayList<Double> offers = new ArrayList<>();
         offers.add(125.5);
         offers.add(200.0);
@@ -261,6 +262,7 @@ public class Bootstrap implements Runnable {
         order1.setAmount(offers);
         order2.setAmount(offers);
         order3.setAmount(offers);
+        order4.setAmount(emptyListOfOrders);
         rep.setOrdersList(order1);
         rep.setOrdersList(order2);
         rep.setOrdersList(order3);
