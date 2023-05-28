@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.User;
+import pt.isep.lei.esoft.auth.UserSession;
 
 
 import java.util.ArrayList;

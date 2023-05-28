@@ -2,18 +2,15 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class RequestRepository {
     /**
      * List of requests
      */
-    private static List<Request> requestList = new ArrayList<>() {
-    };
+    private static List<Request> requestList = new ArrayList<>();
 
-    /**
+        /**
      * Get property types
      */
     public List<Request> getRequests() {
@@ -51,4 +48,16 @@ public class RequestRepository {
         boolean isValid = !requestList.contains(request);
         return isValid;
     }
+
+    public List<Request> getRequestAssignedList(Agent agent) {
+        List<Request> assignedList = new ArrayList<>();
+        for (Request request : this.requestList) {
+            if (request.getAgent().equals(agent)) {
+                assignedList.add(request);
+            }
+        }
+        return assignedList;
+    }
+
+    // public List<Request> sortListByDate(List<Request> list)
 }

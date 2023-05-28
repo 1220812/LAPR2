@@ -10,7 +10,7 @@ public class PublishOfferController {
     public OfferRepository getOfferRepository() {
         if (offerRepository == null) {
             Repositories repositories = Repositories.getInstance();
-            offerRepository = repositories.getOfferRepository();
+//            offerRepository = repositories.getOfferRepository();
         }
         return offerRepository;
     }

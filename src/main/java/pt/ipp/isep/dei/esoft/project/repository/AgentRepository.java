@@ -3,6 +3,8 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Store;
+import pt.isep.lei.esoft.auth.UserSession;
+import pt.isep.lei.esoft.auth.domain.model.Email;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,5 +55,13 @@ public class AgentRepository {
     private boolean validateAgent(Agent agent) {
         boolean isValid = !agentList.contains(agent);
         return isValid;
+    }
+
+    public Agent getAgentByUserSession(UserSession userSession){
+        return this.agentList.
+                stream()
+                .filter((agent) -> new Email(agent.getEmailAddress()).equals(userSession.getUserId()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No Agent is logged in."));
     }
 }

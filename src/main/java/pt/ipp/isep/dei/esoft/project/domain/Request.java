@@ -1,16 +1,30 @@
 package pt.ipp.isep.dei.esoft.project.domain;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Request {
     // ATTRIBUTES
     private PropertyType propertyType;
-    private double price;
     private RequestType requestType;
 
     private Agent agent;
     private Store store;
     private Owner owner;
+
+    private LocalDate requestDate;
+    private Property property;
+
+
     // CONSTRUCTORS
+
+    public Request(Property property, LocalDate requestDate, PropertyType propertyType, Agent agent, Store store, Owner owner) {
+        this.property = property;
+        this.requestDate = requestDate;
+        this.agent = agent;
+        this.owner = owner;
+        this.propertyType = propertyType;
+        this.store = store;
+    }
 
     /**
      * Creates a new request with all the attributes
@@ -20,6 +34,8 @@ public class Request {
      * @param agent selected agent
      * @param store selected store
      */
+
+
     public Request(PropertyType propertyType, double price, RequestType requestType, Agent agent, Store store) {
         if (propertyType == null){
             throw new IllegalArgumentException("Property must not be null");
@@ -38,7 +54,6 @@ public class Request {
         }
 
         this.propertyType = propertyType;
-        this.price = price;
         this.requestType = requestType;
         this.agent = agent;
         this.store = store;
@@ -64,24 +79,6 @@ public class Request {
     }
 
     /**
-     * Method to show the price
-     * @return price
-     */
-
-    public double getPrice() {
-        return price;
-    }
-
-    /**
-     * Method to change the price
-     * @param price
-     */
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    /**
      * Method to show the type
      * @return type
      */
@@ -103,26 +100,50 @@ public class Request {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Request request = (Request) o;
-        return Double.compare(request.price, price) == 0 && Objects.equals(propertyType, request.propertyType) && Objects.equals(requestType, request.requestType) && Objects.equals(agent, request.agent) && Objects.equals(store, request.store) && Objects.equals(owner, request.owner);
+        return Objects.equals(propertyType, request.propertyType) && Objects.equals(requestType, request.requestType) && Objects.equals(agent, request.agent) && Objects.equals(store, request.store) && Objects.equals(owner, request.owner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(propertyType, price, requestType, agent, store, owner);
+        return Objects.hash(propertyType, requestType, agent, store, owner);
     }
+
 
     @Override
     public String toString() {
         return "Request{" +
-                "property=" + propertyType +
-                ", price=" + price +
-                ", requestType='" + requestType + '\'' +
+                "propertyType=" + propertyType +
+                ", requestType=" + requestType +
                 ", agent=" + agent +
                 ", store=" + store +
                 ", owner=" + owner +
+                ", requestDate=" + requestDate +
+                ", property=" + property +
                 '}';
     }
+
     public Request clone() {
-        return new Request(this.propertyType,this.price,this.requestType,this.agent,this.store);
+        return new Request(this.property, this.requestDate, this.propertyType, this.agent, this.store, this.owner);
     }
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public LocalDate getRequestDate() {
+        return requestDate;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
 }

@@ -4,7 +4,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
-public class Agent {
+public class Agent{
     /**
      * name of the agent
      */
