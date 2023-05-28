@@ -34,6 +34,7 @@ public class Property {
     private Agent agent;
 
     private RequestType requestType;
+    private String propertyCode;
 
     /**
      * Method that creates a Property with all the attributes
@@ -232,5 +233,12 @@ public class Property {
     public static boolean existsDistanceFromCityCenter(double distanceFromTheCityCenter){
         if (distanceFromTheCityCenter < 1) { return false; }
         else return true;
+    }
+    public boolean hasCode(String propertyCode) {
+        return propertyCode.equals(propertyCode);
+    }
+
+    public String getCode() {
+        return propertyCode;
     }
 }

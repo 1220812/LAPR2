@@ -41,6 +41,11 @@ public class Bootstrap implements Runnable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+        try{
+            addOrder();
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException(e);
+        }
         addMessage();
     }
 
@@ -221,6 +226,33 @@ public class Bootstrap implements Runnable {
 
         Owner owner1 = new Owner("Joao", "987654321", "joao@this.app", address1, taxNumber1, passportCardNumber1);
         ownerRepository.add(owner1);
+    }
+
+    private void addOrder() throws CloneNotSupportedException {
+        OrderRepository rep = Repositories.getInstance().getOrderRepository();
+        Order order1 = new Order("property 1", 10);
+        Order order2 = new Order("property 2", 18);
+        Order order3 = new Order("property 3", 5);
+        Order order4 = new Order("property 4",3);
+        ArrayList<Double> emptyListOfOrders = new ArrayList<>();
+        ArrayList<Double> offers = new ArrayList<>();
+        offers.add(125.5);
+        offers.add(200.0);
+        offers.add(150.0);
+        offers.add(300.0);
+        offers.add(500.0);
+        offers.add(100.5);
+        offers.add(400.0);
+        offers.add(350.0);
+        offers.add(750.0);
+        order1.setAmount(offers);
+        order2.setAmount(offers);
+        order3.setAmount(offers);
+        order4.setAmount(emptyListOfOrders);
+        rep.setOrdersList(order1);
+        rep.setOrdersList(order2);
+        rep.setOrdersList(order3);
+        rep.setOrdersList(order4);
     }
     private void addMessage(){
         MessageRepository messageRepository =Repositories.getInstance().getMessageRepository();

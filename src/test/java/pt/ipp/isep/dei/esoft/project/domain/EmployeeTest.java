@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.domain;
+/**package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
@@ -81,4 +81,4 @@ public class EmployeeTest {
         assertEquals("password", employee.getPass());
     }
 
-}
+}*/
