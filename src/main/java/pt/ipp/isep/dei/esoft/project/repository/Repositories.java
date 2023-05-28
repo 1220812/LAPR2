@@ -48,6 +48,7 @@ public class Repositories {
     private final AvailableEquipmentRepository availableEquipmentRepository = new AvailableEquipmentRepository();
 
     private final AddressRepository addressRepository = new AddressRepository();
+    private final MessageRepository messageRepository = new MessageRepository();
 
     private final PropertyTypeRepository propertyTypeRepository = new PropertyTypeRepository();
     private final RequestRepository requestRepository = new RequestRepository();
@@ -88,6 +89,9 @@ public class Repositories {
 
     public AuthenticationRepository getAuthenticationRepository() {
         return authenticationRepository;
+    }
+    public MessageRepository getMessageRepository(){
+        return messageRepository;
     }
 
 
@@ -170,6 +174,8 @@ public class Repositories {
         return ownerRepository;
     }
     public OfferRepository getOfferRepository(){return offerRepository;}
+
+
 }
 
 
