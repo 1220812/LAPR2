@@ -12,7 +12,7 @@ public class AnnouncementRepository {
     public List<Announcement> getAnnouncements(){
         return List.copyOf(this.announcementsList);
     }
-
+//
 //    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
 //        List<Announcement> announcementsSpecific = announcements;
 //        return announcements;
@@ -44,7 +44,7 @@ public class AnnouncementRepository {
         return isValid;
     }
 
-    public List<Announcement> getAnnuncementsList(){
+    public  List<Announcement> getAnnuncementsList(){
         return List.copyOf(this.announcementsList);
     }
 

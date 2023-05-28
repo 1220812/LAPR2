@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.utils;
 
+import pt.ipp.isep.dei.esoft.project.domain.Announcement;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.ParseException;
@@ -112,6 +114,37 @@ public class Utils {
         showList(list, header);
         return selectsIndex(list);
     }
+    public static int showAndSelectIndex2(List<Announcement> announcement) {
+        showList2(announcement);
+        return selectsIndex2(announcement);
+
+    }
+
+    static public void showList2(List<Announcement> announcements){
+        int index = 0;
+        for (Object o : announcements) {
+            index++;
+
+            System.out.println(index + ". " + o.toString());
+        }
+        System.out.println();
+        System.out.println("0 - Cancel");
+    }
+    static public int selectsIndex2(List<Announcement> announcements) {
+        String input;
+        Integer value;
+        do {
+            input = Utils.readLineFromConsole("Type your option: ");
+            try {
+                value = Integer.valueOf(input);
+            } catch (NumberFormatException ex) {
+                value = -1;
+            }
+        } while (value < 0 || value > 4);
+
+        return value - 1;
+    }
+
 
     static public void showList(List list, String header) {
         System.out.println(header);
@@ -178,4 +211,6 @@ public class Utils {
             return list.subList(0, option);
         }
     }
+
+
 }

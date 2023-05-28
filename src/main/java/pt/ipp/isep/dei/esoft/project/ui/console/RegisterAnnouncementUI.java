@@ -22,7 +22,7 @@ public class RegisterAnnouncementUI implements Runnable {
     private PropertyType propertyType;
     private String ownerEmail;
     private double area;
-    private LocalDate date;
+    private String date;
     private Address address;
     private int doorNumber;
     private int floorNumber;
