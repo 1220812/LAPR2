@@ -1,9 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.application.session.UserSession;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
+import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
+import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.time.LocalDate;
@@ -46,9 +46,18 @@ public class ScheduleVisitController {
         return Message.checkMinute(startMinute);
     }
 
-    public void getUser() {
-        UserSession.
 
+
+    public boolean checkPhone(int phone) {
+        return Employee.existsPhone(phone);
+    }
+
+    public Message checkIfValid(LocalDate date, String schedule) {
+        return  MessageRepository.checkIfValid(date, schedule);
+    }
+
+    public Message addMessage(LocalDate date, String schedule, String name, int phone) {
+        return MessageRepository.addMessage(date, schedule, name, phone);
     }
 
 
