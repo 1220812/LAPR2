@@ -17,7 +17,7 @@ public class ShowLegacyDataController {
      */
   /**  LoadInformationFromFile loadInformationFromFile;
     /**
-     * Advertisement Repository attribute.
+     * Announcement Repository attribute.
      */
     AnnouncementRepository announcementRepository;
     /**
