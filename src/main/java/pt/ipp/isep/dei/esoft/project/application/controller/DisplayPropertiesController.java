@@ -14,10 +14,10 @@ public class DisplayPropertiesController {
         return Repositories.getInstance().getAnnouncementRepository();
     }
 
-    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
+    /**public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
          AnnouncementRepository announcementRepository = getAnnouncementsRepository();
         return announcementRepository.getSpecificAnnouncements(typeOfBusiness, typeOfProperty, numberOfRooms);
-    }
+    }*/
 
     public void DisplayAnnouncements (AnnouncementRepository announcementRepository) {
         Utils.showList(announcementRepository.getAnnouncements(), "Announcements");

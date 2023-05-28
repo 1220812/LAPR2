@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class Bootstrap implements Runnable {
@@ -36,6 +37,11 @@ public class Bootstrap implements Runnable {
         try {
             addOwner();
         } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        try{
+            addOrder();
+        }catch (CloneNotSupportedException e){
             throw new RuntimeException(e);
         }
     }
@@ -236,7 +242,28 @@ public class Bootstrap implements Runnable {
         ownerRepository.add(owner1);
     }
 
-
-
-
+    private void addOrder() throws CloneNotSupportedException {
+        OrderRepository rep = Repositories.getInstance().getOrderRepository();
+        Order order1 = new Order("property 1", 10);
+        Order order2 = new Order("property 2", 18);
+        Order order3 = new Order("property 3", 5);
+        Order order4 = new Order("property 4",3);
+        ArrayList<Double> offers = new ArrayList<>();
+        offers.add(125.5);
+        offers.add(200.0);
+        offers.add(150.0);
+        offers.add(300.0);
+        offers.add(500.0);
+        offers.add(100.5);
+        offers.add(400.0);
+        offers.add(350.0);
+        offers.add(750.0);
+        order1.setAmount(offers);
+        order2.setAmount(offers);
+        order3.setAmount(offers);
+        rep.setOrdersList(order1);
+        rep.setOrdersList(order2);
+        rep.setOrdersList(order3);
+        rep.setOrdersList(order4);
+    }
 }
