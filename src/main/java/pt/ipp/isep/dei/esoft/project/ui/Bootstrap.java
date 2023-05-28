@@ -44,6 +44,7 @@ public class Bootstrap implements Runnable {
         }catch (CloneNotSupportedException e){
             throw new RuntimeException(e);
         }
+        addMessage();
     }
 
     private void addOrganization() {
@@ -267,5 +268,10 @@ public class Bootstrap implements Runnable {
         rep.setOrdersList(order2);
         rep.setOrdersList(order3);
         rep.setOrdersList(order4);
+    }
+    private void addMessage(){
+        MessageRepository messageRepository =Repositories.getInstance().getMessageRepository();
+        Message message1=new Message(null, null);
+        messageRepository.add(message1);
     }
 }
