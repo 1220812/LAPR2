@@ -7,7 +7,7 @@ public class Announcement {
     /**
      * announcement publish date
      */
-    private LocalDate date;
+    private String date;
     /**
      * announcement property
      */
@@ -24,23 +24,27 @@ public class Announcement {
     private RequestType requestType;
 
 
-    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType) {
+    public Announcement(Property property, String date, String comissionType, double comission, RequestType requestType) {
         this.property = property;
         this.date = date;
         this.comissionType = comissionType;
         this.comission = comission;
         this.requestType = requestType;
     }
-    public Announcement(Property property, LocalDate date){
+    public Announcement(Property property, String date){
         this.property = property;
         this.date = date;
     }
 
-    public LocalDate getDate() {
+//    public static List<Announcement> getSortedProperties() {
+//        return annoucement;
+//    }
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -78,12 +82,6 @@ public class Announcement {
                 '}';
     }
 
-    public String toString2() {
-        return "Announcement{" +
-                "date=" + date +
-                ", property=" + property +
-                '}';
-    }
 
     public Announcement clone(){
         return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType);
