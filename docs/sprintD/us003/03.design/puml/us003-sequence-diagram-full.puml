@@ -1,0 +1,208 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "System Administrator" as ADM
+participant ":RegisterEmployeeUI" as UI
+participant "controller\n:RegisterEmployeeController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agencyRepository\n:AgencyRepository" as AREPO
+participant "roleRepository\n:RoleRepository" as RREPO
+participant "storeRepository\n:StoreRepository" as SREPO
+participant "passwordGenerator\n:PasswordGenerator" as PASSGEN
+participant "emailService\n:EmailService" as EMSERV
+participant "user\n:User" as EMPLOYEE
+participant "UserRepository\n:UserRepository" as EMREPO
+activate ADM
+
+        ADM -> UI : Asks to create a new employee
+
+        activate UI
+
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                        activate RepositorySingleton
+
+                            RepositorySingleton --> CTRL: repositories
+
+                        deactivate RepositorySingleton
+                        CTRL -> PLAT : getAgencyRepository()
+                        activate PLAT
+
+                            PLAT --> CTRL : agencyRepository
+
+                        deactivate PLAT
+                        CTRL -> PLAT : getRoleRepository()
+                        activate PLAT
+
+                            PLAT --> CTRL : roleRepository
+
+                        deactivate PLAT
+                        CTRL -> PLAT : getStoreRepository()
+                        activate PLAT
+
+                            PLAT --> CTRL : storeRepository
+
+                        deactivate PLAT
+            deactivate CTRL
+
+            UI --> ADM : Requests data
+       deactivate UI
+
+       ADM -> UI : Types requested data (name,passport's card number,\n tax number, address,  email, contact, phone number)
+
+       activate UI
+        UI -> UI : keepBaseData(name,passport's card number,\n tax number, address,  email, contact, phone number)
+          UI -> CTRL : getEmployeeRoles()
+
+          activate CTRL
+
+              CTRL -> RREPO : getEmployeeRoles()
+
+              activate RREPO
+
+                  RREPO --> CTRL : listOfEmployeeRoles
+
+              deactivate RREPO
+
+              CTRL --> UI : listOfEmployeeRoles
+
+          deactivate CTRL
+
+           UI --> ADM : Shows user roles and asks to select one
+
+       deactivate UI
+
+       ADM -> UI : Selects a user role
+
+            activate UI
+
+                UI -> UI : keepRole(role)
+                UI --> ADM : return role
+            deactivate UI
+
+       alt Is selected role not System Administrator
+
+              ADM -> UI : Asks to select an agency
+
+              activate UI
+
+                    UI --> CTRL : getAgencies()
+                    activate CTRL
+
+                        CTRL -> AREPO : getAll()
+
+                        activate AREPO
+
+                            AREPO --> CTRL : listOfAllAgencies
+
+                        deactivate AREPO
+
+                        CTRL --> UI : listOfAllAgencies
+
+                    deactivate CTRL
+                    UI --> ADM : Shows the list of agencies and asks to select one
+              deactivate UI
+
+            ADM -> UI : Selects a user agency
+
+            activate UI
+
+                UI -> UI : keepAgency(agency)
+                UI --> ADM : return agency
+            deactivate UI
+
+
+        alt Is selected role Agent or StoreManager
+
+       ADM -> UI : Asks to list all agency Stores
+
+        activate UI
+
+            UI -> CTRL : getStores()
+
+                activate CTRL
+
+                    CTRL -> SREPO : getAgencyStores(agency)
+
+                    activate SREPO
+
+                        SREPO --> CTRL : agencyStores
+
+                    deactivate SREPO
+
+                    CTRL --> UI : agencyStores
+
+                deactivate CTRL
+
+                UI --> ADM : Lists the stores and asks to pick one
+
+                deactivate UI
+
+            ADM -> UI : Selects a store
+
+            activate UI
+
+                UI -> UI : keepStore(store)
+                UI --> ADM : return store
+       deactivate UI
+
+            end
+
+       end
+
+
+    ADM -> UI : Asks to save employee
+
+        activate UI
+
+            UI --> CTRL : registerEmployee(data)
+
+            activate CTRL
+
+                CTRL -> PASSGEN : generate()
+
+                activate PASSGEN
+
+                PASSGEN --> CTRL : pass
+
+                deactivate PASSGEN
+
+                CTRL -> EMPLOYEE** : create(data, role, pass)
+
+                CTRL -> EMREPO : save(user)
+
+                activate EMREPO
+
+                    EMREPO --> CTRL
+
+                deactivate EMREPO
+
+                CTRL -> EMSERV : sendRegisteredUserEmail(employee.email(), employee.password())
+
+                activate EMSERV
+
+                    EMSERV -> EMSERV : sendEmail()
+                    EMSERV --> CTRL
+
+
+                deactivate EMSERV
+
+                CTRL -> UI
+
+            deactivate CTRL
+
+            UI --> ADM : Informs of the operation's success
+
+    deactivate UI
+deactivate ADM
+@enduml

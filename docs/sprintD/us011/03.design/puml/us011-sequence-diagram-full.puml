@@ -1,0 +1,171 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Agent" as ADM
+participant ":OrderDecisionUI" as UI
+participant ":OrderDecisionController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "orderRepository:\nOrderRepository" as OrderRepository
+participant "order: Order" as Order
+participant "propertyOrder: Order" as POrder
+
+activate ADM
+
+    ADM -> UI : requests to see properties \navailable for purchase
+    activate UI
+
+    UI -> CTRL** : create
+
+    activate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+        RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+
+        CTRL -> PLAT : getOrderRepository()
+        activate PLAT
+
+        PLAT --> CTRL: orderRepository
+        deactivate PLAT
+
+    UI -> CTRL: getOrderList()
+
+        CTRL -> OrderRepository : getOrders()
+        activate OrderRepository
+
+        OrderRepository --> CTRL : orders
+        deactivate OrderRepository
+
+    CTRL --> UI : orders
+    deactivate CTRL
+
+alt if that exists purchase orders
+
+    UI --> ADM : displays the list of purchase \norders grouped by property
+    deactivate UI
+    ADM -> UI : select a purchase order
+    activate UI
+
+    UI --> ADM : asks for decision (accept or decline)
+    deactivate UI
+    ADM -> UI : makes the decision (accept or decline)
+    activate UI
+
+    UI -> CTRL : makeDecision(propertyCode, orderNumber, decision)
+
+    activate CTRL
+
+    CTRL -> OrderRepository : getOrderByPropertyCodeOrderNumber(propertyCode, orderNumber)
+
+    activate OrderRepository
+
+    OrderRepository --> CTRL : return order
+
+    deactivate OrderRepository
+
+    CTRL -> Order: makeDecision(decision)
+
+    activate Order
+
+    Order --> CTRL : return decision
+
+    deactivate Order
+
+    CTRL -> Order : getOwnerName()
+
+    activate Order
+
+    Order --> CTRL : clientName
+
+    deactivate Order
+
+    CTRL -> Order: getOrderNumber()
+
+        activate Order
+
+        Order --> CTRL : orderNumber
+
+    deactivate Order
+
+    alt rejects order
+
+        CTRL -> EmailService: sendRejectedOrderEmail(clientName, orderNumber)
+
+        activate EmailService
+
+        CTRL <-- EmailService
+
+        deactivate EmailService
+
+    else accepts order
+
+        CTRL -> EmailService: sendAcceptedOrderEmail(clientName, orderNumber)
+
+        activate EmailService
+
+        CTRL <-- EmailService
+
+        deactivate EmailService
+
+        CTRL -> OrderRepository : getUndecidedPropertyOrders(propertyCode)
+
+        activate OrderRepository
+
+        OrderRepository -> CTRL : propertyOrders
+
+        deactivate OrderRepository
+
+        CTRL --> CTRL : sortPropertyOrders
+
+        loop propertyOrder in propertyOrders
+
+        CTRL -> POrder: reject()
+activate POrder
+
+        POrder --> CTRL
+
+        deactivate POrder
+
+        CTRL -> POrder : getOwnerName()
+
+        activate POrder
+
+        POrder --> CTRL : clientName
+
+        deactivate POrder
+
+        CTRL -> EmailService: sendRejectedOrderEmail(clientName, orderNumber)
+
+        activate EmailService
+
+        CTRL <-- EmailService
+
+        deactivate EmailService
+
+        end
+
+    end
+
+    CTRL --> UI
+    deactivate CTRL
+
+    UI --> ADM : operation success
+
+
+else if there's no purchase orders
+
+
+    UI --> ADM : shows an empty list \nand the operation ends
+
+deactivate UI
+
+end
+@enduml

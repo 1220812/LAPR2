@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model - US007
+
+class Address{
+-int doorNumber
+-int floorNumber
+-String zipCode
+-String streetAddress
+}
+
+class State{
+-String stateName
+}
+
+class District{
+-String districtName
+}
+
+class City{
+-String cityName
+}
+
+class UnregisteredUser{
+-String name
+
+}
+
+class PassportCardNumber{
+-int passportCardNumber
+}
+
+
+Address --|> State
+Address --|> City
+Address --|> District
+
+@enduml

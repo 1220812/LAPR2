@@ -1,0 +1,92 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+left to right direction
+
+class PublishRequestUI
+
+class PublishRequestController
+{
+    -comissionType: String
+    -comission: Double
+    -request: Request
+    +getRequestsList()
+    +getRequestInfo(request)
+    +saveDataComissionType(comissionType)
+    +saveDataComission(comission)
+    +createAnnouncement()
+    +addAnnouncement()
+    +saveEmail()
+    +excludeRequest(request)
+}
+
+class Repositories
+{
+    +getInstance()
+    +getRequestsRepository()
+    +getAnnouncementRepository()
+}
+
+class RequestRepository
+{
+    +getRequests()
+    +getRequest(request)
+    +excludeRequest(request)
+}
+
+class AnnouncementRepository
+{
+    +addAnnouncement()
+
+}
+
+class Announcement
+{
+    -date: LocalDate
+    -property: Property
+    -comissionType: String
+    -comission: Double
+    -requestType: RequestType
+}
+
+class Agent
+{
+    -name: String
+    -citizenCardNumber: Integer
+    -taxNumber: Integer
+    -adress: String
+    -email: String
+    -phoneNumber: Integer
+    -agency: String
+}
+
+Class Request
+{
+     -Property: property
+     -price: Double
+     -requestType: RequestType
+     -agent: Agent
+     -store: Store
+     -owner: Owner
+}
+
+PublishRequestUI -> PublishRequestController
+PublishRequestController -> Repositories
+Repositories -> AnnouncementRepository
+Repositories -> RequestRepository
+Agent -> Announcement
+AnnouncementRepository -> "has" Announcement
+RequestRepository --> "has" Request
+PublishRequestController --> Announcement
+PublishRequestController ..> AnnouncementRepository
+PublishRequestController .> RequestRepository
+PublishRequestController --> Request
+
+
+@enduml

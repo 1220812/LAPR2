@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US009 - System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Client" as Customer
+participant ":System" as System
+
+activate Customer
+
+    Customer -> System : asks to schedule a visit to a property.
+
+    activate System
+
+    loop while date and time slot do not overlap each other
+
+    System --> Customer : shows list of available properties (sorted \nfrom the most recent entries to the oldest).
+
+    deactivate System
+
+    Customer -> System : selects property
+    activate System
+
+    System --> Customer : request data: preferred date, time slot (from x hour to y hour) for the property visit and message
+
+    deactivate System
+
+    Customer -> System : Type request data (date, time slot and message)
+
+    activate System
+
+    end
+
+            System --> Customer : Informs operation sucess
+    deactivate System
+
+
+
+@enduml

@@ -1,0 +1,106 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+left to right direction
+
+class RegisterAnnouncementUI
+
+class RegisterAnnouncementController
+{
+    -area: double
+    -distance: integer
+    -price: double
+    -photos: String
+    -bedrooms: integer
+    -bathrooms: integer
+    -parking: interger
+    -equipment: String
+    -basement: String
+    -loft: String
+    -sun: String
+    -comissionType: String
+    -comission: double
+    +getPropertyType()
+    +addAnnouncement(announcement)
+    +setPropertyType(propertyType)
+    +getRegisteredUsers()
+    +saveDataProperty(area, location, distance, price, photos)
+    +saveDataResidence(bedrooms, bathrooms, parking, equipment
+    +saveDataHouse(basement, loft, sun)
+    +saveDataComissionType(comissionType)
+    +saveDataComission(comission)
+}
+
+class Repositories
+{
+    +getInstance()
+    +getPropertyTypeRepository()
+    +getRegisteredUsersRepository()
+    +getAnnouncementRepository()
+}
+
+class PropertyTypeRepository
+{
+    +getPropertyType()
+}
+
+class RegistedUsersRepository
+{
+    +getRegisteredUsers()
+}
+
+class Announcement
+{
+    -date
+    +createAnnouncement()
+    +setDate(date)
+}
+
+class Agent
+{
+    -name: String
+    -citizenCardNumber: Integer
+    -taxNumber: TaxNumber
+    -propertyAddress: PropertyAddress
+    -email: String
+    -phoneNumber: String
+    -passportCardNumber: PassportCardNumber
+}
+
+Class Address
+{
+    -street: String
+    -city: City
+    -district: District
+    -state: State
+    -zipCode: String
+}
+
+class AnnouncementRepository
+{
+    +addAnnouncement(announcement)
+}
+
+
+
+RegisterAnnouncementUI -> RegisterAnnouncementController
+RegisterAnnouncementController .> Repositories
+Repositories -> Announcement
+Repositories -> RegistedUsersRepository
+Repositories -> PropertyTypeRepository
+Repositories -> AnnouncementRepository
+RegisterAnnouncementController ---> Announcement
+RegisterAnnouncementController ..> RegistedUsersRepository
+RegisterAnnouncementController ..> PropertyTypeRepository
+RegisterAnnouncementController ..> AnnouncementRepository
+AnnouncementRepository -> "has" Announcement
+
+Agent -> Announcement
+Announcement -> "has" Address
+@enduml

@@ -1,0 +1,143 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model - US004
+
+class Owner{
+name
+emailAddress
+phoneNumber
+}
+
+class Agent{
+name
+passportNumber
+emailAddress
+phoneNumber
+}
+
+class CompanyBranch{
+ID
+designation
+emailAddress
+phoneNumber
+}
+
+class Address{
+doorNumber
+floorNumber
+street
+postalCode
+}
+
+class Request{
+date
+}
+
+class Property{
+area
+distanceFromTheCityCentre
+price
+}
+
+class Residence{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpaces
+availableEquipment
+}
+
+class House{
+existenceOfABasement
+inhabitableLoft
+}
+
+class Photographs{
+numberOfPhotographs
+URI
+}
+
+class TaxNumber{
+taxNumber
+}
+
+
+class SunExposure{
+direction
+}
+
+class PropertyType{
+propertyType
+}
+
+class PassportCardNumber{
+passportCardNumber
+}
+
+class District{
+districtName
+}
+
+class State{
+state
+}
+
+class City{
+cityName
+}
+
+class Comission{
+percentage
+}
+
+class Rent{
+contractDuration
+}
+
+class RequestType{
+requestTypeDescription
+}
+
+Owner "1" --- "1" PassportCardNumber : has >
+Owner "1" --- "1" TaxNumber : has >
+Owner "1" -- "1" CompanyBranch : selects >
+Owner "1" --- "1" Address : has >
+Owner "1" ---"0...*" Request : submits
+Owner "1" ---"1" Agent : selects >
+Owner --- Property : owns >
+
+Agent "1" ---- "1" CompanyBranch : works for >
+Agent "1" --- "1" Address : has >
+Agent "1" --- "1" PassportCardNumber : has >
+Agent "1" --- "1" TaxNumber : has >
+Agent --- Request : validates >
+Agent --- Comission : defines
+
+Residence --|> Property : is a
+House --|> Residence : is a
+House -- SunExposure
+
+Property "1" -- "1" PropertyType : has a >
+Property "1" --- "1...30" Photographs : has >
+
+Address --- City : has a >
+City --- District : is in >
+District --- State : is in >
+
+Request "1" -- "1" RequestType : has a >
+Request "1" -- "1" Property : announces >
+Rent --- RequestType : can be <
+
+
+
+
+@enduml

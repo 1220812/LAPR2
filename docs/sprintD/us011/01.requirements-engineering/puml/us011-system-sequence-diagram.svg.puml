@@ -1,0 +1,62 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US011
+
+autonumber
+
+actor "Agent" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : requests to see properties that are available for purchase
+
+        activate System
+
+            alt if that exists purchase orders
+
+                System --> Employee : displays the list of purchase orders for the selected property
+
+        deactivate System
+
+             Employee -> System : selects a purchase order
+
+        activate System
+
+             System --> Employee : asks for decision (accept or decline)
+
+             deactivate System
+
+
+             Employee -> System : Makes the decision (accept or decline)
+        activate System
+
+             System -> System : Update purchase order decision
+             System -> System : Send email to the client
+
+        opt if the decision was accepted
+
+            loop propertie's other proposals
+
+                System -> System : Decline purchase order for that property
+
+                System -> System : Email sent declining
+
+            end
+
+        end
+
+            System --> Employee : Operation success
+
+  else if there's no purchase orders
+
+                    System --> Employee : shows an empty list \nand the operation ends
+
+        deactivate System
+    end
+
+
+@enduml

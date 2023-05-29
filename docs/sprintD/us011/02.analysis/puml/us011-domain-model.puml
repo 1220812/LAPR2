@@ -1,0 +1,71 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model - US011
+
+class Property{
+area
+price
+distanceFromTheCityCenter
+}
+
+class Employee{
+name
+phoneNumber
+emailAddress
+taxNumber
+passportCardNumber
+}
+
+class Decision{
+decision
+}
+
+class PurchaseOrder{
+orderNumber
+price
+date
+property
+}
+
+
+class User{
+name
+phoneNumber
+emailAddress
+taxNumber
+passportCardNumber
+}
+
+class Announcement{
+localDate
+property
+comissionType
+comission
+requestType
+}
+
+class EmailService{
+informationEmail
+}
+
+
+Employee "1" -- "*" Decision : makes >
+Announcement "1" -- "1" Property : announces >
+User "1" -- "1...*" PurchaseOrder : makes
+PurchaseOrder "*" -- "1" Announcement : <
+Employee "1" --"*" PurchaseOrder : analyzes
+Decision "1" -- "1" Announcement
+Decision -- EmailService : depending on <
+EmailService -- User : informing about the decision >
+
+@enduml

@@ -1,0 +1,149 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype polylyne
+
+class CreateRequestUI{
+}
+
+class CreateRequestController{
++CreateRequestController(requestRepository, agencyRepository)
++CreatePhotograph(URI)
++getTypeOfRequest()
++getAgency()
++getBranch()
++getAgent()
++createRequest()
+}
+
+class Repositories{
+-Repositories()
++getInstance()
++getRequestRepository()
++getAgencyRepository()
+}
+
+class RequestRepository{
++getPropertyTypeList()
++getRequestTypeList()
+}
+
+class AgencyRepository{
++getAgencyList()
++getBranchList()
++getAgentsList()
+}
+
+class Photograph{
+- String URI
+}
+
+
+class PhotographList{
+-addPhotographToPhotoList
+}
+
+class Request{
+-String status
+-String dateOfBegin
+-String endDate
+-addRequest()
++validateRequest()
+}
+
+class Property{
+-double area
+-double distanceFromCityCenter
+-double price
++createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList )
+}
+
+class Residence{
+-double numberOfBedrooms
+-double numberOfBathrooms
+-double numberOfParkingSpaces
++createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment)
+}
+
+class AvailableEquipment{
+-boolean equipment
+}
+
+class House{
+-boolean existenceOfABasement
+-boolean inhabitableLoft
++createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList, numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment, existenceOfABasement, inhabitableLoft, sunExposure)
+}
+
+class SunExposure{
+-String direction
+}
+
+class Address{
+-int doorNumber
+-int floorNumber
+-String zipCode
+-String streetAddress
+}
+
+class State{
+-String stateName
+}
+
+class District{
+-String districtName
+}
+
+class City{
+-String cityName
+}
+
+class Rent{
+-int contractDuration
+}
+
+class Owner{
+-String name
+-int phoneNumber
+-String emailAddress
+}
+
+class Agent{
+-String name
+-int phoneNumber
+-String emailAddress
+}
+
+class TaxNumber{
+-int taxNumber
+}
+
+class PassportCardNumber{
+-int passportCardNumber
+}
+
+CreateRequestUI -.-> CreateRequestController
+Repositories -.-> Repositories : instance
+CreateRequestController -.-> Repositories : repositories
+Repositories --> AgencyRepository
+Repositories --> RequestRepository
+Address --|> State
+Address --|> City
+Address --|> District
+Property <|-- Residence
+Property --> Address : has
+PhotographList --> Property
+Residence <|-- House
+Residence --> AvailableEquipment
+Request --> Property : announces
+House <|-- SunExposure
+Request --> Rent : can be
+PhotographList --> "1...30" Photograph : has
+CreateRequestController --> Request
+Owner -> Property : owns
+Owner --|> TaxNumber : has
+Owner --|> PassportCardNumber : has
+Agent --|> PassportCardNumber : has
+Agent --|> TaxNumber : has
+Owner -> "1...*" Request : creates
+Agent --> Request : revises
+@enduml

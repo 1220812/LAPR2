@@ -1,0 +1,69 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title US008 - Domain Model
+
+class Branch {
+    designation
+    location
+    localManager
+}
+
+class Agent {
+    name
+    citizenCardNumber
+    tax number
+    address
+    email
+    phoneNumber
+    agency
+}
+
+class Property {
+    area
+    location
+    distanceFromCityCentre
+    requestedPrice
+    typeOfProperty
+}
+
+class Announcement {
+    date
+    comissionType
+    comission
+}
+
+class AppartmentOrHouse {
+    numberBedrooms
+    numberBathrooms
+    numberParking
+    availableEquipment
+}
+
+class House {
+    basement
+    inhabitableLoft
+    sunExposure
+}
+
+class Request
+
+Branch "1" - "*" Agent : has >
+Agent "1" - "1" ListOfRequests : sees >
+ListOfRequests "1" -- "*" Request : has >
+Announcement "1" -- "1" Property : has >
+Agent "1" -- "1" Request : chooses >
+Property "1" -- "1" AppartmentOrHouse : can be >
+AppartmentOrHouse "1" - "1" House : can be >
+Request "1" -- "1" Property : has >
+Agent "1" -- "1" Announcement : creates >
+
+
+@enduml

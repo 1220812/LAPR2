@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) US 012
+
+autonumber
+
+actor "System administrator" as Sa
+participant ":System" as System
+
+activate Sa
+
+            Sa --> System : asks to show all legacy systems files
+        activate System
+
+            System --> Sa : show data, and asks to select one
+            deactivate System
+
+            Sa ---> System : selects a file
+            activate System
+
+            System --> Sa : Validates data , and show error/sucess message
+
+
+@enduml

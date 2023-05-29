@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US017 - System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Network Manager" as NM
+participant ":System" as System
+
+activate NM
+
+    NM -> System : asks to display the list of all the deals made
+
+    activate System
+
+        System --> NM : shows the two different sorting methods \nand asks to select one
+
+    deactivate System
+
+    NM -> System : selects the sorting method
+
+    activate System
+
+    System --> NM : asks for the order that the Network Manager wants to \nsort the property by their areas (ascending or descending)
+
+    deactivate System
+
+    NM -> System : selects the order of sorting (ascending or descending)
+
+    activate System
+
+    System --> NM : shows the list of all the deals made sorted by the \nselected sorting method and order
+
+    deactivate System
+
+@enduml

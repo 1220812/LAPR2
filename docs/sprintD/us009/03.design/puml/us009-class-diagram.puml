@@ -1,0 +1,119 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+@startuml
+
+class ScheduleVisitUI{
+}
+class ScheduleVisitController{
+-Repositories repositories
+
++checkIfPropertiesIsEmpty()
++getSortedProperties()
++getPersonByUserSession()
++addMessage(...)
++checkIfValid(...)
++createVisit(...)
+}
+
+class Repositories{
+
++Repositories()
++getInstance()
++getUserRepository()
++getMessageRepository()
++getAdvertisementRepository()
++getAnnoucementsRepository()
+
+}
+class AuthenticationRepository{
++getCurrentUserSession()
+}
+class Message{
+-String message
+-String clientName
+-String clientPhoneNbr
+-Advertisement advertisement
+-LocalDateTime startTime
+-LocalDateTime endTime
+
++ClientToAgentMessage(...)
++getMessage()
++getClientName()
++getClientPhoneNbr()
++getStartTime()
++getEndTime()
++getAdvertisement()
++toString()
++equals(...)
+}
+
+class MessageRepository{
+-List<ClientToAgentMessage> clientToAgentMessage
+
++addMessage(...)
++overlapsWith(...)
++createMessage(...)
++checkDateFormat(...)
++checkTimeFormat(...)
+}
+
+class Property{
+}
+class House{
+}
+class Apartment{
+}
+class Land{
+}
+
+
+class User{
+-Sring name
+-String phoneNumber
++getName()
++getPhoneNumber()
+}
+
+
+
+class UserRepository
+{
+-List<Person> personList
+
++getPersonByUserSession(...)
+}
+
+class Annoucement{
+Price
+Type
+Commission
+}
+
+class AnnoucementRepository{
++checkIfAdvertisementListIsEmpty()
+}
+
+
+
+ScheduleVisitUI --> ScheduleVisitController
+
+ScheduleVisitController --> Repositories
+
+Repositories ----> MessageRepository
+Repositories ---> AnnoucementRepository
+Repositories --> UserRepository
+Repositories --> AuthenticationRepository
+User --> UserRepository
+
+Message ->MessageRepository
+
+
+
+Annoucement -> AnnoucementRepository
+Property -> Annoucement
+Property --> House
+Property --> Apartment
+Property --> Land
+
+@enduml

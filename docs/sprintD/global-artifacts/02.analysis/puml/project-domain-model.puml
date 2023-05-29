@@ -1,0 +1,313 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+left to right direction
+
+hide circle
+hide methods
+
+title US001 Domain Model
+
+
+class District {
+}
+
+class Announcement {
+}
+
+class Store {
+}
+
+class Property {
+location
+area
+distanceFromCityCenter
+photographs
+}
+
+class AvailableEquipment {
+centralHeating
+airConditioning
+}
+
+class SunExposure {
+North
+East
+South
+West
+}
+class Branch {
+    designation
+    location
+    localManager
+}
+
+class Agent {
+    name
+    passportCardNumber
+    tax number
+    address
+    email
+    phoneNumber
+    agency
+}
+
+class Property {
+    area
+    location
+    distanceFromCityCentre
+    requestedPrice
+    typeOfProperty
+}
+
+class Announcement {
+    date
+}
+
+class AppartmentOrHouse {
+    numberBedrooms
+    numberBathrooms
+    numberParking
+    availableEquipment
+}
+
+class House {
+    basement
+    inhabitableLoft
+    sunExposure
+}
+
+class Comission {
+    fixed
+    percentage
+}
+class User {
+name
+email
+phone number
+password
+}
+class Passport {
+number
+}
+class TaxNumber {
+number
+}
+
+class Agency {
+designation
+email
+phone number
+}
+class Agent {
+}
+
+class Store {
+name
+designation
+telephone
+email
+}
+class Role {
+description
+permissions
+}
+class SystemAdministrator {
+}
+class StoreManager {
+}
+class StoreNetworkManager {
+}
+class Employee {
+
+}
+class StoreEmployee {
+}
+
+class AgencyEmployee {
+}
+
+class Owner{
+name
+passportNumber
+}
+class CompanyBranch{
+ID
+designation
+}
+
+class Contacts{
+phoneNumber
+emailAddress
+}
+
+class Address{
+doorNumber
+floorNumber
+street
+state
+district
+postalCode
+}
+
+class Request{
+status
+date
+}
+
+class Property{
+area
+distanceFromTheCityCentre
+}
+
+class Residence{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpaces
+availableEquipment
+}
+
+class House{
+existenceOfABasement
+inhabitableLoft
+}
+
+class Land{
+}
+
+class Sell{
+price
+}
+
+class Rent{
+pricePerMonth
+contractDuration
+}
+
+class Photographs{
+URI
+}
+
+class TaxNumber{
+taxNumber
+}
+
+class Apartment{
+}
+
+class SunExposure{
+direction
+}
+
+class PropertyType{
+propertyType
+}
+
+
+class Store {
+    designation
+    ID
+    phoneNumber
+    emailAddress
+}
+
+class State {
+    stateName
+}
+
+class District {
+    districtName
+}
+
+class City {
+    cityName
+}
+
+
+
+
+class UnregisteredUser{
+name
+passportNumber
+}
+
+
+
+class TaxNumber{
+taxNumber
+}
+
+
+UnregisteredUser "1" -- "1" Address : has >
+UnregisteredUser "1" -- "1" TaxNumber : has >
+
+Address "1" -- "1" City : in >
+City "1" -- "1" State : in >
+State "1" -- "1" District : in >
+
+Owner "1" --- "1" Address : has >
+Owner "1" -- "1...*" Request : creates >
+Owner "1" -- "1" TaxNumber : has >
+Owner "1" -- "1" Contacts : has >
+
+Agent "1" --- "1" Address : has >
+Agent "1" --- "1...*" Request : reviews and publishes >
+Agent "1" --- "1" TaxNumber : has >
+Agent "1" --- "1" Contacts : has >
+Agent "1" --- "1" CompanyBranch : works for >
+
+Property "1" -- "1" PropertyType : has >
+Property "1" --- "1...30" Photographs : has
+
+Property "1" --- "1" Address : has >
+PropertyType --> Residence : can be
+PropertyType --> Land : can be
+
+CompanyBranch "1" --- "1" Address : has >
+CompanyBranch "1" -- "1" Contacts : has >
+
+Residence <|-- House
+Residence <|-- Apartment
+
+Request --> Sell : can be
+Request --> Rent : can be
+Request "1"--"1...*" Property : announces >
+
+SunExposure -- House : has <
+
+User "1" -- "1" Passport: has a >
+User "1" -- "1" TaxNumber: has a >
+User "1" -left- "1" Role: has a >
+Agency "1" -right- "1" Store: has a >
+SystemAdministrator  --|> Employee
+Agent  --|>   StoreEmployee
+StoreManager  --left|> StoreEmployee
+
+AgencyEmployee "1" -left- "1" Agency: runs >
+StoreEmployee "1" -right- "1" Store: belongs to >
+Agent "*" -left- "1" Store : has an <
+StoreNetworkManager --|> AgencyEmployee
+Employee --|> User
+AgencyEmployee --|> Employee
+StoreEmployee --|> AgencyEmployee
+
+Store "1" -- "1" Address: has a >
+
+Store "1"-- "*" Announcement : displays >
+Store "1" -- "1" Address : has >
+Address "1" -- "1" District : is in >
+Announcement "1" -- "1" Property : about >
+Property "1" -- "1" AvailableEquipment : has >
+Property "1" -- "1" SunExposure : has >
+Branch "1" -- "*" Agent : has >
+Agent "1" -- "*" Announcement : creates >
+Owner "1" -- "1" Property : owns >
+Announcement "1" - "1" Property : has >
+Property "1" -- "1" AppartmentOrHouse : can be >
+AppartmentOrHouse "1" - "1" House : can be >
+Announcement "1" -- "1" Comission : has >
+Agent "1" - "1" Comission : defines >
+Owner "1" -- "1" Agent: talks to >
+@enduml

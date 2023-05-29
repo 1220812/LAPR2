@@ -1,0 +1,67 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class OrderDecisionUI {
+}
+
+class Agent{
+    -String name
+    -String phoneNumber
+    -String emailAddress
+    +requestsToSeeProperties()
+    +makeDecision(propertyCode, orderNumber, decision)
+}
+
+class OrderDecisionController {
+    -repositories: Repositories
+    -orderRepository: OrderRepository
+
+    +create()
+    +getOrderList()
+    +getOrderRepository()
+    +getOrderByPropertyCodeOrderNumber(propertyCode, orderNumber)
+    +makeDecision(propertyCode, orderNumber, decision)
+    +getUndecidedPropertyOrders(propertyCode)
+}
+
+class Repositories {
+    -Repositories()
+    +getInstance(): Repositories
+    +getOrderRepository(): OrderRepository
+}
+
+class OrderRepository {
+    +getOrders(): List<Order>
+    +getOrderByPropertyCodeOrderNumber(propertyCode, orderNumber): Order
+    +getUndecidedPropertyOrders(propertyCode): List<PropertyOrder>
+}
+
+class Order {
+    -String ownerName
+    -int orderNumber
+    -String decision
+    +makeDecision(decision)
+    +getOwnerName():
+    +getOrderNumber():
+}
+
+class EmailService {
+    +sendRejectedOrderEmail(clientName, orderNumber)
+    +sendAcceptedOrderEmail(clientName, orderNumber)
+}
+
+OrderDecisionUI -.-> OrderDecisionController
+
+OrderDecisionController --> Repositories
+OrderDecisionController --> EmailService
+Repositories -> Repositories : instance
+Repositories --> "1" OrderRepository : orderRepository
+OrderRepository --> "*" Order : orders
+OrderDecisionUI -.-> Agent
+
+Agent --> Order : makeDecision (accept or decline)
+
+@enduml

@@ -1,0 +1,180 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Client" as User
+participant ":ScheduleVisitUI" as System
+participant ":ScheduleVisitController" as Controller
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as repositories
+participant "announcementsRepository\n:AnnouncementsRepository" as AnnoucementRepository
+participant ":userRepository\nUserRepository" as UserRepository
+participant "messageRepository\n:MessageRepository" as Message
+
+
+
+activate User
+
+
+User->System: asks to schedule a visit to a property.
+activate System
+
+
+System->Controller**: create
+
+activate Controller
+
+Controller->RepositorySingleton: getInstance()
+activate RepositorySingleton
+
+RepositorySingleton-->Controller: repositories
+deactivate RepositorySingleton
+
+
+Controller -> repositories : checkIfPropertiesEmpty()
+activate repositories
+
+repositories -> AnnoucementRepository : checkIfPropertiesEmpty()
+activate AnnoucementRepository
+
+AnnoucementRepository --> repositories : boolean
+deactivate AnnoucementRepository
+
+repositories --> Controller : boolean
+deactivate repositories
+
+Controller --> System : boolean
+
+alt if true (list of properties is empty)
+System --> User : Show message :"List of properties is empty"
+
+end
+alt if false (list of properties isn´t empty)
+
+System -> Controller : getSortedProperties()
+
+
+
+
+
+
+
+Controller -> repositories : getSortedProperties()
+activate repositories
+
+repositories -> AnnoucementRepository : getSortedProperties()
+activate AnnoucementRepository
+
+AnnoucementRepository --> repositories : ListOfPropertiesSorted
+deactivate AnnoucementRepository
+
+repositories --> Controller : ListOfPropertiesSorted
+deactivate repositories
+
+
+
+loop while true (yes)
+
+Controller --> System : ListOfPropertiesSorted
+
+
+
+
+
+deactivate Controller
+
+System --> User : show a list of properties sorted from the most recent entries to the oldest
+deactivate System
+
+
+
+User -> System : Select the property
+activate System
+
+System --> User : request data (preferred date for the property visit)
+deactivate System
+
+User -> System : types requested data
+activate System
+
+System --> User : request data (starting time for the property visit)
+deactivate System
+
+User -> System : types requested data
+activate System
+
+
+System --> User : request data (ending time for the property visit)
+deactivate System
+
+User -> System : types requested data
+activate System
+
+
+
+System -> Controller: getUser()
+activate Controller
+
+Controller -> UserRepository: getUser()
+activate UserRepository
+
+UserRepository --> Controller: User
+deactivate UserRepository
+
+System->Controller: User
+deactivate Controller
+
+System -> System : save phoneNumber
+System -> System : save name
+
+
+System -> Controller : checkIfValid()
+activate Controller
+
+Controller -> Message : checkIfValid()
+activate Message
+
+Message --> Controller: return boolean
+deactivate Message
+
+Controller --> System: return boolean
+deactivate Controller
+
+
+alt if true
+
+System -> Controller: addMessage()
+activate Controller
+
+Controller -> Message: addMessage()
+activate Message
+
+deactivate Message
+deactivate Controller
+
+System -> User: show sucess of operation
+
+end
+alt if false
+
+
+
+
+System -> User: show insucess of operation
+
+
+end
+
+System -> User: Show message: "Want to try more?"
+
+User -> System : yes/no
+end
+end
+
+
+
+@enduml

@@ -1,0 +1,76 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+'title Domain Model
+
+'class Platform {
+'  -description
+'}
+
+class Announcement{
+id
+publicationDate
+Agent_comission
+comissionType
+}
+
+class Request{
+requestType
+propertyType
+agency
+agent
+price
+}
+
+class Property{
+Location
+area
+distanceFromCityCenter
+owner
+photos
+}
+
+class Residence{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpacings
+equipment
+}
+
+class Land{
+}
+
+class Apartment {
+}
+
+class House{
+basement
+inhabitableLoft
+sunExposure
+}
+
+class Legacy_System_Files {
+}
+
+
+System_Administrator --> Legacy_System_Files
+Legacy_System_Files "1" --> "0..*" Announcement : contains
+
+Property --|> Residence
+Property --|> Land
+Residence --|> Apartment
+Residence --|> House
+Request --> Property : contains
+Announcement --> Request : contains
+
+
+@enduml

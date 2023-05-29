@@ -1,0 +1,22 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US013 - System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Network Manager" as NM
+participant ":System" as System
+
+activate NM
+
+    NM -> System : asks to display list of all employees
+
+    activate System
+
+        System --> NM : shows list of all employess
+    deactivate System
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+hide circle
+hide methods
+
+title US009 Domain Model
+
+class Client{
+name
+phoneNumber
+}
+
+class ListOfAnnouncements{
+annoucements
+}
+
+
+class Agent{
+}
+
+class Message{
+date
+timeSlot
+}
+
+
+Client "1" -- "1" ListOfAnnouncements : choose one of >
+Client "1" -- "1" Message : send >
+Message "1" -- "1" Agent : recive <
+
+
+
+
+
+@enduml

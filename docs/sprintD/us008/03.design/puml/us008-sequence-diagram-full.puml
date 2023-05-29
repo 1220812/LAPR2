@@ -1,0 +1,210 @@
+
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Agent" as AGENT
+participant ":SeeRequestsUI" as UI
+participant ":PublishRequestsController" as CTRL
+participant ":Repositories" as REP
+participant ":Announcement" as ANCMT
+participant "repositories\n:Repository" as PLAT
+participant "RequestsRepository\n:RequestsRepository" as RequestsREP
+participant "AnnouncementRepository\n:AnnouncementRepository" as AnnouncementREP
+
+
+activate AGENT
+
+        AGENT -> UI : asks to see the list of property announcement requests made to myself
+
+        activate UI
+
+            create CTRL
+            UI -> CTRL** : create
+
+            UI -> CTRL : getRequestsList()
+            activate CTRL
+
+                CTRL -> REP : getInstance()
+                activate REP
+
+                    REP --> CTRL: repositories
+                deactivate REP
+
+                CTRL -> PLAT : getRequestsRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: requestsRepository
+                deactivate PLAT
+
+                CTRL -> RequestsREP : getRequests()
+                activate RequestsREP
+
+                    RequestsREP --> CTRL : requestsList
+                deactivate RequestsREP
+
+                CTRL --> UI : requestsList
+            deactivate CTRL
+
+            UI --> AGENT : shows the list of property announcement requests
+        deactivate UI
+
+    AGENT -> UI : selects one of the property announcement requests
+    activate UI
+    UI -> CTRL : getRequestInfo(request)
+    activate CTRL
+
+    CTRL --> UI : requestInfo
+    deactivate CTRL
+
+        UI --> AGENT : shows request and asks if they want to publish
+    deactivate UI
+
+    AGENT -> UI : selects the option
+    activate UI
+
+    alt selects to publish
+
+
+    UI --> AGENT : requests comission type
+    deactivate UI
+    AGENT -> UI : selects comission type
+    activate UI
+    UI -> CTRL : saveDataComissionType(comissionType)
+    activate CTRL
+    CTRL --> UI : data saved
+    deactivate CTRL
+    alt comission is a percentage
+    UI --> AGENT : requests comission percentage
+    deactivate UI
+    AGENT -> UI : types comission
+    activate UI
+    UI -> CTRL : saveDataComission(comission)
+    activate CTRL
+    CTRL --> UI : data saved
+    deactivate CTRL
+
+
+    end alt
+
+    alt comission is a value
+    UI --> AGENT : requests comission value
+    deactivate UI
+    AGENT -> UI : types comission
+    activate UI
+    UI -> CTRL : saveDataComission(comission)
+    activate CTRL
+    CTRL --> UI : data saved
+    deactivate CTRL
+    end alt
+    UI --> AGENT : shows all the data and asks for confirmation
+    deactivate UI
+    AGENT -> UI : confirms publishment
+    activate UI
+    UI -> CTRL : createAnnouncement()
+    activate CTRL
+    CTRL -> ANCMT** : create()
+    CTRL -> ANCMT : createAnnouncement()
+    activate ANCMT
+    ANCMT --> CTRL : announcement created
+    deactivate ANCMT
+    CTRL -> ANCMT : setDate(date)
+    activate ANCMT
+    ANCMT --> CTRL : announcement created sucessfully
+    deactivate ANCMT
+
+    CTRL --> UI : announcement creted sucessfully
+    deactivate CTRL
+    UI -> CTRL : addAnnouncement()
+    activate CTRL
+    CTRL -> REP : getInstance()
+                    activate REP
+
+                        REP --> CTRL: repositories
+                    deactivate REP
+
+                    CTRL -> PLAT : getAnnouncementRepository()
+                    activate PLAT
+
+                        PLAT --> CTRL: announcementRepository
+                    deactivate PLAT
+
+                    CTRL -> AnnouncementREP : addAnnouncement()
+                    activate AnnouncementREP
+
+                        AnnouncementREP --> CTRL : addAnnouncement
+                    deactivate AnnouncementREP
+
+                    CTRL --> UI : announcement added
+                deactivate CTRL
+                 UI -> CTRL : saveEmail()
+                 activate CTRL
+                 CTRL --> UI : email saved
+                 deactivate CTRL
+                 UI --> AGENT : announcement created sucessfully
+
+
+
+
+    end alt
+
+    alt selects to decline
+
+    UI --> AGENT : asks to type a justification
+    deactivate UI
+    AGENT -> UI : types justification
+    activate UI
+    UI -> CTRL : saveEmail()
+    activate CTRL
+    CTRL --> UI : email saved
+    deactivate CTRL
+    UI --> AGENT : shows all the data and asks for confirmation
+    deactivate UI
+    AGENT -> UI : confirms information
+    activate UI
+    UI -> CTRL : excludeRequest(request)
+            activate CTRL
+
+                CTRL -> REP : getInstance()
+                activate REP
+
+                    REP --> CTRL: repositories
+                deactivate REP
+
+                CTRL -> PLAT : getRequestsRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: requestsRepository
+                deactivate PLAT
+
+                CTRL -> RequestsREP : excludeRequest(request)
+                activate RequestsREP
+
+                    RequestsREP --> CTRL : request deleted
+                deactivate RequestsREP
+
+                CTRL --> UI : request excluded
+            deactivate CTRL
+            UI --> AGENT : request declined sucessfully
+            deactivate UI
+    end alt
+
+
+
+
+
+
+
+
+
+
+
+
+
+deactivate AGENT
+
+@enduml
