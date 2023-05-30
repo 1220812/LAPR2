@@ -15,7 +15,7 @@ public class Agency {
     /**
      * agency address
      */
-    private PropertyAddress propertyAddress;
+    private Address address;
     /**
      * agency email address
      */
@@ -32,7 +32,7 @@ public class Agency {
 
     private static final String DEFAULT_DESIGNATION = "no agency designation";
 
-    private static final PropertyAddress DEFAULT_ADRESS = new PropertyAddress();
+    private static final Address DEFAULT_ADRESS = new Address();
 
     private static final String DEFAULT_EMAILADRESS = "no agency email";
 
@@ -43,22 +43,22 @@ public class Agency {
      * This method creates an agency instance with id, designation, address, emailAddress, phoneNumber and administrator
      * @param id agency id
      * @param designation agency designation
-     * @param propertyAddress agency address
+     * @param address agency address
      * @param emailAddress agency email address
      * @param phoneNumber agency phone number
      */
 
-    public Agency(int id, String designation, PropertyAddress propertyAddress, String emailAddress, String phoneNumber){
+    public Agency(int id, String designation, Address address, String emailAddress, String phoneNumber){
         this.id = id;
         this.designation = designation;
-        this.propertyAddress = propertyAddress;
+        this.address = address;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
     }
 
     public Agency(){
         designation = DEFAULT_DESIGNATION;
-        propertyAddress = DEFAULT_ADRESS;
+        address = DEFAULT_ADRESS;
         phoneNumber = DEFAULT_PHONENUMBER;
         emailAddress = DEFAULT_EMAILADRESS;
         id = DEFAULT_ID;
@@ -120,7 +120,7 @@ public class Agency {
         return "Agency{" +
                 "id=" + id +
                 ", designation='" + designation + '\'' +
-                ", address=" + propertyAddress +
+                ", address=" + address +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 '}';
@@ -131,10 +131,10 @@ public class Agency {
      * @return a clone of the agency object
      */
 
-    public Agency clone(){ return new Agency(this.id, this.designation, this.propertyAddress, this.emailAddress, this.phoneNumber); }
+    public Agency clone(){ return new Agency(this.id, this.designation, this.address, this.emailAddress, this.phoneNumber); }
 
-    public PropertyAddress getAddress() {
-        return propertyAddress;
+    public Address getAddress() {
+        return address;
     }
 
     public int getId() {
@@ -149,8 +149,8 @@ public class Agency {
         return emailAddress;
     }
 
-    public void setAddress(PropertyAddress propertyAddress) {
-        this.propertyAddress = propertyAddress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setDesignation(String designation) {

@@ -10,7 +10,7 @@ public class RegisterStoreUI implements Runnable {
 
     int ID = 0;
 
-    int phoneNumber = 0;
+    String phoneNumber = "000-000-000";
 
     Address address = null;
 
@@ -40,17 +40,15 @@ public class RegisterStoreUI implements Runnable {
         }
 
 
-        phoneNumber=Utils.readIntegerFromConsole("Phone number");
+        phoneNumber=Utils.readLineFromConsole("Phone number:");
         while (!controller.checkPhone(phoneNumber)){
-            phoneNumber=Utils.readIntegerFromConsole("Invalid phone number\nInsert new phone number");
+            phoneNumber=Utils.readLineFromConsole("Invalid phone number\nInsert new phone number");
         }
 
 
         address= Utils.listAndSelectOne(controller.getAddresses());
         if (address==null) return;
         System.out.println(address);
-
-
         System.out.println(controller.RegisterStore(designation, emailAddress, phoneNumber,address, ID));
         System.out.println("Operation sucess");
 

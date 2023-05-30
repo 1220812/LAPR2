@@ -7,17 +7,17 @@ import java.util.Objects;
 public class Store {
     private String designation;
     private Address address;
-    private int phoneNumber;
+    private String phoneNumber;
     private String emailAddress;
     private int ID;
 
     private static final int DEFAULT_ID = 0;
     private static final String DEFAULT_DESIGNATION = "no store designation";
-    private static final Address DEFAULT_ADRESS = new Address(null, null, null , null, null);
+    private static final Address DEFAULT_ADRESS = new Address();
     private static final String DEFAULT_EMAILADRESS = "no store email";
-    private static final int DEFAULT_PHONENUMBER = 0;
+    private static final String DEFAULT_PHONENUMBER = "000-000-000";
 
-    public Store(String designation, Address address, int phoneNumber, String emailAddress, int ID) {
+    public Store(String designation, Address address, String phoneNumber, String emailAddress, int ID) {
         this.designation = designation;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -62,11 +62,11 @@ public class Store {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -118,7 +118,7 @@ public class Store {
         return new Store (this.designation, this.address, this.phoneNumber, this.emailAddress, this.ID);
     }
 
-    public static Store newStore(String designation, String emailAddress, int phoneNumber, Address address, int ID){
+    public static Store newStore(String designation, String emailAddress, String phoneNumber, Address address, int ID){
        return StoreRepository.createStore(designation, emailAddress, phoneNumber, address, ID);
 
     }

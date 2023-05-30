@@ -14,7 +14,7 @@ public class RegisterStoreController {
         return (Employee.existsEmail(email));
     }
 
-    public boolean checkPhone(int phoneNumber){
+    public boolean checkPhone(String phoneNumber){
         return Employee.existsPhone(phoneNumber);
     }
 
@@ -27,7 +27,7 @@ public class RegisterStoreController {
         return Repositories.getInstance().getAddressRepository().getAddressList();
     }
 
-    public Store RegisterStore(String desigantion, String emailAddress, int phoneNumber, Address address, int ID){
+    public Store RegisterStore(String desigantion, String emailAddress, String phoneNumber, Address address, int ID){
         return  StoreRepository.createStore(desigantion, emailAddress, phoneNumber, address, ID);
 
     }

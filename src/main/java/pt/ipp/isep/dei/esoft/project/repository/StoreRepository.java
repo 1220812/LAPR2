@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.PropertyAddress;
 import pt.ipp.isep.dei.esoft.project.domain.Store;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class StoreRepository {
         return List.copyOf(this.storeList);
     }
 
-    public static Store createStore(String designation, String emailAddress, int phoneNumber, Address address, int ID) {
+    public static Store createStore(String designation, String emailAddress, String phoneNumber, Address address, int ID) {
         Store store = new Store (designation, address, phoneNumber, emailAddress, ID);
         addStore(store);
         return store;

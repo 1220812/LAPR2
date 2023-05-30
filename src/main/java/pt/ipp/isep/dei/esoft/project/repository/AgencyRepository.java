@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Agent;
-import pt.ipp.isep.dei.esoft.project.domain.PropertyAddress;
+import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Agency;
 
 import java.util.ArrayList;
@@ -37,8 +36,8 @@ public class AgencyRepository {
         return List.copyOf(this.agencyList);
     }
 
-    public static Agency CreateAgency (int id, String designation, PropertyAddress propertyAddress, String emailAddress, String phoneNumber){
-        return new Agency(id, designation, propertyAddress, emailAddress, phoneNumber);
+    public static Agency CreateAgency (int id, String designation, Address address, String emailAddress, String phoneNumber){
+        return new Agency(id, designation, address, emailAddress, phoneNumber);
     }
 
 

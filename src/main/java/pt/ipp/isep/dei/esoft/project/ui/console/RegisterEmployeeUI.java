@@ -2,9 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterEmployeeController;
-import pt.ipp.isep.dei.esoft.project.application.session.UserSession;
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.ipp.isep.dei.esoft.project.repository.AgentRepository;
 import pt.ipp.isep.dei.esoft.project.repository.NetworkManagerRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
@@ -52,7 +50,7 @@ public class RegisterEmployeeUI implements Runnable {
         }
 
         phone = Utils.readLineFromConsole("Phone number:");
-        while (!controller.checkPhone(Integer.parseInt(phone))) {
+        while (!controller.checkPhone(phone)) {
             phone = Utils.readLineFromConsole("Invalid Phone number (format: xxxxxxxxxx) \nInsert new phone number: ");
         }
         inputTax = String.valueOf(taxNumber);

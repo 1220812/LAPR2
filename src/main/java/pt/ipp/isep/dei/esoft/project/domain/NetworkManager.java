@@ -74,7 +74,6 @@ public class NetworkManager {
     public Address getAddress() {
         return address;
     }
-
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -94,8 +93,6 @@ public class NetworkManager {
     public void setAgency(Agency agency) {
         this.agency = agency;
     }
-
-
 
     public String getPass() {
         return pass;

@@ -39,7 +39,7 @@ public class RegisterEmployeeController {
      * @param pass               the pass
      * @return the employee
      */
-    public Employee RegisterEmployee(String name, String email, String phone, PassportCardNumber passportCardNumber,TaxNumber taxNumber, Address propertyAddress, Role role, Agency agency, Store store, String pass) {
+    public Employee RegisterEmployee(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address propertyAddress, Role role, Agency agency, Store store, String pass) {
         pass = PasswordGenerator.generatePassword();
         return Employee.newEmployee(name, email, phone, passportCardNumber, taxNumber, propertyAddress, role, agency, store, pass);
     }
@@ -93,7 +93,7 @@ public class RegisterEmployeeController {
      * @param phone the phone
      * @return the boolean
      */
-    public boolean checkPhone(int phone) {
+    public boolean checkPhone(String phone) {
        return Employee.existsPhone(phone);
 
     }
@@ -135,7 +135,7 @@ public class RegisterEmployeeController {
 
     }
 
-    public NetworkManager RegisterNetworkManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency,  String pass) {
+    public NetworkManager RegisterNetworkManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, String pass) {
         return  NetworkManagerRepository.createNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
 
     }

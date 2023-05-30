@@ -68,15 +68,12 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_AGENT, AuthenticationController.ROLE_AGENT);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_CLIENT, AuthenticationController.ROLE_CLIENT);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_NETWORK_MANAGER, AuthenticationController.ROLE_NETWORK_MANAGER);
-
-
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin", AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserWithRole("Agent", "agent@this.app", "agent", AuthenticationController.ROLE_AGENT);
         authenticationRepository.addUserWithRole("Owner", "owner@this.app", "owner", AuthenticationController.ROLE_OWNER);
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd", AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserWithRole("Client", "client@this.app", "client", AuthenticationController.ROLE_CLIENT);
         authenticationRepository.addUserWithRole("Network Manager", "networkManager@this.app", "network", AuthenticationController.ROLE_NETWORK_MANAGER);
-
     }
 
     private void addAddresses() {
@@ -89,9 +86,9 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", state1, district1, city1, "12345");
-        Address address2 = new Address("Street B", state2, district2, city2, "12346");
-        Address address3 = new Address("Street C", state1, district3, city2, "12347");
+        Address address1 = new Address("Street A", "12345", state1, district1, city1);
+        Address address2 = new Address("Street B", "12346",state2, district2, city2);
+        Address address3 = new Address("Street C", "12347",state1, district3, city2);
         addressRepository.add(address1);
         addressRepository.add(address2);
         addressRepository.add(address3);
@@ -177,20 +174,21 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address3 = new Address("Street C", state1, district3, city2, "12347");
-        Address address1= new Address("Street2",state2,district1, city1, "98765");
+        Address address1 = new Address("Street A", "12345", state1, district1, city1);
+        Address address2 = new Address("Street B", "12346",state2, district2, city2);
+        Address address3 = new Address("Street C", "12347",state1, district3, city2);
 
         List<Photographs> photo = new ArrayList<>();
 
         Store store1 = new Store("Company", 1);
         TaxNumber taxNumber1 = new TaxNumber("987654321");
         PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
-        Agent agent1 = new Agent("João", "987654321", "Joao@this.app", address3, taxNumber1, passportCardNumber1);
+        Agent agent1 = new Agent("João", "987654321", "Joao@this.app", address1, taxNumber1, passportCardNumber1);
 
         RequestType requestType1 = new RequestType("Sell");
         RequestType requestType2 = new RequestType("Rent");
 
-        PropertyAddress propertyAddress1 = new PropertyAddress("Sesame Street", "12345", state1, district1, city1);
+        Address propertyAddress1 = new Address("Sesame Street", "12345", state1, district1, city1);
         Property property1 = new Property(200.3, 200.6, address3, 2000000, photo, store1, agent1,requestType1);
         Property property2 = new Property(100.0, 150.0, address1, 3450000, photo, store1, agent1,requestType2);
 
@@ -226,8 +224,9 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", state1, district1, city1, "12345");
-
+        Address address1 = new Address("Street A", "12345", state1, district1, city1);
+        Address address2 = new Address("Street B", "12346",state2, district2, city2);
+        Address address3 = new Address("Street C", "12347",state1, district3, city2);
         Owner owner1 = new Owner("Joao", "987654321", "joao@this.app", address1, taxNumber1, passportCardNumber1);
         ownerRepository.add(owner1);
     }
@@ -284,9 +283,9 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", state1, district1, city1, "12345");
-        Address address3 = new Address("Street C", state1, district3, city2, "12347");
-        Address address2 = new Address("Street B", state2, district2, city2, "12345");
+        Address address1 = new Address("Street A", "12345", state1, district1, city1);
+        Address address2 = new Address("Street B", "12346",state2, district2, city2);
+        Address address3 = new Address("Street C", "12347",state1, district3, city2);
         Property property1 = new Property(10, 100, address1, 10000, photos1, requestType1);
         Property property2 = new Property(20, 200, address2, 20000, photos2, requestType2);
         Property property3 = new Property(30, 300, address3, 30000, photos3, requestType3);
@@ -327,19 +326,16 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", state1, district1, city1, "12345");
-
-
+        Address address1 = new Address("Street A", "12345", state1, district1, city1);
+        Address address2 = new Address("Street B", "12346",state2, district2, city2);
+        Address address3 = new Address("Street C", "12347",state1, district3, city2);
         TaxNumber taxNumber1 = new TaxNumber("987654321");
         PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
         Agent agent1 = new Agent("João", "987654321", "Joao@this.app", address1, taxNumber1, passportCardNumber1);
         agentRepository.add(agent1);
-
-        Address address2 = new Address("Street B", state2, district2, city2, "12345");
         TaxNumber taxNumber2 = new TaxNumber("123456789");
         PassportCardNumber passport2 = new PassportCardNumber("12345678");
         Agent agent2 = new Agent("Agent", "987654321", "agent@this.app", address2, taxNumber2, passport2);
         agentRepository.add(agent2);
-
     }
 }

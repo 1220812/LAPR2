@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import javax.annotation.processing.SupportedAnnotationTypes;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

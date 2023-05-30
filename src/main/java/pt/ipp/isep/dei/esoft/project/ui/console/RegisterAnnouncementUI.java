@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +7,6 @@ import java.util.Scanner;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterAnnouncementController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Photographs;
-import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 public class RegisterAnnouncementUI implements Runnable {

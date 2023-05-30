@@ -362,8 +362,8 @@ public class Employee {
      * @param phone the phone number of the employee
      * @return boolean
      */
-    public static boolean existsPhone(int phone) {
-        if (phone < 100000000 || phone > 1000000000) {
+    public static boolean existsPhone(String phone) {
+        if (phone.length() < 100000000 || phone.length() > 1000000000) {
             return false;
         } else {
             return true;

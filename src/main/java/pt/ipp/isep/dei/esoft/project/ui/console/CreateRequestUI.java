@@ -24,7 +24,6 @@ public class CreateRequestUI implements Runnable {
     int numberOfBedrooms = 0;
 
     int numberOfParkingSpaces = 0;
-    Address address = null;
 
     int numberOfPhotos = 0;
 
@@ -35,18 +34,13 @@ public class CreateRequestUI implements Runnable {
     Agent agent = null;
 
     Store store = null;
-    RequestType requestType = null;
-
     SunExposure sunExposure = null;
     private List<Photographs> photographs = new ArrayList<>();
     List<AvailableEquipment> availableEquipment = new ArrayList<>();
-    PropertyType propertyType = null;
     String photoURI = null;
     int contractDuration = 0;
     String streetAddress = null;
-    State state = null;
-    District district = null;
-    City city = null;
+
     String zipCode = null;
 
     public void run() {
@@ -59,7 +53,7 @@ public class CreateRequestUI implements Runnable {
         District district = new District(Utils.readLineFromConsole("Insert the district: "));
         City city = new City(Utils.readLineFromConsole("Insert the city: "));
         numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
-        Address address = new Address(streetAddress, state, district, city, zipCode);
+        Address address = new Address(streetAddress,zipCode, state, district, city);
         while (numberOfPhotos < 1 || numberOfPhotos > 30) {
             System.out.println("please insert a number between 1 and 30");
             numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
@@ -73,7 +67,7 @@ public class CreateRequestUI implements Runnable {
         store = Utils.listAndSelectOne(controller.getStores());
         agent = Utils.listAndSelectOne(controller.getAgent());
         RequestType requestType = Utils.listAndSelectOne(controller.getRequestTypeList());
-        String requestedType = null;
+        String requestedType;
         requestedType = requestType.toString();
         System.out.println(requestedType);
         if(requestedType.equals("Rent")){

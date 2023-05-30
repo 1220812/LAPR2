@@ -44,7 +44,7 @@ public class Property {
      * @param price price of the property
      */
 
-    public Property(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList, Store store,Agent agent,RequestType requestType) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList, Store store, Agent agent, RequestType requestType) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)
@@ -64,7 +64,7 @@ public class Property {
         this.requestType=requestType;
     }
 
-    public Property(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList,RequestType requestType) {
+    public Property(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList, RequestType requestType) {
         if (area <= 0)
             throw new IllegalArgumentException("Inserted value for area must be greater than 0");
         if (distanceFromTheCityCentre <= 0)

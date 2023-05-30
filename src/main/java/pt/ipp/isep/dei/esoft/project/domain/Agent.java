@@ -179,7 +179,7 @@ public class Agent{
      * @param emailAddress email address of the owner
      */
 
-    public Agent(String name, String phoneNumber, String emailAddress,Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+    public Agent(String name, String phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
@@ -220,10 +220,6 @@ public class Agent{
                 ", pass='" + pass + '\'' +
                 '}';
     }
-
-
-
-
     /**
      * Textual representation of an instance of Owner
      */
@@ -236,7 +232,7 @@ public class Agent{
      */
     public Agent clone(){ return new Agent(this.name,this.phoneNumber, this.emailAddress,this.address,this.taxNumber,this.passportCardNumber); }
 
-    public static Agent newAgent(String name, String phoneNumber, String emailAddress,Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+    public static Agent newAgent(String name, String phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         Agent newAgent = newAgent(name, phoneNumber, emailAddress, address, taxNumber, passportCardNumber);
         return newAgent;
     }

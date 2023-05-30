@@ -1,0 +1,72 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+hide circle
+hide methods
+
+title US017 - Domain Model
+class Address{
+streetAddress
+zipCode
+}
+
+class State{
+stateName
+}
+
+class District{
+districtName
+}
+
+class City{
+cityName
+}
+
+class Agent{
+name
+phoneNumber
+emailAddress
+pass
+}
+
+class Employee{
+name
+emailAddress
+phoneNumber
+}
+
+class NetworkManager{
+name
+emailAddress
+phoneNumber
+}
+
+class TaxNumber{
+taxNumber
+}
+
+class PassportCardNumber{
+passportCardNumber
+}
+
+class Store{
+designation
+phoneNumber
+emailAddress
+ID
+}
+
+class Role{
+description
+}
+
+Property{
+
+}
+
+
+@enduml
