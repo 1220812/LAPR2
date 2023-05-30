@@ -134,4 +134,9 @@ public class RegisterEmployeeController {
         return  AgentRepository.createAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
 
     }
+
+    public NetworkManager RegisterNetworkManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency,  String pass) {
+        return  NetworkManagerRepository.createNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
+
+    }
 }

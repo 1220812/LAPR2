@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.application.controller.RegisterEmployeeCont
 import pt.ipp.isep.dei.esoft.project.application.session.UserSession;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.AgentRepository;
+import pt.ipp.isep.dei.esoft.project.repository.NetworkManagerRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.Scanner;
@@ -98,6 +99,12 @@ public class RegisterEmployeeUI implements Runnable {
                 System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
                 controller.getUserRepository();
                 controller.sendRegisteredUserEmail(email, pass);
+                System.out.println("ºjoeçblpw+eó'fihpk-wd");
+                controller.RegisterNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
+                System.out.println(NetworkManagerRepository.getNetworkManagerList());
+
+
+
                 System.out.println();
                 System.out.println("####### Operation sucess ######");
 
