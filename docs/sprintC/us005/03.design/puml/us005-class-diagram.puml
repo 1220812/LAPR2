@@ -101,10 +101,6 @@ RegisterStoreUI .> RegisterStoreController
 
 RegisterStoreController .> Repositories : repositories
 
-Repositories -> "1" StoreRepository
-Repositories -> "1" StateRepository
-Repositories -> "1" DistrictRepository
-Repositories -> "1" CityRepository
 
 RegisterStoreController ..> Store
 RegisterStoreController ..> OrganizationRepository : organizationRepository
