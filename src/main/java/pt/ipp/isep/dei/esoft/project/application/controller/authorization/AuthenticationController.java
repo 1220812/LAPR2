@@ -17,6 +17,7 @@ public class AuthenticationController {
     public static final String ROLE_CLIENT = "CLIENT";
 
     public static final String ROLE_AGENT = "AGENT";
+    public static final String ROLE_NETWORK_MANAGER ="NETWORK MANAGER" ;
     //private final ApplicationSession applicationSession;
     private final AuthenticationRepository authenticationRepository;
 

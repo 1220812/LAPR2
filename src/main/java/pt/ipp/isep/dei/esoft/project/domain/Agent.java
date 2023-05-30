@@ -29,6 +29,57 @@ public class Agent{
      * address of the agent
      */
     private Address address;
+    private Role role;
+    private Agency agency;
+    private Store store;
+    private String pass;
+
+    public Agent(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
+        this.name=name;
+        this.emailAddress=email;
+        this.phoneNumber=phone;
+        this.passportCardNumber=passportCardNumber;
+        this.taxNumber=taxNumber;
+        this.address=address;
+        this.role=role;
+        this.agency=agency;
+        this.store=store;
+        this.pass=pass;
+
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Agency getAgency() {
+        return agency;
+    }
+
+    public void setAgency(Agency agency) {
+        this.agency = agency;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
     /**
      * Method that shows the phone number
      * @return phone number
@@ -154,14 +205,30 @@ public class Agent{
         return Objects.hash(name, phoneNumber, emailAddress, taxNumber, passportCardNumber, address);
     }
 
+    @Override
+    public String toString() {
+        return "Agent{" +
+                "name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", taxNumber=" + taxNumber +
+                ", passportCardNumber=" + passportCardNumber +
+                ", address=" + address +
+                ", role=" + role +
+                ", agency=" + agency +
+                ", store=" + store +
+                ", pass='" + pass + '\'' +
+                '}';
+    }
+
+
+
+
     /**
      * Textual representation of an instance of Owner
      */
     @Override
-    public String toString() {
-        return "Agent:" +
-                "name=" + name;
-    }
+
 
     /**
      * This method creates a new instance of the agent object and initializes its attributes with the exact same values of the original object

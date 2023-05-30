@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
-import pt.ipp.isep.dei.esoft.project.ui.console.CreateRequestUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.PostAnnouncementRequestUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.OrderDecisionUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.RegisterAnnouncementUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -18,6 +15,9 @@ public class AgentUI implements Runnable {
         options.add(new MenuItem("US 002 - Register announcement", new RegisterAnnouncementUI()));
         options.add(new MenuItem("US 008 - Post announcement request", new PostAnnouncementRequestUI()));
         options.add(new MenuItem("US 011 - list real estate purchase orders", new OrderDecisionUI()));
+        options.add(new MenuItem("US 015 - List all booking requests", new ListUI()));
+
+
 
         int option = 0;
         do {

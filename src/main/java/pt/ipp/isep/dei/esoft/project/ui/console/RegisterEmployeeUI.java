@@ -2,7 +2,10 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterEmployeeController;
+import pt.ipp.isep.dei.esoft.project.application.session.UserSession;
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.repository.AgentRepository;
+import pt.ipp.isep.dei.esoft.project.repository.NetworkManagerRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.Scanner;
@@ -13,11 +16,11 @@ public class RegisterEmployeeUI implements Runnable {
     Address address = null;
     String phone = null;
     String email = null;
-    String passportCardNumber = null;
+    PassportCardNumber passportCardNumber = null;
     int zipCode = 0;
     City city = null;
 
-    String taxNumber = null;
+    TaxNumber taxNumber = null;
     String pass = null;
     District district = null;
     String street = null;
@@ -34,10 +37,9 @@ public class RegisterEmployeeUI implements Runnable {
 
         Scanner Input = new Scanner(System.in);
 
-        String inputStore = null;
-        String inputRole = null;
-        String inputAgency = null;
-
+        String inputRole;
+        String inputTax;
+        String inputpassport;
 
         name = Utils.readLineFromConsole("Employee name:");
         while (name.trim().isEmpty()) {
@@ -53,15 +55,15 @@ public class RegisterEmployeeUI implements Runnable {
         while (!controller.checkPhone(Integer.parseInt(phone))) {
             phone = Utils.readLineFromConsole("Invalid Phone number (format: xxxxxxxxxx) \nInsert new phone number: ");
         }
-
-        taxNumber = Utils.readLineFromConsole("tax number:");
-        while (!controller.checkTaxNumber(taxNumber)) {
-            taxNumber = Utils.readLineFromConsole("Invalid tax number (format: xxxxxxxx) \nInsert new tax number: ");
+        inputTax = String.valueOf(taxNumber);
+        inputTax = Utils.readLineFromConsole("tax number:");
+        while (!controller.checkTaxNumber(inputTax)) {
+            inputTax = Utils.readLineFromConsole("Invalid tax number (format: xxxxxxxx) \nInsert new tax number: ");
         }
-
-        passportCardNumber = Utils.readLineFromConsole("Passport card number:");
-        while (!controller.checkPassportCardNumber(passportCardNumber)) {
-            passportCardNumber = Utils.readLineFromConsole("Invalid Passport card number (format: xxxxxxxx) \nInsert new passport card number number: ");
+        inputpassport = String.valueOf(passportCardNumber);
+        inputpassport = Utils.readLineFromConsole("Passport card number:");
+        while (!controller.checkPassportCardNumber(inputpassport)) {
+            inputpassport = Utils.readLineFromConsole("Invalid Passport card number (format: xxxxxxxx) \nInsert new passport card number number: ");
         }
 
         while (!controller.checkEmail(email)) {
@@ -97,12 +99,14 @@ public class RegisterEmployeeUI implements Runnable {
                 System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
                 controller.getUserRepository();
                 controller.sendRegisteredUserEmail(email, pass);
+                System.out.println("ºjoeçblpw+eó'fihpk-wd");
+                controller.RegisterNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
+                System.out.println(NetworkManagerRepository.getNetworkManagerList());
+
+
+
                 System.out.println();
                 System.out.println("####### Operation sucess ######");
-
-
-
-
 
 
             }
@@ -114,6 +118,9 @@ public class RegisterEmployeeUI implements Runnable {
 
         }
         System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
+        if (inputRole.equals("Agent")) {
+            controller.RegisterAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+        }
         controller.getUserRepository();
         controller.sendRegisteredUserEmail(email, pass);
         System.out.println();

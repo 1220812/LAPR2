@@ -1,9 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.ipp.isep.dei.esoft.project.repository.AgencyRepository;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.repository.RoleRepository;
+import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.util.List;
 
@@ -41,7 +39,7 @@ public class RegisterEmployeeController {
      * @param pass               the pass
      * @return the employee
      */
-    public Employee RegisterEmployee(String name, String email, String phone, String passportCardNumber, String taxNumber, Address propertyAddress, Role role, Agency agency, Store store, String pass) {
+    public Employee RegisterEmployee(String name, String email, String phone, PassportCardNumber passportCardNumber,TaxNumber taxNumber, Address propertyAddress, Role role, Agency agency, Store store, String pass) {
         pass = PasswordGenerator.generatePassword();
         return Employee.newEmployee(name, email, phone, passportCardNumber, taxNumber, propertyAddress, role, agency, store, pass);
     }
@@ -132,4 +130,13 @@ public class RegisterEmployeeController {
     }
 
 
+    public Agent RegisterAgent(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
+        return  AgentRepository.createAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+
+    }
+
+    public NetworkManager RegisterNetworkManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency,  String pass) {
+        return  NetworkManagerRepository.createNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
+
+    }
 }

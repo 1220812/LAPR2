@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.Agent;
-import pt.ipp.isep.dei.esoft.project.domain.Store;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.isep.lei.esoft.auth.UserSession;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
@@ -12,27 +10,29 @@ import java.util.Optional;
 
 public class AgentRepository {
 
-    private List<Agent> agentList = new ArrayList<>();
+    private static List<Agent> agentList = new ArrayList<>();
+
+    public static Agent createAgent(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
+        Agent agent = new Agent (name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+        addAgent(agent);
+        return agent;
+    }
 
     /**
      * Get stores.
      */
 
-    public void addAgent(Agent agent) {
+    public static void addAgent(Agent agent) {
         if (validateAgent(agent))
             agentList.add(agent);
     }
 
 
-    public List<Agent> getAgentList() {
-        return List.copyOf(this.agentList);
+    public static List<Agent> getAgentList() {
+        return List.copyOf(agentList);
     }
 
-//    public Store createAgent(String name,int phoneNumber, String emailAddress, int taxNumber, int passportCardNumber, Address address) {
-//        Store store = new Store (name, phoneNumber, emailAddress, taxNumber, passportCardNumber, address);
-//        addAgent(agent);
-//        return agent;
-//    }
+
 
     public List<Agent> add(Agent agent) throws CloneNotSupportedException {
 
@@ -52,7 +52,7 @@ public class AgentRepository {
         return agentList;
     }
 
-    private boolean validateAgent(Agent agent) {
+    private static boolean validateAgent(Agent agent) {
         boolean isValid = !agentList.contains(agent);
         return isValid;
     }
