@@ -160,13 +160,7 @@ public class Agent{
     @Override
     public String toString() {
         return "Agent:" +
-                "name='" + name + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", taxNumber=" + taxNumber +
-                ", passportCardNumber=" + passportCardNumber +
-                ", address=" + address +
-                '}';
+                "name=" + name;
     }
 
     /**

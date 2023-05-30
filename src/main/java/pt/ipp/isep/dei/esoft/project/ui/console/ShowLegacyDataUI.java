@@ -53,7 +53,7 @@ public class ShowLegacyDataUI implements Runnable {
             } while (flag);
             if (answer.equals("Yes")) {
                 try {
-                    controller.importInformationFromFile(path);
+                   // controller.importInformationFromFile(path);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Trouble with the file");
                     flag = true;
