@@ -35,9 +35,9 @@ class Address {
     doorNumber
 }
 
-Address "1" -- "1" City : in >
-City "1" -- "1" State : in >
-State "1" -- "1" District : in >
-Store "1" -- "1" Address : has an >
+Address -- City : in >
+City --  State : in >
+State  --  District : in >
+Store "1" --  Address : has an >
 
 @enduml
