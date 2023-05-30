@@ -37,12 +37,12 @@ public class Employee {
      * @param store              The store of the employee.
      * @param pass               The password of the employee.
      */
-    public Employee(String name, String email, String phoneNumber, String passportCardNumber, String taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
+    public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.passportCardNumber = new PassportCardNumber(passportCardNumber);
-        this.taxNumber = new TaxNumber(taxNumber);
+        this.passportCardNumber = passportCardNumber;
+        this.taxNumber = taxNumber;
         this.address = address;
         this.role = role;
         this.agency = agency;
@@ -100,7 +100,7 @@ public class Employee {
      * @param pass               the password for the employee account
      * @return a new Employee object with the given information
      */
-    public static Employee newEmployee(String name, String email, String phoneNumber, String passportCardNumber, String taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
+    public static Employee newEmployee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         Employee newEmployee = new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
         return newEmployee;
     }
