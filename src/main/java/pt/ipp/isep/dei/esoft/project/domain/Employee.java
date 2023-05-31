@@ -263,6 +263,19 @@ public class Employee {
     }
 
     /**
+     * Gets store.
+     *
+     * @return the store
+     */
+    public String getStoreName() {
+        if (store != null) {
+            return store.getDesignation();
+        }
+        return "";
+    }
+
+
+    /**
      * Sets store.
      *
      * @param store the store
