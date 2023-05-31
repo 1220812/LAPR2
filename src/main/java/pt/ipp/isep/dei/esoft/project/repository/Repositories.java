@@ -14,6 +14,7 @@ public class Repositories {
     // Added after by the Team
 
     private final RoleRepository roleRepository = new RoleRepository();
+    private final EmployeeRepository employeeRepository = new EmployeeRepository();
 
     /**
      * Creating the object agencyRepository
@@ -107,6 +108,9 @@ public class Repositories {
      */
     public RoleRepository getRoleRepository() {
         return roleRepository;
+    }
+    public EmployeeRepository getEmployeeRepository(){
+        return employeeRepository;
     }
 
     /**
