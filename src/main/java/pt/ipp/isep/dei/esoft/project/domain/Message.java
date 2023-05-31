@@ -16,6 +16,8 @@ public class Message {
     private String name;
     private int phone;
 
+    private int inputAnnou;
+
     /**
      * Instantiates a new Message.
      *
@@ -35,11 +37,12 @@ public class Message {
      * @param name     the name
      * @param phone    the phone
      */
-    public Message(LocalDate date, String schedule, String name, int phone) {
+    public Message(LocalDate date, String schedule, String name, int phone,int inputAnnou ) {
         this.date = date;
         this.schedule = schedule;
         this.name=name;
         this.phone=phone;
+        this.inputAnnou=inputAnnou;
     }
 
     /**
@@ -78,6 +81,30 @@ public class Message {
         this.schedule = schedule;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
+    public int getInputAnnou() {
+        return inputAnnou;
+    }
+
+    public void setInputAnnou(int inputAnnou) {
+        this.inputAnnou = inputAnnou;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -86,19 +113,22 @@ public class Message {
                 '}';
     }
 
-    /**
-     * To string 2 string.
-     *
-     * @return the string
-     */
+
     public String toString2() {
         return "Message{" +
                 "date=" + date +
                 ", schedule='" + schedule + '\'' +
                 ", name='" + name + '\'' +
                 ", phone=" + phone +
+                ", inputAnnou=" + inputAnnou +
                 '}';
     }
+    /**
+     * To string 2 string.
+     *
+     * @return the string
+     */
+
 
     /**
      * Create date local date.

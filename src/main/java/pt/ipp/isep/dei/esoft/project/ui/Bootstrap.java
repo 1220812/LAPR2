@@ -192,11 +192,18 @@ public class Bootstrap implements Runnable {
         Property property1 = new Property(200.3, 200.6, address3, 2000000, photo, store1, agent1,requestType1);
         Property property2 = new Property(100.0, 150.0, address1, 3450000, photo, store1, agent1,requestType2);
 
+        PropertyType p1 = new PropertyType("Land");
+        PropertyType p2 = new PropertyType("Apartment");
+        PropertyType p3 = new PropertyType("House");
 
-        Announcement announcement1 = new Announcement(property1, "2004/12/12", "per", 5, requestType1);
-        Announcement announcement2 =new Announcement(property2,"2020/04/04","per", 5, requestType2);
+
+        Announcement announcement1 = new Announcement(property1, "2004/12/12", "per", 5, requestType1,p1 );
+        Announcement announcement2 =new Announcement(property2,"2020/04/04","per", 5, requestType2, p2);
+        Announcement announcement3 =new Announcement(property2,"2021/02/03","per", 5, requestType2, p3);
+
         announcementRepository.addAnnouncement(announcement1);
         announcementRepository.addAnnouncement(announcement2);
+        announcementRepository.addAnnouncement(announcement3);
 
     }
 

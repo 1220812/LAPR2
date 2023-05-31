@@ -363,7 +363,7 @@ public class Employee {
      * @return boolean
      */
     public static boolean existsPhone(String phone) {
-        if (phone.length() < 100000000 || phone.length() > 1000000000) {
+        if (phone.length() < 9 || phone.length() > 10) {
             return false;
         } else {
             return true;
