@@ -11,10 +11,7 @@ public class ListEmployeesUI implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(controller.getEmployeeRepository());
-        System.out.println("awsas<dhf<befçefçv<sdfiv<sefçi<vefçiu");
-
-            System.out.println(controller.getEmployeeRepositorySortedAndGrouped());
+        System.out.println(controller.getEmployeeRepositorySortedAndGrouped());
 
     }
 }
