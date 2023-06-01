@@ -89,8 +89,8 @@ public class MessageRepository {
      * @param phone    the phone
      * @return the message
      */
-    public static Message addMessage(LocalDate date, String schedule, String name, int phone) {
-        Message message = new Message(date, schedule,name, phone);
+    public static Message addMessage(LocalDate date, String schedule, String name, int phone, int inputAnnou) {
+        Message message = new Message(date, schedule,name, phone, inputAnnou);
         addComplete(message);
         return message;
 

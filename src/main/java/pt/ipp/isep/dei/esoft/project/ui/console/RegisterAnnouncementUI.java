@@ -178,7 +178,7 @@ public class RegisterAnnouncementUI implements Runnable {
             else if (inputPropertyType.equals("House")) {
                 property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, price, photos, requestType);
             }
-            announcement = controller.createAnnouncement(property, date, comissionType, comission, requestType);
+            announcement = controller.createAnnouncement(property, date, comissionType, comission, requestType, propertyType);
             controller.registerAnnouncement(announcement);
             System.out.println("Announcement registed successfully");
         }

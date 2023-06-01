@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -47,8 +48,9 @@ public class RegisterEmployeeController {
     /**
      * Gets user repository.
      */
-    public void getUserRepository() {
-        Repositories.getInstance().getUserRepository().getEmployeeList();
+    public List<Employee> getUserRepository() {
+       return Repositories.getInstance().getUserRepository().getEmployeeList();
+
     }
 
     public List<Address> getAddresses(){

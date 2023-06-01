@@ -22,23 +22,23 @@ public class Announcement {
     private double comission;
 
     private RequestType requestType;
+    private PropertyType propertyType;
 
 
-    public Announcement(Property property, String date, String comissionType, double comission, RequestType requestType) {
+    public Announcement(Property property, String date, String comissionType, double comission, RequestType requestType, PropertyType propertyType) {
         this.property = property;
         this.date = date;
         this.comissionType = comissionType;
         this.comission = comission;
         this.requestType = requestType;
+        this.propertyType=propertyType;
     }
     public Announcement(Property property, String date){
         this.property = property;
         this.date = date;
     }
 
-//    public static List<Announcement> getSortedProperties() {
-//        return annoucement;
-//    }
+
 
     public String getDate() {
         return date;
@@ -72,19 +72,36 @@ public class Announcement {
         this.comissionType = comissionType;
     }
 
+    public RequestType getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(RequestType requestType) {
+        this.requestType = requestType;
+    }
+
+    public PropertyType getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(PropertyType propertyType) {
+        this.propertyType = propertyType;
+    }
+
     @Override
     public String toString() {
         return "Announcement{" +
-                "date=" + date +
+                "date='" + date + '\'' +
                 ", property=" + property +
                 ", comissionType='" + comissionType + '\'' +
                 ", comission=" + comission +
+                ", requestType=" + requestType +
+                ", propertyType=" + propertyType +
                 '}';
     }
 
-
     public Announcement clone(){
-        return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType);
+        return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType,this.propertyType);
     }
 
     public static boolean existsPrice(double price){

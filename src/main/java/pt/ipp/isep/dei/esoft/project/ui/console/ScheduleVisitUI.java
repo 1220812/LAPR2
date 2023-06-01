@@ -137,11 +137,11 @@ public class ScheduleVisitUI implements Runnable {
         }
 
         phone = Utils.readIntegerFromConsole("Phone number:");
-        while (!controller.checkPhone(phone)) {
+        while (!controller.checkPhone(String.valueOf(phone))) {
             phone = Utils.readIntegerFromConsole("Invalid Phone number (format: xxxxxxxxxx) \nInsert new phone number: ");
         }
 
-        System.out.println(controller.addMessage(date, schedule, name, phone).toString2());
+        System.out.println(controller.addMessage(date, schedule, name, phone, inputAnnou).toString2());
         System.out.println("Operation sucess");
     }
 }

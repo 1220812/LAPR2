@@ -78,8 +78,7 @@ public class RegisterEmployeeUI implements Runnable {
         if (role == null) return;
 
         inputRole = role.toString();
-        System.out.println(role);
-        System.out.println(inputRole);
+
         if (inputRole.equals("Agent") || inputRole.equals("Manager Network") || inputRole.equals("Store Manager")) {
 
             System.out.println("####### List of Agencies #######");

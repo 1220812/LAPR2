@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
+import pt.ipp.isep.dei.esoft.project.domain.PropertyType;
 import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -100,7 +101,7 @@ public class ScheduleVisitController {
      * @param phone the phone
      * @return the boolean
      */
-    public boolean checkPhone(int phone) {
+    public boolean checkPhone(String phone) {
         return Employee.existsPhone(phone);
     }
 
@@ -124,8 +125,8 @@ public class ScheduleVisitController {
      * @param phone    the phone
      * @return the message
      */
-    public Message addMessage(LocalDate date, String schedule, String name, int phone) {
-        return MessageRepository.addMessage(date, schedule, name, phone);
+    public Message addMessage(LocalDate date, String schedule, String name, int phone, int inputAnnou) {
+        return MessageRepository.addMessage(date, schedule, name, phone, inputAnnou);
     }
 
 }

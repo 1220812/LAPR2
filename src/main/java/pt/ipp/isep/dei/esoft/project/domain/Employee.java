@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
+import static pt.ipp.isep.dei.esoft.project.repository.EmployeeRepository.addNewEmployee;
+
 /**
  * The type Employee.
  */
@@ -102,6 +104,7 @@ public class Employee {
      */
     public static Employee newEmployee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         Employee newEmployee = new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
+        addNewEmployee(newEmployee);
         return newEmployee;
     }
 
@@ -260,6 +263,19 @@ public class Employee {
     }
 
     /**
+     * Gets store.
+     *
+     * @return the store
+     */
+    public String getStoreName() {
+        if (store != null) {
+            return store.getDesignation();
+        }
+        return "";
+    }
+
+
+    /**
      * Sets store.
      *
      * @param store the store
@@ -363,7 +379,7 @@ public class Employee {
      * @return boolean
      */
     public static boolean existsPhone(String phone) {
-        if (phone.length() < 100000000 || phone.length() > 1000000000) {
+        if (phone.length() < 9 || phone.length() > 10) {
             return false;
         } else {
             return true;
@@ -403,6 +419,7 @@ public class Employee {
             return true;
         }
     }
+
 
 
 }

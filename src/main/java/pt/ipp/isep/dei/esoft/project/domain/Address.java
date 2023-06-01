@@ -236,8 +236,7 @@ public class Address {
      */
     @Override
     public String toString() {
-        return "Address\n\tStreet='" + streetAddress + '\'' + "\n\tDoorNumber='" + doorNumber + "\n\tFloorNumber=" +
-                floorNumber + "\n\tPostalCode='" + zipCode + "\n\tState=" + state + "\n";
+        return "Address: " + "\nstate : "+state + "\ndistrict : "+district + "\ncity : "+city + "\ndistrict : "+district + "\nzipcode : "+zipCode + "\nstreet address: "+streetAddress + "\nfloor number : "+floorNumber + "\ndoor number : "+doorNumber;
     }
 
     /**
