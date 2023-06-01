@@ -59,5 +59,9 @@ public class RequestRepository {
         return assignedList;
     }
 
-    // public List<Request> sortListByDate(List<Request> list)
+    public List<Request> getRequestsSorted() {
+        requestList.sort(Comparator.comparing(Request::getRequestDate));
+        return requestList;
+    }
+
 }

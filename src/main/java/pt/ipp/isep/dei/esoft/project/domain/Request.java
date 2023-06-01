@@ -116,6 +116,9 @@ public class Request {
                 ", requestType=" + requestType +
                 ", agent=" + agent +
                 ", store=" + store +
+                ", owner=" + owner +
+                ", requestDate=" + requestDate +
+                ", property=" + property +
                 '}';
     }
 
