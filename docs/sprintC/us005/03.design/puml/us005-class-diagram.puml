@@ -2,7 +2,7 @@
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype polyline
+skinparam linetype orto
 'skinparam linetype orto
 
 skinparam classAttributeIconSize 0
@@ -101,12 +101,15 @@ RegisterStoreUI .> RegisterStoreController
 
 RegisterStoreController .> Repositories : repositories
 
-
 RegisterStoreController ..> Store
 RegisterStoreController ..> OrganizationRepository : organizationRepository
 RegisterStoreController ..> StoreRepository : StoreRepository
 
 Repositories --> "1" OrganizationRepository
+Repositories --> StoreRepository
+Repositories --> StateRepository
+Repositories --> DistrictRepository
+Repositories --> CityRepository
 
 OrganizationRepository --> "*" Organization
 

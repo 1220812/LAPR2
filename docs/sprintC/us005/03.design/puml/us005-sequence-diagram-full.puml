@@ -6,8 +6,8 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "System Administrator" as ADM
-participant ":RegisterStoreUI" as UI
+actor "System AdminiRegisterStoreUIstrator" as ADM
+participant ":" as UI
 participant ":RegisterStoreController" as STRCTRL
 participant ":StateController" as STCTRL
 participant ":Repositories" as RepositorySingleton
