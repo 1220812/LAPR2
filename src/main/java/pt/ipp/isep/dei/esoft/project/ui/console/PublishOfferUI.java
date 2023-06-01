@@ -11,7 +11,7 @@ public class PublishOfferUI implements Runnable {
     }
 
     public void run(){
-        System.out.println("Publish Offer");
 
+        
     }
 }

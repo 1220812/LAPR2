@@ -1,0 +1,14 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+actor "Client" as Client
+participant ":offer:\nOffer" as Offer
+
+
+@enduml

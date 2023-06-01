@@ -3,24 +3,24 @@ package pt.ipp.isep.dei.esoft.project.domain;
 public class Offer {
 
     // ATTRIBUTES
-    private Property property;
+    private Announcement announcement;
     private double offerPrice;
 
     /**
      * Creates a new request with all the attributes
-     * @param property property
+     * @param announcement announcement
      * @param offerPrice ammount offered for the property
      */
-    public Offer(Property property, double offerPrice) {
-        this.property = property;
+    public Offer(Announcement announcement, double offerPrice) {
+        this.announcement = announcement;
         this.offerPrice = offerPrice;
     }
 
     /**
      * Getters
      */
-    public Property getProperty() {
-        return property;
+    public Announcement getAnnouncement() {
+        return announcement;
     }
 
     public double getOfferPrice() {
@@ -29,13 +29,13 @@ public class Offer {
 
 
     public Offer clone() {
-        return new Offer(this.property, this.offerPrice);
+        return new Offer(this.announcement, this.offerPrice);
     }
 
     @Override
     public String toString() {
         return "Offer:" +
-                "Property =" + property +
+                "Property =" + announcement +
                 ", Offer Price =" + offerPrice;
     }
     

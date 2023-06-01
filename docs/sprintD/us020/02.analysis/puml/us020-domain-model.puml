@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model US010
+
+class Property {
+    area
+    distanceCityCenter
+    location
+    requestedPrice
+    photographs
+}
+
+class Request {
+    requiredPrice
+}
+
+class Offer {
+    offerPrice
+    property
+}
+
+
+Owner "1" -- "*" Property : belongs to <
+Owner "1" -- "*" Request : provide >
+
+Offer "1" -- "1" Property : about >
+Client "1" -- "*" Offer : proposes >
+
+Offer "1" -up- "1" Request : is compared to >
+@enduml
