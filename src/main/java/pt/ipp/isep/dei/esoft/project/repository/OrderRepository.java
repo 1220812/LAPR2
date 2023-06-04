@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Order;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Order repository.
@@ -45,8 +46,18 @@ public class OrderRepository {
      * Method that adds an order to the list.
      * @param order order to be added to the list
      */
-    public static void addOrder(Order order) {
+    public List<Order> addOrder(Order order) {
         orders.add(order);
+        Optional<Order> newOrder = Optional.empty();
+        boolean operationSuccess = false;
+        if(validateOrder(order)){
+            newOrder = Optional.of(order.clone());
+            operationSuccess = orders.add(newOrder.get());
+        }
+        if(!operationSuccess){
+            newOrder = Optional.empty();
+        }
+        return orders;
     }
     /**
      * Removes the order.
@@ -129,5 +140,10 @@ public class OrderRepository {
             }
         }
         return properties;
+    }
+
+    public boolean validateOrder(Order order) {
+        boolean isValid = !orders.contains(order);
+        return isValid;
     }
 }

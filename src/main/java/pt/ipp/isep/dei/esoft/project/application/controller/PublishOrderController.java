@@ -3,20 +3,20 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import java.util.List;
 
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
-import pt.ipp.isep.dei.esoft.project.domain.Offer;
+import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
-import pt.ipp.isep.dei.esoft.project.repository.OfferRepository;
+import pt.ipp.isep.dei.esoft.project.repository.OrderRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
-public class PublishOfferController {
+public class PublishOrderController {
 
-    OfferRepository offerRepository = Repositories.getInstance().getOfferRepository();
+    OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
     AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
 
-    public void registerOffer(Offer offer) {
-        OfferRepository repository = Repositories.getInstance().getOfferRepository();
+    public void registerOrder(Order order) {
+        OrderRepository repository = Repositories.getInstance().getOrderRepository();
         //get the email
-        repository.add(offer);
+        repository.addOrder(order);
     }
 
     public List<Announcement> getAnnouncements() {
@@ -24,8 +24,8 @@ public class PublishOfferController {
         return announcementRepository.getAnnouncements();
     }
 
-    public boolean validateOffer(Offer offer) {
-        return Repositories.getInstance().getOfferRepository().validateOffer(offer);
+    public boolean validateOffer(Order order) {
+        return Repositories.getInstance().getOrderRepository().validateOrder(order);
     }
 
     /**

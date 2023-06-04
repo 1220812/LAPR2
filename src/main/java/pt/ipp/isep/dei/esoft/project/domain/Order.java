@@ -29,6 +29,17 @@ public class Order {
      */
     private Boolean decision; // null = pending, true = accepted, false = declined
     private int orderNumber;
+
+    public Order(Announcement announcement, int orderPrice, Property property, User client, LocalDate date, Boolean decision, int orderNumber) {
+        this.announcement = announcement;
+        this.orderPrice = orderPrice;
+        this.property = property;
+        this.client = client;
+        this.date = date;
+        this.decision = decision;
+        this.orderNumber = orderNumber;
+    }
+
     public Order(Announcement announcement, int orderPrice, User client, LocalDate date) {
         this.announcement = announcement;
         this.orderPrice = orderPrice;
@@ -139,5 +150,8 @@ public class Order {
     }
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
+    }
+    public Order clone() {
+        return new Order(this.announcement, this.orderPrice, this.property,this.client,  this.date, this.decision, this.orderNumber);
     }
 }
