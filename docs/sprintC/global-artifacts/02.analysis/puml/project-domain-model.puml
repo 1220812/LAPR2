@@ -243,9 +243,9 @@ taxNumber
 UnregisteredUser "1" -- "1" Address : has >
 UnregisteredUser "1" -- "1" TaxNumber : has >
 
-Address "1" -- "1" City : in >
-City "1" -- "1" State : in >
-State "1" -- "1" District : in >
+Address "1" -- City : in >
+City -- State : in >
+State  -- District : in >
 
 Owner "1" --- "1" Address : has >
 Owner "1" -- "1...*" Request : creates >
@@ -297,7 +297,6 @@ Store "1" -- "1" Address: has a >
 
 Store "1"-- "*" Announcement : displays >
 Store "1" -- "1" Address : has >
-Address "1" -- "1" District : is in >
 Announcement "1" -- "1" Property : about >
 Property "1" -- "1" AvailableEquipment : has >
 Property "1" -- "1" SunExposure : has >
