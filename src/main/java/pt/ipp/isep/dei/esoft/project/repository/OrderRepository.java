@@ -2,8 +2,8 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -112,14 +112,14 @@ public class OrderRepository {
      * @return list of orders sorted by age
      */
     public ArrayList<Order> sortByAge(ArrayList<Order> properties) {
-        Date[] ageArray = new Date[properties.size()];
+        LocalDate[] ageArray = new LocalDate[properties.size()];
         for (int i = 0; i < properties.size(); i++) {
             ageArray[i] = properties.get(i).getAnnouncement().getDate();
         }
         for (int j = 0; j < ageArray.length - 1; j++) {
             for (int k = j; k < ageArray.length; k++) {
                 if (ageArray[j].compareTo(ageArray[k]) > 0) {
-                    Date copy = ageArray[j];
+                    LocalDate copy = ageArray[j];
                     Order copyNumber2 = properties.get(j);
                     ageArray[j] = ageArray[k];
                     properties.set(j, properties.get(k));

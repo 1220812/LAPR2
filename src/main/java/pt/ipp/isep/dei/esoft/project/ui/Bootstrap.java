@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -178,8 +177,8 @@ public class Bootstrap implements Runnable {
         PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
         RequestType requestType1 = new RequestType("Sell");
         RequestType requestType2 = new RequestType("Rent");
-        Date requestDate1 = new Date();
-        Date requestDate2 = new Date();
+        LocalDate requestDate1 = LocalDate.of(2020,10,10);
+        LocalDate requestDate2 = LocalDate.of(2022,3,2);
         Property property1 = new Property(500, 5, address1, 100000,photo);
         Property property2 = new Property(345, 12, address2, 200000,photo);
         PropertyType p1 = new PropertyType("Land");
@@ -254,8 +253,8 @@ public class Bootstrap implements Runnable {
         RequestType requestType1 = new RequestType("Sell");
         RequestType requestType2 = new RequestType("Rent");
 
-        Date requestDate1 = new Date();
-        Date requestDate2 = new Date();
+        LocalDate requestDate1 = LocalDate.of(2022,10,2);
+        LocalDate requestDate2 = LocalDate.of(2022,1,8);
 
         Property property1 = new Property("3",110000,address3,1000, 3);
         Property property = new Property("1", 1200000, address1, 1000, 12 );

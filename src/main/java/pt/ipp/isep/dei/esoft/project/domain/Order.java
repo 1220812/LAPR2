@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Order {
@@ -22,13 +23,13 @@ public class Order {
     /**
      * Date of the order.
      */
-    private Date date;
+    private LocalDate date;
     /**
      * Decision of the order.
      */
     private Boolean decision; // null = pending, true = accepted, false = declined
     private int orderNumber;
-    public Order(Announcement announcement, int orderPrice, User client, Date date) {
+    public Order(Announcement announcement, int orderPrice, User client, LocalDate date) {
         this.announcement = announcement;
         this.orderPrice = orderPrice;
         this.client = client;
@@ -38,7 +39,7 @@ public class Order {
      * @param property
      * @param orderPrice
      */
-    public Order(Property property, int orderPrice, Date date, Announcement announcement){
+    public Order(Property property, int orderPrice, LocalDate date, Announcement announcement){
         this.property = property;
         this.orderPrice = orderPrice;
         this.announcement = announcement;
@@ -56,10 +57,10 @@ public class Order {
     public void setOrderPrice(int orderPrice) {
         this.orderPrice = orderPrice;
     }
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
     @Override

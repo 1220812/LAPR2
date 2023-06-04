@@ -69,6 +69,7 @@ public class OrderDecisionController {
         for (Order propertyOrder : orderRepository.getUndecidedPropertyOrder(propertyCode)){
             propertyOrder.reject();
             propertyOrder.getPropertyAnnouncement();
+
             emailService.sendRejectedOrderEmail(clientName, orderNumber);
         }
     }

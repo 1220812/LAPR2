@@ -1,5 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Announcement {
     /**
@@ -22,10 +22,10 @@ public class Announcement {
     /**
      * announcement publish date
      */
-    private Date date;
+    private LocalDate date;
 
 
-    public Announcement(Property property, Date date, String comissionType, double comission, RequestType requestType, PropertyType propertyType) {
+    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, PropertyType propertyType) {
         this.property = property;
         this.date = date;
         this.comissionType = comissionType;
@@ -33,11 +33,11 @@ public class Announcement {
         this.requestType = requestType;
         this.propertyType=propertyType;
     }
-    public Announcement(Property property, Date date){
+    public Announcement(Property property, LocalDate date){
         this.property = property;
         this.date = date;
     }
-    public Announcement(Property property, Date date, String comissionType, double comission, RequestType requestType, PropertyType propertyType, Agent agent) {
+    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, PropertyType propertyType, Agent agent) {
         this.property = property;
         this.date = date;
         this.comissionType = comissionType;
@@ -47,11 +47,11 @@ public class Announcement {
         this.agent=agent;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

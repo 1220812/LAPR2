@@ -59,7 +59,7 @@ public class RegisterAnnouncementController {
         return new RequestType(requestType, contractDuration);
     }
 
-    public Announcement createAnnouncement(Property property, Date date, String comissionType, double comission , RequestType requestType, PropertyType propertyType) {
+    public Announcement createAnnouncement(Property property, LocalDate date, String comissionType, double comission , RequestType requestType, PropertyType propertyType) {
         return new Announcement(property, date, comissionType, comission, requestType, propertyType);
     }
 
