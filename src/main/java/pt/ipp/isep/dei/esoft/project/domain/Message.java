@@ -120,7 +120,7 @@ public class Message {
                 ", schedule='" + schedule + '\'' +
                 ", name='" + name + '\'' +
                 ", phone=" + phone +
-                ", inputAnnou=" + inputAnnou +
+                ", Announcement=" + inputAnnou +
                 '}';
     }
     /**
