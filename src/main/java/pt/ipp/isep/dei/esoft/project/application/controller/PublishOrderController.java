@@ -24,7 +24,7 @@ public class PublishOrderController {
         return announcementRepository.getAnnouncements();
     }
 
-    public boolean validateOffer(Order order) {
+    public boolean validateOrder(Order order) {
         return Repositories.getInstance().getOrderRepository().validateOrder(order);
     }
 
@@ -32,11 +32,4 @@ public class PublishOrderController {
      * need a method for checking if there is any pending offer on the same announcement
      */
 
-
-
-    /**
-     * new methods for publishing offers for different types of property
-     *
-     * @return offer
-     */
 }
