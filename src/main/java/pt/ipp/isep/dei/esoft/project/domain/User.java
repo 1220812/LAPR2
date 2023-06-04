@@ -114,16 +114,10 @@ public class User {
      */
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", password='" + password + '\'' +
-                ", NAME_BY_DEFAULT='" + NAME_BY_DEFAULT + '\'' +
-                ", PHONE_NUMBER=" + PHONE_NUMBER_BY_DEFAULT +
-                ", EMAIL_ADDRESS_BY_DEFAULT='" + EMAIL_ADDRESS_BY_DEFAULT + '\'' +
-                ", PASSWORD_BY_DEFAULT='" + PASSWORD_BY_DEFAULT + '\'' +
-                '}';
+        return "User" +
+                " name : " + name + '\'' +
+                " emailAddress='" + emailAddress + '\'' +
+                " phoneNumber=" + phoneNumber;
     }
     public User clone(){
         return new User(this.name,this.emailAddress,this.password,this.phoneNumber);
@@ -135,6 +129,7 @@ public class User {
         }
         return true;
     }
-
-
+    public String getEmail() {
+        return this.emailAddress;
+    }
 }

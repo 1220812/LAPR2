@@ -3,94 +3,131 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
- * The type Orders repository.
+ * Order repository.
  */
 public class OrderRepository {
     /**
-     * List of orders
+     * List of orders.
      */
-    ArrayList<Order> ordersList = new ArrayList<>();
+    private static final List<Order> orders = new ArrayList<>();
     /**
-     * Method to sort the orders list by age from the oldest one to the youngest one
-     * Creates an array of integers with the ages of the orders and then sort that list
-     * @param orders orders list
-     * @return the orders list sorted by age
+     * Property code.
      */
-    public ArrayList<Order> sortByAge(ArrayList<Order> orders) {
-        int[] ageArray = new int[orders.size()];
-        for (int i = 0; i < orders.size(); i++) {
-            ageArray[i] = orders.get(i).getAge();
+    private String propertyCode;
+    /**
+     * Order number.
+     */
+    private int orderNumber;
+
+    /**
+     *  Instantiates a new Order repository.
+     */
+
+    public void saveOrder(Order order) {
+        orders.add(order);
+    }
+
+    /**
+     * Gets the order repository list.
+     * @param propertyCode property code
+     * @param orderNumber order number
+     * @return list of orders
+     */
+    public static List<Order> getOrderRepositoryList(String propertyCode, int orderNumber) {
+        return List.copyOf(orders);
+    }
+
+    /**
+     * Method that adds an order to the list.
+     * @param order order to be added to the list
+     */
+    public static void addOrder(Order order) {
+        orders.add(order);
+    }
+    /**
+     * Removes the order.
+     */
+    public void removeOrder() {
+        orders.remove(orders);
+    }
+    /**
+     * Updates the order.
+     */
+    public void updateOrder() {
+        orders.set(orders.indexOf(orders), orders.get(orders.indexOf(orders)));
+    }
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    /**
+     * Gets the order.
+     */
+    public void getOrder() {
+        orders.get(orders.indexOf(orders));
+    }
+    /**
+     * Gets the orders by property.
+     * @return list of orders by property
+     */
+    public List<Order> getOrdersByProperty() {
+        return OrderRepository.getOrderRepositoryList(propertyCode, orderNumber);
+    }
+    /**
+     * Gets the orders by property and order number.
+     * @param propertyCode property code
+     * @param orderNumber order number
+     * @return list of orders by property and order number
+     */
+    public Order getOrderByPropertyCodeOrderNumber(String propertyCode, int orderNumber) {
+        for (Order order : orders) {
+            if (order.hasPropertyCode(propertyCode) && order.hasOrderNumber(orderNumber)) {
+                return order;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the undecided property order.
+     * @param propertyCode property code
+     * @return list of undecided property order
+     */
+    public List<Order> getUndecidedPropertyOrder(String propertyCode) {
+        List<Order> result = new ArrayList<>();
+        for (Order order : orders) {
+            if (order.hasPropertyCode(propertyCode) && !order.hasDecision()) {
+                result.add(order);
+            }
+        }
+        return result;
+    }
+    /**
+     * Gets the properties sorted by age.
+     * @param properties list of orders on a properties
+     * @return list of orders sorted by age
+     */
+    public ArrayList<Order> sortByAge(ArrayList<Order> properties) {
+        Date[] ageArray = new Date[properties.size()];
+        for (int i = 0; i < properties.size(); i++) {
+            ageArray[i] = properties.get(i).getAnnouncement().getDate();
         }
         for (int j = 0; j < ageArray.length - 1; j++) {
-            for (int k = 1; k < ageArray.length; k++) {
-                if (ageArray[k] > ageArray[j]) {
-                    int copy = ageArray[j];
-                    Order copy2 = orders.get(j);
+            for (int k = j; k < ageArray.length; k++) {
+                if (ageArray[j].compareTo(ageArray[k]) > 0) {
+                    Date copy = ageArray[j];
+                    Order copyNumber2 = properties.get(j);
                     ageArray[j] = ageArray[k];
-                    orders.set(j, orders.get(k));
-                    orders.set(k, copy2);
+                    properties.set(j, properties.get(k));
+                    properties.set(k, copyNumber2);
                     ageArray[k] = copy;
                 }
             }
-
         }
-        return orders;
-    }
-    /**
-     * Method to sort the orders list by the amount
-     * @param ordersAmount list of the orders amount
-     * @return sorted list of the orders by the amount from the biggest to the smallest
-     */
-    public ArrayList<Double> sortByAmount(ArrayList<Double> ordersAmount){
-        for (int j = 0; j < ordersAmount.size() - 1; j++) {
-            for (int k = 1; k < ordersAmount.size(); k++) {
-                if (ordersAmount.get(k)>ordersAmount.get(j)){
-                    Double copy = ordersAmount.get(j);
-                    ordersAmount.set(j, ordersAmount.get(k));
-                    ordersAmount.set(k, copy);
-                }
-            }
-        }
-        return ordersAmount;
-    }
-    /**
-     * Method that returns the list of orders
-     * @return list of orders
-     */
-    public ArrayList<Order> getOrdersList() {
-        return ordersList;
-    }
-    /**
-     * Method to change the list of orders
-     * @param property the property
-     */
-    public void setOrdersList(Order property){
-        this.ordersList.add(property);
-    }
-    /**
-     * Method to remove all the offers from the list except the one that was accepted
-     * @param orderAcceptedIndex the orderAcceptedIndex
-     * @param propertyCode the propertyCode
-     */
-    public void removeOffers(int orderAcceptedIndex, int propertyCode){
-        ArrayList<Double> offers = ordersList.get(propertyCode).getAmount();
-        for(int i = offers.size() - 1; i >= 0; i--){
-            if(i != orderAcceptedIndex){
-                offers.remove(i);
-            }
-        }
-        ordersList.get(propertyCode).setAmount(offers);
-    }
-    /**
-     * Method to remove an order that was declined from the list
-     * @param orderDeclinedIndex the index of the declined order
-     * @param propertyCode code of the property
-     */
-    public void removeOffer(int orderDeclinedIndex, int propertyCode){
-        ArrayList<Double> offers = ordersList.get(propertyCode).getAmount();
-        offers.remove(orderDeclinedIndex);
-        ordersList.get(propertyCode).setAmount(offers);
+        return properties;
     }
 }

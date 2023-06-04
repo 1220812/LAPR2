@@ -108,8 +108,6 @@ public class Address {
         this.floorNumber = DEFAULT_FLOOR_NUMBER;
         this.streetAddress = DEFAULT_STREET;
         this.doorNumber = DEFAULT_DOOR_NUMBER;
-
-
     }
 
     /**
@@ -236,7 +234,7 @@ public class Address {
      */
     @Override
     public String toString() {
-        return "Address: " + "\nstate : "+state + "\ndistrict : "+district + "\ncity : "+city + "\ndistrict : "+district + "\nzipcode : "+zipCode + "\nstreet address: "+streetAddress + "\nfloor number : "+floorNumber + "\ndoor number : "+doorNumber;
+        return ", address - " + "state : "+state + ", district : "+district + ", city : "+city  + ", zipcode : "+zipCode + ", street address: "+streetAddress;
     }
 
     /**

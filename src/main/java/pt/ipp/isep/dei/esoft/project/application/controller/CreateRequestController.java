@@ -5,36 +5,23 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CreateRequestController {
-
-    private final RequestRepository requestRepository = Repositories.getInstance().getRequestRepository();
-    private AvailableEquipmentRepository availableEquipmentRepository = null;
-    private AgencyRepository agencyRepository = null;
-    private SunExposureRepository sunExposureRepository = null;
-
     Repositories repositories = Repositories.getInstance();
+    private AgencyRepository agencyRepository;
+    private SunExposureRepository sunExposureRepository;
+    private PropertyRepository propertyRepository;
+    private RequestRepository requestRepository;
     private final RequestTypeRepository requestTypeRepository;
 
 
     public CreateRequestController() {
         requestTypeRepository = Repositories.getInstance().getRequestTypeRepository();
-    }
-
-    private PropertyType propertyType;
-    private City city;
-    private District district;
-    private State state;
-
-    private RequestType requestType;
-
-//    public List<PropertyType> getPropertiesTypeList() {
-//        return List.of(PropertyType.values());
-//    }
-
-    public List<Address> getAddresses() {
-        return Repositories.getInstance().getAddressRepository().getAddressList();
+        propertyRepository = Repositories.getInstance().getPropertyRepository();
     }
 
     public List<RequestType> getRequestTypeList() {
@@ -44,46 +31,65 @@ public class CreateRequestController {
     public List<PropertyType> getPropertiesTypeList(){
         return Repositories.getInstance().getPropertyTypeRepository().getPropertyType();
     }
-
-    public RequestType createRequestType(String name) {
-        requestType = requestTypeRepository.createRequestType(name);
-        return requestType;
-    }
-
-    public Property createLand(double area, double distanceFromCityCenter, Address address, double price, List<Photographs> photographsList, Store store, Agent agent, RequestType requestType) {
-        return new Property(area, distanceFromCityCenter, address, price, photographsList, store, agent, requestType);
-    }
-    public Request createRequest(PropertyType propertyType, double price, RequestType requestType, Agent agent, Store store){
-        return new Request(propertyType, price, requestType, agent, store);
-    }
-    public House createHouse(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<AvailableEquipment> availableEquipment, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList, Agent agent, Store store, RequestType requestType) {
-        return new House(address, area, distanceFromCityCentre, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, availableEquipment, basement, sunExposure, inhabitableLoft, price, photoList, agent, store, requestType);
-    }
-    public Residence createApartment(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, List<AvailableEquipment> availableEquipment, Agent agent, Store store, RequestType requestType) {
-        return new Residence( address,  area,  distanceFromCityCentre,  numberOfBathrooms,  numberOfBedrooms,  numberOfParkingSpaces,  price,photographsList,availableEquipment,agent, store, requestType);
-    }
-    public RequestTypeRepository getRequestTypeRepository() {
-        if (requestTypeRepository == null) {
+    private PropertyRepository getPropertyRepository() {
+        if(propertyRepository == null){
             Repositories repositories = Repositories.getInstance();
-            RequestTypeRepository rep = repositories.getRequestTypeRepository();
+            propertyRepository = repositories.getPropertyRepository();
         }
-        return requestTypeRepository;
+        return propertyRepository;
+    }
+    private RequestRepository getRequestRepository() {
+        return Repositories.getInstance().getRequestRepository();
+    }
+    public Optional<Property> createLand(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList) {
+        Optional<Property> newProperty = Optional.empty();
+        if(getPropertyRepository() !=  null){
+            newProperty = getPropertyRepository().createLand(area, distanceFromTheCityCentre, address, price, photographsList);
+        }
+        return newProperty;
+    }
+    public Optional <Request> createSellRequest(Property property, LocalDate requestDate, PropertyType propertyType, Agent agent, Store store, Owner owner, double price, RequestType requestType){
+        Optional <Request> optionalValue = Optional.empty();
+        if(getRequestRepository() != null){
+            optionalValue = getRequestRepository().CreateSaleRequest(property, requestDate, propertyType, agent, store, owner, price, requestType);
+        }
+        return optionalValue;
+    }
+    public Optional <Request> createRentRequest(Property property, LocalDate requestDate, PropertyType propertyType, Agent agent, Store store, Owner owner, int contractDuration, double price, RequestType requestType){
+        Optional <Request> optionalValue = Optional.empty();
+        if(getRequestRepository() != null){
+            optionalValue = getRequestRepository().CreateRentRequest(property, requestDate, propertyType, agent, store, owner, contractDuration, price,requestType);
+        }
+        return optionalValue;
+    }
+    public Optional<Property> createHouse(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning , boolean centralHeating , boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList) {
+        Optional<Property> newProperty = Optional.empty();
+        if(getPropertyRepository() !=  null){
+            newProperty = getPropertyRepository().createHouse(address, area, distanceFromCityCentre, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure, inhabitableLoft, price, photoList);
+        }
+        return newProperty;
+    }
+    public Optional <Property> createApartment(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning) {
+        Optional<Property> newProperty = Optional.empty();
+        if(getPropertyRepository() != null){
+            newProperty = getPropertyRepository().createApartment(address, area, distanceFromCityCentre, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, price, photographsList, centralHeating, airConditioning);
+        }
+        return newProperty;
     }
     public List<Agency> getAgencies() {
         return Repositories.getInstance().getAgencyRepository().getAgencyList();
     }
-
     public List<Store> getStores() {
         return Repositories.getInstance().getStoreRepository().getStoreList();
     }
     public List<Agent> getAgent() {
         return Repositories.getInstance().getAgentRepository().getAgentList();
     }
-
     public List<SunExposure> getSunExposuresList() {
         return Repositories.getInstance().getSunExposureRepository().getSunExposureList();
     }
-    public List<AvailableEquipment> getAvailableEquipmentList() {
-        return Repositories.getInstance().getAvailableEquipmentRepository().getAvailableEquipmentList();
+    private final List<Property> properties = new ArrayList<>();
+    public void addProperty(Property property) {
+        this.properties.add(property);
     }
 }

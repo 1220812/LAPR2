@@ -18,11 +18,4 @@ public class PropertyTypeRepository {
     public List<PropertyType> getPropertyType(){
         return List.copyOf(propertiesTypeList);
     }
-
-
-    /*
-    public static PropertyType CreatePropertyType(double area, double distanceFromCityCenter, double price, ArrayList<Photographs> photographsList, PropertyType propertyType, Address address){
-        return new PropertyType(area, distanceFromCityCenter ,price ,photographsList ,propertyType, address);
-    }
-    */
 }

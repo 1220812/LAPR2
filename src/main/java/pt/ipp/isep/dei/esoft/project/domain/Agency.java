@@ -117,12 +117,17 @@ public class Agency {
         return designation;
     }
     public String toString2(){
-        return "Agency{" +
-                "id=" + id +
-                ", designation='" + designation + '\'' +
-                ", address=" + address +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", phoneNumber=" + phoneNumber +
+        return "Agency: " +
+                "\n" +
+                "id= " + id +
+                "\n" +
+                " designation= " + designation +
+                "\n" +
+                " address= " + address +
+                "\n" +
+                " emailAddress= " + emailAddress +
+                "\n" +
+                " phoneNumber= " + phoneNumber +
                 '}';
     }
 

@@ -137,6 +137,14 @@ public class Owner {
         this.taxNumber = taxNumber;
         this.passportCardNumber = passportCardNumber;
     }
+
+    /**
+     * Creates an instance of Owner with name
+     * @param name name of the owner
+     */
+    public Owner(String name){
+        this.name = name;
+    }
     /**
      * Compares two instances of Owner
      * @param o other instance of Owner
@@ -159,14 +167,7 @@ public class Owner {
      */
     @Override
     public String toString() {
-        return "Owner{" +
-                "name='" + name + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", taxNumber=" + taxNumber +
-                ", passportCardNumber=" + passportCardNumber +
-                ", address=" + address +
-                '}';
+        return name;
     }
 
     public Owner clone(){ return new Owner(this.name,this.phoneNumber, this.emailAddress,this.address,this.taxNumber,this.passportCardNumber); }

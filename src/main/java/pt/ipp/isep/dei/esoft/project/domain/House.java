@@ -26,21 +26,15 @@ public class House extends Residence {
      * @param numberOfBathrooms number of bathrooms
      * @param numberOfBedrooms number of bedrooms
      * @param numberOfParkingSpaces number of parking spaces
-     * @param availableEquipment available equipment
+     * @param airConditioning air conditioning
+     * @param centralHeating central heating
      * @param basement basement
      * @param sunExposure house exposure to the sun
      * @param inhabitableLoft inhabitable loft
      * @param price house price
      */
-    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<AvailableEquipment> availableEquipment, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList, Agent agent, Store store, RequestType requestType) {
-        super(address,  area, distanceFromCityCentre,  numberOfBathrooms,  numberOfBedrooms,  numberOfParkingSpaces, price, photoList,availableEquipment, agent, store,requestType );
-        this.existenceOfABasement = basement;
-        this.inhabitableLoft = inhabitableLoft;
-        this.sunExposure = sunExposure;
-    }
-
-    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<AvailableEquipment> availableEquipment, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList, RequestType requestType) {
-        super(address,  area, distanceFromCityCentre,  numberOfBathrooms,  numberOfBedrooms,  numberOfParkingSpaces, price, photoList,availableEquipment,requestType );
+    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning , boolean centralHeating , boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList) {
+        super(address,  area, distanceFromCityCentre,  numberOfBathrooms,  numberOfBedrooms,  numberOfParkingSpaces, price, photoList , airConditioning, centralHeating);
         this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;
         this.sunExposure = sunExposure;
@@ -94,15 +88,11 @@ public class House extends Residence {
 
     @Override
     public String toString() {
-        return super.toString()+"House{" +
-                "existenceOfABasement=" + existenceOfABasement +
-                ", sunExposure=" + sunExposure +
-                ", inhabitableLoft=" + inhabitableLoft +
-                '}';
-
+        return super.toString()+"House:" +
+                ", basement :" + existenceOfABasement +
+                ", sunExposure : " + sunExposure +
+                ", inhabitableLoft : " + inhabitableLoft;
     }
-
-
     /**
      * Compares two instances of Owner
      * @param o other instance of Owner

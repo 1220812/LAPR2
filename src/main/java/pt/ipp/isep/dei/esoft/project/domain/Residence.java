@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +19,12 @@ public class Residence extends Property{
     /**
      * available equipment
      */
-    private List<AvailableEquipment> availableEquipment = new ArrayList<>();
+
+
+     private boolean airConditioning;
+
+    private boolean centralHeating;
+
 
     /**
      *
@@ -30,24 +34,18 @@ public class Residence extends Property{
      * @param numberOfBathrooms number of bathrooms
      * @param numberOfBedrooms number of bedrooms
      * @param numberOfParkingSpaces number of parking spaces
-     * @param availableEquipment available equipment
+     * @param airConditioning air conditioning
+     * @param centralHeating central heating
      * @param price price
      */
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, List<AvailableEquipment> availableEquipment, Agent agent, Store store, RequestType requestType) {
-        super(area, distanceFromCityCentre, address,price, photographsList, store, agent, requestType );
+    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning) {
+        super(area, distanceFromCityCentre, address,price, photographsList);
         this.numberOfBedrooms = numberOfBathrooms;
         this.numberOfBathrooms = numberOfBedrooms;
         this.numberOfParkingSpaces = numberOfParkingSpaces;
-        this.availableEquipment = availableEquipment;
-    }
-
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, List<AvailableEquipment> availableEquipment, RequestType requestType) {
-        super(area, distanceFromCityCentre, address,price, photographsList, requestType );
-        this.numberOfBedrooms = numberOfBathrooms;
-        this.numberOfBathrooms = numberOfBedrooms;
-        this.numberOfParkingSpaces = numberOfParkingSpaces;
-        this.availableEquipment = availableEquipment;
+        this.airConditioning = airConditioning;
+        this.centralHeating = centralHeating;
     }
 
     /**
@@ -109,8 +107,8 @@ public class Residence extends Property{
      */
     @Override
     public String toString() {
-        return super.toString() + "Residence\n\tNrBedrooms=" + numberOfBedrooms + "\n\tNrBathrooms=" + numberOfBathrooms +
-                "\n\tNrParkingSpaces=" + numberOfParkingSpaces + "\n\tavailableEquipment='" + availableEquipment + "\n";
+        return super.toString() + ", number of bedrooms = " + numberOfBedrooms + ", number of bathrooms = " + numberOfBathrooms +
+                "\nparking spaces="  + numberOfParkingSpaces + ", air conditioning = " + airConditioning + ", central heating = " + centralHeating + "\n  ";
     }
 
     /**
@@ -124,11 +122,11 @@ public class Residence extends Property{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Residence residence = (Residence) o;
-        return numberOfBedrooms == residence.numberOfBedrooms && numberOfBathrooms == residence.numberOfBathrooms && numberOfParkingSpaces == residence.numberOfParkingSpaces && Objects.equals(availableEquipment, residence.availableEquipment);
+        return numberOfBedrooms == residence.numberOfBedrooms && numberOfBathrooms == residence.numberOfBathrooms && numberOfParkingSpaces == residence.numberOfParkingSpaces && Objects.equals(airConditioning, residence.airConditioning) && Objects.equals(centralHeating, residence.centralHeating);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, availableEquipment);
+        return Objects.hash(super.hashCode(), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces,airConditioning,centralHeating);
     }
 }
