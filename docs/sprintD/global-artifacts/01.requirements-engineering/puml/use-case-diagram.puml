@@ -7,6 +7,7 @@ actor "System Administrator" as Admin #grey
 actor "Owner" as Owner #grey
 actor "Network Manager" as NM #grey
 actor "Client" as C #grey
+actor "Store Manager" as SM #grey
 
 rectangle "RealEstate USA App"{
  usecase "US1 - Display Listed Properties" as UC1
@@ -21,7 +22,14 @@ rectangle "RealEstate USA App"{
  usecase "US3 - Register the Employees" as UC3
  usecase "US11 - List real estate purchase orders to \naccept or decline a purchase order" as UC11
  usecase "US13 - List all employees working in every store" as UC13
+ usecase "US15 - list all booking requests for properties" as UC15
+ usecase "US16 - respond to the user that schedule the visit" as UC16
+ usecase "US17 - list all deals made" as UC17
+ usecase "US18 - analyse deals (compare property sale values with the forecast values)" as UC18
+ usecase "US19 - divide the set of all stores into two subsets" as UC19
+ usecase "US20 - read the response for the appointment request (accept or reject it)" as UC20
  }
+
  unUser -- UC1
  Agent -- UC2
  Admin -- UC5
@@ -29,9 +37,16 @@ rectangle "RealEstate USA App"{
  Owner -- UC4
  unUser -- UC7
  NM -- UC13
+ NM -- UC17
+ NM -- UC19
  Agent -- UC11
  Agent -- UC8
+ Agent -- UC15
+ Agent -- UC16
+ Agent -- UC20
  C -- UC9
  C -- UC10
+ SM -- UC18
+
 Admin -- UC12
 @enduml

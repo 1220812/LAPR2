@@ -39,18 +39,22 @@ emailAddress
 phoneNumber
 }
 
-class NetworkManager{
-name
-emailAddress
-phoneNumber
-}
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype dashed
 
-class TaxNumber{
-taxNumber
-}
+'left to right direction
 
-class PassportCardNumber{
-passportCardNumber
+hide circle
+hide methods
+
+title US017 - Domain Model
+
+class Deal{
+date
+acceptedOrder
 }
 
 class Store{
@@ -60,13 +64,46 @@ emailAddress
 ID
 }
 
-class Role{
-description
+class Address{
+streetAddress
+doorNumber
+floorNumber
+zipCode
 }
 
-Property{
-
+class State{
+stateName
 }
 
+class District{
+districtName
+}
+
+class City{
+cityName
+}
+
+class NetworkManager{
+}
+
+class Employee{
+name
+emailAddress
+phoneNumber
+}
+
+class Agent{}
+
+
+Store "1" -- Address : has >
+Address -- City : has >
+City -- District : is in >
+District -- State : is in >
+NetworkManager --- "1...*" Deal : lists >
+NetworkManager --|> Employee : is >
+Agent ---|> Employee : is >
+Agent "1" -- "0...*" Deal : sets >
+Agent -- Store : works for >
+NetworkManager "1" --- "1...*" Store : manages >
 
 @enduml
