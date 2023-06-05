@@ -15,12 +15,10 @@ public class PublishOrderController {
 
     public void registerOrder(Order order) {
         OrderRepository repository = Repositories.getInstance().getOrderRepository();
-        //get the email
         repository.addOrder(order);
     }
 
     public List<Announcement> getAnnouncements() {
-
         return announcementRepository.getAnnouncements();
     }
 

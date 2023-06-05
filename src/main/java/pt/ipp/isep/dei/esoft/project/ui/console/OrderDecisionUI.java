@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.OrderDecisionController;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.List;
 public class OrderDecisionUI implements Runnable {
     public void run() {
         List<Order> emptyList = new ArrayList<>();
-        Repositories repositories = Repositories.getInstance();
         OrderDecisionController controller = new OrderDecisionController();
         System.out.println(controller.getOrderList());
         if (controller.getOrderList().size() == 0) {

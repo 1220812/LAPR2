@@ -9,10 +9,6 @@ import java.util.Optional;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
-
-/**
- * The type Create request ui.
- */
 public class CreateRequestUI implements Runnable {
     CreateRequestController controller = new CreateRequestController();
 
@@ -50,6 +46,10 @@ public class CreateRequestUI implements Runnable {
 
     public void run() {
         String ownerName = Utils.readLineFromConsole("Insert the owner name: ");
+        while (ownerName.isEmpty()) {
+            System.out.println("please insert a valid name");
+            ownerName = Utils.readLineFromConsole("Insert the owner name: ");
+        }
         owner = new Owner(ownerName);
         requestOverallData();
         requestDataForAddress();
@@ -98,13 +98,37 @@ public class CreateRequestUI implements Runnable {
     }
     private void requestOverallData(){
         area = Utils.readDoubleFromConsole("Insert the area of the property: ");
+        while (area <= 0){
+            System.out.println("please insert a valid number");
+            area = Utils.readDoubleFromConsole("Insert the area of the property: ");
+        }
         distanceFromCityCenter = Utils.readDoubleFromConsole("Insert the distance from the city center: ");
+        while (distanceFromCityCenter <= 0){
+            System.out.println("please insert a valid number");
+            distanceFromCityCenter = Utils.readDoubleFromConsole("Insert the distance from the city center: ");
+        }
         price = Utils.readDoubleFromConsole("Insert the price of the property: ");
+        while (price <= 0){
+            System.out.println("please insert a valid number");
+            price = Utils.readDoubleFromConsole("Insert the price of the property: ");
+        }
     }
     private void requestDataForHouse(){
         numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bathrooms: ");
+        while (numberOfBathrooms <= 0){
+            System.out.println("please insert a valid number");
+            numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bathrooms: ");
+        }
         numberOfBedrooms = Utils.readIntegerFromConsole("Insert the number of bedrooms: ");
+        while (numberOfBedrooms <= 0){
+            System.out.println("please insert a valid number");
+            numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bedrooms: ");
+        }
         numberOfParkingSpaces = Utils.readIntegerFromConsole("Insert the number of parking spaces: ");
+        while (numberOfParkingSpaces <= 0){
+            System.out.println("please insert a valid number");
+            numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of parking spaces: ");
+        }
         String flag = Utils.readLineFromConsole("Does the house have an inhabitable loft? (true/false)");
         if(flag.equalsIgnoreCase("true")){
             inhabitableLoft = true;
@@ -152,7 +176,15 @@ public class CreateRequestUI implements Runnable {
     }
     private void requestDataForAddress(){
         streetAddress = Utils.readLineFromConsole("Insert the street address: ");
+        while (streetAddress == null) {
+            System.out.println("please insert a valid street address");
+            streetAddress = Utils.readLineFromConsole("Insert the street address: ");
+        }
         zipCode = Utils.readLineFromConsole("Insert the zip code: ");
+        while (zipCode==null || zipCode.length() != 5){
+            System.out.println("please insert a valid zip code");
+            zipCode = Utils.readLineFromConsole("Insert the zip code: ");
+        }
         State state = new State(Utils.readLineFromConsole("Insert the state: "));
         District district = new District(Utils.readLineFromConsole("Insert the district: "));
         City city = new City(Utils.readLineFromConsole("Insert the city: "));

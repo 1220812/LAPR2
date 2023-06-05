@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 
 import java.time.LocalDate;
@@ -7,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Order repository.
- */
 public class OrderRepository {
     /**
      * List of orders.
@@ -71,12 +69,15 @@ public class OrderRepository {
     public void updateOrder() {
         orders.set(orders.indexOf(orders), orders.get(orders.indexOf(orders)));
     }
+    /**
+     * Method that shows the order on the list
+     * @return list of orders
+     */
     public List<Order> getOrders() {
         return orders;
     }
-
     /**
-     * Gets the order.
+     * Method that returns the position of an order in the list
      */
     public void getOrder() {
         orders.get(orders.indexOf(orders));
@@ -102,7 +103,6 @@ public class OrderRepository {
         }
         return null;
     }
-
     /**
      * Gets the undecided property order.
      * @param propertyCode property code
@@ -141,7 +141,11 @@ public class OrderRepository {
         }
         return properties;
     }
-
+    /**
+     * Method that validates an order.
+     * @param order order to be validated
+     * @return true if the order is valid, false if not
+     */
     public boolean validateOrder(Order order) {
         boolean isValid = !orders.contains(order);
         return isValid;
