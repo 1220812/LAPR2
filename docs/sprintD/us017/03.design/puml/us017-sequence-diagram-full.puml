@@ -10,17 +10,16 @@ participant ":ListDealsController" as Controller
 participant ":Repositories" as PLAT
 participant "repositories :\nRepositories" as REP
 participant "dealRepository :\nDealRepository" as DR
-participant "dealMapper" as DEALMAPPER
-participant "dealDTO" as DEALDTO
-
 
 activate NM
 
-    NM -> UI : asks to display the list of all the deals made
+    NM -> UI : asks to list of all the deals made
 
     activate UI
 
     UI --> Controller** : create
+
+    UI -> Controller : getDeals()
 
     activate Controller
 
@@ -40,52 +39,61 @@ activate NM
 
     deactivate REP
 
-    UI -> Controller : getDealsList()
-
-    Controller -> DR : getDeals()
-
-    activate DR
-
-    DR --> Controller : deals
-
-    deactivate DR
-
-    loop for each (deal : dealList)
-
-    Controller -> DEALMAPPER : toDto(deal)
-
-    activate DEALMAPPER
-
-    DEALMAPPER -> DEALDTO : createDTO(deal)
-
-    activate DEALDTO
-
-    DEALDTO --> DEALMAPPER : dealDTO
-
-    deactivate DEALDTO
-
-    DEALMAPPER --> DEALMAPPER : addToDealStoList(dealDTO)
-    activate DEALMAPPER
-
-    end
-
-    DEALMAPPER --> Controller : dealDTOList
-
-    deactivate DEALMAPPER
-
-    deactivate DEALMAPPER
-
-    Controller --> UI : dealDTOList
+    Controller --> UI : deals
 
     deactivate Controller
 
-        UI --> NM : shows the two different sorting methods \nand asks to select one
+        UI --> NM : shows the two different sorting methods \n(Bubble Sort or Insertion Sort) and asks to select  one
+
+    deactivate UI
+
+    NM -> UI : selects the sorting method (Bubble Sort or Insertion Sort)
+
+    activate UI
+
+    UI --> NM : asks for the order of sorting (ascending or descending)
 
     deactivate UI
 
     NM -> UI : selects the order of sorting (ascending or descending)
+     alt Bubble Sort method is selected
 
-    activate UI
+        activate UI
+
+        UI --> Controller : sortListByBubbleSort(deals, orderOfSorting)
+
+        activate Controller
+
+        Controller -> DR : sortListByBubbleSort(deals, orderOfSorting)
+
+        activate DR
+
+        DR --> Controller : sortedList
+
+        deactivate DR
+
+        Controller --> UI : sortedList
+
+        deactivate Controller
+
+     else Insertion Sort method is selected
+
+             UI --> Controller : sortListByInsertionSort(deals, orderOfSorting)
+
+             activate Controller
+
+             Controller -> DR : sortListByInsertionSort(deals, orderOfSorting)
+
+             activate DR
+
+             DR --> Controller : sortedList
+
+             deactivate DR
+
+             Controller --> UI : sortedList
+
+             deactivate Controller
+     end
 
     UI --> NM : shows the list of all the deals made sorted \nby the selected sorting method and order
 
