@@ -1,28 +1,76 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
-
+import pt.ipp.isep.dei.esoft.project.domain.EmailService;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
+import pt.ipp.isep.dei.esoft.project.domain.OrderComparator;
 import pt.ipp.isep.dei.esoft.project.repository.OrderRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
-import java.util.ArrayList;
-public class OrderDecisionController{
-    OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
-    public ArrayList<Order> sortOrdersByAge(ArrayList<Order> properties){
-        return orderRepository.sortByAge(properties);
+import java.util.List;
+public class OrderDecisionController {
+    private static final OrderComparator orderComparator = new OrderComparator();
+
+    /**
+     * Order repository.
+     */
+    private final OrderRepository orderRepository;
+    /**
+     * Email service.
+     */
+    private final EmailService emailService;
+    /**
+     * Repositories.
+     */
+    public Repositories repositories;
+
+    /**
+     * Creates a new instance of OrderController with the given OrderRepository.
+     *
+     * @param orderRepository the OrderRepository to use
+     */
+    public OrderDecisionController(OrderRepository orderRepository, EmailService emailService) {
+        this.orderRepository = orderRepository;
+        this.emailService = emailService;
     }
-    public ArrayList<Order> getProperties(){
-        return orderRepository.getOrdersList();
+
+    /**
+     * Creates a new instance of OrderController with the default OrderRepository.
+     */
+    public OrderDecisionController() {
+        repositories = Repositories.getInstance();
+        this.orderRepository = repositories.getOrderRepository();
+        this.emailService = new EmailService();
     }
-    public ArrayList<Double> getOrders(Order propertyOrder){
-        return propertyOrder.getAmount();
+
+    /**
+     * Gets a list with the orders of a property.
+     * @return list with the orders of a property
+     */
+    public List<Order> getOrderList() {
+        List<Order> propertyOrders = orderRepository.getOrders();
+        propertyOrders.sort(orderComparator);
+        return propertyOrders;
     }
-    public ArrayList<Double> sortOrdersByAmount(ArrayList<Double> Offers){
-        return orderRepository.sortByAmount(Offers);
-    }
-    public void removeOffers(int accepted, int property){
-        orderRepository.removeOffers(accepted, property);
-    }
-    public void removeOffer(int declined, int property){
-        orderRepository.removeOffer(declined, property);
+
+    /**
+     * Makes a decision on an order based on the provided property code and order number.
+     * @param propertyCode the property code
+     * @param orderNumber the order number
+     * @param decision the decision
+     */
+    public void makeDecision(String propertyCode, int orderNumber, boolean decision) {
+        Order order = orderRepository.getOrderByPropertyCodeOrderNumber(propertyCode, orderNumber);
+        order.makeDecision(decision);
+        String clientName = order.getClientName();
+        if (!decision) {
+            emailService.sendRejectedOrderEmail(clientName, orderNumber);
+            return;
+        }
+        emailService.sendAcceptedOrderEmail(clientName, orderNumber);
+        for (Order propertyOrder : orderRepository.getUndecidedPropertyOrder(propertyCode)){
+            propertyOrder.reject();
+            propertyOrder.getPropertyAnnouncement();
+
+            emailService.sendRejectedOrderEmail(clientName, orderNumber);
+        }
     }
 }

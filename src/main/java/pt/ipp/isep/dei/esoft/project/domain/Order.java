@@ -1,73 +1,157 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Order {
     /**
-     * age of the order
+     * Announcement of the order.
      */
-    public int age;
+    private Announcement announcement;
     /**
-     * the amount of the order
+     * Price of the order.
      */
-    public ArrayList<Double> amount = new ArrayList<>();
+    private int orderPrice;
     /**
-     * code of the property that is being ordered
+     * Order number.
      */
-    public String propertyCode;
+    private Property property;
     /**
-     * Instantiates a new order with the propertyCode code and the age of the order
-     * @param propertyCode the property code
-     * @param age the age of the order
+     * Client of the order.
      */
-    public Order(String propertyCode, int age) {
-        this.age = age;
-        this.propertyCode = propertyCode;
+    private User client;
+    /**
+     * Date of the order.
+     */
+    private LocalDate date;
+    /**
+     * Decision of the order.
+     */
+    private Boolean decision; // null = pending, true = accepted, false = declined
+    private int orderNumber;
+
+    public Order(Announcement announcement, int orderPrice, Property property, User client, LocalDate date, Boolean decision, int orderNumber) {
+        this.announcement = announcement;
+        this.orderPrice = orderPrice;
+        this.property = property;
+        this.client = client;
+        this.date = date;
+        this.decision = decision;
+        this.orderNumber = orderNumber;
+    }
+
+    public Order(Announcement announcement, int orderPrice, User client, LocalDate date) {
+        this.announcement = announcement;
+        this.orderPrice = orderPrice;
+        this.client = client;
+        this.date = date;
     }
     /**
-     * empty order constructor
+     * @param property
+     * @param orderPrice
      */
-    public Order(){
+    public Order(Property property, int orderPrice, LocalDate date, Announcement announcement){
+        this.property = property;
+        this.orderPrice = orderPrice;
+        this.announcement = announcement;
+        this.date = date;
+    }
+    public Announcement getAnnouncement() {
+        return announcement;
+    }
+    public int getOrderPrice() {
+        return orderPrice;
+    }
+    public void setAnnouncement(Announcement announcement) {
+        this.announcement = announcement;
+    }
+    public void setOrderPrice(int orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+    public LocalDate getDate() {
+        return date;
+    }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+    @Override
+    public String toString() {
+        return "Order: " +
+                announcement +
+                ", orderPrice = " + orderPrice +
+                ", client = " + client.getName() +
+                ", date : " + date +
+                ", property code = " + announcement.getProperty().getCode();
+    }
+
+    /**
+     * makes a decision on an order.
+     * @param decision
+     */
+    public void makeDecision(boolean decision) {
+        this.decision = decision ? Boolean.TRUE : Boolean.FALSE;
+    }
+
+    /**
+     * Gets the name of the owner of the order.
+     * @return
+     */
+    public String getClientName() {
+        return client.getName();
     }
     /**
-     * This method returns the age of the order
-     * @return the age
+     * Sends an email to the client of the order rejecting the order.
      */
-    public int getAge() {
-        return age;
+    public void reject() {
+        this.decision = Boolean.FALSE;
     }
     /**
-     * This method returns the amount of the order
-     * @return the amount of the order
+     * Verifies if the property has a code.
+     * @param propertyCode property code
+     * @return true if the property has a code, false if not
      */
-    public ArrayList<Double> getAmount() {
-        return this.amount;
+    public  boolean hasPropertyCode(String propertyCode) {
+        return announcement.getProperty().hasCode(propertyCode);
     }
     /**
-     * This method shows the property code
-     * @return property code
+     * Verifies if the order has a decision made.
+     * @return true if the order has a decision made, false if not
      */
-    public String getPropertyCode() {
-        return propertyCode;
+    public boolean hasDecision() {
+        return decision != null;
     }
+
     /**
-     * Method to change the age of the order
-     * @param age changed value of age
+     * Gets the property of the order.
+     * @return property of the order
      */
-    public void setAge(int age) {
-        this.age = age;
+    public Property getProperty() {
+        return announcement.getProperty();
     }
-    /**
-     * Method to change the amount of the order
-     * @param amount changed value of amount
-     */
-    public void setAmount(ArrayList<Double> amount) {
-        this.amount = amount;
+    public Boolean getDecision() {
+        return decision;
     }
-    /**
-     * Method to change the property code
-     * @param propertyCode changed value of property code
-     */
-    public void setPropertyCode(String propertyCode) {
-        this.propertyCode = propertyCode;
+
+    public User getClient() {
+        return client;
+    }
+    public boolean contains(Order order) {
+        return this.equals(order);
+    }
+
+    public Property getPropertyAnnouncement() {
+        return this.announcement.getProperty();
+    }
+    public boolean hasOrderNumber(int orderNumber){
+        return this.orderNumber == orderNumber;
+    }
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+    public Order clone() {
+        return new Order(this.announcement, this.orderPrice, this.property,this.client,  this.date, this.decision, this.orderNumber);
     }
 }

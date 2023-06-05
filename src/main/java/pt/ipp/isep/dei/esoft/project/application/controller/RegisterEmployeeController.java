@@ -29,7 +29,7 @@ public class RegisterEmployeeController {
      * Register employee employee.
      *
      * @param name               the name
-     * @param propertyAddress            the address
+     * @param propertyAddress    the address
      * @param phone              the phone
      * @param email              the email
      * @param passportCardNumber the passport card number
@@ -49,17 +49,19 @@ public class RegisterEmployeeController {
      * Gets user repository.
      */
     public List<Employee> getUserRepository() {
-       return Repositories.getInstance().getUserRepository().getEmployeeList();
+        return Repositories.getInstance().getUserRepository().getEmployeeList();
 
     }
 
-    public List<Address> getAddresses(){
+    public List<Address> getAddresses() {
         return Repositories.getInstance().getAddressRepository().getAddressList();
     }
-    public List<Agency> getAgency(){
+
+    public List<Agency> getAgency() {
         return Repositories.getInstance().getAgencyRepository().getAgencyList();
     }
-    public List<Store> getStore(){
+
+    public List<Store> getStore() {
         return Repositories.getInstance().getStoreRepository().getStoreList();
     }
 
@@ -70,10 +72,11 @@ public class RegisterEmployeeController {
      * @param email the email
      * @param pass  the pass
      */
-    public void sendRegisteredUserEmail(String email, String pass){
+    public void sendRegisteredUserEmail(String email, String pass) {
         pass = PasswordGenerator.generatePassword();
         EmailService.sendEmail(email, pass);
     }
+
     public void setStateInstance(State state) {
         this.stateInstance = state;
     }
@@ -86,7 +89,7 @@ public class RegisterEmployeeController {
      * @return the boolean
      */
     public boolean checkEmail(String email) {
-        return (Employee.existsEmail(email)) ;
+        return (Employee.existsEmail(email));
     }
 
     /**
@@ -96,7 +99,7 @@ public class RegisterEmployeeController {
      * @return the boolean
      */
     public boolean checkPhone(String phone) {
-       return Employee.existsPhone(phone);
+        return Employee.existsPhone(phone);
 
     }
 
@@ -106,7 +109,7 @@ public class RegisterEmployeeController {
      * @param taxNumber the tax number
      * @return the boolean
      */
-    public boolean checkTaxNumber(String taxNumber){
+    public boolean checkTaxNumber(String taxNumber) {
         return Employee.existsTaxNumber(taxNumber);
     }
 
@@ -116,7 +119,7 @@ public class RegisterEmployeeController {
      * @param passportCardNumber the passport card number
      * @return the boolean
      */
-    public boolean checkPassportCardNumber(String passportCardNumber){
+    public boolean checkPassportCardNumber(String passportCardNumber) {
         return Employee.existsPassportCardNumber(passportCardNumber);
     }
 
@@ -133,12 +136,18 @@ public class RegisterEmployeeController {
 
 
     public Agent RegisterAgent(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
-        return  AgentRepository.createAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+        return AgentRepository.createAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
 
     }
 
     public NetworkManager RegisterNetworkManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, String pass) {
-        return  NetworkManagerRepository.createNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
+        return NetworkManagerRepository.createNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
+
+    }
+
+    public void saveEmployee(String name, String email, String pass, String role) {
+        AuthenticationRepository repo = Repositories.getInstance().getAuthenticationRepository();
+        repo.addUserWithRole(name, email, pass, role);
 
     }
 }

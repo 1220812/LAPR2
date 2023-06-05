@@ -1,0 +1,88 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Offer {
+    - Property property
+    - Double offerPrice
+    + Offer(property, offerPrice)
+}
+
+class OfferRepository {
+    - addOffer(offer)
+    - validateOffer(offer)
+}
+
+class PublishOfferController {
+    + PublishOfferController(OfferRepository)
+}
+
+class Residence {
+    - Integer numberOfBedrooms
+    - Integer numberOfBathrooms
+    - Integer numberOfParkingSpaces
+    + Residence(numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces)
+}
+
+class House {
+    - boolean existenceOfABasement
+    - SunExposure sunExposure
+    - boolean inhabitableLoft
+    + House(existenceOfABasement, sunExposure, inhabitableLoft)
+}
+
+class AvailableEquipment {
+    - String equipment
+    + Equipment(equipment)
+}
+
+class Adress {
+    - String street
+    - State state
+    - District district
+    - City city
+    - String zipCode
+    + Location(street,city,district,state,zipCode)
+}
+
+class PropertyTypeRepository {
+    + addPropertyType
+    + validatePropertyType
+    + getPropertyType()
+}
+
+class Repositories {
+}
+
+class PropertyType {
+    - String propertyType
+}
+
+Repositories -> Repositories : instance
+
+PublishOfferUI .> PublishOfferController
+PublishOfferController .> Repositories
+
+Repositories --> "1" PropertyTypeRepository
+Repositories --> "1" OfferRepository
+
+PropertyTypeRepository "1" --> "*" PropertyType : stores
+OfferRepository "1" --> "*" Offer : stores
+
+PublishOfferController ..> "1" OfferRepository : offerRepository
+Residence "*" --> "1" Adress : located at
+
+Offer "1" --> "1" Residence : about
+Residence "1" --> "1" House : can be
+Residence "1" --> "*" AvailableEquipment : contains
+
+
+
+@enduml

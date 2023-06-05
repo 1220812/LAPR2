@@ -207,18 +207,7 @@ public class Agent{
 
     @Override
     public String toString() {
-        return "Agent{" +
-                "name='" + name + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", taxNumber=" + taxNumber +
-                ", passportCardNumber=" + passportCardNumber +
-                ", address=" + address +
-                ", role=" + role +
-                ", agency=" + agency +
-                ", store=" + store +
-                ", pass='" + pass + '\'' +
-                '}';
+        return ", agent name= " + name;
     }
     /**
      * Textual representation of an instance of Owner

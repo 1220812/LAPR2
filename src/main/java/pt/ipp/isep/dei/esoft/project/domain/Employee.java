@@ -304,18 +304,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", passportCardNumber=" + passportCardNumber +
-                ", taxNumber=" + taxNumber +
-                ", role='" + role + '\'' +
-                ", address=" + address +
-                ", agency=" + agency +
-                ", store=" + store +
-                ", pass='" + pass + '\'' +
-                '}';
+        return "Employee:"  + "\nname : "+name + "\nemail : "+email + "\nphoneNumber : "+phoneNumber + "\npassportCardNumber : "+passportCardNumber + "\ntaxNumber : "+taxNumber + "\nrole : "+role + "\naddress : "+address + "\nagency : "+agency + "\nstore : "+store + "\npass : "+pass;
     }
 
     /**
@@ -419,6 +408,7 @@ public class Employee {
             return true;
         }
     }
+
 
 
 

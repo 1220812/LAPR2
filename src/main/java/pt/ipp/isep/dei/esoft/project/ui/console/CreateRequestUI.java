@@ -2,18 +2,14 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateRequestController;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
-
-/**
- * The type Create request ui.
- */
 public class CreateRequestUI implements Runnable {
-
-
     CreateRequestController controller = new CreateRequestController();
 
     double area = 0;
@@ -27,33 +23,37 @@ public class CreateRequestUI implements Runnable {
 
     int numberOfPhotos = 0;
 
-    Boolean inhabitableLoft = null;
+    private Boolean inhabitableLoft;
 
-    Boolean basement = null;
+    private Boolean basement;
 
-    Agent agent = null;
+    private Agent agent;
 
-    Store store = null;
-    SunExposure sunExposure = null;
+    private Store store;
+    private SunExposure sunExposure;
     private List<Photographs> photographs = new ArrayList<>();
-    List<AvailableEquipment> availableEquipment = new ArrayList<>();
-    String photoURI = null;
-    int contractDuration = 0;
-    String streetAddress = null;
+    private boolean airConditioning;
 
-    String zipCode = null;
+    private boolean centralHeating;
+    private String photoURI;
+    private String streetAddress;
+
+    private String zipCode;
+    private  Property property;
+    private Address address;
+    public LocalDate requestDate = LocalDate.now();
+    private Owner owner;
 
     public void run() {
-        area = Utils.readDoubleFromConsole("Insert the area of the property: ");
-        distanceFromCityCenter = Utils.readDoubleFromConsole("Insert the distance from the city center: ");
-        price = Utils.readDoubleFromConsole("Insert the price of the property: ");
-        streetAddress = Utils.readLineFromConsole("Insert the street address: ");
-        zipCode = Utils.readLineFromConsole("Insert the zip code: ");
-        State state = new State(Utils.readLineFromConsole("Insert the state: "));
-        District district = new District(Utils.readLineFromConsole("Insert the district: "));
-        City city = new City(Utils.readLineFromConsole("Insert the city: "));
+        String ownerName = Utils.readLineFromConsole("Insert the owner name: ");
+        while (ownerName.isEmpty()) {
+            System.out.println("please insert a valid name");
+            ownerName = Utils.readLineFromConsole("Insert the owner name: ");
+        }
+        owner = new Owner(ownerName);
+        requestOverallData();
+        requestDataForAddress();
         numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
-        Address address = new Address(streetAddress,zipCode, state, district, city);
         while (numberOfPhotos < 1 || numberOfPhotos > 30) {
             System.out.println("please insert a number between 1 and 30");
             numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
@@ -66,39 +66,129 @@ public class CreateRequestUI implements Runnable {
         }
         store = Utils.listAndSelectOne(controller.getStores());
         agent = Utils.listAndSelectOne(controller.getAgent());
-        RequestType requestType = Utils.listAndSelectOne(controller.getRequestTypeList());
-        String requestedType;
-        requestedType = requestType.toString();
-        System.out.println(requestedType);
-        if(requestedType.equals("Rent")){
-            contractDuration = Utils.readIntegerFromConsole("Insert the contract duration: ");
-        }
         PropertyType propertyType = Utils.listAndSelectOne(controller.getPropertiesTypeList());
-        String inPutType = null;
+        String inPutType;
         inPutType = propertyType.toString();
         System.out.println(propertyType);
         if (inPutType.equals("Land")) {
-            controller.createLand(area, distanceFromCityCenter, address, price, photographs, store, agent, requestType);
-            System.out.println(controller.createLand(area, distanceFromCityCenter, address, price, photographs, store, agent, requestType));
+            Optional<Property> land = controller.createLand(area, distanceFromCityCenter, address, price, photographs);
+            System.out.println(land);
+            System.out.println();
         } else if (inPutType.equals("House")) {
-            numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bathrooms: ");
-            numberOfBedrooms = Utils.readIntegerFromConsole("Insert the number of bedrooms: ");
-            numberOfParkingSpaces = Utils.readIntegerFromConsole("Insert the number of parking spaces: ");
-            basement = Utils.readBooleanFromConsole("Does the house have a basement? (y/n)");
-            inhabitableLoft = Utils.readBooleanFromConsole("Does the house have an inhabitable loft? (y/n)");
-            sunExposure = Utils.listAndSelectOne(controller.getSunExposuresList());
-            availableEquipment = Utils.listAndSelectMany(controller.getAvailableEquipmentList());
-            controller.createHouse(address,area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, availableEquipment, basement, sunExposure, inhabitableLoft, price, photographs, agent, store, requestType);
-            System.out.println(controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, availableEquipment, basement, sunExposure, inhabitableLoft, price, photographs, agent, store, requestType));
+            requestDataForHouse();
+            Optional<Property> house = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure,inhabitableLoft,price, photographs);
+            System.out.println(house);
+            System.out.println();
         } else if (inPutType.equals("Apartment")) {
-            numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bathrooms: ");
-            numberOfBedrooms = Utils.readIntegerFromConsole("Insert the number of bedrooms: ");
-            numberOfParkingSpaces = Utils.readIntegerFromConsole("Insert the number of parking spaces: ");
-            availableEquipment = Utils.listAndSelectMany(controller.getAvailableEquipmentList());
-            controller.createApartment(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, price, photographs, availableEquipment, agent, store, requestType);
-            System.out.println(controller.createApartment(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, price, photographs, availableEquipment, agent, store, requestType));
+            requestDataForApartment();
+            Optional<Property> apartment = controller.createApartment(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, price, photographs, centralHeating, airConditioning);
+            System.out.println(apartment);
+            System.out.println();
         }
-        System.out.println();
-        System.out.println(controller.createRequest(propertyType, price, requestType, agent, store));
+        RequestType requestType = Utils.listAndSelectOne(controller.getRequestTypeList());
+        String requestedType = requestType.toString();
+        if (requestedType.equalsIgnoreCase("Rent")) {
+            int contractDuration = Utils.readIntegerFromConsole("Insert the contract duration: ");
+            Optional<Request> rentRequest = controller.createRentRequest(property, requestDate, propertyType, agent, store, owner, contractDuration, price, requestType);
+            System.out.println(rentRequest);
+        }else if(requestedType.equalsIgnoreCase("Sell")){
+            Optional<Request> sellRequest = controller.createSellRequest(property,requestDate,propertyType,agent,store,owner,price,requestType);
+            System.out.println(sellRequest);
+        }
     }
+    private void requestOverallData(){
+        area = Utils.readDoubleFromConsole("Insert the area of the property: ");
+        while (area <= 0){
+            System.out.println("please insert a valid number");
+            area = Utils.readDoubleFromConsole("Insert the area of the property: ");
+        }
+        distanceFromCityCenter = Utils.readDoubleFromConsole("Insert the distance from the city center: ");
+        while (distanceFromCityCenter <= 0){
+            System.out.println("please insert a valid number");
+            distanceFromCityCenter = Utils.readDoubleFromConsole("Insert the distance from the city center: ");
+        }
+        price = Utils.readDoubleFromConsole("Insert the price of the property: ");
+        while (price <= 0){
+            System.out.println("please insert a valid number");
+            price = Utils.readDoubleFromConsole("Insert the price of the property: ");
+        }
+    }
+    private void requestDataForHouse(){
+        numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bathrooms: ");
+        while (numberOfBathrooms <= 0){
+            System.out.println("please insert a valid number");
+            numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bathrooms: ");
+        }
+        numberOfBedrooms = Utils.readIntegerFromConsole("Insert the number of bedrooms: ");
+        while (numberOfBedrooms <= 0){
+            System.out.println("please insert a valid number");
+            numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bedrooms: ");
+        }
+        numberOfParkingSpaces = Utils.readIntegerFromConsole("Insert the number of parking spaces: ");
+        while (numberOfParkingSpaces <= 0){
+            System.out.println("please insert a valid number");
+            numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of parking spaces: ");
+        }
+        String flag = Utils.readLineFromConsole("Does the house have an inhabitable loft? (true/false)");
+        if(flag.equalsIgnoreCase("true")){
+            inhabitableLoft = true;
+        }else{
+            inhabitableLoft = false;
+        }
+        String flag1 = Utils.readLineFromConsole("Does the house have an basement? (true/false)");
+        if(flag1.equalsIgnoreCase("true")){
+            basement = true;
+        }else{
+            basement = false;
+        }
+        System.out.println("Please select the direction of the sun exposure:");
+        System.out.println();
+        sunExposure = Utils.listAndSelectOne(controller.getSunExposuresList());
+        String flag2 = Utils.readLineFromConsole("Does the house have an air conditioning? (true/false)");
+        if(flag2.equalsIgnoreCase("true")){
+            airConditioning = true;
+        }else{
+            airConditioning = false;
+        }
+        String flag3 = Utils.readLineFromConsole("Does the house have a central heating? (true/false)");
+        if(flag3.equalsIgnoreCase("true")){
+            centralHeating = true;
+        }else{
+            centralHeating = false;
+        }
+    }
+    private void requestDataForApartment(){
+        numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bathrooms: ");
+        numberOfBedrooms = Utils.readIntegerFromConsole("Insert the number of bedrooms: ");
+        numberOfParkingSpaces = Utils.readIntegerFromConsole("Insert the number of parking spaces: ");
+        String flag2 = Utils.readLineFromConsole("Does the house have an air conditioning? (true/false)");
+        if(flag2.equalsIgnoreCase("true")){
+            airConditioning = true;
+        }else{
+            airConditioning = false;
+        }
+        String flag3 = Utils.readLineFromConsole("Does the house have a central heating? (true/false)");
+        if(flag3.equalsIgnoreCase("true")){
+            centralHeating = true;
+        }else{
+            centralHeating = false;
+        }
+    }
+    private void requestDataForAddress(){
+        streetAddress = Utils.readLineFromConsole("Insert the street address: ");
+        while (streetAddress == null) {
+            System.out.println("please insert a valid street address");
+            streetAddress = Utils.readLineFromConsole("Insert the street address: ");
+        }
+        zipCode = Utils.readLineFromConsole("Insert the zip code: ");
+        while (zipCode==null || zipCode.length() != 5){
+            System.out.println("please insert a valid zip code");
+            zipCode = Utils.readLineFromConsole("Insert the zip code: ");
+        }
+        State state = new State(Utils.readLineFromConsole("Insert the state: "));
+        District district = new District(Utils.readLineFromConsole("Insert the district: "));
+        City city = new City(Utils.readLineFromConsole("Insert the city: "));
+        address = new Address(streetAddress,zipCode,state,district,city);
+    }
+
 }

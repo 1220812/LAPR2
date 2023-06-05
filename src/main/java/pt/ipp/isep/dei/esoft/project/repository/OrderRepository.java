@@ -1,96 +1,153 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-/**
- * The type Orders repository.
- */
 public class OrderRepository {
     /**
-     * List of orders
+     * List of orders.
      */
-    ArrayList<Order> ordersList = new ArrayList<>();
+    private static final List<Order> orders = new ArrayList<>();
     /**
-     * Method to sort the orders list by age from the oldest one to the youngest one
-     * Creates an array of integers with the ages of the orders and then sort that list
-     * @param orders orders list
-     * @return the orders list sorted by age
+     * Property code.
      */
-    public ArrayList<Order> sortByAge(ArrayList<Order> orders) {
-        int[] ageArray = new int[orders.size()];
-        for (int i = 0; i < orders.size(); i++) {
-            ageArray[i] = orders.get(i).getAge();
-        }
-        for (int j = 0; j < ageArray.length - 1; j++) {
-            for (int k = 1; k < ageArray.length; k++) {
-                if (ageArray[k] > ageArray[j]) {
-                    int copy = ageArray[j];
-                    Order copy2 = orders.get(j);
-                    ageArray[j] = ageArray[k];
-                    orders.set(j, orders.get(k));
-                    orders.set(k, copy2);
-                    ageArray[k] = copy;
-                }
-            }
+    private String propertyCode;
+    /**
+     * Order number.
+     */
+    private int orderNumber;
 
+    /**
+     *  Instantiates a new Order repository.
+     */
+
+    public void saveOrder(Order order) {
+        orders.add(order);
+    }
+
+    /**
+     * Gets the order repository list.
+     * @param propertyCode property code
+     * @param orderNumber order number
+     * @return list of orders
+     */
+    public static List<Order> getOrderRepositoryList(String propertyCode, int orderNumber) {
+        return List.copyOf(orders);
+    }
+
+    /**
+     * Method that adds an order to the list.
+     * @param order order to be added to the list
+     */
+    public List<Order> addOrder(Order order) {
+        orders.add(order);
+        Optional<Order> newOrder = Optional.empty();
+        boolean operationSuccess = false;
+        if(validateOrder(order)){
+            newOrder = Optional.of(order.clone());
+            operationSuccess = orders.add(newOrder.get());
+        }
+        if(!operationSuccess){
+            newOrder = Optional.empty();
         }
         return orders;
     }
     /**
-     * Method to sort the orders list by the amount
-     * @param ordersAmount list of the orders amount
-     * @return sorted list of the orders by the amount from the biggest to the smallest
+     * Removes the order.
      */
-    public ArrayList<Double> sortByAmount(ArrayList<Double> ordersAmount){
-        for (int j = 0; j < ordersAmount.size() - 1; j++) {
-            for (int k = 1; k < ordersAmount.size(); k++) {
-                if (ordersAmount.get(k)>ordersAmount.get(j)){
-                    Double copy = ordersAmount.get(j);
-                    ordersAmount.set(j, ordersAmount.get(k));
-                    ordersAmount.set(k, copy);
+    public void removeOrder() {
+        orders.remove(orders);
+    }
+    /**
+     * Updates the order.
+     */
+    public void updateOrder() {
+        orders.set(orders.indexOf(orders), orders.get(orders.indexOf(orders)));
+    }
+    /**
+     * Method that shows the order on the list
+     * @return list of orders
+     */
+    public List<Order> getOrders() {
+        return orders;
+    }
+    /**
+     * Method that returns the position of an order in the list
+     */
+    public void getOrder() {
+        orders.get(orders.indexOf(orders));
+    }
+    /**
+     * Gets the orders by property.
+     * @return list of orders by property
+     */
+    public List<Order> getOrdersByProperty() {
+        return OrderRepository.getOrderRepositoryList(propertyCode, orderNumber);
+    }
+    /**
+     * Gets the orders by property and order number.
+     * @param propertyCode property code
+     * @param orderNumber order number
+     * @return list of orders by property and order number
+     */
+    public Order getOrderByPropertyCodeOrderNumber(String propertyCode, int orderNumber) {
+        for (Order order : orders) {
+            if (order.hasPropertyCode(propertyCode) && order.hasOrderNumber(orderNumber)) {
+                return order;
+            }
+        }
+        return null;
+    }
+    /**
+     * Gets the undecided property order.
+     * @param propertyCode property code
+     * @return list of undecided property order
+     */
+    public List<Order> getUndecidedPropertyOrder(String propertyCode) {
+        List<Order> result = new ArrayList<>();
+        for (Order order : orders) {
+            if (order.hasPropertyCode(propertyCode) && !order.hasDecision()) {
+                result.add(order);
+            }
+        }
+        return result;
+    }
+    /**
+     * Gets the properties sorted by age.
+     * @param properties list of orders on a properties
+     * @return list of orders sorted by age
+     */
+    public ArrayList<Order> sortByAge(ArrayList<Order> properties) {
+        LocalDate[] ageArray = new LocalDate[properties.size()];
+        for (int i = 0; i < properties.size(); i++) {
+            ageArray[i] = properties.get(i).getAnnouncement().getDate();
+        }
+        for (int j = 0; j < ageArray.length - 1; j++) {
+            for (int k = j; k < ageArray.length; k++) {
+                if (ageArray[j].compareTo(ageArray[k]) > 0) {
+                    LocalDate copy = ageArray[j];
+                    Order copyNumber2 = properties.get(j);
+                    ageArray[j] = ageArray[k];
+                    properties.set(j, properties.get(k));
+                    properties.set(k, copyNumber2);
+                    ageArray[k] = copy;
                 }
             }
         }
-        return ordersAmount;
+        return properties;
     }
     /**
-     * Method that returns the list of orders
-     * @return list of orders
+     * Method that validates an order.
+     * @param order order to be validated
+     * @return true if the order is valid, false if not
      */
-    public ArrayList<Order> getOrdersList() {
-        return ordersList;
-    }
-    /**
-     * Method to change the list of orders
-     * @param property the property
-     */
-    public void setOrdersList(Order property){
-        this.ordersList.add(property);
-    }
-    /**
-     * Method to remove all the offers from the list except the one that was accepted
-     * @param orderAcceptedIndex the orderAcceptedIndex
-     * @param propertyCode the propertyCode
-     */
-    public void removeOffers(int orderAcceptedIndex, int propertyCode){
-        ArrayList<Double> offers = ordersList.get(propertyCode).getAmount();
-        for(int i = offers.size() - 1; i >= 0; i--){
-            if(i != orderAcceptedIndex){
-                offers.remove(i);
-            }
-        }
-        ordersList.get(propertyCode).setAmount(offers);
-    }
-    /**
-     * Method to remove an order that was declined from the list
-     * @param orderDeclinedIndex the index of the declined order
-     * @param propertyCode code of the property
-     */
-    public void removeOffer(int orderDeclinedIndex, int propertyCode){
-        ArrayList<Double> offers = ordersList.get(propertyCode).getAmount();
-        offers.remove(orderDeclinedIndex);
-        ordersList.get(propertyCode).setAmount(offers);
+    public boolean validateOrder(Order order) {
+        boolean isValid = !orders.contains(order);
+        return isValid;
     }
 }

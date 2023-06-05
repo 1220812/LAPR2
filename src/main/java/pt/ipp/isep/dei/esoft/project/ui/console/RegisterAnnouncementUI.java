@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +22,7 @@ public class RegisterAnnouncementUI implements Runnable {
     private PropertyType propertyType;
     private String ownerEmail;
     private double area;
-    private String date;
+    private LocalDate date;
     private Address address;
     private int doorNumber;
     private int floorNumber;
@@ -43,6 +45,10 @@ public class RegisterAnnouncementUI implements Runnable {
     private final String DEFAULT_REQUESTTYPE = "Sell";
     private final double DEFAULT_CONTRACTDURATION = 0;
     List<AvailableEquipment> availableEquipment = new ArrayList<>();
+
+    private boolean airConditioning;
+
+    private boolean centralHeating;
 
     public void run() {
         Scanner ler = new Scanner(System.in);
@@ -145,7 +151,7 @@ public class RegisterAnnouncementUI implements Runnable {
             comission = ler.nextInt();
         }
         System.out.println("Property type = " + propertyType);
-        System.out.println("Address= "+ address);
+        System.out.println("Address= " + address);
         System.out.println("Floor number = " + floorNumber);
         System.out.println("Distance from city centre = " + distanceFromCityCenter);
         System.out.println("Requested Price = " + price);
@@ -165,36 +171,20 @@ public class RegisterAnnouncementUI implements Runnable {
         System.out.println("Comission = " + comission);
         System.out.println();
 
-        dataConfirmation = Utils.readBooleanFromConsole("Confirm data? (y/n)");
+        String flag = Utils.readLineFromConsole("Confirm data? (y/n)");
 
-        if(dataConfirmation) {
-            requestType = controller.createRequestType(DEFAULT_REQUESTTYPE,DEFAULT_CONTRACTDURATION);
+        if (flag.equalsIgnoreCase("y")) {
+            requestType = controller.createRequestType(DEFAULT_REQUESTTYPE, DEFAULT_CONTRACTDURATION);
             if (inputPropertyType.equals("Land")) {
-                property = controller.createProperty(area, distanceFromCityCenter, address, price, photos, requestType);
-            }
-            else if (inputPropertyType.equals("Apartment")) {
-                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, price, photos, requestType);
-            }
-            else if (inputPropertyType.equals("House")) {
-                property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, price, photos, requestType);
+                property = controller.createProperty(area, distanceFromCityCenter, address, price, photos);
+            } else if (inputPropertyType.equals("Apartment")) {
+                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, price, photos, airConditioning, centralHeating, requestType);
+            } else if (inputPropertyType.equals("House")) {
+                property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, price, photos, requestType);
             }
             announcement = controller.createAnnouncement(property, date, comissionType, comission, requestType, propertyType);
             controller.registerAnnouncement(announcement);
-            System.out.println("Announcement registed successfully");
+            System.out.println("Announcement registered successfully");
         }
     }
-
-//    public boolean ownerVerification() {
-//        Scanner ler = new Scanner(System.in);
-//
-//        System.out.println("Please write the owner's email:");
-//        ownerEmail = ler.nextLine();
-//
-//        if(controller.checkEmail(ownerEmail))
-//            return false;
-//
-//        if(controller.)
-//
-//
-//    }
 }

@@ -15,7 +15,7 @@ public class DisplayPropertiesController {
     }
 
 //    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
-//         AnnouncementRepository announcementRepository = getAnnouncementRepository();
+//         AnnouncementRepository announcementRepository = getAnnouncementsRepository();
 //        return announcementRepository.getSpecificAnnouncements(typeOfBusiness, typeOfProperty, numberOfRooms);
 //    }
 

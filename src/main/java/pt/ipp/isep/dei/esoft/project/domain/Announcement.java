@@ -1,13 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
-
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
+
 public class Announcement {
-    /**
-     * announcement publish date
-     */
-    private String date;
     /**
      * announcement property
      */
@@ -24,8 +18,14 @@ public class Announcement {
     private RequestType requestType;
     private PropertyType propertyType;
 
+    private Agent agent;
+    /**
+     * announcement publish date
+     */
+    private LocalDate date;
 
-    public Announcement(Property property, String date, String comissionType, double comission, RequestType requestType, PropertyType propertyType) {
+
+    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, PropertyType propertyType) {
         this.property = property;
         this.date = date;
         this.comissionType = comissionType;
@@ -33,18 +33,25 @@ public class Announcement {
         this.requestType = requestType;
         this.propertyType=propertyType;
     }
-    public Announcement(Property property, String date){
+    public Announcement(Property property, LocalDate date){
         this.property = property;
         this.date = date;
     }
+    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, PropertyType propertyType, Agent agent) {
+        this.property = property;
+        this.date = date;
+        this.comissionType = comissionType;
+        this.comission = comission;
+        this.requestType = requestType;
+        this.propertyType=propertyType;
+        this.agent=agent;
+    }
 
-
-
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -90,22 +97,31 @@ public class Announcement {
 
     @Override
     public String toString() {
-        return "Announcement{" +
-                "date='" + date + '\'' +
-                ", property=" + property +
-                ", comissionType='" + comissionType + '\'' +
-                ", comission=" + comission +
-                ", requestType=" + requestType +
-                ", propertyType=" + propertyType +
-                '}';
+        return "Announcement:" +
+                " date=" + date +
+                "\n" +
+                " property= " + property +
+                "\n" +
+                " comissionType= " + comissionType +
+                "\n" +
+                " comission= " + comission +
+                "\n" +
+                " requestType=" + requestType +
+                "\n" +
+                " propertyType= " + propertyType +
+                "\n" +
+                " agent= " + agent.getName();
     }
 
     public Announcement clone(){
         return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType,this.propertyType);
     }
-
     public static boolean existsPrice(double price){
         if (price < 1) { return false; }
         else return true;
+    }
+
+    public Agent getAgent() {
+        return agent;
     }
 }
