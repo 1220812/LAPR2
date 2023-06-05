@@ -243,7 +243,7 @@ taxNumber
 UnregisteredUser "1" -- "1" Address : has >
 UnregisteredUser "1" -- "1" TaxNumber : has >
 
-Address "1" -- City : in >
+Address "1" -- City : has an >
 City -- State : in >
 State  -- District : in >
 
