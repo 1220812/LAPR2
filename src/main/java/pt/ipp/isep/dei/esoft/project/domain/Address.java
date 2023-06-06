@@ -81,22 +81,6 @@ public class Address {
         this.city = city;
         this.district = district;
     }
-    public Address(String streetAddress, String zipCode, State state, District district, City city) {
-        if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || district == null || city == null) {
-            throw new IllegalArgumentException("Invalid arguments.");
-        }
-        if (zipCode.length() != ZIP_CODE_LENGTH || !StringUtils.isNumeric(zipCode)) {
-            throw new IllegalArgumentException("Invalid zip code.");
-        }
-
-
-        this.streetAddress = streetAddress;
-        this.zipCode = zipCode;
-        this.state = state;
-        this.city = city;
-        this.district = district;
-    }
-
     /**
      * Creates a new instance of Address with attributes by default
      */

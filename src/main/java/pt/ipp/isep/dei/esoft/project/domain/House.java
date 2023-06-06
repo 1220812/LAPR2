@@ -31,10 +31,9 @@ public class House extends Residence {
      * @param basement basement
      * @param sunExposure house exposure to the sun
      * @param inhabitableLoft inhabitable loft
-     * @param price house price
      */
-    public House(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning , boolean centralHeating , boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList) {
-        super(address,  area, distanceFromCityCentre,  numberOfBathrooms,  numberOfBedrooms,  numberOfParkingSpaces, price, photoList , airConditioning, centralHeating);
+    public House(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning , boolean centralHeating , boolean basement, SunExposure sunExposure, boolean inhabitableLoft, List<Photographs> photoList) {
+        super(address,  area, distanceFromCityCentre, propertyType, numberOfBathrooms,  numberOfBedrooms,  numberOfParkingSpaces, photoList , airConditioning, centralHeating);
         this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;
         this.sunExposure = sunExposure;

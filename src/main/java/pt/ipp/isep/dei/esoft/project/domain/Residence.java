@@ -36,11 +36,10 @@ public class Residence extends Property{
      * @param numberOfParkingSpaces number of parking spaces
      * @param airConditioning air conditioning
      * @param centralHeating central heating
-     * @param price price
      */
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning) {
-        super(area, distanceFromCityCentre, address,price, photographsList);
+    public Residence (Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning) {
+        super(area, distanceFromCityCentre, address, propertyType, photographsList);
         this.numberOfBedrooms = numberOfBathrooms;
         this.numberOfBathrooms = numberOfBedrooms;
         this.numberOfParkingSpaces = numberOfParkingSpaces;

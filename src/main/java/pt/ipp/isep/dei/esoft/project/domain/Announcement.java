@@ -1,4 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
+
 import java.time.LocalDate;
 
 public class Announcement {
@@ -16,7 +17,6 @@ public class Announcement {
     private double comission;
 
     private RequestType requestType;
-    private PropertyType propertyType;
 
     private Agent agent;
     /**
@@ -24,27 +24,20 @@ public class Announcement {
      */
     private LocalDate date;
 
+    private double price;
 
-    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, PropertyType propertyType) {
+    private Owner owner;
+
+
+    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, Agent agent, double price, Owner owner) {
         this.property = property;
         this.date = date;
         this.comissionType = comissionType;
         this.comission = comission;
         this.requestType = requestType;
-        this.propertyType=propertyType;
-    }
-    public Announcement(Property property, LocalDate date){
-        this.property = property;
-        this.date = date;
-    }
-    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, PropertyType propertyType, Agent agent) {
-        this.property = property;
-        this.date = date;
-        this.comissionType = comissionType;
-        this.comission = comission;
-        this.requestType = requestType;
-        this.propertyType=propertyType;
         this.agent=agent;
+        this.price= price;
+        this.owner = owner;
     }
 
     public LocalDate getDate() {
@@ -87,34 +80,42 @@ public class Announcement {
         this.requestType = requestType;
     }
 
-    public PropertyType getPropertyType() {
-        return propertyType;
+    public double getPrice() {
+        return price;
     }
 
-    public void setPropertyType(PropertyType propertyType) {
-        this.propertyType = propertyType;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    public Owner getOwner() {
+        return owner;
     }
 
     @Override
     public String toString() {
-        return "Announcement:" +
-                " date=" + date +
-                "\n" +
-                " property= " + property +
-                "\n" +
-                " comissionType= " + comissionType +
-                "\n" +
-                " comission= " + comission +
-                "\n" +
-                " requestType=" + requestType +
-                "\n" +
-                " propertyType= " + propertyType +
-                "\n" +
-                " agent= " + agent.getName();
+        return "Announcement{" +
+                "property=" + property +
+                ", comissionType='" + comissionType + '\'' +
+                ", comission=" + comission +
+                ", requestType=" + requestType +
+                ", agent=" + agent +
+                ", date=" + date +
+                ", price=" + price +
+                ", owner=" + owner +
+                '}';
     }
 
     public Announcement clone(){
-        return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType,this.propertyType, this.agent);
+        return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType, this.agent,this.price, this.owner);
     }
     public static boolean existsPrice(double price){
         if (price < 1) { return false; }
