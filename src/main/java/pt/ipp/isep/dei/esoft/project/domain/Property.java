@@ -1,11 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Property{
+public class Property {
     /**
      * area of the property
      */
@@ -22,23 +21,55 @@ public class Property{
      * type of property
      */
     private PropertyType propertyType;
+    /**
+     * List of photographs of the property
+     */
     private List<Photographs> photographsList = new ArrayList<>();
 
-   public Property (double area, double distanceFromTheCityCenter, Address address, PropertyType propertyType, List<Photographs> photographsList) {
-       this.area = area;
-       this.distanceFromTheCityCenter = distanceFromTheCityCenter;
-       this.address = address;
-       this.propertyType = propertyType;
-       this.photographsList = photographsList;
-   }
+    /**
+     * Method that creates a new instance of property
+     *
+     * @param area                      area of the property
+     * @param distanceFromTheCityCenter distance between the property and the city center
+     * @param address                   property address
+     * @param propertyType              type of property
+     * @param photographsList           list of photographs of the property
+     */
+    public Property(double area, double distanceFromTheCityCenter, Address address, PropertyType propertyType, List<Photographs> photographsList) {
+        if (area <= 0) {
+            throw new IllegalArgumentException("Area must be greater than 0");
+        }
+        if (distanceFromTheCityCenter <= 0) {
+            throw new IllegalArgumentException("Distance from the city center must be greater than 0");
+        }
+        if (address == null) {
+            throw new IllegalArgumentException("Address must not be null");
+        }
+        if (propertyType == null) {
+            throw new IllegalArgumentException("Property type must not be null");
+        }
+        if (photographsList == null) {
+            throw new IllegalArgumentException("Photographs list must not be null");
+        }
+        this.area = area;
+        this.distanceFromTheCityCenter = distanceFromTheCityCenter;
+        this.address = address;
+        this.propertyType = propertyType;
+        this.photographsList = photographsList;
+    }
 
+    /**
+     * Method that shows the distance from the city center
+     *
+     * @return distance from the city center
+     */
     public double getDistanceFromTheCityCenter() {
         return distanceFromTheCityCenter;
     }
 
-
     /**
      * Method to show the area
+     *
      * @return area
      */
     public double getArea() {
@@ -47,39 +78,25 @@ public class Property{
 
     /**
      * Method to change the area
+     *
      * @param area changed area
      */
-
     public void setArea(double area) {
         this.area = area;
     }
 
     /**
-     * Method to show the distance
-     * @return distance from the city center
-     */
-    public double getDistance() {
-        return distanceFromTheCityCenter;
-    }
-
-    /**
-     * Method to change the distance from the city center
-     * @param distanceFromTheCityCentre distance from the city center
-     */
-    public void setDistance(double distanceFromTheCityCentre) {
-        this.distanceFromTheCityCenter = distanceFromTheCityCentre;
-    }
-
-
-    /**
      * Method to show the address of the property
+     *
      * @return address
      */
     public Address getAddress() {
         return address;
     }
+
     /**
      * Method to change the address of the property
+     *
      * @param address changed address
      */
     public void setAddress(Address address) {
@@ -88,46 +105,15 @@ public class Property{
 
     /**
      * Method to change the distance from the city center
+     *
      * @param distanceFromTheCityCenter changed distance from the city center
      */
     public void setDistanceFromTheCityCenter(double distanceFromTheCityCenter) {
         this.distanceFromTheCityCenter = distanceFromTheCityCenter;
     }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Property property = (Property) o;
-        return Double.compare(property.area, area) == 0 && Double.compare(property.distanceFromTheCityCenter, distanceFromTheCityCenter) == 0 && Objects.equals(address, property.address) && Objects.equals(photographsList, property.photographsList);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(area, distanceFromTheCityCenter, address, photographsList);
-    }
-
-    /**
-     * Textual representation of an instance of Owner
-     */
-
-    @Override
-    public String toString() {
-        return "Property{" +
-                "area=" + area +
-                ", distanceFromTheCityCenter=" + distanceFromTheCityCenter +
-                ", address=" + address +
-                ", propertyType=" + propertyType +
-                ", photographsList=" + photographsList +
-                '}';
-    }
-
-    /**
-     * This method creates a new instance of the property object and initializes its attributes with the exact same values of the original object
-     * @return a clone of the property object
-     */
-    public Property clone(){ return new Property(this.area, this.distanceFromTheCityCenter, this.address, this.propertyType, this.photographsList); }
-
     /**
      * Method to show the property type
+     *
      * @return property type
      */
     public PropertyType getPropertyType() {
@@ -136,39 +122,52 @@ public class Property{
 
     /**
      * Method to change the property type
+     *
      * @param propertyType changed property type
      */
     public void setPropertyType(PropertyType propertyType) {
         this.propertyType = propertyType;
     }
-
     /**
-     * Method to verify if that exists area
-     * @param area area of the property
-     * @return true if the area exists, false if not
+     * Equals method that verifies if the property already exists in the system
+     *
+     * @param o object to compare with
+     * @return true if the property already exists, false if it doesn't
      */
-    public static boolean existsArea(double area){
-        if (area < 1) { return false; }
-        else return true;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Property property = (Property) o;
+        return Double.compare(property.area, area) == 0 && Double.compare(property.distanceFromTheCityCenter, distanceFromTheCityCenter) == 0 && Objects.equals(address, property.address) && Objects.equals(propertyType, property.propertyType) && Objects.equals(photographsList, property.photographsList);
     }
     /**
-     * Method to verify if that exists a price
-     * @param price property price
-     * @return true if the price exists, false if not
+     * Method that returns a unique code that identifies the property
+     *
+     * @return hash code for the property
      */
-    public static boolean existsPrice(double price){
-        if (price <= 0) { return false; }
-        else return true;
+    @Override
+    public int hashCode() {
+        return Objects.hash(area, distanceFromTheCityCenter, address, propertyType, photographsList);
     }
-
     /**
-     * Method to verify if that exists a distance from the city center
-     * @param distanceFromTheCityCenter distance from the city center
-     * @return  true if the distance from the city center exists, false if not
+     * Textual representation of an instance of property
      */
-    public static boolean existsDistanceFromCityCenter(double distanceFromTheCityCenter){
-        if (distanceFromTheCityCenter < 1) { return false; }
-        else return true;
+    @Override
+    public String toString() {
+        return "Property : " + "\n" +
+                "area = " + area +
+                ", distanceFromTheCityCenter = " + distanceFromTheCityCenter +
+                ", address = " + address +
+                ", propertyType = " + propertyType +
+                ", photographsList = " + photographsList;
     }
-
+    /**
+     * Method that creates an exact copy of the property object
+     *
+     * @return a clone of the property object
+     */
+    public Property clone() {
+        return new Property(this.area, this.distanceFromTheCityCenter, this.address, this.propertyType, this.photographsList);
+    }
 }

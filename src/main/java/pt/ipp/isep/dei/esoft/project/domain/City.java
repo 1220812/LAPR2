@@ -8,6 +8,9 @@ public class City{
      * City name
      */
     private String name;
+    /**
+     * City name by default
+     */
     private static final String DEFAULT_NAME = "no name";
 
     /**
@@ -40,17 +43,20 @@ public class City{
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Method that provides the city characteristics
+     * @return city characteristics
+     */
     @Override
     public String toString() {
         return name;
     }
+    /**
+     * Method that creates a clone of the city object
+     * @return clone of the city object
+     */
     public City clone(){
         return new City(this.name);
     }
-
-
-
-
-
-
 }

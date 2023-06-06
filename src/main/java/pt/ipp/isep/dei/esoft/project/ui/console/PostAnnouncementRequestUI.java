@@ -26,7 +26,7 @@ public class PostAnnouncementRequestUI implements Runnable{
                 i += 1;
                 System.out.println(i);
                 System.out.println("Date = " + request.getRequestDate());
-                System.out.println("Property Type = " + request.getPropertyType());
+                System.out.println("Property Type = " + request.getProperty().getPropertyType());
             }
             int assignedRequest = Utils.readIntegerFromConsole("Select one of the requests:");
             while (assignedRequest < 1 || assignedRequest > assignedRequestList.size()){

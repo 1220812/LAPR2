@@ -5,14 +5,18 @@ import pt.ipp.isep.dei.esoft.project.repository.StoreRepository;
 
 import java.time.LocalDate;
 
-/**
- * The type Message.
- */
 public class Message {
-
+    /**
+     * Date of the sending message
+     */
     private LocalDate date;
+    /**
+     * Schedule
+     */
     private String schedule;
-
+    /**
+     *
+     */
     private String name;
     private int phone;
 

@@ -14,9 +14,10 @@ public class ImportInformationUI implements Runnable {
     /**
      * Controller attribute.
      */
-   public ImportInformationUI () {}
+    public ImportInformationUI() {
+    }
 
-    public  void run () {
+    public void run() {
         String filePath = Utils.readLineFromConsole("Insert lien path:");
 
         ImportInformationController ctrl = new ImportInformationController();
@@ -27,7 +28,8 @@ public class ImportInformationUI implements Runnable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-   }
+    }
+}
 
 
 

@@ -37,21 +37,37 @@ public class Address {
      * zip code length
      */
     private static final int ZIP_CODE_LENGTH = 5;
+    /**
+     * default street address
+     */
     private static final String DEFAULT_STREET="unregistered";
+    /**
+     * default zip code
+     */
     private static final String DEFAULT_ZIPCODE="none";
+    /**
+     * default city
+     */
     private City DEFAULT_CITY = new City();
+    /**
+     * default district
+     */
     private District DEFAULT_DISTRICT = new District();
+    /**
+     * default state
+     */
     private State DEFAULT_STATE = new State();
+    /**
+     * default floor number
+     */
     private static final int DEFAULT_FLOOR_NUMBER = 0;
+    /**
+     * default door number
+     */
     private static final int DEFAULT_DOOR_NUMBER = 0;
 
-
-
-
-    // CONSTRUCTORS
-
     /**
-     * This method creates an Address object with all attributes and verifies if all the attributes inserted are valid
+     * Method that creates a new instance of Address
      * @param streetAddress street address
      * @param doorNumber door number
      * @param floorNumber floor number
@@ -82,7 +98,7 @@ public class Address {
         this.district = district;
     }
     /**
-     * Creates a new instance of Address with attributes by default
+     * Creates a new instance of Address with ãll the attributes by default
      */
     public Address(){
         this.district = DEFAULT_DISTRICT;
@@ -226,13 +242,4 @@ public class Address {
      * @return copy of address
      */
     public Address clone(){ return new Address(this.streetAddress, this.doorNumber,this.floorNumber,this.zipCode,this.state,this.district,this.city); }
-    public static boolean existsZipCode(String zipCode){
-        if ((zipCode.length() != ZIP_CODE_LENGTH) || (StringUtils.isBlank(zipCode)) || (!StringUtils.isNumeric(zipCode))) { return false; }
-        else return true;
-    }
-
-    public static boolean existsDoorNumber(int floorNumber){
-        if (floorNumber < 1) { return false; }
-        else return true;
-    }
 }

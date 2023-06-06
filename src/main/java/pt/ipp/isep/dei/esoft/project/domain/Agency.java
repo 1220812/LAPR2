@@ -25,30 +25,37 @@ public class Agency {
      */
     private String phoneNumber;
     /**
-     * agency administrator
+     * default agency id
      */
-
     private static final int DEFAULT_ID = 0;
-
+    /**
+     * default agency designation
+     */
     private static final String DEFAULT_DESIGNATION = "no agency designation";
-
-    private static final Address DEFAULT_ADRESS = new Address();
-
-    private static final String DEFAULT_EMAILADRESS = "no agency email";
-
-    private static final String DEFAULT_PHONENUMBER = "000-000-000";
-
+    /**
+     * default agency address
+     */
+    private static final Address DEFAULT_ADDRESS = new Address();
+    /**
+     * default agency email address
+     */
+    private static final String DEFAULT_EMAIL_ADDRESS = "no agency email";
+    /**
+     * default agency phone number
+     */
+    private static final String DEFAULT_PHONE_NUMBER = "000-000-000";
 
     /**
-     * This method creates an agency instance with id, designation, address, emailAddress, phoneNumber and administrator
-     * @param id agency id
-     * @param designation agency designation
-     * @param address agency address
+     * This method creates a new instance of Agency
+     *
+     * @param id           agency id
+     * @param designation  agency designation
+     * @param address      agency address
      * @param emailAddress agency email address
-     * @param phoneNumber agency phone number
+     * @param phoneNumber  agency phone number
      */
 
-    public Agency(int id, String designation, Address address, String emailAddress, String phoneNumber){
+    public Agency(int id, String designation, Address address, String emailAddress, String phoneNumber) {
         this.id = id;
         this.designation = designation;
         this.address = address;
@@ -56,31 +63,29 @@ public class Agency {
         this.phoneNumber = phoneNumber;
     }
 
-    public Agency(){
+    /**
+     * This method creates a new instance of Agency with all the attributes by default
+     */
+
+    public Agency() {
         designation = DEFAULT_DESIGNATION;
-        address = DEFAULT_ADRESS;
-        phoneNumber = DEFAULT_PHONENUMBER;
-        emailAddress = DEFAULT_EMAILADRESS;
+        address = DEFAULT_ADDRESS;
+        phoneNumber = DEFAULT_PHONE_NUMBER;
+        emailAddress = DEFAULT_EMAIL_ADDRESS;
         id = DEFAULT_ID;
     }
-    public Agency(int id, String designation){
-        this.id = id;
-        this.designation = designation;
-    }
-     public Agency(String designation){
-        this.designation=designation;
-     }
 
     /**
      * Method to compare the attributes of the current object with those of another object
+     *
      * @param o object that will be compared with
      * @return boolean
      */
-    public boolean equals(Object o){
-        if (this == o){
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if(!(o instanceof Agency)){
+        if (!(o instanceof Agency)) {
             return false;
         }
         Agency that = (Agency) o;
@@ -89,88 +94,133 @@ public class Agency {
 
     /**
      * Method to show the ID
+     *
      * @return id
      */
 
-    public int getID(){return id;}
+    public int getID() {
+        return id;
+    }
 
     /**
      * Method to show the designation
+     *
      * @return designation
      */
 
-    public String getDesignation() {return designation;}
-
-    /**
-     * Method to return a hash code for the object in order to ensure that this hash code will not collide with the others
-     * @return hash code
-     */
-
-    public int hashCode() { return Objects.hash(id); }
-    /**
-     * Method to show the Agency characteristics
-     * @return String with te Agency characteristics
-     */
-
-    @Override
-    public String toString() {
+    public String getDesignation() {
         return designation;
     }
-    public String toString2(){
-        return "Agency: " +
-                "\n" +
-                "id= " + id +
-                "\n" +
-                " designation= " + designation +
-                "\n" +
-                " address= " + address +
-                "\n" +
-                " emailAddress= " + emailAddress +
-                "\n" +
-                " phoneNumber= " + phoneNumber +
-                '}';
-    }
 
     /**
-     * This method creates a new instance of the agency object and initializes its attributes with the exact same values of the original object
-     * @return a clone of the agency object
+     * Method to show the address
+     *
+     * @return address
      */
-
-    public Agency clone(){ return new Agency(this.id, this.designation, this.address, this.emailAddress, this.phoneNumber); }
-
     public Address getAddress() {
         return address;
     }
 
-    public int getId() {
-        return id;
-    }
-
+    /**
+     * Method to show the phone number
+     *
+     * @return phone number
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Method to show the email address
+     *
+     * @return email address
+     */
     public String getEmailAddress() {
         return emailAddress;
     }
 
+    /**
+     * Method to change the address
+     *
+     * @param address new address
+     */
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    /**
+     * Method to change the designation
+     *
+     * @param designation new designation
+     */
 
     public void setDesignation(String designation) {
         this.designation = designation;
     }
 
+    /**
+     * Method to change the email address
+     *
+     * @param emailAddress new email address
+     */
+
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
+
+    /**
+     * Method to change the ID
+     *
+     * @param id new ID
+     */
 
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Method to change the phone number
+     *
+     * @param phoneNumber new phone number
+     */
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * Method to return a hash code for the object in order to ensure that this hash code will not collide with the others
+     *
+     * @return hash code
+     */
+
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    /**
+     * Method to show the Agency characteristics
+     *
+     * @return String with te Agency characteristics
+     */
+
+    public String toString() {
+        return "Agency : " +
+                "\n" +
+                " id = " + id +
+                ", designation = " + designation +
+                ", address = " + address +
+                ", emailAddress = " + emailAddress +
+                ", phoneNumber = " + phoneNumber;
+    }
+
+    /**
+     * This method creates a new instance of the agency object and initializes its attributes with the exact same values of the original object
+     *
+     * @return a clone of the agency object
+     */
+
+    public Agency clone() {
+        return new Agency(this.id, this.designation, this.address, this.emailAddress, this.phoneNumber);
     }
 }

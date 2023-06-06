@@ -1,15 +1,25 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 public class PropertyType {
-        private String propertyType;
+    /**
+     * Property type
+     */
+    private String propertyType;
 
-        public PropertyType(String propertyType) {
-            this.propertyType = propertyType;
-        }
-
-        @Override
-        public String toString() {
-            return propertyType;
-        }
-
+    /**
+     * Method that creates a new instance of property type
+     * @param propertyType property type
+     */
+    public PropertyType(String propertyType) {
+        this.propertyType = propertyType;
     }
+
+    /**
+     * Method that returns the property type characteristics
+     * @return property type
+     */
+    @Override
+    public String toString() {
+        return propertyType;
+    }
+}

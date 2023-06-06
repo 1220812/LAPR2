@@ -40,8 +40,8 @@ public class PassportCardNumber {
         this.passportCardNumber = passportCardNumber;
     }
     /**
-     * Compares two instances of Owner
-     * @param o other instance of Owner
+     * Compares two instances of passport card number
+     * @param o other instance of passport card number
      * @return true if the instances are equal, false otherwise
      */
     @Override
@@ -51,6 +51,11 @@ public class PassportCardNumber {
         PassportCardNumber that = (PassportCardNumber) o;
         return Objects.equals(passportCardNumber, that.passportCardNumber);
     }
+
+    /**
+     * Hashcode of passport card number
+     * @return hashcode of passport card number
+     */
 
     @Override
     public int hashCode() {
@@ -63,6 +68,11 @@ public class PassportCardNumber {
     public String toString() {
         return passportCardNumber;
     }
+
+    /**
+     * This method creates a clone of the passport card number
+     * @return clone of the passport card number
+     */
     public PassportCardNumber clone(){
         return new PassportCardNumber(this.passportCardNumber);
     }

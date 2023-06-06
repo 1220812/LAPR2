@@ -29,9 +29,9 @@ public class RequestRepository {
         }
         return success;
     }
-    public Optional <Request> CreateSaleRequest(Property property, LocalDate requestDate, PropertyType propertyType, Agent agent, Store store, Owner owner, double price, RequestType requestType){
+    public Optional <Request> CreateSaleRequest(Property property, LocalDate requestDate, Agent agent, Store store, Owner owner, double price, RequestType requestType){
         Optional<Request> optionalValue = Optional.empty();
-        Request saleRequest = new Request(property,requestDate,propertyType,agent,store,owner,price, requestType);
+        Request saleRequest = new Request(property,requestDate,agent,owner,price,requestType);
         if(addRequest(saleRequest)){
             optionalValue = Optional.of(saleRequest);
         }

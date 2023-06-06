@@ -6,24 +6,47 @@ import java.util.Objects;
 
 import static pt.ipp.isep.dei.esoft.project.repository.EmployeeRepository.addNewEmployee;
 
-/**
- * The type Employee.
- */
 public class Employee {
+    /**
+     * The name of the employee.
+     */
     private String name;
+    /**
+     * The email address of the employee.
+     */
     private String email;
+    /**
+     * The phone number of the employee.
+     */
     private String phoneNumber;
+    /**
+     * The passport or card number of the employee.
+     */
     private PassportCardNumber passportCardNumber;
+    /**
+     * The tax number of the employee.
+     */
     private TaxNumber taxNumber;
+    /**
+     * The role of the employee.
+     */
     private Role role;
+    /**
+     * The address of the employee.
+     */
     private Address address;
+    /**
+     * The agency of the employee.
+     */
     private Agency agency;
+    /**
+     * The store of the employee.
+     */
     private Store store;
+/**
+     * The password of the employee.
+     */
     private String pass;
-
-
-    private static final Agency DEFAULT_AGENCY = new Agency();
-    private static final Store DEFAULT_STORE = new Store();
 
     /**
      * Creates a new Employee object with the given attributes.
@@ -74,10 +97,6 @@ public class Employee {
         this.role = role;
         this.pass = pass;
     }
-
-
-
-
     /**
      * Creates a new Employee object with the given attributes.
      *
