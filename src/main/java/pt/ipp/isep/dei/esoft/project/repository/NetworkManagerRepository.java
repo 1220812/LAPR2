@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.isep.lei.esoft.auth.UserSession;
+import pt.isep.lei.esoft.auth.domain.model.Email;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,5 +54,12 @@ public class NetworkManagerRepository {
     private static boolean validateNetworkManager(NetworkManager networkManager) {
         boolean isValid = !networkManagerList.contains(networkManager);
         return isValid;
+    }
+    public NetworkManager getNetworkManagerByUserSession(UserSession userSession) {
+        return this.networkManagerList.
+                stream()
+                .filter((networkManager) -> new Email(networkManager.getEmailAddress()).equals(userSession.getUserId()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No Network Manager is logged in."));
     }
 }

@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterEmployeeController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.ipp.isep.dei.esoft.project.repository.NetworkManagerRepository;
+import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.Scanner;
@@ -32,9 +32,6 @@ public class RegisterEmployeeUI implements Runnable {
 
 
     public void run() {
-
-        Scanner Input = new Scanner(System.in);
-
         String inputRole;
         String inputTax;
         String inputpassport;
@@ -79,6 +76,13 @@ public class RegisterEmployeeUI implements Runnable {
 
         inputRole = role.toString();
 
+        if (inputRole.equals("System Administrator")) {
+            SystemAdministrator sa = controller.registerSystemAdministrator(name, email, phone, passportCardNumber, taxNumber, address, role, pass);
+//            System.out.println(sa);
+            System.out.println(SystemAdministratorRepository.getSystemAdministratorsList());
+
+
+        }
         if (inputRole.equals("Agent") || inputRole.equals("Manager Network") || inputRole.equals("Store Manager")) {
 
             System.out.println("####### List of Agencies #######");
@@ -92,38 +96,36 @@ public class RegisterEmployeeUI implements Runnable {
                 store = Utils.listAndSelectOne(controller.getStore());
                 if (store == null) return;
 
-            } else {
-                System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
-                controller.getUserRepository();
-                controller.sendRegisteredUserEmail(email, pass);
-                System.out.println("ºjoeçblpw+eó'fihpk-wd");
-                controller.RegisterNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
+            }
+
+            if (inputRole.equals("Agent")) {
+
+                Agent v = controller.registerAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+//                System.out.println(v);
+                System.out.println(AgentRepository.getAgentList());
+
+            } else if (inputRole.equals("Manager Network")) {
+
+                NetworkManager n = controller.RegisterNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
+//                System.out.println(n);
                 System.out.println(NetworkManagerRepository.getNetworkManagerList());
 
-
-
-                System.out.println();
-                System.out.println("####### Operation sucess ######");
-
+            } else if (inputRole.equals("Store Manager")) {
+                StoreManager s = controller.registerStoreManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+//                System.out.println(s);
+                System.out.println(StoreManagerReposiotry.getStoreManagerList());
 
             }
-            System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
-            controller.getUserRepository();
-            controller.sendRegisteredUserEmail(email, pass);
-            System.out.println();
-            System.out.println("####### Operation sucess ######");
-
         }
-        System.out.println(controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass));
-        if (inputRole.equals("Agent")) {
-            controller.RegisterAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
-        }
-        controller.getUserRepository();
+        Employee e = controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+        pass = e.getPass();
+        System.out.println(e);
+        controller.saveEmployee(name, email, pass, role.getDescription());
         controller.sendRegisteredUserEmail(email, pass);
         System.out.println();
+
+        System.out.println(EmployeeRepository.getNewEmployeeList());
         System.out.println("####### Operation sucess ######");
-
-
     }
 }
 

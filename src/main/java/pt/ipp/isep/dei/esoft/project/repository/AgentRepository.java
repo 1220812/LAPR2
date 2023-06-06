@@ -13,7 +13,7 @@ public class AgentRepository {
     private static List<Agent> agentList = new ArrayList<>();
 
     public static Agent createAgent(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
-        Agent agent = new Agent (name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+        Agent agent = new Agent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
         addAgent(agent);
         return agent;
     }
@@ -31,7 +31,6 @@ public class AgentRepository {
     public static List<Agent> getAgentList() {
         return List.copyOf(agentList);
     }
-
 
 
     public List<Agent> add(Agent agent) throws CloneNotSupportedException {
@@ -57,7 +56,7 @@ public class AgentRepository {
         return isValid;
     }
 
-    public Agent getAgentByUserSession(UserSession userSession){
+    public Agent getAgentByUserSession(UserSession userSession) {
         return this.agentList.
                 stream()
                 .filter((agent) -> new Email(agent.getEmailAddress()).equals(userSession.getUserId()))

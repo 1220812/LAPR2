@@ -28,8 +28,8 @@ public class EmployeeRepository {
      *
      * @return the new employee list
      */
-    public List<Employee> getNewEmployeeList() {
-        return List.copyOf(this.NewEmployeeList);
+    public static List<Employee> getNewEmployeeList() {
+        return List.copyOf(NewEmployeeList);
     }
 
     /**

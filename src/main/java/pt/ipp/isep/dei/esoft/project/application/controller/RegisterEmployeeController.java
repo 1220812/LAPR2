@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
-import javax.swing.*;
 import java.util.List;
 
 /**
@@ -73,7 +72,7 @@ public class RegisterEmployeeController {
      * @param pass  the pass
      */
     public void sendRegisteredUserEmail(String email, String pass) {
-        pass = PasswordGenerator.generatePassword();
+//        pass = PasswordGenerator.generatePassword();
         EmailService.sendEmail(email, pass);
     }
 
@@ -135,7 +134,7 @@ public class RegisterEmployeeController {
     }
 
 
-    public Agent RegisterAgent(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
+    public Agent registerAgent(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         return AgentRepository.createAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
 
     }
@@ -150,4 +149,13 @@ public class RegisterEmployeeController {
         repo.addUserWithRole(name, email, pass, role);
 
     }
+
+    public StoreManager registerStoreManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency,Store store, String pass) {
+        return StoreManagerReposiotry.createStoreManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+    }
+
+    public SystemAdministrator registerSystemAdministrator(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, String pass) {
+        return SystemAdministratorRepository.createSystemAdministrator(name, email, phone, passportCardNumber, taxNumber, address, role, pass);
+    }
 }
+
