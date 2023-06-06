@@ -174,7 +174,9 @@ public class Bootstrap implements Runnable {
         Address address2 = new Address("Street B", "12346",state2, district2, city2);
         List<Photographs> photo = new ArrayList<>();
         TaxNumber taxNumber1 = new TaxNumber("987654321");
+        TaxNumber taxNumber2 = new TaxNumber("123456789");
         PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
+        PassportCardNumber passportCardNumber2= new PassportCardNumber("23456789");
         RequestType requestType1 = new RequestType("Sell");
         RequestType requestType2 = new RequestType("Rent");
         LocalDate requestDate1 = LocalDate.of(2020,10,10);
@@ -184,9 +186,20 @@ public class Bootstrap implements Runnable {
         PropertyType p1 = new PropertyType("Land");
         PropertyType p2 = new PropertyType("Apartment");
         PropertyType p3 = new PropertyType("House");
-        Announcement announcement1 = new Announcement(property1, requestDate1, "per", 5, requestType1,p1 );
-        Announcement announcement2 =new Announcement(property2,requestDate2,"per", 5, requestType2, p2);
-        Announcement announcement3 =new Announcement(property2,requestDate1,"per", 5, requestType2, p3);
+        Agency agency1 = new Agency("agency1");
+        Agency agency2 = new Agency("agency2");
+        Agency agency3 = new Agency("agency3");
+        Store store1 = new Store("Company", 1);
+        Store store2 = new Store("Galo", 2);
+        Store store3 = new Store("Holand", 3);
+
+
+        Agent agent1 = new Agent("Joao","joao@gmail.com","918734521",passportCardNumber1,taxNumber1,address1,new Role("Agent"),agency1,store1,"joao");
+        Agent agent2 = new Agent("Pedro","pedro@gmail.com","915734521",passportCardNumber2,taxNumber2,address2,new Role("Agent"),agency2,store2,"pedro");
+
+        Announcement announcement1 = new Announcement(property1, requestDate1, "per", 5, requestType1,p1,agent1);
+        Announcement announcement2 =new Announcement(property2,requestDate2,"per", 5, requestType2, p2,agent1);
+        Announcement announcement3 =new Announcement(property2,requestDate1,"per", 5, requestType2, p3,agent2);
         announcementRepository.addAnnouncement(announcement1);
         announcementRepository.addAnnouncement(announcement2);
         announcementRepository.addAnnouncement(announcement3);

@@ -114,7 +114,7 @@ public class Announcement {
     }
 
     public Announcement clone(){
-        return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType,this.propertyType);
+        return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType,this.propertyType, this.agent);
     }
     public static boolean existsPrice(double price){
         if (price < 1) { return false; }
