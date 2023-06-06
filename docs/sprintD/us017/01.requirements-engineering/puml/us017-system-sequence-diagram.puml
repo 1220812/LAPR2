@@ -24,7 +24,7 @@ activate NM
 
     activate System
 
-    System --> NM : asks for the order that the Network Manager wants to \nsort the property by their areas (ascending or descending)
+    System --> NM : asks for the order of sorting (ascending or descending)
 
     deactivate System
 
@@ -32,7 +32,7 @@ activate NM
 
     activate System
 
-    System --> NM : shows the list of all the deals made sorted by the \nselected sorting method and order
+    System --> NM : shows the list of all the deals made sorted by the \nselected sorting method and sorting order
 
     deactivate System
 

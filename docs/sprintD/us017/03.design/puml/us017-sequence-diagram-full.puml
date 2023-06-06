@@ -1,0 +1,104 @@
+@startuml
+autonumber
+
+title US017 - Sequence Diagram (SSD)
+
+actor "NetworkManager" as NM
+participant ":ListDealsUI" as UI
+participant ":ListDealsController" as Controller
+
+participant ":Repositories" as PLAT
+participant "repositories :\nRepositories" as REP
+participant "dealRepository :\nDealRepository" as DR
+
+activate NM
+
+    NM -> UI : asks to list of all the deals made
+
+    activate UI
+
+    UI --> Controller** : create
+
+    UI -> Controller : getDeals()
+
+    activate Controller
+
+    Controller -> PLAT : getInstance()
+
+    activate PLAT
+
+    PLAT --> Controller : repositories
+
+    deactivate PLAT
+
+    Controller -> REP : getDealsRepository()
+
+    activate REP
+
+    REP --> Controller : dealsRepository
+
+    deactivate REP
+
+    Controller --> UI : deals
+
+    deactivate Controller
+
+        UI --> NM : shows the two different sorting methods \n(Bubble Sort or Insertion Sort) and asks to select  one
+
+    deactivate UI
+
+    NM -> UI : selects the sorting method (Bubble Sort or Insertion Sort)
+
+    activate UI
+
+    UI --> NM : asks for the order of sorting (ascending or descending)
+
+    deactivate UI
+
+    NM -> UI : selects the order of sorting (ascending or descending)
+     alt Bubble Sort method is selected
+
+        activate UI
+
+        UI --> Controller : sortListByBubbleSort(deals, orderOfSorting)
+
+        activate Controller
+
+        Controller -> DR : sortListByBubbleSort(deals, orderOfSorting)
+
+        activate DR
+
+        DR --> Controller : sortedList
+
+        deactivate DR
+
+        Controller --> UI : sortedList
+
+        deactivate Controller
+
+     else Insertion Sort method is selected
+
+             UI --> Controller : sortListByInsertionSort(deals, orderOfSorting)
+
+             activate Controller
+
+             Controller -> DR : sortListByInsertionSort(deals, orderOfSorting)
+
+             activate DR
+
+             DR --> Controller : sortedList
+
+             deactivate DR
+
+             Controller --> UI : sortedList
+
+             deactivate Controller
+     end
+
+    UI --> NM : shows the list of all the deals made sorted \nby the selected sorting method and order
+
+    deactivate UI
+
+deactivate NM
+
+@enduml
