@@ -44,39 +44,20 @@ public class RequestRepository {
         return request;
     }
 
+    public Request removeRequest(Request request){
+        requestList.remove(request);
+        return request;
+    }
+
+
     public List<Request> addAccepted(Request request) {
-
         acceptedRequestList.add(request);
-
-        Optional<Request> newRequest = Optional.empty();
-        boolean operationSuccess = false;
-
-        if (validateRequest(request)) {
-            newRequest = Optional.of((Request) request.clone());
-            operationSuccess = acceptedRequestList.add((Request) newRequest.get());
-        }
-
-        if (!operationSuccess) {
-            newRequest = Optional.empty();
-        }
         return acceptedRequestList;
     }
 
     public List<Request> addDeclined(Request request) {
 
         declinedRequestList.add(request);
-
-        Optional<Request> newRequest = Optional.empty();
-        boolean operationSuccess = false;
-
-        if (validateRequest(request)) {
-            newRequest = Optional.of((Request) request.clone());
-            operationSuccess = declinedRequestList.add((Request) newRequest.get());
-        }
-
-        if (!operationSuccess) {
-            newRequest = Optional.empty();
-        }
         return declinedRequestList;
     }
 

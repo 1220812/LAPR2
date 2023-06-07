@@ -225,4 +225,14 @@ public class Request {
     public Request clone() {
         return new Request(this.property, this.requestDate, this.agent, this.owner, this.price, this.requestType, this.store);
     }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    
 }

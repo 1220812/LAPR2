@@ -4,8 +4,9 @@ import pt.ipp.isep.dei.esoft.project.application.controller.PostAnnouncementRequ
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 public class PostAnnouncementRequestUI implements Runnable{
 
@@ -13,6 +14,8 @@ public class PostAnnouncementRequestUI implements Runnable{
     private final PostAnnouncementRequestController controller = new PostAnnouncementRequestController();
 
     public void run() {
+        Scanner ler = new Scanner(System.in);
+
         Agent agent = controller.getCurrentAgent();
 
         List<Request> assignedRequestList = controller.getRequestAssignedList(agent);
@@ -25,7 +28,7 @@ public class PostAnnouncementRequestUI implements Runnable{
             for (Request request: assignedRequestList) {
                 i += 1;
                 System.out.println(i);
-                System.out.println("Date = " + request.getRequestDate());
+                System.out.println("LocalDate = " + request.getRequestDate());
                 System.out.println("Property Type = " + request.getProperty().getPropertyType());
             }
             int assignedRequest = Utils.readIntegerFromConsole("Select one of the requests:");
@@ -43,7 +46,7 @@ public class PostAnnouncementRequestUI implements Runnable{
                 publishOption = Utils.readLineFromConsole("Write a valid answer (accept / decline)");
             }
 
-            Request requestChosen;
+            Request requestChosen = null;
 
             if(publishOption.equals("accept")) {
                 for (Request request: assignedRequestList) {
@@ -52,17 +55,41 @@ public class PostAnnouncementRequestUI implements Runnable{
                         requestChosen = request;
                     }
                 }
+                
+                System.out.println("Commission Type:");
+                System.out.println("- Percentage");
+                System.out.println("- Value");
+                String commissionType = ler.next();
+                while (!commissionType.equals("Percentage") && !commissionType.equals("Value")) {
+                    System.out.println("Please write a valid option.");
+                    commissionType = ler.next();
+                }
 
-                Property property = new Property();
-                Date date = new Date();
-                String comissionType;
-                double comission;
-                RequestType requestType = new RequestType();
-                PropertyType propertyType = new PropertyType();
-                Announcement newAnnouncement = new Announcement(property, date, comissionType, comission, requestType, propertyType);
+                System.out.println("Commission:");
+                double commission = ler.nextDouble();
+                while (commission < 0) {
+                    System.out.println("Please write a valid commission.");
+                    commission = ler.nextInt();
+                }
+                Property property = requestChosen.getProperty();
+                LocalDate date = LocalDate.now();
+                RequestType requestType = requestChosen.getRequestType();
+                double price = requestChosen.getPrice();
+                Owner owner = requestChosen.getOwner();
+                Store store = requestChosen.getStore();
+                Announcement announcement = new Announcement(property, date, commissionType, commission, requestType, agent, price, owner, store);
+                controller.acceptRequest(requestChosen);
+                controller.registerAnnouncement(announcement);
             }
             else if (publishOption.equals("decline")) {
-
+                for (Request request: assignedRequestList) {
+                    i += 1;
+                    if (i == assignedRequest) {
+                        requestChosen = request;
+                    }
+                }
+                String justification = Utils.readLineFromConsole("Please write a justification for the declinement?");
+                controller.declineRequest(requestChosen);
             }
         }
     }
