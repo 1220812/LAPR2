@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
+import pt.ipp.isep.dei.esoft.project.ui.console.PublishOrderUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterEmployeeUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.ScheduleVisitUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -14,6 +15,7 @@ public class ClientUI implements Runnable {
     public void run() {
         List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("US009-Schedule a visit", new ScheduleVisitUI()));
+        options.add(new MenuItem("US010-Place an order to purchase a property", new PublishOrderUI()));
 
         int option = 0;
         do {

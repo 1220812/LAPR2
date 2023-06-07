@@ -75,18 +75,12 @@ public class CreateRequestUI implements Runnable {
         System.out.println(propertyType);
         if (inPutType.equals("Land")) {
             property = controller.createLand(area, distanceFromCityCenter, address, propertyType, photographs);
-            System.out.println(property);
-            System.out.println();
         } else if (inPutType.equals("House")) {
             requestDataForHouse();
             property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure,inhabitableLoft,propertyType,photographs);
-            System.out.println(property);
-            System.out.println();
         } else if (inPutType.equals("Apartment")) {
             requestDataForApartment();
             property = controller.createApartment(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, propertyType, photographs, centralHeating, airConditioning);
-            System.out.println(property);
-            System.out.println();
         }
         System.out.println("Please select on of the request types:");
         System.out.println("1 - Rent");
@@ -105,12 +99,13 @@ public class CreateRequestUI implements Runnable {
             RequestType rentRequestType = controller.createRentRequestType(requestType, contractDuration);
             Request request = controller.createRequest(property, rentRequestType, price, agent,owner, requestDate, store);
             controller.registerRequest(request);
-            System.out.println(request);
+            System.out.println("Request created successfully");
         }else if(requestType.equalsIgnoreCase("Sell")){
             RequestType sellRequestType = controller.createSellRequestType(requestType);
             Request request = controller.createRequest(property, sellRequestType, price, agent,owner, requestDate, store);
             controller.registerRequest(request);
-            System.out.println(request);
+            System.out.println();
+            System.out.println("<<<<Request created successfully>>>>");
         }
     }
     private void requestOverallData(){
