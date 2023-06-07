@@ -28,8 +28,6 @@ public class Bootstrap implements Runnable {
         addAgency();
         addRequests();
         addAnnouncement();
-        addPropertyAdress();
-        addProperty();
         addPropertyType();
         try {
             addAgent();
@@ -41,11 +39,11 @@ public class Bootstrap implements Runnable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
-        try{
+        /**try{
             addOrder();
         }catch (CloneNotSupportedException e){
             throw new RuntimeException(e);
-        }
+        }*/
         addMessage();
     }
 
@@ -86,15 +84,12 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", "12345", state3, district1, city1);
-        Address address2 = new Address("Street B", "12346",state2, district2, city2);
-        Address address3 = new Address("Street C", "12347",state1, district3, city2);
+        Address address1 = new Address("Street A",1, 2, "12345", state3, district1, city1);
+        Address address2 = new Address("Street B",3,4, "12346",state2, district2, city2);
+        Address address3 = new Address("Street C",5,6, "12347",state1, district3, city2);
         addressRepository.add(address1);
         addressRepository.add(address2);
         addressRepository.add(address3);
-    }
-
-    private void addPropertyAdress() {
     }
 
     private void addRequestType() {
@@ -145,65 +140,71 @@ public class Bootstrap implements Runnable {
         roleRepository.add(agent);
         roleRepository.add(storeManager);
         roleRepository.add(managerNetwork);
+
     }
 
     private void addAgency() {
         AgencyRepository agencyRepository = Repositories.getInstance().getAgencyRepository();
-        Agency agency1 = new Agency("agency1");
-        Agency agency2 = new Agency("agency2");
-        Agency agency3 = new Agency("agency3");
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        District district3 = new District("Western");
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
+        Address address1 = new Address("Street A",1,2, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B",3,4, "12346",state2, district2, city2);
+        Address address3 = new Address("Street C",5,6, "12347",state1, district3, city2);
+        Agency agency1 = new Agency(1, "agency1",address1,"agency1@this.app","123456789");
+        Agency agency2 = new Agency(2,"agency2",address2,"agency2@this.app","987654321");
+        Agency agency3 = new Agency(3,"agency3",address3,"agency3@this.app","195451235");
         agencyRepository.addAgency(agency1);
         agencyRepository.addAgency(agency2);
         agencyRepository.addAgency(agency3);
-    }
-
-    private void addProperty() {
-
     }
 
     private void addAnnouncement() {
         AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
         State state1 = new State("California");
         State state2 = new State("Nevada");
-        State state3 = new State("Arizona");
         District district1 = new District("Northem");
         District district2 = new District("Eastern");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", "12345", state3, district1, city1);
-        Address address2 = new Address("Street B", "12346",state2, district2, city2);
+        Address address1 = new Address("Street A",4, 6, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B",1,3, "12346",state2, district2, city2);
         List<Photographs> photo = new ArrayList<>();
         TaxNumber taxNumber1 = new TaxNumber("987654321");
         TaxNumber taxNumber2 = new TaxNumber("123456789");
+        TaxNumber taxNumber = new TaxNumber("123456789");
+        PassportCardNumber passportCardNumber3 = new PassportCardNumber("98755432");
         PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
         PassportCardNumber passportCardNumber2= new PassportCardNumber("23456789");
         RequestType requestType1 = new RequestType("Sell");
         RequestType requestType2 = new RequestType("Rent");
         LocalDate requestDate1 = LocalDate.of(2020,10,10);
         LocalDate requestDate2 = LocalDate.of(2022,3,2);
-        Property property1 = new Property(500, 5, address1, 100000,photo);
-        Property property2 = new Property(345, 12, address2, 200000,photo);
         PropertyType p1 = new PropertyType("Land");
         PropertyType p2 = new PropertyType("Apartment");
         PropertyType p3 = new PropertyType("House");
-        Agency agency1 = new Agency("agency1");
-        Agency agency2 = new Agency("agency2");
-        Agency agency3 = new Agency("agency3");
+        Property property1 = new Property(500, 5, address1, p1,photo);
+        Property property2 = new Property(345, 12, address2, p2,photo);
         Store store1 = new Store("Company", 1);
         Store store2 = new Store("Galo", 2);
-        Store store3 = new Store("Holand", 3);
-
-
+        Agency agency1 = new Agency(1, "agency1",address1,"agency1@this.app","123456789");
+        Agency agency2 = new Agency(2,"agency2",address2,"agency2@this.app","987654321");
         Agent agent1 = new Agent("Joao","joao@gmail.com","918734521",passportCardNumber1,taxNumber1,address1,new Role("Agent"),agency1,store1,"joao");
         Agent agent2 = new Agent("Pedro","pedro@gmail.com","915734521",passportCardNumber2,taxNumber2,address2,new Role("Agent"),agency2,store2,"pedro");
+        Owner owner1 = new Owner("Maria","912345678","maria@gmail.com",address1,taxNumber1,passportCardNumber1);
+        Owner owner2 = new Owner("Madalena","912945678","madalena@gmail.com",address2,taxNumber2,passportCardNumber2);
+        Owner owner3 = new Owner("Manuel","912545698","manuel@gmail.com",address2,taxNumber,passportCardNumber3);
 
-        Announcement announcement1 = new Announcement(property1, requestDate1, "per", 5, requestType1,p1,agent1);
-        Announcement announcement2 =new Announcement(property2,requestDate2,"per", 5, requestType2, p2,agent1);
-        Announcement announcement3 =new Announcement(property2,requestDate1,"per", 5, requestType2, p3,agent2);
+        Announcement announcement1 = new Announcement(property1, requestDate1, "per", 5, requestType1,agent1,200000,owner1,store1);
+        Announcement announcement2 =new Announcement(property2,requestDate2,"per", 5, requestType2, agent2, 300000,owner2,store2);
+        Announcement announcement3 =new Announcement(property2,requestDate1,"per", 5, requestType2, agent2,2450000,owner3,store2);
         announcementRepository.addAnnouncement(announcement1);
         announcementRepository.addAnnouncement(announcement2);
         announcementRepository.addAnnouncement(announcement3);
-
     }
 
     private void addPropertyType() {
@@ -214,7 +215,6 @@ public class Bootstrap implements Runnable {
         propertyTypeRepository.addPropertyType(p1);
         propertyTypeRepository.addPropertyType(p2);
         propertyTypeRepository.addPropertyType(p3);
-
     }
 
     private void addOwner() throws CloneNotSupportedException {
@@ -230,14 +230,14 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", "12345", state1, district1, city1);
-        Address address2 = new Address("Street B", "12346",state2, district2, city2);
-        Address address3 = new Address("Street C", "12347",state1, district3, city2);
+        Address address1 = new Address("Street A",4, 6, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B",1,3, "12346",state2, district2, city2);
+        Address address3 = new Address("Street C",1, 2, "12347",state1, district3, city2);
         Owner owner1 = new Owner("Joao", "987654321", "joao@this.app", address1, taxNumber1, passportCardNumber1);
         ownerRepository.add(owner1);
     }
 
-    private void addOrder() throws CloneNotSupportedException {
+    /**private void addOrder() throws CloneNotSupportedException {
         OrderRepository rep = Repositories.getInstance().getOrderRepository();
         AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
         State state1 = new State("California");
@@ -248,9 +248,9 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", "12345", state1, district1, city1);
-        Address address2 = new Address("Street B", "12346",state2, district2, city2);
-        Address address3 = new Address("Street C", "12347",state1, district3, city2);
+        Address address1 = new Address("Street A",4, 6, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B",1,3, "12346",state2, district2, city2);
+        Address address3 = new Address("Street C",1, 2, "12347",state1, district3, city2);
 
         List<Photographs> photo = new ArrayList<>();
 
@@ -295,7 +295,7 @@ public class Bootstrap implements Runnable {
         rep.saveOrder(order1);
         rep.saveOrder(order3);
         rep.saveOrder(order);
-    }
+    }*/
     private void addMessage(){
         MessageRepository messageRepository =Repositories.getInstance().getMessageRepository();
         Message message1=new Message(null, null);
@@ -308,8 +308,8 @@ public class Bootstrap implements Runnable {
         List<Photographs> photos1 = null;
         List<Photographs> photos2 = null;
         List<Photographs> photos3 = null;
-        RequestType requestType1 = new RequestType("Sale", 1);
-        RequestType requestType2 = new RequestType("Sale", 2);
+        RequestType requestType1 = new RequestType("Sale", 0);
+        RequestType requestType2 = new RequestType("Sale", 0);
         RequestType requestType3 = new RequestType("Rent", 3);
         PropertyType propertyType1 = new PropertyType("Land");
         PropertyType propertyType2 = new PropertyType("Apartment");
@@ -322,14 +322,12 @@ public class Bootstrap implements Runnable {
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        RequestType sell = new RequestType("Sell");
-        RequestType rent = new RequestType("Rent");
-        Address address1 = new Address("Street A", "12345", state1, district1, city1);
-        Address address2 = new Address("Street B", "12346",state2, district2, city2);
-        Address address3 = new Address("Street C", "12347",state1, district3, city2);
-        Property property1 = new Property(10000, 10, address1, 10000, photos1);
-        Property property2 = new House(address2,1000, 12,3,2,2,true,true,true, new SunExposure("North"),true,1000000,photos2);
-        Property property3 = new Residence(address3, 300, 2, 3,2,1,1800000, photos3,true, false);
+        Address address1 = new Address("Street A",4, 6, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B",1,3, "12346",state2, district2, city2);
+        Address address3 = new Address("Street C",1, 2, "12347",state1, district3, city2);
+        Property property1 = new Property(10000, 10, address1, propertyType1, photos1);
+        Property property2 = new House(address2,1000, 12,propertyType3,2,2,true,true,true, new SunExposure("North"),true,1000000,photos2);
+        Property property3 = new Residence(address3, 300, 2, propertyType2,2,1,1800000, photos3,true, false);
         LocalDate requestDate1 = LocalDate.of(2021, 1, 1);
         LocalDate requestDate2 = LocalDate.of(2021, 2, 2);
         LocalDate requestDate3 = LocalDate.of(2021, 3, 3);
@@ -347,10 +345,9 @@ public class Bootstrap implements Runnable {
         Owner owner3 = new Owner("Guilherma", "214522558", "guilherma@this.app", address3, taxNumber3, passport3);
         Agent agent1 = new Agent("Toniteco", "987654321", "pedro@this.app", address1, taxNumber1, passport1);
         Agent agent2 = new Agent("Agent", "987654321", "agent@this.app", address2, taxNumber2, passport2);
-        Agent agent3 = new Agent("Sofia", "741852963", "sofia@this.app", address3, taxNumber3, passport3);
-        Request request1 = new Request(property1, requestDate1, propertyType1, agent1, store1, owner1, 12,10020000,rent);
-        Request request2 = new Request(property2, requestDate2, propertyType2, agent2, store2, owner2, 13, 100000,rent);
-        Request request3 = new Request(property3, requestDate3, propertyType3, agent2, store3, owner3, 120000);
+        Request request1 = new Request(property1, requestDate1, agent1,owner1,1000,requestType1,store1);
+        Request request2 = new Request(property2, requestDate2, agent2,owner2,2000,requestType2,store2);
+        Request request3 = new Request(property3, requestDate3, agent2,owner3,3000,requestType3,store3);
         requestRepository.addRequest(request1);
         requestRepository.addRequest(request2);
         requestRepository.addRequest(request3);
@@ -365,17 +362,17 @@ public class Bootstrap implements Runnable {
         Store store1 = new Store("Company", 1);
         Store store2 = new Store("Galo", 2);
         Store store3 = new Store("Holand", 3);
-        Agency agency1 = new Agency("agency1");
-        Agency agency2 = new Agency("agency2");
-        Agency agency3 = new Agency("agency3");
         District district1 = new District("Northem");
         District district2 = new District("Eastern");
         District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
-        Address address1 = new Address("Street A", "12345", state1, district1, city1);
-        Address address2 = new Address("Street B", "12346",state2, district2, city2);
-        Address address3 = new Address("Street C", "12347",state1, district3, city2);
+        Address address1 = new Address("Street A",1,2, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B",3,4, "12346",state2, district2, city2);
+        Address address3 = new Address("Street C",5,6, "12347",state1, district3, city2);
+        Agency agency1 = new Agency(1, "agency1",address1,"agency1@this.app","123456789");
+        Agency agency2 = new Agency(2,"agency2",address2,"agency2@this.app","987654321");
+        Agency agency3 = new Agency(3,"agency3",address3,"agency3@this.app","195451235");
         Role systemAdministrator = new Role("System Administrator");
         Role agent = new Role("Agent");
         Role storeManager = new Role("Store Manager");
@@ -387,7 +384,7 @@ public class Bootstrap implements Runnable {
         agentRepository.add(agent1);
         TaxNumber taxNumber2 = new TaxNumber("123456789");
         PassportCardNumber passport2 = new PassportCardNumber("12345678");
-        Agent agent2 = new Agent("Bárbara", "agent@this.app","912345674",passportCardNumber2,taxNumber2,address3,agent,agency2,store3,"BIO");
+        Agent agent2 = new Agent("Agent", "987654321", "agent@this.app", address2, taxNumber2, passport2);
         agentRepository.add(agent2);
     }
 }

@@ -1,4 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
+
 import java.time.LocalDate;
 
 public class Announcement {
@@ -7,121 +8,275 @@ public class Announcement {
      */
     private Property property;
     /**
-     * announcement commision type
+     * announcement commission type
      */
-    private String comissionType;
+    private String commissionType;
     /**
-     * announcement comission
+     * announcement commission
      */
-    private double comission;
-
+    private double commission;
+    /**
+     * request type (sell or rent)
+     */
     private RequestType requestType;
-    private PropertyType propertyType;
-
+    /**
+     * agent responsible for the announcement
+     */
     private Agent agent;
     /**
      * announcement publish date
      */
     private LocalDate date;
+    /**
+     * announced price for the property
+     */
+    private double price;
+    /**
+     * Owner of the property announced
+     */
+    private Owner owner;
+    /**
+     * Store selected by the owner
+     */
+    private Store store;
 
+    /**
+     * Method that creates an instance of Announcement
+     *
+     * @param property       property to announce
+     * @param date           date of the announcement
+     * @param commissionType commission type
+     * @param commission     commission
+     * @param requestType    request type
+     * @param agent          agent responsible for the announcement
+     * @param price          announced price
+     * @param owner          owner of the property announced
+     */
 
-    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, PropertyType propertyType) {
+    public Announcement(Property property, LocalDate date, String commissionType, double commission, RequestType requestType, Agent agent, double price, Owner owner, Store store) {
+        if (property == null) {
+            throw new IllegalArgumentException("Property can't be null");
+        }
+        if (date == null) {
+            throw new IllegalArgumentException("Date can't be null");
+        }
+        if (commissionType == null) {
+            throw new IllegalArgumentException("Commission type can't be null");
+        }
+        if (requestType == null) {
+            throw new IllegalArgumentException("Request type can't be null");
+        }
+        if (agent == null) {
+            throw new IllegalArgumentException("Agent can't be null");
+        }
+        if (owner == null) {
+            throw new IllegalArgumentException("Owner can't be null");
+        }
+        if (price <= 0) {
+            throw new IllegalArgumentException("Price can't be negative or zero");
+        }
+        if (store == null) {
+            throw new IllegalArgumentException("Store can't be null");
+        }
         this.property = property;
         this.date = date;
-        this.comissionType = comissionType;
-        this.comission = comission;
+        this.commissionType = commissionType;
+        this.commission = commission;
         this.requestType = requestType;
-        this.propertyType=propertyType;
+        this.agent = agent;
+        this.price = price;
+        this.owner = owner;
+        this.store = store;
     }
-    public Announcement(Property property, LocalDate date){
-        this.property = property;
-        this.date = date;
-    }
-    public Announcement(Property property, LocalDate date, String comissionType, double comission, RequestType requestType, PropertyType propertyType, Agent agent) {
-        this.property = property;
-        this.date = date;
-        this.comissionType = comissionType;
-        this.comission = comission;
-        this.requestType = requestType;
-        this.propertyType=propertyType;
-        this.agent=agent;
-    }
+
+    /**
+     * Method that shows the date of the announcement
+     *
+     * @return date of the announcement
+     */
 
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Method that changes the date of the announcement
+     *
+     * @param date new date of the announcement
+     */
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    /**
+     * Method that shows the announced property
+     *
+     * @return announced property
+     */
 
     public Property getProperty() {
         return property;
     }
 
+    /**
+     * Method to change the announced property
+     *
+     * @param property new announced property
+     */
+
     public void setProperty(Property property) {
         this.property = property;
     }
 
-    public double getComission() {
-        return comission;
+    /**
+     * Method that shows the commission of the announcement
+     *
+     * @return commission of the announcement
+     */
+    public double getCommission() {
+        return commission;
     }
 
-    public void setComission(double comission) {
-        this.comission = comission;
+    /**
+     * Method that changes the commission of the announcement
+     *
+     * @param commission new commission of the announcement
+     */
+    public void setCommission(double commission) {
+        this.commission = commission;
     }
 
-    public String getComissionType() {
-        return comissionType;
+    /**
+     * Method that shows the commission type of the announcement
+     *
+     * @return commission type of the announcement
+     */
+    public String getCommissionType() {
+        return commissionType;
     }
 
-    public void setComissionType(String comissionType) {
-        this.comissionType = comissionType;
+    /**
+     * Method that changes the commission type of the announcement
+     *
+     * @param commissionType new commission type of the announcement
+     */
+    public void setCommissionType(String commissionType) {
+        this.commissionType = commissionType;
     }
+
+    /**
+     * Method that shows the request type of the announcement
+     * @return request type of the announcement
+     */
 
     public RequestType getRequestType() {
         return requestType;
     }
 
+    /**
+     * Method that changes the request type of the announcement
+     * @param requestType new request type of the announcement
+     */
+
     public void setRequestType(RequestType requestType) {
         this.requestType = requestType;
     }
 
-    public PropertyType getPropertyType() {
-        return propertyType;
+    /**
+     * Method that shows the announced price
+     * @return announced price
+     */
+
+    public double getPrice() {
+        return price;
     }
 
-    public void setPropertyType(PropertyType propertyType) {
-        this.propertyType = propertyType;
+    /**
+     * Method that changes the announced price
+     * @param price new announced price
+     */
+
+    public void setPrice(double price) {
+        this.price = price;
     }
+
+    /**
+     * Method that shows the store selected by the owner
+     * @return store selected by the owner
+     */
+
+    public Store getStore() {
+        return store;
+    }
+
+    /**
+     * Method that changes owner of the property announced
+     * @param owner new owner of the property announced
+     */
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    /**
+     * Method that changes the agent selected by the owner
+     * @param agent new agent selected by the owner
+     */
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    /**
+     * Method that shows the owner of the property announced
+     * @return owner of the property announced
+     */
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    /**
+     * Method that shows the agent selected by the owner
+     * @return agent selected by the owner
+     */
+    public Agent getAgent() {
+        return agent;
+    }
+
+    /**
+     * Method that changes the store selected by the owner
+     * @param store new store selected by the owner
+     */
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    /**
+     * Method that creates a string with the information of the announcement
+     * @return string with the information of the announcement
+     */
 
     @Override
     public String toString() {
-        return "Announcement:" +
-                " date=" + date +
-                "\n" +
-                " property= " + property +
-                "\n" +
-                " comissionType= " + comissionType +
-                "\n" +
-                " comission= " + comission +
-                "\n" +
-                " requestType=" + requestType +
-                "\n" +
-                " propertyType= " + propertyType +
-                "\n" +
-                " agent= " + agent.getName();
+        return "Announcement : " + "\n" +
+                "property = " + property +
+                ", commissionType = " + commissionType + '\'' +
+                ", commission = " + commission +
+                ", requestType = " + requestType +
+                ", agent = " + agent +
+                ", date = " + date +
+                ", price = " + price +
+                ", owner = "  + owner +
+                ", store = " + store;
     }
 
-    public Announcement clone(){
-        return  new Announcement(this.property,this.date,this.comissionType,this.comission,this.requestType,this.propertyType, this.agent);
-    }
-    public static boolean existsPrice(double price){
-        if (price < 1) { return false; }
-        else return true;
-    }
-
-    public Agent getAgent() {
-        return agent;
+    /**
+     * Method that creates a clone of the announcement
+     * @return clone of the announcement
+     */
+    public Announcement clone() {
+        return new Announcement(this.property, this.date, this.commissionType, this.commission, this.requestType, this.agent, this.price, this.owner, this.store);
     }
 }

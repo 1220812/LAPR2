@@ -5,7 +5,9 @@ public class District{
      * District name
      */
     private String name;
-
+    /**
+     * Default district name
+     */
     private static final String DEFAULT_NAME="none";
 
     /**
@@ -38,10 +40,20 @@ public class District{
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Method that provides the district characteristics
+     * @return district characteristics
+     */
     @Override
     public String toString() {
         return name;
     }
+
+    /**
+     * This method creates a clone of the district object
+     * @return clone of the district object
+     */
     public District clone(){
         return new District(this.name);
     }

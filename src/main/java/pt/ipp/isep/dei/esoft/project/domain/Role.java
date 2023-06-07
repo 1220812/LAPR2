@@ -11,18 +11,20 @@ public class Role {
      * Role by default
      */
     public static final String DEFAULT_ROLE = "None";
+
     /**
      * Instantiates a new role
+     *
      * @param description
      */
-    public Role(String description){
+    public Role(String description) {
         this.description = description;
     }
 
     /**
      * Instantiates a new role with the attributes by default
      */
-    public Role(){
+    public Role() {
         this.description = DEFAULT_ROLE;
     }
 
@@ -36,11 +38,19 @@ public class Role {
 
     /**
      * Method to change the role description
+     *
      * @param description changed role description
      */
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /**
+     * Method to compare two roles
+     *
+     * @param o role to compare
+     * @return true if the roles are equal, false if not
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -50,16 +60,35 @@ public class Role {
         return Objects.equals(description, role.description);
     }
 
+    /**
+     * Method to show the hashcode of the role
+     *
+     * @return hashcode of the role
+     */
+
     @Override
     public int hashCode() {
         return Objects.hash(description);
     }
 
+    /**
+     * Method to show the role description
+     *
+     * @return role description
+     */
+
     @Override
     public String toString() {
         return description;
     }
-    public Role clone(){
+
+    /**
+     * Method to clone a role
+     *
+     * @return cloned role
+     */
+
+    public Role clone() {
         return new Role(this.description);
     }
 }

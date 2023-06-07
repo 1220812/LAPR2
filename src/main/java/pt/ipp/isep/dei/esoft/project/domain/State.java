@@ -38,10 +38,20 @@ public class State {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Method that shows the state description
+     * @return state description
+     */
     @Override
     public String toString() {
         return name;
     }
+
+    /**
+     * Method that creates a clone of the state
+     * @return clone of the state
+     */
     public State clone(){
         return new State(this.name);
     }

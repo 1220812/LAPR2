@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.List;
 import java.util.Objects;
 
-public class Residence extends Property{
+public class Residence extends Property {
     /**
      * Number of bedrooms
      */
@@ -17,30 +17,44 @@ public class Residence extends Property{
      */
     private int numberOfParkingSpaces;
     /**
-     * available equipment
+     * air conditioning
      */
-
-
-     private boolean airConditioning;
-
+    private boolean airConditioning;
+    /**
+     * central heating
+     */
     private boolean centralHeating;
 
-
     /**
+     * Method that creates a new instance of Residence
      *
-     * @param address residence address
-     * @param area residence area
+     * @param address                residence address
+     * @param area                   residence area
      * @param distanceFromCityCentre distance between the residence and the city center
-     * @param numberOfBathrooms number of bathrooms
-     * @param numberOfBedrooms number of bedrooms
-     * @param numberOfParkingSpaces number of parking spaces
-     * @param airConditioning air conditioning
-     * @param centralHeating central heating
-     * @param price price
+     * @param numberOfBathrooms      number of bathrooms
+     * @param numberOfBedrooms       number of bedrooms
+     * @param numberOfParkingSpaces  number of parking spaces
+     * @param airConditioning        air conditioning
+     * @param centralHeating         central heating
      */
 
-    public Residence (Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning) {
-        super(area, distanceFromCityCentre, address,price, photographsList);
+    public Residence(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning) {
+        super(area, distanceFromCityCentre, address, propertyType, photographsList);
+        if (numberOfBathrooms < 0) {
+            throw new IllegalArgumentException("The number of bathrooms must be positive.");
+        }
+        if (numberOfBedrooms < 0) {
+            throw new IllegalArgumentException("The number of bedrooms must be positive.");
+        }
+        if (numberOfParkingSpaces < 0) {
+            throw new IllegalArgumentException("The number of parking spaces must be positive.");
+        }
+        if (photographsList == null) {
+            throw new IllegalArgumentException("The list of photographs must not be null.");
+        }
+        if (photographsList.isEmpty()) {
+            throw new IllegalArgumentException("The list of photographs must not be empty.");
+        }
         this.numberOfBedrooms = numberOfBathrooms;
         this.numberOfBathrooms = numberOfBedrooms;
         this.numberOfParkingSpaces = numberOfParkingSpaces;
@@ -50,6 +64,7 @@ public class Residence extends Property{
 
     /**
      * Method to show the number of bedrooms
+     *
      * @return number of bedrooms
      */
 
@@ -59,6 +74,7 @@ public class Residence extends Property{
 
     /**
      * Method to change the number of bedrooms
+     *
      * @param numberOfBedrooms changed number of bedrooms
      */
 
@@ -68,6 +84,7 @@ public class Residence extends Property{
 
     /**
      * Method to show the number of bathrooms
+     *
      * @return number of bathrooms
      */
 
@@ -77,6 +94,7 @@ public class Residence extends Property{
 
     /**
      * Method to change the number of bathrooms
+     *
      * @param numberOfBathrooms number of bathrooms
      */
 
@@ -86,6 +104,7 @@ public class Residence extends Property{
 
     /**
      * Method to show the number of parking spaces
+     *
      * @return numberOfParkingSpaces number of parking spaces
      */
 
@@ -95,26 +114,36 @@ public class Residence extends Property{
 
     /**
      * Method to change the number of parking spaces
+     *
      * @param numberOfParkingSpaces number of parking spaces
      */
 
     public void setNumberOfParkingSpaces(int numberOfParkingSpaces) {
         this.numberOfParkingSpaces = numberOfParkingSpaces;
     }
+
     /**
-     * Method to show the characteristics of a residence
-     * @return String with the residence characteristics
+     * Method to change the truth value of the existence of air conditioning
+     * @param airConditioning true if there is air conditioning, false otherwise
      */
-    @Override
-    public String toString() {
-        return super.toString() + ", number of bedrooms = " + numberOfBedrooms + ", number of bathrooms = " + numberOfBathrooms +
-                "\nparking spaces="  + numberOfParkingSpaces + ", air conditioning = " + airConditioning + ", central heating = " + centralHeating + "\n  ";
+
+    public void setAirConditioning(boolean airConditioning) {
+        this.airConditioning = airConditioning;
     }
 
     /**
-     * Compares two instances of Owner
-     * @param o other instance of Owner
-     * @return true if the instances are equal, false otherwise
+     * Method to change the truth value of the existence of central heating
+     * @param centralHeating true if there is central heating, false otherwise
+     */
+
+    public void setCentralHeating(boolean centralHeating) {
+        this.centralHeating = centralHeating;
+    }
+    /**
+     * Equals method that verifies if the residence already exists in the system
+     *
+     * @param o object to compare with
+     * @return true if the residence already exists, false if it doesn't
      */
     @Override
     public boolean equals(Object o) {
@@ -124,9 +153,24 @@ public class Residence extends Property{
         Residence residence = (Residence) o;
         return numberOfBedrooms == residence.numberOfBedrooms && numberOfBathrooms == residence.numberOfBathrooms && numberOfParkingSpaces == residence.numberOfParkingSpaces && Objects.equals(airConditioning, residence.airConditioning) && Objects.equals(centralHeating, residence.centralHeating);
     }
-
+    /**
+     * Method that returns a unique code that identifies the residence
+     *
+     * @return hash code for the residence
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces,airConditioning,centralHeating);
+        return Objects.hash(super.hashCode(), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, airConditioning, centralHeating);
+    }
+
+    /**
+     * Method to show the characteristics of a residence
+     *
+     * @return String with the residence characteristics
+     */
+    @Override
+    public String toString() {
+        return super.toString() + ", number of bedrooms = " + numberOfBedrooms + ", number of bathrooms = " + numberOfBathrooms +
+                "\nparking spaces=" + numberOfParkingSpaces + ", air conditioning = " + airConditioning + ", central heating = " + centralHeating;
     }
 }

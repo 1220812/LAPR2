@@ -5,6 +5,11 @@ import org.apache.commons.lang3.NotImplementedException;
 import java.io.*;
 
 public class EmailService {
+    /**
+     * Method that sends an email to the user with the password when he registers in the system
+     * @param email user´s email
+     * @param pass user´s password
+     */
 
     public static void sendEmail(String email, String pass) {
         System.out.println("Password ("+ pass+") was sent to the user´s email ("+email+")");
@@ -27,6 +32,11 @@ public class EmailService {
         }
     }
 
+    /**
+     * This method sends an email to the client when his order is rejected
+     * @param clientName name of the client
+     * @param propertyOrderNumber order number of the property
+     */
     public void sendRejectedOrderEmail(String clientName, int propertyOrderNumber) {
         String message = "Dear " + clientName + ",\n\n" +
                 "Your order for the property with the order number " + propertyOrderNumber + " was rejected.\n\n" +
@@ -34,6 +44,12 @@ public class EmailService {
                 "The Real Estate Company";
         wrightToFile("RejectedOrder.txt", message);
     }
+
+    /**
+     * This method sends an email to the client when his order is accepted
+     * @param clientName name of the client
+     * @param propertyOrderNumber order number of the property
+     */
     public void sendAcceptedOrderEmail(String clientName, int propertyOrderNumber){
         String message = "Dear" + clientName + ",\n\n" +
                 "Your order for the property with the order number " + propertyOrderNumber + " was accepted.\n\n" +

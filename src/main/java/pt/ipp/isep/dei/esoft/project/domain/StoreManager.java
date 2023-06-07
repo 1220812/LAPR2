@@ -1,22 +1,60 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 public class StoreManager {
-
+    /**
+     * name of the store manager
+     */
     private String name;
-
+    /**
+     * phone number of the store manager
+     */
     private String phoneNumber;
-
+    /**
+     * email address of the store manager
+     */
     private String emailAddress;
-
+    /**
+     * tax number of the store manager
+     */
     private TaxNumber taxNumber;
-
+    /**
+     * passport card number of the store manager
+     */
     private PassportCardNumber passportCardNumber;
-
+    /**
+     * address of the store manager
+     */
     private Address address;
+    /**
+     * role of the store manager
+     */
     private Role role;
+    /**
+     * agency of the store manager
+     */
     private Agency agency;
+    /**
+     * store of the store manager
+     */
     private Store store;
+    /**
+     * password of the store manager
+     */
     private String pass;
+
+    /**
+     * This
+     * @param name
+     * @param email
+     * @param phone
+     * @param passportCardNumber
+     * @param taxNumber
+     * @param address
+     * @param role
+     * @param agency
+     * @param store
+     * @param pass
+     */
     public StoreManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         this.name=name;
         this.emailAddress=email;

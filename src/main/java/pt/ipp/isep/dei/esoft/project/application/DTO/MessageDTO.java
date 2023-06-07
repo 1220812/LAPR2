@@ -1,11 +1,11 @@
-package pt.ipp.isep.dei.esoft.project.domain;
+package pt.ipp.isep.dei.esoft.project.application.DTO;
 
-import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
-import pt.ipp.isep.dei.esoft.project.repository.StoreRepository;
+import pt.ipp.isep.dei.esoft.project.domain.Agent;
 
 import java.time.LocalDate;
 
-public class Message {
+public class MessageDTO {
+
     /**
      * Date of the sending message
      */
@@ -21,6 +21,7 @@ public class Message {
     private int phone;
 
     private int inputAnnou;
+    private Agent agent;
 
     /**
      * Instantiates a new Message.
@@ -28,7 +29,7 @@ public class Message {
      * @param date     the date
      * @param schedule the schedule
      */
-    public Message(LocalDate date, String schedule) {
+    public MessageDTO(LocalDate date, String schedule) {
         this.date = date;
         this.schedule = schedule;
     }
@@ -41,13 +42,15 @@ public class Message {
      * @param name     the name
      * @param phone    the phone
      */
-    public Message(LocalDate date, String schedule, String name, int phone,int inputAnnou ) {
+    public MessageDTO(LocalDate date, String schedule, String name, int phone, int inputAnnou, Agent agent) {
         this.date = date;
         this.schedule = schedule;
-        this.name=name;
-        this.phone=phone;
-        this.inputAnnou=inputAnnou;
+        this.name = name;
+        this.phone = phone;
+        this.inputAnnou = inputAnnou;
+        this.agent = agent;
     }
+
 
     /**
      * Gets date.
@@ -109,6 +112,14 @@ public class Message {
         this.inputAnnou = inputAnnou;
     }
 
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -124,8 +135,7 @@ public class Message {
                 ", schedule='" + schedule + '\'' +
                 ", name='" + name + '\'' +
                 ", phone=" + phone +
-                ", Announcement=" + inputAnnou +
-                '}';
+                ", Announcement=" + inputAnnou;
     }
     /**
      * To string 2 string.
@@ -142,14 +152,25 @@ public class Message {
      * @param year  the year
      * @return the local date
      */
+
     public static LocalDate createDate(int day, int month, int year) {
-        try {
-            return LocalDate.of(year, month, day);
-        } catch (Exception e) {
-            System.out.println("Data inválida.");
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate dataInput =LocalDate.of(year, month, day);
+        if (dataAtual.isAfter(dataInput)) {
+            System.out.println("Data inválida. A data fornecida está no passado.");
             return null;
         }
+        return dataInput;
     }
+    public static boolean checkDate(int day, int month, int year) {
+        try {
+            LocalDate.of(year, month, day);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
 
     /**
@@ -223,4 +244,3 @@ public class Message {
     }
 
 }
-
