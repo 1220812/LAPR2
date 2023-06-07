@@ -36,8 +36,6 @@ public class Store {
         this.designation = designation;
         this.ID = ID;
     }
-
-
     public static boolean existID(int ID){
         if (ID <1000000 || ID >100000000){
             return false;

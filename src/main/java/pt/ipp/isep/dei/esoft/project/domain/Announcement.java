@@ -252,12 +252,18 @@ public class Announcement {
     public void setStore(Store store) {
         this.store = store;
     }
-
+    /**
+     * Method that verifies if exists a property price
+     * @return true if exists a property price, false if not
+     */
+    public static boolean existsPrice(double price){
+        if (price < 1) { return false; }
+        else return true;
+    }
     /**
      * Method that creates a string with the information of the announcement
      * @return string with the information of the announcement
      */
-
     @Override
     public String toString() {
         return "Announcement : " + "\n" +

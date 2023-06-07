@@ -12,8 +12,7 @@ public class OwnerUI implements Runnable{
     }
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
-       options.add(new MenuItem("US 0004 - make a request", new CreateRequestUI()));
-        options.add(new MenuItem("US 0002 - register announcement", new RegisterAnnouncementUI()));
+        options.add(new MenuItem("US 0004 - make a request", new CreateRequestUI()));
 
         int option = 0;
         do {

@@ -43,6 +43,9 @@ public class CreateRequestUI implements Runnable {
     private Address address;
     public LocalDate requestDate = LocalDate.now();
     private Owner owner;
+    private int doorNumber;
+    private int floorNumber;
+    private RequestType requestType;
 
     public void run() {
         String ownerName = Utils.readLineFromConsole("Insert the owner name: ");
@@ -71,29 +74,43 @@ public class CreateRequestUI implements Runnable {
         inPutType = propertyType.toString();
         System.out.println(propertyType);
         if (inPutType.equals("Land")) {
-            Optional<Property> land = controller.createLand(area, distanceFromCityCenter, address, price, photographs);
-            System.out.println(land);
+            property = controller.createLand(area, distanceFromCityCenter, address, propertyType, photographs);
+            System.out.println(property);
             System.out.println();
         } else if (inPutType.equals("House")) {
             requestDataForHouse();
-            Optional<Property> house = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure,inhabitableLoft,price, photographs);
-            System.out.println(house);
+            property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure,inhabitableLoft,propertyType,photographs);
+            System.out.println(property);
             System.out.println();
         } else if (inPutType.equals("Apartment")) {
             requestDataForApartment();
-            Optional<Property> apartment = controller.createApartment(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, price, photographs, centralHeating, airConditioning);
-            System.out.println(apartment);
+            property = controller.createApartment(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, propertyType, photographs, centralHeating, airConditioning);
+            System.out.println(property);
             System.out.println();
         }
-        RequestType requestType = Utils.listAndSelectOne(controller.getRequestTypeList());
-        String requestedType = requestType.toString();
-        if (requestedType.equalsIgnoreCase("Rent")) {
+        System.out.println("Please select on of the request types:");
+        System.out.println("1 - Rent");
+        System.out.println("2 - Sell");
+        String requestType = Utils.readLineFromConsole("Insert the request type: ");
+        while (!requestType.equalsIgnoreCase("Rent") && !requestType.equalsIgnoreCase("Sell")){
+            System.out.println("please insert a valid request type");
+            requestType = Utils.readLineFromConsole("Insert the request type: ");
+        }
+        if (requestType.equalsIgnoreCase("Rent")) {
             int contractDuration = Utils.readIntegerFromConsole("Insert the contract duration: ");
-            Optional<Request> rentRequest = controller.createRentRequest(property, requestDate, propertyType, agent, store, owner, contractDuration, price, requestType);
-            System.out.println(rentRequest);
-        }else if(requestedType.equalsIgnoreCase("Sell")){
-            Optional<Request> sellRequest = controller.createSellRequest(property,requestDate,propertyType,agent,store,owner,price,requestType);
-            System.out.println(sellRequest);
+            if(contractDuration <= 0){
+                System.out.println("please insert a valid number");
+                contractDuration = Utils.readIntegerFromConsole("Insert the contract duration: ");
+            }
+            RequestType rentRequestType = controller.createRentRequestType(requestType, contractDuration);
+            Request request = controller.createRequest(property, rentRequestType, price, agent,owner, requestDate, store);
+            controller.registerRequest(request);
+            System.out.println(request);
+        }else if(requestType.equalsIgnoreCase("Sell")){
+            RequestType sellRequestType = controller.createSellRequestType(requestType);
+            Request request = controller.createRequest(property, sellRequestType, price, agent,owner, requestDate, store);
+            controller.registerRequest(request);
+            System.out.println(request);
         }
     }
     private void requestOverallData(){
@@ -175,6 +192,16 @@ public class CreateRequestUI implements Runnable {
         }
     }
     private void requestDataForAddress(){
+        floorNumber = Utils.readIntegerFromConsole("Insert the floor number: ");
+        while (floorNumber <= 0){
+            System.out.println("please insert a valid number");
+            floorNumber = Utils.readIntegerFromConsole("Insert the floor number: ");
+        }
+        doorNumber = Utils.readIntegerFromConsole("Insert the door number: ");
+        while (doorNumber <= 0){
+            System.out.println("please insert a valid number");
+            doorNumber = Utils.readIntegerFromConsole("Insert the door number: ");
+        }
         streetAddress = Utils.readLineFromConsole("Insert the street address: ");
         while (streetAddress == null) {
             System.out.println("please insert a valid street address");
@@ -188,7 +215,6 @@ public class CreateRequestUI implements Runnable {
         State state = new State(Utils.readLineFromConsole("Insert the state: "));
         District district = new District(Utils.readLineFromConsole("Insert the district: "));
         City city = new City(Utils.readLineFromConsole("Insert the city: "));
-        address = new Address(streetAddress,zipCode,state,district,city);
+        address = new Address(streetAddress,doorNumber,floorNumber,zipCode,state,district,city);
     }
-
 }

@@ -34,13 +34,13 @@ public class PropertyRepository {
      * Creates a land property
      * @param area area of the property
      * @param address address of the property
-     * @param price price of the property
+     * @param propertyType propertyType of the property
      * @return the property created
      */
-    public Optional <Property> createLand(double area, double distanceFromTheCityCentre, Address address, double price, List<Photographs> photographsList){
+    public Optional <Property> createLand(double area, double distanceFromTheCityCentre, Address address, PropertyType propertyType, List<Photographs> photographsList){
         Optional<Property> optionalValue = Optional.empty();
 
-        Property property = new Property(area, distanceFromTheCityCentre, address, price, photographsList);
+        Property property = new Property(area, distanceFromTheCityCentre, address, propertyType, photographsList);
         if(addProperty(property)){
             optionalValue = Optional.of(property);
         }
@@ -51,7 +51,7 @@ public class PropertyRepository {
      * Creates an apartment property
      * @param area area of the property
      * @param address address of the property
-     * @param price price of the property
+     * @param propertyType propertyType of the property
      * @param numberOfBedrooms number of bedrooms
      * @param numberOfBathrooms number of bathrooms
      * @param numberOfParkingSpaces number of parking spaces
@@ -59,10 +59,10 @@ public class PropertyRepository {
      * @param airConditioning air conditioning
      * @return the property created
      */
-    public Optional <Property> createApartment(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, double price, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning){
+    public Optional <Property> createApartment(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, PropertyType propertyType, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning){
         Optional<Property> optionalValue = Optional.empty();
 
-        Residence apartment = new Residence(address, area, distanceFromCityCentre, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, price, photographsList, centralHeating, airConditioning);
+        Residence apartment = new Residence(address, area, distanceFromCityCentre, propertyType ,numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, photographsList, centralHeating, airConditioning);
         if(addProperty(apartment)){
             optionalValue = Optional.of(apartment);
         }
@@ -81,13 +81,12 @@ public class PropertyRepository {
      * @param basement   basement
      * @param sunExposure  sun exposure
      * @param inhabitableLoft  inhabitable loft
-     * @param price  price of the property
      * @param photoList list of photographs
      * @return the property created
      */
-    public Optional<Property> createHouse(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning , boolean centralHeating , boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double price, List<Photographs> photoList){
+    public Optional<Property> createHouse(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning , boolean centralHeating , boolean basement, SunExposure sunExposure, boolean inhabitableLoft, PropertyType propertyType, List<Photographs> photoList){
         Optional<Property> optionalValue = Optional.empty();
-        House house = new House(address, area, distanceFromCityCentre, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure, inhabitableLoft, price, photoList);
+        House house = new House(address, area, distanceFromCityCentre, propertyType, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure, inhabitableLoft, photoList);
         if(addProperty(house)){
             optionalValue = Optional.of(house);
         }

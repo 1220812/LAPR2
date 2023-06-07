@@ -14,7 +14,7 @@ public class RequestType {
     /**
      * contract duration by default
      */
-    private static final double DEFAULT_CONTRACTDURATION = 0;
+    private static final double DEFAULT_CONTRACT_DURATION = 0;
 
     /**
      * Creates a new instance of request type
@@ -33,7 +33,7 @@ public class RequestType {
      */
     public RequestType(String requestType) {
         this.requestType = requestType;
-        contractDuration = DEFAULT_CONTRACTDURATION;
+        contractDuration = DEFAULT_CONTRACT_DURATION;
     }
 
     /**
@@ -79,7 +79,8 @@ public class RequestType {
      */
     @Override
     public String toString() {
-        return requestType;
+        return "RequestType : " + requestType +
+                ", contractDuration = " + contractDuration;
     }
 
     /**

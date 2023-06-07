@@ -304,10 +304,9 @@ public class Bootstrap implements Runnable {
 
     private void addRequests() {
         RequestRepository requestRepository = Repositories.getInstance().getRequestRepository();
-
-        List<Photographs> photos1 = null;
-        List<Photographs> photos2 = null;
-        List<Photographs> photos3 = null;
+        List<Photographs> photoList1 = new ArrayList<>();
+        List<Photographs> photoList2 = new ArrayList<>();
+        List<Photographs> photoList3 = new ArrayList<>();
         RequestType requestType1 = new RequestType("Sale", 0);
         RequestType requestType2 = new RequestType("Sale", 0);
         RequestType requestType3 = new RequestType("Rent", 3);
@@ -325,9 +324,9 @@ public class Bootstrap implements Runnable {
         Address address1 = new Address("Street A",4, 6, "12345", state1, district1, city1);
         Address address2 = new Address("Street B",1,3, "12346",state2, district2, city2);
         Address address3 = new Address("Street C",1, 2, "12347",state1, district3, city2);
-        Property property1 = new Property(10000, 10, address1, propertyType1, photos1);
-        Property property2 = new House(address2,1000, 12,propertyType3,2,2,true,true,true, new SunExposure("North"),true,1000000,photos2);
-        Property property3 = new Residence(address3, 300, 2, propertyType2,2,1,1800000, photos3,true, false);
+        Property property1 = new Property(10000, 10, address1, propertyType1, photoList1);
+        Property property2 = new House(address2,1000, 12,propertyType3,2,2,1,true,true,true,new SunExposure("North"),true,photoList2);
+        Property property3 = new Residence(address3, 300, 2, propertyType2,2,1,1, photoList3,true, false);
         LocalDate requestDate1 = LocalDate.of(2021, 1, 1);
         LocalDate requestDate2 = LocalDate.of(2021, 2, 2);
         LocalDate requestDate3 = LocalDate.of(2021, 3, 3);

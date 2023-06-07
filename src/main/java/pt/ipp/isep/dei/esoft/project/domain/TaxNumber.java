@@ -41,8 +41,8 @@ public class TaxNumber {
     }
 
     /**
-     * Compares two instances of Owner
-     * @param o other instance of Owner
+     * Compares two instances of tax number
+     * @param o other instance of tax number
      * @return true if the instances are equal, false otherwise
      */
     @Override
@@ -65,6 +65,11 @@ public class TaxNumber {
     public String toString() {
         return taxNumber;
     }
+
+    /**
+     * This method clones an instance of TaxNumber
+     * @return cloned TaxNumber
+     */
 
     public TaxNumber clone(){
         return new TaxNumber(this.taxNumber);

@@ -74,6 +74,7 @@ public class Request {
         this.owner = owner;
         this.requestType = requestType;
         this.store = store;
+        this.price = price;
     }
 
     /**
@@ -207,12 +208,12 @@ public class Request {
     @Override
     public String toString() {
         return "Request : " + "\n" +
-                "requestType = " + requestType +
+                requestType +
                 ", price = " + price +
                 ", agent = " + agent +
                 ", owner = " + owner +
                 ", requestDate = " + requestDate +
-                ", property = " + property +
+                ", property : " + property +
                 ", store = " + store;
     }
 
