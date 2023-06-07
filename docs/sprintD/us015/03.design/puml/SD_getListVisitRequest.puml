@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "vistRequestRepository\n:VisitRequestRepository" as REREPO
+participant "algorithm\n:SortingAlgorithm" as ALG
+participant "visitRequestList\n:List<VisitRequest>" as REQLIST
+
+-> REREPO :getListVisitRequest(userEmail, startDate, endDate, algorithm)
+
+
+activate REREPO
+loop (for each visitRequest)
+
+REREPO -> ALG** : creates()
+
+alt (visitRequest.getAgentEmail()==userEmail
+
+REREPO --> REQLIST : add(visitRequest)
+activate REQLIST
+deactivate REQLIST
+
+end
+
+end
+
+REREPO -> REREPO : sortList(visitRequestList, startDate, endDate)
+
+REREPO -> REREPO : filterByDate(visitRequestList, startDate, endDate)
+
+REREPO -> ALG : sort(startDate, endDate)
+activate ALG
+note over REQLIST
+SortingAlgorithm instance
+is used based on the
+information written on the config file
+end note
+
+deactivate ALG
+
+<-- REREPO : visitRequestList
+@enduml

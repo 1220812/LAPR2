@@ -1,0 +1,111 @@
+@startuml
+autonumber
+actor "Agent" as AGENT
+participant ":ListRequestsUI" as UI
+participant ":ListRequestsController" as CTRL
+participant ":Repositories" as REPO
+participant "repositories\n:Repositories" as PLAT
+participant ":ApplicationSession" as APP
+participant "appSession\n:ApplicationSession" as APPSESSION
+participant "currentSession\n:UserSession" as USER
+participant "visitRequestRepository\n:VisitRequestRepository" as VISITREPO
+participant "visitRequestMapper\:VisitRequestMapper" as MAPPER
+
+activate AGENT
+
+AGENT -> UI : Request to list all booking requests managed by me
+activate UI
+
+UI -> CTRL** : create
+activate CTRL
+
+CTRL -> REPO : getInstance()
+activate REPO
+
+REPO --> CTRL : repositories
+deactivate REPO
+
+CTRL -> PLAT : getMessageReposiotry()
+activate PLAT
+
+PLAT --> CTRL : messageRepository
+deactivate PLAT
+CTRL -> APP : getInstance()
+activate APP
+
+APP --> CTRL :appSession
+deactivate APP
+
+CTRL -> APPSESSION : getCurrentSession()
+activate APPSESSION
+
+APPSESSION --> CTRL : currentSession
+deactivate CTRL
+deactivate APPSESSION
+
+UI --> AGENT : Requests to input the start date of the filtering
+deactivate UI
+
+AGENT -> UI : Submists the start date
+activate UI
+
+UI --> UI : Saves start date
+
+UI -> AGENT : Asks to input the end date of the filtering
+deactivate UI
+
+AGENT --> UI: Submists the end date
+activate UI
+UI --> UI : Saves end date
+
+UI --> AGENT : Shows the start date and end date and ask to confirm
+deactivate UI
+
+AGENT -> UI : Confirms the file name and type of algorithm
+activate UI
+
+UI -> CTRL : getListVisitRequest(startDate, endDate)
+activate CTRL
+
+CTRL -> USER: getUserEmail()
+activate USER
+
+USER --> CTRL: getUserEmail
+deactivate USER
+
+CTRL -> APPSESSION : getSortingAlgorithm()
+activate APPSESSION
+
+APPSESSION --> CTRL : algorithm
+deactivate APPSESSION
+
+CTRL -> VISITREPO
+activate VISITREPO
+
+ref over VISITREPO
+SD_getListVisitRequest
+end
+
+VISITREPO --> CTRL : visitRequestList
+deactivate VISITREPO
+
+CTRL -> MAPPER : listToDTO(visitRequestList)
+activate MAPPER
+
+ref over MAPPER
+SD_getListVisitRequest
+end
+
+MAPPER --> CTRL: visitRequestDTOlist
+deactivate MAPPER
+
+CTRL --> UI : visitRequestDTOlist
+deactivate CTRL
+
+UI --> AGENT : Displays the list of all booking requests sorted by the selectd algorithm
+
+
+
+
+
+@enduml
