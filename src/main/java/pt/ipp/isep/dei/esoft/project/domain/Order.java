@@ -5,13 +5,17 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Order {
+    private Status status;
     private Announcement announcement;
     private double orderPrice;
-    private User client;
-    public Order(Announcement announcement, double orderPrice,User client) {
+    private String email;
+    private static int orderCounter = 1;
+    public Order(Announcement announcement, double orderPrice,String email) {
         this.announcement = announcement;
         this.orderPrice = orderPrice;
-        this.client = client;
+        this.email = email;
+        this.status = Status.PENDING;
+        orderCounter++;
     }
     public Announcement getAnnouncement() {
         return announcement;
@@ -26,11 +30,20 @@ public class Order {
         this.orderPrice = orderPrice;
     }
 
-    public User getClient() {
-        return client;
+    public String getEmail() {
+        return email;
     }
-    public void setClient(User client) {
-        this.client = client;
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
@@ -38,22 +51,25 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Double.compare(order.orderPrice, orderPrice) == 0 && Objects.equals(announcement, order.announcement) && Objects.equals(client, order.client);
+        return Double.compare(order.orderPrice, orderPrice) == 0 && status == order.status && Objects.equals(announcement, order.announcement) && Objects.equals(email, order.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(announcement, orderPrice);
+        return Objects.hash(status, announcement, orderPrice, email);
     }
+
     public Order clone(){
-        return new Order(this.announcement,this.orderPrice, this.client);
+        return new Order(this.announcement,this.orderPrice, this.email);
     }
+
     @Override
     public String toString() {
         return "Order{" +
-                "announcement=" + announcement +
+                "status=" + status +
+                ", announcement=" + announcement +
                 ", orderPrice=" + orderPrice +
-                ", client=" + client +
+                ", email=" + email +
                 '}';
     }
 }

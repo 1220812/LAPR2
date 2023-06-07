@@ -12,7 +12,7 @@ public class User {
 
     private final String NAME_BY_DEFAULT = "[NO DATA]";
 
-    private final String PHONE_NUMBER_BY_DEFAULT = "000-000-000";
+    private final String PHONE_NUMBER_BY_DEFAULT = "000-000-0000";
     private final String EMAIL_ADDRESS_BY_DEFAULT = "[NO DATA]";
     private final String PASSWORD_BY_DEFAULT = "[NO DATA]";
 
@@ -27,9 +27,9 @@ public class User {
 
     /**
      *
-     * @param name
-     * @param emailAddress
-     * @param password
+     * @param name name
+     * @param emailAddress email
+     * @param password pwd
      */
     public User(String name, String emailAddress, String password, String phoneNumber) {
         this.name = name;
@@ -50,7 +50,7 @@ public class User {
 
     /**
      * Method to change the name
-     * @param name
+     * @param name name
      */
     public void setName(String name) {
         this.name = name;
@@ -67,7 +67,7 @@ public class User {
 
     /**
      * Method to change the email address
-     * @param emailAddress email address
+     * @param emailAddress email
      */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
@@ -84,7 +84,7 @@ public class User {
 
     /**
      * Method to change the password
-     * @param password
+     * @param password pwd
      */
     public void setPassword(String password) {
         this.password = password;
@@ -101,7 +101,7 @@ public class User {
 
     /**
      * Method to change the phoneNumber
-     * @param phoneNumber
+     * @param phoneNumber phone number
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;

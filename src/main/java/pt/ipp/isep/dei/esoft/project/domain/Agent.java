@@ -225,4 +225,6 @@ public class Agent{
         Agent newAgent = newAgent(name, phoneNumber, emailAddress, address, taxNumber, passportCardNumber);
         return newAgent;
     }
+
+
 }
