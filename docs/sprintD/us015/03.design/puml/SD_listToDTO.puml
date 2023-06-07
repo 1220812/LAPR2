@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "visitRequestMapper\n:VisitRequestMapper" as MAPPER
+participant "visitRequestDTOList\n:List<VisitRequestDTO>" as DTOLIST
+participant "vistRequestDTO\n:VisitRequestDTO" as DTO
+
+-> MAPPER : ListToDTO(visitRequestList)
+activate MAPPER
+
+MAPPER -> DTOLIST**
+
+loop for each visitRequest in visitRequestList]
+
+MAPPER -> MAPPER : visitRequestDTO= visitRequestToDTO((visitRequest)
+
+MAPPER -> DTO**
+
+activate DTOLIST
+MAPPER ->DTOLIST: add(annoucementDTO)
+deactivate DTOLIST
+
+end
+
+ <-- MAPPER  :visitRequestDTOList
+
+@enduml
