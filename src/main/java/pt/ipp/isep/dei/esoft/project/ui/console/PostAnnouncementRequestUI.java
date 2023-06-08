@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-public class PostAnnouncementRequestUI implements Runnable{
+/**public class PostAnnouncementRequestUI implements Runnable{
 
     Request request;
     private final PostAnnouncementRequestController controller = new PostAnnouncementRequestController();
@@ -93,4 +93,4 @@ public class PostAnnouncementRequestUI implements Runnable{
             }
         }
     }
-}
+}*/

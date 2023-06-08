@@ -2,6 +2,7 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
+skinparam linetype polyline
 
 'left to right direction
 
@@ -27,10 +28,6 @@ cityName
 }
 
 class Agent{
-name
-phoneNumber
-emailAddress
-pass
 }
 
 class Employee{
@@ -39,22 +36,28 @@ emailAddress
 phoneNumber
 }
 
-@startuml
-skinparam monochrome true
-skinparam packageStyle rectangle
-skinparam shadowing false
-skinparam linetype dashed
-
-'left to right direction
-
-hide circle
-hide methods
-
-title US017 - Domain Model
-
-class Deal{
+class Order{
+orderPrice
 date
-acceptedOrder
+orderNumber
+decision
+}
+
+class Announcement{
+comissionType
+comission
+date
+}
+
+class Client{
+}
+
+class Property{
+area
+price
+distanceFromCityCenter
+propertyType
+photographList
 }
 
 class Store{
@@ -92,18 +95,19 @@ emailAddress
 phoneNumber
 }
 
-class Agent{}
-
-
 Store "1" -- Address : has >
-Address -- City : has >
-City -- District : is in >
-District -- State : is in >
-NetworkManager --- "1...*" Deal : lists >
+Address -- "1" City : has >
+City -- "1" District : is in >
+District -- "1" State : is in >
+NetworkManager --- "1...*" Order : sorts the deals >
 NetworkManager --|> Employee : is >
 Agent ---|> Employee : is >
-Agent "1" -- "0...*" Deal : sets >
+Agent "1" -- "1...*" Order : makes the \ndecision on  >
 Agent -- Store : works for >
 NetworkManager "1" --- "1...*" Store : manages >
+Property -- Address : has >
+Order -- "1" Announcement : on >
+Announcement -- "1" Property : announces >
+Client -- Order : makes >
 
 @enduml

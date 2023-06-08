@@ -12,11 +12,11 @@ participant ":System" as System
 
 activate NM
 
-    NM -> System : asks to display the list of all the deals made
+    NM -> System : asks to list all the deals made
 
     activate System
 
-        System --> NM : shows the two different sorting methods \nand asks to select one
+        System --> NM : shows the list and asks to select one of the \nsorting methods (Bubble Sort or Insertion Sort)
 
     deactivate System
 

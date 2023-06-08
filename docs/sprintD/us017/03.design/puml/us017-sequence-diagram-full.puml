@@ -9,11 +9,14 @@ participant ":ListDealsController" as Controller
 
 participant ":Repositories" as PLAT
 participant "repositories :\nRepositories" as REP
-participant "dealRepository :\nDealRepository" as DR
+participant "orderRepository :\nOrderRepository" as OR
+participant "order:\nOrder" as order
+participant "announcement:\nAnnouncement" as announcement
+participant "property:\nProperty" as property
 
 activate NM
 
-    NM -> UI : asks to list of all the deals made
+    NM -> UI : asks to list all the deals made
 
     activate UI
 
@@ -31,19 +34,27 @@ activate NM
 
     deactivate PLAT
 
-    Controller -> REP : getDealsRepository()
+    Controller -> REP : getOrdersRepository()
 
     activate REP
 
-    REP --> Controller : dealsRepository
+    REP --> Controller : ordersRepository
 
     deactivate REP
+
+    Controller -> OR : getAcceptedOrders()
+
+    activate OR
+
+    OR --> Controller : acceptedOrders
+
+    deactivate OR
 
     Controller --> UI : deals
 
     deactivate Controller
 
-        UI --> NM : shows the two different sorting methods \n(Bubble Sort or Insertion Sort) and asks to select  one
+        UI --> NM : shows the list and asks to select one of the \nsorting methods (Bubble Sort or Insertion Sort)
 
     deactivate UI
 
@@ -64,13 +75,41 @@ activate NM
 
         activate Controller
 
-        Controller -> DR : sortListByBubbleSort(deals, orderOfSorting)
+        Controller -> OR : sortListByBubbleSort(deals, orderOfSorting)
 
-        activate DR
+        activate OR
 
-        DR --> Controller : sortedList
+        loop for every deal
 
-        deactivate DR
+        OR --> order : getAnnouncement()
+
+        activate order
+
+        order -> announcement : getProperty()
+
+        activate announcement
+
+        announcement -> property : getArea()
+
+        activate property
+
+        property --> announcement : area
+
+        deactivate property
+
+        announcement --> order : area
+
+        deactivate announcement
+
+        order --> OR : area
+
+        deactivate order
+
+        end
+
+        OR --> Controller : sortedListByArea
+
+        deactivate OR
 
         Controller --> UI : sortedList
 
@@ -82,13 +121,41 @@ activate NM
 
              activate Controller
 
-             Controller -> DR : sortListByInsertionSort(deals, orderOfSorting)
+             Controller -> OR : sortListByInsertionSort(deals, orderOfSorting)
 
-             activate DR
+             activate OR
 
-             DR --> Controller : sortedList
+             loop for every deal
 
-             deactivate DR
+                     OR --> order : getAnnouncement()
+
+                     activate order
+
+                     order -> announcement : getProperty()
+
+                     activate announcement
+
+                     announcement -> property : getArea()
+
+                     activate property
+
+                     property --> announcement : area
+
+                     deactivate property
+
+                     announcement --> order : area
+
+                     deactivate announcement
+
+                     order --> OR : area
+
+                     deactivate order
+
+                     end
+
+             OR --> Controller : sortedListByArea
+
+             deactivate OR
 
              Controller --> UI : sortedList
 

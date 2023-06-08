@@ -1,76 +1,59 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
 
-@startuml
+skinparam classAttributeIconSize 0
 
-class ListEmployeesUI
-class ListEmployeesController
-{
+
+Title US017 - Class Diagram (UC)
+
+class ListDealsUI{
 }
 
+class ListDealsController{
++getDeals()
+}
 
-class Repositories
-{
--description
--StoreRepository storeRepository
+class Repositories{
+-Repositories
 +getInstance() : Repositories
-+getStoreRepository()
+getOrdersRepository()
 }
 
-
-
-class Store
-{
--int ID
--String designation
--String phoneNumber
--String email
--List<Employee> employees
--List<Advertisement> advertisements
-+Store(int ID, String designation, String phoneNumber, String email, String street, City city, String postalCode)
-+getEmployees()
-+getAdvertisements()
+class OrderRepository{
++sortListByBubbleSort()
++sortListByInsertionSort()
 }
 
-
-class StoreRepository
-{
--List<Store> storeList
-+getStoreList()
-+sortStoreListByNumberOfAdvertisements()
-+getEmployeesOfStore(Store store)
+class Order{
+-int orderPrice
+-int orderNumber
+-boolean decision
+-LocalDate date
++getAnnouncement()
++getOrderPrice()
++setAnnouncement()
++setOrderPrice()
++getDate()
++setDate()
++makeDecision(decision)
++getClientName()
++getClient()
++getOrderNumber()
 }
 
-class EmployeeRepository {
--List<Employee> employeeList
-+getEmployeeList()
-+sortListAlphabetically()
-}
+ListDealsUI -.-> ListDealsController
 
-class Employee
-{
-- name
-- phoneNumber
-- email
-- passportNumber
-- taxNumber
-+ Employee (String name, String phoneNumber, String email, String passportNumber, String taxNumber)
-+ getName()
-}
+ListDealsController -.-> Repositories
 
-class SortAlphabeticallyComparator
-{
+Repositories -> Repositories : instance
 
-}
+Repositories --> "1" OrderRepository : dealsRepository
 
-Repositories --> Repositories : instance
-ListEmployeesController ..> Repositories
-ListEmployeesUI ..> ListEmployeesController
-Repositories "1" -- "1" StoreRepository : has >
-Repositories "1" -- "1" EmployeeRepository : has >
-StoreRepository "1" -- "*" Store : has >
-EmployeeRepository ..> SortAlphabeticallyComparator
-EmployeeRepository "1" -- "*" Employee : has >
-Store "1" .. "*" Employee : has >
+ListDealsController -.-> OrderRepository
+
+OrderRepository --> "1..*" Order : orders
 
 @enduml
