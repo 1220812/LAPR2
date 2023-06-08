@@ -8,57 +8,81 @@ import java.util.List;
 import java.util.Optional;
 
 public class RequestTypeRepository {
+    /**
+     * Creation of a list to store request types
+     */
     private final List<RequestType> requestTypes = new ArrayList<>();
 
-    public List<RequestType> getRequestTypeList(){
+    /**
+     * Method to get the list of request types
+     *
+     * @return list of request types
+     */
+    public List<RequestType> getRequestTypeList() {
         return List.copyOf(requestTypes);
     }
 
     /**
      * Method to add a new request type to the list
+     *
      * @param requestType request type to add
      * @return request type list with new one added
      */
-
-    public boolean validateRequestType(RequestType requestType){
+    public boolean validateRequestType(RequestType requestType) {
         return !this.requestTypes.contains(requestType);
     }
-    public List<RequestType> getRequestTypes(){
+
+    /**
+     * Method to get a copy of the list of request types
+     *
+     * @return copy of the list of request types
+     */
+    public List<RequestType> getRequestTypes() {
         return List.copyOf(this.requestTypes);
     }
 
-    public List<RequestType> add(RequestType requestType) {
-
-        requestTypes.add(requestType);
-
-        Optional<RequestType> newRequestType = Optional.empty();
-        boolean operationSuccess = false;
-
+    /**
+     * Method to add a new request type to the list
+     *
+     * @param requestType request type to add
+     * @return true if the request type is added, false if not
+     */
+    public boolean add(RequestType requestType) {
+        boolean addRequestType = false;
         if (validateRequestType(requestType)) {
-            newRequestType = Optional.of((RequestType) requestType.clone());
-            operationSuccess = requestTypes.add((RequestType) newRequestType.get());
+            addRequestType = this.requestTypes.add(requestType);
         }
-
-        if (!operationSuccess) {
-            newRequestType = Optional.empty();
-        }
-        return requestTypes;
-    }
-    private boolean validateEquipment(RequestType requestType) {
-        boolean isValid = !requestTypes.contains(requestType);
-        return isValid;
+        return addRequestType;
     }
 
-    public RequestType getRequestTypeByName(String name) {
-        for (RequestType requestType: requestTypes) {
-            if(requestType.getRequestType().equals(name)){
-                return requestType;
-            }
+    /**
+     * Method that creates a new request type
+     *
+     * @param contractDuration contract duration
+     * @param requestType      request type
+     * @return optional value of the request type
+     */
+    public Optional<RequestType> CreateRentRequestType(int contractDuration, String requestType) {
+        Optional<RequestType> optionalValue = Optional.empty();
+        RequestType requestType1 = new RequestType(requestType, contractDuration);
+        if (add(requestType1)) {
+            optionalValue = Optional.of(requestType1);
         }
-        return null;
+        return optionalValue;
     }
 
-    public RequestType createRequestType(String name) {
-        throw new NotImplementedException();
+    /**
+     * Method that creates a new request type
+     *
+     * @param requestType request type
+     * @return optional value of the request type
+     */
+    public Optional<RequestType> CreateSellRequestType(String requestType) {
+        Optional<RequestType> optionalValue = Optional.empty();
+        RequestType requestType1 = new RequestType(requestType);
+        if (add(requestType1)) {
+            optionalValue = Optional.of(requestType1);
+        }
+        return optionalValue;
     }
 }

@@ -1,0 +1,123 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+@startuml
+
+class VisitRequestRepository{
+-add(visitRequest)
++sortList(fileName)
+}
+
+class VisitRequest{
+-message
+-date
+-timeSolt
+-clientName
+-clientPhoneNumber
+-agent
+-property
+}
+
+interface SortingAlgorithm{
+sort()
+}
+
+class BubbleSort{
+sort()
+}
+
+class SelectionSort{
+sort()
+}
+
+class ListVisitRequestsController{
++getListVisitRequest(fileName)
+-ListVisitRequestController(visitRequestRepository, appSession)
+}
+
+class Client{
+-name: String
+-passportCardNumber: String
+-taxNumber: String
+-email: String
+-phoneNumber: String
+-address: Address
+}
+
+class Employee{
+-name: String
+-passportCardNumber: String
+-taxNumber: String
+-phoneNumber: String
+-role: Role
+-address: Address
+}
+
+class Repositories{
+-Repositories()
++getInstance() : Repositories
++getVisitRequestRepository()
+}
+
+class VisitRequestDTO{
+-message
+-date
+-timeSlot
+-clientName
+-clientPhoneNumber
+-agent
+-property
+}
+
+class ListVisitRequestUI{
+}
+
+class UserSession{
++getUserEmail()
+}
+
+class VisitRequestMapper{
++listToDTO(visitRequestList)
++visitRequestToDTO(visitRequest)
+-add(announcementDTO)
+}
+
+class Address{
+-street: String
+-zipCode: String
+}
+
+class ApplicationSession{
++getInstance()
++getCurrentSession()
+}
+
+
+
+
+
+
+
+
+VisitRequestRepository --|> VisitRequest
+VisitRequestRepository ..> SortingAlgorithm
+VisitRequestRepository <.. ListVisitRequestsController
+VisitRequest <.. VisitRequestMapper
+VisitRequest <.. ListVisitRequestsController
+SortingAlgorithm <|-- SelectionSort
+SortingAlgorithm <|-- BubbleSort
+ListVisitRequestsController ..>UserSession
+ListVisitRequestsController ..> VisitRequestMapper
+ListVisitRequestsController ..> ApplicationSession
+ListVisitRequestsController ..> Repositories
+ListVisitRequestsController ..> VisitRequestDTO
+Client --|> Address
+Client <|-- VisitRequest
+Employee <|-- VisitRequest
+Employee --|> Address
+Repositories ..> Repositories :instance
+VisitRequestDTO <|-- VisitRequestMapper
+VisitRequestDTO ..> ListVisitRequestUI
+ListVisitRequestUI ..> ListVisitRequestsController
+
+@enduml

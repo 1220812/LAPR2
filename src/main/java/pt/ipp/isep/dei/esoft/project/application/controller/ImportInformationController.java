@@ -13,6 +13,6 @@ public class ImportInformationController {
     FileInformation fileImporter= new FileInformation ();
 
     public void ImportFile ( String path ) throws IOException {
-        fileImporter.importFile(path);
+        //fileImporter.importFile(path);
     }
 }

@@ -48,9 +48,6 @@ public class Property {
         if (propertyType == null) {
             throw new IllegalArgumentException("Property type must not be null");
         }
-        if (photographsList == null) {
-            throw new IllegalArgumentException("Photographs list must not be null");
-        }
         this.area = area;
         this.distanceFromTheCityCenter = distanceFromTheCityCenter;
         this.address = address;
@@ -128,6 +125,25 @@ public class Property {
     public void setPropertyType(PropertyType propertyType) {
         this.propertyType = propertyType;
     }
+
+    /**
+     * Method that verifies if the property has area
+     * @param area area of the property
+     * @return true if the property has area, false if not
+     */
+    public static boolean existsArea(double area){
+        if (area < 1) { return false; }
+        else return true;
+    }
+    /**
+     * Method to verify if that exists a distance from the city center
+     * @param distanceFromTheCityCenter distance from the city center
+     * @return  true if the distance from the city center exists, false if not
+     */
+    public static boolean existsDistanceFromCityCenter(double distanceFromTheCityCenter){
+        if (distanceFromTheCityCenter < 1) { return false; }
+        else return true;
+    }
     /**
      * Equals method that verifies if the property already exists in the system
      *
@@ -155,8 +171,7 @@ public class Property {
      */
     @Override
     public String toString() {
-        return "Property : " + "\n" +
-                "area = " + area +
+        return "area = " + area +
                 ", distanceFromTheCityCenter = " + distanceFromTheCityCenter +
                 ", address = " + address +
                 ", propertyType = " + propertyType +

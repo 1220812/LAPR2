@@ -209,11 +209,28 @@ public class Address {
         this.district = district;
     }
     /**
+     * Method that checks if the zip code exists
+     * @param zipCode zip code
+     * @return true if the zip code exists, false otherwise
+     */
+    public static boolean existsZipCode(String zipCode){
+        if ((zipCode.length() != ZIP_CODE_LENGTH) || (StringUtils.isBlank(zipCode)) || (!StringUtils.isNumeric(zipCode))) { return false; }
+        else return true;
+    }
+    /**
+     * Method that checks if the door number exists
+     * @param floorNumber floor number
+     * @return true if the door number exists, false otherwise
+     */
+    public static boolean existsDoorNumber(int floorNumber){
+        if (floorNumber < 1) { return false; }
+        else return true;
+    }
+    /**
      * Compares two instances of Address
      * @param o other instance of Address
      * @return true if the instances are equal, false otherwise
      */
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -234,7 +251,7 @@ public class Address {
      */
     @Override
     public String toString() {
-        return ", address - " + "state : "+state + ", district : "+district + ", city : "+city  + ", zipcode : "+zipCode + ", street address: "+streetAddress;
+        return "state : "+state + ", district : "+district + ", city : "+city  + ", zipcode : "+zipCode + ", street address: "+streetAddress;
     }
 
     /**

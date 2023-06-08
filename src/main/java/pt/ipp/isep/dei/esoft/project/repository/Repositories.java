@@ -9,7 +9,7 @@ public class Repositories {
     private final TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
     private final OrganizationRepository organizationRepository = new OrganizationRepository();
     private final AuthenticationRepository authenticationRepository = new AuthenticationRepository();
-    private final OrderRepository orderRepository = new OrderRepository();
+    //private final OrderRepository orderRepository = new OrderRepository();
 
     // Added after by the Team
 
@@ -63,6 +63,7 @@ public class Repositories {
     private  final OwnerRepository ownerRepository= new OwnerRepository();
 
     private final PropertyRepository propertyRepository = new PropertyRepository();
+    private final OrderRepository orderRepository = new OrderRepository();
     /**
      * The Get announcement repository.
      */
@@ -97,9 +98,9 @@ public class Repositories {
     public AgentRepository getAgentRepository(){
         return agentRepository;
     }
-    public OrderRepository getOrderRepository() {
+    /**public OrderRepository getOrderRepository() {
         return orderRepository;
-    }
+    }*/
 
     /**
      * Gets role repository.
@@ -283,6 +284,9 @@ public class Repositories {
      */
     public PropertyRepository getPropertyRepository() {
         return propertyRepository;
+    }
+    public OrderRepository getOrderRepository(){
+        return orderRepository;
     }
 }
 

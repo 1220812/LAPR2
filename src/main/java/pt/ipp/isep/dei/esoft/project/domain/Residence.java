@@ -49,12 +49,6 @@ public class Residence extends Property {
         if (numberOfParkingSpaces < 0) {
             throw new IllegalArgumentException("The number of parking spaces must be positive.");
         }
-        if (photographsList == null) {
-            throw new IllegalArgumentException("The list of photographs must not be null.");
-        }
-        if (photographsList.isEmpty()) {
-            throw new IllegalArgumentException("The list of photographs must not be empty.");
-        }
         this.numberOfBedrooms = numberOfBathrooms;
         this.numberOfBathrooms = numberOfBedrooms;
         this.numberOfParkingSpaces = numberOfParkingSpaces;

@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +18,6 @@ public class RegisterAnnouncementUI implements Runnable {
         return controller;
     }
 
-    private PropertyType propertyType;
     private String ownerEmail;
     private double area;
     private LocalDate date;
@@ -39,12 +37,17 @@ public class RegisterAnnouncementUI implements Runnable {
     private boolean loft;
     private RequestType requestType;
     private SunExposure sunExposure;
-    private String comissionType;
+    private String commissionType;
     private boolean dataConfirmation;
-    private double comission;
+    private double commission;
     private final String DEFAULT_REQUESTTYPE = "Sell";
     private final double DEFAULT_CONTRACTDURATION = 0;
     List<AvailableEquipment> availableEquipment = new ArrayList<>();
+
+    private PropertyType propertyType;
+    private Agent agent = null;
+    private Store store = null;
+    private Owner owner = null;
 
     private boolean airConditioning;
 
@@ -138,17 +141,17 @@ public class RegisterAnnouncementUI implements Runnable {
         System.out.println("Comission Type:");
         System.out.println("- Percentage");
         System.out.println("- Value");
-        comissionType = ler.next();
-        while (!comissionType.equals("Percentage") && !comissionType.equals("Value")) {
+        commissionType = ler.next();
+        while (!commissionType.equals("Percentage") && !commissionType.equals("Value")) {
             System.out.println("Please write a valid option.");
-            comissionType = ler.next();
+            commissionType = ler.next();
         }
 
         System.out.println("Comission:");
-        comission = ler.nextDouble();
-        while (comission < 0) {
+        commission = ler.nextDouble();
+        while (commission < 0) {
             System.out.println("Please select a valid comission.");
-            comission = ler.nextInt();
+            commission = ler.nextInt();
         }
         System.out.println("Property type = " + propertyType);
         System.out.println("Address= " + address);
@@ -167,8 +170,8 @@ public class RegisterAnnouncementUI implements Runnable {
                 System.out.println("Sun exposure = " + sunExposure);
             }
         }
-        System.out.println("Comission type = " + comissionType);
-        System.out.println("Comission = " + comission);
+        System.out.println("Comission type = " + commissionType);
+        System.out.println("Comission = " + commission);
         System.out.println();
 
         String flag = Utils.readLineFromConsole("Confirm data? (y/n)");
@@ -176,13 +179,13 @@ public class RegisterAnnouncementUI implements Runnable {
         if (flag.equalsIgnoreCase("y")) {
             requestType = controller.createRequestType(DEFAULT_REQUESTTYPE, DEFAULT_CONTRACTDURATION);
             if (inputPropertyType.equals("Land")) {
-                property = controller.createProperty(area, distanceFromCityCenter, address, price, photos);
+                property = controller.createProperty(area, distanceFromCityCenter, address, propertyType, photos);
             } else if (inputPropertyType.equals("Apartment")) {
-                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, price, photos, airConditioning, centralHeating, requestType);
+                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, airConditioning, centralHeating);
             } else if (inputPropertyType.equals("House")) {
-                property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, price, photos, requestType);
+                property = controller.createHouse(address, area, distanceFromCityCenter,numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft,propertyType, photos, requestType);
             }
-            announcement = controller.createAnnouncement(property, date, comissionType, comission, requestType, propertyType);
+            announcement = controller.createAnnouncement(property, date, commissionType, commission, requestType, propertyType,agent,store, owner,price);
             controller.registerAnnouncement(announcement);
             System.out.println("Announcement registered successfully");
         }

@@ -207,7 +207,7 @@ public class Agent{
 
     @Override
     public String toString() {
-        return ", agent name= " + name;
+        return name;
     }
     /**
      * Textual representation of an instance of Owner
@@ -225,4 +225,6 @@ public class Agent{
         Agent newAgent = newAgent(name, phoneNumber, emailAddress, address, taxNumber, passportCardNumber);
         return newAgent;
     }
+
+
 }

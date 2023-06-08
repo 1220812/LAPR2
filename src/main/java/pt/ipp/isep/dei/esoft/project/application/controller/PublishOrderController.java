@@ -3,31 +3,28 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import java.util.List;
 
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
-import pt.ipp.isep.dei.esoft.project.domain.Order;
+import pt.ipp.isep.dei.esoft.project.domain.CurrentSession;
 import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrderRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 public class PublishOrderController {
-
-    OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
     AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
-
-    public void registerOrder(Order order) {
-        OrderRepository repository = Repositories.getInstance().getOrderRepository();
-        repository.addOrder(order);
+    OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
+    public void registerOrder(Announcement announcement, double orderPrice){
+        String email = CurrentSession.getEmail();
+        orderRepository.add(email, orderPrice, announcement);
     }
-
-    public List<Announcement> getAnnouncements() {
+    public List <Announcement> getAnnouncements(){
         return announcementRepository.getAnnouncements();
     }
-
-    public boolean validateOrder(Order order) {
-        return Repositories.getInstance().getOrderRepository().validateOrder(order);
+    public boolean validateOrder(Announcement announcement, double orderPrice){
+        return Repositories.getInstance().getOrderRepository().validateOrder(announcement,orderPrice);
     }
-
-    /**
-     * need a method for checking if there is any pending offer on the same announcement
-     */
-
+    public boolean orderPriceLimits(Announcement announcement, double orderPrice){
+        return Repositories.getInstance().getOrderRepository().orderPriceLimits(announcement,orderPrice);
+    }
+    public boolean checkIfOrderIsPending(Announcement announcement){
+        return orderRepository.checkForPendingOrder(announcement);
+    }
 }

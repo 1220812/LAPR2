@@ -29,7 +29,7 @@ public class RegisterAnnouncementController {
 
     public boolean checkDistanceFromCityCenter(double distanceFromCityCenter) {return (Property.existsDistanceFromCityCenter(distanceFromCityCenter));}
 
-    public boolean checkPrice(double price) {return (Property.existsPrice(price));}
+    public boolean checkPrice(double price) {return (Announcement.existsPrice(price));}
 
     public List<Address> getAddresses(){
         return Repositories.getInstance().getAddressRepository().getAddressList();
@@ -43,24 +43,24 @@ public class RegisterAnnouncementController {
         return Repositories.getInstance().getSunExposureRepository().getSunExposureList();
     }
 
-    public Property createProperty(double area, double distanceFromCityCenter, Address address, double price, List<Photographs> photos){
-        return new Property(area, distanceFromCityCenter, address, price, photos);
+    public Property createProperty(double area, double distanceFromCityCenter, Address address, PropertyType propertyType, List<Photographs> photos){
+        return new Property(area, distanceFromCityCenter, address, propertyType, photos);
     }
 
-    public Residence createResidence(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking, double price, List<Photographs> photos,  boolean airConditioning, boolean centralHeating ,RequestType requestType){
-        return new Residence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, price, photos, airConditioning, centralHeating);
+    public Residence createResidence(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking, PropertyType propertyType, List<Photographs> photos,  boolean airConditioning, boolean centralHeating){
+        return new Residence(address, area, distanceFromCityCenter, propertyType,numberOfBathrooms, numberOfBedrooms, parking, photos, airConditioning, centralHeating);
     }
 
-    public House createHouse(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking,  boolean airConditioning, boolean centralHeating, boolean basement, SunExposure sunExposure, boolean loft, double price, List<Photographs> photos, RequestType requestType) {
-        return new House(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, price, photos);
+    public House createHouse(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking,  boolean airConditioning, boolean centralHeating, boolean basement, SunExposure sunExposure, boolean loft, PropertyType propertyType, List<Photographs> photos, RequestType requestType) {
+        return new House(address, area, distanceFromCityCenter,propertyType, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, photos);
     }
 
     public RequestType createRequestType(String requestType, double contractDuration) {
         return new RequestType(requestType, contractDuration);
     }
 
-    public Announcement createAnnouncement(Property property, LocalDate date, String comissionType, double comission , RequestType requestType, PropertyType propertyType) {
-        return new Announcement(property, date, comissionType, comission, requestType, propertyType);
+    public Announcement createAnnouncement(Property property, LocalDate date, String commissionType, double commission , RequestType requestType, PropertyType propertyType, Agent agent, Store store, Owner owner, double price){
+        return new Announcement(property, date, commissionType, commission, requestType, agent, price, owner, store);
     }
 
     public Announcement registerAnnouncement(Announcement announcement){

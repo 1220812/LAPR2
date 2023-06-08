@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US015 - System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Agent" as Agent
+participant ":System" as System
+
+activate Agent
+
+Agent -> System : Intend to list all booking requests for properties managed by the agent.
+activate System
+
+"System" --> Agent: request a specific period (begin date, end date).
+
+deactivate System
+
+Agent -> System : Type specific period (begin date, end date).
+activate System
+
+
+"System" --> Agent : show a list for a specific period (begin date, end date).
+
+
+
+@enduml
