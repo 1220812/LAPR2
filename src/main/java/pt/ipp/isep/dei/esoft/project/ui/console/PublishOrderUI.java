@@ -39,7 +39,6 @@ public class PublishOrderUI implements Runnable {
         }
 
     }
-
     private int showAndSelectAnnouncement(List<Announcement> announcements) {
         int selection = Utils.showAndSelectIndex(announcements, "Choose the announcement you want to publish an order for: ");
         return selection;
