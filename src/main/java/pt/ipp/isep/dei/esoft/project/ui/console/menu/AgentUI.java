@@ -14,7 +14,7 @@ public class AgentUI implements Runnable {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("US 002 - Register announcement", new RegisterAnnouncementUI()));
         //options.add(new MenuItem("US 008 - Post announcement request", new PostAnnouncementRequestUI()));
-        //options.add(new MenuItem("US 011 - list real estate purchase orders", new OrderDecisionUI()));
+        options.add(new MenuItem("US 011 - list real estate purchase orders", new OrderDecisionUI()));
         options.add(new MenuItem("US 015 - List all booking requests", new ListRequestsUI()));
 
 

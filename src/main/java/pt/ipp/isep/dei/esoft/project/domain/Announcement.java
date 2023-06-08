@@ -1,6 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class Announcement {
     /**
@@ -39,6 +42,10 @@ public class Announcement {
      * Store selected by the owner
      */
     private Store store;
+    /**
+     * List of orders on the announcement
+     */
+    private List<Order> ordersOnTheAnnouncement;
 
     /**
      * Method that creates an instance of Announcement
@@ -284,5 +291,59 @@ public class Announcement {
      */
     public Announcement clone() {
         return new Announcement(this.property, this.date, this.commissionType, this.commission, this.requestType, this.agent, this.price, this.owner, this.store);
+    }
+
+    /**
+     * Method that creates a new order
+     * @param orderPrice price of the order
+     * @param email email of the client
+     * @return new order
+     */
+    public Optional <Order> createOrder(double orderPrice, String email){
+        Optional<Order> newOrder = Optional.empty();
+        Order order = new Order(orderPrice, email);
+        if(addOrder(order)){
+            newOrder = Optional.of(order);
+        }
+        return newOrder;
+    }
+
+    /**
+     * Method that adds an order to the order list
+     * @param order order to be added to the order list
+     * @return true if the order was added to the order list, false if not
+     */
+    public boolean addOrder(Order order){
+        boolean success = false;
+        if (validate(order)) {
+            success = ordersOnTheAnnouncement.add(order.clone());
+        }
+        return success;
+    }
+
+    /**
+     * Method that adds an order to the order list
+     * @param orders order to be added to the order list
+     */
+    public void addOrderToOrderList(List orders){
+        this.ordersOnTheAnnouncement=orders;
+    }
+
+    /**
+     * Method that verifies if the order is valid
+     * @param order order to be verified
+     * @return true if the order is valid, false if not
+     */
+    private boolean validate(Order order) {
+        return orderListDoNotContain(order);
+    }
+
+    /**
+     * Method that verifies if the order list already contains the created order
+     * @param order order to be verified
+     * @return true if the order list does not contain the created order, false if not
+     */
+    private boolean orderListDoNotContain(Order order) {
+        return !ordersOnTheAnnouncement.contains(order);
     }
 }

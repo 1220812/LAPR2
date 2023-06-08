@@ -238,63 +238,55 @@ public class Bootstrap implements Runnable {
     }
 
     /**private void addOrder() throws CloneNotSupportedException {
-        OrderRepository rep = Repositories.getInstance().getOrderRepository();
-        AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
+        OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
         State state1 = new State("California");
         State state2 = new State("Nevada");
-        State state3 = new State("Arizona");
         District district1 = new District("Northem");
         District district2 = new District("Eastern");
-        District district3 = new District("Western");
         City city1 = new City("Los Angeles");
         City city2 = new City("New York");
         Address address1 = new Address("Street A",4, 6, "12345", state1, district1, city1);
         Address address2 = new Address("Street B",1,3, "12346",state2, district2, city2);
-        Address address3 = new Address("Street C",1, 2, "12347",state1, district3, city2);
-
         List<Photographs> photo = new ArrayList<>();
-
-        Store store1 = new Store("Company", 1);
         TaxNumber taxNumber1 = new TaxNumber("987654321");
-        TaxNumber taxNumber2 = new TaxNumber("987765432");
-        Agency agency = new Agency("agency1");
+        TaxNumber taxNumber2 = new TaxNumber("123456789");
+        TaxNumber taxNumber = new TaxNumber("123456789");
+        PassportCardNumber passportCardNumber3 = new PassportCardNumber("98755432");
         PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
-        Agent agent1 = new Agent("Joao","joao@gmail.com","918734521",passportCardNumber1,taxNumber1,address1,new Role("Agent"),agency,store1,"joao");
-        PassportCardNumber passportCardNumber2 = new PassportCardNumber("98765433");
-        Agent agent2 = new Agent("Pedro","pedro@gmail.com","915734521",passportCardNumber2,taxNumber2,address2,new Role("Agent"),agency,store1,"pedro");
-
+        PassportCardNumber passportCardNumber2= new PassportCardNumber("23456789");
         RequestType requestType1 = new RequestType("Sell");
         RequestType requestType2 = new RequestType("Rent");
-
-        LocalDate requestDate1 = LocalDate.of(2022,10,2);
-        LocalDate requestDate2 = LocalDate.of(2022,1,8);
-
-        Property property1 = new Property("3",110000,address3,1000, 3);
-        Property property = new Property("1", 1200000, address1, 1000, 12 );
-        Property property3 = new Property("2", 139000, address2, 1000, 12 );
-
-        User client1 = new User("João Silva", "joaosilva@gmail.com","1213","912312231");
-        User client2 = new User("Pedro Silva", "pedrosilva@gmail.com","1413","919312231");
-
+        LocalDate requestDate1 = LocalDate.of(2020,10,10);
+        LocalDate requestDate2 = LocalDate.of(2022,3,2);
         PropertyType p1 = new PropertyType("Land");
         PropertyType p2 = new PropertyType("Apartment");
         PropertyType p3 = new PropertyType("House");
+        Property property1 = new Property(500, 5, address1, p1,photo);
+        Property property2 = new Property(345, 12, address2, p2,photo);
+        Store store1 = new Store("Company", 1);
+        Store store2 = new Store("Galo", 2);
+        Agency agency1 = new Agency(1, "agency1",address1,"agency1@this.app","123456789");
+        Agency agency2 = new Agency(2,"agency2",address2,"agency2@this.app","987654321");
+        Agent agent1 = new Agent("Joao","joao@gmail.com","918734521",passportCardNumber1,taxNumber1,address1,new Role("Agent"),agency1,store1,"joao");
+        Agent agent2 = new Agent("Pedro","pedro@gmail.com","915734521",passportCardNumber2,taxNumber2,address2,new Role("Agent"),agency2,store2,"pedro");
+        Owner owner1 = new Owner("Maria","912345678","maria@gmail.com",address1,taxNumber1,passportCardNumber1);
+        Owner owner2 = new Owner("Madalena","912945678","madalena@gmail.com",address2,taxNumber2,passportCardNumber2);
+        Owner owner3 = new Owner("Manuel","912545698","manuel@gmail.com",address2,taxNumber,passportCardNumber3);
 
+        Announcement announcement1 = new Announcement(property1, requestDate1, "per", 5, requestType1,agent1,200000,owner1,store1);
+        Announcement announcement2 =new Announcement(property2,requestDate2,"per", 5, requestType2, agent2, 300000,owner2,store2);
+        Announcement announcement3 =new Announcement(property2,requestDate1,"per", 5, requestType2, agent2,2450000,owner3,store2);
 
-        Announcement announcement1 = new Announcement(property1, requestDate1, "per", 5, requestType1,p1,agent1);
-        Announcement announcement3 =new Announcement(property,requestDate1,"per", 5, requestType2, p3, agent1);
-        Announcement announcement = new Announcement(property3,requestDate1,"per", 5, requestType2, p3, agent2);
-
-        announcementRepository.addAnnouncement(announcement1);
-        announcementRepository.addAnnouncement(announcement3);
-        announcementRepository.addAnnouncement(announcement);
-
-        Order order1 = new Order(announcement1, 123000,client1, requestDate1);
-        Order order3 = new Order(announcement, 124000,client2, requestDate2);
-        Order order = new Order(announcement3, 124000,client2, requestDate2);
-        rep.saveOrder(order1);
-        rep.saveOrder(order3);
-        rep.saveOrder(order);
+        Order order1 = new Order(announcement1, 123000, agent1.getEmailAddress());
+        Order order3 = new Order(announcement1, 124000,agent1.getEmailAddress());
+        Order order = new Order(announcement2, 124000,agent2.getEmailAddress());
+        Order order2 = new Order(announcement2, 100000,agent2.getEmailAddress());
+        Order order4 = new Order(announcement3, 100000,agent2.getEmailAddress());
+        orderRepository.add(order1);
+        orderRepository.add(order2);
+        orderRepository.add(order3);
+        orderRepository.add(order);
+        orderRepository.add(order4);
     }*/
     private void addMessage(){
         MessageRepository messageRepository =Repositories.getInstance().getMessageRepository();
