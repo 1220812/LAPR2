@@ -100,7 +100,7 @@ public class FileInformation {
 
     }
     private boolean headerVerification (String header) {
-        return header.equals ("sid, owner name, passport number, tin, owner email, owner phone, property type, property area, location,");
+        return header.equals ("sid, owner name, passport number, tin, owner email, owner phone, property type, property area, property location,property distance from the center, property number bedrooms,property number bathrooms, property npark, property central heating, property air conditioning, property basement, property loft,property sun exposure, property request price,commission,contract duration,property date announce request, property date of sale,business type,store ID, store name, store location store phone number, store email ");
 
     }
 }
