@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -290,7 +291,16 @@ public class Bootstrap implements Runnable {
     }*/
     private void addMessage(){
         MessageRepository messageRepository =Repositories.getInstance().getMessageRepository();
-        Message message1=new Message(null, null);
+        int year= 2023;
+        int month=1;
+        int day=1;
+        int startHour=0;
+        int startMinute=0;
+        int endHour=0;
+        int endMinute=0;
+        LocalDateTime newVisitStartTime1 = LocalDateTime.of(year, month, day, startHour, startMinute);
+        LocalDateTime newVisitEndTime1= LocalDateTime.of(year, month, day, endHour, endMinute);
+        Message message1=new Message( newVisitStartTime1,newVisitEndTime1 );
         messageRepository.add(message1);
     }
 

@@ -3,8 +3,10 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * The type Message repository.
@@ -40,8 +42,8 @@ public class MessageRepository {
      * @param schedule the schedule
      * @return the message
      */
-    public static Message checkIfValid(LocalDate date, String schedule) {
-        Message message = new Message(date, schedule);
+    public static Message checkIfValid(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        Message message = new Message(newVisitStartTime, newVisitEndTime);
         add(message);
         return message;
     }
@@ -89,8 +91,8 @@ public class MessageRepository {
      * @param phone    the phone
      * @return the message
      */
-    public static Message addMessage(LocalDate date, String schedule, String name, int phone, int inputAnnou) {
-        Message message = new Message(date, schedule,name, phone, inputAnnou);
+    public static Message addMessage( String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime,LocalDateTime newVisitEndTime) {
+        Message message = new Message(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime);
         addComplete(message);
         return message;
 
