@@ -4,6 +4,10 @@ import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.repository.StoreRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static pt.ipp.isep.dei.esoft.project.repository.MessageRepository.getMessageList;
 
 public class Message {
     /**
@@ -22,6 +26,11 @@ public class Message {
 
     private int inputAnnou;
 
+    private LocalDateTime newVisitStartTime;
+
+    private LocalDateTime newVisitEndTime;
+
+
     /**
      * Instantiates a new Message.
      *
@@ -33,21 +42,39 @@ public class Message {
         this.schedule = schedule;
     }
 
-    /**
-     * Instantiates a new Message.
-     *
-     * @param date     the date
-     * @param schedule the schedule
-     * @param name     the name
-     * @param phone    the phone
-     */
-    public Message(LocalDate date, String schedule, String name, int phone,int inputAnnou ) {
-        this.date = date;
-        this.schedule = schedule;
-        this.name=name;
-        this.phone=phone;
-        this.inputAnnou=inputAnnou;
+    public Message(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        this.newVisitStartTime = newVisitStartTime;
+        this.newVisitEndTime = newVisitEndTime;
     }
+
+
+    public LocalDateTime getNewVisitStartTime() {
+        return newVisitStartTime;
+    }
+
+    public void setNewVisitStartTime(LocalDateTime newVisitStartTime) {
+        this.newVisitStartTime = newVisitStartTime;
+    }
+
+    public LocalDateTime getNewVisitEndTime() {
+        return newVisitEndTime;
+    }
+
+    public void setNewVisitEndTime(LocalDateTime newVisitEndTime) {
+        this.newVisitEndTime = newVisitEndTime;
+    }
+
+
+
+    public Message(String name, int phone, int inputAnnou,LocalDateTime newVisitStartTime,LocalDateTime newVisitEndTime) {
+
+        this.name = name;
+        this.phone = phone;
+        this.inputAnnou = inputAnnou;
+        this.newVisitStartTime=newVisitStartTime;
+        this.newVisitEndTime=newVisitEndTime;
+    }
+
 
     /**
      * Gets date.
@@ -111,22 +138,22 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
-                "date=" + date +
-                ", schedule='" + schedule + '\'' +
+        return "MessageINCOMPLETE{" +
+                "newVisitStartTime=" + newVisitStartTime +
+                ", newVisitEndTime=" + newVisitEndTime +
                 '}';
     }
-
-
     public String toString2() {
         return "Message{" +
-                "date=" + date +
-                ", schedule='" + schedule + '\'' +
                 ", name='" + name + '\'' +
                 ", phone=" + phone +
-                ", Announcement=" + inputAnnou +
+                ", inputAnnou=" + inputAnnou +
+                ", newVisitStartTime=" + newVisitStartTime +
+                ", newVisitEndTime=" + newVisitEndTime +
                 '}';
     }
+
+
     /**
      * To string 2 string.
      *
@@ -221,6 +248,20 @@ public class Message {
             return true;
         }
     }
+    public static boolean checkIfValidVisit(List<Message> MessageList, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        for (Message messageList : MessageList) {
+            LocalDateTime existingStartDate = messageList.getNewVisitStartTime();
+            LocalDateTime existingEndDate = messageList.getNewVisitEndTime();
 
+            if (newVisitStartTime.isBefore(existingEndDate) && newVisitEndTime.isAfter(existingStartDate)) {
+                return true; // A nova visita se sobrepõe a uma visita existente
+            }
+        }
+
+        MessageList.add(new Message(newVisitStartTime, newVisitEndTime)); // Adiciona a nova visita à lista
+        return false; // A nova visita não se sobrepõe a nenhuma visita existente
+    }
 }
+
+
 

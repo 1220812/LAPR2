@@ -3,11 +3,11 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
-import pt.ipp.isep.dei.esoft.project.domain.PropertyType;
 import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -105,29 +105,21 @@ public class ScheduleVisitController {
         return Employee.existsPhone(phone);
     }
 
-    /**
-     * Check if valid message.
-     *
-     * @param date     the date
-     * @param schedule the schedule
-     * @return the message
-     */
-    public Message checkIfValid(LocalDate date, String schedule) {
-        return  MessageRepository.checkIfValid(date, schedule);
+
+    public Message checkIfValid(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        return MessageRepository.checkIfValid(newVisitStartTime, newVisitEndTime);
     }
 
-    /**
-     * Add message message.
-     *
-     * @param date     the date
-     * @param schedule the schedule
-     * @param name     the name
-     * @param phone    the phone
-     * @return the message
-     */
-    public Message addMessage(LocalDate date, String schedule, String name, int phone, int inputAnnou) {
-        return MessageRepository.addMessage(date, schedule, name, phone, inputAnnou);
+
+    public Message addMessage(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime,LocalDateTime newVisitEndTime) {
+        return MessageRepository.addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime);
     }
 
+
+
+    public boolean checkIfValidVisit(List<Message> MessageList, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        return Message.checkIfValidVisit(MessageList,newVisitStartTime, newVisitEndTime);
+
+    }
 }
 
