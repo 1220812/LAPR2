@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+//import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
