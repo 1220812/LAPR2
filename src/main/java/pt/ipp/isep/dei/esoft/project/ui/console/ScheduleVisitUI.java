@@ -148,7 +148,7 @@ public class ScheduleVisitUI implements Runnable {
                 System.out.println("There is overlapping schedule.");
             } else {
                 System.out.println("There is no overlapping of visits. The new message has been sent to an agent.");
-                System.out.println(controller.addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime).toString2());
+                System.out.println(controller.addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime).toString());
                 System.out.println("                  ");
                 System.out.println("#######successful operation#######");
                 System.out.println("                  ");
@@ -157,7 +157,7 @@ public class ScheduleVisitUI implements Runnable {
                 for (Message messageList : MessageList) {
                     if (isFirstMessage) {
                         isFirstMessage = false;
-                        continue; // Pula para a próxima iteração sem executar o restante do loop
+                        continue;
                     }
                     System.out.println("Start of visit: " + messageList.getNewVisitStartTime() + " - End of Visit: " + messageList.getNewVisitEndTime());
                 }

@@ -9,92 +9,66 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * The type Message repository.
+ * The MessageRepository class is responsible for storing and managing messages.
  */
 public class MessageRepository {
-    /**
-     * The Message list.
-     */
     static List<Message> MessageList;
-    /**
-     * The Message complete list.
-     */
     static List<Message> MessageCompleteList;
 
     /**
-     * The Message.
-     */
-    Message message=null;
-
-    /**
-     * Instantiates a new Message repository.
+     * Constructs a new instance of MessageRepository.
+     * Initializes the message lists.
      */
     public MessageRepository(){
         MessageList = new ArrayList<>();
         MessageCompleteList = new ArrayList<>();
     }
 
-
     /**
-     * Check if valid message.
+     * Adds a message to the MessageList.
      *
-     * @param date     the date
-     * @param schedule the schedule
-     * @return the message
-     */
-    public static Message checkIfValid(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
-        Message message = new Message(newVisitStartTime, newVisitEndTime);
-        add(message);
-        return message;
-    }
-
-
-    /**
-     * Add boolean.
-     *
-     * @param message the message
-     * @return the boolean
+     * @param message the message to add.
+     * @return true if the message is added successfully, false otherwise.
+     * @throws IllegalArgumentException if the message is null or already exists in the list.
      */
     public static boolean add(Message message){
         if (message == null) throw new IllegalArgumentException("Impossible message");
-        if (MessageList.contains(message)) throw new IllegalArgumentException("Visit already exist");
+        if (MessageList.contains(message)) throw new IllegalArgumentException("Visit already exists");
         return MessageList.add(message);
     }
 
     /**
-     * Add complete boolean.
+     * Adds a message to the MessageCompleteList.
      *
-     * @param message the message
-     * @return the boolean
+     * @param message the message to add.
+     * @return true if the message is added successfully, false otherwise.
      */
     public static boolean addComplete(Message message){
         return MessageCompleteList.add(message);
     }
 
-
     /**
-     * Get message list list.
+     * Retrieves the list of messages.
      *
-     * @return the list
+     * @return the list of messages.
      */
     public static List<Message> getMessageList(){
         return MessageList;
     }
 
-
     /**
-     * Add message message.
+     * Adds a new message to the repository.
      *
-     * @param date     the date
-     * @param schedule the schedule
-     * @param name     the name
-     * @param phone    the phone
-     * @return the message
+     * @param name               the name of the message sender.
+     * @param phone              the phone number of the message sender.
+     * @param inputAnnou         the input announcement for the visit.
+     * @param newVisitStartTime  the start time of the visit.
+     * @param newVisitEndTime    the end time of the visit.
+     * @return the created Message object.
      */
-    public static Message addMessage( String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime,LocalDateTime newVisitEndTime) {
+    public static Message addMessage(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         Message message = new Message(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime);
         addComplete(message);
         return message;
-
     }
 }

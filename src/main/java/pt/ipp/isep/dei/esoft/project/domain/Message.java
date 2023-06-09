@@ -1,154 +1,142 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
-import pt.ipp.isep.dei.esoft.project.repository.StoreRepository;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static pt.ipp.isep.dei.esoft.project.repository.MessageRepository.getMessageList;
-
+/**
+ * The Message class represents a message.
+ */
 public class Message {
-    /**
-     * Date of the sending message
-     */
-    private LocalDate date;
-    /**
-     * Schedule
-     */
-    private String schedule;
-    /**
-     *
-     */
     private String name;
     private int phone;
-
     private int inputAnnou;
-
     private LocalDateTime newVisitStartTime;
-
     private LocalDateTime newVisitEndTime;
 
-
     /**
-     * Instantiates a new Message.
+     * Constructs a new instance of Message with visit start and end times.
      *
-     * @param date     the date
-     * @param schedule the schedule
+     * @param newVisitStartTime  the start time of the visit.
+     * @param newVisitEndTime    the end time of the visit.
      */
-    public Message(LocalDate date, String schedule) {
-        this.date = date;
-        this.schedule = schedule;
-    }
-
     public Message(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         this.newVisitStartTime = newVisitStartTime;
         this.newVisitEndTime = newVisitEndTime;
     }
 
-    public static boolean checkVisitTime(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
-        LocalDateTime now = LocalDateTime.now();
-        return newVisitStartTime.isAfter(now) && newVisitEndTime.isAfter(now);
+    /**
+     * Constructs a new instance of Message with visit details.
+     *
+     * @param name               the name of the message sender.
+     * @param phone              the phone number of the message sender.
+     * @param inputAnnou         the input announcement for the visit.
+     * @param newVisitStartTime  the start time of the visit.
+     * @param newVisitEndTime    the end time of the visit.
+     */
+    public Message(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        this.name = name;
+        this.phone = phone;
+        this.inputAnnou = inputAnnou;
+        this.newVisitStartTime = newVisitStartTime;
+        this.newVisitEndTime = newVisitEndTime;
     }
 
-
+    /**
+     * Retrieves the start time of the visit.
+     *
+     * @return the start time of the visit.
+     */
     public LocalDateTime getNewVisitStartTime() {
         return newVisitStartTime;
     }
 
+    /**
+     * Sets the start time of the visit.
+     *
+     * @param newVisitStartTime  the start time of the visit.
+     */
     public void setNewVisitStartTime(LocalDateTime newVisitStartTime) {
         this.newVisitStartTime = newVisitStartTime;
     }
 
+    /**
+     * Retrieves the end time of the visit.
+     *
+     * @return the end time of the visit.
+     */
     public LocalDateTime getNewVisitEndTime() {
         return newVisitEndTime;
     }
 
+    /**
+     * Sets the end time of the visit.
+     *
+     * @param newVisitEndTime  the end time of the visit.
+     */
     public void setNewVisitEndTime(LocalDateTime newVisitEndTime) {
         this.newVisitEndTime = newVisitEndTime;
     }
 
-
-    public Message(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
-
-        this.name = name;
-        this.phone = phone;
-        this.inputAnnou = inputAnnou;
-        this.newVisitStartTime = newVisitStartTime;
-        this.newVisitEndTime = newVisitEndTime;
-    }
-
-
     /**
-     * Gets date.
+     * Retrieves the name of the message sender.
      *
-     * @return the date
+     * @return the name of the message sender.
      */
-    public LocalDate getDate() {
-        return date;
-    }
-
-    /**
-     * Sets date.
-     *
-     * @param date the date
-     */
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    /**
-     * Gets schedule.
-     *
-     * @return the schedule
-     */
-    public String getSchedule() {
-        return schedule;
-    }
-
-    /**
-     * Sets schedule.
-     *
-     * @param schedule the schedule
-     */
-    public void setSchedule(String schedule) {
-        this.schedule = schedule;
-    }
-
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the message sender.
+     *
+     * @param name  the name of the message sender.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Retrieves the phone number of the message sender.
+     *
+     * @return the phone number of the message sender.
+     */
     public int getPhone() {
         return phone;
     }
 
+    /**
+     * Sets the phone number of the message sender.
+     *
+     * @param phone  the phone number of the message sender.
+     */
     public void setPhone(int phone) {
         this.phone = phone;
     }
 
+    /**
+     * Retrieves the input announcement for the visit.
+     *
+     * @return the input announcement for the visit.
+     */
     public int getInputAnnou() {
         return inputAnnou;
     }
 
+    /**
+     * Sets the input announcement for the visit.
+     *
+     * @param inputAnnou  the input announcement for the visit.
+     */
     public void setInputAnnou(int inputAnnou) {
         this.inputAnnou = inputAnnou;
     }
 
-    @Override
+    /**
+     * Returns a string representation of the Message object.
+     *
+     * @return a string representation of the Message object.
+     */
     public String toString() {
-        return "MessageINCOMPLETE{" +
-                "newVisitStartTime=" + newVisitStartTime +
-                ", newVisitEndTime=" + newVisitEndTime +
-                '}';
-    }
-
-    public String toString2() {
         return "Message:"
                 + "\nname: " + name
                 + "\nphone: " + phone
@@ -157,116 +145,86 @@ public class Message {
                 + "\nend date of the visit: " + newVisitEndTime;
     }
 
-
     /**
-     * To string 2 string.
+     * Checks if the visit time is valid.
      *
-     * @return the string
+     * @param newVisitStartTime  the start time of the visit.
+     * @param newVisitEndTime    the end time of the visit.
+     * @return true if the visit time is valid, false otherwise.
      */
-
-
-    /**
-     * Create date local date.
-     *
-     * @param day   the day
-     * @param month the month
-     * @param year  the year
-     * @return the local date
-     */
-    public static LocalDate createDate(int day, int month, int year) {
-        try {
-            return LocalDate.of(year, month, day);
-        } catch (Exception e) {
-            System.out.println("Data inválida.");
-            return null;
-        }
+    public static boolean checkVisitTime(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        LocalDateTime now = LocalDateTime.now();
+        return newVisitStartTime.isAfter(now) && newVisitEndTime.isAfter(now) && newVisitEndTime.isAfter(newVisitStartTime);
     }
 
-
     /**
-     * Check day boolean.
+     * Checks if the specified day is valid.
      *
-     * @param day the day
-     * @return the boolean
+     * @param day  the day to be checked.
+     * @return true if the day is valid, false otherwise.
      */
     public static boolean checkDay(int day) {
-        if (day < 1 || day > 31) {
-            return false;
-        } else {
-            return true;
-        }
+        return day >= 1 && day <= 31;
     }
 
     /**
-     * Check month boolean.
+     * Checks if the specified month is valid.
      *
-     * @param month the month
-     * @return the boolean
+     * @param month  the month to be checked.
+     * @return true if the month is valid, false otherwise.
      */
     public static boolean checkMonth(int month) {
-        if (month < 1 || month > 12) {
-            return false;
-        } else {
-            return true;
-        }
+        return month >= 1 && month <= 12;
     }
 
     /**
-     * Check year boolean.
+     * Checks if the specified year is valid.
      *
-     * @param year the year
-     * @return the boolean
+     * @param year  the year to be checked.
+     * @return true if the year is valid, false otherwise.
      */
     public static boolean checkYear(int year) {
-        if (year < 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return year >= 0;
     }
 
     /**
-     * Check hour boolean.
+     * Checks if the specified hour is valid.
      *
-     * @param startHour the start hour
-     * @return the boolean
+     * @param startHour  the hour to be checked.
+     * @return true if the hour is valid, false otherwise.
      */
     public static boolean checkHour(int startHour) {
-        if (startHour < 0 || startHour > 24) {
-            return false;
-        } else {
-            return true;
-        }
+        return startHour >= 0 && startHour <= 24;
     }
 
     /**
-     * Check minute boolean.
+     * Checks if the specified minute is valid.
      *
-     * @param startMinute the start minute
-     * @return the boolean
+     * @param startMinute  the minute to be checked.
+     * @return true if the minute is valid, false otherwise.
      */
     public static boolean checkMinute(int startMinute) {
-        if (startMinute < 0 || startMinute > 60) {
-            return false;
-        } else {
-            return true;
-        }
+        return startMinute >= 0 && startMinute <= 60;
     }
 
+    /**
+     * Checks if the visit time overlaps with any existing visits.
+     *
+     * @param MessageList          the list of existing messages.
+     * @param newVisitStartTime    the start time of the new visit.
+     * @param newVisitEndTime      the end time of the new visit.
+     * @return true if there is an overlap, false otherwise.
+     */
     public static boolean checkIfValidVisit(List<Message> MessageList, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         for (Message messageList : MessageList) {
             LocalDateTime existingStartDate = messageList.getNewVisitStartTime();
             LocalDateTime existingEndDate = messageList.getNewVisitEndTime();
 
             if (newVisitStartTime.isBefore(existingEndDate) && newVisitEndTime.isAfter(existingStartDate)) {
-                return true; // A nova visita se sobrepõe a uma visita existente
+                return true;
             }
         }
-
-        MessageList.add(new Message(newVisitStartTime, newVisitEndTime)); // Adiciona a nova visita à lista
-        return false; // A nova visita não se sobrepõe a nenhuma visita existente
+        MessageList.add(new Message(newVisitStartTime, newVisitEndTime));
+        return false;
     }
 }
-
-
-

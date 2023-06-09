@@ -2,82 +2,106 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pt.ipp.isep.dei.esoft.project.domain.Message;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-class MessageTest {
-
-    @Test
-    void testCreateDate_ValidDate_ReturnsLocalDate() {
-        LocalDate expectedDate = LocalDate.of(2023, 5, 28);
-        LocalDate actualDate = Message.createDate(28, 5, 2023);
-        Assertions.assertEquals(expectedDate, actualDate);
-    }
+public class MessageTest {
 
     @Test
-    void testCreateDate_InvalidDate_ReturnsNull() {
-        LocalDate actualDate = Message.createDate(32, 13, 2022);
-        Assertions.assertNull(actualDate);
-    }
+    public void testCheckIfValidVisit_NoOverlap_ReturnsFalse() {
+        LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
+        LocalDateTime endTime1 = LocalDateTime.of(2023, 6, 9, 12, 0);
 
-    @Test
-    void testCheckDay_ValidDay_ReturnsTrue() {
-        boolean result = Message.checkDay(15);
-        Assertions.assertTrue(result);
-    }
+        LocalDateTime startTime2 = LocalDateTime.of(2023, 6, 9, 14, 0);
+        LocalDateTime endTime2 = LocalDateTime.of(2023, 6, 9, 16, 0);
 
-    @Test
-    void testCheckDay_InvalidDay_ReturnsFalse() {
-        boolean result = Message.checkDay(0);
+        List<Message> messageList = new ArrayList<>();
+        messageList.add(new Message(startTime1, endTime1));
+
+        boolean result = Message.checkIfValidVisit(messageList, startTime2, endTime2);
+
         Assertions.assertFalse(result);
     }
 
     @Test
-    void testCheckMonth_ValidMonth_ReturnsTrue() {
-        boolean result = Message.checkMonth(6);
+    public void testCheckIfValidVisit_Overlap_ReturnsTrue() {
+        LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
+        LocalDateTime endTime1 = LocalDateTime.of(2023, 6, 9, 12, 0);
+
+        LocalDateTime startTime2 = LocalDateTime.of(2023, 6, 9, 11, 0);
+        LocalDateTime endTime2 = LocalDateTime.of(2023, 6, 9, 13, 0);
+
+        List<Message> messageList = new ArrayList<>();
+        messageList.add(new Message(startTime1, endTime1));
+
+        boolean result = Message.checkIfValidVisit(messageList, startTime2, endTime2);
+
         Assertions.assertTrue(result);
     }
 
     @Test
-    void testCheckMonth_InvalidMonth_ReturnsFalse() {
-        boolean result = Message.checkMonth(13);
+    public void testCheckIfValidVisit_OverlapWithMultipleVisits_ReturnsTrue() {
+        LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
+        LocalDateTime endTime1 = LocalDateTime.of(2023, 6, 9, 12, 0);
+
+        LocalDateTime startTime2 = LocalDateTime.of(2023, 6, 9, 11, 0);
+        LocalDateTime endTime2 = LocalDateTime.of(2023, 6, 9, 13, 0);
+
+        LocalDateTime startTime3 = LocalDateTime.of(2023, 6, 9, 9, 0);
+        LocalDateTime endTime3 = LocalDateTime.of(2023, 6, 9, 10, 30);
+
+        List<Message> messageList = new ArrayList<>();
+        messageList.add(new Message(startTime1, endTime1));
+        messageList.add(new Message(startTime3, endTime3));
+
+        boolean result = Message.checkIfValidVisit(messageList, startTime2, endTime2);
+
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testCheckIfValidVisit_NoVisits_ReturnsFalse() {
+        LocalDateTime startTime = LocalDateTime.of(2023, 6, 9, 10, 0);
+        LocalDateTime endTime = LocalDateTime.of(2023, 6, 9, 12, 0);
+
+        List<Message> messageList = new ArrayList<>();
+
+        boolean result = Message.checkIfValidVisit(messageList, startTime, endTime);
+
         Assertions.assertFalse(result);
     }
 
     @Test
-    void testCheckYear_ValidYear_ReturnsTrue() {
-        boolean result = Message.checkYear(2023);
+    public void testCheckIfValidVisit_ExistingVisitsWithSameTime_ReturnsTrue() {
+        LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
+        LocalDateTime endTime1 = LocalDateTime.of(2023, 6, 9, 12, 0);
+
+        LocalDateTime startTime2 = LocalDateTime.of(2023, 6, 9, 10, 0);
+        LocalDateTime endTime2 = LocalDateTime.of(2023, 6, 9, 12, 0);
+
+        List<Message> messageList = new ArrayList<>();
+        messageList.add(new Message(startTime1, endTime1));
+
+        boolean result = Message.checkIfValidVisit(messageList, startTime2, endTime2);
+
         Assertions.assertTrue(result);
     }
 
     @Test
-    void testCheckYear_InvalidYear_ReturnsFalse() {
-        boolean result = Message.checkYear(2022);
-        Assertions.assertFalse(result);
-    }
+    public void testCheckIfValidVisit_ExistingVisitsWithDifferentTimes_ReturnsFalse() {
+        LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
+        LocalDateTime endTime1 = LocalDateTime.of(2023, 6, 9, 12, 0);
 
-    @Test
-    void testCheckHour_ValidHour_ReturnsTrue() {
-        boolean result = Message.checkHour(12);
-        Assertions.assertTrue(result);
-    }
+        LocalDateTime startTime2 = LocalDateTime.of(2023, 6, 9, 12, 30);
+        LocalDateTime endTime2 = LocalDateTime.of(2023, 6, 9, 13, 0);
 
-    @Test
-    void testCheckHour_InvalidHour_ReturnsFalse() {
-        boolean result = Message.checkHour(25);
-        Assertions.assertFalse(result);
-    }
+        List<Message> messageList = new ArrayList<>();
+        messageList.add(new Message(startTime1, endTime1));
 
-    @Test
-    void testCheckMinute_ValidMinute_ReturnsTrue() {
-        boolean result = Message.checkMinute(30);
-        Assertions.assertTrue(result);
-    }
+        boolean result = Message.checkIfValidVisit(messageList, startTime2, endTime2);
 
-    @Test
-    void testCheckMinute_InvalidMinute_ReturnsFalse() {
-        boolean result = Message.checkMinute(61);
         Assertions.assertFalse(result);
     }
 }
