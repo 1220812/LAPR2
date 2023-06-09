@@ -7,24 +7,23 @@ autonumber
 
 'hide footbox
 actor "Client" as User
-participant ":ScheduleVisitUI" as System
+participant ":ScheduleVisitUI" as UI
 participant ":ScheduleVisitController" as Controller
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as repositories
 participant "announcementsRepository\n:AnnouncementsRepository" as AnnoucementRepository
-participant ":userRepository\nUserRepository" as UserRepository
-participant "messageRepository\n:MessageRepository" as Message
+participant "messageRepository\n:MessageRepository" as MessageRepo
 
 
 
 activate User
 
 
-User->System: asks to schedule a visit to a property.
-activate System
+User->UI: asks to schedule a visit to a property.
+activate UI
 
 
-System->Controller**: create
+UI->Controller**: create
 
 activate Controller
 
@@ -34,145 +33,231 @@ activate RepositorySingleton
 RepositorySingleton-->Controller: repositories
 deactivate RepositorySingleton
 
+Controller -> MessageRepo : getMessageRepository()
+activate MessageRepo
 
-Controller -> repositories : checkIfPropertiesEmpty()
-activate repositories
+MessageRepo--> Controller : messageRepository
+deactivate MessageRepo
 
-repositories -> AnnoucementRepository : checkIfPropertiesEmpty()
+Controller -> AnnoucementRepository : getAnnouncementRepository()
 activate AnnoucementRepository
 
-AnnoucementRepository --> repositories : boolean
+AnnoucementRepository--> Controller : announcementRepository
 deactivate AnnoucementRepository
 
-repositories --> Controller : boolean
-deactivate repositories
-
-Controller --> System : boolean
-
-alt if true (list of properties is empty)
-System --> User : Show message :"List of properties is empty"
-
-end
-alt if false (list of properties isn´t empty)
-
-System -> Controller : getSortedProperties()
+deactivate Controller
 
 
 
 
 
 
+UI --> User : Requests data (name and phoneNumber)
+deactivate UI
 
-Controller -> repositories : getSortedProperties()
+User -> UI : Types request data (name and phoneNumber)
+activate UI
+
+UI-> UI : keepName(name)
+
+UI -> UI : keepPhone(phoneNumber)
+
+loop while option selected is yes
+
+UI -> Controller : getAnnouncement()
+activate Controller
+
+Controller -> repositories : getAnnouncement()
 activate repositories
 
-repositories -> AnnoucementRepository : getSortedProperties()
+repositories -> AnnoucementRepository : getAnnouncement()
 activate AnnoucementRepository
 
-AnnoucementRepository --> repositories : ListOfPropertiesSorted
+AnnoucementRepository --> repositories : announcementsList
 deactivate AnnoucementRepository
 
-repositories --> Controller : ListOfPropertiesSorted
+repositories --> Controller : announcementsList
 deactivate repositories
 
-
-
-loop while true (yes)
-
-Controller --> System : ListOfPropertiesSorted
-
-
-
-
-
+Controller --> UI : announcementsList
 deactivate Controller
 
-System --> User : show a list of properties sorted from the most recent entries to the oldest
-deactivate System
+ UI --> User : show a list of properties sorted from the most recent entries to the oldest
+deactivate UI
+
+User -> UI : Select the property
+activate UI
+
+UI->UI : keepProperty(inputAnnou)
 
 
+loop while NewVisitStartTime and NewVisitEndTime is invalid
+UI --> User : request data(day, month, year, startHour, StartMinute, EndHour, EndMinute)
+deactivate UI
 
-User -> System : Select the property
-activate System
+User -> UI : Types requested date
+activate UI
 
-System --> User : request data (preferred date for the property visit)
-deactivate System
-
-User -> System : types requested data
-activate System
-
-System --> User : request data (starting time for the property visit)
-deactivate System
-
-User -> System : types requested data
-activate System
-
-
-System --> User : request data (ending time for the property visit)
-deactivate System
-
-User -> System : types requested data
-activate System
-
-
-
-System -> Controller: getUser()
+UI ->Controller : checkDay(day)
 activate Controller
 
-Controller -> UserRepository: getUser()
-activate UserRepository
-
-UserRepository --> Controller: User
-deactivate UserRepository
-
-System->Controller: User
-deactivate Controller
-
-System -> System : save phoneNumber
-System -> System : save name
 
 
-System -> Controller : checkIfValid()
-activate Controller
-
-Controller -> Message : checkIfValid()
+Controller ->Message : checkDay(day)
 activate Message
 
-Message --> Controller: return boolean
+Message --> Controller : day
 deactivate Message
 
-Controller --> System: return boolean
+Controller --> UI :day
 deactivate Controller
 
+UI -> UI : keepDay(day)
 
-alt if true
-
-System -> Controller: addMessage()
+UI ->Controller : checkMonth(month)
 activate Controller
 
-Controller -> Message: addMessage()
+Controller ->Message : checkMonth(month)
 activate Message
+
+Message --> Controller : month
+deactivate Message
+
+Controller --> UI :month
+deactivate Controller
+
+UI -> UI : keepMonth(month)
+
+UI ->Controller : checkYear(year)
+activate Controller
+
+Controller ->Message : checkYear(year)
+activate Message
+
+Message --> Controller : year
+deactivate Message
+
+Controller --> UI :year
+deactivate Controller
+
+UI -> UI : keepYear(year)
+
+UI ->Controller : checkHour(startHour)
+activate Controller
+
+Controller ->Message : checkHour(startHour)
+activate Message
+
+Message --> Controller : startHour
+deactivate Message
+
+Controller --> UI :startHour
+deactivate Controller
+
+UI -> UI : keepStartHour(startHour)
+
+UI ->Controller : checkMinutes(startMinute)
+activate Controller
+
+Controller ->Message : checkMinutes(startMinute)
+activate Message
+
+Message --> Controller :startMinute
+deactivate Message
+
+Controller --> UI :startMinute
+deactivate Controller
+
+UI -> UI : keepStartHour(startMinute)
+
+UI ->Controller : checkHour(endHour)
+activate Controller
+
+Controller ->Message : checkHour(endtHour)
+activate Message
+
+Message --> Controller : endHour
+deactivate Message
+
+Controller --> UI :endHour
+deactivate Controller
+
+UI -> UI : keepStartHour(endHour)
+
+UI ->Controller : checkMinutes(endMinute)
+activate Controller
+
+Controller ->Message : checkMinutes(endMinute)
+activate Message
+
+Message --> Controller :endMinute
+deactivate Message
+
+Controller --> UI :endMinute
+deactivate Controller
+
+UI -> UI : newVisitStartTime = \nLocalDateTime.of(year, month, day, startHour, startMinute)
+
+UI -> UI : newVisitEndTime = \nLocalDateTime.of(year, month, day, startHour, startMinute)
+
+end
+
+UI -> UI : keepNewVisitStartTime(newVisitStartTime)
+UI -> UI : keepNewVisitEndTime(newVisitEndTime)
+
+
+UI -> Controller : hasOverlap = checkIfValidVisit(MessageList, newVisitStartTime, newVisitEndTime)
+activate Controller
+
+Controller -> Message :checkIfValidVisit(MessageList, newVisitStartTime, newVisitEndTime);
+activate Message
+
+Message --> Controller : boolean
+deactivate Message
+
+Controller --> UI : boolean
+deactivate Controller
+
+alt if hasOverlap = true (overlapping schedule)
+UI -> User: Show message:"There is overlapping schedule."
 
 deactivate Message
 deactivate Controller
+end
+alt if hasOverlap = false (no overlapping schedule.)
+UI -> User: Show message:"There is no overlapping of visits"
 
-System -> User: show sucess of operation
+User -> UI : Send message
+
+UI -> Controller: addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime)
+deactivate UI
+
+activate Controller
+Controller -> MessageRepo : addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime)
+
+activate MessageRepo
+MessageRepo -> MessageRepo :addComplete(message)
+
+MessageRepo --> Controller :messageList
+deactivate MessageRepo
+
+Controller --> UI : messageList
+deactivate Controller
+
+activate UI
+UI -> User : successful operation
+
 
 end
-alt if false
 
-
-
-
-System -> User: show insucess of operation
-
-
+UI -> User: Show message: "Want to try more?"
+alt
+User -> UI : Types yes
 end
-
-System -> User: Show message: "Want to try more?"
-
-User -> System : yes/no
 end
+alt
+User -> UI :Types no
+UI ->User:Show message: "End of Operation"
 end
 
 
