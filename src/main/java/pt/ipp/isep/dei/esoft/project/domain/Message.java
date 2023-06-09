@@ -47,6 +47,11 @@ public class Message {
         this.newVisitEndTime = newVisitEndTime;
     }
 
+    public static boolean checkVisitTime(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        LocalDateTime now = LocalDateTime.now();
+        return newVisitStartTime.isAfter(now) && newVisitEndTime.isAfter(now);
+    }
+
 
     public LocalDateTime getNewVisitStartTime() {
         return newVisitStartTime;
@@ -65,14 +70,13 @@ public class Message {
     }
 
 
-
-    public Message(String name, int phone, int inputAnnou,LocalDateTime newVisitStartTime,LocalDateTime newVisitEndTime) {
+    public Message(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
 
         this.name = name;
         this.phone = phone;
         this.inputAnnou = inputAnnou;
-        this.newVisitStartTime=newVisitStartTime;
-        this.newVisitEndTime=newVisitEndTime;
+        this.newVisitStartTime = newVisitStartTime;
+        this.newVisitEndTime = newVisitEndTime;
     }
 
 
@@ -143,14 +147,14 @@ public class Message {
                 ", newVisitEndTime=" + newVisitEndTime +
                 '}';
     }
+
     public String toString2() {
-        return "Message{" +
-                ", name='" + name + '\'' +
-                ", phone=" + phone +
-                ", inputAnnou=" + inputAnnou +
-                ", newVisitStartTime=" + newVisitStartTime +
-                ", newVisitEndTime=" + newVisitEndTime +
-                '}';
+        return "Message:"
+                + "\nname: " + name
+                + "\nphone: " + phone
+                + "\nListing number of announcement: " + inputAnnou
+                + "\nstart date of the visit: " + newVisitStartTime
+                + "\nend date of the visit: " + newVisitEndTime;
     }
 
 
@@ -214,7 +218,7 @@ public class Message {
      * @return the boolean
      */
     public static boolean checkYear(int year) {
-        if (year < 2023) {
+        if (year < 0) {
             return false;
         } else {
             return true;
@@ -248,6 +252,7 @@ public class Message {
             return true;
         }
     }
+
     public static boolean checkIfValidVisit(List<Message> MessageList, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         for (Message messageList : MessageList) {
             LocalDateTime existingStartDate = messageList.getNewVisitStartTime();

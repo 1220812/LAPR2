@@ -62,40 +62,84 @@ public class ScheduleVisitUI implements Runnable {
             System.out.println("#######Sugest a date to visit the property#######");
             day = Utils.readIntegerFromConsole("Day: ");
             while (!controller.checkDay(day)) {
-                day = Utils.readIntegerFromConsole("Invalide day (format: 1-31)\n Insert new day");
+                day = Utils.readIntegerFromConsole("Invalid day (format: 1-31)\n Insert new day");
             }
 
             month = Utils.readIntegerFromConsole("Month:");
             while (!controller.checkMonth(month)) {
-                month = Utils.readIntegerFromConsole("Invalide month (format: 1-12)\nInsert new month");
+                month = Utils.readIntegerFromConsole("Invalid month (format: 1-12)\nInsert new month");
             }
 
             year = Utils.readIntegerFromConsole("Year:");
             while (!controller.checkYear(year)) {
-                year = Utils.readIntegerFromConsole("Must be bigger than 2022)\nInsert new year");
+                year = Utils.readIntegerFromConsole(")\nInsert new year");
             }
 
             startHour = Utils.readIntegerFromConsole("Starting hour:");
             while (!controller.checkHour(startHour)) {
-                startHour = Utils.readIntegerFromConsole("Invalide hour (format: 0-23)\nInsert new hour");
+                startHour = Utils.readIntegerFromConsole("Invalid hour (format: 0-23)\nInsert new hour");
             }
 
             startMinute = Utils.readIntegerFromConsole("Starting minute:");
             while (!controller.checkMinutes(startMinute)) {
-                startMinute = Utils.readIntegerFromConsole("Invalide minute (format: 0-59)\nInsert new minute");
+                startMinute = Utils.readIntegerFromConsole("Invalid minute (format: 0-59)\nInsert new minute");
             }
             endHour = Utils.readIntegerFromConsole("Ending hour:");
             while (!controller.checkHour(endHour)) {
-                endHour = Utils.readIntegerFromConsole("Invalide hour (format: 0-23)\nInsert new hour");
+                endHour = Utils.readIntegerFromConsole("Invalid hour (format: 0-23)\nInsert new hour");
             }
 
             endMinute = Utils.readIntegerFromConsole("Ending minute:");
             while (!controller.checkMinutes(endMinute)) {
-                endMinute = Utils.readIntegerFromConsole("Invalide minute (format: 0-59)\nInsert new minute");
+                endMinute = Utils.readIntegerFromConsole("Invalid minute (format: 0-59)\nInsert new minute");
             }
 
             newVisitStartTime = LocalDateTime.of(year, month, day, startHour, startMinute);
             newVisitEndTime = LocalDateTime.of(year, month, day, endHour, endMinute);
+
+            while (!controller.checkVisitTime(newVisitStartTime, newVisitEndTime)) {
+                System.out.println("Date Entered is invalid");
+
+                day = Utils.readIntegerFromConsole("Day: ");
+                while (!controller.checkDay(day)) {
+                    day = Utils.readIntegerFromConsole("Invalid day (format: 1-31)\n Insert new day");
+                }
+
+                month = Utils.readIntegerFromConsole("Month:");
+                while (!controller.checkMonth(month)) {
+                    month = Utils.readIntegerFromConsole("Invalid month (format: 1-12)\nInsert new month");
+                }
+
+                year = Utils.readIntegerFromConsole("Year:");
+                while (!controller.checkYear(year)) {
+                    year = Utils.readIntegerFromConsole("Invalid year (format: 0-...))\nInsert new year");
+                }
+
+                startHour = Utils.readIntegerFromConsole("Starting hour:");
+                while (!controller.checkHour(startHour)) {
+                    startHour = Utils.readIntegerFromConsole("Invalid hour (format: 0-23)\nInsert new hour");
+                }
+
+                startMinute = Utils.readIntegerFromConsole("Starting minute:");
+                while (!controller.checkMinutes(startMinute)) {
+                    startMinute = Utils.readIntegerFromConsole("Invalid minute (format: 0-59)\nInsert new minute");
+                }
+                endHour = Utils.readIntegerFromConsole("Ending hour:");
+                while (!controller.checkHour(endHour)) {
+                    endHour = Utils.readIntegerFromConsole("Invalid hour (format: 0-23)\nInsert new hour");
+                }
+
+                endMinute = Utils.readIntegerFromConsole("Ending minute:");
+                while (!controller.checkMinutes(endMinute)) {
+                    endMinute = Utils.readIntegerFromConsole("Invalid minute (format: 0-59)\nInsert new minute");
+                }
+                newVisitStartTime = LocalDateTime.of(year, month, day, startHour, startMinute);
+                newVisitEndTime = LocalDateTime.of(year, month, day, endHour, endMinute);
+            }
+
+
+
+
 
             List<Message> MessageList = MessageRepository.getMessageList();
             boolean hasOverlap = controller.checkIfValidVisit(MessageList, newVisitStartTime, newVisitEndTime);
@@ -109,15 +153,21 @@ public class ScheduleVisitUI implements Runnable {
                 System.out.println("#######successful operation#######");
                 System.out.println("                  ");
                 System.out.println("List of scheduled visits:");
+                boolean isFirstMessage = true;
                 for (Message messageList : MessageList) {
+                    if (isFirstMessage) {
+                        isFirstMessage = false;
+                        continue; // Pula para a próxima iteração sem executar o restante do loop
+                    }
                     System.out.println("Start of visit: " + messageList.getNewVisitStartTime() + " - End of Visit: " + messageList.getNewVisitEndTime());
                 }
             }
             String flag = Utils.readLineFromConsole("\"Do you want to schedule another visit? (yes/no): ");
-            if (flag.equalsIgnoreCase("y")) {
+            if (!flag.equalsIgnoreCase("yes")) {
                 continueScheduling = false;
             }
         }
     }
 }
+
 

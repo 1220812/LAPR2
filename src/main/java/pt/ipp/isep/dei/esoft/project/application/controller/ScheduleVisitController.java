@@ -121,5 +121,9 @@ public class ScheduleVisitController {
         return Message.checkIfValidVisit(MessageList,newVisitStartTime, newVisitEndTime);
 
     }
+
+    public boolean checkVisitTime(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        return Message.checkVisitTime(newVisitStartTime, newVisitEndTime);
+    }
 }
 
