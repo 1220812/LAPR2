@@ -307,6 +307,12 @@ public class Bootstrap implements Runnable {
         List<Photographs> photoList1 = new ArrayList<>();
         List<Photographs> photoList2 = new ArrayList<>();
         List<Photographs> photoList3 = new ArrayList<>();
+        Photographs photo1 = new Photographs("AAA");
+        Photographs photo2 = new Photographs("bbb");
+        Photographs photo3 = new Photographs("CCC");
+        photoList1.add(photo1);
+        photoList2.add(photo2);
+        photoList3.add(photo3);
         RequestType requestType1 = new RequestType("Sale", 0);
         RequestType requestType2 = new RequestType("Sale", 0);
         RequestType requestType3 = new RequestType("Rent", 3);

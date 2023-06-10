@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Owner;
 import pt.ipp.isep.dei.esoft.project.domain.Owner;
+import pt.ipp.isep.dei.esoft.project.domain.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 public class OwnerRepository {
 
-    private List<Owner> ownerList = new ArrayList<>();
+    private static List<Owner> ownerList = new ArrayList<>();
 
 
     public void addOwner(Owner owner) {
@@ -49,5 +50,14 @@ public class OwnerRepository {
     private boolean validateOwner(Owner owner) {
         boolean isValid = !ownerList.contains(owner);
         return isValid;
+    }
+
+    public static boolean checkOwnerEmail(String ownerEmail) {
+        for (Owner owner: ownerList) {
+            if (ownerEmail.equals(owner.getEmailAddress())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -70,7 +70,7 @@ public class RequestRepository {
     public List<Request> getRequestAssignedList(Agent agent) {
         List<Request> assignedList = new ArrayList<>();
         for (Request request : this.requestList) {
-            if (request.getAgent().getEmailAddress().equals(agent.getEmailAddress())) {
+            if (request.getAgent().getEmailAddress().equalsIgnoreCase(agent.getEmailAddress())) {
                 assignedList.add(request);
             }
         }

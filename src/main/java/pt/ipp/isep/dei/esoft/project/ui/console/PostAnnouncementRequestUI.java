@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-/**public class PostAnnouncementRequestUI implements Runnable{
+public class PostAnnouncementRequestUI implements Runnable{
 
     Request request;
     private final PostAnnouncementRequestController controller = new PostAnnouncementRequestController();
@@ -28,39 +28,26 @@ import java.util.Scanner;
             for (Request request: assignedRequestList) {
                 i += 1;
                 System.out.println(i);
-                System.out.println("LocalDate = " + request.getRequestDate());
+                System.out.println("Date = " + request.getRequestDate());
                 System.out.println("Property Type = " + request.getProperty().getPropertyType());
             }
             int assignedRequest = Utils.readIntegerFromConsole("Select one of the requests:");
             while (assignedRequest < 1 || assignedRequest > assignedRequestList.size()){
                 assignedRequest = Utils.readIntegerFromConsole("Select a valid request:");
             }
-            for (Request request: assignedRequestList) {
-                i += 1;
-                if (i == assignedRequest) {
-                    System.out.println(request.toString());
-                }
-            }
+            Request requestChosen = assignedRequestList.get(assignedRequest);
+            System.out.println(requestChosen.toString());
+
             String publishOption = Utils.readLineFromConsole("Do you want to accept or decline the request?");
-            while(!publishOption.equals("accept")&&!publishOption.equals("decline")){
+            while(!publishOption.equalsIgnoreCase("accept")&&!publishOption.equalsIgnoreCase("decline")){
                 publishOption = Utils.readLineFromConsole("Write a valid answer (accept / decline)");
             }
 
-            Request requestChosen = null;
+            if(publishOption.equalsIgnoreCase("accept")) {
 
-            if(publishOption.equals("accept")) {
-                for (Request request: assignedRequestList) {
-                    i += 1;
-                    if (i == assignedRequest) {
-                        requestChosen = request;
-                    }
-                }
-                
-                System.out.println("Commission Type:");
-                System.out.println("- Percentage");
-                System.out.println("- Value");
+                System.out.println("Commission type:");
                 String commissionType = ler.next();
-                while (!commissionType.equals("Percentage") && !commissionType.equals("Value")) {
+                while (!commissionType.equalsIgnoreCase("Percentage") && !commissionType.equalsIgnoreCase("Value")) {
                     System.out.println("Please write a valid option.");
                     commissionType = ler.next();
                 }
@@ -80,17 +67,14 @@ import java.util.Scanner;
                 Announcement announcement = new Announcement(property, date, commissionType, commission, requestType, agent, price, owner, store);
                 controller.acceptRequest(requestChosen);
                 controller.registerAnnouncement(announcement);
+                System.out.println("Announcement posted successfully!");
             }
-            else if (publishOption.equals("decline")) {
-                for (Request request: assignedRequestList) {
-                    i += 1;
-                    if (i == assignedRequest) {
-                        requestChosen = request;
-                    }
-                }
+            else if (publishOption.equalsIgnoreCase("decline")) {
                 String justification = Utils.readLineFromConsole("Please write a justification for the declinement?");
                 controller.declineRequest(requestChosen);
+                System.out.println("Announcement declined successfully!");
+
             }
         }
     }
-}*/
+}

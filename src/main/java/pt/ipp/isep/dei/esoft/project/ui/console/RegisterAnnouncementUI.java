@@ -56,138 +56,143 @@ public class RegisterAnnouncementUI implements Runnable {
     public void run() {
         Scanner ler = new Scanner(System.in);
 
-//        if (!ownerVerification()) {
-//            System.out.println("Owner not registed, please register Owner.");
-//        }
-//        else {
-
-
-        propertyType = Utils.listAndSelectOne(controller.getPropertyType());
-        if (propertyType == null) return;
-
-
-        area = Utils.readIntegerFromConsole("Area in m2:");
-        while (!controller.checkArea(area)) {
-            area = Utils.readIntegerFromConsole("Please write a valid area.");
+        System.out.println("Please write the owner's email:");
+        ownerEmail = ler.nextLine();
+        if (!controller.checkOwnerExistence(ownerEmail)) {
+            System.out.println("Owner not registed, please register Owner.");
         }
-
-        address = Utils.listAndSelectOne(controller.getAddresses());
-        if (address == null) return;
-        System.out.println(address);
-
-        doorNumber = Utils.readIntegerFromConsole("Door number:");
-        while (!controller.checkDoorNumber(doorNumber)) {
-            doorNumber = Utils.readIntegerFromConsole("Please write a valid door number.");
-        }
+        else {
+            propertyType = Utils.listAndSelectOne(controller.getPropertyType());
+            if (propertyType == null) return;
 
 
-        distanceFromCityCenter = Utils.readIntegerFromConsole("Distance from city centre:");
-        while (!controller.checkDistanceFromCityCenter(distanceFromCityCenter)) {
-            distanceFromCityCenter = Utils.readIntegerFromConsole("Please write a valid distance.");
-        }
+            area = Utils.readIntegerFromConsole("Area in m2:");
+            while (!controller.checkArea(area)) {
+                area = Utils.readIntegerFromConsole("Please write a valid area.");
+            }
+
+            address = Utils.listAndSelectOne(controller.getAddresses());
+            if (address == null) return;
+            System.out.println(address);
+
+            doorNumber = Utils.readIntegerFromConsole("Door number:");
+            while (!controller.checkDoorNumber(doorNumber)) {
+                doorNumber = Utils.readIntegerFromConsole("Please write a valid door number.");
+            }
 
 
-        price = Utils.readIntegerFromConsole("Price:");
-        while (!controller.checkPrice(price)) {
-            price = Utils.readIntegerFromConsole("Please write a valid price.");
-        }
+            distanceFromCityCenter = Utils.readIntegerFromConsole("Distance from city centre:");
+            while (!controller.checkDistanceFromCityCenter(distanceFromCityCenter)) {
+                distanceFromCityCenter = Utils.readIntegerFromConsole("Please write a valid distance.");
+            }
 
-        numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
-        while (numberOfPhotos < 1 || numberOfPhotos > 30) {
-            System.out.println("please insert a number between 1 and 30");
+
+            price = Utils.readIntegerFromConsole("Price:");
+            while (!controller.checkPrice(price)) {
+                price = Utils.readIntegerFromConsole("Please write a valid price.");
+            }
+
             numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
-        }
+            while (numberOfPhotos < 1 || numberOfPhotos > 30) {
+                System.out.println("please insert a number between 1 and 30");
+                numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
+            }
 
-        String inputPropertyType;
-        inputPropertyType = propertyType.toString();
+            String inputPropertyType;
+            inputPropertyType = propertyType.toString();
 
 
-        if (inputPropertyType.equals("House") || inputPropertyType.equals("Apartment")) {
+            if (inputPropertyType.equalsIgnoreCase("House") || inputPropertyType.equalsIgnoreCase("Apartment")) {
 
-            System.out.println("Number of numberOfBedrooms:");
-            numberOfBedrooms = ler.nextInt();
-            while (numberOfBedrooms < 0) {
-                System.out.println("Please select a valid number of numberOfBedrooms.");
+                System.out.println("Number of number of bedrooms:");
                 numberOfBedrooms = ler.nextInt();
-            }
+                while (numberOfBedrooms < 0) {
+                    System.out.println("Please select a valid number of bedrooms.");
+                    numberOfBedrooms = ler.nextInt();
+                }
 
-            System.out.println("Number of numberOfBathrooms:");
-            numberOfBathrooms = ler.nextInt();
-            while (numberOfBathrooms < 0) {
-                System.out.println("Please select a valid number of numberOfBathrooms.");
+                System.out.println("Number of number of bathrooms:");
                 numberOfBathrooms = ler.nextInt();
-            }
+                while (numberOfBathrooms < 0) {
+                    System.out.println("Please select a valid number of bathrooms.");
+                    numberOfBathrooms = ler.nextInt();
+                }
 
-            System.out.println("Number of parking spaces:");
-            parking = ler.nextInt();
-            while (parking < 0) {
-                System.out.println("Please select a valid number of parking spaces.");
+                System.out.println("Number of parking spaces:");
                 parking = ler.nextInt();
+                while (parking < 0) {
+                    System.out.println("Please select a valid number of parking spaces.");
+                    parking = ler.nextInt();
+                }
+
+                availableEquipment = Utils.listAndSelectMany(controller.getAvailableEquipmentList());
+
+
+                if (inputPropertyType.equalsIgnoreCase("House")) {
+                    basement = Utils.readBooleanFromConsole("Does the house have a basement? (y/n)");
+
+                    loft = Utils.readBooleanFromConsole("Does the house have an inhabitable loft? (y/n)");
+
+                    sunExposure = Utils.listAndSelectOne(controller.getSunExposuresList());
+
+                }
             }
 
-            availableEquipment = Utils.listAndSelectMany(controller.getAvailableEquipmentList());
-
-
-            if (inputPropertyType.equals("House")) {
-                basement = Utils.readBooleanFromConsole("Does the house have a basement? (y/n)");
-
-                loft = Utils.readBooleanFromConsole("Does the house have an inhabitable loft? (y/n)");
-
-                sunExposure = Utils.listAndSelectOne(controller.getSunExposuresList());
-
-            }
-        }
-
-        System.out.println("Comission Type:");
-        System.out.println("- Percentage");
-        System.out.println("- Value");
-        commissionType = ler.next();
-        while (!commissionType.equals("Percentage") && !commissionType.equals("Value")) {
-            System.out.println("Please write a valid option.");
+            System.out.println("Commission Type:");
+            System.out.println("- Percentage");
+            System.out.println("- Value");
             commissionType = ler.next();
-        }
-
-        System.out.println("Comission:");
-        commission = ler.nextDouble();
-        while (commission < 0) {
-            System.out.println("Please select a valid comission.");
-            commission = ler.nextInt();
-        }
-        System.out.println("Property type = " + propertyType);
-        System.out.println("Address= " + address);
-        System.out.println("Floor number = " + floorNumber);
-        System.out.println("Distance from city centre = " + distanceFromCityCenter);
-        System.out.println("Requested Price = " + price);
-        System.out.println("Area = " + area);
-        if (inputPropertyType.equals("House") || inputPropertyType.equals("Apartment")) {
-            System.out.println("Number of numberOfBedrooms = " + numberOfBedrooms);
-            System.out.println("Number of numberOfBathrooms = " + numberOfBathrooms);
-            System.out.println("Number of parking space = " + parking);
-            System.out.println("Available equipment = " + availableEquipment);
-            if (inputPropertyType.equals("House")) {
-                System.out.println("Basement existence = " + basement);
-                System.out.println("Inhabitable loft existence = " + loft);
-                System.out.println("Sun exposure = " + sunExposure);
+            while (!commissionType.equalsIgnoreCase("Percentage") && !commissionType.equalsIgnoreCase("Value")) {
+                System.out.println("Please write a valid option.");
+                commissionType = ler.next();
             }
-        }
-        System.out.println("Comission type = " + commissionType);
-        System.out.println("Comission = " + commission);
-        System.out.println();
 
-        String flag = Utils.readLineFromConsole("Confirm data? (y/n)");
-
-        if (flag.equalsIgnoreCase("y")) {
-            requestType = controller.createRequestType(DEFAULT_REQUESTTYPE, DEFAULT_CONTRACTDURATION);
-            if (inputPropertyType.equals("Land")) {
-                property = controller.createProperty(area, distanceFromCityCenter, address, propertyType, photos);
-            } else if (inputPropertyType.equals("Apartment")) {
-                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, airConditioning, centralHeating);
-            } else if (inputPropertyType.equals("House")) {
-                property = controller.createHouse(address, area, distanceFromCityCenter,numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft,propertyType, photos, requestType);
+            System.out.println("Commission:");
+            commission = ler.nextDouble();
+            while (commission < 0) {
+                System.out.println("Please write a valid commission.");
+                commission = ler.nextInt();
             }
-            announcement = controller.createAnnouncement(property, date, commissionType, commission, requestType, propertyType,agent,store, owner,price);
-            controller.registerAnnouncement(announcement);
-            System.out.println("Announcement registered successfully");
+            System.out.println("Property type = " + propertyType);
+            System.out.println("Address= " + address);
+            System.out.println("Floor number = " + floorNumber);
+            System.out.println("Distance from city centre = " + distanceFromCityCenter);
+            System.out.println("Requested Price = " + price);
+            System.out.println("Area = " + area);
+            if (inputPropertyType.equalsIgnoreCase("House") || inputPropertyType.equalsIgnoreCase("Apartment")) {
+                System.out.println("Number of numberOfBedrooms = " + numberOfBedrooms);
+                System.out.println("Number of numberOfBathrooms = " + numberOfBathrooms);
+                System.out.println("Number of parking space = " + parking);
+                System.out.println("Available equipment = " + availableEquipment);
+                if (inputPropertyType.equalsIgnoreCase("House")) {
+                    System.out.println("Basement existence = " + basement);
+                    System.out.println("Inhabitable loft existence = " + loft);
+                    System.out.println("Sun exposure = " + sunExposure);
+                }
+            }
+            System.out.println("Commission type = " + commissionType);
+            System.out.println("Commission = " + commission);
+            System.out.println();
+
+            String flag = Utils.readLineFromConsole("Confirm data? (y/n)");
+
+            if (flag.equalsIgnoreCase("y")) {
+                requestType = controller.createRequestType(DEFAULT_REQUESTTYPE, DEFAULT_CONTRACTDURATION);
+                if (inputPropertyType.equalsIgnoreCase("Land")) {
+                    property = controller.createProperty(area, distanceFromCityCenter, address, propertyType, photos);
+                } else if (inputPropertyType.equalsIgnoreCase("Apartment")) {
+                    property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, airConditioning, centralHeating);
+                } else if (inputPropertyType.equalsIgnoreCase("House")) {
+                    property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, propertyType, photos, requestType);
+                }
+                announcement = controller.createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price);
+                controller.registerAnnouncement(announcement);
+                System.out.println("Announcement registered successfully");
+            }
+            else if(flag.equalsIgnoreCase("n")) {
+                System.out.println("Operation canceled");
+            }
         }
     }
 }
+
