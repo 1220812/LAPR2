@@ -35,7 +35,7 @@ public class PostAnnouncementRequestUI implements Runnable{
             while (assignedRequest < 1 || assignedRequest > assignedRequestList.size()){
                 assignedRequest = Utils.readIntegerFromConsole("Select a valid request:");
             }
-            Request requestChosen = assignedRequestList.get(assignedRequest);
+            Request requestChosen = assignedRequestList.get(assignedRequest - 1);
             System.out.println(requestChosen.toString());
 
             String publishOption = Utils.readLineFromConsole("Do you want to accept or decline the request?");
