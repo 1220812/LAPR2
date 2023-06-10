@@ -24,8 +24,12 @@ class Agent{
 }
 
 class Message{
-date
-timeSlot
+day
+month
+year
+startHour
+startMinute
+endMinute
 }
 
 

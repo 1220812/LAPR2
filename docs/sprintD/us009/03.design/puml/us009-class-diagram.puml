@@ -8,57 +8,47 @@ class ScheduleVisitUI{
 class ScheduleVisitController{
 -Repositories repositories
 
-+checkIfPropertiesIsEmpty()
-+getSortedProperties()
-+getPersonByUserSession()
-+addMessage(...)
-+checkIfValid(...)
-+createVisit(...)
++getAnnouncement()
++getInstance()
++checkMinutes()
++checkHour()
++checkYear()
++checkMonth()
++checkDay()
++checkIfValidVisit()
++addMessage()
 }
 
 class Repositories{
 
 +Repositories()
 +getInstance()
-+getUserRepository()
 +getMessageRepository()
-+getAdvertisementRepository()
-+getAnnoucementsRepository()
++getAnnouncementsRepository()
+}
 
-}
-class AuthenticationRepository{
-+getCurrentUserSession()
-}
+
 class Message{
 -String message
--String clientName
--String clientPhoneNbr
--Advertisement advertisement
--LocalDateTime startTime
--LocalDateTime endTime
+-String name
+-String phone
+-Int inputAnnou
+-LocalDateTime newVisitStartTime
+-LocalDateTime newVisitEndTime
 
-+ClientToAgentMessage(...)
-+getMessage()
-+getClientName()
-+getClientPhoneNbr()
-+getStartTime()
-+getEndTime()
-+getAdvertisement()
-+toString()
-+equals(...)
++checkIfValidVisit()
 }
 
 class MessageRepository{
--List<ClientToAgentMessage> clientToAgentMessage
+-List<Message> MessageList
+-List<Message> MessageCompleteList
 
-+addMessage(...)
-+overlapsWith(...)
-+createMessage(...)
-+checkDateFormat(...)
-+checkTimeFormat(...)
++addMessage()
++addComplete()
 }
 
 class Property{
+-PropertyType propertyType
 }
 class House{
 }
@@ -67,31 +57,15 @@ class Apartment{
 class Land{
 }
 
-
-class User{
--Sring name
--String phoneNumber
-+getName()
-+getPhoneNumber()
-}
-
-
-
-class UserRepository
-{
--List<Person> personList
-
-+getPersonByUserSession(...)
-}
-
 class Annoucement{
 Price
 Type
 Commission
+Agent
 }
 
 class AnnoucementRepository{
-+checkIfAdvertisementListIsEmpty()
++getAnnouncement()
 }
 
 
@@ -102,9 +76,6 @@ ScheduleVisitController --> Repositories
 
 Repositories ----> MessageRepository
 Repositories ---> AnnoucementRepository
-Repositories --> UserRepository
-Repositories --> AuthenticationRepository
-User --> UserRepository
 
 Message ->MessageRepository
 
