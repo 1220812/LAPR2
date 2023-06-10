@@ -15,7 +15,7 @@ public class PublishOrderController {
     public void registerOrder(Announcement announcement, double orderPrice){
         String email = CurrentSession.getEmail();
         Order order = new Order(announcement,orderPrice,email);
-        orderRepository.add(order);
+        orderRepository.addNewOrder(order);
     }
     public List <Announcement> getAnnouncements(){
         return announcementRepository.getAnnouncements();

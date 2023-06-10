@@ -26,14 +26,14 @@ public class OrderDecisionUI implements Runnable{
         return selection;
     }
     private void listOrders(Announcement announcement) {
+        List<Order> emptyOrderList = new ArrayList<>();
         List<Order> allOrders = controller.getAllOrders();
-        List<Order> orders = controller.getOrdersByAnnouncement(allOrders, announcement);
-        List<Order> announcementOrdersSorted = controller.getOrderListSortedByPrice(orders);
-        if (announcementOrdersSorted.isEmpty()) {
-            System.out.println("No orders found for this announcement.");
+        List<Order> ordersByAnnouncement = controller.getOrdersByAnnouncement(announcement, allOrders);
+        if (ordersByAnnouncement.isEmpty()) {
+            System.out.println(emptyOrderList);
         } else {
-            int selection = Utils.showAndSelectIndex(announcementOrdersSorted, "Please select one order!");
-            Order order = orders.get(selection);
+            int selection = Utils.showAndSelectIndex(controller.getOrderListSortedByPrice(ordersByAnnouncement), "Please select one order!");
+            Order order = ordersByAnnouncement.get(selection);
             System.out.println("1 - Accept order");
             System.out.println("2 - Decline order");
             System.out.println("0 - Exit");

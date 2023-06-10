@@ -28,11 +28,6 @@ public class OrderDecisionController {
         announcementList.sort(new AnnouncementDateComparator());
         return announcementList;
     }
-
-    /**
-     * Method that returns the list of orders sorted by price
-     * @return list of orders sorted by price
-     */
     public List<Order> getOrderListSortedByPrice(List<Order> orderList){
         orderList.sort(new OrderPriceComparator().reversed());
         return orderList;
@@ -45,14 +40,15 @@ public class OrderDecisionController {
      *
      * @return list of properties with their purchase orders
      */
-    public List<Order> getOrdersByAnnouncement(List<Order> orders, Announcement announcement) {
-        List<Order> propertyOrders = new ArrayList<>();
+
+    public List<Order> getOrdersByAnnouncement(Announcement announcement, List<Order> orders) {
+        List<Order> announcementOrders = new ArrayList<>();
         for (Order order : orders) {
             if (order.getAnnouncement().equals(announcement)) {
-                propertyOrders.add(order);
+                announcementOrders.add(order);
             }
         }
-        return propertyOrders;
+        return announcementOrders;
     }
 
     /**
