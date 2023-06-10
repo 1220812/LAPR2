@@ -15,11 +15,18 @@ activate Agent
 Agent -> System : Intend to list all booking requests for properties managed by the agent.
 activate System
 
-"System" --> Agent: request a specific period (begin date, end date).
+"System" --> Agent: request a specific period (begin date).
 
 deactivate System
 
-Agent -> System : Type specific period (begin date, end date).
+Agent -> System : Type specific period (begin date).
+activate System
+
+"System" --> Agent: request a specific period (end date).
+
+deactivate System
+
+Agent -> System : Type specific period (end date).
 activate System
 
 
