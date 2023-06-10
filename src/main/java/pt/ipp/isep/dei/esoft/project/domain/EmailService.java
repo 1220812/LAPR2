@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 import java.io.*;
 
 public class EmailService {
@@ -20,7 +18,7 @@ public class EmailService {
      * @param fileName name of the file generated
      * @param emailText text to be written in the file
      */
-    public static void wrightToFile(String fileName, String emailText){
+    public static void writeToFile(String fileName, String emailText){
         try {
             File file = new File(fileName);
             FileWriter fileWriter = new FileWriter(file);
@@ -33,28 +31,15 @@ public class EmailService {
     }
 
     /**
-     * This method sends an email to the client when his order is rejected
-     * @param clientName name of the client
-     * @param propertyOrderNumber order number of the property
+     * This method sends an email to the client
+     * @param clientEmail client's email
+     * @param message sending message
      */
-    public void sendRejectedOrderEmail(String clientName, int propertyOrderNumber) {
-        String message = "Dear " + clientName + ",\n\n" +
-                "Your order for the property with the order number " + propertyOrderNumber + " was rejected.\n\n" +
+    public void sendMessage(String clientEmail, String message) {
+        String emailText = "Dear client " + clientEmail + ",\n\n" +
+                message + "\n\n" +
                 "Best regards,\n" +
                 "The Real Estate Company";
-        wrightToFile("RejectedOrder.txt", message);
-    }
-
-    /**
-     * This method sends an email to the client when his order is accepted
-     * @param clientName name of the client
-     * @param propertyOrderNumber order number of the property
-     */
-    public void sendAcceptedOrderEmail(String clientName, int propertyOrderNumber){
-        String message = "Dear" + clientName + ",\n\n" +
-                "Your order for the property with the order number " + propertyOrderNumber + " was accepted.\n\n" +
-                "Best regards,\n" +
-                "The Real Estate Company";
-        wrightToFile("AcceptedOrder.txt", message);
+        writeToFile(clientEmail+" you got a new email", emailText);
     }
 }

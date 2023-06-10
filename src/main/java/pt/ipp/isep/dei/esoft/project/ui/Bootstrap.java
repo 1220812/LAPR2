@@ -40,11 +40,11 @@ public class Bootstrap implements Runnable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
-        /**try{
+        try{
             addOrder();
         }catch (CloneNotSupportedException e){
             throw new RuntimeException(e);
-        }*/
+        }
         addMessage();
     }
 
@@ -238,7 +238,7 @@ public class Bootstrap implements Runnable {
         ownerRepository.add(owner1);
     }
 
-    /**private void addOrder() throws CloneNotSupportedException {
+    private void addOrder() throws CloneNotSupportedException {
         OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
         State state1 = new State("California");
         State state2 = new State("Nevada");
@@ -282,13 +282,11 @@ public class Bootstrap implements Runnable {
         Order order3 = new Order(announcement1, 124000,agent1.getEmailAddress());
         Order order = new Order(announcement2, 124000,agent2.getEmailAddress());
         Order order2 = new Order(announcement2, 100000,agent2.getEmailAddress());
-        Order order4 = new Order(announcement3, 100000,agent2.getEmailAddress());
         orderRepository.add(order1);
         orderRepository.add(order2);
         orderRepository.add(order3);
         orderRepository.add(order);
-        orderRepository.add(order4);
-    }*/
+    }
     private void addMessage(){
         MessageRepository messageRepository =Repositories.getInstance().getMessageRepository();
         int year= 2023;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.CurrentSession;
+import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrderRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -13,7 +14,8 @@ public class PublishOrderController {
     OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
     public void registerOrder(Announcement announcement, double orderPrice){
         String email = CurrentSession.getEmail();
-        orderRepository.add(email, orderPrice, announcement);
+        Order order = new Order(announcement,orderPrice,email);
+        orderRepository.add(order);
     }
     public List <Announcement> getAnnouncements(){
         return announcementRepository.getAnnouncements();

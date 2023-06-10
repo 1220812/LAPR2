@@ -3,95 +3,107 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.Comparators.AnnouncementDateComparator;
 import pt.ipp.isep.dei.esoft.project.domain.Comparators.OrderPriceComparator;
+import pt.ipp.isep.dei.esoft.project.domain.EmailService;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
+import pt.ipp.isep.dei.esoft.project.repository.OrderRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class OrderDecisionController {
-    private AnnouncementRepository announcementRepository = new AnnouncementRepository();
-
-    private List<Order> orderList = new ArrayList<>();
+    OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
+    AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
+    EmailService emailService = new EmailService();
 
     /**
-     * Method that returns a list of announcements sorted by date
-     *
-     * @param announcementList list of announcements
-     * @return list of announcements sorted by date
+     * Method that returns the list of announcements sorted by date of creation
+     * @return list of announcements sorted by date of creation
      */
-    public List<Announcement> getAnnouncementListSortedByDate(List<Announcement> announcementList) {
-        List<Announcement> announcementListSortedByDate = new ArrayList<>(announcementList);
-        announcementListSortedByDate.sort(new AnnouncementDateComparator());
-        return announcementListSortedByDate;
-    }
-    public List<Announcement> getAnnouncements(){
-        return announcementRepository.getAnnouncements();
+    public List<Announcement> getAnnouncementListSortedByDate() {
+        List<Announcement> announcementList = new ArrayList<>(announcementRepository.getAnnouncementsList());
+        announcementList.sort(new AnnouncementDateComparator());
+        return announcementList;
     }
 
     /**
-     * Method that returns a list of orders sorted by price
-     *
-     * @param orderList list of orders
+     * Method that returns the list of orders sorted by price
      * @return list of orders sorted by price
      */
-    public List<Order> getOrderListSortedByPrice(List<Order> orderList) {
-        List<Order> orderListSortedByPrice = new ArrayList<>(orderList);
-        orderListSortedByPrice.sort(new OrderPriceComparator());
-        return orderListSortedByPrice;
-    }
-
-    /**
-     * Method to verify if there are orders that are already accepted in the list
-     *
-     * @param orderList list of orders
-     * @return true if there are orders that are already accepted in the list, false if not
-     */
-    public boolean checkIfOrderListHasAcceptedOrders(List<Order> orderList) {
-        for (Order order : orderList) {
-            if (order.getStatus() == (Status.ACCEPTED)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Method to verify if there are orders that hasn't been analyzed by the agent
-     *
-     * @param orderList list of orders
-     * @return true if there are orders that hasn't been analyzed by the agent, false if not
-     */
-    public boolean checkIfOrderListHasPendingOrders(List<Order> orderList) {
-        for (Order order : orderList) {
-            if (order.getStatus() == (Status.PENDING)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public List<Order> getOrderListWithStatus(List<Order> orderListSortedByPrice, int i, int orderOption) {
-        orderList = orderListSortedByPrice;
-        if (orderListSortedByPrice != null) {
-            if (orderOption == 1) {
-                    int j = 1;
-                    for (Order order : orderListSortedByPrice) {
-                        if (order.getStatus() == (Status.PENDING)) {
-                            if (j - 1 != i) {
-                                order.setStatus(Status.DECLINED);
-                            } else {
-                                order.setStatus(Status.ACCEPTED);
-                            }
-                        }
-                        j++;
-                    }
-                } else if (orderOption == 2) {
-                    orderList.get(i).setStatus(Status.DECLINED);
-                }
-            }
+    public List<Order> getOrderListSortedByPrice(List<Order> orderList){
+        orderList.sort(new OrderPriceComparator().reversed());
         return orderList;
     }
 
+    /**
+     * Method that returns a list of properties with their corresponding purchase orders.
+     * The properties are sorted from oldest to most recent, and for each property, the
+     * purchase orders are sorted by the amount offered (highest offer first).
+     *
+     * @return list of properties with their purchase orders
+     */
+    public List<Order> getOrdersByAnnouncement(List<Order> orders, Announcement announcement) {
+        List<Order> propertyOrders = new ArrayList<>();
+        for (Order order : orders) {
+            if (order.getAnnouncement().equals(announcement)) {
+                propertyOrders.add(order);
+            }
+        }
+        return propertyOrders;
+    }
+
+    /**
+     * Method to accept a purchase order for a property.
+     * When a purchase order is accepted, all other orders for the same property are declined,
+     * @param order the purchase order to accept
+     */
+    public void acceptPurchaseOrder(Order order) {
+        declineOtherOrders(order);
+        String clientEmail = order.getEmail();
+        String message = "Your offer for the property with the order number " + order.getOrderID() +
+                " has been accepted. Congratulations!";
+        emailService.sendMessage(clientEmail, message);
+    }
+
+    /**
+     * Method to decline a purchase order for an announcement.
+     *
+     * @param order the purchase order to be declined
+     */
+    public void declinePurchaseOrder(Order order) {
+        Announcement announcement = order.getAnnouncement();
+        List<Order> orderList = orderRepository.getOrdersByAnnouncement(announcement);
+        orderList.remove(order);
+        String clientEmail = order.getEmail();
+        String message = "Your offer for the property with the order number " + order.getOrderID() +
+                " has been declined. We apologize for any inconvenience caused.";
+        emailService.sendMessage(clientEmail, message);
+    }
+
+    public List<Order> getAllOrders(){
+        return orderRepository.getOrders();
+    }
+
+    /**
+     * Method that declines all other orders for the same property when one is accepted
+     * @param acceptedOrder accepted order
+     */
+    private void declineOtherOrders(Order acceptedOrder) {
+        List<Order> orders = orderRepository.getOrdersByAnnouncement(acceptedOrder.getAnnouncement());
+        Iterator<Order> iterator = orders.iterator();
+        while (iterator.hasNext()) {
+            Order order = iterator.next();
+            if (!order.equals(acceptedOrder)) {
+                order.setStatus(Status.DECLINED);
+                iterator.remove();
+                String clientEmail = order.getEmail();
+                String message = "Your offer for the property with the order number " + order.getOrderID() +
+                        " has been declined. We apologize for any inconvenience caused.";
+                emailService.sendMessage(clientEmail, message);
+            }
+        }
+    }
 }

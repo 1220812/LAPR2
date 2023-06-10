@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.esoft.project.domain.Message;
 import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class ScheduleVisitController {
      * @return List of Announcement objects.
      */
     public List<Announcement> getAnnouncement() {
-        return Repositories.getInstance().getAnnouncementRepository.getAnnuncementsList();
+        return Repositories.getInstance().getAnnouncementRepository.getAnnouncementsList();
     }
 
     /**
