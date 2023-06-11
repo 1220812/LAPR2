@@ -18,7 +18,7 @@ public class RequestRepository {
     /**
      * Get property types
      */
-    public List<Request> getRequests() {
+    public static List<Request> getRequests() {
         return List.copyOf(requestList);
     }
     public List<Request> add(Request request) {
