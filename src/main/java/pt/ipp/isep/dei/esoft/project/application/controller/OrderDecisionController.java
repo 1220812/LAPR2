@@ -79,6 +79,11 @@ public class OrderDecisionController {
         emailService.sendMessage(clientEmail, message);
     }
 
+    /**
+     * Method that returns a list of all orders
+     * @return list of all orders
+     */
+
     public List<Order> getAllOrders(){
         return orderRepository.getOrders();
     }
