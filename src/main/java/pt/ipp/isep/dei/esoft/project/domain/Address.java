@@ -234,18 +234,16 @@ public class Address {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Address)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(getStreetAddress(), address.getStreetAddress()) &&
-                Objects.equals(getDoorNumber(), address.getDoorNumber()) &&
-                Objects.equals(getFloorNumber(), address.getFloorNumber()) &&
-                Objects.equals(getZipCode(), address.getZipCode()) &&
-                Objects.equals(getState(), address.getState());
+        return doorNumber == address.doorNumber && floorNumber == address.floorNumber && streetAddress.equals(address.streetAddress) && zipCode.equals(address.zipCode) && state.equals(address.state) && district.equals(address.district) && city.equals(address.city);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(getStreetAddress(), getDoorNumber(), getFloorNumber(), getZipCode(), getState(), getCity(), getDistrict());
+        return Objects.hash(streetAddress, doorNumber, floorNumber, zipCode, state, district, city);
     }
+
     /**
      * Textual representation of an instance of Address
      */
