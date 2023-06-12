@@ -5,45 +5,80 @@ skinparam shadowing false
 
 'left to right direction
 
+skinparam classAttributeIconSize 0
+
 hide circle
 hide methods
 
-title US013 - Domain Model
+'title Domain Model
 
-class Store{
-designation
-phoneNumber
-emailAddress
-ID
+'class Platform {
+'  -description
+'}
+
+class EmailResponse {
+    emailTo
+    emailFrom
+    emailSubject
+    emailBody
 }
 
-class Agent{
-name
-phoneNumber
-emailAddress
+class Agent {
+    name
+    phoneNumber
+    emailAddress
+    taxNumber
+    passportCardNumber
 }
 
-class StoreManager{
-assignedStore
+
+'class Address {
+'      streetAddress
+'      city
+'      district
+'      state
+'      ZipCode
+'}
+
+class Client {
+      name
+      phoneNumber
+      emailAddress
+      taxNumber
+      passportCardNumber
 }
 
-class Employee{
-name
-emailAddress
-phoneNumber
+class Property {
+       type of property
+       area
+       distance from center
+       price
+       photos
+       state
+       propertyCode
+
 }
 
-class NetworkManager{
-name
-emailAddress
-phoneNumber
+class BookingRequest {
+    visitDate
+
 }
 
-StoreManager "1" -- "1" Store : manages >"
-Store "1" -- "*" Agent : employs >
-StoreManager -- Employee : is >
-Agent -- Employee : is >
-NetworkManager -- Employee : is >
-NetworkManager -- "*" Agent : lists >
+class Address {
+      streetAddress
+      city
+      district
+      state
+      ZipCode
+}
+
+Agent -- Client: Informs >
+(Agent, Client) -- EmailResponse: making use of
+
+Property "1" -- "*" BookingRequest: has >
+EmailResponse "1" -- "1" BookingRequest: about >
+Agent "1" -- BookingRequest: decides >
+BookingRequest "*" -- "1" Client: makes <
+Address "1" -- "1" Property: has >
 
 @enduml

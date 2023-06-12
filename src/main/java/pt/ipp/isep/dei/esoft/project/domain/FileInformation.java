@@ -84,7 +84,7 @@ public class FileInformation {
                 String propertySunExposure = contents[PROPERTY_SUN_EXPOSURE_INDEX];
                 int propertySaleRentPrice = parseInt(contents[PROPERTY_REQUESTED_PRICE_INDEX].replace("NA","-1"));
                 int propertySaleRentPriceUSD = parseInt(contents[PROPERTY_REQUESTED_PRICE_USD_INDEX].replace("NA","-1"));
-                int comission = parseInt(contents[COMMISSION_INDEX].replace("NA","-1"));
+                int commission = parseInt(contents[COMMISSION_INDEX].replace("NA","-1"));
                 int contractDurationInMonths = parseInt(contents[CONTRACT_DURATION_INDEX].replace("NA","0"));
                 String propertyAnnouncementDate = contents[PROPERTY_DATE_ANNOUNCE_REQUEST_INDEX];
                 String propertyDateSale = contents[PROPERTY_DATE_OF_SALE_INDEX];

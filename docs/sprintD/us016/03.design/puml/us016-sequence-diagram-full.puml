@@ -6,97 +6,149 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "System Administrator" as ADM
-participant ":ShowLegacyDataUI" as UI
-participant ":ShowLegacyDataController" as CTRL
-participant ":Repositories" as Repositories
-participant "repositories\n:Repositories" as repositories
-participant ":LegacyDataRepository" as legacyData
-participant ":agency" as agency
-participant ":Announcement" as Announcement
+actor "Organization Employee" as ADM
+participant "BookingRequestUI" as UI
+participant ":BookingRequestController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "bookingRequestRepository:\nBookingRequestRepository" as BookingRequestRepository
+participant "booking:\nBooking" as Booking
+participant "bookingRepository:\nBookingRepository" as BookingRepository
 
-    activate ADM
+activate ADM
 
-        ADM --> UI : Asks to show LegacyDataFiles List
+        ADM -> UI : Asks to see the list of all booking requests
 
         activate UI
 
-        UI --> CTRL : Asks to show LegacyDataFiles List
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
 
-        activate CTRL
-
-        CTRL --> Repositories : getInstance
-
-
-        activate Repositories
-
-           Repositories --> CTRL : repositories
-
-           deactivate Repositories
-
-           CTRL --> repositories : show LegacyDataRepository
-
-           activate repositories
-
-           repositories --> CTRL : LegacyDataRepository
-
-           deactivate repositories
-
-           CTRL --> legacyData : getLegacyDataList
-           activate legacyData
-
-           legacyData --> CTRL : LegacyDataList
-
-           deactivate legacyData
-
-           CTRL --> UI : LegacyDataList
-
-           deactivate CTRL
-
-           UI --> ADM : LegacyDataList
-
-deactivate UI
-
-
-ADM --> UI : Shows selected LegacyData
-        activate UI
-
-          loop  while (LegacyData.hasNextLine())
-
-
-
-            UI --> UI : create Request
-
-            UI --> CTRL : create Announcement
-
+            UI -> CTRL : getBookingRequest()
             activate CTRL
 
-            CTRL --> Announcement** : create
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
 
-            activate Announcement
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
 
-            Announcement --> CTRL : Announcement
+                CTRL -> PLAT : getBookingRequestRepository()
+                activate PLAT
 
-            deactivate Announcement
+                    PLAT --> CTRL: bookingRequestRepository
+                deactivate PLAT
 
-            CTRL --> agency : addAnnouncement
+                CTRL -> BookingRequest : getBookingRequest()
+                activate BookingRequest
 
-            activate agency
+                   BookingRequest --> CTRL : bookingRequestList
+                deactivate BookingRequest
 
-
+                CTRL --> UI : bookingRequestList
             deactivate CTRL
-            deactivate agency
 
-end loop
-
-        UI --> ADM : Show operation result
+            UI --> ADM : Shows the list off all booking requests and \n and asks to sleect one
         deactivate UI
 
+    ADM -> UI : Selects a booking request and asks to select the option to respond
+    activate UI
+
+        UI --> ADM : Asks to accept or decline the booking request
+    deactivate UI
+
+    ADM -> UI : Accepts or declines
+    activate UI
+
+    UI --> ADM : Informs about the success of the operation
+
+    deactivate UI
+
+    alt if the booking request was rejected
 
 
-    deactivate ADM
 
 
+   ADM -> UI : Rejected booking request
+
+   activate UI
+
+   UI -> CTRL : sendEmailBookingRequestRejected(requestId)
+
+
+
+   activate CTRL
+
+   CTRL -> bookingRequestRepository: getBookingRequestById(requestId)
+
+   activate bookingRequestRepository
+
+   bookingRequestRepository --> CTRL : bookingRequest
+
+   deactivate bookingRequestRepository
+
+
+   CTRL -> EmailService : sendEmailBookingRequestRejected(bookingRequest)
+
+
+   activate EmailService
+
+   EmailService --> CTRL :
+
+
+
+   deactivate EmailService
+
+    else if the booking request was accepted
+
+    ADM -> UI : Accepted booking request
+
+
+
+       UI -> CTRL : sendEmailBookingRequestAccepted(requestId)
+
+      CTRL -> bookingRequestRepository: getBookingRequestById(requestId)
+
+       activate bookingRequestRepository
+
+       bookingRequestRepository --> CTRL : bookingRequest
+
+       deactivate bookingRequestRepository
+
+
+
+
+
+    CTRL -> EmailService : sendEmailBookingRequestAccepted(bookingRequest)
+
+    activate EmailService
+
+    EmailService --> CTRL :
+
+    deactivate EmailService
+
+    CTRL -> Booking** : create(bookingRequest)
+
+    CTRL -> BookingRepository : save(booking)
+
+    activate BookingRepository
+
+    BookingRepository --> CTRL :
+
+    deactivate BookingRepository
+
+
+
+    end
+
+    CTRL --> UI:
+
+    deactivate CTRL
+
+    UI --> ADM : Informs about the success of the operation
+
+    deactivate UI
 
 
 @enduml
