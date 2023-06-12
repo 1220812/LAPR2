@@ -1,4 +1,4 @@
-# US 013 - For an unregistered user to display listed properties 
+# US 017 - As a Network Manager I want to list all the deals made
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
