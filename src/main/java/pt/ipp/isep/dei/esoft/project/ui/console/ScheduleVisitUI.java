@@ -14,26 +14,29 @@ import java.util.List;
 
 public class ScheduleVisitUI implements Runnable {
     Announcement announcement = null;
-    int day = 0;
-    int month = 0;
-    int year = 0;
-    int startHour = 0;
-    int startMinute = 0;
+    private int day = 0;
+    private int month = 0;
+    private int year = 0;
+    private int startHour = 0;
+    private int startMinute = 0;
 
-    int endHour = 0;
-    int endMinute = 0;
-    String name = null;
-    int phone = 0;
+    private int endHour = 0;
+    private int endMinute = 0;
+    private String name = null;
+    private int phone = 0;
 
 
-    LocalDateTime newVisitEndTime;
-    LocalDateTime newVisitStartTime;
+    private LocalDateTime newVisitEndTime;
+    private  LocalDateTime newVisitStartTime;
 
 
     ScheduleVisitController controller = new ScheduleVisitController();
 
 
     public void run() {
+        List<Message> MessageList = MessageRepository.getMessageList();
+
+
         System.out.println("Schedule a visit:");
 
 
@@ -75,21 +78,21 @@ public class ScheduleVisitUI implements Runnable {
                 year = Utils.readIntegerFromConsole(")\nInsert new year");
             }
 
-            startHour = Utils.readIntegerFromConsole("Starting hour:");
+            startHour = Utils.readIntegerFromConsole("Starting hour (format: 0-23):");
             while (!controller.checkHour(startHour)) {
                 startHour = Utils.readIntegerFromConsole("Invalid hour (format: 0-23)\nInsert new hour");
             }
 
-            startMinute = Utils.readIntegerFromConsole("Starting minute:");
+            startMinute = Utils.readIntegerFromConsole("Starting minute (format: 0-59):");
             while (!controller.checkMinutes(startMinute)) {
                 startMinute = Utils.readIntegerFromConsole("Invalid minute (format: 0-59)\nInsert new minute");
             }
-            endHour = Utils.readIntegerFromConsole("Ending hour:");
+            endHour = Utils.readIntegerFromConsole("Ending hour (format: 0-23):");
             while (!controller.checkHour(endHour)) {
                 endHour = Utils.readIntegerFromConsole("Invalid hour (format: 0-23)\nInsert new hour");
             }
 
-            endMinute = Utils.readIntegerFromConsole("Ending minute:");
+            endMinute = Utils.readIntegerFromConsole("Ending minute (format: 0-59):");
             while (!controller.checkMinutes(endMinute)) {
                 endMinute = Utils.readIntegerFromConsole("Invalid minute (format: 0-59)\nInsert new minute");
             }
@@ -141,14 +144,14 @@ public class ScheduleVisitUI implements Runnable {
 
 
 
-            List<Message> MessageList = MessageRepository.getMessageList();
+
             boolean hasOverlap = controller.checkIfValidVisit(MessageList, newVisitStartTime, newVisitEndTime);
 
             if (hasOverlap) {
                 System.out.println("There is overlapping schedule.");
             } else {
                 System.out.println("There is no overlapping of visits. The new message has been sent to an agent.");
-                System.out.println(controller.addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime).toString2());
+                System.out.println(controller.addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime).toString());
                 System.out.println("                  ");
                 System.out.println("#######successful operation#######");
                 System.out.println("                  ");
@@ -157,7 +160,7 @@ public class ScheduleVisitUI implements Runnable {
                 for (Message messageList : MessageList) {
                     if (isFirstMessage) {
                         isFirstMessage = false;
-                        continue; // Pula para a próxima iteração sem executar o restante do loop
+                        continue;
                     }
                     System.out.println("Start of visit: " + messageList.getNewVisitStartTime() + " - End of Visit: " + messageList.getNewVisitEndTime());
                 }

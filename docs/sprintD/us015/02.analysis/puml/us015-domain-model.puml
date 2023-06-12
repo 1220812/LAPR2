@@ -1,0 +1,67 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+hide circle
+hide methods
+
+title US013 - Domain Model
+
+class Client{
+name
+passportCardNumber
+emial
+taxNumber
+phoneNumber
+}
+
+class Agent{
+name
+passportCardNumber
+emial
+taxNumber
+phoneNumber
+}
+
+class VisitRequest{
+message
+date
+timeSlot
+}
+
+class Property{
+area
+distance
+price
+}
+
+class Photograph{
+URI
+}
+
+class Address{
+street
+zipCode
+city
+district
+state
+}
+
+
+Client "1" -- "*" VisitRequest : submits >
+Client "1" -- "1" Address : has >
+Agent "1" -- "1" VisitRequest : lists >
+Agent "1" -- "1" Address : has >
+VisitRequest "1" -- "1" Property : has >
+Property "1" -- "1" Photograph : has >
+Property "1" -- "1" Address : has >
+
+
+
+
+
+
+@enduml

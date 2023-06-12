@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
+import pt.ipp.isep.dei.esoft.project.repository.OwnerRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.time.LocalDate;
@@ -11,10 +12,6 @@ import java.util.List;
 public class RegisterAnnouncementController {
 
     Repositories repositories = Repositories.getInstance();
-
-    public boolean checkEmail(String email) {
-        return (User.existsEmail(email));
-    }
 
     public List<PropertyType> getPropertyType(){
         return Repositories.getInstance().getPropertyTypeRepository().getPropertyType();
@@ -65,6 +62,10 @@ public class RegisterAnnouncementController {
 
     public Announcement registerAnnouncement(Announcement announcement){
         return AnnouncementRepository.addAnnouncement(announcement);
+    }
+
+    public boolean checkOwnerExistence(String ownerEmail) {
+        return OwnerRepository.checkOwnerEmail(ownerEmail);
     }
 
 }

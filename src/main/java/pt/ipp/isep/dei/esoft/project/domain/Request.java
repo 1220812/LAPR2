@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import pt.isep.lei.esoft.auth.domain.model.Email;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Request {
@@ -34,6 +35,9 @@ public class Request {
      * Property that is being requested for sale/rent
      */
     private Property property;
+
+    private LocalDate startDate;
+   private LocalDate enDate;
 
     /**
      * Method that creates an instance of request
@@ -75,7 +79,18 @@ public class Request {
         this.requestType = requestType;
         this.store = store;
         this.price = price;
+
     }
+
+    public Request(LocalDate startDate, LocalDate enDate) {
+        this.startDate = startDate;
+        this.enDate = enDate;
+    }
+
+    public static boolean checkVisitTime(LocalDate newStartTime, LocalDate newEndTime) {
+        return newEndTime.isAfter(newStartTime);
+    }
+
 
     /**
      * Method to show the type
@@ -93,6 +108,26 @@ public class Request {
      */
     public void setRequestType(RequestType requestType) {
         this.requestType = requestType;
+    }
+
+    public void setRequestDate(LocalDate requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEnDate() {
+        return enDate;
+    }
+
+    public void setEnDate(LocalDate enDate) {
+        this.enDate = enDate;
     }
 
     /**
@@ -232,6 +267,31 @@ public class Request {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+    public static List<Request> getRequests(List<Request> RequestList, LocalDate startDate, LocalDate endDate) {
+        List<Request> filteredRequests = new ArrayList<>();
+
+        for (Request request : RequestList) {
+            LocalDate requestDate = request.getRequestDate();
+
+            if (requestDate.compareTo(startDate) >= 0 && requestDate.compareTo(endDate) <= 0) {
+                filteredRequests.add(request);
+            }
+        }
+
+        return filteredRequests;
+    }
+
+    public static boolean checkDay(int startDay) {
+        return startDay >= 1 && startDay <= 31;
+    }
+
+    public static boolean checkMonth(int startMonth) {
+        return startMonth >= 1 && startMonth <= 12;
+    }
+
+    public static boolean checkYear(int startYear) {
+        return startYear >= 0;
     }
 
     

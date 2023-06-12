@@ -1,4 +1,4 @@
-/**package pt.ipp.isep.dei.esoft.project.domain;
+package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
@@ -8,77 +8,155 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EmployeeTest {
 
     @Test
-    public void testEmployeeConstructor() {
-        Employee employee = new Employee("João Manuel", "João@example.com", 123456789, 98765432, 1234567, "123 Main St", "Store manager", "agency2", "store3", "password");
-        assertNotNull(employee);
-        assertEquals("João Manuel", employee.getName());
-        assertEquals("João@example.com", employee.getEmail());
-        assertEquals(123456789, employee.getPhoneNumber());
-        assertEquals(98765432, employee.getPassportCardNumber());
-        assertEquals(1234567, employee.getTaxNumber());
-        assertEquals("123 Main St", employee.getAddress());
-        assertEquals("Store manager", employee.getRole());
-        assertEquals("agency2", employee.getAgency());
-        assertEquals("store3", employee.getStore());
-        assertEquals("password", employee.getPass());
+    void getName() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals("John Doe", agent.getName());
     }
 
     @Test
-    public void testEmployeeDefaultConstructor() {
-        Employee employee = new Employee();
-        assertNotNull(employee);
-        assertEquals("No name", employee.getName());
-        assertEquals("No email", employee.getEmail());
-        assertEquals(0, employee.getPhoneNumber());
-        assertEquals(0, employee.getPassportCardNumber());
-        assertEquals(0, employee.getTaxNumber());
-        assertEquals("No passport", employee.getAddress());
-        assertEquals("No role", employee.getRole());
-        assertEquals("No agency", employee.getAgency());
-        assertEquals("No store", employee.getStore());
-        assertEquals("No password", employee.getPass());
+    void setName() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals("John Doe", agent.getName());
+        agent.setName("Jane Doe");
+        assertEquals("Jane Doe", agent.getName());
     }
 
     @Test
-    public void testEmployeeNewEmployeeMethod() {
-        Employee employee = Employee.newEmployee("António Carlos", "António@example.com", 987654321, 12345678, 98765, "123 Main St", "Store manager", "agency4", "store1", "password123");
-        assertNotNull(employee);
-        assertEquals("António Carlos", employee.getName());
-        assertEquals("António@example.com", employee.getEmail());
-        assertEquals(987654321, employee.getPhoneNumber());
-        assertEquals(12345678, employee.getPassportCardNumber());
-        assertEquals(98765, employee.getTaxNumber());
-        assertEquals("456 Main St", employee.getAddress());
-        assertEquals("Salesperson", employee.getRole());
-        assertEquals("agency4", employee.getAgency());
-        assertEquals("store1", employee.getStore());
-        assertEquals("password123", employee.getPass());
+    void getPhoneNumber() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals("123456789", agent.getPhoneNumber());
     }
 
     @Test
-    public void testEmployeeSetters() {
-        Employee employee = new Employee();
-        employee.setName("Carlos Monteiro");
-        employee.setEmail("Carlos@example.com");
-        employee.setPhoneNumber(123456789);
-        employee.setPassportCardNumber(98765432);
-        employee.setTaxNumber(1234567);
-        employee.setAddress("123 St");
-        employee.setRole("System Administrator");
-        employee.setAgency("agency4");
-        employee.setStore("store3");
-        employee.setPass("password");
-        assertNotNull(employee);
-        assertEquals("Carlos Monteiro", employee.getName());
-        assertEquals("Carlos@example.com", employee.getEmail());
-        assertEquals(123456789, employee.getPhoneNumber());
-        assertEquals(98765432, employee.getPassportCardNumber());
-        assertEquals(1234567, employee.getTaxNumber());
-        assertEquals("123 St", employee.getAddress());
-        assertEquals("System Administrator", employee.getRole());
-        assertEquals("agency4", employee.getAgency());
-        assertEquals("store3", employee.getStore());
-        assertEquals("password", employee.getPass());
+    void setPhoneNumber() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals("123456789", agent.getPhoneNumber());
+        agent.setPhoneNumber("987654321");
+        assertEquals("987654321", agent.getPhoneNumber());
     }
 
-}*/
+    @Test
+    void getPassportCardNumber() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(new PassportCardNumber("12345678"), agent.getPassportCardNumber());
+    }
+
+    @Test
+    void setPassportCardNumber() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(new PassportCardNumber("12345678"), agent.getPassportCardNumber());
+        agent.setPassportCardNumber(new PassportCardNumber("87654321"));
+        assertEquals(new PassportCardNumber("87654321"), agent.getPassportCardNumber());
+    }
+
+    @Test
+    void getTaxNumber() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(new TaxNumber("123456789"), agent.getTaxNumber());
+    }
+
+    @Test
+    void setTaxNumber() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(new TaxNumber("123456789"), agent.getTaxNumber());
+        agent.setTaxNumber(new TaxNumber("987654321"));
+        assertEquals(new TaxNumber("987654321"), agent.getTaxNumber());
+    }
+
+    @Test
+    void getRole() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(new Role("Agent"), agent.getRole());
+    }
+
+    @Test
+    void setRole() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(new Role("Agent"), agent.getRole());
+        agent.setRole(new Role("Manager"));
+        assertEquals(new Role("Manager"), agent.getRole());
+    }
+
+    @Test
+    void getAgency() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111"), agent.getAgency());
+    }
+
+    @Test
+    void setAgency() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111"), agent.getAgency());
+        agent.setAgency(new Agency(2, "Agency 2", address, "test@example.com", "222-222-222"));
+        assertEquals(new Agency(2, "Agency 2", address, "test@example.com", "222-222-222"), agent.getAgency());
+    }
+
+    @Test
+    void getStore() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals( new Store("Store1", 1), agent.getStore());
+    }
+
+    @Test
+    void setStore() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals( new Store("Store1", 1), agent.getStore());
+        agent.setStore(new Store("Store2", 2));
+        assertEquals(new Store("Store2", 2), agent.getStore());
+    }
+
+    @Test
+    void getPass() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals( "password", agent.getPass());
+    }
+
+    @Test
+    void setPass() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals( "password", agent.getPass());
+        agent.setPass("newPassword");
+        assertEquals("newPassword", agent.getPass());
+    }
+
+    @Test
+    void testHashCode() {
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        Agency agency1 = new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111");
+        Employee agent = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        Employee agent2 = new Employee("John Doe", "john@example.com", "123456789", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), agency1, new Store("Store1", 1), "password");
+        assertEquals(agent.hashCode(), agent2.hashCode());
+    }
+}

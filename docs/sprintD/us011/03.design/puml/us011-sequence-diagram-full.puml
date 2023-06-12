@@ -11,9 +11,8 @@ participant ":OrderDecisionUI" as UI
 participant ":OrderDecisionController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
+participant "announcementRepository\n:AnnouncementRepository" as A
 participant "orderRepository:\nOrderRepository" as OrderRepository
-participant "order: Order" as Order
-participant "propertyOrder: Order" as POrder
 
 activate ADM
 
@@ -21,6 +20,37 @@ activate ADM
     activate UI
 
     UI -> CTRL** : create
+
+activate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+        RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+
+        CTRL -> A : getAnnouncementRepository()
+        activate A
+
+        A--> CTRL: announcementRepository
+        deactivate A
+
+    UI -> CTRL:  getAnnouncementListSortedByDate()
+
+        CTRL -> A : getAnnouncementsList()
+        activate A
+
+        A --> CTRL : announcementsList()
+        deactivate A
+
+    CTRL --> UI : announcementsList()
+    deactivate CTRL
+
+    UI --> ADM : shows the available properties and asks to select one
+
+    ADM -> UI : selects a property
+
+    UI -> CTRL : getOrderListSortedByPrice(selectedProperty)
 
     activate CTRL
 
@@ -36,15 +66,14 @@ activate ADM
         PLAT --> CTRL: orderRepository
         deactivate PLAT
 
-    UI -> CTRL: getOrderList()
 
-        CTRL -> OrderRepository : getOrders()
+        CTRL -> OrderRepository : getOrdersList()
         activate OrderRepository
 
-        OrderRepository --> CTRL : orders
+        OrderRepository --> CTRL : ordersList
         deactivate OrderRepository
 
-    CTRL --> UI : orders
+    CTRL --> UI : ordersList
     deactivate CTRL
 
 alt if that exists purchase orders
@@ -59,103 +88,59 @@ alt if that exists purchase orders
     ADM -> UI : makes the decision (accept or decline)
     activate UI
 
-    UI -> CTRL : makeDecision(propertyCode, orderNumber, decision)
+    alt accepts the order
+
+    UI -> CTRL : acceptPurchaseOrder(order)
 
     activate CTRL
 
-    CTRL -> OrderRepository : getOrderByPropertyCodeOrderNumber(propertyCode, orderNumber)
+    CTRL -> PLAT : getOrdersByAnnouncement(announcement)
+
+    activate PLAT
+
+    PLAT --> CTRL : ordersList
+
+    deactivate PLAT
+
+    CTRL -> CTRL: declineOtherOrders(acceptedOrder)
+
+    CTRL -> EmailService: sendMessage(clientEmail, message)
+
+    activate EmailService
+
+    EmailService --> CTRL : operation success
+    deactivate EmailService
+
+    CTRL --> UI : operation success
+
+    deactivate CTRL
+
+    else declines the order
+
+    UI -> CTRL : declinePurchaseOrder(order)
+    activate CTRL
+
+    CTRL -> OrderRepository: getOrdersByAnnouncement(announcement)
 
     activate OrderRepository
 
-    OrderRepository --> CTRL : return order
+    OrderRepository --> CTRL : ordersList
 
     deactivate OrderRepository
 
-    CTRL -> Order: makeDecision(decision)
+    CTRL -> EmailService: sendMessage(clientEmail, message)
 
-    activate Order
+    activate EmailService
 
-    Order --> CTRL : return decision
+    EmailService --> CTRL: operation success
 
-    deactivate Order
+    deactivate EmailService
 
-    CTRL -> Order : getOwnerName()
+    CTRL --> UI : operation success
 
-    activate Order
-
-    Order --> CTRL : clientName
-
-    deactivate Order
-
-    CTRL -> Order: getOrderNumber()
-
-        activate Order
-
-        Order --> CTRL : orderNumber
-
-    deactivate Order
-
-    alt rejects order
-
-        CTRL -> EmailService: sendRejectedOrderEmail(clientName, orderNumber)
-
-        activate EmailService
-
-        CTRL <-- EmailService
-
-        deactivate EmailService
-
-    else accepts order
-
-        CTRL -> EmailService: sendAcceptedOrderEmail(clientName, orderNumber)
-
-        activate EmailService
-
-        CTRL <-- EmailService
-
-        deactivate EmailService
-
-        CTRL -> OrderRepository : getUndecidedPropertyOrders(propertyCode)
-
-        activate OrderRepository
-
-        OrderRepository -> CTRL : propertyOrders
-
-        deactivate OrderRepository
-
-        CTRL --> CTRL : sortPropertyOrders
-
-        loop propertyOrder in propertyOrders
-
-        CTRL -> POrder: reject()
-activate POrder
-
-        POrder --> CTRL
-
-        deactivate POrder
-
-        CTRL -> POrder : getOwnerName()
-
-        activate POrder
-
-        POrder --> CTRL : clientName
-
-        deactivate POrder
-
-        CTRL -> EmailService: sendRejectedOrderEmail(clientName, orderNumber)
-
-        activate EmailService
-
-        CTRL <-- EmailService
-
-        deactivate EmailService
-
-        end
+    deactivate CTRL
 
     end
-
-    CTRL --> UI
-    deactivate CTRL
 
     UI --> ADM : operation success
 

@@ -71,11 +71,11 @@ activate NM
 
         activate UI
 
-        UI --> Controller : sortListByBubbleSort(deals, orderOfSorting)
+        UI --> Controller : sortListByBubbleSort(deals, sortingMethod, orderOfSorting)
 
         activate Controller
 
-        Controller -> OR : sortListByBubbleSort(deals, orderOfSorting)
+        Controller -> OR : sortListByBubbleSort(deals, sortingMethod ,orderOfSorting)
 
         activate OR
 
@@ -117,11 +117,11 @@ activate NM
 
      else Insertion Sort method is selected
 
-             UI --> Controller : sortListByInsertionSort(deals, orderOfSorting)
+             UI --> Controller : sortListByInsertionSort(deals, sortingMethod, orderOfSorting)
 
              activate Controller
 
-             Controller -> OR : sortListByInsertionSort(deals, orderOfSorting)
+             Controller -> OR : sortListByInsertionSort(deals, sortingMethod, orderOfSorting)
 
              activate OR
 

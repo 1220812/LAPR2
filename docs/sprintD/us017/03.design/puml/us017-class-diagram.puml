@@ -19,7 +19,7 @@ class ListDealsController{
 class Repositories{
 -Repositories
 +getInstance() : Repositories
-getOrdersRepository()
+getOrdersRepository() : OrderRepository
 }
 
 class OrderRepository{
@@ -44,6 +44,26 @@ class Order{
 +getOrderNumber()
 }
 
+class Announcement{
+    - LocalDate creationDate
+    - int announcementID
+    - int Price
+    + getPrice()
+    + setPrice(price)
+    + getCreationDate()
+    + setCreationDate(creationDate)
+    + getAnnouncementID()
+    + getProperty()
+}
+
+class Property{
+-double area
+-double distanceFromCityCenter
+-double price
++createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList )
++getArea()
+}
+
 ListDealsUI -.-> ListDealsController
 
 ListDealsController -.-> Repositories
@@ -55,5 +75,9 @@ Repositories --> "1" OrderRepository : dealsRepository
 ListDealsController -.-> OrderRepository
 
 OrderRepository --> "1..*" Order : orders
+
+Order --> "1" Announcement : announcement
+
+Announcement --> "1" Property : property
 
 @enduml

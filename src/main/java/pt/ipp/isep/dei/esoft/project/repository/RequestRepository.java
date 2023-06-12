@@ -18,7 +18,7 @@ public class RequestRepository {
     /**
      * Get property types
      */
-    public List<Request> getRequests() {
+    public static List<Request> getRequests() {
         return List.copyOf(requestList);
     }
     public List<Request> add(Request request) {
@@ -70,7 +70,7 @@ public class RequestRepository {
     public List<Request> getRequestAssignedList(Agent agent) {
         List<Request> assignedList = new ArrayList<>();
         for (Request request : this.requestList) {
-            if (request.getAgent().getEmailAddress().equals(agent.getEmailAddress())) {
+            if (request.getAgent().getEmailAddress().equalsIgnoreCase(agent.getEmailAddress())) {
                 assignedList.add(request);
             }
         }

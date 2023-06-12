@@ -43,7 +43,7 @@ public class AnnouncementRepository {
         return isValid;
     }
 
-    public  List<Announcement> getAnnuncementsList(){
+    public  List<Announcement> getAnnouncementsList(){
         return List.copyOf(this.announcementsList);
     }
 

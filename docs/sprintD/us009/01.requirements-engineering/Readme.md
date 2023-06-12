@@ -113,9 +113,13 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 
 * Typed Data:
   
-  * Preferred date for the visit
-  * Time slot of the visit
-  * Message
+  * Day
+  * Month
+  * Year
+  * StartMinute
+  * StarHour
+  * EndMinte
+  * EndHour
 
 
 * Selected data:
@@ -125,7 +129,7 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 
 * List of properties sorted from the most recent entries to the oldest.
 * (In)Success of the operation
-* Show message: "Want to try more?"
+* Show message: "Want to try more? (yes/no)"
 
 
 ### 1.6. System Sequence Diagram (SSD)

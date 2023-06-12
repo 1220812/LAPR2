@@ -13,30 +13,43 @@ participant ":System" as System
 activate Customer
 
     Customer -> System : asks to schedule a visit to a property.
-
     activate System
 
-    loop while date and time slot do not overlap each other
+    System --> Customer : Request data (name and phone number of Client)
+    deactivate System
+
+    Customer -> System : Input request data
+    activate System
+
+    loop while Client wants to make a new schedule request
 
     System --> Customer : shows list of available properties (sorted \nfrom the most recent entries to the oldest).
 
     deactivate System
 
-    Customer -> System : selects property
+    Customer -> System : selects property.
     activate System
 
-    System --> Customer : request data: preferred date, time slot (from x hour to y hour) for the property visit and message
+    System --> Customer : request data: date, time slot (newVisitStartDate and newVisitEndDate) for the property visit.
 
     deactivate System
 
-    Customer -> System : Type request data (date, time slot and message)
+    Customer -> System : Type request data (date, time slot)
 
     activate System
+
+    alt if schedule is available
+       System --> Customer : Informs operation sucess
+    deactivate System
+    end
+    alt if schedule isn´t available
+    System --> Customer : Informs overlapping schedule
+    end
 
     end
 
-            System --> Customer : Informs operation sucess
-    deactivate System
+
+
 
 
 

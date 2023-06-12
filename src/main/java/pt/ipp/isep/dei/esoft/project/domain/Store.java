@@ -101,18 +101,9 @@ public class Store {
     public String toString() {
         return designation;
     }
-    public String toString2(){
-        return "Store{" +
-                "designation='" + designation + '\'' +
-                ", address=" + address +
-                ", phoneNumber=" + phoneNumber +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", ID=" + ID +
-                '}';
-    }
 
     @Override
-    public Store clone() throws CloneNotSupportedException {
+    public Store clone() {
         return new Store (this.designation, this.address, this.phoneNumber, this.emailAddress, this.ID);
     }
 
