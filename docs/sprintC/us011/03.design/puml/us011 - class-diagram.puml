@@ -3,65 +3,87 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-
-class OrderDecisionUI {
-}
-
-class Agent{
-    -String name
-    -String phoneNumber
-    -String emailAddress
-    +requestsToSeeProperties()
-    +makeDecision(propertyCode, orderNumber, decision)
-}
-
-class OrderDecisionController {
-    -repositories: Repositories
-    -orderRepository: OrderRepository
-
-    +create()
-    +getOrderList()
-    +getOrderRepository()
-    +getOrderByPropertyCodeOrderNumber(propertyCode, orderNumber)
-    +makeDecision(propertyCode, orderNumber, decision)
-    +getUndecidedPropertyOrders(propertyCode)
-}
-
-class Repositories {
-    -Repositories()
-    +getInstance(): Repositories
-    +getOrderRepository(): OrderRepository
-}
+title US011 - Class Diagram
 
 class OrderRepository {
-    +getOrders(): List<Order>
-    +getOrderByPropertyCodeOrderNumber(propertyCode, orderNumber): Order
-    +getUndecidedPropertyOrders(propertyCode): List<PropertyOrder>
+    - List<Order> order
+    + addNewOrder(order)
+    + validateOrder(announcement, orderPrice)
+    + valid(order)
+    + getOrders()
+    + getOrdersByAnnouncement(announcement)
+    + add(order)
 }
 
 class Order {
-    -String ownerName
-    -int orderNumber
-    -String decision
-    +makeDecision(decision)
-    +getOwnerName():
-    +getOrderNumber():
+    - status
+    - double orderPrice
+    - String email
+    - int orderID
+    + getAnnouncement()
+    + setAnnouncement(announcement)
+    + getOrderPrice()
+    + setOrderPrice(orderPrice)
+    + getEmail()
+    + setEmail(email)
+    + getStatus()
+    + setStatus(status)
+    + getOrderID()
+}
+
+class Announcement {
+    - LocalDate creationDate
+    - int announcementID
+    + getPrice()
+    + setPrice(price)
+    + getCreationDate()
+    + setCreationDate(creationDate)
+    + getAnnouncementID()
+}
+
+class OrderDecisionController {
+    - orderRepository: OrderRepository
+    - announcementRepository: AnnouncementRepository
+    - emailService: EmailService
+    + getAnnouncementListSortedByDate(): List<Announcement>
+    + getOrderListSortedByPrice(orderList: List<Order>): List<Order>
+    + getOrdersByAnnouncement(announcement: Announcement, orders: List<Order>): List<Order>
+    + acceptPurchaseOrder(order: Order): void
+    + declinePurchaseOrder(order: Order): void
+    + getAllOrders(): List<Order>
+    - declineOtherOrders(acceptedOrder: Order): void
+}
+
+class AnnouncementRepository {
+    - announcementsList: List<Announcement>
+    + addNewAnnouncement(announcement: Announcement): void
+    + removeAnnouncement(announcement: Announcement): void
+    + getAnnouncementsList(): List<Announcement>
+    + getAnnouncementByID(announcementID: int): Announcement
 }
 
 class EmailService {
-    +sendRejectedOrderEmail(clientName, orderNumber)
-    +sendAcceptedOrderEmail(clientName, orderNumber)
+    + sendMessage(email: String, message: String): void
 }
 
-OrderDecisionUI -.-> OrderDecisionController
+class Repositories{
+   - Repositories
+   +getInstance() : Repositories
+   +getOrderRepository() : OrderRepository
+   +getAnnouncementRepository() : AnnouncementRepository
+}
 
+
+OrderRepository --> Order
 OrderDecisionController --> Repositories
-OrderDecisionController --> EmailService
 Repositories -> Repositories : instance
 Repositories --> "1" OrderRepository : orderRepository
-OrderRepository --> "*" Order : orders
-OrderDecisionUI -.-> Agent
+Repositories --> "1" AnnouncementRepository : announcementRepository
+AnnouncementRepository --> Announcement
+OrderDecisionUI -.-> OrderDecisionController
 
-Agent --> Order : makeDecision (accept or decline)
+OrderDecisionController --> EmailService
+
+
 
 @enduml

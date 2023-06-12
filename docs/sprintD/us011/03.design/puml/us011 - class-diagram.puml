@@ -81,6 +81,7 @@ Repositories --> "1" OrderRepository : orderRepository
 Repositories --> "1" AnnouncementRepository : announcementRepository
 AnnouncementRepository --> Announcement
 OrderDecisionUI -.-> OrderDecisionController
+
 OrderDecisionController --> EmailService
 
 
