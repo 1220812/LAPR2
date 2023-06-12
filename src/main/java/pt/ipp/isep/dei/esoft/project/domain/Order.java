@@ -153,4 +153,10 @@ public class Order {
                 "orderID = " + orderID +
                 ", orderPrice = " + orderPrice;
     }
+    public  String toStringDeals(){
+        return "Order : " + "\n" +
+                "orderID = " + orderID +
+                ", orderPrice = " + orderPrice +
+                ", property area = " + announcement.getProperty().getArea();
+    }
 }

@@ -264,6 +264,7 @@ public class Bootstrap implements Runnable {
         PropertyType p3 = new PropertyType("House");
         Property property1 = new Property(500, 5, address1, p1,photo);
         Property property2 = new Property(345, 12, address2, p2,photo);
+        Property property = new Property(400, 8, address2, p3,photo);
         Store store1 = new Store("Company", 1);
         Store store2 = new Store("Galo", 2);
         Agency agency1 = new Agency(1, "agency1",address1,"agency1@this.app","123456789");
@@ -277,15 +278,25 @@ public class Bootstrap implements Runnable {
         Announcement announcement1 = new Announcement(property1, requestDate1, "per", 5, requestType1,agent1,200000,owner1,store1);
         Announcement announcement2 =new Announcement(property2,requestDate2,"per", 5, requestType2, agent2, 300000,owner2,store2);
         Announcement announcement3 =new Announcement(property2,requestDate1,"per", 5, requestType2, agent2,2450000,owner3,store2);
+        Announcement announcement =new Announcement(property,requestDate1,"per", 5, requestType2, agent2,2350000,owner3,store2);
 
         Order order1 = new Order(announcement1, 123000, agent1.getEmailAddress());
         Order order3 = new Order(announcement1, 124000,agent1.getEmailAddress());
         Order order = new Order(announcement2, 124000,agent2.getEmailAddress());
         Order order2 = new Order(announcement2, 100000,agent2.getEmailAddress());
+        Order order4 = new Order(announcement1, 100000,agent2.getEmailAddress());
+        Order order5 = new Order(announcement3, 100000,agent2.getEmailAddress());
+        Order order6 = new Order(announcement, 100000,agent2.getEmailAddress());
+        order4.setStatus(Status.ACCEPTED);
+        order5.setStatus(Status.ACCEPTED);
+        order6.setStatus(Status.ACCEPTED);
         orderRepository.add(order1);
         orderRepository.add(order2);
         orderRepository.add(order3);
         orderRepository.add(order);
+        orderRepository.add(order4);
+        orderRepository.add(order5);
+        orderRepository.add(order6);
     }
     private void addMessage(){
         MessageRepository messageRepository =Repositories.getInstance().getMessageRepository();
