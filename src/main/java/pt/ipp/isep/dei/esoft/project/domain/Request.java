@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -86,18 +87,8 @@ public class Request {
         this.enDate = enDate;
     }
 
-    public static List<Request> getRequests(List<Request> RequestList, LocalDate startDate, LocalDate endDate) {
-        List<Request> filteredRequests = new ArrayList<>();
-
-        for (Request request : RequestList) {
-            LocalDate requestDate = request.getRequestDate();
-
-            if (requestDate.compareTo(startDate) >= 0 && requestDate.compareTo(endDate) <= 0) {
-                filteredRequests.add(request);
-            }
-        }
-
-        return filteredRequests;
+    public static boolean checkVisitTime(LocalDate newStartTime, LocalDate newEndTime) {
+        return newEndTime.isAfter(newStartTime);
     }
 
 
@@ -276,6 +267,31 @@ public class Request {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+    public static List<Request> getRequests(List<Request> RequestList, LocalDate startDate, LocalDate endDate) {
+        List<Request> filteredRequests = new ArrayList<>();
+
+        for (Request request : RequestList) {
+            LocalDate requestDate = request.getRequestDate();
+
+            if (requestDate.compareTo(startDate) >= 0 && requestDate.compareTo(endDate) <= 0) {
+                filteredRequests.add(request);
+            }
+        }
+
+        return filteredRequests;
+    }
+
+    public static boolean checkDay(int startDay) {
+        return startDay >= 1 && startDay <= 31;
+    }
+
+    public static boolean checkMonth(int startMonth) {
+        return startMonth >= 1 && startMonth <= 12;
+    }
+
+    public static boolean checkYear(int startYear) {
+        return startYear >= 0;
     }
 
     
