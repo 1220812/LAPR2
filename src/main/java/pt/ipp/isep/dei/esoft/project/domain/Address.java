@@ -111,6 +111,47 @@ public class Address {
     }
 
     /**
+     * This method creates a new instance of Address with the following parameters:
+     * @param streetAddress street address
+     * @param zipCode zip code
+     * @param state state
+     * @param city city
+     * @param district district
+     */
+    public Address(String streetAddress, City city, District district,State state,String zipCode) {
+        if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || district == null || city == null) {
+            throw new IllegalArgumentException("Invalid arguments.");
+        }
+        if (zipCode.length() != ZIP_CODE_LENGTH || !StringUtils.isNumeric(zipCode)) {
+            throw new IllegalArgumentException("Invalid zip code.");
+        }
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.district = district;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+    /**
+     * This method creates a new instance of Address with the following parameters:
+     * @param streetAddress street address
+     * @param zipCode zip code
+     * @param state state
+     */
+    public Address(String streetAddress,City city,  State state,String zipCode) {
+        if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || city == null) {
+            throw new IllegalArgumentException("Invalid arguments.");
+        }
+        if (zipCode.length() != ZIP_CODE_LENGTH || !StringUtils.isNumeric(zipCode)) {
+            throw new IllegalArgumentException("Invalid zip code.");
+        }
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+    /**
      * Method to show the street
      * @return street
      */

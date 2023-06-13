@@ -61,12 +61,12 @@ public class Repositories {
 
     private  final OwnerRepository ownerRepository= new OwnerRepository();
 
-    private final PropertyRepository propertyRepository = new PropertyRepository();
     private final OrderRepository orderRepository = new OrderRepository();
     /**
      * The Get announcement repository.
      */
     public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
+    public PropertyRepository getPropertyRepository = new PropertyRepository();
 
     private Repositories() {
     }
@@ -282,7 +282,7 @@ public class Repositories {
      * @return the property repository
      */
     public PropertyRepository getPropertyRepository() {
-        return propertyRepository;
+        return getPropertyRepository;
     }
     public OrderRepository getOrderRepository() {
         return orderRepository;

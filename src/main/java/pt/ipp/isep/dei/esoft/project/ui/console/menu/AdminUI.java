@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterEmployeeUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterStoreUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.ShowLegacyDataUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class AdminUI implements Runnable {
         List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("Register a new employee", new RegisterEmployeeUI()));
         options.add(new MenuItem("Register a new store", new RegisterStoreUI()));
+        options.add(new MenuItem("Import information from a legacy system", new ShowLegacyDataUI()));
 
 
         int option = 0;

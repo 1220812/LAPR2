@@ -91,6 +91,43 @@ public class Announcement {
     }
 
     /**
+     * Method that creates an instance of Announcement with the given parameters:
+     * @param property property to announce
+     * @param date date of the announcement
+     * @param commission commission
+     * @param requestType request type
+     * @param price announced price
+     * @param owner owner of the property announced
+     * @param store store selected by the owner
+     */
+    public Announcement(Property property, LocalDate date, double commission, RequestType requestType, double price, Owner owner, Store store) {
+        if (property == null) {
+            throw new IllegalArgumentException("Property can't be null");
+        }
+        if (date == null) {
+            throw new IllegalArgumentException("Date can't be null");
+        }
+        if (requestType == null) {
+            throw new IllegalArgumentException("Request type can't be null");
+        }
+        if (owner == null) {
+            throw new IllegalArgumentException("Owner can't be null");
+        }
+        if (price <= 0) {
+            throw new IllegalArgumentException("Price can't be negative or zero");
+        }
+        if (store == null) {
+            throw new IllegalArgumentException("Store can't be null");
+        }
+        this.property = property;
+        this.date = date;
+        this.commission = commission;
+        this.requestType = requestType;
+        this.price = price;
+        this.owner = owner;
+        this.store = store;
+    }
+    /**
      * Method that shows the date of the announcement
      *
      * @return date of the announcement

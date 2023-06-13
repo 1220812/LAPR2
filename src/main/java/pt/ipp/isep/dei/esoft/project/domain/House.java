@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,6 +35,12 @@ public class House extends Residence {
      */
     public House(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning, boolean centralHeating, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, List<Photographs> photoList) {
         super(address, area, distanceFromCityCentre, propertyType, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, photoList, airConditioning, centralHeating);
+        this.existenceOfABasement = basement;
+        this.inhabitableLoft = inhabitableLoft;
+        this.sunExposure = sunExposure;
+    }
+    public House(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning, boolean centralHeating, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double finalPrice, LocalDate businessDate) {
+        super(address, area, distanceFromCityCentre, propertyType,numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, finalPrice, businessDate);
         this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;
         this.sunExposure = sunExposure;

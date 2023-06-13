@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.ShowLegacyDataController;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,15 +52,17 @@ public class ShowLegacyDataUI implements Runnable {
                     flag = true;
                 }
             } while (flag);
-            if (answer.equals("Yes")) {
+            if (answer.equalsIgnoreCase("Yes")) {
                 try {
-                   // controller.importInformationFromFile(path);
+                   controller.importInformationFromFile(path);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Trouble with the file");
                     flag = true;
                 } catch (IllegalArgumentException e) {
                     System.out.println("Invalid path or file is empty");
                     flag = true;
+                } catch (IOException | CloneNotSupportedException e) {
+                    throw new RuntimeException(e);
                 }
             } else {
                 System.out.println("Information not imported");
