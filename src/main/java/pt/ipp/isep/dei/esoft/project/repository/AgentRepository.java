@@ -32,6 +32,18 @@ public class AgentRepository {
         return List.copyOf(agentList);
     }
 
+    public Agent getAgent (){
+        Agent agent1 = null;
+        List<Agent> agents = getAgentList();
+        for (Agent agent: agents){
+            if (agent.getEmailAddress().equals(CurrentSession.getEmail())){
+                agent1 = agent;
+            }
+        }
+        return agent1;
+    }
+
+
 
     public List<Agent> add(Agent agent) throws CloneNotSupportedException {
 

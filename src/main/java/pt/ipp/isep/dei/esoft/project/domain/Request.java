@@ -110,6 +110,7 @@ public class Request {
         this.requestType = requestType;
     }
 
+
     public void setRequestDate(LocalDate requestDate) {
         this.requestDate = requestDate;
     }
@@ -294,5 +295,6 @@ public class Request {
         return startYear >= 0;
     }
 
-    
+
+
 }
