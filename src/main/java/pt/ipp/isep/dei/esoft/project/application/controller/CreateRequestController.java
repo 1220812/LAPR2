@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class CreateRequestController {
     Repositories repositories = Repositories.getInstance();
@@ -57,5 +58,9 @@ public class CreateRequestController {
     }
     public Request registerRequest(Request request) {
         return requestRepository.addRequest(request);
+    }
+
+    public List<Request> getRequests() {
+        return Repositories.getInstance().getRequestRepository().getRequests();
     }
 }
