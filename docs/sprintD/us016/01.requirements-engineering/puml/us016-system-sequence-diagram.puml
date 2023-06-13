@@ -3,20 +3,38 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title US015 - System Sequence Diagram (SSD)
+title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Agent" as AGENT
+actor "Agent" as Employee
 participant ":System" as System
 
-activate NM
+activate Employee
 
-    NM -> System : asks to display list of all employees
+    Employee -> System : Asks to see the list of all booking requests
 
     activate System
 
-        System --> NM : shows list of all employess
+    System --> Employee : Shows the list off all booking requests and asks to select one
+
+    deactivate System
+
+    Employee -> System : Selects a booking request and asks to select the option to respond\n to the user that scheduled the visit.
+
+    activate System
+
+    System --> Employee : Shows the booking request details
+
+    deactivate System
+
+    Employee -> System : Selects the option to respond to the user that scheduled the visit.
+    activate System
+
+    System --> System : Sends the response message by email to the user that scheduled the visit
+
+    System --> Employee : displays operation success
+
     deactivate System
 
 @enduml

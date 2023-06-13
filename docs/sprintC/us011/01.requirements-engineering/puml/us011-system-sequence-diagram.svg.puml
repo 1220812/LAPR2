@@ -12,7 +12,15 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : requests to see properties that are available for purchase
+    Employee -> System : requests to see the properties that are available for purchase
+
+    activate System
+
+    System --> Employee : shows the available properties and asks to select one
+
+    deactivate System
+
+    Employee -> System : selects a property
 
         activate System
 

@@ -23,7 +23,7 @@ class ShowLegacyDataController{
 class AgencyRepository{
 -ArrayList<Agency> listOfAgency;
 +AgencyRepository();
-+getListOfAnnoucement();
++getListOfAnnouncement();
 +addAgency(Agency agency);
 }
 
