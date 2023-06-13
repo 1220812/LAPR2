@@ -69,6 +69,7 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_NETWORK_MANAGER, AuthenticationController.ROLE_NETWORK_MANAGER);
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin", AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserWithRole("Agent", "agent@this.app", "agent", AuthenticationController.ROLE_AGENT);
+        authenticationRepository.addUserWithRole("Agent", "pedro@gmail.com", "agent", AuthenticationController.ROLE_AGENT);
         authenticationRepository.addUserWithRole("Owner", "owner@this.app", "owner", AuthenticationController.ROLE_OWNER);
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd", AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserWithRole("Client", "client@this.app", "client", AuthenticationController.ROLE_CLIENT);
@@ -364,8 +365,8 @@ public class Bootstrap implements Runnable {
         Request request1 = new Request(property1, requestDate1, agent1,owner1,1000,requestType1,store1);
         Request request2 = new Request(property2, requestDate2, agent2,owner2,2000,requestType2,store2);
         Request request3 = new Request(property3, requestDate3, agent2,owner3,3000,requestType3,store3);
-        requestRepository.addRequest(request1);
         requestRepository.addRequest(request2);
+        requestRepository.addRequest(request1);
         requestRepository.addRequest(request3);
     }
 
