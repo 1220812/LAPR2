@@ -1,8 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.SortingMethods.BubbleSort;
+import pt.ipp.isep.dei.esoft.project.domain.SortingMethods.MergeSort;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class RequestRepository {
@@ -21,6 +28,7 @@ public class RequestRepository {
     public static List<Request> getRequests() {
         return List.copyOf(requestList);
     }
+
     public List<Request> add(Request request) {
 
         requestList.add(request);
@@ -38,13 +46,14 @@ public class RequestRepository {
         }
         return requestList;
     }
-    public static Request addRequest(Request request){
-        if(validateRequest(request))
+
+    public static Request addRequest(Request request) {
+        if (validateRequest(request))
             requestList.add(request);
         return request;
     }
 
-    public Request removeRequest(Request request){
+    public Request removeRequest(Request request) {
         requestList.remove(request);
         return request;
     }
@@ -77,9 +86,65 @@ public class RequestRepository {
         return assignedList;
     }
 
-    public List<Request> getRequestsSorted() {
-        requestList.sort(Comparator.comparing(Request::getRequestDate));
-        return requestList;
+    List<Request> finalList = new ArrayList<>();
+
+    public List<Request> getRequestsSorted(List<Request> requestList) throws IOException {
+        Properties properties = System.getProperties();
+        properties.load(new FileReader("src/main/resources/sortingMethods.properties"));
+        String algorithm = properties.getProperty("sorting.algorithm");
+
+        switch (algorithm.toUpperCase()) {
+            case "MERGESORT":
+                MergeSort merge = new MergeSort();
+                //finalList = merge.merge(requestList);
+
+
+
+                break;
+            case "SORTINGBUBBLES":
+                BubbleSort bubbleSort = new BubbleSort();
+                finalList = bubbleSort.sortByDate(requestList);
+                break;
+            default:
+                System.out.println("Warning: invalid");
+//                finalList = merge.merge(requestList);
+        }
+        return finalList;
     }
 
+    public List<Request> getAgentList(Agent agent) {
+        List<Request> newList = new ArrayList<>();
+        for (int i = 0 ; i < requestList.size(); i++){
+            if (requestList.get(i).getAgent().equals(agent)){
+                newList.add(requestList.get(i));
+            }
+        }
+        return newList;
+    }
+
+    public List<Request> getSortedVisitRequestList(List<Request> list, LocalDate begin, LocalDate end) {
+        List<Request> newList = new ArrayList<>();
+        ZoneId zId = ZoneId.systemDefault();
+
+        for (int i = 0; i < list.size(); i++){
+            Date beginDate = Date.from(begin.atStartOfDay(zId).toInstant());
+            Date endDate = Date.from(end.atStartOfDay(zId).toInstant());
+
+            String requestDate = list.get(i).getRequestDate().toString();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date dateRequest = null;
+
+            try {
+                dateRequest = sdf.parse(requestDate);
+            } catch (ParseException e) {
+                throw new RuntimeException("The date format in the system is wrong!");
+            }
+
+            if(dateRequest.after(beginDate) && dateRequest.before(endDate)){
+                newList.add(list.get(i));
+            }
+
+        }
+        return newList;
+    }
 }
