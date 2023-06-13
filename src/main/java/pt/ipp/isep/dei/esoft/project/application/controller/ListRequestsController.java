@@ -1,23 +1,25 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 public class ListRequestsController {
-    public void ListRequestsController() {
-        Repositories repositories = Repositories.getInstance();
-    }
+
+    Repositories repositories = Repositories.getInstance();
+    Agent agent = repositories.getAgentRepository().getAgent();
 
     public List<Request> getRequests() {
         return Repositories.getInstance().getRequestRepository().getRequests();
     }
 
-    public List<Request> getRequestsSorted() {
-        return Repositories.getInstance().getRequestRepository().getRequestsSorted();
+    public List<Request> getRequestsSorted(List<Request> requestList) throws IOException {
+        return Repositories.getInstance().getRequestRepository().getRequestsSorted(requestList);
     }
 
     public List<Request> getRequestDated(List<Request> RequestList, LocalDate startDate, LocalDate endDate) {
@@ -38,6 +40,13 @@ public class ListRequestsController {
 
     public boolean checkVisitTime(LocalDate newStartTime, LocalDate newEndTime) {
         return Request.checkVisitTime(newStartTime, newEndTime);
+    }
+    public List<Request> getAgentList() {
+        return repositories.getRequestRepository().getAgentList(agent);
+    }
+
+    public List<Request> getSortedVisitRequestList(List<Request> list, LocalDate begin, LocalDate end){
+        return repositories.getRequestRepository().getSortedVisitRequestList(list, begin, end);
     }
 }
 
