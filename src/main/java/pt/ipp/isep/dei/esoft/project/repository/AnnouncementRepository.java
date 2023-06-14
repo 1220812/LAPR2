@@ -35,6 +35,9 @@ public class AnnouncementRepository {
         if (!operationSuccess) {
             newAnnouncement = Optional.empty();
         }
+
+        System.out.println(announcementsList);
+
         return announcementsList;
     }
 

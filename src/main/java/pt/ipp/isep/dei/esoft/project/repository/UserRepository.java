@@ -54,7 +54,9 @@ public class UserRepository {
     }
 
     public List<User> add(User user) {
-
+    for (User u : userList) {
+        System.out.println(u.toString());
+        }
         userList.add(user);
 
         Optional<User> newUser = Optional.empty();

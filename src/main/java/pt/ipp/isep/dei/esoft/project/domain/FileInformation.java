@@ -44,13 +44,16 @@ public class FileInformation {
     public static final int storePhoneNumberPosition = 28;
     public static final int storeEmailPosition = 29;
 
-    public void importFile(String filePath) throws IOException, CloneNotSupportedException {
+    public void importFile(String filePath)throws IOException, CloneNotSupportedException {
         File file = new File(filePath);
-        String extension = filePath.substring(filePath.lastIndexOf(".") + 1);
+        String extension = filePath.substring(filePath.lastIndexOf(".")+1);
         if (!extension.equals("csv")) {
-            throw new IllegalArgumentException("File extension is not csv");
+            throw new IOException("File extension is not csv");
         }
         Scanner reader = new Scanner(file);
+        if(!readerVerification(reader)) {
+            throw new IOException("Not in the requested format");
+        }
         while (reader.hasNextLine()) {
             String streetAddress = "";
             State state = null;
@@ -98,7 +101,7 @@ public class FileInformation {
                     streetAddress = propertyAddress1[0];
                     state = new State(propertyAddress1[2]);
                     city = new City(propertyAddress1[1]);
-                    zipCode = propertyAddress1[3];
+                    zipCode = propertyAddress1[3].trim();
                     propertyAddress = new Address(streetAddress, city, state, zipCode);
                 }
                 else if(propertyAddress1.length == 5) {
@@ -106,29 +109,30 @@ public class FileInformation {
                     state = new State(propertyAddress1[3]);
                     city = new City(propertyAddress1[1]);
                     district = new District(propertyAddress1[2]);
-                    zipCode = propertyAddress1[4];
+                    zipCode = propertyAddress1[4].trim();
                     propertyAddress = new Address(streetAddress, city, district, state , zipCode);
                 }
                 if(storeAddress1.length == 4){
-                    streetAddress = propertyAddress1[0];
-                    state = new State(propertyAddress1[2]);
-                    city = new City(propertyAddress1[1]);
-                    zipCode = propertyAddress1[3];
+                    streetAddress = storeAddress1[0];
+                    state = new State(storeAddress1[2]);
+                    city = new City(storeAddress1[1]);
+                    zipCode = storeAddress1[3].trim();
                     storeAddress = new Address(streetAddress, city, state, zipCode);
                 } else if(storeAddress1.length == 5){
-                    streetAddress = propertyAddress1[0];
-                    state = new State(propertyAddress1[3]);
-                    city = new City(propertyAddress1[1]);
-                    district = new District(propertyAddress1[2]);
-                    zipCode = propertyAddress1[4];
+                    streetAddress = storeAddress1[0];
+                    state = new State(storeAddress1[3]);
+                    city = new City(storeAddress1[1]);
+                    district = new District(storeAddress1[2]);
+                    zipCode = storeAddress1[4].trim();
                     storeAddress = new Address(streetAddress, city, district, state , zipCode);
                 }
                 Store newStore = new Store(storeName, storeAddress, storePhoneNumber, storeEmail, storeID);
-                String[] data1 = announcementDateString.split("/");
-                String[] data2 = businessDateString.split("/");
+                String[] data1 = announcementDateString.split("-");
+                String[] data2 = businessDateString.split("-");
                 LocalDate date = LocalDate.of(Integer.parseInt(data1[2].trim()), Integer.parseInt(data1[1].trim()), Integer.parseInt(data1[0].trim()));
                 LocalDate date1 = LocalDate.of(Integer.parseInt(data2[2].trim()), Integer.parseInt(data2[1].trim()), Integer.parseInt(data2[0].trim()));
-                userRepository.add(new User(ownerName, ownerEmail,new PassportCardNumber(ownerPassportCardNumber), new TaxNumber(ownerTaxNumber), ownerPhoneNumber));
+                String ownerTaxNumber1 = ownerTaxNumber.replaceAll("-", "");
+                userRepository.add(new User(ownerName, ownerEmail,new PassportCardNumber(ownerPassportCardNumber), new TaxNumber(ownerTaxNumber1), ownerPhoneNumber));
                 storeRepository.add(newStore);
                 if(!propertySunExposure.equals("NA")){
                     boolean basement = Boolean.getBoolean(propertyBasement);
@@ -143,6 +147,7 @@ public class FileInformation {
                         House house = new House(propertyAddress, area, distanceFromCityCenter, new PropertyType(propertyType), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, centralHeating, airConditioning, basement, new SunExposure(propertySunExposure), loft, finalPrice, date1);
                         propertyRepository.addProperty(house);
                         announcementRepository.add(new Announcement(house, date, commission, new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore));
+                        System.out.println();
                         }
                 }
                 if(propertyType.equalsIgnoreCase("Land")){
@@ -152,5 +157,11 @@ public class FileInformation {
                 }
             }
         }
+    }
+
+    private boolean readerVerification(Scanner reader) {
+        String expectedHeader = "sid;owner_name;owner_passportNum;owner_TIN(SSN);owner_email;owner_phone;property_type;property_area(square feet);property_location;property_distanceFromCenter (miles);property_numberBedrooms;property_numberBathrooms;property_pnumParking;property_centralHeating;property_airconditioned;property_basement;property_loft;property_sunExposure;property_requested_sale_rent_price;property_sale_rent_price (USD);commission(%);contract_duration(months);property_dateAnnounceRequest;property_dateofSale;type_business;store_ID;store_name;store_location;store_phonenumber;store_emailAddress";
+        String header = reader.nextLine().trim();
+        return header.equals(expectedHeader);
     }
 }

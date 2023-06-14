@@ -20,9 +20,9 @@ public class TaxNumber {
      * @param taxNumber tax number
      */
     public TaxNumber(String taxNumber) {
-        if(taxNumber.length() != TAX_NUMBER_LENGTH || !StringUtils.isNumeric(taxNumber)){
+        /**if(taxNumber.length() != TAX_NUMBER_LENGTH || !StringUtils.isNumeric(taxNumber)){
             throw new IllegalArgumentException("Invalid passport card number");
-        }
+        }*/
         this.taxNumber = taxNumber;
     }
     /**

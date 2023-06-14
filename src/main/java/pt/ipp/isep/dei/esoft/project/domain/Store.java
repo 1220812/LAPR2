@@ -15,7 +15,7 @@ public class Store {
     private static final String DEFAULT_DESIGNATION = "no store designation";
     private static final Address DEFAULT_ADRESS = new Address();
     private static final String DEFAULT_EMAILADRESS = "no store email";
-    private static final String DEFAULT_PHONENUMBER = "000-000-000";
+    private static final String DEFAULT_PHONENUMBER = "000-000-0000";
 
     public Store(String designation, Address address, String phoneNumber, String emailAddress, int ID) {
         this.designation = designation;

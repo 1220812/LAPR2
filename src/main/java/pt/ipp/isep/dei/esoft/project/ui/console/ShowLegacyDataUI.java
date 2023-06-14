@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This class is responsible for interacting betten the user and the controller.
- */
 public class ShowLegacyDataUI implements Runnable {
     /**
      * Controller attribute.
@@ -34,7 +31,8 @@ public class ShowLegacyDataUI implements Runnable {
                 flag = false;
                 try {
                     path = Utils.readLineFromConsole("Insert the path of the file you want to import: ");
-                    if(!path.substring(path.length()-4).equals(".csv")) {
+                    String extension = path.substring(path.lastIndexOf(".") + 1);
+                    if(!extension.equals("csv")) {
                         System.out.println("This file is not valid, please insert a .csv file");
                         flag = true;
                     }
@@ -61,7 +59,13 @@ public class ShowLegacyDataUI implements Runnable {
                 } catch (IllegalArgumentException e) {
                     System.out.println("Invalid path or file is empty");
                     flag = true;
-                } catch (IOException | CloneNotSupportedException e) {
+                } catch (IOException e) {
+                    try {
+                        throw new IOException(e);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                } catch (CloneNotSupportedException e) {
                     throw new RuntimeException(e);
                 }
             } else {
