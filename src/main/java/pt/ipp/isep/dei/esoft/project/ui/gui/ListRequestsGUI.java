@@ -23,4 +23,5 @@ public class ListRequestsGUI extends Application implements Runnable {
         stage.setScene(scene);
         stage.show();
     }
+
 }
