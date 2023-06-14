@@ -1,9 +1,9 @@
-@startuml
+ @startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title US010 - System Sequence Diagram (SSD)
+title US020 - System Sequence Diagram (SSD)
 
 autonumber
 
@@ -12,34 +12,31 @@ participant ":System" as System
 
 activate Customer
 
-    Customer -> System : whilst looking at one of the properties, selects the option \n to make an offer
+    Customer -> System : asks to read answers to the appointment requests
 
     activate System
 
-    System --> System : Checks if this client already has already\n made an offer for that property
-
-        System --> Customer : asks the client for the ammount of the offer
+        System --> Customer : shows list of appointments
     deactivate System
 
-loop until the price entered is equal or lower than the base price of the property
-
-    Customer -> System : enters the ammount of the offer
+    Customer -> System : selects appointment
 
     activate System
 
-    System --> System : Checks if the price is valid
+        System --> Customer : shows appointment information (agent's response)
+    deactivate System
+alt accepts
+    Customer -> System : accepts appointment conditions
+        activate System
+end
 
-end loop
-
-    System --> System : Checks if there are any offers made by\n other client in the same ammount
-
-opt there is no existing offer made by another client in the same\n ammount
+alt declines
+        Customer -> System : gives specification on the declined appointment
+end
             System --> Customer : gives confirmation
-    deactivate System
-end
+        deactivate System
 
-opt there is an exiisting offer made by another client in the same\n ammount
-        System --> Customer : informs the client that there is an existing offer for the\n same property in the same ammount which will have\n priority over the client's offer
-end
+
+
 
 @enduml
