@@ -15,6 +15,8 @@ public class User {
     private final String PHONE_NUMBER_BY_DEFAULT = "000-000-0000";
     private final String EMAIL_ADDRESS_BY_DEFAULT = "[NO DATA]";
     private final String PASSWORD_BY_DEFAULT = "[NO DATA]";
+    private PassportCardNumber passportCardNumber;
+    private TaxNumber taxNumber;
 
     // CONSTRUCTORS
 
@@ -38,6 +40,21 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * This method creates a new instance of User with the following parameters
+     * @param name name of the user
+     * @param emailAddress email address
+     * @param passportCardNumber passport card number
+     * @param taxNumber tax number
+     * @param phoneNumber phone number
+     */
+    public User(String name, String emailAddress, PassportCardNumber passportCardNumber, TaxNumber taxNumber, String phoneNumber) {
+        this.name = name;
+        this.emailAddress = emailAddress;
+        this.passportCardNumber = passportCardNumber;
+        this.phoneNumber = phoneNumber;
+        this.taxNumber = taxNumber;
+    }
     // SETS AND GETS
 
     /**

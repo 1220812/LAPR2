@@ -44,7 +44,7 @@ public class OrderDecisionController {
     public List<Order> getOrdersByAnnouncement(Announcement announcement, List<Order> orders) {
         List<Order> announcementOrders = new ArrayList<>();
         for (Order order : orders) {
-            if (order.getAnnouncement().equals(announcement)) {
+            if (order.getAnnouncement().toString().equals(announcement.toString())) {
                 announcementOrders.add(order);
             }
         }

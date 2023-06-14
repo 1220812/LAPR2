@@ -15,9 +15,8 @@ As an agent, when viewing a booking request, I want to respond to the user that 
 **From the specifications document:**
 
 
-> The real estate agent reviews advertisement requests (...) it is **visible to all clients** who visit the agency and use the application.
-
-> All registered information, except the agency commission, can be accessed by the client who intends to buy or rent the property.
+> After consulting a list of properties, the client can request to schedule a visit to the real estate agent for a specific property to verify its conditions. The agent receives the request, checks the availability and sends the response. If the customer accepts the order, it is automatically scheduled
+in the system.
 
 
 **From the client clarifications:**
@@ -50,7 +49,7 @@ Important: In US15 the Agent gets a list of booking requests (made to him). Then
 
 7th June 
 
-> **Question:**  The US15 does the listing and in US16 we are already responsing to one booking request. That said, were is the selection part being done?
+> **Question:**  The US15 does the listing and in US16 we are already responding to one booking request. That said, were is the selection part being done?
 >  
 > **Answer:** In US15 the Agent gets a list of booking requests (made to him). Then, the agent, may want to respond to the user (as defined in US16). US15 and US16 are executed sequentially. Even so, the agent should be able to see a list of all booking requests made to him (US15) without answer any booking request. In US16 the agent selects the booking request.
 
@@ -76,18 +75,25 @@ Important: In US15 the Agent gets a list of booking requests (made to him). Then
 
 ### 1.3. Acceptance Criteria
 
-**AC1:** The list of employee should be alphabetically sorted and grouped by store.
+**AC1:** The response is sent by email.
 
 
-**AC2:** Stores should be sorted according to their property listings, from the one with more listings .
+**AC2:** Different email services can send the message. These services must be configured using a configuration file to enable using different platforms
 
 
-**AC3:** Each store should state how many property listings it has.
+**AC3:** The response should include the name and phone number of the responsible Agent.
+
+
+**AC4:** The response should include the property identification and location. 
+
+
+**AC5:** When an Agent responds to a booking request the list of booking requests should be updated to not show this request.
+
 
 ### 1.4. Found out Dependencies
 
 
-* There could be a dependency in US002 since publishing a sale announcement would eventually require the listed properties to be shown.
+* There are dependencies with US015. In US15 the Agent gets a list of booking requests (made to him). Then, the agent, may want to respond to the user (as defined in US16). US15 and US16 are executed sequentially. Even so, the agent should be able to see a list of all booking requests made to him (US15) without answer any booking request. In US16 the agent selects the booking request.
 
 
 ### 1.5 Input and Output Data
@@ -96,34 +102,18 @@ Important: In US15 the Agent gets a list of booking requests (made to him). Then
 **Input Data:**
 
 * Typed data:
-	* parish
-    * price
+	
 * Selected data:
-	* sale/rental
-	* area
-	* distance from center
-	* price
-	* property type
-		* apartment
-			* number of bedrooms
-			* number of bathrooms
-			* number of parking spaces
-			* available equipment
-		* house
-			* number of bedrooms
-			* number of bathrooms
-			* number of parking spaces
-			* available equipment
-			* existence of a sun exposure
-			* existence of a basement
-			* existence of an inhabitable loft
+	* booking request 
+	* option to respond to the user that scheduled the visit
 
 **Output Data:**
 
-* Listed properties that correspond to the inserted data or (by default) from most recently added.
+* Message by email
+
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![System Sequence Diagram](svg/us013-system-sequence-diagram.svg)
+![System Sequence Diagram](svg/us016-system-sequence-diagram.svg)
 
 ### 1.7 Other Relevant Remarks

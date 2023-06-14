@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
-public class Owner {
+public class Owner extends User{
     /**
      * name of the owner
      */
@@ -134,6 +134,22 @@ public class Owner {
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.address = address;
+        this.taxNumber = taxNumber;
+        this.passportCardNumber = passportCardNumber;
+    }
+
+    /**
+     * Creates an instance of Owner with name, phone number, email address, tax number and passport card number
+     * @param name name of the owner
+     * @param phoneNumber phone number of the owner
+     * @param emailAddress email address of the owner
+     * @param taxNumber tax number of the owner
+     * @param passportCardNumber passport card number of the owner
+     */
+    public Owner(String name, String phoneNumber, String emailAddress, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
         this.taxNumber = taxNumber;
         this.passportCardNumber = passportCardNumber;
     }

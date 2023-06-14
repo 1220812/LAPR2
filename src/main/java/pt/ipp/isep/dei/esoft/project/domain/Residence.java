@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,7 +56,35 @@ public class Residence extends Property {
         this.airConditioning = airConditioning;
         this.centralHeating = centralHeating;
     }
-
+    /**
+     * Method that creates a new instance of Residence with the given parameters:
+     * @param address residence address
+     * @param area residence area
+     * @param distanceFromCityCentre distance between the residence and the city center
+     * @param propertyType type of property
+     * @param numberOfBathrooms number of bathrooms
+     * @param numberOfBedrooms number of bedrooms
+     * @param numberOfParkingSpaces number of parking spaces
+     * @param centralHeating central heating
+     * @param airConditioning air conditioning
+     */
+    public Residence(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean centralHeating, boolean airConditioning, double finalPrice, LocalDate businessDate) {
+        super(area, distanceFromCityCentre, address, propertyType, finalPrice, businessDate);
+        if (numberOfBathrooms < 0) {
+            throw new IllegalArgumentException("The number of bathrooms must be positive.");
+        }
+        if (numberOfBedrooms < 0) {
+            throw new IllegalArgumentException("The number of bedrooms must be positive.");
+        }
+        if (numberOfParkingSpaces < 0) {
+            throw new IllegalArgumentException("The number of parking spaces must be positive.");
+        }
+        this.numberOfBedrooms = numberOfBathrooms;
+        this.numberOfBathrooms = numberOfBedrooms;
+        this.numberOfParkingSpaces = numberOfParkingSpaces;
+        this.airConditioning = airConditioning;
+        this.centralHeating = centralHeating;
+    }
     /**
      * Method to show the number of bedrooms
      *
