@@ -22,7 +22,7 @@ public class PublishOrderController {
     public void registerOrder(Announcement announcement, double orderPrice){
         String email = CurrentSession.getEmail();
         Order order = new Order(announcement,orderPrice,email);
-        orderRepository.add(email, orderPrice, announcement);
+        OrderRepository.addNewOrder(order);
     }
     /**
      * used to get the announcements
