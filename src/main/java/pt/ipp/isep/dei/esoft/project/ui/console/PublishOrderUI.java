@@ -9,7 +9,15 @@ import java.util.List;
 public class PublishOrderUI implements Runnable {
 
     PublishOrderController controller = new PublishOrderController();
+
+    /**
+     * @param chosenAnnouncement the announcement chosen by the customer
+     */
     private Announcement chosenAnnouncement;
+
+    /**
+     * @param orderPrice the ammount offered by the customer
+     */
     private double orderPrice;
     private boolean validOrder = false;
 
@@ -33,7 +41,7 @@ public class PublishOrderUI implements Runnable {
                 System.out.println("Your order was successfully registered!");
                 validOrder = true;
             } else {
-                System.out.println("There is other orders registered in the system with the same amount offered for this announcement!");
+                System.out.println("There are other orders registered in the system with the same amount offered for this announcement!");
                 selection = Utils.showAndSelectIndex(List.of("Yes", "No"), "Do tou want to keep your order?");
                 if (selection == 1) {
                     validOrder = true;

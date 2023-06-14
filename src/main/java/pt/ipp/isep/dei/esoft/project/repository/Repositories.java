@@ -67,6 +67,8 @@ public class Repositories {
      */
     public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
     public PropertyRepository getPropertyRepository = new PropertyRepository();
+    public BookingRequestsRepository bookingRequestsRepository = new BookingRequestsRepository();
+    public BookingRequestsFeedbackRepository bookingRequestsFeedbackRepository = new BookingRequestsFeedbackRepository();
 
     private Repositories() {
     }
@@ -289,7 +291,13 @@ public class Repositories {
         return orderRepository;
     }
 
+    public BookingRequestsRepository getBookingRequestsRepository() {
+        return bookingRequestsRepository;
+    }
 
+    public BookingRequestsFeedbackRepository getBookingRequestsFeedbackRepository() {
+        return bookingRequestsFeedbackRepository;
+    }
 }
 
 
