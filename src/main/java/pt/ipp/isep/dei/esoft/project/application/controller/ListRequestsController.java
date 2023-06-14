@@ -51,15 +51,15 @@ public class ListRequestsController {
     public List<Request> getSortedVisitRequestList(List<Request> list, LocalDate begin, LocalDate end){
         return repositories.getRequestRepository().getSortedVisitRequestList(list, begin, end);
     }
-    public Employee getCurrentAgent() {
+    public Agent getCurrentAgent() {
         AuthenticationRepository rep = Repositories.getInstance().getAuthenticationRepository();
         UserSession us = rep.getCurrentUserSession();
         String email = us.getUserId().getEmail();
-        return Repositories.getInstance().getEmployeeRepository().getEmployeeByEmail(email);
+        return Repositories.getInstance().getAgentRepository().getAgentByEmail(email);
     }
     public void showBookingRequests() {
         List<Request> RequestList = Repositories.getInstance().getRequestRepository().getRequests();
-        Employee loggedInAgent = getCurrentAgent();
+        Agent loggedInAgent = getCurrentAgent();
         for (int i = 0; i < RequestList.size(); i++) {
             if((loggedInAgent.equals(RequestList.get(i).getAgent())) ){
                 System.out.println("Booking Request#" + (i + 1) + ": " + RequestList.get(i).toString());

@@ -75,4 +75,13 @@ public class AgentRepository {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("No Agent is logged in."));
     }
+
+    public Agent getAgentByEmail(String email) {
+        for (Agent agent : agentList) {
+            if (email.equals(agent.getEmailAddress())) {
+                return agent;
+            }
+        }
+        return null;
+    }
 }

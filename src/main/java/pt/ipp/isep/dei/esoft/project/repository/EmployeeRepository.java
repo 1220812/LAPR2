@@ -9,15 +9,15 @@ import java.util.stream.Collectors;
  * The type Employee repository.
  */
 public class EmployeeRepository {
-    private static List<Employee> NewEmployeeList = new ArrayList<>();
+    private  List<Employee> NewEmployeeList = new ArrayList<>();
 
-
+    public EmployeeRepository(){}
     /**
      * Add new employee.
      *
      * @param newEmployee the new employee
      */
-    public static void addNewEmployee(Employee newEmployee) {
+    public  void addNewEmployee(Employee newEmployee) {
         if (validateNewEmployee(newEmployee))
             NewEmployeeList.add(newEmployee);
     }
@@ -28,8 +28,8 @@ public class EmployeeRepository {
      *
      * @return the new employee list
      */
-    public static List<Employee> getNewEmployeeList() {
-        return List.copyOf(NewEmployeeList);
+    public  List<Employee> getNewEmployeeList() {
+        return new ArrayList<>(NewEmployeeList) ;
     }
 
     /**
@@ -74,7 +74,7 @@ public class EmployeeRepository {
      * @param pass               the pass
      * @return the employee
      */
-    public static Employee createNewEmployee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, String pass) {
+    public  Employee createNewEmployee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, String pass) {
         Employee newEmployee = new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, pass);
         addNewEmployee(newEmployee);
         return newEmployee;
@@ -95,8 +95,8 @@ public class EmployeeRepository {
         boolean operationSuccess = false;
 
         if (validateNewEmployee(newEmployee)) {
-            newNewEmployee = Optional.of((Employee) newEmployee.clone());
-            operationSuccess = NewEmployeeList.add((Employee) newNewEmployee.get());
+            newNewEmployee = Optional.of( newEmployee.clone());
+            operationSuccess = NewEmployeeList.add( newNewEmployee.get());
         }
 
         if (!operationSuccess) {
@@ -105,7 +105,7 @@ public class EmployeeRepository {
         return NewEmployeeList;
     }
 
-    private static boolean validateNewEmployee(Employee newEmployee) {
+    private  boolean validateNewEmployee(Employee newEmployee) {
         boolean isValid = !NewEmployeeList.contains(newEmployee);
         return isValid;
     }
@@ -119,6 +119,8 @@ public class EmployeeRepository {
         }
         return null;
     }
+
+
 }
 
 

@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.ListRequestsController;
+import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
 
@@ -110,9 +111,10 @@ public class ListRequestControllerJavaFx implements Initializable {
         List<Request> requests =  controller.getRequests();
         start = getBeginDate();
         end = getEndDate();
-        Employee loggedInAgent = controller.getCurrentAgent();
+        lView.getItems().clear();
+        Agent loggedInAgent = controller.getCurrentAgent();
         for (int i = 0; i < requests.size(); i++) {
-            if ((/*loggedInAgent.equals(requests.get(i).getAgent())) &&*/ ((requests.get(i).getRequestDate().isAfter(start)) && (requests.get(i).getRequestDate().isBefore(end))) )) {
+            if ((loggedInAgent.getEmailAddress().equals(requests.get(i).getAgent().getEmailAddress())) && ((requests.get(i).getRequestDate().isAfter(start)) && (requests.get(i).getRequestDate().isBefore(end)))) {
                 lView.getItems().add(requests.get(i));
             }
         }

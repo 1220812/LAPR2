@@ -197,7 +197,7 @@ public class Agent{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Agent agent = (Agent) o;
-        return phoneNumber == agent.phoneNumber && Objects.equals(name, agent.name) && Objects.equals(emailAddress, agent.emailAddress) && Objects.equals(taxNumber, agent.taxNumber) && Objects.equals(passportCardNumber, agent.passportCardNumber) && Objects.equals(address, agent.address);
+        return phoneNumber.equals(agent.phoneNumber) && Objects.equals(name, agent.name) && Objects.equals(emailAddress, agent.emailAddress) && Objects.equals(taxNumber, agent.taxNumber) && Objects.equals(passportCardNumber, agent.passportCardNumber) && Objects.equals(address, agent.address);
     }
 
     @Override

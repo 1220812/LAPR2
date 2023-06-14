@@ -137,6 +137,7 @@ public class Repositories {
      * @return the authentication repository
      */
     public AuthenticationRepository getAuthenticationRepository() {
+
         return authenticationRepository;
     }
 

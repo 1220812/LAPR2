@@ -20,6 +20,7 @@ public class Bootstrap implements Runnable {
         addAddresses();
         addRequestType();
         addAvailableEquipment();
+
         try {
             addStores();
         } catch (CloneNotSupportedException e) {
@@ -30,6 +31,7 @@ public class Bootstrap implements Runnable {
         addRequests();
         addAnnouncement();
         addPropertyType();
+
         try {
             addAgent();
         } catch (CloneNotSupportedException e) {
@@ -314,7 +316,30 @@ public class Bootstrap implements Runnable {
         messageRepository.add(message1);
     }
 
-    private void addRequests() {
+//    public void addRequests(){
+//        RequestRepository rep = Repositories.getInstance().getRequestRepository();
+//        State state = new State("California");
+//        District district = new District("Northem");
+//        City city = new City("Los Angeles");
+//        Address address = new Address("Street A",4, 6, "12345", state, district, city);
+//        PropertyType propertyType = new PropertyType("Land");
+//        List<Photographs> photoList = new ArrayList<>();
+//        Property property = new Property(10000, 10, address, propertyType, photoList);
+//        LocalDate requestDate = LocalDate.of(2021, 1, 1);
+//        TaxNumber taxNumber = new TaxNumber("195451235");
+//        PassportCardNumber passport = new PassportCardNumber("12345678");
+//        Role agentRole = new Role("Agent");
+//        Agency agency = new Agency(1, "agency",address,"agency@this.app","123456789");
+//        Store store = new Store("Company", 1);
+//        Agent agent = new Agent("pedro","agent@this.app","987654321", passport,taxNumber, address,agentRole, agency,store,"agent");
+//        Owner owner = new Owner("Martim", "123456789", "martim@this.app", address, taxNumber, passport);
+//        RequestType requestType = new RequestType("Sale", 0);
+//        Store store1 = new Store("Company", 1);
+//        rep.add(new Request(property,requestDate,agent, owner,20.0, requestType,store1));
+//
+//    }
+
+    public void addRequests() {
         RequestRepository requestRepository = Repositories.getInstance().getRequestRepository();
         List<Photographs> photoList1 = new ArrayList<>();
         List<Photographs> photoList2 = new ArrayList<>();
@@ -360,7 +385,7 @@ public class Bootstrap implements Runnable {
         Owner owner1 = new Owner("Martim", "123456789", "martim@this.app", address1, taxNumber1, passport1);
         Owner owner2 = new Owner("Toni", "456787655", "toni@this.app", address2, taxNumber2, passport2);
         Owner owner3 = new Owner("Guilherma", "214522558", "guilherma@this.app", address3, taxNumber3, passport3);
-        Agent agent1 = new Agent("Toniteco", "987654321", "pedro@this.app", address1, taxNumber1, passport1);
+        Agent agent1 = new Agent("Toniteco", "987654321", "pedro@gmail.com", address1, taxNumber1, passport1);
         Agent agent2 = new Agent("Agent", "987654321", "agent@this.app", address2, taxNumber2, passport2);
         Request request1 = new Request(property1, requestDate1, agent1,owner1,1000,requestType1,store1);
         Request request2 = new Request(property2, requestDate2, agent2,owner2,2000,requestType2,store2);
@@ -369,6 +394,7 @@ public class Bootstrap implements Runnable {
         requestRepository.addRequest(request1);
         requestRepository.addRequest(request3);
     }
+
 
     private void addAgent() throws CloneNotSupportedException {
         AgentRepository agentRepository = Repositories.getInstance().getAgentRepository();
@@ -397,7 +423,7 @@ public class Bootstrap implements Runnable {
         TaxNumber taxNumber1 = new TaxNumber("987654321");
         PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
         PassportCardNumber passportCardNumber2 = new PassportCardNumber("98765432");
-        Agent agent1 = new Agent("Pedro", "agent@this.app","987654321",passportCardNumber1,taxNumber1,address1,agent,agency1,store1,"Pedro");
+        Agent agent1 = new Agent("Pedro", "pedro@gmail.com","987654321",passportCardNumber1,taxNumber1,address1,agent,agency1,store1,"agent");
         agentRepository.add(agent1);
         TaxNumber taxNumber2 = new TaxNumber("123456789");
         PassportCardNumber passport2 = new PassportCardNumber("12345678");

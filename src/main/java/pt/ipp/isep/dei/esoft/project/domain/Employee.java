@@ -4,7 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
-import static pt.ipp.isep.dei.esoft.project.repository.EmployeeRepository.addNewEmployee;
+import  pt.ipp.isep.dei.esoft.project.repository.EmployeeRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 public class Employee {
     /**
@@ -123,7 +124,9 @@ public class Employee {
      */
     public static Employee newEmployee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         Employee newEmployee = new Employee(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, agency, store, pass);
-        addNewEmployee(newEmployee);
+        EmployeeRepository rep = Repositories.getInstance().getEmployeeRepository();
+
+        rep.addNewEmployee(newEmployee);
         return newEmployee;
     }
 
