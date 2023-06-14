@@ -111,6 +111,14 @@ public class EmployeeRepository {
     }
 
 
+    public Employee getEmployeeByEmail(String email) {
+        for (Employee employee : NewEmployeeList) {
+            if (email.equals(employee.getEmail())) {
+                return employee;
+            }
+        }
+        return null;
+    }
 }
 
 
