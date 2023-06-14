@@ -316,28 +316,6 @@ public class Bootstrap implements Runnable {
         messageRepository.add(message1);
     }
 
-//    public void addRequests(){
-//        RequestRepository rep = Repositories.getInstance().getRequestRepository();
-//        State state = new State("California");
-//        District district = new District("Northem");
-//        City city = new City("Los Angeles");
-//        Address address = new Address("Street A",4, 6, "12345", state, district, city);
-//        PropertyType propertyType = new PropertyType("Land");
-//        List<Photographs> photoList = new ArrayList<>();
-//        Property property = new Property(10000, 10, address, propertyType, photoList);
-//        LocalDate requestDate = LocalDate.of(2021, 1, 1);
-//        TaxNumber taxNumber = new TaxNumber("195451235");
-//        PassportCardNumber passport = new PassportCardNumber("12345678");
-//        Role agentRole = new Role("Agent");
-//        Agency agency = new Agency(1, "agency",address,"agency@this.app","123456789");
-//        Store store = new Store("Company", 1);
-//        Agent agent = new Agent("pedro","agent@this.app","987654321", passport,taxNumber, address,agentRole, agency,store,"agent");
-//        Owner owner = new Owner("Martim", "123456789", "martim@this.app", address, taxNumber, passport);
-//        RequestType requestType = new RequestType("Sale", 0);
-//        Store store1 = new Store("Company", 1);
-//        rep.add(new Request(property,requestDate,agent, owner,20.0, requestType,store1));
-//
-//    }
 
     public void addRequests() {
         RequestRepository requestRepository = Repositories.getInstance().getRequestRepository();
@@ -390,9 +368,9 @@ public class Bootstrap implements Runnable {
         Request request1 = new Request(property1, requestDate1, agent1,owner1,1000,requestType1,store1);
         Request request2 = new Request(property2, requestDate2, agent2,owner2,2000,requestType2,store2);
         Request request3 = new Request(property3, requestDate3, agent2,owner3,3000,requestType3,store3);
-        requestRepository.addRequest(request2);
-        requestRepository.addRequest(request1);
         requestRepository.addRequest(request3);
+        requestRepository.addRequest(request1);
+        requestRepository.addRequest(request2);
     }
 
 

@@ -45,7 +45,7 @@ public class ListRequestControllerJavaFx implements Initializable {
     @FXML
     private Scene scene;
     @FXML
-    private  List<Request> list;
+    private List<Request> list;
     private ListRequestsController controller = new ListRequestsController();
 
     @FXML
@@ -101,24 +101,30 @@ public class ListRequestControllerJavaFx implements Initializable {
 
 
     }
-    public void showRequests(ActionEvent event){
+
+    public void showRequests(ActionEvent event) throws IOException {
 //        try {
 //            System.out.println(Request.getRequestsSorted(RequestList));
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
-
-        List<Request> requests =  controller.getRequests();
+        List<Request> requestsAgent = new ArrayList<>();
+        List<Request> requests = controller.getRequests();
         start = getBeginDate();
         end = getEndDate();
         lView.getItems().clear();
         Agent loggedInAgent = controller.getCurrentAgent();
         for (int i = 0; i < requests.size(); i++) {
             if ((loggedInAgent.getEmailAddress().equals(requests.get(i).getAgent().getEmailAddress())) && ((requests.get(i).getRequestDate().isAfter(start)) && (requests.get(i).getRequestDate().isBefore(end)))) {
-                lView.getItems().add(requests.get(i));
+                requestsAgent.add(requests.get(i));
             }
         }
+        List<Request> sortedList = controller.getRequestsSorted(requestsAgent);
+        for (int i = 0; i < sortedList.size(); i++) {
+            lView.getItems().add(sortedList.get(i));
+        }
     }
+
 
     public LocalDate getBeginDate() {
         LocalDate date = startDate.getValue();
