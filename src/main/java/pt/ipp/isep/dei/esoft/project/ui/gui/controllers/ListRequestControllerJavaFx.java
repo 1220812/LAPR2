@@ -110,9 +110,9 @@ public class ListRequestControllerJavaFx implements Initializable {
         List<Request> requests =  controller.getRequests();
         start = getBeginDate();
         end = getEndDate();
-//        Employee loggedInAgent = controller.getCurrentAgent();
+        Employee loggedInAgent = controller.getCurrentAgent();
         for (int i = 0; i < requests.size(); i++) {
-            if (/*(loggedInAgent.equals(requests.get(i).getAgent())) &&*/ ((requests.get(i).getRequestDate().isAfter(start)) && (requests.get(i).getRequestDate().isBefore(end))) ) {
+            if ((/*loggedInAgent.equals(requests.get(i).getAgent())) &&*/ ((requests.get(i).getRequestDate().isAfter(start)) && (requests.get(i).getRequestDate().isBefore(end))) )) {
                 lView.getItems().add(requests.get(i));
             }
         }
