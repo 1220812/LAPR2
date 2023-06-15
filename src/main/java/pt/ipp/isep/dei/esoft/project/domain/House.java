@@ -101,10 +101,10 @@ public class House extends Residence {
 
     @Override
     public String toString() {
-        return super.toString() + "House:" +
-                ", basement :" + existenceOfABasement +
-                ", sunExposure : " + sunExposure +
-                ", inhabitableLoft : " + inhabitableLoft;
+        return super.toString() +
+                "\nBasement :" + existenceOfABasement +
+                "\nSun exposure : " + sunExposure +
+                "\nInhabitable loft : " + inhabitableLoft;
     }
 
     /**

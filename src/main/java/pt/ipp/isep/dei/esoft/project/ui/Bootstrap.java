@@ -405,7 +405,7 @@ public class Bootstrap implements Runnable {
         agentRepository.add(agent1);
         TaxNumber taxNumber2 = new TaxNumber("123456789");
         PassportCardNumber passport2 = new PassportCardNumber("12345678");
-        Agent agent2 = new Agent("Agent", "987654321", "agent@this.app", address2, taxNumber2, passport2);
+        Agent agent2 = new Agent("Agent", "agent@this.app","988654321",passportCardNumber2,taxNumber2, address2,agent,agency2,store2,"agent");
         agentRepository.add(agent2);
     }
 }

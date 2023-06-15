@@ -305,10 +305,10 @@ public class Announcement {
     @Override
     public String toString() {
         return "Announcement : " +
-                "\nProperty = " + property +
+                property +
                 "\nCommission type = " + commissionType +
                 "\nCommission = " + commission +
-                "\nRequestType = " + requestType +
+                "\n" + requestType +
                 "\nAgent = " + agent +
                 "\nDate = " + date +
                 "\nPrice = " + price +

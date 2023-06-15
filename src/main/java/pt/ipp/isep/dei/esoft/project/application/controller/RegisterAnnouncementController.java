@@ -1,3 +1,8 @@
+
+
+
+
+
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
@@ -7,7 +12,6 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.isep.lei.esoft.auth.UserSession;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -212,6 +216,16 @@ public class RegisterAnnouncementController {
     }
 
     /**
+     * Gets owner by email.
+     *
+     * @param ownerEmail the owner email
+     * @return the owner by email
+     */
+    public Owner getOwnerByEmail(String ownerEmail) {
+        return this.repositories.getOwnerRepository().getOwnerByEmail(ownerEmail);
+    }
+
+    /**0
      * Get current user session.
      *
      * @return the user session

@@ -4,6 +4,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.util.Objects;
 
+/**
+ * The type Agent.
+ */
 public class Agent{
     /**
      * name of the agent
@@ -34,6 +37,20 @@ public class Agent{
     private Store store;
     private String pass;
 
+    /**
+     * Instantiates a new Agent.
+     *
+     * @param name               the name
+     * @param email              the email
+     * @param phone              the phone
+     * @param passportCardNumber the passport card number
+     * @param taxNumber          the tax number
+     * @param address            the address
+     * @param role               the role
+     * @param agency             the agency
+     * @param store              the store
+     * @param pass               the pass
+     */
     public Agent(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {
         this.name=name;
         this.emailAddress=email;
@@ -48,69 +65,118 @@ public class Agent{
 
     }
 
+    /**
+     * Gets role.
+     *
+     * @return the role
+     */
     public Role getRole() {
         return role;
     }
 
+    /**
+     * Sets role.
+     *
+     * @param role the role
+     */
     public void setRole(Role role) {
         this.role = role;
     }
 
+    /**
+     * Gets agency.
+     *
+     * @return the agency
+     */
     public Agency getAgency() {
         return agency;
     }
 
+    /**
+     * Sets agency.
+     *
+     * @param agency the agency
+     */
     public void setAgency(Agency agency) {
         this.agency = agency;
     }
 
+    /**
+     * Gets store.
+     *
+     * @return the store
+     */
     public Store getStore() {
         return store;
     }
 
+    /**
+     * Sets store.
+     *
+     * @param store the store
+     */
     public void setStore(Store store) {
         this.store = store;
     }
 
+    /**
+     * Gets pass.
+     *
+     * @return the pass
+     */
     public String getPass() {
         return pass;
     }
 
+    /**
+     * Sets pass.
+     *
+     * @param pass the pass
+     */
     public void setPass(String pass) {
         this.pass = pass;
     }
 
     /**
      * Method that shows the phone number
+     *
      * @return phone number
      */
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
     /**
      * Method to change the phone number
+     *
      * @param phoneNumber changed phone number
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
     /**
      * Method to show the email address
+     *
      * @return email address
      */
     public String getEmailAddress() {
         return emailAddress;
     }
+
     /**
      * Method to change the email address
+     *
      * @param emailAddress changed email address
      */
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
+
     /**
      * Method to show the name
-     * @return name
+     *
+     * @return name name
      */
     public String getName() {
         return name;
@@ -118,6 +184,7 @@ public class Agent{
 
     /**
      * Method to change the name
+     *
      * @param name changed name
      */
     public void setName(String name) {
@@ -126,6 +193,7 @@ public class Agent{
 
     /**
      * Method to show the tax number
+     *
      * @return tax number
      */
     public TaxNumber getTaxNumber() {
@@ -134,6 +202,7 @@ public class Agent{
 
     /**
      * Method to show the passport card number
+     *
      * @return passport card number
      */
     public PassportCardNumber getPassportCardNumber() {
@@ -142,6 +211,7 @@ public class Agent{
 
     /**
      * Method to change the tax number
+     *
      * @param taxNumber changed tax number
      */
     public void setTaxNumber(TaxNumber taxNumber) {
@@ -150,6 +220,7 @@ public class Agent{
 
     /**
      * Method to change the passport card number
+     *
      * @param passportCardNumber changed passport card number
      */
     public void setPassportCardNumber(PassportCardNumber passportCardNumber) {
@@ -158,7 +229,8 @@ public class Agent{
 
     /**
      * Method to show the address
-     * @return address
+     *
+     * @return address address
      */
     public Address getAddress() {
         return address;
@@ -166,6 +238,7 @@ public class Agent{
 
     /**
      * Method to change the address
+     *
      * @param address changed address
      */
     public void setAddress(Address address) {
@@ -174,11 +247,14 @@ public class Agent{
 
     /**
      * This method creates an owner with name, phone number and email address
-     * @param name name of the owner
-     * @param phoneNumber phone number of the owner
-     * @param emailAddress email address of the owner
+     *
+     * @param name               name of the owner
+     * @param phoneNumber        phone number of the owner
+     * @param emailAddress       email address of the owner
+     * @param address            the address
+     * @param taxNumber          the tax number
+     * @param passportCardNumber the passport card number
      */
-
     public Agent(String name, String phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -221,6 +297,17 @@ public class Agent{
      */
     public Agent clone(){ return new Agent(this.name,this.phoneNumber, this.emailAddress,this.address,this.taxNumber,this.passportCardNumber); }
 
+    /**
+     * New agent agent.
+     *
+     * @param name               the name
+     * @param phoneNumber        the phone number
+     * @param emailAddress       the email address
+     * @param address            the address
+     * @param taxNumber          the tax number
+     * @param passportCardNumber the passport card number
+     * @return the agent
+     */
     public static Agent newAgent(String name, String phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         Agent newAgent = newAgent(name, phoneNumber, emailAddress, address, taxNumber, passportCardNumber);
         return newAgent;

@@ -193,7 +193,6 @@ public class Residence extends Property {
      */
     @Override
     public String toString() {
-        return super.toString() + ", number of bedrooms = " + numberOfBedrooms + ", number of bathrooms = " + numberOfBathrooms +
-                "\nparking spaces=" + numberOfParkingSpaces + ", air conditioning = " + airConditioning + ", central heating = " + centralHeating;
+        return super.toString() + "\nNumber of bedrooms = " + numberOfBedrooms + "\nNumber of bathrooms = " + numberOfBathrooms + "\nParking spaces =" + numberOfParkingSpaces;
     }
 }

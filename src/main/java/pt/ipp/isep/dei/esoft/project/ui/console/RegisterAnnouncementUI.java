@@ -23,11 +23,13 @@ public class RegisterAnnouncementUI implements Runnable {
     private LocalDate date;
     private Address address;
     private int doorNumber;
-    private int floorNumber;
+    private int floorNumber = 0;
     private int distanceFromCityCenter;
     private double price;
+    private State state;
+
     private Announcement announcement;
-    private List<Photographs> photos;
+    private List<Photographs> photos = new ArrayList<>();
     private int numberOfBedrooms;
     private int numberOfBathrooms;
     private int parking;
@@ -35,7 +37,11 @@ public class RegisterAnnouncementUI implements Runnable {
     private Property property;
     private boolean basement;
     private boolean loft;
+    private String streetAddress;
+    private District district;
+    private City city;
     private RequestType requestType;
+    private String zipCode;
     private SunExposure sunExposure;
     private String commissionType;
     private boolean dataConfirmation;
@@ -45,9 +51,9 @@ public class RegisterAnnouncementUI implements Runnable {
     List<AvailableEquipment> availableEquipment = new ArrayList<>();
 
     private PropertyType propertyType;
-    private Agent agent = null;
-    private Store store = null;
-    private Owner owner = null;
+    private Agent agent;
+    private Store store;
+    private Owner owner;
 
     private boolean airConditioning;
 
@@ -56,24 +62,50 @@ public class RegisterAnnouncementUI implements Runnable {
     public void run() {
         Scanner ler = new Scanner(System.in);
 
-        System.out.println("Please write the owner's email:");
+        System.out.println("\nPlease write the owner's email:");
         ownerEmail = ler.nextLine();
         if (!controller.checkOwnerExistence(ownerEmail)) {
             System.out.println("Owner not registed, please register Owner.");
         }
         else {
+            System.out.println("Property type:");
             propertyType = Utils.listAndSelectOne(controller.getPropertyType());
             if (propertyType == null) return;
 
+            String inputPropertyType = propertyType.toString();
 
             area = Utils.readIntegerFromConsole("Area in m2:");
             while (!controller.checkArea(area)) {
                 area = Utils.readIntegerFromConsole("Please write a valid area.");
             }
 
-            address = Utils.listAndSelectOne(controller.getAddresses());
-            if (address == null) return;
-            System.out.println(address);
+
+            streetAddress = Utils.readLineFromConsole("Insert the street address:");
+            while (streetAddress == null) {
+                streetAddress = Utils.readLineFromConsole("Please insert a valid street address.");
+            }
+
+
+            city = new City(Utils.readLineFromConsole("Insert the city: "));
+
+
+            district = new District(Utils.readLineFromConsole("Insert the district: "));
+
+
+            state = new State(Utils.readLineFromConsole("Insert the state:"));
+
+
+            zipCode = Utils.readLineFromConsole("Insert the zip code: ");
+            while (zipCode==null || zipCode.length() != 5){
+                zipCode = Utils.readLineFromConsole("Please insert a valid zip code.");
+            }
+
+            if (inputPropertyType.equalsIgnoreCase("Apartment")) {
+                floorNumber = Utils.readIntegerFromConsole("Floor number:");
+                while (!controller.checkDoorNumber(floorNumber)) {
+                    floorNumber = Utils.readIntegerFromConsole("Please write a valid floor number.");
+                }
+            }
 
             doorNumber = Utils.readIntegerFromConsole("Door number:");
             while (!controller.checkDoorNumber(doorNumber)) {
@@ -97,32 +129,29 @@ public class RegisterAnnouncementUI implements Runnable {
                 System.out.println("please insert a number between 1 and 30");
                 numberOfPhotos = Utils.readIntegerFromConsole("Insert the number of photos: ");
             }
-
-            String inputPropertyType;
-            inputPropertyType = propertyType.toString();
+            for (int i = 0; i < numberOfPhotos; i++) {
+                String photoURI = Utils.readLineFromConsole("Insert the photo URI:");
+                Photographs photo = new Photographs(photoURI);
+                photos.add(photo);
+                System.out.println("Photograph added");
+            }
 
 
             if (inputPropertyType.equalsIgnoreCase("House") || inputPropertyType.equalsIgnoreCase("Apartment")) {
 
-                System.out.println("Number of number of bedrooms:");
-                numberOfBedrooms = ler.nextInt();
+                numberOfBedrooms = Utils.readIntegerFromConsole("Number of bedrooms:");
                 while (numberOfBedrooms < 0) {
-                    System.out.println("Please select a valid number of bedrooms.");
-                    numberOfBedrooms = ler.nextInt();
+                    numberOfBathrooms = Utils.readIntegerFromConsole("Please select a valid number of bedrooms.");
                 }
 
-                System.out.println("Number of number of bathrooms:");
-                numberOfBathrooms = ler.nextInt();
+                numberOfBathrooms = Utils.readIntegerFromConsole("Number of bathrooms:");
                 while (numberOfBathrooms < 0) {
-                    System.out.println("Please select a valid number of bathrooms.");
-                    numberOfBathrooms = ler.nextInt();
+                    numberOfBathrooms = Utils.readIntegerFromConsole("Please select a valid number of bathrooms.");
                 }
 
-                System.out.println("Number of parking spaces:");
-                parking = ler.nextInt();
+                parking = Utils.readIntegerFromConsole("Number of parking spaces:");
                 while (parking < 0) {
-                    System.out.println("Please select a valid number of parking spaces.");
-                    parking = ler.nextInt();
+                    parking = Utils.readIntegerFromConsole("Please select a valid number of parking spaces.");
                 }
 
                 availableEquipment = Utils.listAndSelectMany(controller.getAvailableEquipmentList());
@@ -138,54 +167,46 @@ public class RegisterAnnouncementUI implements Runnable {
                 }
             }
 
-            System.out.println("Commission Type:");
-            System.out.println("- Percentage");
-            System.out.println("- Value");
-            commissionType = ler.next();
+
+            commissionType = Utils.readLineFromConsole("Commission Type:\n- Percentage\n- Value");
             while (!commissionType.equalsIgnoreCase("Percentage") && !commissionType.equalsIgnoreCase("Value")) {
-                System.out.println("Please write a valid option.");
-                commissionType = ler.next();
+                commissionType = Utils.readLineFromConsole("Please write a valid option.");
             }
 
-            System.out.println("Commission:");
-            commission = ler.nextDouble();
+
+            commission = Utils.readDoubleFromConsole("Commission:");
             while (commission < 0) {
-                System.out.println("Please write a valid commission.");
-                commission = ler.nextInt();
+                commission = Utils.readDoubleFromConsole("Please write a valid commission:");
             }
-            System.out.println("Property type = " + propertyType);
-            System.out.println("Address= " + address);
-            System.out.println("Floor number = " + floorNumber);
-            System.out.println("Distance from city centre = " + distanceFromCityCenter);
-            System.out.println("Requested Price = " + price);
-            System.out.println("Area = " + area);
-            if (inputPropertyType.equalsIgnoreCase("House") || inputPropertyType.equalsIgnoreCase("Apartment")) {
-                System.out.println("Number of numberOfBedrooms = " + numberOfBedrooms);
-                System.out.println("Number of numberOfBathrooms = " + numberOfBathrooms);
-                System.out.println("Number of parking space = " + parking);
-                System.out.println("Available equipment = " + availableEquipment);
-                if (inputPropertyType.equalsIgnoreCase("House")) {
-                    System.out.println("Basement existence = " + basement);
-                    System.out.println("Inhabitable loft existence = " + loft);
-                    System.out.println("Sun exposure = " + sunExposure);
-                }
+
+
+            date = LocalDate.now();
+
+            agent = controller.getCurrentAgent();
+
+            owner = controller.getOwnerByEmail(ownerEmail);
+
+            store = agent.getStore();
+
+            address = new Address(streetAddress, doorNumber, floorNumber, zipCode, state, district, city);
+
+            requestType = controller.createRequestType(DEFAULT_REQUESTTYPE, DEFAULT_CONTRACTDURATION);
+
+            if (inputPropertyType.equalsIgnoreCase("Land")) {
+                property = controller.createProperty(area, distanceFromCityCenter, address, propertyType, photos);
+            } else if (inputPropertyType.equalsIgnoreCase("Apartment")) {
+                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, airConditioning, centralHeating);
+            } else if (inputPropertyType.equalsIgnoreCase("House")) {
+                property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, propertyType, photos, requestType);
             }
-            System.out.println("Commission type = " + commissionType);
-            System.out.println("Commission = " + commission);
-            System.out.println();
+            announcement = controller.createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price);
+
+            System.out.println(announcement.toString());
 
             String flag = Utils.readLineFromConsole("Confirm data? (y/n)");
-
+            while (!flag.equalsIgnoreCase("y") && !flag.equalsIgnoreCase("n"))
+                flag = Utils.readLineFromConsole("Insert valid option. (y/n)");
             if (flag.equalsIgnoreCase("y")) {
-                requestType = controller.createRequestType(DEFAULT_REQUESTTYPE, DEFAULT_CONTRACTDURATION);
-                if (inputPropertyType.equalsIgnoreCase("Land")) {
-                    property = controller.createProperty(area, distanceFromCityCenter, address, propertyType, photos);
-                } else if (inputPropertyType.equalsIgnoreCase("Apartment")) {
-                    property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, airConditioning, centralHeating);
-                } else if (inputPropertyType.equalsIgnoreCase("House")) {
-                    property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, propertyType, photos, requestType);
-                }
-                announcement = controller.createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price);
                 controller.registerAnnouncement(announcement);
                 System.out.println("Announcement registered successfully");
             }

@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Owner;
 import pt.ipp.isep.dei.esoft.project.domain.Owner;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
@@ -59,5 +60,14 @@ public class OwnerRepository {
             }
         }
         return false;
+    }
+
+    public Owner getOwnerByEmail(String email) {
+        for (Owner owner : ownerList) {
+            if (email.equals(owner.getEmailAddress())) {
+                return owner;
+            }
+        }
+        return null;
     }
 }

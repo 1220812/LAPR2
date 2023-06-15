@@ -86,9 +86,6 @@ public class Address {
         if(doorNumber<=0) {
             throw new IllegalArgumentException("Door Number must be a positive value");
         }
-        if(floorNumber<=0) {
-            throw new IllegalArgumentException("Floor Number must be a positive value");
-        }
         this.streetAddress = streetAddress;
         this.doorNumber = doorNumber;
         this.floorNumber = floorNumber;
@@ -98,7 +95,7 @@ public class Address {
         this.district = district;
     }
     /**
-     * Creates a new instance of Address with ãll the attributes by default
+     * Creates a new instance of Address with all the attributes by default
      */
     public Address(){
         this.district = DEFAULT_DISTRICT;

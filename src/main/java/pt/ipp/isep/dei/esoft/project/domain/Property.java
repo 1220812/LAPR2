@@ -215,7 +215,7 @@ public class Property {
     public String toString() {
         return "\nArea = " + area +
                 "\nDistance from the city center = " + distanceFromTheCityCenter +
-                "\nAddress = " + address +
+                "\n" + address +
                 "\nProperty type = " + propertyType +
                 "\nPhotographs list = " + photographsList;
     }
