@@ -9,7 +9,6 @@ public class Agent implements Serializable {
 /**
  * The type Agent.
  */
-public class Agent{
     /**
      * name of the agent
      */
