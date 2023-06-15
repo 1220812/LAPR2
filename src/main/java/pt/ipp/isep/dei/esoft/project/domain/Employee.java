@@ -2,12 +2,13 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import  pt.ipp.isep.dei.esoft.project.repository.EmployeeRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
-public class Employee {
+public class Employee implements Serializable{
     /**
      * The name of the employee.
      */

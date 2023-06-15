@@ -12,7 +12,7 @@ public class FileInformation {
     AnnouncementRepository announcementRepository = repositories.getAnnouncementRepository();
     StoreRepository storeRepository = repositories.getStoreRepository();
     PropertyRepository propertyRepository = repositories.getPropertyRepository();
-    UserRepository userRepository = repositories.getUserRepository();
+    OwnerRepository userRepository = repositories.getOwnerRepository();
     public static final int sidPosition = 0;
     public static final int ownerNamePosition = 1;
     public static final int ownerPassportCardNumberPosition = 2;
@@ -132,7 +132,7 @@ public class FileInformation {
                 LocalDate date = LocalDate.of(Integer.parseInt(data1[2].trim()), Integer.parseInt(data1[1].trim()), Integer.parseInt(data1[0].trim()));
                 LocalDate date1 = LocalDate.of(Integer.parseInt(data2[2].trim()), Integer.parseInt(data2[1].trim()), Integer.parseInt(data2[0].trim()));
                 String ownerTaxNumber1 = ownerTaxNumber.replaceAll("-", "");
-                userRepository.add(new User(ownerName, ownerEmail,new PassportCardNumber(ownerPassportCardNumber), new TaxNumber(ownerTaxNumber1), ownerPhoneNumber));
+                userRepository.add(new Owner(ownerName, ownerPhoneNumber,ownerEmail, new TaxNumber(ownerTaxNumber1), new PassportCardNumber(ownerPassportCardNumber)));
                 storeRepository.add(newStore);
                 if(!propertySunExposure.equals("NA")){
                     boolean basement = Boolean.getBoolean(propertyBasement);

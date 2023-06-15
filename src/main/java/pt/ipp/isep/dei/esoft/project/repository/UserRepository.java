@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.User;
 import pt.isep.lei.esoft.auth.UserSession;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import java.util.Optional;
  *
  * @author Francisco Silveira
  */
-public class UserRepository {
+public class UserRepository implements Serializable {
     /**
      * Represents the list of employees in the Repository
      */

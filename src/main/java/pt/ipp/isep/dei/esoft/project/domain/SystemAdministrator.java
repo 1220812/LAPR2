@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class SystemAdministrator extends Employee {
+import java.io.Serializable;
+
+public class SystemAdministrator extends Employee implements Serializable {
     public SystemAdministrator(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Role role, Address address, String pass ) {
         super(name, email, phoneNumber, passportCardNumber, taxNumber, address, role, pass);
     }

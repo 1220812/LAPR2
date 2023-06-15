@@ -1,9 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.utils;
 
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +15,8 @@ import java.util.logging.Logger;
  * @author Paulo Maio pam@isep.ipp.pt
  */
 public class Utils {
+
+    private static final String SERIALIZATION_FILENAME = "serializationFile";
 
     static private <T> void showList(List<T> list, int len) {
         for (int i = 0; i < len; i++) {
@@ -212,6 +214,31 @@ public class Utils {
             return list.subList(0, option);
         }
     }
+    public static void serialize(Repositories repo) throws IOException {
 
 
+        FileOutputStream file = new FileOutputStream(SERIALIZATION_FILENAME);
+        ObjectOutputStream out = new ObjectOutputStream(file);
+        // Method for serialization of object
+        out.writeObject(repo);
+
+        out.close();
+        file.close();
+
+        System.out.println("Object has been serialized");
+    }
+
+    public static Repositories deserialize() throws IOException, ClassNotFoundException {
+        // Reading the object from a file
+        FileInputStream file = new FileInputStream(SERIALIZATION_FILENAME);
+        ObjectInputStream in = new ObjectInputStream(file);
+
+        // Method for deserialization of object
+        Repositories repo = (Repositories)in.readObject();
+
+        in.close();
+        file.close();
+
+        return repo;
+    }
 }

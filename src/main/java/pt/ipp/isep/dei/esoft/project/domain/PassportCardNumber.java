@@ -2,9 +2,10 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class PassportCardNumber {
+public class PassportCardNumber implements Serializable {
     /**
      * passport card number
      */

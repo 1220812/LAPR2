@@ -2,9 +2,10 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.repository.StoreRepository;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Store {
+public class Store implements Serializable {
     private String designation;
     private Address address;
     private String phoneNumber;

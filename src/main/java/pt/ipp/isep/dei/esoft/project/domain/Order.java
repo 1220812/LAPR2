@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Order {
+public class Order implements Serializable {
     /**
      * Decision of the agent on the order (Accepted, Declined or Pending(waiting for decision))
      */

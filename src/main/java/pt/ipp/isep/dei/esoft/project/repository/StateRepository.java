@@ -2,11 +2,12 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.State;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class StateRepository {
+public class StateRepository implements Serializable {
     private List<State> stateList = new ArrayList<>();
     public void addState(State state) {
         if(validateState(state)){
@@ -16,9 +17,6 @@ public class StateRepository {
 
     public List<State> getStateList(){
         return List.copyOf(this.stateList);
-    }
-    public static State CreateState(String name){
-        return new State(name);
     }
 
 

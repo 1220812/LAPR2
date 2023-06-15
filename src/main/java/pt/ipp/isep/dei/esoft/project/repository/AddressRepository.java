@@ -2,10 +2,11 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressRepository {
+public class AddressRepository implements Serializable {
     List<Address> AddressList;
 
     public AddressRepository(){

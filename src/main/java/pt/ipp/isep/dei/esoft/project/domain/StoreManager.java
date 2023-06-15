@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class StoreManager {
+import java.io.Serializable;
+
+public class StoreManager implements Serializable {
     /**
      * name of the store manager
      */

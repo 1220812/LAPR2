@@ -2,9 +2,10 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.repository.StateRepository;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class State {
+public class State implements Serializable {
     /**
      * State name
      */

@@ -3,11 +3,12 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import org.apache.commons.lang3.NotImplementedException;
 import pt.ipp.isep.dei.esoft.project.domain.RequestType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RequestTypeRepository {
+public class RequestTypeRepository implements Serializable {
     /**
      * Creation of a list to store request types
      */
@@ -30,15 +31,6 @@ public class RequestTypeRepository {
      */
     public boolean validateRequestType(RequestType requestType) {
         return !this.requestTypes.contains(requestType);
-    }
-
-    /**
-     * Method to get a copy of the list of request types
-     *
-     * @return copy of the list of request types
-     */
-    public List<RequestType> getRequestTypes() {
-        return List.copyOf(this.requestTypes);
     }
 
     /**

@@ -2,11 +2,12 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.SunExposure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class SunExposureRepository {
+public class SunExposureRepository implements Serializable {
     private List<SunExposure> sunExposureList = new ArrayList<>();
 
     public void addsunExposure(SunExposure sunExposure){

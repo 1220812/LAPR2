@@ -4,11 +4,12 @@ import pt.ipp.isep.dei.esoft.project.domain.Owner;
 import pt.ipp.isep.dei.esoft.project.domain.Owner;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class OwnerRepository {
+public class OwnerRepository implements Serializable {
 
     private static List<Owner> ownerList = new ArrayList<>();
 

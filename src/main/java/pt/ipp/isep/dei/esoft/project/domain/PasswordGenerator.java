@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
+
 /**
  * The type Password generator.
  */
-public class PasswordGenerator {
+public class PasswordGenerator implements Serializable {
 
     /**
      * Generate password string.

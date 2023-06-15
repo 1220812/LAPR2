@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class AvailableEquipment {
+public class AvailableEquipment implements Serializable {
     /**
      * equipment available
      */
