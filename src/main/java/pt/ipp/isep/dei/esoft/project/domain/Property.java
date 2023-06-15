@@ -214,11 +214,11 @@ public class Property implements Serializable {
      */
     @Override
     public String toString() {
-        return "area = " + area +
-                ", distanceFromTheCityCenter = " + distanceFromTheCityCenter +
-                ", address = " + address +
-                ", propertyType = " + propertyType +
-                ", photographsList = " + photographsList;
+        return "\nArea = " + area +
+                "\nDistance from the city center = " + distanceFromTheCityCenter +
+                "\nAddress = " + address +
+                "\nProperty type = " + propertyType +
+                "\nPhotographs list = " + photographsList;
     }
     /**
      * Method that creates an exact copy of the property object

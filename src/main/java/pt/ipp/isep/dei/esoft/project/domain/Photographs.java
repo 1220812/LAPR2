@@ -82,6 +82,6 @@ public class Photographs implements Serializable {
      */
     @Override
     public String toString() {
-        return " | PhotoID: "+photoID+" | Path To PNG: "+ photoURI;
+        return "PhotoID = "+photoID+" | Path To PNG = "+ photoURI;
     }
 }

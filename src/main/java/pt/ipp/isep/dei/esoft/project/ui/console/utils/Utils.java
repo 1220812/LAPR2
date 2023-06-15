@@ -196,9 +196,9 @@ public class Utils {
         String input;
         do {
             input = String.valueOf(Utils.readLineFromConsole(s));
-        } while (!input.equalsIgnoreCase("s") && !input.equalsIgnoreCase("n"));
+        } while (!input.equalsIgnoreCase("y") && !input.equalsIgnoreCase("n"));
 
-        return input.equalsIgnoreCase("s");
+        return input.equalsIgnoreCase("y");
     }
     static public <T> List<T> listAndSelectMany(List<T> list) {
         int len = list.size();

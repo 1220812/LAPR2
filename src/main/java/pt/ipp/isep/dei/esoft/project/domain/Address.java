@@ -291,7 +291,7 @@ public class Address implements Serializable {
      */
     @Override
     public String toString() {
-        return "state : "+state + ", district : "+district + ", city : "+city  + ", zipcode : "+zipCode + ", street address: "+streetAddress;
+        return "State = "+state + "\nDistrict = "+district + "\nCity = "+city  + "\nZipcode = "+zipCode + "\nStreet address= "+streetAddress+"\nDoor number = "+doorNumber+"\nFloor number = "+ floorNumber;
     }
 
     /**
