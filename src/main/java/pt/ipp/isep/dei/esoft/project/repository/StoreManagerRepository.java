@@ -1,14 +1,13 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.isep.lei.esoft.auth.UserSession;
-import pt.isep.lei.esoft.auth.domain.model.Email;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class StoreManagerReposiotry {
+public class StoreManagerRepository implements Serializable {
     private static List<StoreManager> storeManagerList = new ArrayList<>();
 
     public static StoreManager createStoreManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, Store store, String pass) {

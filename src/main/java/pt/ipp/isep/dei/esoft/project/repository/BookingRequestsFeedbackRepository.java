@@ -2,10 +2,11 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.BookingRequestFeedback;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingRequestsFeedbackRepository {
+public class BookingRequestsFeedbackRepository implements Serializable {
 
     private List<BookingRequestFeedback> BookingRequestFeedbackList = new ArrayList<>();
 

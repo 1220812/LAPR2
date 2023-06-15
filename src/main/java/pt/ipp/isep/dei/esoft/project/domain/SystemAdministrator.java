@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
+
 /**
  * The type System administrator.
  */
-public class SystemAdministrator extends Employee {
+public class SystemAdministrator extends Employee implements Serializable {
     /**
      * Instantiates a new System administrator.
      *

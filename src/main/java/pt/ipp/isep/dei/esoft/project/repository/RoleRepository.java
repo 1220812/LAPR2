@@ -2,11 +2,12 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Role;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RoleRepository {
+public class RoleRepository implements Serializable {
     private List<Role> roleList = new ArrayList<>();
     public void addRole(Role role){
         if(validateRole(role)){

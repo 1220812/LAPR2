@@ -2,13 +2,14 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * The type Employee repository.
  */
-public class EmployeeRepository {
+public class EmployeeRepository implements Serializable {
     private  List<Employee> NewEmployeeList = new ArrayList<>();
 
     public EmployeeRepository(){}

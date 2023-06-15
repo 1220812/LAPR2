@@ -1,10 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-public class House extends Residence {
+public class House extends Residence implements Serializable {
     /**
      * existence of a basement
      */

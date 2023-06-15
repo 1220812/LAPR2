@@ -2,8 +2,10 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 //import pt.ipp.isep.dei.esoft.project.repository.AgentRepository;
 
+import java.io.Serializable;
 import java.util.Objects;
 
+public class Agent implements Serializable {
 /**
  * The type Agent.
  */

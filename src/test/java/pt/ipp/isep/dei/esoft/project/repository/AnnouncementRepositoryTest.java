@@ -9,77 +9,76 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OrderRepositoryTest {
+class AnnouncementRepositoryTest {
 
     @Test
-    void addNewOrder() {
-        OrderRepository orderRepository = new OrderRepository();
+    void getAnnouncements() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
         PropertyType propertyType = new PropertyType("Apartment");
         RequestType requestType = new RequestType("Rent", 2);
         LocalDate date = LocalDate.of(2020, 1, 1);
         Property property = new Property(100, 1000, address, propertyType, 200000, date);
+        AnnouncementRepository announcementRepository = new AnnouncementRepository();
         Announcement announcement = new Announcement(property, date, 5, requestType, 100000, new Owner("John", "912345678", "john@test.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), new Store("Store", 1));
-        Order order = new Order(announcement, 100000, "john2example");
-        orderRepository.addNewOrder(order);
-        assertTrue(orderRepository.getOrders().contains(order));
+        announcementRepository.addAnnouncement(announcement);
+        List<Announcement> announcements = announcementRepository.getAnnouncements();
+        assertTrue(announcements.contains(announcement));
     }
 
     @Test
-    void validateOrder() {
-        OrderRepository orderRepository = new OrderRepository();
+    void add() throws CloneNotSupportedException {
+        AnnouncementRepository announcementRepository = new AnnouncementRepository();
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
         PropertyType propertyType = new PropertyType("Apartment");
         RequestType requestType = new RequestType("Rent", 2);
         LocalDate date = LocalDate.of(2020, 1, 1);
         Property property = new Property(100, 1000, address, propertyType, 200000, date);
         Announcement announcement = new Announcement(property, date, 5, requestType, 100000, new Owner("John", "912345678", "john@test.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), new Store("Store", 1));
-        boolean valid = orderRepository.validateOrder(announcement, 100000);
+        List<Announcement> addedAnnouncement = announcementRepository.add(announcement);
+        assertTrue(addedAnnouncement.contains(announcement));
+    }
+
+    @Test
+    void validateAnnouncement() {
+        AnnouncementRepository announcementRepository = new AnnouncementRepository();
+        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
+        PropertyType propertyType = new PropertyType("Apartment");
+        RequestType requestType = new RequestType("Rent", 2);
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        Property property = new Property(100, 1000, address, propertyType, 200000, date);
+        Announcement announcement = new Announcement(property, date, 5, requestType, 100000, new Owner("John", "912345678", "john@test.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), new Store("Store", 1));
+        boolean valid = AnnouncementRepository.validateAnnouncement(announcement);
         assertTrue(valid);
+        announcementRepository.addAnnouncement(announcement);
+        boolean valid1 = AnnouncementRepository.validateAnnouncement(announcement);
+        assertFalse(valid1);
     }
 
     @Test
-    void valid() {
-        OrderRepository orderRepository = new OrderRepository();
+    void getAnnouncementsList() {
+        AnnouncementRepository announcementRepository = new AnnouncementRepository();
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
         PropertyType propertyType = new PropertyType("Apartment");
         RequestType requestType = new RequestType("Rent", 2);
         LocalDate date = LocalDate.of(2020, 1, 1);
         Property property = new Property(100, 1000, address, propertyType, 200000, date);
         Announcement announcement = new Announcement(property, date, 5, requestType, 100000, new Owner("John", "912345678", "john@test.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), new Store("Store", 1));
-        Order order = new Order(announcement, 100000, "john2example");
-        orderRepository.addNewOrder(order);
-        boolean valid = orderRepository.valid(order);
-        assertTrue(valid);
+        announcementRepository.addAnnouncement(announcement);
+        List<Announcement> announcements = announcementRepository.getAnnouncementsList();
+        assertTrue(announcements.contains(announcement));
     }
 
     @Test
-    void getOrders() {
-        OrderRepository orderRepository = new OrderRepository();
+    void addAnnouncement() {
+        AnnouncementRepository announcementRepository = new AnnouncementRepository();
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
         PropertyType propertyType = new PropertyType("Apartment");
         RequestType requestType = new RequestType("Rent", 2);
         LocalDate date = LocalDate.of(2020, 1, 1);
         Property property = new Property(100, 1000, address, propertyType, 200000, date);
         Announcement announcement = new Announcement(property, date, 5, requestType, 100000, new Owner("John", "912345678", "john@test.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), new Store("Store", 1));
-        Order order = new Order(announcement, 100000, "john2example");
-        orderRepository.addNewOrder(order);
-        List<Order> orders = orderRepository.getOrders();
-        assertTrue(orders.contains(order));
-    }
-
-    @Test
-    void getOrdersByAnnouncement() {
-        OrderRepository orderRepository = new OrderRepository();
-        Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
-        PropertyType propertyType = new PropertyType("Apartment");
-        RequestType requestType = new RequestType("Rent", 2);
-        LocalDate date = LocalDate.of(2020, 1, 1);
-        Property property = new Property(100, 1000, address, propertyType, 200000, date);
-        Announcement announcement = new Announcement(property, date, 5, requestType, 100000, new Owner("John", "912345678", "john@test.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), new Store("Store", 1));
-        Order order = new Order(announcement, 100000, "john2example");
-        orderRepository.addNewOrder(order);
-        List<Order> orders = orderRepository.getOrdersByAnnouncement(announcement);
-        assertTrue(orders.contains(order));
+        announcementRepository.addAnnouncement(announcement);
+        List<Announcement> announcements = announcementRepository.getAnnouncements();
+        assertTrue(announcements.contains(announcement));
     }
 }

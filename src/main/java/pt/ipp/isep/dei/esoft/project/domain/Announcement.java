@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Announcement {
+public class Announcement implements Serializable {
     /**
      * announcement property
      */

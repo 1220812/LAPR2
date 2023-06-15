@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,7 @@ import java.util.Optional;
 /**
  * The type Store repository.
  */
-public class StoreRepository {
+public class StoreRepository implements Serializable {
     private static List<Store> storeList = new ArrayList<>();
 
     /**

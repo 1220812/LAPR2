@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class RequestType {
+public class RequestType implements Serializable {
     /**
      * Request type
      */

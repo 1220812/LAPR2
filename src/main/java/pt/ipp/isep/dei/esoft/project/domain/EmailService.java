@@ -2,7 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.*;
 
-public class EmailService {
+public class EmailService implements Serializable {
     /**
      * Method that sends an email to the user with the password when he registers in the system
      * @param email user´s email

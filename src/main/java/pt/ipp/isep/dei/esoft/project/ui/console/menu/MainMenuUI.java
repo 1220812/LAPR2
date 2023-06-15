@@ -1,16 +1,47 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.ui.console.DevTeamUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.DisplayPropertiesUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.authorization.AuthenticationUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenuUI implements Runnable {
 
-    public MainMenuUI() {
+    private static final String SERIALIZATION_FILENAME = "serializationFile";
+
+    public MainMenuUI() throws IOException {
+    }
+    public static void serialize(Repositories repo) throws IOException {
+
+
+        FileOutputStream file = new FileOutputStream(SERIALIZATION_FILENAME);
+        ObjectOutputStream out = new ObjectOutputStream(file);
+        // Method for serialization of object
+        out.writeObject(repo);
+
+        out.close();
+        file.close();
+
+        System.out.println("Object has been serialized");
+    }
+
+    public static Repositories deserialize() throws IOException, ClassNotFoundException {
+        // Reading the object from a file
+        FileInputStream file = new FileInputStream(SERIALIZATION_FILENAME);
+        ObjectInputStream in = new ObjectInputStream(file);
+
+        // Method for deserialization of object
+        Repositories repo = (Repositories)in.readObject();
+
+        in.close();
+        file.close();
+
+        return repo;
     }
 
     public void run() {
@@ -26,7 +57,6 @@ public class MainMenuUI implements Runnable {
                 options.get(option).run();
             }
         } while (option != -1);
+
     }
-
-
 }

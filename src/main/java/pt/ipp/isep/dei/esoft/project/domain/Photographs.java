@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class Photographs {
+import java.io.Serializable;
+
+public class Photographs implements Serializable {
     /**
      * photo id
      */

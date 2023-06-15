@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.isep.lei.esoft.auth.UserSession;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ import java.util.Optional;
 /**
  * Agent repository.
  */
-public class AgentRepository {
+public class AgentRepository implements Serializable {
 
     private static List<Agent> agentList = new ArrayList<>();
 

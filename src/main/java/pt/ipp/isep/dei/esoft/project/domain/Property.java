@@ -1,11 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Property {
+public class Property implements Serializable {
     /**
      * area of the property
      */

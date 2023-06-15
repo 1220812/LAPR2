@@ -3,7 +3,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.UserRepository;
 
-public class CurrentSession {
+import java.io.Serializable;
+
+public class CurrentSession implements Serializable {
     private static String email;
     private static UserRepository userRepository = Repositories.getInstance().getUserRepository();
 

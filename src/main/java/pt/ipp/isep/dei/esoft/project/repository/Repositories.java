@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import java.io.*;
+
 /**
  * The type Repositories.
  */
-public class Repositories {
+public class Repositories implements Serializable{
     // From the template
     private static final Repositories instance = new Repositories();
     private final TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
@@ -67,7 +69,7 @@ public class Repositories {
      */
     public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
     public PropertyRepository getPropertyRepository = new PropertyRepository();
-    public BookingRequestsRepository bookingRequestsRepository = new BookingRequestsRepository();
+    public transient BookingRequestsRepository bookingRequestsRepository = new BookingRequestsRepository();
     public BookingRequestsFeedbackRepository bookingRequestsFeedbackRepository = new BookingRequestsFeedbackRepository();
 
     private Repositories() {

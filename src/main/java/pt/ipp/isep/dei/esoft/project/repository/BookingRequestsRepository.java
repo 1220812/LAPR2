@@ -1,4 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-public class BookingRequestsRepository {
+import java.io.Serializable;
+
+public class BookingRequestsRepository implements Serializable {
 }

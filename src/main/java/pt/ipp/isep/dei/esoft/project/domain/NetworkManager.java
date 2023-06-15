@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class NetworkManager {
+import java.io.Serializable;
+
+public class NetworkManager implements Serializable {
     /**
      * Name of the Network Manager
      */

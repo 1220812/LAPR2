@@ -3,10 +3,11 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.District;
 import pt.ipp.isep.dei.esoft.project.domain.State;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DistrictRepository {
+public class DistrictRepository implements Serializable {
     /**
      * Creating a list with the property types
      */

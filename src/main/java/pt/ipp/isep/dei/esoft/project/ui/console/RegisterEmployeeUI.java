@@ -6,8 +6,6 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
-import java.util.Scanner;
-
 public class RegisterEmployeeUI implements Runnable {
 
     String name = null;
@@ -113,7 +111,7 @@ public class RegisterEmployeeUI implements Runnable {
             } else if (inputRole.equals("Store Manager")) {
                 StoreManager s = controller.registerStoreManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
 //                System.out.println(s);
-                System.out.println(StoreManagerReposiotry.getStoreManagerList());
+                System.out.println(StoreManagerRepository.getStoreManagerList());
 
             }
         }

@@ -1,12 +1,13 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * The Message class represents a message.
  */
-public class Message {
+public class Message implements Serializable {
     private String name;
     private int phone;
     private int inputAnnou;

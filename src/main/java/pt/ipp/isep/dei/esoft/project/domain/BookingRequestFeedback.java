@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class BookingRequestFeedback {
+public class BookingRequestFeedback implements Serializable {
 
     private String finalFeedback;
     private String justification;

@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     // ATTRIBUTES
 

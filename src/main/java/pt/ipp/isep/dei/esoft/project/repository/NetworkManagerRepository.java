@@ -4,11 +4,12 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.isep.lei.esoft.auth.UserSession;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class NetworkManagerRepository {
+public class NetworkManagerRepository implements Serializable {
     private static List<NetworkManager> networkManagerList = new ArrayList<>();
 
     public static NetworkManager createNetworkManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, String pass) {

@@ -1,12 +1,13 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Request {
+public class Request implements Serializable {
     /**
      * Type of request (sale or rent)
      */

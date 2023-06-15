@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class District{
+import java.io.Serializable;
+
+public class District implements Serializable {
     /**
      * District name
      */

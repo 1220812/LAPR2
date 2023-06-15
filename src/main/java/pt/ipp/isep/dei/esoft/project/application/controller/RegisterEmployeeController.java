@@ -151,7 +151,7 @@ public class RegisterEmployeeController {
     }
 
     public StoreManager registerStoreManager(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency,Store store, String pass) {
-        return StoreManagerReposiotry.createStoreManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+        return StoreManagerRepository.createStoreManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
     }
 
     public SystemAdministrator registerSystemAdministrator(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, String pass) {

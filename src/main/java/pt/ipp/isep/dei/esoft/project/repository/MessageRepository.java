@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Message;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Locale;
 /**
  * The MessageRepository class is responsible for storing and managing messages.
  */
-public class MessageRepository {
+public class MessageRepository implements Serializable {
     static List<Message> MessageList;
     static List<Message> MessageCompleteList;
 

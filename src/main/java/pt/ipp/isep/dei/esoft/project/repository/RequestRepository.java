@@ -6,26 +6,27 @@ import pt.ipp.isep.dei.esoft.project.domain.SortingMethods.MergeSort;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
-public class RequestRepository {
+public class RequestRepository implements Serializable {
     /**
      * List of requests
      */
-    private static List<Request> requestList = new ArrayList<>();
+    List<Request> requestList = new ArrayList<>();
 
-    private static List<Request> acceptedRequestList = new ArrayList<>();
+    List<Request> acceptedRequestList = new ArrayList<>();
 
-    private static List<Request> declinedRequestList = new ArrayList<>();
+    List<Request> declinedRequestList = new ArrayList<>();
 
     /**
      * Get property types
      */
-    public static List<Request> getRequests() {
+    public List<Request> getRequests() {
         return List.copyOf(requestList);
     }
 

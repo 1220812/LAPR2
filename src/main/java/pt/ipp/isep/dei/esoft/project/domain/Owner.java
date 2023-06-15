@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Owner extends User{
+public class Owner extends User implements Serializable {
     /**
      * name of the owner
      */

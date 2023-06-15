@@ -1,11 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PropertyTypeRepository {
+public class PropertyTypeRepository implements Serializable {
     private final List<PropertyType> propertiesTypeList = new ArrayList<>();
     public void addPropertyType(PropertyType propertyType){
         if(validatePropertyType(propertyType)){

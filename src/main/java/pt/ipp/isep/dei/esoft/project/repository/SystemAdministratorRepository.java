@@ -2,11 +2,12 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class SystemAdministratorRepository {
+public class SystemAdministratorRepository implements Serializable {
     private static List<SystemAdministrator> systemAdministratorsList = new ArrayList<>();
 
     public static SystemAdministrator createSystemAdministrator(String name, String email, String phone, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, String pass) {

@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class CreateRequestController {
     Repositories repositories = Repositories.getInstance();
-    private AgencyRepository agencyRepository;
-    private SunExposureRepository sunExposureRepository;
-    private PropertyRepository propertyRepository;
-    private RequestRepository requestRepository;
+    private AgencyRepository agencyRepository = Repositories.getInstance().getAgencyRepository();
+    private SunExposureRepository sunExposureRepository = Repositories.getInstance().getSunExposureRepository();
+    private PropertyRepository propertyRepository = Repositories.getInstance().getPropertyRepository();
+    private RequestRepository requestRepository = Repositories.getInstance().getRequestRepository();
     private final RequestTypeRepository requestTypeRepository;
 
     public CreateRequestController() {
@@ -57,9 +57,8 @@ public class CreateRequestController {
         return Repositories.getInstance().getSunExposureRepository().getSunExposureList();
     }
     public Request registerRequest(Request request) {
-        return requestRepository.addRequest(request);
+        return Repositories.getInstance().getRequestRepository().addRequest(request);
     }
-
     public List<Request> getRequests() {
         return Repositories.getInstance().getRequestRepository().getRequests();
     }
