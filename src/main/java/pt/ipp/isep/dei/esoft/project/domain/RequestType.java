@@ -79,8 +79,9 @@ public class RequestType {
      */
     @Override
     public String toString() {
-        return "RequestType : " + requestType +
-                ", contractDuration = " + contractDuration;
+        if(requestType.equalsIgnoreCase("Rent"))
+            return "RequestType = " + requestType + "\nContract duration = " + contractDuration;
+        else return "RequestType = " + requestType;
     }
 
     /**

@@ -304,16 +304,16 @@ public class Announcement {
      */
     @Override
     public String toString() {
-        return "Announcement : " + "\n" +
-                "property = " + property +
-                ", commissionType = " + commissionType + '\'' +
-                ", commission = " + commission +
-                ", requestType = " + requestType +
-                ", agent = " + agent +
-                ", date = " + date +
-                ", price = " + price +
-                ", owner = "  + owner +
-                ", store = " + store;
+        return "Announcement : " +
+                "\nProperty = " + property +
+                "\nCommission type = " + commissionType +
+                "\nCommission = " + commission +
+                "\nRequestType = " + requestType +
+                "\nAgent = " + agent +
+                "\nDate = " + date +
+                "\nPrice = " + price +
+                "\nOwner = "  + owner +
+                "\nStore = " + store;
     }
 
     /**
