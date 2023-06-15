@@ -235,7 +235,7 @@ public class Utils {
 
         // Method for deserialization of object
         Repositories repo = (Repositories)in.readObject();
-
+        repo.getAuthenticationRepository().initializeFacade();
         in.close();
         file.close();
 

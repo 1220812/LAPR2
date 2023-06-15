@@ -69,7 +69,7 @@ public class Repositories implements Serializable{
      */
     public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
     public PropertyRepository getPropertyRepository = new PropertyRepository();
-    public BookingRequestsRepository bookingRequestsRepository = new BookingRequestsRepository();
+    public transient BookingRequestsRepository bookingRequestsRepository = new BookingRequestsRepository();
     public BookingRequestsFeedbackRepository bookingRequestsFeedbackRepository = new BookingRequestsFeedbackRepository();
 
     private Repositories() {

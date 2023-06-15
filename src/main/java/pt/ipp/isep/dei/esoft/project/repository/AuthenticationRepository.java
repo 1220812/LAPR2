@@ -6,7 +6,7 @@ import pt.isep.lei.esoft.auth.UserSession;
 import java.io.Serializable;
 
 public class AuthenticationRepository implements Serializable {
-    private final AuthFacade authenticationFacade = new AuthFacade();
+    private transient AuthFacade authenticationFacade = new AuthFacade();
 
     public boolean doLogin(String email, String pwd) {
         return authenticationFacade.doLogin(email, pwd).isLoggedIn();
@@ -26,6 +26,10 @@ public class AuthenticationRepository implements Serializable {
 
     public boolean addUserWithRole(String name, String email, String pwd, String roleId) {
         return authenticationFacade.addUserWithRole(name, email, pwd, roleId);
+    }
+
+    public void initializeFacade(){
+        this.authenticationFacade=new AuthFacade();
     }
 
 }

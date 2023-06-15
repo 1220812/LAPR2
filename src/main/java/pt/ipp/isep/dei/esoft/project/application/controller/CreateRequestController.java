@@ -57,7 +57,7 @@ public class CreateRequestController {
         return Repositories.getInstance().getSunExposureRepository().getSunExposureList();
     }
     public Request registerRequest(Request request) {
-        return requestRepository.addRequest(request);
+        return Repositories.getInstance().getRequestRepository().addRequest(request);
     }
     public List<Request> getRequests() {
         return Repositories.getInstance().getRequestRepository().getRequests();

@@ -17,16 +17,16 @@ public class RequestRepository implements Serializable {
     /**
      * List of requests
      */
-    private static List<Request> requestList = new ArrayList<>();
+    List<Request> requestList = new ArrayList<>();
 
-    private static List<Request> acceptedRequestList = new ArrayList<>();
+    List<Request> acceptedRequestList = new ArrayList<>();
 
-    private static List<Request> declinedRequestList = new ArrayList<>();
+    List<Request> declinedRequestList = new ArrayList<>();
 
     /**
      * Get property types
      */
-    public static List<Request> getRequests() {
+    public List<Request> getRequests() {
         return List.copyOf(requestList);
     }
 

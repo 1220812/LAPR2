@@ -57,12 +57,6 @@ public class MainMenuUI implements Runnable {
                 options.get(option).run();
             }
         } while (option != -1);
-        Repositories repo = Repositories.getInstance();
-        try {
-            Utils.serialize(repo);
-        } catch (IOException e) {
-            System.out.println("Failed to serialize repositories");
-            e.printStackTrace();
-        }
+
     }
 }
