@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Message;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -70,6 +70,29 @@ public class MessageRepository implements Serializable {
     public static Message addMessage(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         Message message = new Message(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime);
         addComplete(message);
+        return message;
+    }
+
+    public List<Message> getRequestAssignedList(Agent agent) {
+        List<Message> assignedList = new ArrayList<>();
+        for (Message message : this.MessageList) {
+            if (message.getAgent().getEmailAddress().equalsIgnoreCase(agent.getEmailAddress())) {
+                assignedList.add(message);
+            }
+        }
+        return assignedList;
+    }
+
+    public Client getClient(Message message) {
+        return message.getClient();
+    }
+
+    public Announcement getAnnouncement(Message message) {
+        return message.getAnnouncement();
+    }
+
+    public static Message removeMessage(Message message) {
+        getMessageList().remove(message);
         return message;
     }
 }
