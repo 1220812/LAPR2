@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Announcement {
     /**
@@ -89,6 +90,43 @@ public class Announcement {
         this.store = store;
     }
 
+    /**
+     * Method that creates an instance of Announcement with the given parameters:
+     * @param property property to announce
+     * @param date date of the announcement
+     * @param commission commission
+     * @param requestType request type
+     * @param price announced price
+     * @param owner owner of the property announced
+     * @param store store selected by the owner
+     */
+    public Announcement(Property property, LocalDate date, double commission, RequestType requestType, double price, Owner owner, Store store) {
+        if (property == null) {
+            throw new IllegalArgumentException("Property can't be null");
+        }
+        if (date == null) {
+            throw new IllegalArgumentException("Date can't be null");
+        }
+        if (requestType == null) {
+            throw new IllegalArgumentException("Request type can't be null");
+        }
+        if (owner == null) {
+            throw new IllegalArgumentException("Owner can't be null");
+        }
+        if (price <= 0) {
+            throw new IllegalArgumentException("Price can't be negative or zero");
+        }
+        if (store == null) {
+            throw new IllegalArgumentException("Store can't be null");
+        }
+        this.property = property;
+        this.date = date;
+        this.commission = commission;
+        this.requestType = requestType;
+        this.price = price;
+        this.owner = owner;
+        this.store = store;
+    }
     /**
      * Method that shows the date of the announcement
      *
@@ -266,16 +304,16 @@ public class Announcement {
      */
     @Override
     public String toString() {
-        return "Announcement : " + "\n" +
-                "property = " + property +
-                ", commissionType = " + commissionType + '\'' +
-                ", commission = " + commission +
-                ", requestType = " + requestType +
-                ", agent = " + agent +
-                ", date = " + date +
-                ", price = " + price +
-                ", owner = "  + owner +
-                ", store = " + store;
+        return "Announcement : " +
+                "\nProperty = " + property +
+                "\nCommission type = " + commissionType +
+                "\nCommission = " + commission +
+                "\nRequestType = " + requestType +
+                "\nAgent = " + agent +
+                "\nDate = " + date +
+                "\nPrice = " + price +
+                "\nOwner = "  + owner +
+                "\nStore = " + store;
     }
 
     /**
@@ -284,5 +322,27 @@ public class Announcement {
      */
     public Announcement clone() {
         return new Announcement(this.property, this.date, this.commissionType, this.commission, this.requestType, this.agent, this.price, this.owner, this.store);
+    }
+
+    /**
+     * Method that compares two announcements
+     * @param o announcement to be compared
+     * @return true if the announcements are equal, false if not
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Announcement that = (Announcement) o;
+        return Double.compare(that.commission, commission) == 0 && Double.compare(that.price, price) == 0 && property.equals(that.property) && commissionType.equals(that.commissionType) && requestType.equals(that.requestType) && agent.equals(that.agent) && date.equals(that.date) && owner.equals(that.owner) && store.equals(that.store);
+    }
+
+    /**
+     * Method that creates a hash code for the announcement
+     * @return hash code for the announcement
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(property, commissionType, commission, requestType, agent, date, price, owner, store);
     }
 }

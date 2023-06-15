@@ -29,25 +29,15 @@ public class RequestRepository {
         return List.copyOf(requestList);
     }
 
-    public List<Request> add(Request request) {
+    public boolean add(Request request) {
 
-        requestList.add(request);
-
-        Optional<Request> newRequest = Optional.empty();
-        boolean operationSuccess = false;
-
-        if (validateRequest(request)) {
-            newRequest = Optional.of((Request) request.clone());
-            operationSuccess = requestList.add((Request) newRequest.get());
+        if(validateRequest(request)){
+            return true;
         }
-
-        if (!operationSuccess) {
-            newRequest = Optional.empty();
-        }
-        return requestList;
+        return false;
     }
 
-    public static Request addRequest(Request request) {
+    public  Request addRequest(Request request) {
         if (validateRequest(request))
             requestList.add(request);
         return request;
@@ -71,7 +61,7 @@ public class RequestRepository {
     }
 
 
-    private static boolean validateRequest(Request request) {
+    private  boolean validateRequest(Request request) {
         boolean isValid = !requestList.contains(request);
         return isValid;
     }

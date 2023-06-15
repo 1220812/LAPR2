@@ -9,10 +9,6 @@ public class PassportCardNumber {
      * passport card number
      */
     private String passportCardNumber;
-    /**
-     * passport card number length
-     */
-    private static final int PASSPORT_NUMBER_LENGTH = 8;
 
     /**
      * This method creates the PassportCardNumber with passportCardNumber
@@ -20,9 +16,6 @@ public class PassportCardNumber {
      * @param passportCardNumber passport card number
      */
     public PassportCardNumber(String passportCardNumber) {
-        if(passportCardNumber.length() != PASSPORT_NUMBER_LENGTH || !StringUtils.isNumeric(passportCardNumber)){
-            throw new IllegalArgumentException("Invalid passport card number");
-        }
         this.passportCardNumber = passportCardNumber;
     }
     /**

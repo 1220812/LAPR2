@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +26,14 @@ public class Property {
      * List of photographs of the property
      */
     private List<Photographs> photographsList = new ArrayList<>();
+    /**
+     * final price of the property (price of sell/rent of the property)
+     */
+    private double finalPrice;
+    /**
+     * business date (date of the sell/rent of the property)
+     */
+    private LocalDate businessDate;
 
     /**
      * Method that creates a new instance of property
@@ -53,6 +62,39 @@ public class Property {
         this.address = address;
         this.propertyType = propertyType;
         this.photographsList = photographsList;
+    }
+
+    /**
+     * This method creates a new instance of property with the given parameters:
+     * @param area area of the property
+     * @param distanceFromTheCityCenter distance between the property and the city center
+     * @param address property address
+     * @param propertyType type of property
+     * @param finalPrice final price of the property (price of sell/rent of the property)
+     * @param businessDate business date (date of the sell/rent of the property)
+     */
+    public Property(double area, double distanceFromTheCityCenter, Address address, PropertyType propertyType, double finalPrice, LocalDate businessDate) {
+        if (area <= 0) {
+            throw new IllegalArgumentException("Area must be greater than 0");
+        }
+        if (distanceFromTheCityCenter <= 0) {
+            throw new IllegalArgumentException("Distance from the city center must be greater than 0");
+        }
+        if (address == null) {
+            throw new IllegalArgumentException("Address must not be null");
+        }
+        if (propertyType == null) {
+            throw new IllegalArgumentException("Property type must not be null");
+        }
+        if(finalPrice <= 0){
+            throw new IllegalArgumentException("Final price must be greater than 0");
+        }
+        this.area = area;
+        this.distanceFromTheCityCenter = distanceFromTheCityCenter;
+        this.address = address;
+        this.propertyType = propertyType;
+        this.finalPrice = finalPrice;
+        this.businessDate = businessDate;
     }
 
     /**
@@ -171,11 +213,11 @@ public class Property {
      */
     @Override
     public String toString() {
-        return "area = " + area +
-                ", distanceFromTheCityCenter = " + distanceFromTheCityCenter +
-                ", address = " + address +
-                ", propertyType = " + propertyType +
-                ", photographsList = " + photographsList;
+        return "\nArea = " + area +
+                "\nDistance from the city center = " + distanceFromTheCityCenter +
+                "\nAddress = " + address +
+                "\nProperty type = " + propertyType +
+                "\nPhotographs list = " + photographsList;
     }
     /**
      * Method that creates an exact copy of the property object

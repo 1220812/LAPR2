@@ -36,8 +36,8 @@
         <maven-surefire-plugin>3.0.0-M9</maven-surefire-plugin>
 
         <!-- Mockito Version Configuration -->
-        <mockito-all>1.10.19</mockito-all>
-        <mockito-core>5.1.1</mockito-core>
+        <mockito-all>2.0.2-beta</mockito-all>
+        <mockito-core>5.2.0</mockito-core>
 
     </properties>
 
@@ -59,6 +59,9 @@
             <version>${junit-jupiter}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+
 
         <dependency>
             <groupId>org.mockito</groupId>
@@ -88,8 +91,15 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>20</version>
+            <version>21-ea+17</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>21-ea+17</version>
+        </dependency>
+
 
     </dependencies>
     <build>

@@ -24,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * The class CreateTaskController does not perform anything by itself and relies on other classes to work. Therefore,
  * all these tests are integration tests and not unit tests. That is why this class is named IT from Integration Tests.
  */
-class CreateTaskControllerIT {
+class
+CreateTaskControllerIT {
 
     @Test
     void ensureCreateTaskWorks() {
