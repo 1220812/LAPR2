@@ -12,7 +12,20 @@ public class BookingRequestFeedbackUI implements Runnable{
 
     private BookingRequestFeedbackController controller;
 
+    public BookingRequestFeedbackUI(BookingRequestFeedbackController controller) {
+        this.controller = controller;
+    }
+
     public void run(){
+
+        String finalFeedback = null;
+        String justification = null;
+        BookingRequestFeedback bookingRequestFeedback = new BookingRequestFeedback(finalFeedback, justification);
+
+        System.out.println();
+        System.out.println("Choose an appointment request to answer:");
+        System.out.println();
+
 
     }
 }

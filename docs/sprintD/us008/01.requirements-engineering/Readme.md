@@ -80,6 +80,8 @@ As an agent, I intend to see the list of property announcement requests made to 
 * **AC4:** The comission must be positive.
 * **AC5:** The announcement must be created.
 * **AC6:** The request list must be updated.
+* **AC6:** The request must have all information needed.
+
 
 
 ### 1.4. Found out Dependencies
