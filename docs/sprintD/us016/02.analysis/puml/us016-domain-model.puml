@@ -16,17 +16,20 @@ hide methods
 '  -description
 '}
 
-class EmailResponse {
-    emailTo
-    emailFrom
-    emailSubject
-    emailBody
+class SendEmailMessage {
 }
 
 class Agent {
     name
     phoneNumber
     emailAddress
+    taxNumber
+    passportCardNumber
+    address
+    role
+    agency
+    store
+    pass
 }
 
 
@@ -34,10 +37,10 @@ class Address {
      streetAddress
      doorNumber
      floorNumber
-     city
-     district
+     zipCode
      state
-     ZipCode
+     district
+     city
 }
 
 class Client {
@@ -49,29 +52,31 @@ class Client {
 }
 
 class Property {
-       type of property
        area
-       distance from center
-       price
-       photos
-       state
-       propertyCode
-
+       distanceFromTheCityCenter
+       address
+       propertyType
+       photographsList
+       finalPrice
+       businessDate
 }
 
-class BookingRequest {
-    visitDate
-
+class Message {
+    client
+    phone
+    announcement
+    newVisitStartTime
+    newVisitEndTime
 }
 
 
 Agent -- Client: Informs >
-(Agent, Client) -- EmailResponse: making use of
+(Agent, Client) -- SendEmailMessage: making use of
 
-Property "1" -- "*" BookingRequest: has >
-EmailResponse "1" -- "1" BookingRequest: about >
-Agent "1" -- BookingRequest: decides >
-BookingRequest "*" -- "1" Client: makes <
+Property "1" -- "*" Message: has >
+SendEmailMessage "1" -- "1" Message: about >
+Agent "1" -- Message: decides >
+Message "*" -- "1" Client: makes <
 Address "1" -- "1" Property: has >
 
 @enduml
