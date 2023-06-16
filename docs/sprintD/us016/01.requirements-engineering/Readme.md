@@ -102,7 +102,8 @@ Important: In US15 the Agent gets a list of booking requests (made to him). Then
 **Input Data:**
 
 * Typed data:
-	
+    * the response to the client
+
 * Selected data:
 	* booking request 
 	* option to respond to the user that scheduled the visit
