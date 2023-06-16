@@ -20,6 +20,8 @@ As an agent, I intend to see the list of property announcement requests made to 
 
 **From the client clarifications:**
 
+5th May
+
 > **Question:** When displaying the property announcement requests in the system to the agent besides them being ordered from most recent to oldest is there a need to display the specific day where the requests were published?
 >  
 > **Answer:** The list of property announcement requests should be sorted by the date they were created, with the most recent requests appearing first. The system should show the date when the property announcement requests was made.
@@ -29,6 +31,7 @@ As an agent, I intend to see the list of property announcement requests made to 
 >
 > **Answer:** No. The agent can only post one announcement at a time.
 
+9th May
 
 > **Question:** Regarding US008, can the agent decline an announcement request?
 >
@@ -39,6 +42,7 @@ As an agent, I intend to see the list of property announcement requests made to 
 >
 > **Answer:** There is no search criteria.
 
+16th May
 
 > **Question:** Is the owner responsible to assigning the property to an agent or there are other ways to do that?
 >
@@ -52,8 +56,9 @@ As an agent, I intend to see the list of property announcement requests made to 
 
 > **Question:** Does the request once its declined by the agent be deleted from the request list?
 >
-> **Answer:** The announce request should not be shown again to the agent. We never delete information from our system.
+> **Answer:** The announcement request should not be shown again to the agent. We never delete information from our system.
 
+20th May
 
 > **Question:** Besides the creation of a message justifiyng the rejection should a message or an email be sent to the client.
 >
@@ -64,15 +69,6 @@ As an agent, I intend to see the list of property announcement requests made to 
 >
 > **Answer:** I want to check all property announcement requests and have the option to accept or reject any announcement request. The property owner is a human being and can make errors like any other human being...
 
-
-> **Question:**
->
-> **Answer:**
-
-
-> **Question:**
->
-> **Answer:**
 
 
 ### 1.3. Acceptance Criteria
@@ -94,10 +90,13 @@ As an agent, I intend to see the list of property announcement requests made to 
 **Input Data:**
 
 * Typed data:
+    * Comission
+    * Justification
 	
 * Selected data:
 	* Announcement to see
     * Publish anouncement or not
+    * Comission type
 
 * Other data:
 
@@ -107,6 +106,8 @@ As an agent, I intend to see the list of property announcement requests made to 
 * Announcement requests
 * Specific announcement information
 * Success message
+* Request
+* Email
 
 
 ### 1.6. System Sequence Diagram (SSD)
