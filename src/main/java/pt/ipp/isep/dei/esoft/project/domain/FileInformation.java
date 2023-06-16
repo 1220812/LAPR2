@@ -157,6 +157,7 @@ public class FileInformation {
                 }
             }
         }
+        System.out.println(announcementRepository.getAnnouncementsList());
     }
 
     private boolean readerVerification(Scanner reader) {

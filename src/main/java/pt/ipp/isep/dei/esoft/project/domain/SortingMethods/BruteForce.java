@@ -88,7 +88,7 @@ public class BruteForce implements Serializable {
     private static int getAnnouncements() {
         int totalAnnouncements = 0;
         AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
-        totalAnnouncements += announcementRepository.getAnnouncements().size();
+        totalAnnouncements += announcementRepository.getAnnouncementsList().size();
         return totalAnnouncements;
     }
     /**

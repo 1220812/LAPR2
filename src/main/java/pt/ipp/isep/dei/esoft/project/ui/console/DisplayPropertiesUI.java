@@ -21,7 +21,7 @@ public class DisplayPropertiesUI implements Runnable{
     public void run() {
         int count = 1;
         System.out.println("List of Properties:");
-        for (Announcement announcement : announcementRepository.getAnnouncements()) {
+        for (Announcement announcement : announcementRepository.getAnnouncementsList()) {
             System.out.println(count+". "+announcement);
             count++;
         }
