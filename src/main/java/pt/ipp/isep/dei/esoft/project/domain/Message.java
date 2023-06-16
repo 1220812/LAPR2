@@ -8,7 +8,6 @@ import java.util.List;
  * The Message class represents a message.
  */
 public class Message implements Serializable {
-    private String name;
     private Client client;
     private int phone;
     private Announcement announcement;
@@ -85,18 +84,7 @@ public class Message implements Serializable {
      *
      * @return the name of the message sender.
      */
-    public String getName() {
-        return name;
-    }
 
-    /**
-     * Sets the name of the message sender.
-     *
-     * @param name  the name of the message sender.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * Retrieves the phone number of the message sender.
