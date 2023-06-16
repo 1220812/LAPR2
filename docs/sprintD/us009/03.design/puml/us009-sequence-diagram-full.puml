@@ -13,7 +13,8 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as repositories
 participant "announcementsRepository\n:AnnouncementsRepository" as AnnoucementRepository
 participant "messageRepository\n:MessageRepository" as MessageRepo
-
+participant "authentication\n:AuthenticationRepository" as AUTHREPO
+participant "clientRepository\n:ClientRepository" as CLIENTREPO
 
 
 activate User
@@ -45,6 +46,12 @@ activate AnnoucementRepository
 AnnoucementRepository--> Controller : announcementRepository
 deactivate AnnoucementRepository
 
+Controller -> AUTHREPO : getAuthenticationRepository()
+activate AUTHREPO
+
+AUTHREPO --> Controller : authenticationRepository
+deactivate AUTHREPO
+
 deactivate Controller
 
 
@@ -52,15 +59,25 @@ deactivate Controller
 
 
 
-UI --> User : Requests data (name and phoneNumber)
-deactivate UI
 
-User -> UI : Types request data (name and phoneNumber)
-activate UI
+UI -> Controller : loggedInClient = getCurrentClient()
+activate Controller
 
-UI-> UI : keepName(name)
+Controller -> AUTHREPO : getCurrentClient()
+activate AUTHREPO
 
-UI -> UI : keepPhone(phoneNumber)
+AUTHREPO -> CLIENTREPO : getClientByEmail()
+activate CLIENTREPO
+
+CLIENTREPO --> AUTHREPO : return client
+deactivate CLIENTREPO
+
+AUTHREPO --> Controller : return client
+deactivate AUTHREPO
+
+Controller --> UI : return client
+deactivate Controller
+
 
 loop while option selected is yes
 
@@ -229,11 +246,11 @@ UI -> User: Show message:"There is no overlapping of visits"
 
 User -> UI : Send message
 
-UI -> Controller: addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime)
+UI -> Controller: addMessage(loggedInClient, inputAnnou, newVisitStartTime, newVisitEndTime)
 deactivate UI
 
 activate Controller
-Controller -> MessageRepo : addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime)
+Controller -> MessageRepo : addMessage(loggedInClient, inputAnnou, newVisitStartTime, newVisitEndTime)
 
 activate MessageRepo
 MessageRepo -> MessageRepo :addComplete(message)
