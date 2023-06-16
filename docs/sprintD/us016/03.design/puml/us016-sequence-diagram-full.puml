@@ -34,17 +34,17 @@ activate ADM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getBookingRequestRepository()
+                CTRL -> PLAT : getMessageRepository()
                 activate PLAT
 
-                    PLAT --> CTRL: bookingRequestRepository
+                    PLAT --> CTRL: MessageRepository
                 deactivate PLAT
 
-                CTRL -> BookingRequest : getBookingRequest()
-                activate BookingRequest
+                CTRL -> Message : getMessage()
+                activate Message
 
-                   BookingRequest --> CTRL : bookingRequestList
-                deactivate BookingRequest
+                   Message --> CTRL : bookingRequestList
+                deactivate Message
 
                 CTRL --> UI : bookingRequestList
             deactivate CTRL
@@ -80,13 +80,13 @@ activate ADM
 
    activate CTRL
 
-   CTRL -> bookingRequestRepository: getBookingRequestById(requestId)
+   CTRL -> MessageRepository: getBookingRequestById(requestId)
 
-   activate bookingRequestRepository
+   activate MessageRepository
 
-   bookingRequestRepository --> CTRL : bookingRequest
+   MessageRepository --> CTRL : bookingRequest
 
-   deactivate bookingRequestRepository
+   deactivate MessageRepository
 
 
    CTRL -> SendEmailMessage : sendEmailBookingRequestRejected(bookingRequest)
@@ -108,16 +108,13 @@ activate ADM
 
        UI -> CTRL : sendEmailBookingRequestAccepted(requestId)
 
-      CTRL -> bookingRequestRepository: getBookingRequestById(requestId)
+      CTRL -> MessageRepository: getBookingRequestById(requestId)
 
-       activate bookingRequestRepository
+       activate MessageRepository
 
-       bookingRequestRepository --> CTRL : bookingRequest
+       MessageRepository --> CTRL : message
 
-       deactivate bookingRequestRepository
-
-
-
+       deactivate MessageRepository
 
 
     CTRL -> SendEmailMessage : sendEmailBookingRequestAccepted(bookingRequest)
@@ -130,13 +127,13 @@ activate ADM
 
     CTRL -> Booking** : create(bookingRequest)
 
-    CTRL -> BookingRepository : save(booking)
+    CTRL -> MessageRepository : save(booking)
 
-    activate BookingRepository
+    activate MessageRepository
 
-    BookingRepository --> CTRL :
+    MessageRepository --> CTRL :
 
-    deactivate BookingRepository
+    deactivate MessageRepository
 
 
 
