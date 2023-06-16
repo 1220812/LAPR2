@@ -1,4 +1,4 @@
-# US 017 - As a Network Manager I want to list all the deals made
+# US 018 - As a store manager, I intend to analyse the deals (only sale of houses and apartments) made.
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
