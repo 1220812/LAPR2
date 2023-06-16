@@ -9,7 +9,7 @@ skinparam linetype polyline
 hide circle
 hide methods
 
-title US017 - Domain Model
+title US019 - Domain Model
 class Address{
 streetAddress
 zipCode
@@ -27,8 +27,6 @@ class City{
 cityName
 }
 
-class Agent{
-}
 
 class Employee{
 name
@@ -107,21 +105,20 @@ existenceOfABasement
 inhabitableLoft
 }
 
+Residence --|> Property
+House --|> Residence
+
 Store "1" -- Address : has >
 Address -- "1" City : has >
 City -- "1" District : is in >
 District -- "1" State : is in >
-NetworkManager --- "1...*" Order : sorts the deals >
+NetworkManager --- "1...*" Order : analyzes the \nperformance of >
 NetworkManager --|> Employee : is >
-Agent ---|> Employee : is >
-Agent "1" -- "1...*" Order : makes the \ndecision on  >
-Agent -- Store : works for >
 NetworkManager "1" --- "1...*" Store : manages >
 Property -- Address : has >
-Residence --|> Property
-House --|> Residence
 Order -- "1" Announcement : on >
 Announcement -- "1" Property : announces >
 Client -- Order : makes >
+Client -- Address : has >
 
 @enduml

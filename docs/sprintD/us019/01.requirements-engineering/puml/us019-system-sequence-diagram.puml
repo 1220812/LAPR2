@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US019 - System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Network Manager" as NM
+participant ":System" as System
+
+activate NM
+
+    NM -> System : asks to divide the set of all stores into two subsets
+
+    activate System
+
+        System --> NM : display the number of stores in the \nsystem and asks for confirmation
+
+    deactivate System
+
+    NM -> System : confirms the number of stores
+
+    activate System
+
+    System --> NM : returns the run time algorithm, the \nlist of stores in each subset and their difference
+
+@enduml
