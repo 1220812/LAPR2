@@ -16,25 +16,47 @@ class RegisterAnnouncementController
     -area: double
     -distance: integer
     -price: double
-    -photos: String
+    -photos: List<Photograph>
     -bedrooms: integer
     -bathrooms: integer
-    -parking: interger
-    -equipment: String
-    -basement: String
-    -loft: String
+    -parkingSpaces: integer
+    -availableEquipment: List<availableEquipment>
+    -basement: boolean
+    -loft: boolean
     -sun: String
     -comissionType: String
     -comission: double
-    +getPropertyType()
-    +addAnnouncement(announcement)
-    +setPropertyType(propertyType)
+    -announcement: Announcement
+    -property: Property
+    -date: LocalDate
+    -photoURI: String
     +getRegisteredUsers()
-    +saveDataProperty(area, location, distance, price, photos)
-    +saveDataResidence(bedrooms, bathrooms, parking, equipment
-    +saveDataHouse(basement, loft, sun)
-    +saveDataComissionType(comissionType)
-    +saveDataComission(comission)
+    +getPropertyType()
+    +setPropertyType(propertyType)
+    +setArea(area)
+    +setStreetAdress(streetAdress)
+    +setCity(city)
+    +setState(state)
+    +setFloorNumber(floorNumber)
+    +setDoorNumber(doorNumber)
+    +setDistanceFromCityCenter(distanceFromCityCenter)
+    +setPrice(price)
+    +setNumberOfPhotos(numberOfPhotos)
+    +addPhoto(photoURI)
+    +setNumberOfBedrooms(numberOfBedrooms)
+    +setNumberOfBathrooms(numberOfBathrooms)
+    +setParkingSpaces(parkingSpaces)
+    +addAvailableEquipment(availableEquipment)
+    +setBasementExistence(basement)
+    +setLoftExistence(loft)
+    +setSunExposure(sunExposure)
+    +setComissionType(comissionType)
+    +setComission(comission)
+    +setDate(date)
+    +createProperty(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, propertyType, photos, requestType)
+    +createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price)
+    +addAnnouncement(announcement)
+    +createSMS(announcement)
 }
 
 class Repositories
@@ -57,9 +79,17 @@ class RegistedUsersRepository
 
 class Announcement
 {
-    -date
-    +createAnnouncement()
-    +setDate(date)
+    -property: Property
+    -date: LocalDate
+    -comissionType: String
+    -comission: Double
+    -requestType: RequestType
+    -propertyType: PropertyType
+    -agent: Agent
+    -store: Store
+    -owner: Owner
+    -price: double
+    +createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price)
 }
 
 class Agent
@@ -87,6 +117,31 @@ class AnnouncementRepository
     +addAnnouncement(announcement)
 }
 
+class Property
+{
+    -area: double
+    -distance: integer
+    -price: double
+    -photos: List<Photograph>
+    -bedrooms: integer
+    -bathrooms: integer
+    -parkingSpaces: integer
+    -availableEquipment: List<availableEquipment>
+    -basement: boolean
+    -loft: boolean
+    -sun: String
+    -comissionType: String
+    -comission: double
+    -announcement: Announcement
+    -property: Property
+    -date: LocalDate
+    -photoURI: String
+    +createProperty(area, distanceFromCityCenter, address, propertyType, photos)
+    +createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, availableEquipment)
+    +createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, propertyType, photos, requestType)
+
+}
+
 
 
 RegisterAnnouncementUI -> RegisterAnnouncementController
@@ -95,12 +150,12 @@ Repositories -> Announcement
 Repositories -> RegistedUsersRepository
 Repositories -> PropertyTypeRepository
 Repositories -> AnnouncementRepository
-RegisterAnnouncementController ---> Announcement
+RegisterAnnouncementController ---> "creates" Announcement
 RegisterAnnouncementController ..> RegistedUsersRepository
 RegisterAnnouncementController ..> PropertyTypeRepository
 RegisterAnnouncementController ..> AnnouncementRepository
 AnnouncementRepository -> "has" Announcement
-
-Agent -> Announcement
-Announcement -> "has" Address
+Announcement -> "has" Property
+Property -> "has" Address
+Announcement --> "has" Agent
 @enduml

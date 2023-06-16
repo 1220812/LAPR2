@@ -10,12 +10,6 @@ hide methods
 
 title US002 - Domain Model
 
-class Branch {
-    designation
-    location
-    localManager
-}
-
 class Agent {
     name
     citizenCardNumber
@@ -28,20 +22,36 @@ class Agent {
 
 class Property {
     area
-    location
-    distanceFromCityCentre
-    requestedPrice
-    typeOfProperty
+    distanceFromCityCenter
+    propertyType
+}
+
+class PhotographList {
+}
+
+class Photos {
+    photoURI
+    photoID
 }
 
 class Announcement {
     date
+    comissionType
+    comission
+    requestType
+    price
 }
 
-class AppartmentOrHouse {
+class Residence {
     numberBedrooms
     numberBathrooms
     numberParking
+}
+
+class AvailableEquipmentList {
+}
+
+class AvailableEquipment {
     availableEquipment
 }
 
@@ -51,20 +61,35 @@ class House {
     sunExposure
 }
 
-class Comission {
-    fixed
-    percentage
+class Address {
+    streetAddress
+    doorNumber
+    floorNumber
+    zipCode
+    state
+    district
+    city
 }
 
-Branch "1" -- "*" Agent : has >
+class Owner {
+    name
+    citizenCardNumber
+    tax number
+    address
+    email
+    phoneNumber
+}
+
 Agent "1" -- "*" Announcement : creates >
 Owner "1" -- "1" Property : owns >
 Announcement "1" - "1" Property : has >
-Property "1" -- "1" AppartmentOrHouse : can be >
-AppartmentOrHouse "1" - "1" House : can be >
-Announcement "1" -- "1" Comission : has >
-Agent "1" - "1" Comission : defines >
+Property "1" -- "1" Residence : can be >
+Residence "1" - "1" House : can be >
 Owner "1" -- "1" Agent: talks to >
-
+Property "1" -- "1" Address: has >
+Announcement "1" - "1" PhotographList: has >
+PhotographList "1" -- "1 - 30" Photos: has >
+Residence "1" -- "1" AvailableEquipmentList: has >
+AvailableEquipmentList "1" - "*" AvailableEquipment: has >
 
 @enduml

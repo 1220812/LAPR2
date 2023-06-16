@@ -22,6 +22,8 @@ As an agent, I can publish any sale announcement on the system, for example rece
 
 **From the client clarifications:**
 
+21st March
+
 > **Question:** We are having a little issue defining what the sun exposure might be. We are not sure what it will be as a value. If it's a number that defines how much exposure the house has or if it is just a text saying if it has or hasn't sun exposure.
 >  
 > **Answer:** Sun exposure will take the following values: North, South, East, or West.
@@ -41,6 +43,7 @@ As an agent, I can publish any sale announcement on the system, for example rece
 >
 > **Answer:** For now this is the only way.
 
+23rd March
 
 > **Question:** The act of publishing a sale announcement means that the agent is publishing a new property for sale in the system (receiving the information of the seller and publishing the new property for sale) or is it the buyer giving positive feedback to the agent with intent to buy the property(actually closing a sale, buying a property and de-listing said property)?
 >
@@ -80,7 +83,8 @@ As an agent, I can publish any sale announcement on the system, for example rece
 > **Question:** Does the owner who contacts the company provide the information during the call or is it just for setting up a meeting, "scheduling"?
 >
 > **Answer:** The owner provides the information. Where did you saw that the goal is "setting up a meeting"?????
- 
+
+24th April
 
 > **Question:** Is it necessary to publish the owner atributes on the sale announcement?
 >
@@ -121,6 +125,7 @@ As an agent, I can publish any sale announcement on the system, for example rece
 >
 > **Answer:** The owner should input the URI of each file/photograph.
 
+29th April
 
 > **Question:** In one of the previous questions you have stated that for now the only way that a agent can receive the request to publish an announcement is through a phone call, however in the primary data necessary to create an announcement it's said that it's necessary to upload at least one photo of the property. Taking that into consideration, the announcement can't be fully made by only communicating with the owner through a phone call, how is it possible for an agent to publish an announcement without all the necessary data?
 >
@@ -146,6 +151,7 @@ As an agent, I can publish any sale announcement on the system, for example rece
 >
 > **Answer:** In my previous answer, when I said "...the only way that an agent can receive the sale announcement..." I was talking about the agent as an actor of the system that introduces in the system property data.
 
+4th May
 
 > **Question:** In USS02 are all the criteria for publishing the sale of a property in the system mandatory, or is there any data that the owner can choose not to give? such as not saying the direction of sun exposure in the case of a house.
 >
@@ -161,6 +167,22 @@ As an agent, I can publish any sale announcement on the system, for example rece
 >
 > **Answer:** The agent registers the order in the system.
 
+29th May
+
+> **Question:** When the agent receives the phone call (as mentioned in US002) is it the agent who registers the order in the system or has the order already been entered into the system by the owner? Or is the phone call just for the owner to tell the agent that he registered a request in the system?
+>
+> **Answer:** The agent registers the order in the system.
+
+
+> **Question:** Are the SMSs created the same way as the emails? The emails are made through a text file, are the SMS notifications the same way?
+>
+> **Answer:** A file named SMS.txt should be used.
+
+
+> **Question:** Which number should be used to send the SMS, the responsible agent's number or the agency where the agent works?
+>
+> **Answer:** The responsible agent phone number.
+
 
 ### 1.3. Acceptance Criteria
 
@@ -168,12 +190,36 @@ As an agent, I can publish any sale announcement on the system, for example rece
 * **AC1:** The user must be a real estate agent to proceed with a property registration.
 * **AC2:** All required fields must be filled in.
 * **AC3:** The property can't already exist in the system.
+* **AC4:** Owner must be registed in the system.
+* **AC5:** The property type must be valid.
+* **AC6:** The area must be positive.
+* **AC7:** The address must be valid.
+* **AC8:** The city must be valid.
+* **AC9:** The state must be valid.
+* **AC10:** The house number must be positive.
+* **AC11:** The floor number must be valid.
+* **AC12:** The distance from city center must be positive.
+* **AC13:** The price must be positive.
+* **AC14:** The number of photos must be in between 1 and 30.
+* **AC15:** The number of bedrooms must be positive.
+* **AC16:** The number of bathrooms must be positive.
+* **AC17:** The number of parking spaces must be positive.
+* **AC18:** The existence of a basement must be valid.
+* **AC19:** The existence of an inhabitable loft must be valid.
+* **AC20:** The sun exposure must be valid.
+* **AC21:** The comission type must be valid.
+* **AC22:** The comission must be positive.
+* **AC23:** An SMS notification should be sent to the owner when the listing of the property becomes available.
+* **AC24:** The notification must include the property identification and the date it became available
+* **AC25:** The Notification must include the name and phone number of the responsible Agent
+* **AC25:** The owner must be registed in system
 
 
 ### 1.4. Found out Dependencies
 
 
 * US3 - US2 needs the agent to exist
+* The owner needs to exist
 
 
 ### 1.5 Input and Output Data
@@ -191,6 +237,9 @@ As an agent, I can publish any sale announcement on the system, for example rece
     * Number of parking spaces
     * Available equipment
     * Comission
+    * Number of photos
+    * Photo URI
+
 	
 * Selected data:
 	* Type of property
@@ -199,14 +248,13 @@ As an agent, I can publish any sale announcement on the system, for example rece
     * Sun exposure
     * Type of comission
 
-* Other data:
-    * One or more photographs
-
 
 **Output Data:**
 
 * All the data
 * Success message
+* SMS notification
+* Announcement
 
 
 ### 1.6. System Sequence Diagram (SSD)

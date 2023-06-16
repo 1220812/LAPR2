@@ -8,45 +8,44 @@ left to right direction
 hide circle
 hide methods
 
-title US001 Domain Model
+title Project domain Model
 
 
-class District {
+
+class PublishedAnnouncement {
+photos
+price
+date
+comissionType
+comission
+localDate
+property
+requestType
+agent
+price
+store
 }
 
-class Announcement {
-}
 
-class Store {
-}
-
-class Property {
-location
-area
-distanceFromCityCenter
-photographs
-}
 
 class AvailableEquipment {
 centralHeating
 airConditioning
 }
 
-class SunExposure {
-North
-East
-South
-West
-}
-class Branch {
+class Store {
     designation
     location
     localManager
+    name
+    ID
+    phoneNumber
+    emailAddress
 }
 
 class Agent {
     name
-    passportCardNumber
+    citizenCardNumber
     tax number
     address
     email
@@ -60,29 +59,16 @@ class Property {
     distanceFromCityCentre
     requestedPrice
     typeOfProperty
+    photographs
 }
 
-class Announcement {
-    date
-}
 
-class AppartmentOrHouse {
-    numberBedrooms
-    numberBathrooms
-    numberParking
-    availableEquipment
-}
-
-class House {
-    basement
-    inhabitableLoft
-    sunExposure
-}
 
 class Comission {
     fixed
     percentage
 }
+
 class User {
 name
 email
@@ -96,20 +82,14 @@ class TaxNumber {
 number
 }
 
+
 class Agency {
 designation
 email
 phone number
 }
-class Agent {
-}
 
-class Store {
-name
-designation
-telephone
-email
-}
+
 class Role {
 description
 permissions
@@ -118,11 +98,7 @@ class SystemAdministrator {
 }
 class StoreManager {
 }
-class StoreNetworkManager {
-}
-class Employee {
 
-}
 class StoreEmployee {
 }
 
@@ -131,62 +107,32 @@ class AgencyEmployee {
 
 class Owner{
 name
-passportNumber
-}
-class CompanyBranch{
-ID
-designation
+emailAddress
+phoneNumber
 }
 
-class Contacts{
-phoneNumber
+
+class CompanyStore{
+ID
+designation
 emailAddress
+phoneNumber
 }
 
 class Address{
 doorNumber
 floorNumber
-street
-state
-district
 postalCode
+street
+city
+district
+state
+zipcode
 }
 
-class Request{
-status
-date
-}
-
-class Property{
-area
-distanceFromTheCityCentre
-}
-
-class Residence{
-numberOfBedrooms
-numberOfBathrooms
-numberOfParkingSpaces
-availableEquipment
-}
-
-class House{
-existenceOfABasement
-inhabitableLoft
-}
-
-class Land{
-}
-
-class Sell{
-price
-}
-
-class Rent{
-pricePerMonth
-contractDuration
-}
 
 class Photographs{
+numberOfPhotographs
 URI
 }
 
@@ -194,120 +140,453 @@ class TaxNumber{
 taxNumber
 }
 
-class Apartment{
-}
 
 class SunExposure{
 direction
 }
 
-class PropertyType{
-propertyType
+
+class PassportCardNumber{
+passportCardNumber
+}
+
+class District{
+districtName
 }
 
 
-class Store {
-    designation
-    ID
-    phoneNumber
-    emailAddress
+
+class City{
+cityName
 }
+
+class Comission{
+percentage
+}
+
+class Rent{
+contractDuration
+}
+
+class RequestType{
+requestTypeDescription
+date
+requiredPrice
+requestType
+price
+agent
+owner
+store
+requestDate
+property
+startDate
+enDate
+}
+
+
+
 
 class State {
     stateName
 }
 
-class District {
-    districtName
-}
-
-class City {
-    cityName
-}
-
-
 
 
 class UnregisteredUser{
+-String name
+
+}
+
+
+class AppartmentOrHouse {
+    numberBedrooms
+    numberBathrooms
+    numberParking
+    availableEquipment
+}
+
+
+
+
+
+class Client{
 name
-passportNumber
+phoneNumber
+}
+
+
+class ListOfAnnouncements{
+annoucements
+}
+
+
+class Message{
+ phone
+ announcement
+ newVisitStartTime
+ newVisitEndTime
 }
 
 
 
-class TaxNumber{
+
+class Offer {
+    offerPrice
+    property
+}
+
+
+class Employee{
+name
+phoneNumber
+emailAddress
 taxNumber
+passportCardNumber
+}
+
+class Decision{
+decision
+}
+
+class Order{
+orderNumber
+clientEmail
+price
+announcement
 }
 
 
-UnregisteredUser "1" -- "1" Address : has >
-UnregisteredUser "1" -- "1" TaxNumber : has >
+class User{
+name
+phoneNumber
+emailAddress
+taxNumber
+passportCardNumber
+}
 
-Address "1" -- "1" City : in >
-City "1" -- "1" State : in >
-State "1" -- "1" District : in >
 
+
+class EmailService{
+informationEmail
+}
+
+
+
+
+
+
+class Residence{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpacings
+airConditioning
+centralHeating
+finalPrice
+businessDate
+}
+
+class House{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpacings
+airConditioning
+centralHeating
+finalPrice
+businessDate
+existenceOfABasement
+sunExposure
+inhabitableLoft
+}
+
+class Legacy_System_Files {
+}
+
+
+class StoreManager{
+assignedStore
+}
+
+
+class NetworkManager{
+name
+emailAddress
+phoneNumber
+}
+
+
+class VisitRequest{
+date
+timeSlot
+}
+
+
+
+class Annoucement{
+property
+date
+commissionType
+commission
+requestType
+price
+owner
+}
+
+
+class EmailResponse {
+    emailTo
+    emailFrom
+    emailSubject
+    emailBody
+}
+
+class Agent {
+    name
+    phoneNumber
+    emailAddress
+}
+
+
+
+class Client {
+      name
+      phoneNumber
+      emailAddress
+      taxNumber
+      passportCardNumber
+}
+
+
+class BookingRequest {
+    visitDate
+
+}
+
+
+
+class Announcement{
+comissionType
+comission
+date
+}
+
+class Client{
+}
+
+
+
+
+
+class NetworkManager{
+}
+
+
+
+class Client{
+}
+
+
+
+
+
+
+class NetworkManager{
+}
+
+
+
+class Client{
+}
+
+
+class House{
+existenceOfABasement
+inhabitableLoft
+}
+
+
+
+
+
+City "1" -- "1" Address : has >
+
+State "1" -- "1" District : has >
+
+District "1" -- "1" City : has >
+
+PublishedAnnouncement "1" -- "1" Property : about >
+
+Residence "1" -- "1" AvailableEquipment : has >
+
+House "1" -- "1" SunExposure : has >
+House --|> Residence : is a
+
+
+Residence --|> House : extends
+
+
+Property <|-- Residence
+Property "1" -- "1" Address : located at >
+
+Store "1" -- "*" Agent : has >
+Store "1" -- "1" Address: has a >
+
+
+
+
+Owner "1" --- "1" PassportCardNumber : has >
+Owner "1" --- "1" TaxNumber : has >
+Owner "1" -- "1" CompanyStore : selects >
 Owner "1" --- "1" Address : has >
-Owner "1" -- "1...*" Request : creates >
-Owner "1" -- "1" TaxNumber : has >
-Owner "1" -- "1" Contacts : has >
+Owner "1" ---"0...*" Request : submits
+Owner "1" ---"1" Agent : selects >
+Owner --- Property : owns >
+Owner "1" -- "*" Property : belongs to <
 
+
+Announcement "1" - "1" Property : has >
+Announcement "1" -- "1" Comission : has >
+Announcement --> Request : contains
+Announcement "1"--"1" Agent : has >
+Announcement "1"--"1" VisitRequest : has <
+
+
+
+
+
+
+
+Property "1" -- "1" AppartmentOrHouse : can be >
+Property "1" -- "1" PropertyType : has a >
+Property "1" --- "1...30" Photographs : has >
+Property --|> Residence : contains
+
+Request --> Property : contains
+Property "1" -- "*" BookingRequest: has >
+Address "1" -- "1" Property: has >
+
+
+
+
+
+
+AppartmentOrHouse "1" - "1" House : can be >
+
+
+Agent "1" - "1" Comission : defines >
+Agent "1" -- "*" Announcement : creates >
+Agent  --|>   StoreEmployee
+Agent "*" -left- "1" Store : has an <
+Agent "1" ---- "1" CompanyStore : works for >
 Agent "1" --- "1" Address : has >
-Agent "1" --- "1...*" Request : reviews and publishes >
+Agent "1" --- "1" PassportCardNumber : has >
 Agent "1" --- "1" TaxNumber : has >
-Agent "1" --- "1" Contacts : has >
-Agent "1" --- "1" CompanyBranch : works for >
+Agent --- Request : validates >
+Agent "1" - "1" ListOfRequests : sees >
+Agent "1" -- "*" VisitRequest : lists >
+Agent -- Client: Informs >
+(Agent, Client) -- EmailResponse: making use of
+Agent "1" -- BookingRequest: decides >
+Agent ---|> Employee : is >
+Agent "1" -- "1...*" Order : makes the \ndecision on  >
+Agent -- Store : works for >
 
-Property "1" -- "1" PropertyType : has >
-Property "1" --- "1...30" Photographs : has
 
-Property "1" --- "1" Address : has >
-PropertyType --> Residence : can be
-PropertyType --> Land : can be
 
-CompanyBranch "1" --- "1" Address : has >
-CompanyBranch "1" -- "1" Contacts : has >
+BookingRequest "*" -- "1" Client: makes <
 
-Residence <|-- House
-Residence <|-- Apartment
 
-Request --> Sell : can be
-Request --> Rent : can be
-Request "1"--"1...*" Property : announces >
 
-SunExposure -- House : has <
+
+VisitRequest "1"--"*" Message : has >
+
 
 User "1" -- "1" Passport: has a >
 User "1" -- "1" TaxNumber: has a >
+User "1" -- "1" Address: has an >
 User "1" -left- "1" Role: has a >
+User "1" -- "1...*" Order : makes
+
+
 Agency "1" -right- "1" Store: has a >
+
 SystemAdministrator  --|> Employee
-Agent  --|>   StoreEmployee
+
 StoreManager  --left|> StoreEmployee
+StoreManager "1" -- "1" Store : manages >"
+StoreManager -- Employee : is >
+
+
 
 AgencyEmployee "1" -left- "1" Agency: runs >
-StoreEmployee "1" -right- "1" Store: belongs to >
-Agent "*" -left- "1" Store : has an <
-StoreNetworkManager --|> AgencyEmployee
-Employee --|> User
 AgencyEmployee --|> Employee
+
+
+StoreEmployee "1" -right- "1" Store: belongs to >
 StoreEmployee --|> AgencyEmployee
 
-Store "1" -- "1" Address: has a >
+NetworkManager --|> AgencyEmployee
+NetworkManager -- "*" Agent : lists >
+NetworkManager --- "1...*" Order : sorts the deals >
+NetworkManager --|> Employee : is >
+NetworkManager "1" --- "1...*" Store : manages >
+NetworkManager --- "1...*" Order : sorts the deals >
 
-Store "1"-- "*" Announcement : displays >
-Store "1" -- "1" Address : has >
-Address "1" -- "1" District : is in >
-Announcement "1" -- "1" Property : about >
-Property "1" -- "1" AvailableEquipment : has >
-Property "1" -- "1" SunExposure : has >
-Branch "1" -- "*" Agent : has >
-Agent "1" -- "*" Announcement : creates >
-Owner "1" -- "1" Property : owns >
-Announcement "1" - "1" Property : has >
-Property "1" -- "1" AppartmentOrHouse : can be >
-AppartmentOrHouse "1" - "1" House : can be >
-Announcement "1" -- "1" Comission : has >
-Agent "1" - "1" Comission : defines >
-Owner "1" -- "1" Agent: talks to >
+
+
+
+
+Employee --|> User
+Employee "1" -- "*" Decision : makes >
+Employee "1" --"*" Order : analyzes >
+
+
+
+Request "1" -- "1" RequestType : has a >
+Request "1" -- "1" Property : announces >
+ListOfRequests "1" -- "*" Request : has >
+
+Rent --- RequestType : can be <
+
+Client "1" -- "1" ListOfAnnouncements : choose one of >
+Client "1" -- "1" Message : send >
+Client "1" -- "*" Offer : proposes >
+Client -- Order : makes >
+Client -- Address : has >
+
+
+Message "1" -- "1" Agent : recive <
+
+Offer "1" -up- "1" Request : is compared to >
+Offer "1" -- "1" Property : about >
+
+Order "*" -- "1" Announcement : > on
+
+
+
+Decision "1" -- "1" Order : has <
+Decision -- EmailService : depending on <
+
+EmailService -- User : informing about the decision >
+EmailResponse "1" -- "1" BookingRequest: about >
+
+
+System_Administrator --> Legacy_System_Files
+
+Legacy_System_Files "1" --> "0...*" Announcement : contains
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @enduml

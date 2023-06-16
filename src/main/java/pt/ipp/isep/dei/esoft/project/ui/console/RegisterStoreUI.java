@@ -11,12 +11,9 @@ public class RegisterStoreUI implements Runnable {
     int ID = 0;
 
     String phoneNumber = "000-000-000";
-
     Address address = null;
-
     String emailAddress = null;
     String designation = null;
-
 
 
     RegisterStoreController controller = new RegisterStoreController();
