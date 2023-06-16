@@ -522,19 +522,23 @@ deactivate CTRL
 
 UI -> PRPT** : createProperty
 
+UI -> CTRL : createProperty(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, propertyType, photos, requestType)
+
+activate CTRL
+
 alt if property is a land
 
-UI -> PRPT : createProperty(area, distanceFromCityCenter, address, propertyType, photos)
+CTRL -> PRPT : createProperty(area, distanceFromCityCenter, address, propertyType, photos)
 activate PRPT
-PRPT --> UI : property created
+PRPT --> CTRL : property created
 deactivate PRPT
 end alt
 
 alt if property is a appartment
 
-UI -> PRPT : createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, availableEquipment)
+CTRL -> PRPT : createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, availableEquipment)
 activate PRPT
-PRPT --> UI : property created
+PRPT --> CTRL : property created
 deactivate PRPT
 
 
@@ -542,13 +546,15 @@ end alt
 
 alt if property is a house
 
-UI -> PRPT : createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, propertyType, photos, requestType)
+CTRL -> PRPT : createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, propertyType, photos, requestType)
 activate PRPT
-PRPT --> UI : property created
+PRPT --> CTRL : property created
 deactivate PRPT
 
 
 end alt
+CTRL --> UI : property created
+deactivate CTRL
 
 
 
