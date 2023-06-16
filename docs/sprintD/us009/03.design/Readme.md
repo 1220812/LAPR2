@@ -6,15 +6,16 @@
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for...               | Answer                  | Justification (with patterns)                                                                                 |
-|:---------------|:----------------------------------------------------------|:------------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?                          | ScheduleVisitUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		        | 	... coordinating the US?                                 | ScheduleVisitController | Controller                                                                                                    |
-| 			  		        | 	... creating a new message?                              | MessageRepository       | Creator (Rule 1): in the DM one Announcement has just one Property.                                                         |
-| Step 2  		     | 	...knowing the specific characteristics to select?						 |                         |                                                                                                               |
-| Step 3  		     | 	...saving the inputted data?                             | Task                    | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		     | 	...knowing the task categories to show?                  | System                  | IE: Task Categories are defined by the Administrators.                                                        |
-| 
+| Interaction ID | Question: Which class is responsible for...                       | Answer                         | Justification (with patterns)                          |
+|:---------------|:------------------------------------------------------------------|:-------------------------------|:-------------------------------------------------------|
+| Step 1  	      | asking to schedule a visit to a property?                         | ScheduleVisitUI                | Pure Fabrication                             |
+| Step 2 	  	    | 	showing list of available properties?                            | ScheduleVisitController        | Controller                                       |
+| Step 3		       | 	selecting property?                                              | ScheduleVisitUI                | Pure Fabrication                              |
+| Step 4  	      | 	requesting data: date and time slot for the property visi?		 	 	 | ScheduleController             |       Controller                                          |
+| Step 5  	      | 	Typing request data (date, time slot)?                           | ScheduleVisitUI                |   Pure Fabrication   |
+| Step 6         | 	Informing operation sucess                                       | ScheduleVisitUI                |  Pure Fabrication  |
+| Step 7         | 	Informing overlapping schedule                                   | ScheduleVisitUI                |  Pure Fabrication  |
+
 
 
 ### Systematization ##
@@ -29,9 +30,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
  * ScheduleVisitUI
  * ScheduleVisitController
- * MessageRepository
- * UserRepository
- * AnnoucementsRepository
+
 
 
 ## 3.2. Sequence Diagram (SD)
