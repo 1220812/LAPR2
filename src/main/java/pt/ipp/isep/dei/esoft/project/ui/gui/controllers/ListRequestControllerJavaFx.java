@@ -64,29 +64,6 @@ public class ListRequestControllerJavaFx implements Initializable {
         this.start = startDate.getValue();
     }
 
-    @FXML
-//    void switchToScene2(ActionEvent event) throws IOException {
-//        content = new ArrayList<>();
-//        fxmlLoader = new FXMLLoader(new File("src/main/resources/fxml/us015.2.fxml").toURL());
-//        List<Request> list;
-//
-//
-//        if (start == null || end == null) {
-//            lView.getItems().add("You must choose the dates before");
-//        } else if (!controller.checkVisitTime(start,end)) {
-//            System.out.println("Invalid date");
-//        } else {
-//            list = controller.getSortedVisitRequestList(controller.getAgentList(), start, end);
-//            for (int i = 0; i < list.size(); i++) {
-//                content.add(list.get(i).toString());
-//            }
-//        }
-//
-//        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        scene = new Scene(fxmlLoader.load());
-//        stage.setScene(scene);
-//        stage.show();
-//    }
 
     public void switchToScene1(ActionEvent actionEvent) throws IOException {
         fxmlLoader = new FXMLLoader(new File("src/main/resources/fxml/us015.fxml").toURL());
@@ -103,11 +80,6 @@ public class ListRequestControllerJavaFx implements Initializable {
     }
 
     public void showRequests(ActionEvent event) throws IOException {
-//        try {
-//            System.out.println(Request.getRequestsSorted(RequestList));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         List<Request> requestsAgent = new ArrayList<>();
         List<Request> requests = controller.getRequests();
         start = getBeginDate();
