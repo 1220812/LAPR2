@@ -20,13 +20,13 @@ class ScheduleVisitController{
 }
 
 class Repositories{
-
 +Repositories()
 +getAuthenticationRepository()
 +getInstance()
 +getMessageRepository()
 +getAnnouncementsRepository()
 }
+
 
 
 class Message{
