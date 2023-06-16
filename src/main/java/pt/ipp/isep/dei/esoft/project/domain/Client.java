@@ -179,13 +179,19 @@ public class Client extends User implements Serializable {
         return Objects.hash(name, phoneNumber, emailAddress, taxNumber, passportCardNumber, address);
     }
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                '}';
+    }
+
     /**
      * Textual representation of an instance of Client
      */
-    @Override
-    public String toString() {
-        return name;
-    }
+
 
     public Client clone(){ return new Client(this.name,this.phoneNumber, this.emailAddress,this.address,this.taxNumber,this.passportCardNumber); }
 }

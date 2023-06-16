@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.ScheduleVisitController;
+import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
+import pt.ipp.isep.dei.esoft.project.domain.Client;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
 import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -13,7 +15,7 @@ import java.util.List;
 
 
 public class ScheduleVisitUI implements Runnable {
-    Announcement announcement = null;
+    private Announcement announcement;
     private int day = 0;
     private int month = 0;
     private int year = 0;
@@ -24,6 +26,7 @@ public class ScheduleVisitUI implements Runnable {
     private int endMinute = 0;
     private String name = null;
     private int phone = 0;
+    private String email=null;
 
 
     private LocalDateTime newVisitEndTime;
@@ -36,19 +39,10 @@ public class ScheduleVisitUI implements Runnable {
     public void run() {
         List<Message> MessageList = MessageRepository.getMessageList();
 
+        Client loggedInClient = controller.getCurrentClient();
 
         System.out.println("Schedule a visit:");
 
-
-        name = Utils.readLineFromConsole("Employee name:");
-        while (name.trim().isEmpty()) {
-            name = Utils.readLineFromConsole("Invalid Name \nInsert employee name:");
-        }
-
-        phone = Utils.readIntegerFromConsole("Phone number:");
-        while (!controller.checkPhone(String.valueOf(phone))) {
-            phone = Utils.readIntegerFromConsole("Invalid Phone number (format: xxxxxxxxxx) \nInsert new phone number: ");
-        }
         boolean continueScheduling = true;
         while (continueScheduling) {
 
@@ -59,8 +53,8 @@ public class ScheduleVisitUI implements Runnable {
             inputAnnou = Utils.showAndSelectIndex2(controller.getAnnouncement()) + 1;
             if (inputAnnou == 0) return;
 
+            announcement = controller.getAnnouncement().get(inputAnnou - 1);
 
-            System.out.println(inputAnnou);
 
             System.out.println("#######Sugest a date to visit the property#######");
             day = Utils.readIntegerFromConsole("Day: ");
@@ -140,18 +134,13 @@ public class ScheduleVisitUI implements Runnable {
                 newVisitEndTime = LocalDateTime.of(year, month, day, endHour, endMinute);
             }
 
-
-
-
-
-
             boolean hasOverlap = controller.checkIfValidVisit(MessageList, newVisitStartTime, newVisitEndTime);
 
             if (hasOverlap) {
                 System.out.println("There is overlapping schedule.");
             } else {
                 System.out.println("There is no overlapping of visits. The new message has been sent to an agent.");
-                System.out.println(controller.addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime).toString());
+                System.out.println(controller.addMessage(loggedInClient, announcement, newVisitStartTime, newVisitEndTime).toString());
                 System.out.println("                  ");
                 System.out.println("#######successful operation#######");
                 System.out.println("                  ");

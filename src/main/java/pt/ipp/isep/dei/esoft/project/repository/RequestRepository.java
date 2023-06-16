@@ -79,29 +79,29 @@ public class RequestRepository implements Serializable {
 
     List<Request> finalList = new ArrayList<>();
 
-    public List<Request> getRequestsSorted(List<Request> requestList) throws IOException {
-        Properties properties = System.getProperties();
-        properties.load(new FileReader("src/main/resources/sortingMethods.properties"));
-        String algorithm = properties.getProperty("sorting.algorithm");
-
-        switch (algorithm.toUpperCase()) {
-            case "MERGESORT":
-                MergeSort merge = new MergeSort();
-                //finalList = merge.merge(requestList);
-
-
-
-                break;
-            case "SORTINGBUBBLES":
-                BubbleSort bubbleSort = new BubbleSort();
-                finalList = bubbleSort.sortByDate(requestList);
-                break;
-            default:
-                System.out.println("Warning: invalid");
-//                finalList = merge.merge(requestList);
-        }
-        return finalList;
-    }
+//    public List<Request> getRequestsSorted(List<Request> requestList) throws IOException {
+//        Properties properties = System.getProperties();
+//        properties.load(new FileReader("src/main/resources/sortingMethods.properties"));
+//        String algorithm = properties.getProperty("sorting.algorithm");
+//
+//        switch (algorithm.toUpperCase()) {
+//            case "MERGESORT":
+//                MergeSort merge = new MergeSort();
+//                //finalList = merge.merge(requestList);
+//
+//
+//
+//                break;
+//            case "SORTINGBUBBLES":
+//                BubbleSort bubbleSort = new BubbleSort();
+//                finalList = bubbleSort.sortByDate(requestList);
+//                break;
+//            default:
+//                System.out.println("Warning: invalid");
+////                finalList = merge.merge(requestList);
+//        }
+//        return finalList;
+//    }
 
     public List<Request> getAgentList(Agent agent) {
         List<Request> newList = new ArrayList<>();

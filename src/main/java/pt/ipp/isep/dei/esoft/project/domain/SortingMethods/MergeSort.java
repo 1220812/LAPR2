@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain.SortingMethods;
 
-import pt.ipp.isep.dei.esoft.project.domain.Request;
+import pt.ipp.isep.dei.esoft.project.domain.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +13,17 @@ public class MergeSort {
     int n2 = r - m;
     int i = 0, j = 0, k = l;
 
-public List<Request> merge(List<Request> requestList){
-    List<Request> tempList = new ArrayList<>(requestList); // Criar uma nova lista temporária
-    List<Request> tempList1 = new ArrayList<>(requestList); // Criar uma nova lista temporária
+public List<Message> merge(List<Message> messageList){
+    List<Message> tempList = new ArrayList<>(messageList); // Criar uma nova lista temporária
+    List<Message> tempList1 = new ArrayList<>(messageList); // Criar uma nova lista temporária
 
 
     while(i<n1 &&j<n2){
-        if (tempList.get(i).getRequestDate().isBefore(tempList1.get(j).getRequestDate())) {
-            requestList.set(k, tempList.get(i));
+        if (tempList.get(i).getNewVisitStartTime().isBefore(tempList1.get(j).getNewVisitStartTime())) {
+            messageList.set(k, tempList.get(i));
             i++;
         } else {
-            requestList.set(k, tempList1.get(j));
+            messageList.set(k, tempList1.get(j));
             j++;
         }
         k++;
@@ -32,7 +32,7 @@ public List<Request> merge(List<Request> requestList){
     while(i<n1)
 
     {
-        requestList.set(k, tempList.get(i));
+        messageList.set(k, tempList.get(i));
         i++;
         k++;
     }
@@ -40,25 +40,25 @@ public List<Request> merge(List<Request> requestList){
     while(j<n2)
 
     {
-        requestList.set(k, tempList1.get(j));
+        messageList.set(k, tempList1.get(j));
         j++;
         k++;
     }
 
-    return requestList;
+    return messageList;
 }
 
-    public List<Request> mergeSort(List<Request> requestList) {
+    public List<Message> mergeSort(List<Message> messageList) {
         if (l < r) {
             int m = l + (r - l) / 2;
 
             // Sort first and second halves
-            mergeSort(requestList);
-            mergeSort(requestList);
+            mergeSort(messageList);
+            mergeSort(messageList);
 
-            merge(requestList);
+            merge(messageList);
         }
-        return requestList;
+        return messageList;
     }
 
 

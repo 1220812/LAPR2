@@ -1,13 +1,18 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.SortingMethods.BubbleSort;
+import pt.ipp.isep.dei.esoft.project.domain.SortingMethods.MergeSort;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 /**
  * The MessageRepository class is responsible for storing and managing messages.
@@ -21,7 +26,7 @@ public class MessageRepository implements Serializable {
      * Constructs a new instance of MessageRepository.
      * Initializes the message lists.
      */
-    public MessageRepository(){
+    public MessageRepository() {
         MessageList = new ArrayList<>();
         MessageCompleteList = new ArrayList<>();
     }
@@ -33,7 +38,7 @@ public class MessageRepository implements Serializable {
      * @return true if the message is added successfully, false otherwise.
      * @throws IllegalArgumentException if the message is null or already exists in the list.
      */
-    public static boolean add(Message message){
+    public static boolean add(Message message) {
         if (message == null) throw new IllegalArgumentException("Impossible message");
         if (MessageList.contains(message)) throw new IllegalArgumentException("Visit already exists");
         return MessageList.add(message);
@@ -45,7 +50,7 @@ public class MessageRepository implements Serializable {
      * @param message the message to add.
      * @return true if the message is added successfully, false otherwise.
      */
-    public static boolean addComplete(Message message){
+    public static boolean addComplete(Message message) {
         return MessageCompleteList.add(message);
     }
 
@@ -54,22 +59,22 @@ public class MessageRepository implements Serializable {
      *
      * @return the list of messages.
      */
-    public static List<Message> getMessageList(){
+    public static List<Message> getMessageList() {
         return MessageList;
     }
 
     /**
      * Adds a new message to the repository.
      *
-     * @param name               the name of the message sender.
-     * @param phone              the phone number of the message sender.
-     * @param inputAnnou         the input announcement for the visit.
-     * @param newVisitStartTime  the start time of the visit.
-     * @param newVisitEndTime    the end time of the visit.
+     * @param name              the name of the message sender.
+     * @param phone             the phone number of the message sender.
+     * @param inputAnnou        the input announcement for the visit.
+     * @param newVisitStartTime the start time of the visit.
+     * @param newVisitEndTime   the end time of the visit.
      * @return the created Message object.
      */
-    public static Message addMessage(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
-        Message message = new Message(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime);
+    public static Message addMessage(Client client, Announcement announcement, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        Message message = new Message(client, announcement, newVisitStartTime, newVisitEndTime);
         addComplete(message);
         return message;
     }
@@ -96,4 +101,30 @@ public class MessageRepository implements Serializable {
         getMessageList().remove(message);
         return message;
     }
+    List<Message> finalList = new ArrayList<>();
+
+
+    public List<Message> getMessageSorted(List<Message> messageList) throws IOException {
+        Properties properties = System.getProperties();
+        properties.load(new FileReader("src/main/resources/sortingMethods.properties"));
+        String algorithm = properties.getProperty("sorting.algorithm");
+
+        switch (algorithm.toUpperCase()) {
+            case "MERGESORT":
+                MergeSort merge = new MergeSort();
+                //finalList = merge.merge(requestList);
+
+
+                break;
+            case "SORTINGBUBBLES":
+                BubbleSort bubbleSort = new BubbleSort();
+                finalList = bubbleSort.sortByDate(messageList);
+                break;
+            default:
+                System.out.println("Warning: invalid");
+//                finalList = merge.merge(requestList);
+        }
+        return finalList;
+    }
+
 }

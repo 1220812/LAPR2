@@ -1,111 +1,109 @@
 @startuml
 autonumber
 actor "Agent" as AGENT
-participant ":ListRequestsUI" as UI
-participant ":ListRequestsController" as CTRL
+participant "ListRequestsGUI" as UI
+participant ":ListRequestController" as CTRL
 participant ":Repositories" as REPO
-participant "repositories\n:Repositories" as PLAT
-participant ":ApplicationSession" as APP
-participant "appSession\n:ApplicationSession" as APPSESSION
-participant "currentSession\n:UserSession" as USER
-participant "visitRequestRepository\n:VisitRequestRepository" as VISITREPO
-participant "visitRequestMapper\:VisitRequestMapper" as MAPPER
+participant ":MessageRepository" as REQREPO
+participant ":AuthenticationRepository" as AUTHREPO
+participant ":AgentRepository" as AGENTREPO
+
+title "US015 - Main activity Flux (Sequence Diagram)"
+
+
 
 activate AGENT
 
-AGENT -> UI : Request to list all booking requests managed by me
-activate UI
+    AGENT -> UI : asks to see the list of booking request for him
+    activate UI
+    UI-> CTRL**: create
+    activate CTRL
 
-UI -> CTRL** : create
-activate CTRL
+    CTRL -> REPO : getInstance()
+    activate REPO
 
-CTRL -> REPO : getInstance()
-activate REPO
+    REPO--> CTRL: repositories
+    deactivate REPO
 
-REPO --> CTRL : repositories
-deactivate REPO
+    CTRL -> REQREPO : getMessageRepository()
+    activate REQREPO
 
-CTRL -> PLAT : getMessageReposiotry()
-activate PLAT
+    REQREPO --> CTRL : messageRepository
+    deactivate REQREPO
 
-PLAT --> CTRL : messageRepository
-deactivate PLAT
-CTRL -> APP : getInstance()
-activate APP
+    CTRL -> AUTHREPO : getAuthenticationRepository()
+    activate AUTHREPO
 
-APP --> CTRL :appSession
-deactivate APP
+    AUTHREPO --> CTRL : authenticationRepository
+    deactivate AUTHREPO
 
-CTRL -> APPSESSION : getCurrentSession()
-activate APPSESSION
+    deactivate CTRL
+     UI -> CTRL : getRequest()
+       activate CTRL
 
-APPSESSION --> CTRL : currentSession
-deactivate CTRL
-deactivate APPSESSION
+       CTRL -> REQREPO : getRequest()
+       activate REQREPO
 
-UI --> AGENT : Requests to input the start date of the filtering
-deactivate UI
+       REQREPO --> CTRL : requestList
+       deactivate REQREPO
 
-AGENT -> UI : Submists the start date
-activate UI
+       CTRL --> UI : requestList
+       deactivate CTRL
 
-UI --> UI : Saves start date
-
-UI -> AGENT : Asks to input the end date of the filtering
-deactivate UI
-
-AGENT --> UI: Submists the end date
-activate UI
-UI --> UI : Saves end date
-
-UI --> AGENT : Shows the start date and end date and ask to confirm
-deactivate UI
-
-AGENT -> UI : Confirms the file name and type of algorithm
-activate UI
-
-UI -> CTRL : getListVisitRequest(startDate, endDate)
-activate CTRL
-
-CTRL -> USER: getUserEmail()
-activate USER
-
-USER --> CTRL: getUserEmail
-deactivate USER
-
-CTRL -> APPSESSION : getSortingAlgorithm()
-activate APPSESSION
-
-APPSESSION --> CTRL : algorithm
-deactivate APPSESSION
-
-CTRL -> VISITREPO
-activate VISITREPO
-
-ref over VISITREPO
-SD_getListVisitRequest
-end
-
-VISITREPO --> CTRL : visitRequestList
-deactivate VISITREPO
-
-CTRL -> MAPPER : listToDTO(visitRequestList)
-activate MAPPER
-
-ref over MAPPER
-SD_getListVisitRequest
-end
-
-MAPPER --> CTRL: visitRequestDTOlist
-deactivate MAPPER
-
-CTRL --> UI : visitRequestDTOlist
-deactivate CTRL
-
-UI --> AGENT : Displays the list of all booking requests sorted by the selectd algorithm
+    UI --> AGENT : Requests begin data
+    deactivate UI
 
 
+    AGENT -> UI : Select begin data
+    activate UI
+
+    UI -> UI : keepBeginDate(start)
+
+    UI --> AGENT : Requests end data
+    deactivate UI
+
+    AGENT -> UI : Select end data
+    activate UI
+
+    UI -> UI : keepEndDate(end)
+
+   UI -> CTRL : getCurrentAgent()
+   activate CTRL
+
+   CTRL -> AUTHREPO : getCurrentUserSession()
+   activate AUTHREPO
+
+   AUTHREPO --> AGENTREPO :getAgentByEmail(email)
+   activate AGENTREPO
+
+   deactivate AUTHREPO
+
+   AGENTREPO --> CTRL : loggedInAgent
+   deactivate AGENTREPO
 
 
+   CTRL --> UI : loggedInAgent
+   deactivate CTRL
+
+   loop while request list is not read in full
+   alt if loggedInAgent is equals to agent in requestList and exists request for that agent and exist a request for that date
+
+   UI -> UI : requestsAgent.add(requests);
+
+   end
+
+   end
+      ref over UI
+   Alternative flux (Sorting Methods)
+
+   end ref
+
+   alt if sortedList is empty
+   UI -> AGENT : Show message:"There is no request associated with this agent"
+
+
+   else if sortedList isn´t empty
+   UI -> AGENT : Show sortedList
+   end
 
 @enduml

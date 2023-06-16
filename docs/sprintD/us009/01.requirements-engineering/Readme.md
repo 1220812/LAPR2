@@ -128,7 +128,7 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 **Output Data:**
 
 * List of properties sorted from the most recent entries to the oldest.
-* (In)Success of the operation
+* Show message: "(In)Success of the operation"
 * Show message: "Want to try more? (yes/no)"
 
 

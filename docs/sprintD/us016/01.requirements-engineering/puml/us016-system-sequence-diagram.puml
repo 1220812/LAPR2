@@ -24,11 +24,12 @@ activate Employee
 
     activate System
 
-    System --> Employee : Shows the booking request details
+     Employee -> System : Selects a booking request and asks to select the option to respond\n to the user that scheduled the visit.
 
-    deactivate System
+     activate System
 
     Employee -> System : Selects the option to respond to the user that scheduled the visit.
+
     activate System
 
     System --> System : Sends the response message by email to the user that scheduled the visit
