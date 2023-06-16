@@ -10,6 +10,7 @@ actor "Agent" as AGENT
 participant ":RegisterAnnouncementUI" as UI
 participant ":RegisterAnnouncementController" as CTRL
 participant ":Repositories" as REP
+participant ":Property" as PRPT
 participant ":Announcement" as ANCMT
 participant "repositories\n:Repository" as PLAT
 participant "PropertyTypeRepository\n:PropertyTypeRepository" as PropertyTypeREP
@@ -25,6 +26,37 @@ activate AGENT
 
             create CTRL
             UI -> CTRL** : create
+
+            UI --> AGENT : requests data to verify if the owner is registed
+            deactivate UI
+
+            AGENT -> UI : types the requested data (owner's email)
+
+            activate UI
+            UI -> CTRL : getRegisteredUsers()
+                    activate CTRL
+                    CTRL -> REP : getInstance()
+                    activate REP
+                    REP --> CTRL : repositories
+                    deactivate REP
+                    CTRL -> PLAT : getRegisteredUsersRepository()
+                    activate PLAT
+                    PLAT --> CTRL : registeredUsersRepository
+                    deactivate PLAT
+                    CTRL -> RegistedUsersREP : getRegisteredUsers()
+                    activate RegistedUsersREP
+                    RegistedUsersREP --> CTRL : registeredUsersList
+                    deactivate RegistedUsersREP
+
+                    CTRL --> UI : registedUsersList
+                    deactivate CTRL
+
+                    alt if owner's email not in registedUsersList
+
+                    UI --> AGENT : owner not registed
+
+                    end alt
+                    alt if owner's email is in registedUsersList
 
             UI -> CTRL : getPropertyType()
             activate CTRL
@@ -55,104 +87,426 @@ activate AGENT
 
     AGENT -> UI : selects a property type (land, house, appartment)
     activate UI
+    loop while propertyType invalid
+                UI --> AGENT : shows property type list and asks to sleect one
+
+               deactivate UI
+                   AGENT -> UI : selects a property type (land, house, appartment)
+activate UI
+
+        end loop
     UI -> CTRL : setPropertyType(propertyType)
     activate CTRL
+
     CTRL --> UI : propertyType selected
     deactivate CTRL
 
-        UI --> AGENT : requests data to verify if the owner is registed
-    deactivate UI
 
-    AGENT -> UI : types the requested data (owner's name)
-    activate UI
-        UI -> CTRL : getRegisteredUsers()
-        activate CTRL
-        CTRL -> REP : getInstance()
-        activate REP
-        REP --> CTRL : repositories
-        deactivate REP
-        CTRL -> PLAT : getRegisteredUsersRepository()
-        activate PLAT
-        PLAT --> CTRL : registeredUsersRepository
-        deactivate PLAT
-        CTRL -> RegistedUsersREP : getRegisteredUsers()
-        activate RegistedUsersREP
-        RegistedUsersREP --> CTRL : registeredUsers
-        deactivate RegistedUsersREP
-        loop while user not registered
-        CTRL --> CTRL : user is registered
-        end loop
-        CTRL --> UI : user is registered
-        deactivate CTRL
-        UI --> AGENT : requests data
-        deactivate UI
 
-        AGENT -> UI : types the requested data (area in m2, location, distance from the city centre, requested price, one or more photos)
+
+
+
+
+
+
+
+
+
+
+    UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (area)
         activate UI
-        UI -> CTRL : saveDataProperty(area, location, distance, price, photos)
+        loop while area <= 0
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (area)
+    activate UI
+
+            end loop
+        UI -> CTRL : setArea(area)
         activate CTRL
-        CTRL --> UI : data saved
+
+        CTRL --> UI : area set
         deactivate CTRL
+
+
+
+
+
+
+        UI --> AGENT : requests area
+                    deactivate UI
+
+                AGENT -> UI : writes data (street adress)
+                activate UI
+                loop while street adress invalid
+                            UI --> AGENT : requests data
+                           deactivate UI
+                               AGENT -> UI : writes data (street adress)
+            activate UI
+
+                    end loop
+                UI -> CTRL : setStreetAdress(streetAdress)
+                activate CTRL
+
+                CTRL --> UI : streetAdress set
+                deactivate CTRL
+
+
+
+
+                UI --> AGENT : requests data
+                            deactivate UI
+
+                        AGENT -> UI : writes data (city)
+                        activate UI
+                        loop while city invalid
+                                    UI --> AGENT : requests data
+                                   deactivate UI
+                                       AGENT -> UI : writes data (city)
+                    activate UI
+
+                            end loop
+                        UI -> CTRL : setCity(city)
+                        activate CTRL
+
+                        CTRL --> UI : city set
+                        deactivate CTRL
+
+
+
+                        UI --> AGENT : requests data
+                                    deactivate UI
+
+                                AGENT -> UI : writes data (state)
+                                activate UI
+                                loop while state invalid
+                                            UI --> AGENT : requests data
+                                           deactivate UI
+                                               AGENT -> UI : writes data (state)
+                            activate UI
+
+                                    end loop
+                                UI -> CTRL : setState(state)
+                                activate CTRL
+
+                                CTRL --> UI : state set
+                                deactivate CTRL
+
+
+
+
+opt property is a appartment
+                                UI --> AGENT : requests data
+                                            deactivate UI
+
+                                        AGENT -> UI : writes data (floor number)
+                                        activate UI
+                                        loop while floorNumber invalid
+                                                    UI --> AGENT : requests data
+                                                   deactivate UI
+                                                       AGENT -> UI : writes data (floor number)
+                                    activate UI
+
+                                            end loop
+                                        UI -> CTRL : setFloorNumber(floorNumber)
+                                        activate CTRL
+
+                                        CTRL --> UI : floorNumber set
+                                        deactivate CTRL
+                                        end opt
+
+UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (door number)
+        activate UI
+        loop while doorNumber <= 0
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (door number)
+    activate UI
+
+            end loop
+        UI -> CTRL : setDoorNumber(doorNumber)
+        activate CTRL
+
+        CTRL --> UI : doorNumber selected
+        deactivate CTRL
+
+
+
+
+
+UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (distance from city center)
+        activate UI
+        loop while distanceFromCityCenter < 0
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (distance from city center)
+    activate UI
+
+            end loop
+        UI -> CTRL : setDistanceFromCityCenter(distanceFromCityCenter)
+        activate CTRL
+
+        CTRL --> UI : distanceFromCityCenter set
+        deactivate CTRL
+
+
+
+
+
+UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (price)
+        activate UI
+        loop while price <= 0
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (price)
+    activate UI
+
+            end loop
+        UI -> CTRL : setPrice(price)
+        activate CTRL
+
+        CTRL --> UI : price set
+        deactivate CTRL
+
+
+        UI --> AGENT : requests data
+                    deactivate UI
+
+                AGENT -> UI : writes data (number of photos)
+                activate UI
+                loop while numberOfPhotos <= 0 && numberOfPhotos > 30
+                            UI --> AGENT : requests data
+                           deactivate UI
+                               AGENT -> UI : writes data (number of photos)
+            activate UI
+
+                    end loop
+                UI -> CTRL : setNumberOfPhotos(numberOfPhotos)
+                activate CTRL
+
+                CTRL --> UI : numberOfPhotos set
+                deactivate CTRL
+
+
+    loop while i < numberOfPhotos
+    UI --> AGENT : requests data
+    deactivate UI
+    AGENT -> UI : writes data (photo uri)
+    activate UI
+    UI -> CTRL : addPhoto(photoURI)
+    activate CTRL
+    CTRL --> UI : photograph added
+    deactivate CTRL
+    end loop
+
+
+
+
+
+
+
 
 
         opt property is an Apartment/House
 
-        UI --> AGENT : requests data
-    deactivate UI
+UI --> AGENT : requests data
+            deactivate UI
 
-    AGENT -> UI : types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)
+        AGENT -> UI : writes data (number of bedrooms)
         activate UI
+        loop while numberOfBedrooms < 0
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (numberOfBedrooms)
+    activate UI
 
-    UI -> CTRL : saveDataResidence(bedrooms, bathrooms, parking, equipment)
-    activate CTRL
-    CTRL --> UI : data saved
-    deactivate CTRL
+            end loop
+        UI -> CTRL : setNumberOfBedrooms(numberOfBedrooms)
+        activate CTRL
+
+        CTRL --> UI : numberOfBedroom set
+        deactivate CTRL
+
+
+UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (number of bathrooms)
+        activate UI
+        loop while numberOfBathrooms < 0
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (number of bathrooms)
+    activate UI
+
+            end loop
+        UI -> CTRL : setNumberOfBathrooms(numberOfBathrooms)
+        activate CTRL
+
+        CTRL --> UI : numberOfBathrooms set
+        deactivate CTRL
+
+
+
+UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (number of parking spaces)
+        activate UI
+        loop while parkingSpaces < 0
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (number of parking spaces)
+    activate UI
+
+            end loop
+        UI -> CTRL : setParkingSpaces(parkingSpaces)
+        activate CTRL
+
+        CTRL --> UI : parkingSpaces set
+        deactivate CTRL
+
+
+
+
+
+    loop while !(availableEquipment == 0)
+
+    UI --> AGENT : requests data
+                deactivate UI
+
+            AGENT -> UI : writes data (available equipment)
+            activate UI
+
+            UI -> CTRL : addAvailableEquipment(availableEquipment)
+            activate CTRL
+
+            CTRL --> UI : availableEquipment added
+            deactivate CTRL
+
+    end loop
+
+
 
 
         opt property is a House
 
-        UI --> AGENT : requests data
-    deactivate UI
-AGENT -> UI : types the requested data (existence of a basement and inhabitable loft, sun exposure)
-activate UI
-UI -> CTRL : saveDataHouse(basement, loft, sun)
-activate CTRL
-CTRL --> UI : data saved
-deactivate CTRL
+UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (existence of basement)
+        activate UI
+        loop while basement invalid
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (existence of basement)
+    activate UI
+
+            end loop
+        UI -> CTRL : setBasementExistence(basement)
+        activate CTRL
+
+        CTRL --> UI : basement set
+        deactivate CTRL
+
+
+
+UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (existence of inhabitable loft)
+        activate UI
+        loop while loft invalid
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (existence of inhabitable loft)
+    activate UI
+
+            end loop
+        UI -> CTRL : setLoftExistence(loft)
+        activate CTRL
+
+        CTRL --> UI : loft set
+        deactivate CTRL
+
+  UI --> AGENT : requests data
+              deactivate UI
+
+          AGENT -> UI : select data (sun exposure)
+          activate UI
+          loop while sunExposure invalid
+                      UI --> AGENT : requests data
+                     deactivate UI
+                         AGENT -> UI : select data (sun exposure)
+      activate UI
+
+              end loop
+          UI -> CTRL : setSunExposure(sunExposure)
+          activate CTRL
+
+          CTRL --> UI : sunExposure selected
+          deactivate CTRL
+
+
+
+
+
+
+
+
+
+
 
 end opt
 end opt
-UI --> AGENT : requests comission type
-deactivate UI
-AGENT -> UI : selects comission type
-activate UI
-UI -> CTRL : saveDataComissionType(comissionType)
-activate CTRL
-CTRL --> UI : data saved
-deactivate CTRL
-opt comission is a percentage
-UI --> AGENT : requests comission percentage
-deactivate UI
-AGENT -> UI : types comission
-activate UI
-UI -> CTRL : saveDataComission(comission)
-activate CTRL
-CTRL --> UI : data saved
-deactivate CTRL
+UI --> AGENT : requests data
+            deactivate UI
+
+        AGENT -> UI : writes data (comission type)
+        activate UI
+        loop while comissionType invalid
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (comission type)
+    activate UI
+
+            end loop
+        UI -> CTRL : setComissionType(comissionType)
+        activate CTRL
+
+        CTRL --> UI : comissionType set
+        deactivate CTRL
 
 
-end opt
+UI --> AGENT : requests data
+            deactivate UI
 
-opt comission is a value
-UI --> AGENT : requests comission value
-deactivate UI
-AGENT -> UI : types comission
-activate UI
-UI -> CTRL : saveDataComission(comission)
-activate CTRL
-CTRL --> UI : data saved
-deactivate CTRL
-end opt
+        AGENT -> UI : writes data (comission)
+        activate UI
+        loop while comission <= 0
+                    UI --> AGENT : requests data
+                   deactivate UI
+                       AGENT -> UI : writes data (comission)
+    activate UI
+
+            end loop
+        UI -> CTRL : setComission(comission)
+        activate CTRL
+
+        CTRL --> UI : comission selected
+        deactivate CTRL
 
 
 UI --> AGENT : presents all the data inserted
@@ -160,23 +514,66 @@ UI --> AGENT : presents all the data inserted
 deactivate UI
 
 AGENT -> UI : confirms inserted data
-
 activate UI
-UI -> CTRL : createAnnouncement
+UI -> CTRL : setDate(date)
+activate CTRL
+CTRL --> UI : date set
+deactivate CTRL
+
+UI -> PRPT** : createProperty
+
+UI -> CTRL : createProperty(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, propertyType, photos, requestType)
+
+activate CTRL
+
+alt if property is a land
+
+CTRL -> PRPT : createProperty(area, distanceFromCityCenter, address, propertyType, photos)
+activate PRPT
+PRPT --> CTRL : property created
+deactivate PRPT
+end alt
+
+alt if property is a appartment
+
+CTRL -> PRPT : createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, availableEquipment)
+activate PRPT
+PRPT --> CTRL : property created
+deactivate PRPT
+
+
+end alt
+
+alt if property is a house
+
+CTRL -> PRPT : createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, availableEquipment, basement, sunExposure, loft, propertyType, photos, requestType)
+activate PRPT
+PRPT --> CTRL : property created
+deactivate PRPT
+
+
+end alt
+CTRL --> UI : property created
+deactivate CTRL
+
+
+
+
+
+
+
+UI -> CTRL : createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price)
 activate CTRL
 CTRL -> ANCMT** : create()
-CTRL -> ANCMT : createAnnouncement()
+CTRL -> ANCMT : createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price)
 activate ANCMT
 ANCMT --> CTRL : announcement created
 deactivate ANCMT
-CTRL -> ANCMT : setDate(date)
-activate ANCMT
-ANCMT --> CTRL : announcement created sucessfully
-deactivate ANCMT
+
 
 CTRL --> UI : announcement created sucessfully
 deactivate CTRL
-UI -> CTRL : addAnnouncement
+UI -> CTRL : addAnnouncement(announcement)
     activate CTRL
     CTRL -> REP : getInstance()
                     activate REP
@@ -199,13 +596,16 @@ UI -> CTRL : addAnnouncement
                     CTRL --> UI : announcement added
                 deactivate CTRL
 
-UI --> AGENT : announcement created sucessfully
+UI -> CTRL : createSMS(announcement)
+activate CTRL
+CTRL --> UI : sms created sucessfully
+deactivate CTRL
+
+
+
+UI --> AGENT : announcement and sms created sucessfully
 deactivate UI
-
-
-
-
-
+end alt
 deactivate AGENT
 
 @enduml

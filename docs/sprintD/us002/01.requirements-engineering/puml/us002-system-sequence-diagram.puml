@@ -16,6 +16,22 @@ activate Agent
 
     activate System
 
+        System --> Agent : requests owner email
+
+    deactivate System
+
+    Agent -> System : types owner email
+
+    activate System
+
+    alt owner not registed
+
+    System --> Agent : owner not registed
+
+    end alt
+
+    alt owner registed
+
         System --> Agent : requests type of property
 
     deactivate System
@@ -28,7 +44,27 @@ activate Agent
 
     deactivate System
 
-    Agent -> System : types the requested data (area in m2, location, distance from the city centre, requested price, comission on the sale, one or more photos)
+    Agent -> System : types the requested data (area in m2, street adress, city, state, floor number, door number, distance from city center, price)
+
+    activate System
+
+    System --> Agent : requests number of photos
+
+    deactivate System
+
+    Agent -> System : inserts number of photos
+
+    loop while i < numberOfPhotos
+
+    activate System
+
+    System --> Agent : requests photo uri
+
+    deactivate System
+
+    Agent -> System : inserts photo uri
+
+    end loop
 
     opt property is an Apartment/House
 
@@ -38,7 +74,19 @@ activate Agent
 
         deactivate System
 
-        Agent -> System : types the requested data (number of bedrooms and bathrooms, parking spaces, available equipment)
+        Agent -> System : types the requested data (number of bedrooms and bathrooms, parking spaces)
+
+        loop while !(availableEquipment == 0)
+
+        activate System
+
+                System --> Agent : requests available equipment
+
+        deactivate System
+
+        Agent -> System : types available equipment
+
+        end loop
 
         opt property is a House
 
@@ -56,6 +104,14 @@ activate Agent
 
     end opt
 
+            System --> Agent : requests data
+
+            deactivate System
+
+            Agent -> System : types comission type and comission
+
+            activate System
+
         System --> Agent : presents all the data inserted
 
     deactivate System
@@ -64,12 +120,11 @@ activate Agent
 
     activate System
 
-        System --> Agent : analyses the data and, if approved, sends a confirmation request before posting
+        System --> Agent : publishes announcement and sends sms notification to the owner
 
     deactivate System
-
-    Agent -> System : confirms publishment
-
+end alt
 deactivate Agent
+
 
 @enduml
