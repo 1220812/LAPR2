@@ -6,10 +6,9 @@ import java.io.*;
  * The type Repositories.
  */
 public class Repositories implements Serializable{
+    private static final long serialVersionUID = 9037739044406608007L;
     // From the template
     private static final Repositories instance = new Repositories();
-    private final TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository();
-    private final OrganizationRepository organizationRepository = new OrganizationRepository();
     private final AuthenticationRepository authenticationRepository = new AuthenticationRepository();
 
     // Added after by the Team
@@ -121,24 +120,6 @@ public class Repositories implements Serializable{
     }
     public EmployeeRepository getEmployeeRepository(){
         return employeeRepository;
-    }
-
-    /**
-     * Gets organization repository.
-     *
-     * @return the organization repository
-     */
-    public OrganizationRepository getOrganizationRepository() {
-        return organizationRepository;
-    }
-
-    /**
-     * Gets task category repository.
-     *
-     * @return the task category repository
-     */
-    public TaskCategoryRepository getTaskCategoryRepository() {
-        return taskCategoryRepository;
     }
 
     /**

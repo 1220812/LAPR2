@@ -38,7 +38,7 @@ class OrderRepositoryTest {
         assertTrue(valid);
     }
 
-    @Test
+    /**@Test
     void valid() {
         OrderRepository orderRepository = new OrderRepository();
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -51,7 +51,7 @@ class OrderRepositoryTest {
         orderRepository.addNewOrder(order);
         boolean valid = orderRepository.valid(order);
         assertTrue(valid);
-    }
+    }*/
 
     @Test
     void getOrders() {

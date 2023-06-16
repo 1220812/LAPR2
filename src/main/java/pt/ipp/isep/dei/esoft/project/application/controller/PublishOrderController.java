@@ -30,7 +30,7 @@ public class PublishOrderController {
      * @return the announcements registered on the app
      */
     public List <Announcement> getAnnouncements(){
-        return announcementRepository.getAnnouncements();
+        return announcementRepository.getAnnouncementsList();
     }
 
     /**

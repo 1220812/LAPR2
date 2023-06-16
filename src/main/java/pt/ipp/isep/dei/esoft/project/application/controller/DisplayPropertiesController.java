@@ -20,7 +20,7 @@ public class DisplayPropertiesController {
 //    }
 
     public void DisplayAnnouncements (AnnouncementRepository announcementRepository) {
-        Utils.showList(announcementRepository.getAnnouncements(), "Announcements");
+        Utils.showList(announcementRepository.getAnnouncementsList(), "Announcements");
     }
 
 }
