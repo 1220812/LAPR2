@@ -11,8 +11,8 @@ participant "RespondBookingRequestUI" as UI
 participant ":RespondBookingRequestController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "bookingRequestRepository:\nBookingRequestRepository" as BookingRequestRepository
-participant "booking:\nBooking" as Booking
+participant "MessageRepository:\nMessageRepository" as MessageRepository
+participant "Message" as Message
 participant "bookingRepository:\nBookingRepository" as BookingRepository
 
 activate ADM
@@ -89,16 +89,16 @@ activate ADM
    deactivate bookingRequestRepository
 
 
-   CTRL -> EmailService : sendEmailBookingRequestRejected(bookingRequest)
+   CTRL -> SendEmailMessage : sendEmailBookingRequestRejected(bookingRequest)
 
 
-   activate EmailService
+   activate SendEmailMessage
 
-   EmailService --> CTRL :
+   SendEmailMessage --> CTRL :
 
 
 
-   deactivate EmailService
+   deactivate SendEmailMessage
 
     else if the booking request was accepted
 
@@ -120,13 +120,13 @@ activate ADM
 
 
 
-    CTRL -> EmailService : sendEmailBookingRequestAccepted(bookingRequest)
+    CTRL -> SendEmailMessage : sendEmailBookingRequestAccepted(bookingRequest)
 
-    activate EmailService
+    activate SendEmailMessage
 
-    EmailService --> CTRL :
+    SendEmailMessage --> CTRL :
 
-    deactivate EmailService
+    deactivate SendEmailMessage
 
     CTRL -> Booking** : create(bookingRequest)
 
