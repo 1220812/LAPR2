@@ -15,28 +15,22 @@ activate Employee
     Employee -> System : asks to register a store
     activate System
 
-        System --> Employee : requests data for store
+        System --> Employee : requests data for store address
     deactivate System
 
-    Employee -> System : types requested data (designation, email adress, contact)
+    Employee -> System : types requested data (street address, doorNumber, floorNumber, zipCode, state, district, city )
     activate System
 
-        System --> Employee : asks for address data
+        System --> Employee : asks for store data
     deactivate System
 
-    Employee -> System: types requested address data (street, postal code, door number)
+    Employee -> System: types requested store data (ID, designation, emailAddress, phoneNumber)
     activate System
 
-        System --> Employee : requests location data
+        System --> Employee : shows store preview and asks for confirmed submission
     deactivate System
 
-    Employee -> System : types requested location data (city, district, state)
-    activate System
-
-        System --> Employee : shows store preview and asks for confirmed submition
-    deactivate System
-
-    Employee -> System : confirms submition
+    Employee -> System : confirms submission
     activate System
 
         System --> Employee : registers the store

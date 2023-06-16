@@ -75,22 +75,6 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 >
 > **Answer:** Any date and time can be specified. We are always available to our customers!
 
-> **Question:**
->
-> **Answer:**
-
-> **Question:**
->
-> **Answer:**
-
-> **Question:**
->
-> **Answer:**
-
-> **Question:**
->
-> **Answer:**
-
 
 ### 1.3. Acceptance Criteria
 
@@ -99,7 +83,16 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 * *AC3:* A client may post multiple visit requests, but only if those do not overlap each other.
 * *AC4:* The client must receive a success message when the request is valid and registered in the system.
 * *AC5:* Time format must be 24-hour format.
-
+* *AC6:* Day format: 1-31
+* *AC7:* Month format: 1-12
+* *AC8:* Year must be higher than 2022
+* *AC9:* StarHour format: 0-23
+* *AC10:* StartMinute format: 0-59
+* *AC11:* EndHour format: 0-23
+* *AC12:* EndMinute format: 0-59
+* *AC13:* newVisitStartTime must be beyond the current data 
+* *AC14:* newVisitEndTime must be beyond the current data
+* *AC15:* newVisitEndTime must be beyond the newVisitStartTime
 
 ### 1.4. Found out Dependencies
 
@@ -107,7 +100,6 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
 * There is a dependency with US007, since only users with the role CLIENT are able to submit schedule visits, so at least one CLIENT must be registered in the system.
 
 ### 1.5 Input and Output Data
-
 
 **Input Data:**
 
@@ -121,14 +113,13 @@ As a client, I want to leave a message to the agent to schedule a visit to a pro
   * EndMinte
   * EndHour
 
-
 * Selected data:
   * chosen property for the visit
 
 **Output Data:**
 
 * List of properties sorted from the most recent entries to the oldest.
-* (In)Success of the operation
+* Show message: "(In)Success of the operation"
 * Show message: "Want to try more? (yes/no)"
 
 

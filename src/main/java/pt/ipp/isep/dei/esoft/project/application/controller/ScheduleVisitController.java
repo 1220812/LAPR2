@@ -1,10 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Announcement;
-import pt.ipp.isep.dei.esoft.project.domain.Employee;
-import pt.ipp.isep.dei.esoft.project.domain.Message;
+import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.isep.lei.esoft.auth.UserSession;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -75,36 +75,27 @@ public class ScheduleVisitController {
         return Message.checkMinute(startMinute);
     }
 
-    /**
-     * Checks if the given phone number exists.
-     *
-     * @param phone the phone number to check.
-     * @return true if the phone number exists, false otherwise.
-     */
-    public boolean checkPhone(String phone) {
-        return Employee.existsPhone(phone);
-    }
+
 
     /**
      * Adds a new message for scheduling a visit.
      *
-     * @param name               the name of the message sender.
-     * @param phone              the phone number of the message sender.
-     * @param inputAnnou         the input announcement for the visit.
-     * @param newVisitStartTime  the start time of the visit.
-     * @param newVisitEndTime    the end time of the visit.
+     * @param name              the name of the message sender.
+     * @param phone             the phone number of the message sender.
+     * @param newVisitStartTime the start time of the visit.
+     * @param newVisitEndTime   the end time of the visit.
      * @return the created Message object.
      */
-    public Message addMessage(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
-        return MessageRepository.addMessage(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime);
+    public Message addMessage( Client client,Announcement announcement, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        return MessageRepository.addMessage(client,announcement, newVisitStartTime, newVisitEndTime);
     }
 
     /**
      * Checks if the visit specified by the start and end times is valid.
      *
-     * @param MessageList        the list of messages to check against.
-     * @param newVisitStartTime  the start time of the visit.
-     * @param newVisitEndTime    the end time of the visit.
+     * @param MessageList       the list of messages to check against.
+     * @param newVisitStartTime the start time of the visit.
+     * @param newVisitEndTime   the end time of the visit.
      * @return true if the visit is valid, false otherwise.
      */
     public boolean checkIfValidVisit(List<Message> MessageList, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
@@ -114,12 +105,25 @@ public class ScheduleVisitController {
     /**
      * Checks if the visit time is valid, i.e., the end time occurs after the start time.
      *
-     * @param newVisitStartTime  the start time of the visit.
-     * @param newVisitEndTime    the end time of the visit.
+     * @param newVisitStartTime the start time of the visit.
+     * @param newVisitEndTime   the end time of the visit.
      * @return true if the visit time is valid, false otherwise.
      */
     public boolean checkVisitTime(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         return Message.checkVisitTime(newVisitStartTime, newVisitEndTime);
     }
+
+    public boolean checkEmail(String email) {
+        return (Employee.existsEmail(email));
+    }
+
+    public Client getCurrentClient() {
+        AuthenticationRepository rep = Repositories.getInstance().getAuthenticationRepository();
+        UserSession us = rep.getCurrentUserSession();
+        String email = us.getUserId().getEmail();
+        return Repositories.getInstance().getClientRepository().getClientByEmail(email);
+    }
 }
+
+
 

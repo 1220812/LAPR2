@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Agent" as AGENT
+participant "ListRequestsGUI" as UI
+participant ":ListRequestController" as CTRL
+participant ":RequestRepository" as REQREPO
+participant ":sortingMethods.properties" as SM
+
+
+title "US015 - Alternative flux (Sorting Methods)"
+
+activate UI
+
+UI -> CTRL : sortedList = getRequestsSorted(requestsAgent)
+activate CTRL
+
+CTRL -> REQREPO: getRequestsSorted(requestList)
+activate REQREPO
+
+REQREPO -> SM : System.getProperties()
+activate SM
+
+SM --> REQREPO : returns algorithm
+
+REQREPO --> CTRL : sortedList
+
+CTRL --> UI : sortedList
+
+@enduml

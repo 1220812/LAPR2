@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class OwnerRepository implements Serializable {
-
+    private static final long serialVersionUID = 74193049451413887L;
     private static List<Owner> ownerList = new ArrayList<>();
 
 

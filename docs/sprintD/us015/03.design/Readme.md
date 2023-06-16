@@ -31,12 +31,16 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-### Alternative 1 - Full Diagram
+### Main Sequence Diagram
 
-This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
+This diagram shows the main sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us013-sequence-diagram-full.svg)
+![Main Sequence Diagram](us015-main-sequence-diagram.puml)
+
+### Alternative flux (sorting methods)
+
+![Alternative Flux (sorting methods)](us015-alternative flux sorting methods.puml)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us013-class-diagram.svg)
+![Class Diagram](us015-class-diagram.puml)

@@ -2,9 +2,9 @@
 
 ## 2. Analysis
 
-### 2.1. Relevant Domain Model Excerpt 
+### 2.1. Relevant Domain Model Excerpt
 
-![Domain Model](svg/us013-domain-model.svg)
+![Domain Model](us015-domain-model.puml)
 
 ### 2.2. Other Remarks
 

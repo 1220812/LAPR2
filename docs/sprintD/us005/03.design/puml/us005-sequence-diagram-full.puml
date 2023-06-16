@@ -8,15 +8,14 @@ autonumber
 'hide footbox
 actor "System Administrator" as ADM
 participant ":RegisterStoreUI" as UI
-participant ":RegisterStoreController" as STRCTRL
-participant ":StateController" as STCTRL
+participant "controller\n:RegisterStoreController" as STRCTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "StoreRepository:\nStoreRepository" as StoreRepository
 participant "StateRepository:\nStateRepository" as StateRepository
 participant "DistrictRepository:\nDistrictRepository" as DistrictRepository
 participant "CityRepository:\nCityRepository" as CityRepository
-participant "Location:\nLocation" as Location
+participant "Address:\nAddress" as Address
 'participant ":ApplicationSession" as _APP
 'participant "appSession\n:ApplicationSession" as APP
 'participant "currentSession\n:UserSession" as SESSAO
@@ -34,118 +33,63 @@ activate ADM
             'create CTRL
             UI -> STRCTRL** : create
 
-            UI -> STRCTRL : getRepositories()
+
             activate STRCTRL
 
                     STRCTRL -> RepositorySingleton : getInstance()
                     activate RepositorySingleton
 
-                    RepositorySingleton --> STRCTRL: repositories
+                        RepositorySingleton --> STRCTRL: repositories
+
                     deactivate RepositorySingleton
+                    STRCTRL -> PLAT: getStoreRepository();
+                    activate PLAT
 
-                    STRCTRL -> StoreRepository : getStoreRepository()
-                    activate StoreRepository
+                        PLAT --> STRCTRL : storeRepository
 
-                    StoreRepository --> STRCTRL : stores
-                    deactivate StoreRepository
+                    deactivate PLAT
+                    STRCTRL -> PLAT : getStateRepository();
+                    activate PLAT
 
-                    STRCTRL -> StateRepository : getStateRepository()
-                    activate StateRepository
+                        PLAT --> STRCTRL : stateRepository
 
-                    StateRepository --> STRCTRL : states
-                    deactivate StateRepository
+                    deactivate PLAT
+                    STRCTRL -> PLAT : getDistrictRepository();
+                    activate PLAT
 
-            STRCTRL --> UI : States
+                        PLAT --> STRCTRL : districtRepository
+
+                    deactivate PLAT
+                    STRCTRL -> PLAT : getCityRepository();
+                    activate PLAT
+
+                        PLAT --> STRCTRL : cityRepository
+
+                    deactivate PLAT
             deactivate STRCTRL
 
-            UI --> ADM : shows list of states and asks to select one
-            deactivate UI
-
-            ADM -> UI : selects a state
-            activate UI
-
-            UI -> STRCTRL : getDistrict()
-            activate STRCTRL
-
-                    STRCTRL -> RepositorySingleton : getInstance()
-                    activate RepositorySingleton
-
-                    RepositorySingleton --> STRCTRL: repositories
-                    deactivate RepositorySingleton
-
-                    STRCTRL -> StoreRepository : getStoreRepository()
-                    activate StoreRepository
-
-                    StoreRepository --> STRCTRL : stores
-                    deactivate StoreRepository
-
-                    STRCTRL -> DistrictRepository : getDistrictRepository
-                    activate DistrictRepository
-
-                    DistrictRepository --> STRCTRL : districts
-                    deactivate DistrictRepository
-
-
-            STRCTRL --> UI : districts
-            deactivate STRCTRL
-
-            UI --> ADM : shows list of districts within the selected state and asks to select one
-            deactivate UI
-
-            ADM -> UI : selects a district
-            activate UI
-
-            UI --> STRCTRL : getCity()
-            activate STRCTRL
-
-                STRCTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                RepositorySingleton --> STRCTRL: repositories
-                deactivate RepositorySingleton
-
-                STRCTRL -> StoreRepository : getStoreRepository()
-                activate StoreRepository
-
-                StoreRepository --> STRCTRL : stores
-                deactivate StoreRepository
-
-                STRCTRL -> CityRepository : getCityRepository
-                activate CityRepository
-
-                CityRepository --> STRCTRL : cities
-                deactivate CityRepository
-
-            STRCTRL --> UI : cities
-            deactivate STRCTRL
-
-            UI --> ADM : show list of cities within the selected district and asks to select one
-            deactivate UI
-
-            ADM -> UI: selects a city
-
-            UI --> ADM : requests store location data (streetAdress, zip-code)
+            UI --> ADM : requests address data (street address, doorNumber, floorNumber, zipCode, state, district, city )
             deactivate UI
 
             ADM -> UI : types requested data
             activate UI
 
-            UI --> ADM : shows selected state, district, city and store location data and asks to confirm
+            UI --> ADM : shows store address data and asks to confirm
             deactivate UI
 
             ADM -> UI : submits data
             activate UI
 
-                    UI -> STRCTRL :createStoreLocation(streetAddress, city, district, state, zipCode)
+                    UI -> STRCTRL :createStoreAddress(streetAddress, doorNumber, floorNumber, zipCode, state, district, city)
                     activate STRCTRL
 
-                    STRCTRL -> Location : location(streetAddress, city, district, state, zipCode)
-                    activate Location
+                    STRCTRL -> Address : Address(streetAddress, doorNumber, floorNumber, zipCode, state, district, city)
+                    activate Address
 
-                    Location --> STRCTRL : location object
-                    deactivate Location
+                    Address --> STRCTRL : address object
+                    deactivate Address
 
-                    STRCTRL -> UI : location
+                    STRCTRL -> UI : address
                     deactivate STRCTRL
 
             UI --> ADM : requests store data (ID, designation, emailAddress, phoneNumber)
@@ -173,10 +117,10 @@ activate ADM
             ADM -> UI : submits data
             activate UI
 
-                UI -> STRCTRL : registerLocationAtStore(store, location)
+                UI -> STRCTRL : registerAddressAtStore(store, address)
                 activate STRCTRL
 
-                STRCTRL -> StoreRepository : setLocation(location)
+                STRCTRL -> StoreRepository : setAddress(address)
                 activate StoreRepository
 
                 StoreRepository --> STRCTRL : boolean
@@ -193,7 +137,6 @@ activate ADM
 
                 UI -> STRCTRL : registerStore(store)
                 activate STRCTRL
-
 
                 STRCTRL -> StoreRepository : registerStore(store)
                 activate StoreRepository

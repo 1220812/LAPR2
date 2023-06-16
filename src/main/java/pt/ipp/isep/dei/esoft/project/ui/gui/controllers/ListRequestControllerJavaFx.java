@@ -5,14 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.ListRequestsController;
 import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
+import pt.ipp.isep.dei.esoft.project.domain.Message;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
 
 import java.io.File;
@@ -29,7 +28,7 @@ public class ListRequestControllerJavaFx implements Initializable {
     @FXML
     private FXMLLoader fxmlLoader;
     @FXML
-    private ListView<Request> lView;
+    private ListView<Message> lView;
     @FXML
     private Button cancelButton;
     @FXML
@@ -45,7 +44,7 @@ public class ListRequestControllerJavaFx implements Initializable {
     @FXML
     private Scene scene;
     @FXML
-    private List<Request> list;
+    private List<Message> list;
     private ListRequestsController controller = new ListRequestsController();
 
     @FXML
@@ -79,21 +78,27 @@ public class ListRequestControllerJavaFx implements Initializable {
 
     }
 
-    public void showRequests(ActionEvent event) throws IOException {
-        List<Request> requestsAgent = new ArrayList<>();
-        List<Request> requests = controller.getRequests();
+    public void showMessages(ActionEvent event) throws IOException {
+        List<Message> requestsAgent = new ArrayList<>();
+        List<Message> messageList = controller.getMessages();
         start = getBeginDate();
         end = getEndDate();
         lView.getItems().clear();
         Agent loggedInAgent = controller.getCurrentAgent();
-        for (int i = 0; i < requests.size(); i++) {
-            if ((loggedInAgent.getEmailAddress().equals(requests.get(i).getAgent().getEmailAddress())) && ((requests.get(i).getRequestDate().isAfter(start)) && (requests.get(i).getRequestDate().isBefore(end)))) {
-                requestsAgent.add(requests.get(i));
+        for (int i = 0; i < messageList.size(); i++) {
+            if ((loggedInAgent.getEmailAddress().equals(messageList.get(i).getAgent().getEmailAddress())) && ((messageList.get(i).getNewVisitStartTime().isAfter(start.atStartOfDay())) && (messageList.get(i).getNewVisitEndTime().isBefore(end.atStartOfDay())))) {
+                requestsAgent.add(messageList.get(i));
             }
         }
-        List<Request> sortedList = controller.getRequestsSorted(requestsAgent);
-        for (int i = 0; i < sortedList.size(); i++) {
-            lView.getItems().add(sortedList.get(i));
+        List<Message> sortedList = controller.getMessagesSorted(requestsAgent);
+
+
+        if (sortedList.isEmpty()) {
+            System.out.println(("There is no booking associated with this agent"));
+        } else {
+            for (int i = 0; i < sortedList.size(); i++) {
+                lView.getItems().add(sortedList.get(i));
+            }
         }
     }
 
@@ -108,3 +113,4 @@ public class ListRequestControllerJavaFx implements Initializable {
         return date;
     }
 }
+
