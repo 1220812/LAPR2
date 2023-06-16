@@ -48,6 +48,11 @@ public class Bootstrap implements Runnable {
             throw new RuntimeException(e);
         }
         addMessage();
+        try {
+            addClient();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void addOrganization() {
@@ -408,5 +413,24 @@ public class Bootstrap implements Runnable {
         PassportCardNumber passport2 = new PassportCardNumber("12345678");
         Agent agent2 = new Agent("Agent", "agent@this.app","988654321",passportCardNumber2,taxNumber2, address2,agent,agency2,store2,"agent");
         agentRepository.add(agent2);
+    }
+    private void addClient() throws CloneNotSupportedException {
+        ClientRepository clientRepository = Repositories.getInstance().getClientRepository();
+        TaxNumber taxNumber1 = new TaxNumber("987654321");
+        PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
+
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        State state3 = new State("Arizona");
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        District district3 = new District("Western");
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
+        Address address1 = new Address("Street A", 4, 6, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B", 1, 3, "12346", state2, district2, city2);
+        Address address3 = new Address("Street C", 1, 2, "12347", state1, district3, city2);
+        Client client1 = new Client("Joao", "987654321", "client@this.app", address1, taxNumber1, passportCardNumber1);
+        clientRepository.add(client1);
     }
 }

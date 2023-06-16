@@ -17,6 +17,8 @@ public class Repositories implements Serializable{
     private final RoleRepository roleRepository = new RoleRepository();
     private final EmployeeRepository employeeRepository = new EmployeeRepository();
 
+    private final ClientRepository clientRepository = new ClientRepository();
+
     /**
      * Creating the object agencyRepository
      */
@@ -82,6 +84,10 @@ public class Repositories implements Serializable{
      */
     public static Repositories getInstance() {
         return instance;
+    }
+
+    public ClientRepository getClientRepository() {
+        return clientRepository;
     }
 
     /**

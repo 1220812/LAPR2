@@ -11,10 +11,10 @@ public class Message implements Serializable {
     private String name;
     private Client client;
     private int phone;
-    private int inputAnnou;
     private Announcement announcement;
     private LocalDateTime newVisitStartTime;
     private LocalDateTime newVisitEndTime;
+
 
     /**
      * Constructs a new instance of Message with visit start and end times.
@@ -30,28 +30,19 @@ public class Message implements Serializable {
     /**
      * Constructs a new instance of Message with visit details.
      *
-     * @param name               the name of the message sender.
-     * @param phone              the phone number of the message sender.
-     * @param inputAnnou         the input announcement for the visit.
+     * @param announcement         the input announcement for the visit.
      * @param newVisitStartTime  the start time of the visit.
      * @param newVisitEndTime    the end time of the visit.
      */
-    public Message(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
-        this.name = name;
-        this.phone = phone;
-        this.inputAnnou = inputAnnou;
+    public Message(Client client, Announcement announcement, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        this.client=client;
+        this.announcement = announcement;
         this.newVisitStartTime = newVisitStartTime;
         this.newVisitEndTime = newVisitEndTime;
     }
 
-    public Message(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime, Announcement announcement) {
-        this.name = name;
-        this.phone = phone;
-        this.inputAnnou = inputAnnou;
-        this.newVisitStartTime = newVisitStartTime;
-        this.newVisitEndTime = newVisitEndTime;
-        this.announcement= announcement;
-    }
+
+
 
     /**
      * Retrieves the start time of the visit.
@@ -125,23 +116,9 @@ public class Message implements Serializable {
         this.phone = phone;
     }
 
-    /**
-     * Retrieves the input announcement for the visit.
-     *
-     * @return the input announcement for the visit.
-     */
-    public int getInputAnnou() {
-        return inputAnnou;
-    }
 
-    /**
-     * Sets the input announcement for the visit.
-     *
-     * @param inputAnnou  the input announcement for the visit.
-     */
-    public void setInputAnnou(int inputAnnou) {
-        this.inputAnnou = inputAnnou;
-    }
+
+
 
     /**
      * Returns a string representation of the Message object.
@@ -150,9 +127,9 @@ public class Message implements Serializable {
      */
     public String toString() {
         return "Message:"
-                + "\nname: " + name
-                + "\nphone: " + phone
-                + "\nListing number of announcement: " + inputAnnou
+                + "\nname: " + client.getName()
+                + "\nphone: " + client.getPhoneNumber()
+                + "\nAnnouncement: " + announcement
                 + "\nstart date of the visit: " + newVisitStartTime
                 + "\nend date of the visit: " + newVisitEndTime;
     }

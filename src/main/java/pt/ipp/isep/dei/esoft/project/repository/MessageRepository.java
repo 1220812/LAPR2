@@ -67,8 +67,8 @@ public class MessageRepository implements Serializable {
      * @param newVisitEndTime    the end time of the visit.
      * @return the created Message object.
      */
-    public static Message addMessage(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
-        Message message = new Message(name, phone, inputAnnou, newVisitStartTime, newVisitEndTime);
+    public static Message addMessage(Client client,Announcement announcement, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
+        Message message = new Message(client,announcement, newVisitStartTime, newVisitEndTime);
         addComplete(message);
         return message;
     }
