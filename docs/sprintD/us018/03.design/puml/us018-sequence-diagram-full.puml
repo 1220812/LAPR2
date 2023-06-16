@@ -1,0 +1,171 @@
+@startuml
+autonumber
+
+title US017 - Sequence Diagram (SSD)
+
+actor "NetworkManager" as NM
+participant ":ListDealsUI" as UI
+participant ":ListDealsController" as Controller
+
+participant ":Repositories" as PLAT
+participant "repositories :\nRepositories" as REP
+participant "orderRepository :\nOrderRepository" as OR
+participant "order:\nOrder" as order
+participant "announcement:\nAnnouncement" as announcement
+participant "property:\nProperty" as property
+
+activate NM
+
+    NM -> UI : asks to list all the deals made
+
+    activate UI
+
+    UI --> Controller** : create
+
+    UI -> Controller : getDeals()
+
+    activate Controller
+
+    Controller -> PLAT : getInstance()
+
+    activate PLAT
+
+    PLAT --> Controller : repositories
+
+    deactivate PLAT
+
+    Controller -> REP : getOrdersRepository()
+
+    activate REP
+
+    REP --> Controller : ordersRepository
+
+    deactivate REP
+
+    Controller -> OR : getAcceptedOrders()
+
+    activate OR
+
+    OR --> Controller : acceptedOrders
+
+    deactivate OR
+
+    Controller --> UI : deals
+
+    deactivate Controller
+
+        UI --> NM : shows the list and asks to select one of the \nsorting methods (Bubble Sort or Insertion Sort)
+
+    deactivate UI
+
+    NM -> UI : selects the sorting method (Bubble Sort or Insertion Sort)
+
+    activate UI
+
+    UI --> NM : asks for the order of sorting (ascending or descending)
+
+    deactivate UI
+
+    NM -> UI : selects the order of sorting (ascending or descending)
+     alt Bubble Sort method is selected
+
+        activate UI
+
+        UI --> Controller : sortListByBubbleSort(deals, sortingMethod, orderOfSorting)
+
+        activate Controller
+
+        Controller -> OR : sortListByBubbleSort(deals, sortingMethod ,orderOfSorting)
+
+        activate OR
+
+        loop for every deal
+
+        OR --> order : getAnnouncement()
+
+        activate order
+
+        order -> announcement : getProperty()
+
+        activate announcement
+
+        announcement -> property : getArea()
+
+        activate property
+
+        property --> announcement : area
+
+        deactivate property
+
+        announcement --> order : area
+
+        deactivate announcement
+
+        order --> OR : area
+
+        deactivate order
+
+        end
+
+        OR --> Controller : sortedListByArea
+
+        deactivate OR
+
+        Controller --> UI : sortedList
+
+        deactivate Controller
+
+     else Insertion Sort method is selected
+
+             UI --> Controller : sortListByInsertionSort(deals, sortingMethod, orderOfSorting)
+
+             activate Controller
+
+             Controller -> OR : sortListByInsertionSort(deals, sortingMethod, orderOfSorting)
+
+             activate OR
+
+             loop for every deal
+
+                     OR --> order : getAnnouncement()
+
+                     activate order
+
+                     order -> announcement : getProperty()
+
+                     activate announcement
+
+                     announcement -> property : getArea()
+
+                     activate property
+
+                     property --> announcement : area
+
+                     deactivate property
+
+                     announcement --> order : area
+
+                     deactivate announcement
+
+                     order --> OR : area
+
+                     deactivate order
+
+                     end
+
+             OR --> Controller : sortedListByArea
+
+             deactivate OR
+
+             Controller --> UI : sortedList
+
+             deactivate Controller
+     end
+
+    UI --> NM : shows the list of all the deals made sorted \nby the selected sorting method and order
+
+    deactivate UI
+
+deactivate NM
+
+@enduml

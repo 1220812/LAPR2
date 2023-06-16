@@ -1,0 +1,83 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+skinparam classAttributeIconSize 0
+
+
+Title US017 - Class Diagram (UC)
+
+class ListDealsUI{
+}
+
+class ListDealsController{
++getDeals()
+}
+
+class Repositories{
+-Repositories
++getInstance() : Repositories
+getOrdersRepository() : OrderRepository
+}
+
+class OrderRepository{
++sortListByBubbleSort()
++sortListByInsertionSort()
+}
+
+class Order{
+-int orderPrice
+-int orderNumber
+-boolean decision
+-LocalDate date
++getAnnouncement()
++getOrderPrice()
++setAnnouncement()
++setOrderPrice()
++getDate()
++setDate()
++makeDecision(decision)
++getClientName()
++getClient()
++getOrderNumber()
+}
+
+class Announcement{
+    - LocalDate creationDate
+    - int announcementID
+    - int Price
+    + getPrice()
+    + setPrice(price)
+    + getCreationDate()
+    + setCreationDate(creationDate)
+    + getAnnouncementID()
+    + getProperty()
+}
+
+class Property{
+-double area
+-double distanceFromCityCenter
+-double price
++createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList )
++getArea()
+}
+
+ListDealsUI -.-> ListDealsController
+
+ListDealsController -.-> Repositories
+
+Repositories -> Repositories : instance
+
+Repositories --> "1" OrderRepository : dealsRepository
+
+ListDealsController -.-> OrderRepository
+
+OrderRepository --> "1..*" Order : orders
+
+Order --> "1" Announcement : announcement
+
+Announcement --> "1" Property : property
+
+@enduml

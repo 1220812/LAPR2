@@ -1,0 +1,113 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+'left to right direction
+
+hide circle
+hide methods
+
+title US017 - Domain Model
+class Address{
+streetAddress
+zipCode
+}
+
+class State{
+stateName
+}
+
+class District{
+districtName
+}
+
+class City{
+cityName
+}
+
+class Agent{
+}
+
+class Employee{
+name
+emailAddress
+phoneNumber
+}
+
+class Order{
+orderPrice
+date
+orderNumber
+decision
+}
+
+class Announcement{
+comissionType
+comission
+date
+}
+
+class Client{
+}
+
+class Property{
+area
+price
+distanceFromCityCenter
+propertyType
+photographList
+}
+
+class Store{
+designation
+phoneNumber
+emailAddress
+ID
+}
+
+class Address{
+streetAddress
+doorNumber
+floorNumber
+zipCode
+}
+
+class State{
+stateName
+}
+
+class District{
+districtName
+}
+
+class City{
+cityName
+}
+
+class NetworkManager{
+}
+
+class Employee{
+name
+emailAddress
+phoneNumber
+}
+
+Store "1" -- Address : has >
+Address -- "1" City : has >
+City -- "1" District : is in >
+District -- "1" State : is in >
+NetworkManager --- "1...*" Order : sorts the deals >
+NetworkManager --|> Employee : is >
+Agent ---|> Employee : is >
+Agent "1" -- "1...*" Order : makes the \ndecision on  >
+Agent -- Store : works for >
+NetworkManager "1" --- "1...*" Store : manages >
+Property -- Address : has >
+Order -- "1" Announcement : on >
+Announcement -- "1" Property : announces >
+Client -- Order : makes >
+
+@enduml
