@@ -8,56 +8,56 @@ skinparam shadowing false
 hide circle
 hide methods
 
-title US013 - Domain Model
+title US015 - Domain Model
 
-class Client{
-name
-passportCardNumber
-emial
-taxNumber
-phoneNumber
-}
 
 class Agent{
 name
-passportCardNumber
-emial
-taxNumber
-phoneNumber
 }
 
 class VisitRequest{
-message
 date
 timeSlot
 }
 
-class Property{
-area
-distance
+class Message{
+ phone
+ announcement
+ newVisitStartTime
+ newVisitEndTime
+}
+
+class Annoucement{
+property
+date
+commissionType
+commission
+requestType
 price
+owner
 }
 
-class Photograph{
-URI
-}
-
-class Address{
-street
-zipCode
-city
-district
-state
-}
+'class Client{
+'name
+'phoneNumber
+'emailAddress
+'address
+'taxNumber
+'passportCardNumber
+'}
 
 
-Client "1" -- "*" VisitRequest : submits >
-Client "1" -- "1" Address : has >
-Agent "1" -- "1" VisitRequest : lists >
-Agent "1" -- "1" Address : has >
-VisitRequest "1" -- "1" Property : has >
-Property "1" -- "1" Photograph : has >
-Property "1" -- "1" Address : has >
+
+
+
+Agent "1" -- "*" VisitRequest : lists >
+VisitRequest "1"--"*" Message : has >
+
+Annoucement "1"--"1" Agent : has >
+Annoucement "1"--"1" VisitRequest : has <
+
+
+
 
 
 
