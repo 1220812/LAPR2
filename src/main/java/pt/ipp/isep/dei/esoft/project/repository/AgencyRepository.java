@@ -41,6 +41,4 @@ public class AgencyRepository implements Serializable {
         return new Agency(id, designation, address, emailAddress, phoneNumber);
     }
 
-
-
 }

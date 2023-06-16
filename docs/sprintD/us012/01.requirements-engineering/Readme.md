@@ -66,7 +66,7 @@ name=Legacy Agent; passport card number=000000000; tax number=000000000, email a
 ### 1.4. Found out Dependencies
 
 
-* There is no dependency with other user-stories.
+* The US018 and US019 are both dependent on US012 due to the fact that both need to import files. 
 
 
 ### 1.5 Input and Output Data

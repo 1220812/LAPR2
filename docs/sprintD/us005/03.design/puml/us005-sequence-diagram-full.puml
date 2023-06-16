@@ -32,25 +32,41 @@ activate ADM
 
 '            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
             'create CTRL
-            UI -> STRCTRL** : create
+            UI -> CTRL** : create
 
-            UI -> STRCTRL : getRepositories()
-            activate STRCTRL
 
-                    STRCTRL -> RepositorySingleton : getInstance()
+            activate CTRL
+
+                    CTRL -> RepositorySingleton : getInstance()
                     activate RepositorySingleton
 
-                    RepositorySingleton --> STRCTRL: repositories
+                        RepositorySingleton --> CTRL: repositories
+
                     deactivate RepositorySingleton
+                    CTRL -> PLAT: getStoreRepository();
+                    activate PLAT
 
-                    STRCTRL -> StoreRepository : getStoreRepository()
-                    activate StoreRepository
+                        PlAT --> CTRL : storeRepository
 
-                    StoreRepository --> STRCTRL : stores
-                    deactivate StoreRepository
+                    deactivate PLAT
+                    CTRL -> PLAT : getStateRepository();
+                    activate PLAT
 
-                    STRCTRL -> StateRepository : getStateRepository()
-                    activate StateRepository
+                        PLAT --> CTRL : stateRepository
+
+                    deactivate PLAT
+                    CTRL -> PLAT : getDistrictRepository();
+                    activate PLAT
+
+                        PLAT --> CTRL : districtRepository
+
+                    deactivate PLAT
+                    CTRL -> PLAT : getCityRepository();
+                    activate PLAT
+
+
+
+
 
                     StateRepository --> STRCTRL : states
                     deactivate StateRepository

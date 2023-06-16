@@ -17,45 +17,58 @@ hide methods
 '}
 
 class Announcement{
-id
-publicationDate
-Agent_comission
+property
+date
 comissionType
+comission
+requestType
+agent
+price
+owner
+store
 }
 
 class Request{
 requestType
-propertyType
-agency
-agent
 price
+agent
+owner
+store
+requestDate
+property
+startDate
+enDate
 }
 
 class Property{
-Location
+address
 area
 distanceFromCityCenter
-owner
-photos
+propertyType
+photographsList
 }
 
 class Residence{
 numberOfBedrooms
 numberOfBathrooms
 numberOfParkingSpacings
-equipment
-}
-
-class Land{
-}
-
-class Apartment {
+airConditioning
+centralHeating
+finalPrice
+businessDate
 }
 
 class House{
-basement
-inhabitableLoft
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpacings
+airConditioning
+centralHeating
+finalPrice
+businessDate
+existenceOfABasement
 sunExposure
+inhabitableLoft
 }
 
 class Legacy_System_Files {
@@ -65,10 +78,8 @@ class Legacy_System_Files {
 System_Administrator --> Legacy_System_Files
 Legacy_System_Files "1" --> "0..*" Announcement : contains
 
-Property --|> Residence
-Property --|> Land
-Residence --|> Apartment
-Residence --|> House
+Property --|> Residence : contains
+Residence --|> House : extends
 Request --> Property : contains
 Announcement --> Request : contains
 
