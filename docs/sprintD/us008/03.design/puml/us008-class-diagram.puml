@@ -16,14 +16,32 @@ class PublishRequestController
     -comissionType: String
     -comission: Double
     -request: Request
-    +getRequestsList()
+    -announcement: Announcement
+    -justification: String
+    -property: Property
+    -date: LocalDate
+    -requestType: RequestType
+    -agent: Agent
+    -price: Double
+    -owner: Owner
+    -store: Store
+    +getRequestsList(agent)
     +getRequestInfo(request)
     +saveDataComissionType(comissionType)
     +saveDataComission(comission)
-    +createAnnouncement()
-    +addAnnouncement()
-    +saveEmail()
+    +addAnnouncement(announcement)
+    +createEmail(announcement, request)
     +excludeRequest(request)
+    +getProperty(request)
+    +setDate()
+    +getRequestType(request)
+    +getAgent(request)
+    +getOwner(request)
+    +getPrice(request)
+    +getStore(request)
+    +acceptRequest(request)
+    +createEmail(request, justification)
+    +createAnnouncement(property, date, commissionType, commission, requestType, agent, price, owner, store)
 }
 
 class Repositories
@@ -35,14 +53,17 @@ class Repositories
 
 class RequestRepository
 {
-    +getRequests()
-    +getRequest(request)
+    -agent
+    -request
+    +getRequests(agent)
+    +acceptRequest(request)
     +excludeRequest(request)
 }
 
 class AnnouncementRepository
 {
-    +addAnnouncement()
+    -announcement
+    +addAnnouncement(announcement)
 
 }
 
@@ -55,16 +76,6 @@ class Announcement
     -requestType: RequestType
 }
 
-class Agent
-{
-    -name: String
-    -citizenCardNumber: Integer
-    -taxNumber: Integer
-    -adress: String
-    -email: String
-    -phoneNumber: Integer
-    -agency: String
-}
 
 Class Request
 {
@@ -80,10 +91,9 @@ PublishRequestUI -> PublishRequestController
 PublishRequestController -> Repositories
 Repositories -> AnnouncementRepository
 Repositories -> RequestRepository
-Agent -> Announcement
 AnnouncementRepository -> "has" Announcement
 RequestRepository --> "has" Request
-PublishRequestController --> Announcement
+PublishRequestController --> "creates "Announcement
 PublishRequestController ..> AnnouncementRepository
 PublishRequestController .> RequestRepository
 PublishRequestController --> Request
