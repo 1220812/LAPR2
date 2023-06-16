@@ -1,0 +1,109 @@
+@startuml
+autonumber
+actor "Agent" as AGENT
+participant "ListRequestsGUI" as UI
+participant ":ListRequestController" as CTRL
+participant ":Repositories" as REPO
+participant ":MessageRepository" as REQREPO
+participant ":AuthenticationRepository" as AUTHREPO
+participant ":AgentRepository" as AGENTREPO
+
+title "US015 - Main activity Flux (Sequence Diagram)"
+
+
+
+activate AGENT
+
+    AGENT -> UI : asks to see the list of booking request for him
+    activate UI
+    UI-> CTRL**: create
+    activate CTRL
+
+    CTRL -> REPO : getInstance()
+    activate REPO
+
+    REPO--> CTRL: repositories
+    deactivate REPO
+
+    CTRL -> REQREPO : getMessageRepository()
+    activate REQREPO
+
+    REQREPO --> CTRL : messageRepository
+    deactivate REQREPO
+
+    CTRL -> AUTHREPO : getAuthenticationRepository()
+    activate AUTHREPO
+
+    AUTHREPO --> CTRL : authenticationRepository
+    deactivate AUTHREPO
+
+    deactivate CTRL
+     UI -> CTRL : getRequest()
+       activate CTRL
+
+       CTRL -> REQREPO : getRequest()
+       activate REQREPO
+
+       REQREPO --> CTRL : requestList
+       deactivate REQREPO
+
+       CTRL --> UI : requestList
+       deactivate CTRL
+
+    UI --> AGENT : Requests begin data
+    deactivate UI
+
+
+    AGENT -> UI : Select begin data
+    activate UI
+
+    UI -> UI : keepBeginDate(start)
+
+    UI --> AGENT : Requests end data
+    deactivate UI
+
+    AGENT -> UI : Select end data
+    activate UI
+
+    UI -> UI : keepEndDate(end)
+
+   UI -> CTRL : getCurrentAgent()
+   activate CTRL
+
+   CTRL -> AUTHREPO : getCurrentUserSession()
+   activate AUTHREPO
+
+   AUTHREPO --> AGENTREPO :getAgentByEmail(email)
+   activate AGENTREPO
+
+   deactivate AUTHREPO
+
+   AGENTREPO --> CTRL : loggedInAgent
+   deactivate AGENTREPO
+
+
+   CTRL --> UI : loggedInAgent
+   deactivate CTRL
+
+   loop while request list is not read in full
+   alt if loggedInAgent is equals to agent in requestList and exists request for that agent and exist a request for that date
+
+   UI -> UI : requestsAgent.add(requests);
+
+   end
+
+   end
+      ref over UI
+   Alternative flux (Sorting Methods)
+
+   end ref
+
+   alt if sortedList is empty
+   UI -> AGENT : Show message:"There is no request associated with this agent"
+
+
+   else if sortedList isn´t empty
+   UI -> AGENT : Show sortedList
+   end
+
+@enduml

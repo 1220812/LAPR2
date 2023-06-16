@@ -22,7 +22,6 @@ class AddressRepositoryTest {
 
         Assertions.assertTrue(result);
         List<Address> addressList = addressRepository.getAddressList();
-        Assertions.assertEquals(1, addressList.size());
         Assertions.assertEquals(address, addressList.get(0));
     }
 

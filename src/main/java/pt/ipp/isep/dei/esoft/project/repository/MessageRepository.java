@@ -18,6 +18,7 @@ import java.util.Properties;
  * The MessageRepository class is responsible for storing and managing messages.
  */
 public class MessageRepository implements Serializable {
+    private static final long serialVersionUID = -2164261031341973438L;
     static List<Message> MessageList;
     static List<Message> MessageCompleteList;
 

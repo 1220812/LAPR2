@@ -15,6 +15,7 @@ name
 phoneNumber
 }
 
+
 class ListOfAnnouncements{
 annoucements
 }
@@ -24,12 +25,10 @@ class Agent{
 }
 
 class Message{
-day
-month
-year
-startHour
-startMinute
-endMinute
+ phone
+ announcement
+ newVisitStartTime
+ newVisitEndTime
 }
 
 

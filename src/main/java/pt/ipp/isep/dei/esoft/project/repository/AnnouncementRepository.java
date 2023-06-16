@@ -8,17 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AnnouncementRepository implements Serializable {
-
-    public List<Announcement> getAnnouncements(){
-        return List.copyOf(this.announcementsList);
-    }
-//
-//    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
-//        List<Announcement> announcementsSpecific = announcements;
-//        return announcements;
-//    }
-
-
+    private static final long serialVersionUID = 1513917858611164050L;
     private static List<Announcement> announcementsList = new ArrayList<>();
 
     public List<Announcement> add(Announcement announcement) throws CloneNotSupportedException {
