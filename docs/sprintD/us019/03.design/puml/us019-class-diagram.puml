@@ -1,0 +1,72 @@
+@startuml
+
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+class DivideUI {
+}
+
+class DivideController {
+  + divideIntoSubsets()
+}
+
+class Repositories {
+  - Repositories
+  + getInstance(): Repositories
+  + getStoreRepository(): StoreRepository
+  + getAnnouncementRepository(): AnnouncementRepository
+}
+
+class StoreRepository {
+  + getStoreList(): List<Store>
+}
+
+class AnnouncementRepository {
+  + getAnnouncementsByStoreID(storeID: int): List<Announcement>
+  + getProperty(): Property
+}
+
+class BruteForce {
+  + divideIntoSubsets(storeList: List<Store>): Subsets
+}
+
+class Store {
+  - storeID: int
+  - name: string
+}
+
+class Announcement {
+  - announcementID: int
+  - storeID: int
+  - property: Property
+}
+
+class Property {
+  - propertyID: int
+  - name: string
+}
+
+DivideUI -.-> DivideController
+
+DivideController -.-> Repositories
+Repositories --> Repositories : instance
+Repositories --> StoreRepository
+Repositories --> AnnouncementRepository
+DivideController -.-> AnnouncementRepository
+DivideController --> BruteForce
+DivideController -.-> StoreRepository
+AnnouncementRepository "1" --> "*" Announcement
+DivideController -.-> "1" Store
+DivideController -.-> "1" Announcement
+
+Announcement --> "1" Property
+
+StoreRepository "1" -- "*" Store
+
+Store "1" --> "*" Announcement
+
+@enduml
+
+
+@enduml

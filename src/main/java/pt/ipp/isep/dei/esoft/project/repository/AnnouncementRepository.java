@@ -56,4 +56,15 @@ public class AnnouncementRepository implements Serializable {
             announcementsList.add(announcement);
         return announcement;
     }
+
+    public int getAnnouncementsByStoreID(int storeID){
+        List<Announcement> announcementList = getAnnouncementsList();
+        int count = 0;
+        for (int i = 0; i < announcementList.size(); i++) {
+            if(announcementList.get(i).getStore().getID() == storeID){
+                count++;
+            }
+        }
+        return count;
+    }
 }

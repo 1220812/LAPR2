@@ -95,18 +95,6 @@ emailAddress
 phoneNumber
 }
 
-class Residence{
-numberOfBedrooms
-numberOfBathrooms
-numberOfParkingSpaces
-availableEquipment
-}
-
-class House{
-existenceOfABasement
-inhabitableLoft
-}
-
 Store "1" -- Address : has >
 Address -- "1" City : has >
 City -- "1" District : is in >
@@ -118,8 +106,6 @@ Agent "1" -- "1...*" Order : makes the \ndecision on  >
 Agent -- Store : works for >
 NetworkManager "1" --- "1...*" Store : manages >
 Property -- Address : has >
-Residence --|> Property
-House --|> Residence
 Order -- "1" Announcement : on >
 Announcement -- "1" Property : announces >
 Client -- Order : makes >

@@ -1,0 +1,96 @@
+@startuml
+autonumber
+
+title US019 - Sequence Diagram (SSD)
+
+actor "NetworkManager" as NM
+participant ":DivideUI" as UI
+participant ":DivideController" as Controller
+
+participant ":Repositories" as PLAT
+participant "repositories :\nRepositories" as REP
+participant "storeRepository :\nStoreRepository" as OR
+participant "announcementRepository :\nAnnouncementRepository" as AR
+participant "bruteForce:\nBruteForce" as bruteForce
+
+activate NM
+
+        NM -> UI : asks to divide the set of all stores into two subsets
+
+        activate UI
+
+        UI -> Controller** : create
+
+        activate Controller
+
+        Controller -> PLAT : getInstance()
+
+        activate PLAT
+
+        PLAT --> Controller : repositories
+
+        deactivate PLAT
+
+        Controller -> REP : getStoreRepository()
+
+        activate REP
+
+        REP --> Controller : storeRepository
+
+        deactivate REP
+
+        Controller -> OR : getStoreList()
+
+        activate OR
+
+        OR --> Controller : storeList
+
+        deactivate OR
+
+        loop for each store of the list
+
+        Controller -> AR : getAnnouncementsByStoreID(storeID)
+
+        activate AR
+
+        loop for each announcement of the list
+
+        AR -> AR : getProperty()
+
+        end
+
+        AR --> Controller : numberOfProperties
+
+        deactivate AR
+
+        Controller --> UI : numberOfProperties and storeList
+
+        end
+
+        deactivate Controller
+
+            UI --> NM : display the number of stores in the \nsystem and asks for confirmation
+
+
+        NM -> UI : confirms the number of stores
+
+        UI -> Controller : divideIntoSubsets
+
+        activate Controller
+
+        Controller -> bruteForce : divideIntoSubsets
+
+        activate bruteForce
+
+        bruteForce --> Controller : subsets
+        deactivate bruteForce
+
+        Controller --> UI : subsets
+
+        deactivate Controller
+
+        UI --> NM : returns the run time algorithm, the \nlist of stores in each subset and their difference
+
+deactivate NM
+
+@enduml
