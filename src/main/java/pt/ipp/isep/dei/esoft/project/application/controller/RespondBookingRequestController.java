@@ -19,8 +19,6 @@ public class RespondBookingRequestController {
 
     UserSession userSession;
 
-
-
     String ConfigurationFile;
 
 

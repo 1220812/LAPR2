@@ -27,18 +27,18 @@ class Agent {
     name
     phoneNumber
     emailAddress
-    taxNumber
-    passportCardNumber
 }
 
 
-'class Address {
-'      streetAddress
-'      city
-'      district
-'      state
-'      ZipCode
-'}
+class Address {
+     streetAddress
+     doorNumber
+     floorNumber
+     city
+     district
+     state
+     ZipCode
+}
 
 class Client {
       name
@@ -64,13 +64,6 @@ class BookingRequest {
 
 }
 
-class Address {
-      streetAddress
-      city
-      district
-      state
-      ZipCode
-}
 
 Agent -- Client: Informs >
 (Agent, Client) -- EmailResponse: making use of

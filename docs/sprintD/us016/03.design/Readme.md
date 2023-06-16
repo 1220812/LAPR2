@@ -1,4 +1,4 @@
-# US 013 - To create a Task 
+# US 016 - To create a Task 
 
 ## 3. Design - User Story Realization 
 
@@ -24,8 +24,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * ListEmployeeUI
- * ListEmployeeController 
+ * RespondBookingRequestUI
+ * RespondBookingRequestController
  
 
 
@@ -35,8 +35,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us013-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us016-sequence-diagram-full.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us013-class-diagram.svg)
+![Class Diagram](svg/us016-class-diagram.svg)
