@@ -190,12 +190,36 @@ As an agent, I can publish any sale announcement on the system, for example rece
 * **AC1:** The user must be a real estate agent to proceed with a property registration.
 * **AC2:** All required fields must be filled in.
 * **AC3:** The property can't already exist in the system.
+* **AC4:** Owner must be registed in the system.
+* **AC5:** The property type must be valid.
+* **AC6:** The area must be positive.
+* **AC7:** The address must be valid.
+* **AC8:** The city must be valid.
+* **AC9:** The state must be valid.
+* **AC10:** The house number must be positive.
+* **AC11:** The floor number must be valid.
+* **AC12:** The distance from city center must be positive.
+* **AC13:** The price must be positive.
+* **AC14:** The number of photos must be in between 1 and 30.
+* **AC15:** The number of bedrooms must be positive.
+* **AC16:** The number of bathrooms must be positive.
+* **AC17:** The number of parking spaces must be positive.
+* **AC18:** The existence of a basement must be valid.
+* **AC19:** The existence of an inhabitable loft must be valid.
+* **AC20:** The sun exposure must be valid.
+* **AC21:** The comission type must be valid.
+* **AC22:** The comission must be positive.
+* **AC23:** An SMS notification should be sent to the owner when the listing of the property becomes available.
+* **AC24:** The notification must include the property identification and the date it became available
+* **AC25:** The Notification must include the name and phone number of the responsible Agent
+* **AC25:** The owner must be registed in system
 
 
 ### 1.4. Found out Dependencies
 
 
 * US3 - US2 needs the agent to exist
+* The owner needs to exist
 
 
 ### 1.5 Input and Output Data
@@ -213,6 +237,9 @@ As an agent, I can publish any sale announcement on the system, for example rece
     * Number of parking spaces
     * Available equipment
     * Comission
+    * Number of photos
+    * Photo URI
+
 	
 * Selected data:
 	* Type of property
@@ -221,14 +248,13 @@ As an agent, I can publish any sale announcement on the system, for example rece
     * Sun exposure
     * Type of comission
 
-* Other data:
-    * One or more photographs
-
 
 **Output Data:**
 
 * All the data
 * Success message
+* SMS notification
+* Announcement
 
 
 ### 1.6. System Sequence Diagram (SSD)
