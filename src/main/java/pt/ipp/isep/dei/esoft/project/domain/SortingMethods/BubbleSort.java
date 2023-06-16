@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain.SortingMethods;
 
+import pt.ipp.isep.dei.esoft.project.domain.Message;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
 
@@ -9,16 +10,16 @@ import java.util.List;
 public class BubbleSort {
 
 
-    public List<Request> sortByDate(List<Request> requestList) {
-        List<Request> tempList = new ArrayList<>(requestList);
+    public List<Message> sortByDate(List<Message> messageList) {
+        List<Message> tempList = new ArrayList<>(messageList);
 
         int n = tempList.size();
         boolean swapped;
         for (int i = 0; i < n - 1; i++) {
             swapped = false;
             for (int j = 0; j < n - i - 1; j++) {
-                if (tempList.get(j).getRequestDate().isAfter(tempList.get(j + 1).getRequestDate())) {
-                    Request temp = tempList.get(j);
+                if (tempList.get(j).getNewVisitEndTime().isAfter(tempList.get(j + 1).getNewVisitEndTime())) {
+                    Message temp = tempList.get(j);
                     tempList.set(j, tempList.get(j + 1));
                     tempList.set(j + 1, temp);
                     swapped = true;
@@ -74,4 +75,6 @@ public class BubbleSort {
             }
         }
     }
+
+
 }

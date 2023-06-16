@@ -48,6 +48,11 @@ public class Bootstrap implements Runnable {
             throw new RuntimeException(e);
         }
         addMessage();
+        try {
+            addClient();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void addOrganization() {
@@ -304,17 +309,65 @@ public class Bootstrap implements Runnable {
 
     private void addMessage() {
         MessageRepository messageRepository = Repositories.getInstance().getMessageRepository();
-        int year = 2023;
-        int month = 1;
-        int day = 1;
-        int startHour = 0;
-        int startMinute = 0;
-        int endHour = 0;
-        int endMinute = 0;
-        LocalDateTime newVisitStartTime1 = LocalDateTime.of(year, month, day, startHour, startMinute);
-        LocalDateTime newVisitEndTime1 = LocalDateTime.of(year, month, day, endHour, endMinute);
-        Message message1 = new Message(newVisitStartTime1, newVisitEndTime1);
+
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
+        Address address1 = new Address("Street A", 4, 6, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B", 1, 3, "12346", state2, district2, city2);
+        List<Photographs> photo = new ArrayList<>();
+        TaxNumber taxNumber1 = new TaxNumber("987654321");
+        TaxNumber taxNumber2 = new TaxNumber("123456789");
+        TaxNumber taxNumber = new TaxNumber("123456789");
+        PassportCardNumber passportCardNumber3 = new PassportCardNumber("98755432");
+        PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
+        PassportCardNumber passportCardNumber2 = new PassportCardNumber("23456789");
+        RequestType requestType1 = new RequestType("Sell");
+        RequestType requestType2 = new RequestType("Rent");
+        LocalDate requestDate1 = LocalDate.of(2020, 10, 10);
+        LocalDate requestDate2 = LocalDate.of(2022, 3, 2);
+        PropertyType p1 = new PropertyType("Land");
+        PropertyType p2 = new PropertyType("Apartment");
+        PropertyType p3 = new PropertyType("House");
+        Property property1 = new Property(500, 5, address1, p1, photo);
+        Property property2 = new Property(345, 12, address2, p2, photo);
+        Store store1 = new Store("Company", 1);
+        Store store2 = new Store("Galo", 2);
+        Agency agency1 = new Agency(1, "agency1", address1, "agency1@this.app", "123456789");
+        Agency agency2 = new Agency(2, "agency2", address2, "agency2@this.app", "987654321");
+        Agent agent1 = new Agent("Pedro", "pedro@gmail.com", "918734521", passportCardNumber1, taxNumber1, address1, new Role("Agent"), agency1, store1, "agent");
+        Agent agent2 = new Agent("Agent", "987654321", "agent@this.app", address2, taxNumber2, passportCardNumber2);
+        Owner owner1 = new Owner("Maria", "912345678", "maria@gmail.com", address1, taxNumber1, passportCardNumber1);
+        Owner owner2 = new Owner("Madalena", "912945678", "madalena@gmail.com", address2, taxNumber2, passportCardNumber2);
+        Owner owner3 = new Owner("Manuel", "912545698", "manuel@gmail.com", address2, taxNumber, passportCardNumber3);
+
+        Announcement announcement1 = new Announcement(property1, requestDate1, "per", 5, requestType1, agent1, 200000, owner1, store1);
+        Announcement announcement2 = new Announcement(property2, requestDate2, "per", 5, requestType2, agent2, 300000, owner2, store2);
+        Announcement announcement3 = new Announcement(property2, requestDate1, "per", 5, requestType2, agent2, 2450000, owner3, store2);
+
+
+        Client client1 = new Client("Joao", "987654321", "client@this.app", address1, taxNumber1, passportCardNumber1);
+
+        LocalDateTime newVisitStartTime1 = LocalDateTime.of(2024, 1, 1, 0,0);
+        LocalDateTime newVisitEndTime1 = LocalDateTime.of(2024, 1, 1, 0, 1);
+
+        LocalDateTime newVisitStartTime2 = LocalDateTime.of(2025, 1, 1, 0,0);
+        LocalDateTime newVisitEndTime2 = LocalDateTime.of(2025, 1, 1, 0, 1);
+
+        LocalDateTime newVisitStartTime3 = LocalDateTime.of(2026, 1, 1, 0,0);
+        LocalDateTime newVisitEndTime3 = LocalDateTime.of(2026, 1, 1, 0, 1);
+
+        Message message1 = new Message(client1,announcement1, newVisitStartTime1, newVisitEndTime1);
+        Message message2= new Message(client1,announcement2, newVisitStartTime3, newVisitEndTime3);
+        Message message3 = new Message(client1,announcement3, newVisitStartTime2, newVisitEndTime2);
         messageRepository.add(message1);
+        messageRepository.add(message2);
+        messageRepository.add(message3);
+
+
     }
 
 
@@ -408,5 +461,24 @@ public class Bootstrap implements Runnable {
         PassportCardNumber passport2 = new PassportCardNumber("12345678");
         Agent agent2 = new Agent("Agent", "agent@this.app","988654321",passportCardNumber2,taxNumber2, address2,agent,agency2,store2,"agent");
         agentRepository.add(agent2);
+    }
+    private void addClient() throws CloneNotSupportedException {
+        ClientRepository clientRepository = Repositories.getInstance().getClientRepository();
+        TaxNumber taxNumber1 = new TaxNumber("987654321");
+        PassportCardNumber passportCardNumber1 = new PassportCardNumber("98765432");
+
+        State state1 = new State("California");
+        State state2 = new State("Nevada");
+        State state3 = new State("Arizona");
+        District district1 = new District("Northem");
+        District district2 = new District("Eastern");
+        District district3 = new District("Western");
+        City city1 = new City("Los Angeles");
+        City city2 = new City("New York");
+        Address address1 = new Address("Street A", 4, 6, "12345", state1, district1, city1);
+        Address address2 = new Address("Street B", 1, 3, "12346", state2, district2, city2);
+        Address address3 = new Address("Street C", 1, 2, "12347", state1, district3, city2);
+        Client client1 = new Client("Joao", "987654321", "client@this.app", address1, taxNumber1, passportCardNumber1);
+        clientRepository.add(client1);
     }
 }

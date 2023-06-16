@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
+import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.isep.lei.esoft.auth.UserSession;
 
@@ -17,12 +18,12 @@ public class ListRequestsController {
     Repositories repositories = Repositories.getInstance();
     Agent agent = repositories.getAgentRepository().getAgent();
 
-    public List<Request> getRequests() {
-        return Repositories.getInstance().getRequestRepository().getRequests();
+    public List<Message> getMessages() {
+        return MessageRepository.getMessageList();
     }
 
-    public List<Request> getRequestsSorted(List<Request> requestList) throws IOException {
-        return Repositories.getInstance().getRequestRepository().getRequestsSorted(requestList);
+    public List<Message> getMessagesSorted(List<Message> messageList) throws IOException {
+        return Repositories.getInstance().getMessageRepository().getMessageSorted(messageList);
     }
 
     public List<Request> getRequestDated(List<Request> RequestList, LocalDate startDate, LocalDate endDate) {

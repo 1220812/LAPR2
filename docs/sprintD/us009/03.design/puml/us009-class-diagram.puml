@@ -22,6 +22,7 @@ class ScheduleVisitController{
 class Repositories{
 
 +Repositories()
++getAuthenticationRepository()
 +getInstance()
 +getMessageRepository()
 +getAnnouncementsRepository()
@@ -29,10 +30,9 @@ class Repositories{
 
 
 class Message{
--String message
--String name
+-Client loggedInClient
 -String phone
--Int inputAnnou
+-Annoucement announcement
 -LocalDateTime newVisitStartTime
 -LocalDateTime newVisitEndTime
 
@@ -45,6 +45,10 @@ class MessageRepository{
 
 +addMessage()
 +addComplete()
+}
+
+class AuthenticationRepository{
++getCurrentUserSession()
 }
 
 class Property{
@@ -76,6 +80,7 @@ ScheduleVisitController --> Repositories
 
 Repositories ----> MessageRepository
 Repositories ---> AnnoucementRepository
+Repositories ---> AuthenticationRepository
 
 Message ->MessageRepository
 

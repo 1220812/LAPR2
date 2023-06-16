@@ -15,12 +15,6 @@ activate Customer
     Customer -> System : asks to schedule a visit to a property.
     activate System
 
-    System --> Customer : Request data (name and phone number of Client)
-    deactivate System
-
-    Customer -> System : Input request data
-    activate System
-
     loop while Client wants to make a new schedule request
 
     System --> Customer : shows list of available properties (sorted \nfrom the most recent entries to the oldest).
