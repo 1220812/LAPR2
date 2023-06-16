@@ -32,12 +32,12 @@ activate ADM
 
 '            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
             'create CTRL
-            UI -> STRCTRL** : create
+            UI -> CTRL** : create
 
-            UI -> STRCTRL : getRepositories()
-            activate STRCTRL
 
-                    STRCTRL -> RepositorySingleton : getInstance()
+            activate CTRL
+
+                     -> RepositorySingleton : getInstance()
                     activate RepositorySingleton
 
                     RepositorySingleton --> STRCTRL: repositories
