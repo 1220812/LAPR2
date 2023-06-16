@@ -6,26 +6,27 @@
 
 **SSD - Alternative 1 is adopted.**
 
-| Interaction ID | Question: Which class is responsible for... | Answer                 | Justification (with patterns)                                                                                 |
-|:---------------|:--------------------------------------------|:-----------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		     | 	... interacting with the actor?            | ListEmployeeUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		        | 	... coordinating the US?                   | ListEmployeeController | Controller                                                                                                    |
-| 			  		        | 	... list all employees from a store?       | EmployeeRepository     | The repository has the data of all the employees working on all stores of the network.                        |
-|                          |                                             |                        |                                                                                                               |
-| Step 2  		     | 	...asks for the information					           | Network Manager        | The network Manager has access to all the data about every employee.                                          |
+| Interaction ID | Question: Which class is responsible for...                                               | Answer                | Justification (with patterns) |
+|:---------------|:------------------------------------------------------------------------------------------|:----------------------|:------------------------------|
+| Step 1  	      | 	Intend to list all booking requests for properties managed by the agent?                 | ListRequestsGUI       | Pure Fabrication              |
+| Step 2		       | 	Requesting a specific period (begin date)?                                               | ListRequestController | Controller                    |
+| Step 3 	       | 	Selecting specific period (begin date)?                                                  | ListRequestsGUI       | Pure Fabrication              |
+| Step 4         | Requesting a specific period (end date)?                                                  | ListRequestController | Controller                    |
+| Step 5  		     | Selecting specific period (end date)?				                                                 | ListRequestsGUI       | Pure Fabrication              |
+| Step 6  	      | 	Showing a list for a specific period sorted in ascending gorder (begin date, end date)?  | ListRequestsGUI       | Pure Fabrication              |
 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Employee
- * Store
+ * Message
+ * Agent
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * ListEmployeeUI
- * ListEmployeeController 
+ * ListRequestsGUI
+ * ListRequestsController
  
 
 

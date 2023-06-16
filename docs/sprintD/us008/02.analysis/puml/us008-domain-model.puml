@@ -10,11 +10,6 @@ hide methods
 
 title US008 - Domain Model
 
-class Branch {
-    designation
-    location
-    localManager
-}
 
 class Agent {
     name
@@ -28,22 +23,36 @@ class Agent {
 
 class Property {
     area
-    location
-    distanceFromCityCentre
-    requestedPrice
-    typeOfProperty
+    distanceFromCityCenter
+    propertyType
+}
+
+class PhotographList {
+}
+
+class Photos {
+    photoURI
+    photoID
 }
 
 class Announcement {
     date
     comissionType
     comission
+    requestType
+    price
 }
 
-class AppartmentOrHouse {
+class Residence {
     numberBedrooms
     numberBathrooms
     numberParking
+}
+
+class AvailableEquipmentList {
+}
+
+class AvailableEquipment {
     availableEquipment
 }
 
@@ -53,17 +62,31 @@ class House {
     sunExposure
 }
 
+class Address {
+    streetAddress
+    doorNumber
+    floorNumber
+    zipCode
+    state
+    district
+    city
+}
+
 class Request
 
-Branch "1" - "*" Agent : has >
 Agent "1" - "1" ListOfRequests : sees >
 ListOfRequests "1" -- "*" Request : has >
 Announcement "1" -- "1" Property : has >
 Agent "1" -- "1" Request : chooses >
-Property "1" -- "1" AppartmentOrHouse : can be >
-AppartmentOrHouse "1" - "1" House : can be >
+Property "1" -- "1" Residence : can be >
+Property "1" - "1" Address : has >
+Residence "1" -- "1" House : can be >
 Request "1" -- "1" Property : has >
 Agent "1" -- "1" Announcement : creates >
+Residence "1" - "1" AvailableEquipmentList : has >
+AvailableEquipmentList "1" - "*" AvailableEquipment : has >
+Announcement "1" - "1" PhotographList : has >
+PhotographList "1" - "1 - 30" Photos : has >
 
 
 @enduml

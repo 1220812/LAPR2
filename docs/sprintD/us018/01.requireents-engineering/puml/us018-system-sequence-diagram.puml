@@ -5,43 +5,33 @@ skinparam shadowing false
 
 title US018 - System Sequence Diagram (SSD)
 
+autonumber
 
-participant "Store Manager" as actor
-participant "System" as System
+actor StoreManager
+participant System
 
-activate actor
+activate StoreManager
 
-actor -> System : asks to analyse deals
-activate System
-System --> actor : shows available regression models \n  and asks to select one
-deactivate System
-actor -> System : selects a regression model
-activate System
+    StoreManager -> System: asks to analyse the deals (on houses and apartments)
+    activate System
 
-alt if simple-linear regression is chosen
-System --> actor : displays regression parameters \n and asks to select one
-deactivate System
-actor -> System : selects regression parameter
-activate System
-end
+        StoreManager <-- System: requests the path of the information file
+    deactivate System
 
-System --> actor : shows regression analysis report and asks if user\n wants to make a custom prediction
-alt if option == "Y"
-    alt if RegressionModelOption == "SimpleLinear"
-    System --> actor : requests data
-            deactivate System
-            actor -> System : inputs requested data(parameter)
-            activate System
+    StoreManager -> System: inserts the path of the information file
+    activate System
 
-    else if RegressionModelOption == "MultiLinear"
-             System --> actor : requests data
-                     deactivate System
-                     actor -> System : inputs requested data(parameter1, parameter2,\n parameter3, parameter4, parameter5)
-                     activate System
-    end
-                System --> actor : displays prediction
+        StoreManager <-- System: show the regression models and request to select one (simple-linear or multi-linear)
+    deactivate System
 
-end
-deactivate System
+    StoreManager -> System: selects a regression model (simple-linear or multi-linear)
+    activate System
 
+        StoreManager <-- System: asks for the parameters to be used (eg. area, number of bathrooms, etc...)
+    deactivate System
+
+        StoreManager -> System: inserts the parameters to be used (eg. area, number of bathrooms, etc...)
+        activate System
+
+            StoreManager <-- System: displays prediction
 @enduml

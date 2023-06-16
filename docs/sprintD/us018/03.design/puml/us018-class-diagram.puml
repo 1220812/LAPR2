@@ -2,82 +2,111 @@
 'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
-skinparam linetype polyline
+'skinparam linetype polyline
+'skinparam linetype orto
 
 skinparam classAttributeIconSize 0
 
+title US018 - Class Diagram (CD)
 
-Title US017 - Class Diagram (UC)
 
-class ListDealsUI{
+class DealsAnalysisUI {
 }
 
-class ListDealsController{
-+getDeals()
+class DealsAnalysisController {
+    +create()
+    +simpleLinearRegression(option)
+    +multiLinearRegression(option)
+    +receiveDescriptiveStats(descriptiveStats)
 }
 
-class Repositories{
--Repositories
-+getInstance() : Repositories
-getOrdersRepository() : OrderRepository
+class OrderRepository {
+- List<Order> order
+    + addNewOrder(order)
+    + validateOrder(announcement, orderPrice)
+    + valid(order)
+    + getOrders()
+    + getOrdersByAnnouncement(announcement)
+    + add(order)
 }
 
-class OrderRepository{
-+sortListByBubbleSort()
-+sortListByInsertionSort()
+
+class Announcements {
+    +getSimpleParameterList(option)
+    +getAllParameterList()
+    +getAnnouncementValues()
 }
 
-class Order{
--int orderPrice
--int orderNumber
--boolean decision
--LocalDate date
-+getAnnouncement()
-+getOrderPrice()
-+setAnnouncement()
-+setOrderPrice()
-+getDate()
-+setDate()
-+makeDecision(decision)
-+getClientName()
-+getClient()
-+getOrderNumber()
+class SimpleLinear {
+    - regression: SimpleRegression
+    - n: int
+    - Sxx: double
+    - Syy: double
+    - Sxy: double
+    - SE: double
+    - SR: double
+    - avgX: double
+    - avgY: double
+    - slope: double
+    - intercept: double
+    - squareR: double
+    + getCoefficients(): double[]
+    + toString(): String
+    + anovaSingificanceModel()
+    + calculateInterceptConfidenceInterval()
+    + calculateSlopeConfidenceInterval()
+    + calculateInterceptHyopthesisTest()
+    + calculateSlopeHyopthesisTest()
+    + generateAnalysisReport()
 }
 
-class Announcement{
-    - LocalDate creationDate
-    - int announcementID
-    - int Price
-    + getPrice()
-    + setPrice(price)
-    + getCreationDate()
-    + setCreationDate(creationDate)
-    + getAnnouncementID()
-    + getProperty()
+
+class SimpleLinearRegression {
+    +getRegressionModel(parameterList)
 }
 
-class Property{
--double area
--double distanceFromCityCenter
--double price
-+createRequest(agentName, propertyType, area, location, distanceFromCityCenter, price, photographList )
-+getArea()
+class MultiLinearRegression{
+    +getRegressionModel(parametersList)
+
+}
+class MultiLinear {
+    - regression: OLSMultipleLinearRegression
+    - parameters: double[][]
+    - n: int
+    - B: double[]
+    - k: int
+    - SE: double
+    - ST: double
+    - SR: double
+    - squareR: double
+    - squareRAdjusted: double
+    - parametersStdErr: double[]
+    + getB()
+    + anovaSingificanceModel()
+    + calculateCoefficientCondifenceIntervals()
+    + calculateHypothesisTests()
+    + generateAnalysisReport()
 }
 
-ListDealsUI -.-> ListDealsController
+class Repositories {
+  - Repositories()
+  +getInstance() : Repositories
+  +getOrderRepository()
+}
+class AnnouncementRepository{
+  + getAnnouncements()
+}
 
-ListDealsController -.-> Repositories
-
+Repositories --> OrderRepository : OrderRepository
+DealsAnalysisController -.-> Repositories : repositories
+DealsAnalysisController -.-> SimpleLinearRegression : simpleLinearRegression
+DealsAnalysisController -.-> MultiLinearRegression : multiLinearRegression
+DealsAnalysisController -.-> AnnouncementRepository : announcementRepository
+AnnouncementRepository --> "*" Announcements : announcements
 Repositories -> Repositories : instance
-
-Repositories --> "1" OrderRepository : dealsRepository
-
-ListDealsController -.-> OrderRepository
-
-OrderRepository --> "1..*" Order : orders
-
-Order --> "1" Announcement : announcement
-
-Announcement --> "1" Property : property
-
+DealsAnalysisController -.-> OrderRepository : orderRepository
+MultiLinearRegression ..> MultiLinear
+DealsAnalysisUI ..> DealsAnalysisController
+DealsAnalysisController ..> Announcements
+SimpleLinearRegression ..> SimpleLinear
 @enduml

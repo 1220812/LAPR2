@@ -12,29 +12,59 @@ hide methods
 
 title Domain Model US020
 
-class Property {
+class Property{
     area
-    distanceCityCenter
-    location
-    requestedPrice
+    distanceFromCityCenter
     photographs
 }
 
-class Request {
-    requiredPrice
+class Agent{}
+
+class Client{
+    name
+    taxNumber
+    emailAddress
+    address
+    phoneNumber
+    passportCardNumber
 }
 
-class Offer {
-    offerPrice
-    property
+class Apartment{
+    numOfBedrooms
+    numOfBathrooms
+    numOfParkingSpaces
+    availableEquipment
 }
 
+class House{
+    numOfBedrooms
+    numOfBathrooms
+    numOfParkingSpaces
+    availableEquipment
+    hasBasement
+    hasInhabitableLoft
+    sunExposure
+}
 
-Owner "1" -- "*" Property : belongs to <
-Owner "1" -- "*" Request : provide >
+class Employee{
+    name
+    citizenCard
+    taxNumber
+    address
+    emailAddress
+    phoneNumber
+}
 
-Offer "1" -- "1" Property : about >
-Client "1" -- "*" Offer : proposes >
+class Announcement{}
 
-Offer "1" -up- "1" Request : is compared to >
+class BookingtRequest{}
+
+Agent-->Announcement: publishes
+Announcement --> Property:has
+BookingtRequest-->Announcement:has
+Agent--> BookingtRequest : manages
+Client --> BookingtRequest :requests
+Property <|-- Apartment
+Property <|-- House
+Employee <|-- Agent
 @enduml
