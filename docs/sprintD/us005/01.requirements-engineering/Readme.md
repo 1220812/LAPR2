@@ -73,6 +73,9 @@ of employees.
 * **AC1:** Declaring the obligatory data to register a store.
 * **AC2:** The designation/name should be at most forty characters.
 * **AC3:** The phone number must have 10 digits. The first 3 digits must correspond to the "area code", the next 3 correspond to the geographical area and the last four can be random.
+* **AC4:** The ID must be an integer number. 
+* **AC5:** There cannot be more than one Administrator. 
+* **AC6:** The System Administrator must be logged in the application to make a request to register a new store.
 
 ### 1.4. Found out Dependencies
 
@@ -86,13 +89,18 @@ of employees.
 * Typed data:
 	* an ID, 
 	* a designation/name,
-    * a location,
 	* a local manager, 
 	* a phone number, 
-	* an e-mail address.
+	* an e-mail address, 
+    * street name, 
+    * postal code, 
+    * door number, 
+    * city,
+    * district, 
+    * state. 
 	
 * Selected data:
-	* Classifying task category 
+	* Confirmation to register the store
 
 **Output Data:**
 
