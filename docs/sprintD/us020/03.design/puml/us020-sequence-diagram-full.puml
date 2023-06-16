@@ -7,8 +7,154 @@ autonumber
 
 'hide footbox
 
+autonumber
+
+'hide footbox
 actor "Client" as Client
-participant ":offer:\nOffer" as Offer
+participant "BookingRequestFeedbackUI" as UI
+participant "BookingRequestFeedbackController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "BookingRequestsRepository:\nBookingRequestsRepository" as BookingRequestsRepository
+participant "AnnouncementRepository:\nAnnouncementRepository" as AnnouncementRepository
+participant MessageRepository as Message
+participant PersonRepository as PersonRepository
+
+activate Client
+
+        Client -> UI : asks to read the response for the appointment request
+
+        activate UI
+
+            UI -> CTRL** : create
+
+            UI -> CTRL : getResponse()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getResponseRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: BookingRequestsRepository
+                deactivate PLAT
+
+                CTRL -> BookingRequestsRepository : getResponse()
+                activate BookingRequestsRepository
+
+                    BookingRequestsRepository --> CTRL : response
+                deactivate BookingRequestsRepository
+
+                CTRL --> UI : response
+            deactivate CTRL
+
+            UI --> Client : shows the response for the appointment request and asks to accept or decline
+
+
+        UI -> CTRL: getPropertyCharacteristics()
+        activate CTRL
+
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+        RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+
+        CTRL -> PLAT : getAnnouncementRepository()
+        activate PLAT
+
+        PLAT --> CTRL : announcementRepository
+        deactivate PLAT
+
+        CTRL -> AnnouncementRepository : getPropertyCharacteristics()
+        activate AnnouncementRepository
+
+        AnnouncementRepository --> CTRL : propertyCharacteristics
+        deactivate AnnouncementRepository
+
+
+
+        CTRL --> UI: propertyCharacteristicsDTO
+        deactivate CTRL
+
+
+
+        UI --> Client: shows information about the property and the date of the appointment
+        deactivate UI
+
+    Client -> UI :  accepts or declines
+    activate UI
+
+    UI -> UI : keepAnswer(answer)
+
+
+
+    alt if the order was declined
+    UI --> Client : asks to specify the reason
+    deactivate UI
+
+    Client -> UI : types the reason
+    activate UI
+
+    UI -> CTRL : saveMessage(message)
+    activate CTRL
+
+    CTRL -> Message ** : saveMessage(message)
+
+    activate Message
+    Message -> Message : addMessage
+    activate Message
+
+    Message --> CTRL : success message
+    deactivate Message
+    deactivate Message
+
+    CTRL --> UI : success message
+    deactivate CTRL
+
+    UI --> Client : displays success message
+
+end
+
+    UI -> CTRL : getAgentInformation()
+    activate CTRL
+
+    CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getPersonRepository()
+            activate PLAT
+
+            PLAT --> CTRL : personRepository
+            deactivate PLAT
+
+            CTRL -> PersonRepository : getAgentInformation()
+            activate PersonRepository
+
+            PersonRepository --> CTRL : agent information
+            deactivate PersonRepository
+
+    CTRL --> UI : agent information
+    deactivate CTRL
+
+
+    UI --> Client : shows responsible agent name and phone number
+
+    UI --> Client : displays operation success
+
+    deactivate UI
+
+
+deactivate Client
+
+@enduml
 
 
 @enduml
