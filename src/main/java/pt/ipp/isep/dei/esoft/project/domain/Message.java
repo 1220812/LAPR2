@@ -9,8 +9,10 @@ import java.util.List;
  */
 public class Message implements Serializable {
     private String name;
+    private Client client;
     private int phone;
     private int inputAnnou;
+    private Announcement announcement;
     private LocalDateTime newVisitStartTime;
     private LocalDateTime newVisitEndTime;
 
@@ -40,6 +42,15 @@ public class Message implements Serializable {
         this.inputAnnou = inputAnnou;
         this.newVisitStartTime = newVisitStartTime;
         this.newVisitEndTime = newVisitEndTime;
+    }
+
+    public Message(String name, int phone, int inputAnnou, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime, Announcement announcement) {
+        this.name = name;
+        this.phone = phone;
+        this.inputAnnou = inputAnnou;
+        this.newVisitStartTime = newVisitStartTime;
+        this.newVisitEndTime = newVisitEndTime;
+        this.announcement= announcement;
     }
 
     /**
@@ -227,5 +238,21 @@ public class Message implements Serializable {
         }
         MessageList.add(new Message(newVisitStartTime, newVisitEndTime));
         return false;
+    }
+
+    public Announcement getAnnouncement() {
+        return announcement;
+    }
+
+    public void setAnnouncement(Announcement announcement) {
+        this.announcement = announcement;
+    }
+
+    public Agent getAgent() {
+        return announcement.getAgent();
+    }
+
+    public Client getClient() {
+        return client;
     }
 }
