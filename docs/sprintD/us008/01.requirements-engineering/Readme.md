@@ -76,12 +76,16 @@ As an agent, I intend to see the list of property announcement requests made to 
 
 * **AC1:** The list of property announcement requests should be sorted by the date they were created, with the most recent requests appearing first.
 * **AC2:** An announcement is posted when a request is accepted. The list of requests should be refreshed, and that request should not be shown again.
+* **AC3:** The comission type must be valid.
+* **AC4:** The comission must be positive.
+* **AC5:** The announcement must be created.
+* **AC6:** The request list must be updated.
 
 
 ### 1.4. Found out Dependencies
 
 
-* US4 - US8 needs the announcement to exist
+* US4 - US8 needs the request to exist
 
 
 ### 1.5 Input and Output Data
