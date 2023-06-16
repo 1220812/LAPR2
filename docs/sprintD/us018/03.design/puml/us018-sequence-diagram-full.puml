@@ -1,171 +1,99 @@
 @startuml
 autonumber
+title US018 - Sequence Diagram (SD)
+actor StoreManager as SM
 
-title US017 - Sequence Diagram (SSD)
+participant ":DealsAnalyzesUI" as GUI
+participant ":DealsAnalyzesController" as CTRL
+participant ":Repositories" as REPO
+participant "repositories :Repositories" as repo
+participant ":FileInformation" as IF
 
-actor "NetworkManager" as NM
-participant ":ListDealsUI" as UI
-participant ":ListDealsController" as Controller
+participant ":OrderRepository" as OR
+participant ":Order" as O
 
-participant ":Repositories" as PLAT
-participant "repositories :\nRepositories" as REP
-participant "orderRepository :\nOrderRepository" as OR
-participant "order:\nOrder" as order
-participant "announcement:\nAnnouncement" as announcement
-participant "property:\nProperty" as property
+participant ":SimpleRegression" as SR
+participant ":MultipleLinearRegression" as MLR
 
-activate NM
+activate SM
 
-    NM -> UI : asks to list all the deals made
+    SM -> GUI: asks to analyse the deals (on houses and apartments)
+    activate GUI
+        SM <-- GUI: requests the path of the information file
+        SM -> GUI: inserts the path of the information file
 
-    activate UI
+        GUI -> CTRL**: create()
+        GUI -> CTRL: informationFromFile(path)
+        activate CTRL
 
-    UI --> Controller** : create
+            CTRL -> REPO: getInstance
+            activate REPO
+                CTRL <-- REPO: repositories
+            deactivate REPO
+            CTRL -> repo: getOrderRepository
+            activate repo
+                CTRL <-- repo: OrderRepository
+            deactivate repo
+            CTRL -> IF: loadDealsFromFile(path)
+            activate IF
 
-    UI -> Controller : getDeals()
+                CTRL <-- IF: list<InformationFromFile>
+            deactivate IF
 
-    activate Controller
+            CTRL -> CTRL: fillAdvertisementInfo()
+            activate CTRL
 
-    Controller -> PLAT : getInstance()
+            deactivate CTRL
 
-    activate PLAT
+            CTRL -> OR: createOrder(list<Advertisement> advertisementList)
+            activate OR
 
-    PLAT --> Controller : repositories
+loop for each announcement
+                OR -> O**: createOrder()
+end
+                CTRL <-- OR: List<Order> acceptedOrders
+            deactivate OR
 
-    deactivate PLAT
+            GUI <-- CTRL: List<Order> acceptedOrders
 
-    Controller -> REP : getOrdersRepository()
+        deactivate CTRL
 
-    activate REP
+        deactivate CTRL
 
-    REP --> Controller : ordersRepository
+        SM <-- GUI: shows regression models and requests to select one (simple-linear or multi-linear)
+        SM -> GUI: selects a regression model (simple-linear or multi-linear)
+        GUI --> SM: asks for the parameter to be used (eg. area, number of bathrooms, etc...)
+        SM -> GUI : selects a parameter (eg. area, number of bathrooms, etc...)
 
-    deactivate REP
+        GUI -> CTRL: getPrediction(selectedParameter(s))
+        alt if simple-linear regression model is selected
+        activate CTRL
 
-    Controller -> OR : getAcceptedOrders()
+            CTRL -> SR: simplePrediction(selectedParameter)
+            activate SR
 
-    activate OR
+                SR --> CTRL: prediction
 
-    OR --> Controller : acceptedOrders
+                deactivate SR
 
-    deactivate OR
+            else if multi-linear regression model is selected
 
-    Controller --> UI : deals
+                CTRL -> MLR: multiPrediction(selectedParameter(s))
+                activate MLR
 
-    deactivate Controller
+                    MLR --> CTRL: prediction
 
-        UI --> NM : shows the list and asks to select one of the \nsorting methods (Bubble Sort or Insertion Sort)
+                    deactivate MLR
 
-    deactivate UI
+            end
 
-    NM -> UI : selects the sorting method (Bubble Sort or Insertion Sort)
+            CTRL --> GUI: prediction
 
-    activate UI
+    deactivate CTRL
 
-    UI --> NM : asks for the order of sorting (ascending or descending)
+        SM <-- GUI: displays the prediction
 
-    deactivate UI
+    deactivate GUI
 
-    NM -> UI : selects the order of sorting (ascending or descending)
-     alt Bubble Sort method is selected
-
-        activate UI
-
-        UI --> Controller : sortListByBubbleSort(deals, sortingMethod, orderOfSorting)
-
-        activate Controller
-
-        Controller -> OR : sortListByBubbleSort(deals, sortingMethod ,orderOfSorting)
-
-        activate OR
-
-        loop for every deal
-
-        OR --> order : getAnnouncement()
-
-        activate order
-
-        order -> announcement : getProperty()
-
-        activate announcement
-
-        announcement -> property : getArea()
-
-        activate property
-
-        property --> announcement : area
-
-        deactivate property
-
-        announcement --> order : area
-
-        deactivate announcement
-
-        order --> OR : area
-
-        deactivate order
-
-        end
-
-        OR --> Controller : sortedListByArea
-
-        deactivate OR
-
-        Controller --> UI : sortedList
-
-        deactivate Controller
-
-     else Insertion Sort method is selected
-
-             UI --> Controller : sortListByInsertionSort(deals, sortingMethod, orderOfSorting)
-
-             activate Controller
-
-             Controller -> OR : sortListByInsertionSort(deals, sortingMethod, orderOfSorting)
-
-             activate OR
-
-             loop for every deal
-
-                     OR --> order : getAnnouncement()
-
-                     activate order
-
-                     order -> announcement : getProperty()
-
-                     activate announcement
-
-                     announcement -> property : getArea()
-
-                     activate property
-
-                     property --> announcement : area
-
-                     deactivate property
-
-                     announcement --> order : area
-
-                     deactivate announcement
-
-                     order --> OR : area
-
-                     deactivate order
-
-                     end
-
-             OR --> Controller : sortedListByArea
-
-             deactivate OR
-
-             Controller --> UI : sortedList
-
-             deactivate Controller
-     end
-
-    UI --> NM : shows the list of all the deals made sorted \nby the selected sorting method and order
-
-    deactivate UI
-
-deactivate NM
 
 @enduml
