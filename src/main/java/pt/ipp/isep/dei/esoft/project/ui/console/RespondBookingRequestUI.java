@@ -41,7 +41,7 @@ public class RespondBookingRequestUI implements Runnable {
 
             String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\ui\\console\\emails\\emails";
             Announcement announcement = controller.getAnnouncement(message);
-            String print =
+            String replyMessage =
                     "Subject: Response to booking request"
                     + "\nFrom: " + controller.getAgentEmail(agent)
                     + "\nTo: " + controller.getClientEmail(message)
@@ -62,11 +62,11 @@ public class RespondBookingRequestUI implements Runnable {
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            printWriter.write(print);
+            printWriter.write(replyMessage);
             printWriter.close();
             newFile.deleteOnExit();
 
-            controller.replyMessage(message);
+            controller.replyMessage(message, replyMessage);
         }
     }
 }
