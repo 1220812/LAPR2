@@ -371,6 +371,15 @@ public class Bootstrap implements Runnable {
         photoList1.add(photo1);
         photoList2.add(photo2);
         photoList3.add(photo3);
+        List<AvailableEquipment> availableEquipmentList1 = new ArrayList<>();
+        List<AvailableEquipment> availableEquipmentList2 = new ArrayList<>();
+        List<AvailableEquipment> availableEquipmentList3 = new ArrayList<>();
+        AvailableEquipment availableEquipment1 = new AvailableEquipment("AAA");
+        AvailableEquipment availableEquipment2 = new AvailableEquipment("bbb");
+        AvailableEquipment availableEquipment3 = new AvailableEquipment("CCC");
+        availableEquipmentList1.add(availableEquipment1);
+        availableEquipmentList2.add(availableEquipment2);
+        availableEquipmentList3.add(availableEquipment3);
         RequestType requestType1 = new RequestType("Sale", 0);
         RequestType requestType2 = new RequestType("Sale", 0);
         RequestType requestType3 = new RequestType("Rent", 3);
@@ -389,8 +398,8 @@ public class Bootstrap implements Runnable {
         Address address2 = new Address("Street B", 1, 3, "12346", state2, district2, city2);
         Address address3 = new Address("Street C", 1, 2, "12347", state1, district3, city2);
         Property property1 = new Property(10000, 10, address1, propertyType1, photoList1);
-        Property property2 = new House(address2, 1000, 12, propertyType3, 2, 2, 1, true, true, true, new SunExposure("North"), true, photoList2);
-        Property property3 = new Residence(address3, 300, 2, propertyType2, 2, 1, 1, photoList3, true, false);
+        Property property2 = new House(address2, 1023, 345, propertyType2, 12, 4, 1, true, new SunExposure("North"), true, photoList2, availableEquipmentList1);
+        Property property3 = new Residence(address3, 12023, 3425, propertyType3, 132, 34, 31, photoList2, availableEquipmentList1);
         LocalDate requestDate1 = LocalDate.of(2021, 1, 1);
         LocalDate requestDate2 = LocalDate.of(2021, 2, 2);
         LocalDate requestDate3 = LocalDate.of(2021, 3, 3);

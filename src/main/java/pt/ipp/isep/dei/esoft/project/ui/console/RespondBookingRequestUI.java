@@ -39,7 +39,7 @@ public class RespondBookingRequestUI implements Runnable {
             String reply = Utils.readLineFromConsole("Write reply message to booking request:");
             LocalDate replyDate = LocalDate.now();
 
-            String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\ui\\console\\emails\\emails";
+            String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\email";
             Announcement announcement = controller.getAnnouncement(message);
             String replyMessage =
                     "Subject: Response to booking request"

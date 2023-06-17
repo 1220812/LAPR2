@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type House.
+ */
 public class House extends Residence implements Serializable {
     /**
      * existence of a basement
@@ -25,21 +28,41 @@ public class House extends Residence implements Serializable {
      * @param address                house address
      * @param area                   house area
      * @param distanceFromCityCentre distance between the house and the city center
+     * @param propertyType           the property type
      * @param numberOfBathrooms      number of bathrooms
      * @param numberOfBedrooms       number of bedrooms
      * @param numberOfParkingSpaces  number of parking spaces
-     * @param airConditioning        air conditioning
-     * @param centralHeating         central heating
      * @param basement               basement
      * @param sunExposure            house exposure to the sun
      * @param inhabitableLoft        inhabitable loft
+     * @param photoList              the photo list
+     * @param availableEquipmentList the available equipment list
      */
-    public House(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning, boolean centralHeating, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, List<Photographs> photoList) {
-        super(address, area, distanceFromCityCentre, propertyType, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, photoList, airConditioning, centralHeating);
+    public House(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, List<Photographs> photoList, List<AvailableEquipment> availableEquipmentList) {
+        super(address, area, distanceFromCityCentre, propertyType, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, photoList, availableEquipmentList);
         this.existenceOfABasement = basement;
         this.inhabitableLoft = inhabitableLoft;
         this.sunExposure = sunExposure;
     }
+
+    /**
+     * Instantiates a new House.
+     *
+     * @param address                the address
+     * @param area                   the area
+     * @param distanceFromCityCentre the distance from city centre
+     * @param propertyType           the property type
+     * @param numberOfBathrooms      the number of bathrooms
+     * @param numberOfBedrooms       the number of bedrooms
+     * @param numberOfParkingSpaces  the number of parking spaces
+     * @param airConditioning        the air conditioning
+     * @param centralHeating         the central heating
+     * @param basement               the basement
+     * @param sunExposure            the sun exposure
+     * @param inhabitableLoft        the inhabitable loft
+     * @param finalPrice             the final price
+     * @param businessDate           the business date
+     */
     public House(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning, boolean centralHeating, boolean basement, SunExposure sunExposure, boolean inhabitableLoft, double finalPrice, LocalDate businessDate) {
         super(address, area, distanceFromCityCentre, propertyType,numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, finalPrice, businessDate);
         this.existenceOfABasement = basement;
@@ -49,6 +72,8 @@ public class House extends Residence implements Serializable {
 
     /**
      * Method to show the basement
+     *
+     * @return the boolean
      */
     public boolean basement() {
         return existenceOfABasement;
@@ -59,7 +84,6 @@ public class House extends Residence implements Serializable {
      *
      * @param existenceOfABasement basement
      */
-
     public void setExistenceOfABasement(boolean existenceOfABasement) {
         this.existenceOfABasement = existenceOfABasement;
     }
@@ -69,7 +93,6 @@ public class House extends Residence implements Serializable {
      *
      * @return inhabitable loft
      */
-
     public boolean inhabitableLoft() {
         return inhabitableLoft;
     }
@@ -79,7 +102,6 @@ public class House extends Residence implements Serializable {
      *
      * @param inhabitableLoft inhabitable loft
      */
-
     public void setInhabitableLoft(boolean inhabitableLoft) {
         this.inhabitableLoft = inhabitableLoft;
     }
@@ -89,7 +111,6 @@ public class House extends Residence implements Serializable {
      *
      * @param sunExposure sun exposure
      */
-
     public void setSunExposure(SunExposure sunExposure) {
         this.sunExposure = sunExposure;
     }
