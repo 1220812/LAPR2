@@ -166,76 +166,76 @@ public class RegisterAnnouncementUI implements Runnable {
                         availableEquipmentList.add(availableEquipment);
                         System.out.println("Equipment added");
                     }
-
-
-                    if (inputPropertyType.equalsIgnoreCase("House")) {
-                        basement = Utils.readBooleanFromConsole("Does the house have a basement? (y/n)");
-
-                        loft = Utils.readBooleanFromConsole("Does the house have an inhabitable loft? (y/n)");
-
-                        sunExposure = Utils.listAndSelectOne(controller.getSunExposuresList());
-
-                    }
                 }
 
 
-                commissionType = Utils.readLineFromConsole("Commission Type:\n- Percentage\n- Value");
-                while (!commissionType.equalsIgnoreCase("Percentage") && !commissionType.equalsIgnoreCase("Value")) {
-                    commissionType = Utils.readLineFromConsole("Please write a valid option.");
+                if (inputPropertyType.equalsIgnoreCase("House")) {
+                    basement = Utils.readBooleanFromConsole("Does the house have a basement? (y/n)");
+
+                    loft = Utils.readBooleanFromConsole("Does the house have an inhabitable loft? (y/n)");
+
+                    sunExposure = Utils.listAndSelectOne(controller.getSunExposuresList());
+
                 }
+            }
 
 
-                commission = Utils.readDoubleFromConsole("Commission:");
-                while (commission < 0) {
-                    commission = Utils.readDoubleFromConsole("Please write a valid commission:");
-                }
+            commissionType = Utils.readLineFromConsole("Commission Type:\n- Percentage\n- Value");
+            while (!commissionType.equalsIgnoreCase("Percentage") && !commissionType.equalsIgnoreCase("Value")) {
+                commissionType = Utils.readLineFromConsole("Please write a valid option.");
+            }
 
 
-                date = LocalDate.now();
+            commission = Utils.readDoubleFromConsole("Commission:");
+            while (commission < 0) {
+                commission = Utils.readDoubleFromConsole("Please write a valid commission:");
+            }
 
-                agent = controller.getCurrentAgent();
 
-                owner = controller.getOwnerByEmail(ownerEmail);
+            date = LocalDate.now();
 
-                store = agent.getStore();
+            agent = controller.getCurrentAgent();
 
-                address = new Address(streetAddress, doorNumber, floorNumber, zipCode, state, district, city);
+            owner = controller.getOwnerByEmail(ownerEmail);
 
-                requestType = controller.createRequestType(DEFAULT_REQUESTTYPE, DEFAULT_CONTRACTDURATION);
+            store = agent.getStore();
 
-                if (inputPropertyType.equalsIgnoreCase("Land")) {
-                    property = controller.createProperty(area, distanceFromCityCenter, address, propertyType, photos);
-                } else if (inputPropertyType.equalsIgnoreCase("Apartment")) {
-                    property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, availableEquipmentList);
-                } else if (inputPropertyType.equalsIgnoreCase("House")) {
-                    property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, basement, sunExposure, loft, propertyType, photos, availableEquipmentList);
-                }
-                announcement = controller.createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price);
+            address = new Address(streetAddress, doorNumber, floorNumber, zipCode, state, district, city);
 
-                System.out.println(announcement.toString());
+            requestType = controller.createRequestType(DEFAULT_REQUESTTYPE, DEFAULT_CONTRACTDURATION);
 
-                String flag = Utils.readLineFromConsole("Confirm data? (y/n)");
-                while (!flag.equalsIgnoreCase("y") && !flag.equalsIgnoreCase("n"))
-                    flag = Utils.readLineFromConsole("Insert valid option. (y/n)");
-                if (flag.equalsIgnoreCase("y")) {
-                    controller.registerAnnouncement(announcement);
-                    String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\sms";
-                    String replyMessage =
-                            "Subject: Announcement request registed"
-                                    + "\nFrom: " + controller.getAgentPhone(agent)
-                                    + "\nTo: " + controller.getOwnerPhone(owner)
-                                    + "\nBody:"
-                                    + "\nProperty info:"
-                                    + "\nProperty type: " + controller.getPropertyType(announcement)
-                                    + "\nAddress: " + controller.getAddress(announcement)
-                                    + "\nAgent info:"
-                                    + "\nName: " + controller.getAgentName(agent)
-                                    + "\nReply date: " + date;
+            if (inputPropertyType.equalsIgnoreCase("Land")) {
+                property = controller.createProperty(area, distanceFromCityCenter, address, propertyType, photos);
+            } else if (inputPropertyType.equalsIgnoreCase("Apartment")) {
+                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, availableEquipmentList);
+            } else if (inputPropertyType.equalsIgnoreCase("House")) {
+                property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, basement, sunExposure, loft, propertyType, photos, availableEquipmentList);
+            }
+            announcement = controller.createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price);
 
-                    System.out.println("Announcement registered successfully");
-                } else if (flag.equalsIgnoreCase("n")) {
-                    System.out.println("Operation canceled");
-                }
+            System.out.println(announcement.toString());
+
+            String flag = Utils.readLineFromConsole("Confirm data? (y/n)");
+            while (!flag.equalsIgnoreCase("y") && !flag.equalsIgnoreCase("n"))
+                flag = Utils.readLineFromConsole("Insert valid option. (y/n)");
+            if (flag.equalsIgnoreCase("y")) {
+                controller.registerAnnouncement(announcement);
+                String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\sms";
+                String replyMessage =
+                        "Subject: Announcement request registed"
+                                + "\nFrom: " + controller.getAgentPhone(agent)
+                                + "\nTo: " + controller.getOwnerPhone(owner)
+                                + "\nBody:"
+                                + "\nProperty info:"
+                                + "\nProperty type: " + controller.getPropertyType(announcement)
+                                + "\nAddress: " + controller.getAddress(announcement)
+                                + "\nAgent info:"
+                                + "\nName: " + controller.getAgentName(agent)
+                                + "\nReply date: " + date;
+
+                System.out.println("Announcement registered successfully");
+            } else if (flag.equalsIgnoreCase("n")) {
+                System.out.println("Operation canceled");
             }
         }
     }
