@@ -169,7 +169,7 @@ public class Store implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Store store = (Store) o;
-        return phoneNumber == store.phoneNumber && ID == store.ID && Objects.equals(designation, store.designation) && Objects.equals(address, store.address) && Objects.equals(emailAddress, store.emailAddress);
+        return Objects.equals(phoneNumber, store.phoneNumber) && ID == store.ID && Objects.equals(designation, store.designation) && Objects.equals(address, store.address) && Objects.equals(emailAddress, store.emailAddress);
     }
 
     @Override

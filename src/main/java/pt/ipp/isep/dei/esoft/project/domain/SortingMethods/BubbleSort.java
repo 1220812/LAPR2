@@ -4,10 +4,11 @@ import pt.ipp.isep.dei.esoft.project.domain.Message;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BubbleSort {
+public class BubbleSort implements Serializable {
 
 
     public List<Message> sortByDate(List<Message> messageList) {

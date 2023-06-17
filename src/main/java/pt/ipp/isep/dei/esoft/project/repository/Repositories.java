@@ -69,7 +69,6 @@ public class Repositories implements Serializable{
      * The Get announcement repository.
      */
     public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
-    public PropertyRepository getPropertyRepository = new PropertyRepository();
     public transient BookingRequestsRepository bookingRequestsRepository = new BookingRequestsRepository();
     public BookingRequestsFeedbackRepository bookingRequestsFeedbackRepository = new BookingRequestsFeedbackRepository();
 
@@ -273,9 +272,6 @@ public class Repositories implements Serializable{
      * Gets property repository.
      * @return the property repository
      */
-    public PropertyRepository getPropertyRepository() {
-        return getPropertyRepository;
-    }
     public OrderRepository getOrderRepository() {
         return orderRepository;
     }

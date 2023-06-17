@@ -41,6 +41,17 @@ public class Order implements Serializable {
     }
 
     /**
+     * Method that creates a new instance of order
+     * @param announcement selected announcement
+     * @param clientEmail client email
+     */
+    public Order (Announcement announcement, String clientEmail){
+        this.announcement = announcement;
+        this.email = clientEmail;
+        orderID = orderCounter++;
+    }
+
+    /**
      * Method that returns the selected announcement
      * @return selected announcement
      */

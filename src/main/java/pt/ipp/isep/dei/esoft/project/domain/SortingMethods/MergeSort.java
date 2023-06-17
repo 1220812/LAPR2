@@ -2,10 +2,11 @@ package pt.ipp.isep.dei.esoft.project.domain.SortingMethods;
 
 import pt.ipp.isep.dei.esoft.project.domain.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MergeSort {
+public class MergeSort implements Serializable {
     int m;
     int l;
     int r;

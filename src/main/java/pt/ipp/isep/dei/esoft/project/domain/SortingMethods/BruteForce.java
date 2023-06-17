@@ -11,98 +11,96 @@ import java.util.List;
 
 public class BruteForce implements Serializable {
     /**
-     * Method that finds the closest partitions of stores with the closest number of announcements
-     * @param organizations list of stores
-     * @param numberOfStoresInThePartition number of stores to be divided
+     * This method divides the list of stores in two different subsets and finds the minimum difference between both
+     *
+     * @param storesList the list of stores
+     * @param n          the number of stores in each subset
      */
-    public static void findClosestPartitions(List<Store> organizations, int numberOfStoresInThePartition) {
-        List<Store> storesList = new ArrayList<>();
-        for (int i = 0; i < numberOfStoresInThePartition; i++) {
-            storesList.add(organizations.get(i));
-        }
-
-        divideStores(storesList);
-    }
-    /**
-     * Method that divides the stores into two subsets with the closest number of ads
-     * @param storeList list of stores
-     */
-    public static void divideStores(List<Store> storeList) {
-        int n = storeList.size();
-
+    public void storesDivisor(List<Store> storesList, int n) {
+        int totalSubset1 = 0, totalSubset2 = 0, difference, minDifference, subsetSize;
+        int sumOfAnnouncements = 0;
         List<Store> subset1 = new ArrayList<>();
         List<Store> subset2 = new ArrayList<>();
-        int totalAdsSubset1 = 0;
-        int totalAdsSubset2 = 0;
-
-        long startTime = System.nanoTime(); // Measure start time
-
-        // Generate all possible subsets and find the one with the closest number of ads
-        int closestDifference = Integer.MAX_VALUE;
-        int subsetSize = (int) Math.pow(2, n);
+        long startingTime, endingTime;
+        double runTime;
+        storesList = getStores(storesList, n);
+        subsetSize = (int) Math.pow(2, n);
+        minDifference = Integer.MAX_VALUE;
+        startingTime = System.nanoTime();
         for (int i = 0; i < subsetSize; i++) {
-            int currentSubsetSum = 0;
+            int sum = 0;
             for (int j = 0; j < n; j++) {
                 if ((i & (1 << j)) != 0) {
-                    // currentSubsetSum += storeList.get(j).getTotalAdsCount();
+                    sumOfAnnouncements = getAnnouncementsByStoreID(storesList.get(j).getID()).size();
+                    sum += sumOfAnnouncements;
                 }
             }
-
-            int difference = Math.abs(currentSubsetSum - (getAnnouncements() - currentSubsetSum));
-            if (difference < closestDifference) {
-                closestDifference = difference;
+            difference = Math.abs(sum - (getTotalNumberOfProperties(storesList) - sum));
+            if (difference < minDifference) {
+                minDifference = difference;
                 subset1.clear();
                 subset2.clear();
-
                 for (int j = 0; j < n; j++) {
                     if ((i & (1 << j)) != 0) {
-                        subset1.add(storeList.get(j));
-                        int storeID = storeList.get(j).getID();
-
-                        totalAdsSubset1 += getAnnouncementsByStoreID(storeID).size();
+                        subset1.add(storesList.get(j));
+                        totalSubset1 += getAnnouncementsByStoreID(storesList.get(j).getID()).size();
                     } else {
-                        subset2.add(storeList.get(j));
-                        int storeID = storeList.get(j).getID();
-                        totalAdsSubset2 += getAnnouncementsByStoreID(storeID).size();
+                        subset2.add(storesList.get(j));
+                        getAnnouncementsByStoreID(storesList.get(j).getID());
+                        totalSubset2 += getAnnouncementsByStoreID(storesList.get(j).getID()).size();
                     }
                 }
             }
         }
-
-        long endTime = System.nanoTime();
-
-        System.out.println("List: " + storeList);
-        System.out.println("Subset1: " + subset1);
-        System.out.println("Subset2: " + subset2);
-        System.out.println("Difference: " + closestDifference);
-
-        double executionTime = (endTime - startTime) / 1_000_000_000.0;
-        System.out.printf("Time: %.15f seconds%n", executionTime);
-
+        endingTime = System.nanoTime();
+        System.out.printf("Stores list: " + storesList + ", Subset1: " + subset1 + ", Subset2: " + subset2 + ", Difference between the subsets: " + minDifference);
+        runTime = (endingTime - startingTime) / 1000000000.0;
+        System.out.printf(", run time: %.15f seconds%n", runTime);
     }
 
     /**
-     * Method that returns the total number of announcements in the system
-     * @return total number of announcements in the system
+     * This method returns a list with the n first stores of the list of stores
+     * @param stores the list of all stores
+     * @param numberOfStores the number of stores to be returned
+     * @return the list with the n first stores of the list of stores
      */
-    private static int getAnnouncements() {
-        int totalAnnouncements = 0;
-        AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
-        totalAnnouncements += announcementRepository.getAnnouncementsList().size();
-        return totalAnnouncements;
+    public List<Store> getStores (List<Store> stores, int numberOfStores){
+        List<Store> storesList = new ArrayList<>();
+        for (int i = 0; i < numberOfStores; i++) {
+            storesList.add(stores.get(i));
+        }
+        return storesList;
     }
+
     /**
-     * Method that returns the list of announcements by store
-     * @param storeID store ID
-     * return list of announcements by store
+     * This method returns the total number of properties of a list of stores
+     * @param stores the list of stores
+     * @return the total number of properties of a list of stores
      */
-    private static List<Announcement> getAnnouncementsByStoreID(int storeID) {
-        List<Announcement> announcements = new ArrayList<>();
-        for (Announcement announcement : announcements) {
-            if (announcement.getStore().getID() == storeID) {
-                announcements.add(announcement);
+    public static int getTotalNumberOfProperties(List<Store> stores){
+        int totalNumberOfProperties=0;
+        for (Store store:stores) {
+            List <Announcement> announcements = getAnnouncementsByStoreID(store.getID());
+            for (int i = 0; i < announcements.size() ; i++) {
+                totalNumberOfProperties++;
             }
         }
-        return announcements;
+        return totalNumberOfProperties;
+    }
+
+    /**
+     * This method returns a list of the announcements of a store
+     * @param storeID the ID of the store
+     * @return the list of the announcements of a store
+     */
+    public static List<Announcement> getAnnouncementsByStoreID(int storeID) {
+        List<Announcement> announcements = Repositories.getInstance().getAnnouncementRepository().getAnnouncementsList();
+        List<Announcement> matchingAnnouncements = new ArrayList<>();
+        for (Announcement announcement : announcements) {
+            if (announcement.getStore().getID() == storeID) {
+                matchingAnnouncements.add(announcement);
+            }
+        }
+        return matchingAnnouncements;
     }
 }

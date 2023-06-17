@@ -5,14 +5,15 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class FileInformation {
     Repositories repositories = Repositories.getInstance();
     AnnouncementRepository announcementRepository = repositories.getAnnouncementRepository();
     StoreRepository storeRepository = repositories.getStoreRepository();
-    PropertyRepository propertyRepository = repositories.getPropertyRepository();
     OwnerRepository userRepository = repositories.getOwnerRepository();
+    OrderRepository orderRepository = repositories.getOrderRepository();
     public static final int sidPosition = 0;
     public static final int ownerNamePosition = 1;
     public static final int ownerPassportCardNumberPosition = 2;
@@ -148,14 +149,15 @@ public class FileInformation {
                     zipCode = storeAddress1[4].trim();
                     storeAddress = new Address(streetAddress, city, district, state , zipCode);
                 }
+                List<Store> stores = storeRepository.getStoreList();
                 Store newStore = new Store(storeName, storeAddress, storePhoneNumber, storeEmail, storeID);
+
                 String[] data1 = announcementDateString.split("-");
                 String[] data2 = businessDateString.split("-");
                 LocalDate date = LocalDate.of(Integer.parseInt(data1[2].trim()), Integer.parseInt(data1[1].trim()), Integer.parseInt(data1[0].trim()));
                 LocalDate date1 = LocalDate.of(Integer.parseInt(data2[2].trim()), Integer.parseInt(data2[1].trim()), Integer.parseInt(data2[0].trim()));
                 String ownerTaxNumber1 = ownerTaxNumber.replaceAll("-", "");
                 userRepository.add(new Owner(ownerName, ownerPhoneNumber,ownerEmail, new TaxNumber(ownerTaxNumber1), new PassportCardNumber(ownerPassportCardNumber)));
-                storeRepository.add(newStore);
                 if(!propertySunExposure.equals("NA")){
                     boolean basement = Boolean.getBoolean(propertyBasement);
                     boolean loft = Boolean.getBoolean(propertyLoft);
@@ -163,19 +165,24 @@ public class FileInformation {
                     boolean airConditioning = Boolean.getBoolean(propertyAirConditioning);
                     if(propertyType.equalsIgnoreCase("Apartment")){
                         Residence residence = new Residence(propertyAddress, area, distanceFromCityCenter, new PropertyType(propertyType), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, centralHeating, airConditioning, finalPrice, date1);
-                        propertyRepository.addProperty(residence);
-                        announcementRepository.add(new Announcement(residence, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore));
+                        Announcement announcement = new Announcement(residence, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
+                        announcementRepository.add(announcement);
+                        Order order = new Order(announcement, ownerEmail);
+                        orderRepository.add(order);
                     } else if (propertyType.equalsIgnoreCase("House")) {
                         House house = new House(propertyAddress, area, distanceFromCityCenter, new PropertyType(propertyType), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, centralHeating, airConditioning, basement, new SunExposure(propertySunExposure), loft, finalPrice, date1);
-                        propertyRepository.addProperty(house);
-                        announcementRepository.add(new Announcement(house, date, commission, new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore));
-                        System.out.println();
+                        Announcement announcement = new Announcement(house, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
+                        announcementRepository.add(announcement);
+                        Order order = new Order(announcement, ownerEmail);
+                        orderRepository.add(order);
                         }
                 }
                 if(propertyType.equalsIgnoreCase("Land")){
                     Property land = new Property(area, distanceFromCityCenter, propertyAddress ,new PropertyType(propertyType), finalPrice, date1);
-                    propertyRepository.addProperty(land);
-                    announcementRepository.add(new Announcement(land, date, commission, new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore));
+                    Announcement announcement = new Announcement(land, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
+                    announcementRepository.add(announcement);
+                    Order order = new Order(announcement, ownerEmail);
+                    orderRepository.add(order);
                 }
             }
         }

@@ -10,13 +10,11 @@ public class CreateRequestController {
     Repositories repositories = Repositories.getInstance();
     private AgencyRepository agencyRepository = Repositories.getInstance().getAgencyRepository();
     private SunExposureRepository sunExposureRepository = Repositories.getInstance().getSunExposureRepository();
-    private PropertyRepository propertyRepository = Repositories.getInstance().getPropertyRepository();
     private RequestRepository requestRepository = Repositories.getInstance().getRequestRepository();
     private final RequestTypeRepository requestTypeRepository;
 
     public CreateRequestController() {
         requestTypeRepository = Repositories.getInstance().getRequestTypeRepository();
-        propertyRepository = Repositories.getInstance().getPropertyRepository();
     }
 
     public List<RequestType> getRequestTypeList() {
@@ -35,11 +33,11 @@ public class CreateRequestController {
     public RequestType createSellRequestType(String requestType){
         return new RequestType(requestType);
     }
-    public House createHouse(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean airConditioning , boolean centralHeating , boolean basement, SunExposure sunExposure, boolean inhabitableLoft, PropertyType propertyType, List<Photographs> photoList) {
-        return new House(address, area, distanceFromCityCentre, propertyType, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure, inhabitableLoft, photoList);
+    public House createHouse(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking, boolean basement, SunExposure sunExposure, boolean loft, PropertyType propertyType, List<Photographs> photos, List<AvailableEquipment> equipment) {
+        return new House(address, area, distanceFromCityCenter,propertyType, numberOfBathrooms, numberOfBedrooms, parking, basement, sunExposure, loft, photos, equipment);
     }
-    public Residence createApartment(Address address, double area, double distanceFromCityCentre, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, PropertyType propertyType, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning) {
-        return new Residence(address, area, distanceFromCityCentre, propertyType,numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, photographsList, centralHeating, airConditioning);
+    public Residence createResidence(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking, PropertyType propertyType, List<Photographs> photos, List<AvailableEquipment> equipment){
+        return new Residence(address, area, distanceFromCityCenter,propertyType, numberOfBathrooms, numberOfBedrooms, parking, photos, equipment);
     }
     public Request createRequest(Property property, RequestType requestType, double price, Agent agent, Owner owner, LocalDate requestDate, Store store){
         return new Request(property, requestDate, agent, owner,price, requestType, store);
