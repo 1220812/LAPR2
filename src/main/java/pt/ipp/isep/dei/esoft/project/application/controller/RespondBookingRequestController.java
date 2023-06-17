@@ -72,8 +72,9 @@ public class RespondBookingRequestController {
         return announcement.getProperty().getAddress();
     }
 
-    public void replyMessage(Message message) {
+    public void replyMessage(Message message, String replyMessage) {
         MessageRepository.removeMessage(message);
         MessageRepository.addComplete(message);
+        ReplyRepository.add(replyMessage);
     }
 }
