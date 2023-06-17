@@ -136,4 +136,8 @@ public class RequestRepository implements Serializable {
         }
         return newList;
     }
+
+    public List<Request> getRequestsSorted(List<Request> requests) {
+        return requestList;
+    }
 }

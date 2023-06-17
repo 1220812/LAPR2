@@ -57,4 +57,8 @@ public class AnnouncementRepository implements Serializable {
         }
         return count;
     }
+
+    public List<Announcement> getAnnouncements() {
+        return announcementsList;
+    }
 }
