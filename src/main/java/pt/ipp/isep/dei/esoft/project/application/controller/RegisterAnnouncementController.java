@@ -240,7 +240,7 @@ public class RegisterAnnouncementController {
         return agent.getPhoneNumber();
     }
 
-    public List<PropertyType> getPropertyType(Announcement announcement){
+    public List<PropertyType> getPropertyTypeByAnnouncement(Announcement announcement){
         return Repositories.getInstance().getPropertyTypeRepository().getPropertyType();
     }
 

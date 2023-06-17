@@ -48,7 +48,7 @@ public class RespondBookingRequestUI implements Runnable {
                     + "\nBody:"
                     + "\nProperty info:"
                     + "\nProperty type: " + controller.getPropertyType(announcement)
-                    + "\nAddress: " + controller.getAddress(announcement)
+                    + "\nAddress: \n" + controller.getAddress(announcement)
                     + "\nAgent info:"
                     + "\nName: " + controller.getAgentName(agent)
                     + "\nPhone number: " + controller.getAgentPhone(agent)
@@ -64,7 +64,7 @@ public class RespondBookingRequestUI implements Runnable {
             }
             printWriter.write(replyMessage);
             printWriter.close();
-            newFile.deleteOnExit();
+
 
             controller.replyMessage(message, replyMessage);
         }

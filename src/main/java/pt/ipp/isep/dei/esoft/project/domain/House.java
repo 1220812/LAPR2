@@ -124,7 +124,7 @@ public class House extends Residence implements Serializable {
     @Override
     public String toString() {
         return super.toString() +
-                "\nBasement :" + existenceOfABasement +
+                "\nBasement : " + existenceOfABasement +
                 "\nSun exposure : " + sunExposure +
                 "\nInhabitable loft : " + inhabitableLoft;
     }

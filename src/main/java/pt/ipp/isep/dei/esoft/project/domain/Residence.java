@@ -198,6 +198,6 @@ public class Residence extends Property implements Serializable {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nNumber of bedrooms = " + numberOfBedrooms + "\nNumber of bathrooms = " + numberOfBathrooms + "\nParking spaces =" + numberOfParkingSpaces;
+        return super.toString() + "\nNumber of bedrooms = " + numberOfBedrooms + "\nNumber of bathrooms = " + numberOfBathrooms + "\nParking spaces = " + numberOfParkingSpaces + "\nAvailable equipment list: " + availableEquipmentList;
     }
 }

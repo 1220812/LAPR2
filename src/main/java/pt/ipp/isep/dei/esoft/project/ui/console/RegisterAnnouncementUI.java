@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -221,19 +224,30 @@ public class RegisterAnnouncementUI implements Runnable {
             if (flag.equalsIgnoreCase("y")) {
                 controller.registerAnnouncement(announcement);
                 String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\sms";
+
                 String replyMessage =
                         "Subject: Announcement request registed"
                                 + "\nFrom: " + controller.getAgentPhone(agent)
                                 + "\nTo: " + controller.getOwnerPhone(owner)
                                 + "\nBody:"
                                 + "\nProperty info:"
-                                + "\nProperty type: " + controller.getPropertyType(announcement)
-                                + "\nAddress: " + controller.getAddress(announcement)
+                                + "\nProperty type: " + controller.getPropertyTypeByAnnouncement(announcement)
+                                + "\nAddress: \n" + controller.getAddress(announcement)
                                 + "\nAgent info:"
                                 + "\nName: " + controller.getAgentName(agent)
                                 + "\nReply date: " + date;
 
-                System.out.println("Announcement registered successfully");
+                File newFile = new File(path);
+                PrintWriter printWriter;
+                try {
+                    printWriter = new PrintWriter(newFile);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                printWriter.write(replyMessage);
+                printWriter.close();
+
+                System.out.println("Announcement registered and sms sent successfully");
             } else if (flag.equalsIgnoreCase("n")) {
                 System.out.println("Operation canceled");
             }
