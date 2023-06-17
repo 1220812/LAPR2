@@ -27,7 +27,7 @@ public class ListRequestsGUI extends Application implements Runnable {
 
 
         BackgroundImage backgroundImage = new BackgroundImage(
-                new Image("Icon.jpg"),
+                new Image("Icon.png"),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
