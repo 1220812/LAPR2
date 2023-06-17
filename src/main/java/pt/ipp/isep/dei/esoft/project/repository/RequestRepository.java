@@ -14,9 +14,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 public class RequestRepository implements Serializable {
-    /**
-     * List of requests
-     */
+    private static final long serialVersionUID = -958191308379930267L;
     List<Request> requestList = new ArrayList<>();
 
     List<Request> acceptedRequestList = new ArrayList<>();

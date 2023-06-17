@@ -49,7 +49,7 @@ public class Property implements Serializable {
         if (area <= 0) {
             throw new IllegalArgumentException("Area must be greater than 0");
         }
-        if (distanceFromTheCityCenter <= 0) {
+        if (distanceFromTheCityCenter < 0) {
             throw new IllegalArgumentException("Distance from the city center must be greater than 0");
         }
         if (address == null) {
@@ -78,8 +78,8 @@ public class Property implements Serializable {
         if (area <= 0) {
             throw new IllegalArgumentException("Area must be greater than 0");
         }
-        if (distanceFromTheCityCenter <= 0) {
-            throw new IllegalArgumentException("Distance from the city center must be greater than 0");
+        if (distanceFromTheCityCenter < 0) {
+            throw new IllegalArgumentException("Distance from the city center must be a positive value");
         }
         if (address == null) {
             throw new IllegalArgumentException("Address must not be null");

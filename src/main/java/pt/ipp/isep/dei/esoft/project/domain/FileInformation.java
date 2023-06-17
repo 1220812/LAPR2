@@ -60,6 +60,9 @@ public class FileInformation {
             District district = null;
             City city = null;
             String zipCode = "";
+            String building = "";
+            String floor = "";
+            String numberOfApartment = "";
             Address propertyAddress = null;
             Address storeAddress = null;
             String line = reader.nextLine();
@@ -111,6 +114,25 @@ public class FileInformation {
                     district = new District(propertyAddress1[2]);
                     zipCode = propertyAddress1[4].trim();
                     propertyAddress = new Address(streetAddress, city, district, state , zipCode);
+                } else if (propertyAddress1.length == 7) {
+                    streetAddress = propertyAddress1[0];
+                    building = propertyAddress1[1];
+                    floor = propertyAddress1[2];
+                    numberOfApartment = propertyAddress1[3];
+                    state = new State(propertyAddress1[5]);
+                    city = new City(propertyAddress1[4]);
+                    zipCode = propertyAddress1[6].trim();
+                    propertyAddress = new Address(streetAddress, building, floor, numberOfApartment, zipCode, state, city);
+                } else if (propertyAddress1.length == 8) {
+                    streetAddress = propertyAddress1[0];
+                    building = propertyAddress1[1];
+                    floor = propertyAddress1[2];
+                    numberOfApartment = propertyAddress1[3];
+                    state = new State(propertyAddress1[6]);
+                    district = new District(propertyAddress1[5]);
+                    city = new City(propertyAddress1[4]);
+                    zipCode = propertyAddress1[7].trim();
+                    propertyAddress = new Address(streetAddress, building, floor, numberOfApartment, zipCode, state, district, city);
                 }
                 if(storeAddress1.length == 4){
                     streetAddress = storeAddress1[0];
@@ -157,7 +179,6 @@ public class FileInformation {
                 }
             }
         }
-        System.out.println(announcementRepository.getAnnouncementsList());
     }
 
     private boolean readerVerification(Scanner reader) {
