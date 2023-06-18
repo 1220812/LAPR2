@@ -118,5 +118,10 @@ public class BookingRequestFeedbackController {
         }
         return listReplies;
     }
+
+    public void finishReply(String chosenReply, Message chosenMessage) {
+        repositories.getMessageRepository().getMessageCompleteList().remove(chosenMessage);
+        repositories.getReplyRepository().getReplyList().remove(chosenReply);
+    }
 }
 
