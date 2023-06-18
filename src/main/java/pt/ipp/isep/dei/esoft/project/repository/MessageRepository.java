@@ -7,11 +7,9 @@ import pt.ipp.isep.dei.esoft.project.domain.SortingMethods.MergeSort;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -167,4 +165,17 @@ public class MessageRepository implements Serializable {
         return finalList;
     }
 
+    public List<Message> getRequestCompletedList(Client client) {
+        List<Message> assignedCompletedList = new ArrayList<>();
+        for (Message message : this.MessageCompleteList) {
+            if (message.getClient().getEmailAddress().equalsIgnoreCase(client.getEmailAddress())) {
+                assignedCompletedList.add(message);
+            }
+        }
+        return assignedCompletedList;
+    }
+
+    public List<Message> getMessageCompleteList() {
+        return MessageCompleteList;
+    }
 }

@@ -13,8 +13,6 @@ public class RespondBookingRequestController {
 
     AgentRepository agentRepository;
 
-    BookingRequestsRepository bookingRequestsRepository;
-
     AuthenticationRepository authenticationRepository;
 
     UserSession userSession;
@@ -25,7 +23,6 @@ public class RespondBookingRequestController {
     public  RespondBookingRequestController() {
         repositories = Repositories.getInstance();
         agentRepository = repositories.getAgentRepository();
-        bookingRequestsRepository = repositories.getBookingRequestsRepository();
         authenticationRepository = repositories.getAuthenticationRepository();
         userSession = repositories.getAuthenticationRepository().getCurrentUserSession();
         ConfigurationFile = "";
