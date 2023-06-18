@@ -61,4 +61,7 @@ public class AnnouncementRepository implements Serializable {
     public List<Announcement> getAnnouncements() {
         return announcementsList;
     }
+    public void removeAnnouncement(Announcement announcement){
+        announcementsList.remove(announcement);
+    }
 }

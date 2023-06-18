@@ -151,7 +151,16 @@ public class FileInformation {
                 }
                 List<Store> stores = storeRepository.getStoreList();
                 Store newStore = new Store(storeName, storeAddress, storePhoneNumber, storeEmail, storeID);
-
+                boolean storeExists = false;
+                for (Store store : stores) {
+                    if (store.getDesignation().equals(storeName)) {
+                        storeExists = true;
+                        break;
+                    }
+                }
+                if(!storeExists) {
+                    storeRepository.add(newStore);
+                }
                 String[] data1 = announcementDateString.split("-");
                 String[] data2 = businessDateString.split("-");
                 LocalDate date = LocalDate.of(Integer.parseInt(data1[2].trim()), Integer.parseInt(data1[1].trim()), Integer.parseInt(data1[0].trim()));
@@ -168,13 +177,13 @@ public class FileInformation {
                         Announcement announcement = new Announcement(residence, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
                         announcementRepository.add(announcement);
                         Order order = new Order(announcement, ownerEmail);
-                        orderRepository.add(order);
+                        orderRepository.addAcceptedOrder(order);
                     } else if (propertyType.equalsIgnoreCase("House")) {
                         House house = new House(propertyAddress, area, distanceFromCityCenter, new PropertyType(propertyType), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, centralHeating, airConditioning, basement, new SunExposure(propertySunExposure), loft, finalPrice, date1);
                         Announcement announcement = new Announcement(house, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
                         announcementRepository.add(announcement);
-                        Order order = new Order(announcement, ownerEmail);
-                        orderRepository.add(order);
+                        Order order = new Order(announcement, finalPrice);
+                        orderRepository.addAcceptedOrder(order);
                         }
                 }
                 if(propertyType.equalsIgnoreCase("Land")){
@@ -182,7 +191,7 @@ public class FileInformation {
                     Announcement announcement = new Announcement(land, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
                     announcementRepository.add(announcement);
                     Order order = new Order(announcement, ownerEmail);
-                    orderRepository.add(order);
+                    orderRepository.addAcceptedOrder(order);
                 }
             }
         }

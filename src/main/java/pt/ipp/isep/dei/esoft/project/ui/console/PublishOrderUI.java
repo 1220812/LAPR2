@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.PublishOrderController;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
+import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.List;
@@ -37,8 +38,10 @@ public class PublishOrderUI implements Runnable {
                 orderPrice = Utils.readDoubleFromConsole("Insert a valid offer price!");
             }
             if (controller.validateOrder(chosenAnnouncement, orderPrice)) {
-                controller.registerOrder(chosenAnnouncement, orderPrice);
+                Order newOrder = controller.createOrder(chosenAnnouncement, orderPrice);
+                controller.registerOrder(newOrder);
                 System.out.println("Your order was successfully registered!");
+                System.out.println(controller.orders());
                 validOrder = true;
             } else {
                 System.out.println("There are other orders registered in the system with the same amount offered for this announcement!");

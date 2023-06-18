@@ -54,7 +54,6 @@ public class RespondBookingRequestUI implements Runnable {
                     + "\nPhone number: " + controller.getAgentPhone(agent)
                     + "\nMessage from agent: " + reply
                     + "\nReply date: " + replyDate;
-
             File newFile = new File(path);
             PrintWriter printWriter;
             try {

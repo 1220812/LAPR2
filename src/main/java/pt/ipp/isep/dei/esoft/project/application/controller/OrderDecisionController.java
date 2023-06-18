@@ -3,10 +3,10 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.Comparators.AnnouncementDateComparator;
 import pt.ipp.isep.dei.esoft.project.domain.Comparators.OrderPriceComparator;
-import pt.ipp.isep.dei.esoft.project.domain.EmailService;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
+import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrderRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class OrderDecisionController {
     OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
     AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
-    EmailService emailService = new EmailService();
+    AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
 
     /**
      * Method that returns the list of announcements sorted by date of creation
@@ -52,34 +52,6 @@ public class OrderDecisionController {
     }
 
     /**
-     * Method to accept a purchase order for a property.
-     * When a purchase order is accepted, all other orders for the same property are declined,
-     * @param order the purchase order to accept
-     */
-    public void acceptPurchaseOrder(Order order) {
-        declineOtherOrders(order);
-        String clientEmail = order.getEmail();
-        String message = "Your offer for the property with the order number " + order.getOrderID() +
-                " has been accepted. Congratulations!";
-        emailService.sendMessage(clientEmail, message);
-    }
-
-    /**
-     * Method to decline a purchase order for an announcement.
-     *
-     * @param order the purchase order to be declined
-     */
-    public void declinePurchaseOrder(Order order) {
-        Announcement announcement = order.getAnnouncement();
-        List<Order> orderList = orderRepository.getOrdersByAnnouncement(announcement);
-        orderList.remove(order);
-        String clientEmail = order.getEmail();
-        String message = "Your offer for the property with the order number " + order.getOrderID() +
-                " has been declined. We apologize for any inconvenience caused.";
-        emailService.sendMessage(clientEmail, message);
-    }
-
-    /**
      * Method that returns a list of all orders
      * @return list of all orders
      */
@@ -89,22 +61,23 @@ public class OrderDecisionController {
     }
 
     /**
-     * Method that declines all other orders for the same property when one is accepted
-     * @param acceptedOrder accepted order
+     * Method that accepts an order for an announcement, declines the other orders for the same announcement and removes that announcement from the list of announcements
+     * @param order order to be accepted
      */
-    private void declineOtherOrders(Order acceptedOrder) {
-        List<Order> orders = orderRepository.getOrdersByAnnouncement(acceptedOrder.getAnnouncement());
-        Iterator<Order> iterator = orders.iterator();
-        while (iterator.hasNext()) {
-            Order order = iterator.next();
-            if (!order.equals(acceptedOrder)) {
-                order.setStatus(Status.DECLINED);
-                iterator.remove();
-                String clientEmail = order.getEmail();
-                String message = "Your offer for the property with the order number " + order.getOrderID() +
-                        " has been declined. We apologize for any inconvenience caused.";
-                emailService.sendMessage(clientEmail, message);
-            }
-        }
+    public void acceptOrder(Order order){
+        orderRepository.acceptOrder(order);
+        orderRepository.removeAllOrdersByAnnouncement(order.getAnnouncement());
+        announcementRepository.removeAnnouncement(order.getAnnouncement());
+    }
+
+    /**
+     * Method that shows the email of the logged user
+     * @return email of the logged user
+     */
+    public String getUser(){
+        return authenticationRepository.getCurrentUserSession().getUserId().getEmail();
+    }
+    public void removeOrder(Order order){
+        orderRepository.removeOrder(order);
     }
 }

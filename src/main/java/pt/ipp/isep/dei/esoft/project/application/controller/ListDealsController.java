@@ -39,24 +39,9 @@ public class ListDealsController {
      * This method returns a list of the all the accepted orders(deals) on the system
      * @return list of accepted orders
      */
-    public List<Order> dealsList(List<Order> orders){
-        List<Order> dealsMade = new ArrayList<>();
-        for (Order order: orders) {
-            if(order.getStatus().equals(Status.ACCEPTED)){
-                dealsMade.add(order);
-            }
-        }
-        return dealsMade;
+    public List<Order> dealsList(){
+        return orderRepository.getAcceptedOrders();
     }
-
-    /**
-     * Method that returns a list of all the orders
-     * @return list of orders
-     */
-    public List<Order> getAllOrders(){
-        return orderRepository.getOrders();
-    }
-
     /**
      * Method that sorts the deals by the selected sorting method and order
      * @param dealsList list of deals

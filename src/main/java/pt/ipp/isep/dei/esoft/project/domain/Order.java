@@ -41,6 +41,18 @@ public class Order implements Serializable {
     }
 
     /**
+     * Method that creates a new instance of an accepted order
+     * @param announcement selected announcement
+     * @param orderPrice amount offered by the client
+     */
+    public Order(Announcement announcement, double orderPrice){
+        this.announcement = announcement;
+        this.orderPrice = orderPrice;
+        this.status = Status.ACCEPTED;
+        this.orderID = orderCounter++;
+    }
+
+    /**
      * Method that creates a new instance of order
      * @param announcement selected announcement
      * @param clientEmail client email

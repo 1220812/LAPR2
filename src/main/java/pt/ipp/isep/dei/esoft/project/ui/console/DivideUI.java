@@ -10,14 +10,8 @@ public class DivideUI implements Runnable{
     private final DivideController controller = new DivideController();
 
     public void run(){
-        int numberOfStores;
-        numberOfStores = Utils.readIntegerFromConsole("Please insert the number of stores you want to consider for the study: ");
-        while (numberOfStores <= 0 || numberOfStores > controller.getStores().size()) {
-            System.out.println("Invalid number of stores!");
-            numberOfStores = Utils.readIntegerFromConsole("Please insert the number of stores you want to consider for the study: ");
-        }
         showsNumberOfPropertiesByStore();
-        controller.divideStores(numberOfStores);
+        controller.divideStores();
     }
     public void showsNumberOfPropertiesByStore() {
         List<Store> storesList = controller.getStores();

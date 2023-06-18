@@ -23,11 +23,9 @@ public class DivideController implements Serializable {
 
     /**
      * Method that divides the stores into the number of stores given by the user.
-     *
-     * @param numberOfStores number of stores given by the user.
      */
-    public void divideStores(int numberOfStores) {
-        bruteForce.storesDivisor(storeRepository.getStoreList(), numberOfStores);
+    public void divideStores() {
+        bruteForce.storesDivisor(storeRepository.getStoreList());
     }
 
     public int getNumberOfProperties(int storeID) {

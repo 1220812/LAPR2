@@ -60,7 +60,7 @@ public class OrderDecisionUI implements Runnable{
         } else if(order.getStatus() == Status.DECLINED){
             System.out.println("This order has already been declined");
         } else{
-            controller.declinePurchaseOrder(order);
+            controller.removeOrder(order);
             System.out.println("Order declined!");
         }
     }
@@ -70,8 +70,9 @@ public class OrderDecisionUI implements Runnable{
         } else if(order.getStatus() == Status.ACCEPTED){
             System.out.println("This order has already been accepted");
         } else{
-            controller.acceptPurchaseOrder(order);
+            controller.acceptOrder(order);
             System.out.println("Order accepted!");
         }
     }
+
 }

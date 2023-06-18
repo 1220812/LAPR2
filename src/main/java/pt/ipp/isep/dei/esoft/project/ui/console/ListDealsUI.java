@@ -11,11 +11,9 @@ public class ListDealsUI implements Runnable{
     public void run(){
         int sortingMethod = sortingMethodSelection();
         int sortingOrder = sortingOrderSelection();
-        List<Order> orders;
         List<Order> dealsMade;
         List<Order> dealsMadeSorted;
-        orders = controller.getAllOrders();
-        dealsMade = controller.dealsList(orders);
+        dealsMade = controller.dealsList();
         if(dealsMade.isEmpty()){
             System.out.println("There are no deals made yet!");
         }else{

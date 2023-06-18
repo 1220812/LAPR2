@@ -287,13 +287,13 @@ public class Bootstrap implements Runnable {
         order4.setStatus(Status.ACCEPTED);
         order5.setStatus(Status.ACCEPTED);
         order6.setStatus(Status.ACCEPTED);
-        orderRepository.add(order1);
-        orderRepository.add(order2);
-        orderRepository.add(order3);
-        orderRepository.add(order);
-        orderRepository.add(order4);
-        orderRepository.add(order5);
-        orderRepository.add(order6);
+        orderRepository.addOrder(order1);
+        orderRepository.addOrder(order2);
+        orderRepository.addOrder(order3);
+        orderRepository.addOrder(order);
+        orderRepository.addOrder(order4);
+        orderRepository.addOrder(order5);
+        orderRepository.addOrder(order6);
     }
 
     private void addMessage() {

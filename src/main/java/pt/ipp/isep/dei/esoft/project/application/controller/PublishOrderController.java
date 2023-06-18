@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.CurrentSession;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
+import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrderRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -13,16 +14,18 @@ public class PublishOrderController {
     AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
     OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
 
+    AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
+
+
     /**
-     * used to rgister the order
-     *
-     * @param announcement the announcement which the order regards to
-     * @param orderPrice the ammount offered
+     * used to register the order
+     * @param order the order to be registered
      */
-    public void registerOrder(Announcement announcement, double orderPrice){
-        String email = CurrentSession.getEmail();
-        Order order = new Order(announcement,orderPrice,email);
-        OrderRepository.addNewOrder(order);
+    public Order registerOrder(Order order){
+        return orderRepository.addOrder(order);
+    }
+    public Order createOrder(Announcement announcement, double orderPrice){
+        return new Order(announcement,orderPrice,CurrentSession.getEmail());
     }
     /**
      * used to get the announcements
@@ -43,7 +46,6 @@ public class PublishOrderController {
     public boolean validateOrder(Announcement announcement, double orderPrice){
         return Repositories.getInstance().getOrderRepository().validateOrder(announcement,orderPrice);
     }
-
     /**
      * used for checking if the order ammount is within the price limits
      *
@@ -63,5 +65,16 @@ public class PublishOrderController {
      */
     public boolean checkIfOrderIsPending(Announcement announcement){
         return orderRepository.checkForPendingOrder(announcement);
+    }
+
+    /**
+     * Method to show the user email
+     * @return the user email
+     */
+    public String getUser(){
+        return authenticationRepository.getCurrentUserSession().getUserId().getEmail();
+    }
+    public List<Order> orders(){
+        return orderRepository.getRequestedOrders();
     }
 }
