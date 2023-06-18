@@ -8,9 +8,9 @@ import java.util.List;
 
 public class OrderRepository implements Serializable {
 
-    private static List<Order> orders = new ArrayList<>();
+    private static List<Order> declinedOrders = new ArrayList<>();
     private static List<Order> acceptedOrders = new ArrayList<>();
-    private static List<Order> requestedOrders = new ArrayList<>();
+    private static List<Order> orders = new ArrayList<>();
 
     /**
      * Method that adds an order to the list
@@ -108,12 +108,12 @@ public class OrderRepository implements Serializable {
     }
 
     /**
-     * Method that returns a list of requested orders
+     * Method that returns a list of declined orders
      *
-     * @return list of requested orders
+     * @return list of declined orders
      */
-    public List<Order> getRequestedOrders() {
-        return new ArrayList<>(requestedOrders);
+    public List<Order> getDeclinedOrders() {
+        return new ArrayList<>(declinedOrders);
     }
 
     /**
@@ -140,8 +140,9 @@ public class OrderRepository implements Serializable {
      * @throws CloneNotSupportedException exception
      */
     public Order addOrder(Order order) {
-        orders.add(order);
-        requestedOrders.add(order);
+        if(valid(order)){
+            orders.add(order);
+        }
         return order;
     }
 
@@ -163,7 +164,7 @@ public class OrderRepository implements Serializable {
      * @return requested order
      */
     public Order getRequestedOrder(String clientEmail, int ID) {
-        for (Order order : requestedOrders) {
+        for (Order order : orders) {
             if (order.getEmail().equals(clientEmail) && order.getOrderID() == ID) {
                 return order;
             }
@@ -179,6 +180,7 @@ public class OrderRepository implements Serializable {
     public void acceptOrder(Order order) {
         order.setStatus(Status.ACCEPTED);
         acceptedOrders.add(order);
+        orders.remove(order);
     }
 
     /**
@@ -186,10 +188,9 @@ public class OrderRepository implements Serializable {
      * @param announcement announcement to be ordered
      */
     public void removeAllOrdersByAnnouncement(Announcement announcement) {
-        for (int i = 0; i < requestedOrders.size(); i++) {
-            if (requestedOrders.get(i).getAnnouncement().equals(announcement)) {
-                requestedOrders.get(i).setStatus(Status.DECLINED);
-                requestedOrders.remove(i);
+        for (int i = 0; i < orders.size(); i++) {
+            if (orders.get(i).getAnnouncement().equals(announcement)) {
+                removeOrder(orders.get(i));
             }
         }
     }
@@ -200,6 +201,7 @@ public class OrderRepository implements Serializable {
      */
     public void removeOrder(Order order) {
         order.setStatus(Status.DECLINED);
-        requestedOrders.remove(order);
+        orders.remove(order);
+        declinedOrders.add(order);
     }
 }

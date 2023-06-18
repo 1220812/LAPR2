@@ -14,11 +14,11 @@ public class BruteForce implements Serializable {
      * This method divides the list of stores in two different subsets and finds the minimum difference between both
      *
      * @param storesList the list of stores
+     * @param n          the number of stores in each subset
      */
-    public void storesDivisor(List<Store> storesList) {
+    public void storesDivisor(List<Store> storesList, int n) {
         int totalSubset1 = 0, totalSubset2 = 0, difference, minDifference, subsetSize;
         int sumOfAnnouncements = 0;
-        int n = storesList.size();
         List<Store> subset1 = new ArrayList<>();
         List<Store> subset2 = new ArrayList<>();
         long startingTime, endingTime;

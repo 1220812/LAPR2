@@ -75,6 +75,6 @@ public class PublishOrderController {
         return authenticationRepository.getCurrentUserSession().getUserId().getEmail();
     }
     public List<Order> orders(){
-        return orderRepository.getRequestedOrders();
+        return orderRepository.getOrders();
     }
 }

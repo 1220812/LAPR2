@@ -192,7 +192,7 @@ public class Bootstrap implements Runnable {
         Agency agency1 = new Agency(1, "agency1", address1, "agency1@this.app", "123456789");
         Agency agency2 = new Agency(2, "agency2", address2, "agency2@this.app", "987654321");
         Agent agent1 = new Agent("Joao", "joao@gmail.com", "918734521", passportCardNumber1, taxNumber1, address1, new Role("Agent"), agency1, store1, "joao");
-        Agent agent2 = new Agent("Pedro", "pedro@gmail.com", "915734521", passportCardNumber2, taxNumber2, address2, new Role("Agent"), agency2, store2, "pedro");
+        Agent agent2 = new Agent("agent", "agent@this.app", "915734521", passportCardNumber2, taxNumber2, address2, new Role("Agent"), agency2, store2, "pedro");
         Owner owner1 = new Owner("Maria", "912345678", "maria@gmail.com", address1, taxNumber1, passportCardNumber1);
         Owner owner2 = new Owner("Madalena", "912945678", "madalena@gmail.com", address2, taxNumber2, passportCardNumber2);
         Owner owner3 = new Owner("Manuel", "912545698", "manuel@gmail.com", address2, taxNumber, passportCardNumber3);
@@ -267,7 +267,7 @@ public class Bootstrap implements Runnable {
         Agency agency1 = new Agency(1, "agency1", address1, "agency1@this.app", "123456789");
         Agency agency2 = new Agency(2, "agency2", address2, "agency2@this.app", "987654321");
         Agent agent1 = new Agent("Joao", "joao@gmail.com", "918734521", passportCardNumber1, taxNumber1, address1, new Role("Agent"), agency1, store1, "joao");
-        Agent agent2 = new Agent("Pedro", "pedro@gmail.com", "915734521", passportCardNumber2, taxNumber2, address2, new Role("Agent"), agency2, store2, "pedro");
+        Agent agent2 = new Agent("agent", "agent@this.app", "915734521", passportCardNumber2, taxNumber2, address2, new Role("Agent"), agency2, store2, "pedro");
         Owner owner1 = new Owner("Maria", "912345678", "maria@gmail.com", address1, taxNumber1, passportCardNumber1);
         Owner owner2 = new Owner("Madalena", "912945678", "madalena@gmail.com", address2, taxNumber2, passportCardNumber2);
         Owner owner3 = new Owner("Manuel", "912545698", "manuel@gmail.com", address2, taxNumber, passportCardNumber3);

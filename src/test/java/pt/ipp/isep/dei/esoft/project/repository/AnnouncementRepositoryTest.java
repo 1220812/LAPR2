@@ -47,10 +47,10 @@ class AnnouncementRepositoryTest {
         LocalDate date = LocalDate.of(2020, 1, 1);
         Property property = new Property(100, 1000, address, propertyType, 200000, date);
         Announcement announcement = new Announcement(property, date, 5, requestType, 100000, new Owner("John", "912345678", "john@test.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), new Store("Store", 1));
-        boolean valid = AnnouncementRepository.validateAnnouncement(announcement);
+        boolean valid = announcementRepository.validateAnnouncement(announcement);
         assertTrue(valid);
         announcementRepository.addAnnouncement(announcement);
-        boolean valid1 = AnnouncementRepository.validateAnnouncement(announcement);
+        boolean valid1 = announcementRepository.validateAnnouncement(announcement);
         assertFalse(valid1);
     }
 

@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
+import pt.ipp.isep.dei.esoft.project.domain.Request;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +11,8 @@ import java.util.Optional;
 
 public class AnnouncementRepository implements Serializable {
     private static final long serialVersionUID = 1513917858611164050L;
-    private static List<Announcement> announcementsList = new ArrayList<>();
+    List<Announcement> announcementsList = new ArrayList<>();
+    List<Announcement> finishedAnnouncementsList = new ArrayList<>();
 
     public List<Announcement> add(Announcement announcement) throws CloneNotSupportedException {
 
@@ -32,16 +35,16 @@ public class AnnouncementRepository implements Serializable {
         return announcementsList;
     }
 
-    public static boolean validateAnnouncement(Announcement announcement) {
+    public boolean validateAnnouncement(Announcement announcement) {
         boolean isValid = !announcementsList.contains(announcement);
         return isValid;
     }
 
     public  List<Announcement> getAnnouncementsList(){
-        return List.copyOf(this.announcementsList);
+        return List.copyOf(announcementsList);
     }
 
-    public static Announcement addAnnouncement(Announcement announcement){
+    public Announcement addAnnouncement(Announcement announcement){
         if(validateAnnouncement(announcement))
             announcementsList.add(announcement);
         return announcement;
@@ -63,5 +66,19 @@ public class AnnouncementRepository implements Serializable {
     }
     public void removeAnnouncement(Announcement announcement){
         announcementsList.remove(announcement);
+    }
+    public Announcement addFinishedAnnouncement(Announcement announcement){
+        if(validateAnnouncement(announcement))
+            finishedAnnouncementsList.add(announcement);
+        return announcement;
+    }
+    public List<Announcement> getAnnouncementAssignedList(Agent agent) {
+        List<Announcement> assignedList = new ArrayList<>();
+        for (Announcement announcement : this.announcementsList) {
+            if (announcement.getAgent().getEmailAddress().equalsIgnoreCase(agent.getEmailAddress())) {
+                assignedList.add(announcement);
+            }
+        }
+        return assignedList;
     }
 }

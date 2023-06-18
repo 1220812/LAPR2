@@ -190,7 +190,7 @@ public class RegisterAnnouncementController {
      * @return the announcement
      */
     public Announcement registerAnnouncement(Announcement announcement){
-        return AnnouncementRepository.addAnnouncement(announcement);
+        return this.repositories.getAnnouncementRepository.addAnnouncement(announcement);
     }
 
     /**

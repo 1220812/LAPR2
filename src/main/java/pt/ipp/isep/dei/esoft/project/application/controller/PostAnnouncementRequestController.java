@@ -83,6 +83,6 @@ public class PostAnnouncementRequestController {
      * @param announcement the announcement
      * @return the announcement
      */
-    public Announcement registerAnnouncement(Announcement announcement){
-        return AnnouncementRepository.addAnnouncement(announcement);
+    public void registerAnnouncement(Announcement announcement){
+        this.repositories.getAnnouncementRepository.addAnnouncement(announcement);
     }}
