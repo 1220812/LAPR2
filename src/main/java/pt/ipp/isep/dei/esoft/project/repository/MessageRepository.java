@@ -165,6 +165,12 @@ public class MessageRepository implements Serializable {
         return finalList;
     }
 
+    /**
+     * Gets request completed list.
+     *
+     * @param client the client
+     * @return the request completed list
+     */
     public List<Message> getRequestCompletedList(Client client) {
         List<Message> assignedCompletedList = new ArrayList<>();
         for (Message message : this.MessageCompleteList) {
@@ -175,6 +181,11 @@ public class MessageRepository implements Serializable {
         return assignedCompletedList;
     }
 
+    /**
+     * Gets message complete list.
+     *
+     * @return the message complete list
+     */
     public List<Message> getMessageCompleteList() {
         return MessageCompleteList;
     }

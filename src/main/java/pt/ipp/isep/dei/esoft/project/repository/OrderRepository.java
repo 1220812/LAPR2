@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Order repository.
+ */
 public class OrderRepository implements Serializable {
 
     private static List<Order> declinedOrders = new ArrayList<>();
@@ -17,7 +20,6 @@ public class OrderRepository implements Serializable {
      *
      * @param order order to be added
      */
-
     public static void addNewOrder(Order order) {
         if (valid(order)) {
             orders.add(order);
@@ -60,7 +62,6 @@ public class OrderRepository implements Serializable {
      * @param orderPrice   price of the order
      * @return true if the order price is within the limits, false if not
      */
-
     public boolean orderPriceLimits(Announcement announcement, double orderPrice) {
         if (orderPrice > announcement.getPrice() || orderPrice <= 0) {
             return false;
@@ -74,7 +75,6 @@ public class OrderRepository implements Serializable {
      * @param announcement announcement to be ordered
      * @return true if the client has no pending order on the same announcement, false if not
      */
-
     public boolean checkForPendingOrder(Announcement announcement) {
         String email = CurrentSession.getEmail();
         for (Order order : orders) {
@@ -148,7 +148,9 @@ public class OrderRepository implements Serializable {
 
     /**
      * Method to add an accepted order to the list of the accepted orders
+     *
      * @param order order to be added
+     * @return the order
      */
     public Order addAcceptedOrder(Order order) {
         order.setStatus(Status.ACCEPTED);
@@ -185,6 +187,7 @@ public class OrderRepository implements Serializable {
 
     /**
      * Method to decline the orders by announcement except the one who was accepted
+     *
      * @param announcement announcement to be ordered
      */
     public void removeAllOrdersByAnnouncement(Announcement announcement) {
@@ -197,6 +200,7 @@ public class OrderRepository implements Serializable {
 
     /**
      * Method to remove an order from the list of requested orders
+     *
      * @param order order to be removed
      */
     public void removeOrder(Order order) {
