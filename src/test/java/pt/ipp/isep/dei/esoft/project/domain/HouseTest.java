@@ -17,7 +17,7 @@ class HouseTest {
         PropertyType propertyType = new PropertyType("House");
         List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
 
-        House house = new House(address,100.0, 5.0, propertyType, 3, 3, 1, true,new SunExposure("North"), false,photographsList, availableEquipmentList);
+        House house = new House(address,100.0, 5.0, propertyType, 3, 3, 1, true,new SunExposure("North"), true,photographsList, availableEquipmentList);
 
         Assertions.assertEquals(address, house.getAddress());
         Assertions.assertEquals(100.0, house.getArea());
@@ -57,7 +57,7 @@ class HouseTest {
         List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
 
         House residence1 = new House(address,100.0, 5.0, propertyType, 3, 3, 1, true,new SunExposure("North"), false,photographsList, availableEquipmentList);
-        House residence2 = new House(address,100.0, 5.0, propertyType, 3, 3, 1, true,new SunExposure("North"), false,photographsList, availableEquipmentList);
+        House residence2 = new House(address,100.0, 5.0, propertyType, 3, 2, 1, true,new SunExposure("North"), false,photographsList, availableEquipmentList);
         House residence3 = new House(address,100.0, 5.0, propertyType, 3, 3, 1, true,new SunExposure("North"), false,photographsList, availableEquipmentList);
 
         Assertions.assertEquals(residence1, residence3);
