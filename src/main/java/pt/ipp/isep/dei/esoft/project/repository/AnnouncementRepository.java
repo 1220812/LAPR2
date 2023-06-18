@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
+import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
 
 import java.io.Serializable;
@@ -40,8 +41,9 @@ public class AnnouncementRepository implements Serializable {
         return isValid;
     }
 
-    public  List<Announcement> getAnnouncementsList(){
-        return List.copyOf(announcementsList);
+
+    public List<Announcement> getAnnouncementsList() {
+        return announcementsList;
     }
 
     public Announcement addAnnouncement(Announcement announcement){
@@ -81,4 +83,10 @@ public class AnnouncementRepository implements Serializable {
         }
         return assignedList;
     }
+
+    public List<Announcement> getFinishedAnnouncementsList() {
+        return finishedAnnouncementsList;
+    }
+
+
 }

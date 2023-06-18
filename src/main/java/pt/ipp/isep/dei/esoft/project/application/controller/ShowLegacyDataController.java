@@ -21,4 +21,14 @@ public class ShowLegacyDataController {
   public void importInformationFromFile(String path) throws IOException, CloneNotSupportedException {
     fileInformation.importFile(path);
   }
+
+  public void clearData() {
+    Repositories repositories = Repositories.getInstance();
+    repositories.getAnnouncementRepository().getAnnouncementsList().clear();
+    repositories.getAnnouncementRepository().getFinishedAnnouncementsList().clear();
+    repositories.getStoreRepository().getStoreList().clear();
+    repositories.getOrderRepository().getOrders().clear();
+    repositories.getOrderRepository().getAcceptedOrders().clear();
+    repositories.getOrderRepository().getDeclinedOrders().clear();
+  }
 }
