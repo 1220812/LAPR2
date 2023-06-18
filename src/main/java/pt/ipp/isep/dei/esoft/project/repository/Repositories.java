@@ -69,8 +69,12 @@ public class Repositories implements Serializable{
      * The Get announcement repository.
      */
     public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
-    public transient BookingRequestsRepository bookingRequestsRepository = new BookingRequestsRepository();
+
     public BookingRequestsFeedbackRepository bookingRequestsFeedbackRepository = new BookingRequestsFeedbackRepository();
+
+    private final ReplyRepository replyRepository = new ReplyRepository();
+
+
 
     private Repositories() {
     }
@@ -276,12 +280,12 @@ public class Repositories implements Serializable{
         return orderRepository;
     }
 
-    public BookingRequestsRepository getBookingRequestsRepository() {
-        return bookingRequestsRepository;
-    }
-
     public BookingRequestsFeedbackRepository getBookingRequestsFeedbackRepository() {
         return bookingRequestsFeedbackRepository;
+    }
+
+    public ReplyRepository getReplyRepository() {
+        return replyRepository;
     }
 }
 

@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Client;
 import pt.ipp.isep.dei.esoft.project.domain.Client;
 import pt.ipp.isep.dei.esoft.project.domain.Request;
+import pt.isep.lei.esoft.auth.UserSession;
+import pt.isep.lei.esoft.auth.domain.model.Email;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,5 +72,13 @@ public class ClientRepository implements Serializable {
             }
         }
         return null;
+    }
+
+    public Client getClientByUserSession(UserSession userSession) {
+        return this.clientList.
+                stream()
+                .filter((client) -> new Email(client.getEmailAddress()).equals(userSession.getUserId()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No Client is logged in."));
     }
 }
