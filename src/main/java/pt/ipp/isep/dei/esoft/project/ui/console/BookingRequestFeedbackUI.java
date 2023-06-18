@@ -13,10 +13,18 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Booking request feedback ui.
+ */
 public class BookingRequestFeedbackUI implements Runnable{
 
     private BookingRequestFeedbackController controller;
 
+    /**
+     * Instantiates a new Booking request feedback ui.
+     *
+     * @param controller the controller
+     */
     public BookingRequestFeedbackUI(BookingRequestFeedbackController controller) {
         this.controller = controller;
     }

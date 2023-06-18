@@ -8,8 +8,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Post announcement request ui.
+ */
 public class PostAnnouncementRequestUI implements Runnable{
 
+    /**
+     * The Request.
+     */
     Request request;
     private final PostAnnouncementRequestController controller = new PostAnnouncementRequestController();
 

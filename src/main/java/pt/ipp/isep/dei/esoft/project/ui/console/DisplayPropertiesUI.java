@@ -11,11 +11,17 @@ import java.util.Collections;
 import java.util.List;
 
 
+/**
+ * The type Display properties ui.
+ */
 public class DisplayPropertiesUI implements Runnable{
 
     private final DisplayPropertiesController dpController = new DisplayPropertiesController();
 //    private final AnnouncementRepository aRepository = new AnnouncementRepository();
 
+    /**
+     * The Announcement repository.
+     */
     AnnouncementRepository announcementRepository = dpController.getAnnouncementRepository();
     @Override
     public void run() {

@@ -15,6 +15,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Respond booking request ui.
+ */
 public class RespondBookingRequestUI implements Runnable {
 
     private RespondBookingRequestController controller= new RespondBookingRequestController();

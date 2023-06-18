@@ -11,18 +11,46 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.RequestRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+
+/**
+ * The type Create request ui.
+ */
 public class CreateRequestUI implements Runnable {
+    /**
+     * The Controller.
+     */
     CreateRequestController controller = new CreateRequestController();
 
+    /**
+     * The Area.
+     */
     double area = 0;
+    /**
+     * The Distance from city center.
+     */
     double distanceFromCityCenter = 0;
+    /**
+     * The Price.
+     */
     double price = 0;
+    /**
+     * The Number of bathrooms.
+     */
     int numberOfBathrooms = 0;
 
+    /**
+     * The Number of bedrooms.
+     */
     int numberOfBedrooms = 0;
 
+    /**
+     * The Number of parking spaces.
+     */
     int numberOfParkingSpaces = 0;
 
+    /**
+     * The Number of photos.
+     */
     int numberOfPhotos = 0;
 
     private Boolean inhabitableLoft;
@@ -43,11 +71,17 @@ public class CreateRequestUI implements Runnable {
     private String zipCode;
     private  Property property;
     private Address address;
+    /**
+     * The Request date.
+     */
     public LocalDate requestDate = LocalDate.now();
     private Owner owner;
     private int doorNumber;
     private int floorNumber;
     private RequestType requestType;
+    /**
+     * The Available equipment list.
+     */
     List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
     private RequestRepository requestRepository = Repositories.getInstance().getRequestRepository();
 

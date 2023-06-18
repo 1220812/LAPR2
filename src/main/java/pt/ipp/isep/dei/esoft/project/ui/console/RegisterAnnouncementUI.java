@@ -13,6 +13,9 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Photographs;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+/**
+ * The type Register announcement ui.
+ */
 public class RegisterAnnouncementUI implements Runnable {
 
     private final RegisterAnnouncementController controller = new RegisterAnnouncementController();
@@ -51,6 +54,9 @@ public class RegisterAnnouncementUI implements Runnable {
     private double commission;
     private final String DEFAULT_REQUESTTYPE = "Sell";
     private final double DEFAULT_CONTRACTDURATION = 0;
+    /**
+     * The Available equipment list.
+     */
     List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
 
     private PropertyType propertyType;

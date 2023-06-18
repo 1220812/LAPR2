@@ -6,26 +6,77 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+/**
+ * The type Register employee ui.
+ */
 public class RegisterEmployeeUI implements Runnable {
 
+    /**
+     * The Name.
+     */
     String name = null;
+    /**
+     * The Address.
+     */
     Address address = null;
+    /**
+     * The Phone.
+     */
     String phone = null;
+    /**
+     * The Email.
+     */
     String email = null;
+    /**
+     * The Passport card number.
+     */
     PassportCardNumber passportCardNumber = null;
+    /**
+     * The Zip code.
+     */
     int zipCode = 0;
+    /**
+     * The City.
+     */
     City city = null;
 
+    /**
+     * The Tax number.
+     */
     TaxNumber taxNumber = null;
+    /**
+     * The Pass.
+     */
     String pass = null;
+    /**
+     * The District.
+     */
     District district = null;
+    /**
+     * The Street.
+     */
     String street = null;
+    /**
+     * The State.
+     */
     State state = null;
+    /**
+     * The Role.
+     */
     Role role = null;
+    /**
+     * The Store.
+     */
     Store store = null;
+    /**
+     * The Agency.
+     */
     Agency agency = null;
 
 
+    /**
+     * The Controller.
+     */
     RegisterEmployeeController controller = new RegisterEmployeeController();
 
 
