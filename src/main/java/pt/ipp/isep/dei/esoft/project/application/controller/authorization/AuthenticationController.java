@@ -38,6 +38,9 @@ public class AuthenticationController {
      * The constant ROLE_NETWORK_MANAGER.
      */
     public static final String ROLE_NETWORK_MANAGER ="NETWORK MANAGER" ;
+
+    public static final String ROLE_STORE_MANAGER ="STORE MANAGER" ;
+
     //private final ApplicationSession applicationSession;
     private final AuthenticationRepository authenticationRepository;
 

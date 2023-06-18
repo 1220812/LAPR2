@@ -208,4 +208,17 @@ public class OrderRepository implements Serializable {
         orders.remove(order);
         declinedOrders.add(order);
     }
+
+    public List<Order> getOrderAcceptedListHousesAndApparts(){
+        List<Order> list = new ArrayList<>();
+        PropertyType house = new PropertyType("House");
+        PropertyType apartment = new PropertyType("Apartment");
+        for (Order order : acceptedOrders) {
+            PropertyType propertyType = order.getAnnouncement().getProperty().getPropertyType();
+            if (propertyType.equals(house) || propertyType.equals(apartment)) {
+                list.add(order);
+            }
+        }
+        return list;
+    }
 }

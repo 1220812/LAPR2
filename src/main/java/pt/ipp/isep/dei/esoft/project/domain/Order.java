@@ -203,4 +203,6 @@ public class Order implements Serializable {
                 ", orderPrice = " + orderPrice +
                 ", property area = " + announcement.getProperty().getArea();
     }
+
+
 }
