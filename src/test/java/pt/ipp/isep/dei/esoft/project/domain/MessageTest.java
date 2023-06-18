@@ -7,8 +7,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Message test.
+ */
 public class MessageTest {
 
+    /**
+     * Test check if valid visit no overlap returns false.
+     */
     @Test
     public void testCheckIfValidVisit_NoOverlap_ReturnsFalse() {
         LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
@@ -25,6 +31,9 @@ public class MessageTest {
         Assertions.assertFalse(result);
     }
 
+    /**
+     * Test check if valid visit overlap returns true.
+     */
     @Test
     public void testCheckIfValidVisit_Overlap_ReturnsTrue() {
         LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
@@ -41,6 +50,9 @@ public class MessageTest {
         Assertions.assertTrue(result);
     }
 
+    /**
+     * Test check if valid visit overlap with multiple visits returns true.
+     */
     @Test
     public void testCheckIfValidVisit_OverlapWithMultipleVisits_ReturnsTrue() {
         LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
@@ -61,6 +73,9 @@ public class MessageTest {
         Assertions.assertTrue(result);
     }
 
+    /**
+     * Test check if valid visit no visits returns false.
+     */
     @Test
     public void testCheckIfValidVisit_NoVisits_ReturnsFalse() {
         LocalDateTime startTime = LocalDateTime.of(2023, 6, 9, 10, 0);
@@ -73,6 +88,9 @@ public class MessageTest {
         Assertions.assertFalse(result);
     }
 
+    /**
+     * Test check if valid visit existing visits with same time returns true.
+     */
     @Test
     public void testCheckIfValidVisit_ExistingVisitsWithSameTime_ReturnsTrue() {
         LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);
@@ -89,6 +107,9 @@ public class MessageTest {
         Assertions.assertTrue(result);
     }
 
+    /**
+     * Test check if valid visit existing visits with different times returns false.
+     */
     @Test
     public void testCheckIfValidVisit_ExistingVisitsWithDifferentTimes_ReturnsFalse() {
         LocalDateTime startTime1 = LocalDateTime.of(2023, 6, 9, 10, 0);

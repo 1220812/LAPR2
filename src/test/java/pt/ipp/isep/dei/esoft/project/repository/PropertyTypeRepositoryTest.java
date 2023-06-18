@@ -7,8 +7,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Property type repository test.
+ */
 class PropertyTypeRepositoryTest {
 
+    /**
+     * Validate property type.
+     */
     @Test
     void validatePropertyType() {
         PropertyTypeRepository repo = new PropertyTypeRepository();
@@ -17,6 +23,9 @@ class PropertyTypeRepositoryTest {
         assertTrue(result);
     }
 
+    /**
+     * Gets property type.
+     */
     @Test
     void getPropertyType() {
         PropertyTypeRepository repo = new PropertyTypeRepository();

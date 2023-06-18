@@ -7,8 +7,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Owner repository test.
+ */
 class OwnerRepositoryTest {
 
+    /**
+     * Add owner.
+     */
     @Test
     void addOwner() {
         OwnerRepository ownerRepository = new OwnerRepository();
@@ -17,6 +23,9 @@ class OwnerRepositoryTest {
         assertTrue(ownerRepository.getOwnerList().contains(owner));
     }
 
+    /**
+     * Gets owner list.
+     */
     @Test
     void getOwnerList() {
         OwnerRepository ownerRepository = new OwnerRepository();
@@ -26,6 +35,11 @@ class OwnerRepositoryTest {
         assertTrue(owners.contains(owner));
     }
 
+    /**
+     * Add.
+     *
+     * @throws CloneNotSupportedException the clone not supported exception
+     */
     @Test
     void add() throws CloneNotSupportedException {
         OwnerRepository ownerRepository = new OwnerRepository();

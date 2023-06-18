@@ -4,28 +4,43 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Available equipment test.
+ */
 class AvailableEquipmentTest {
 
-        @Test
+    /**
+     * Test get equipment.
+     */
+    @Test
         public void testGetEquipment() {
             AvailableEquipment equipment = new AvailableEquipment("Pool");
             assertEquals("Pool", equipment.getEquipment());
         }
 
-        @Test
+    /**
+     * Test set equipment.
+     */
+    @Test
         public void testSetEquipment() {
             AvailableEquipment equipment = new AvailableEquipment("Pool");
             equipment.setEquipment("Oven");
             assertEquals("Oven", equipment.getEquipment());
         }
 
-        @Test
+    /**
+     * Test to string.
+     */
+    @Test
         public void testToString() {
             AvailableEquipment equipment = new AvailableEquipment("Microwave");
             assertEquals("Microwave", equipment.toString());
         }
 
-        @Test
+    /**
+     * Test equals.
+     */
+    @Test
         public void testEquals() {
             AvailableEquipment equipment1 = new AvailableEquipment("Microwave");
             AvailableEquipment equipment2 = new AvailableEquipment("Microwave");
@@ -35,7 +50,10 @@ class AvailableEquipmentTest {
             assertFalse(equipment1.equals(equipment3));
         }
 
-        @Test
+    /**
+     * Test clone.
+     */
+    @Test
         public void testClone() {
             AvailableEquipment equipment1 = new AvailableEquipment("Fridge");
             AvailableEquipment equipment2 = equipment1.clone();

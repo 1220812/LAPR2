@@ -8,8 +8,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type House test.
+ */
 class HouseTest {
 
+    /**
+     * Test constructor and getters.
+     */
     @Test
     public void testConstructorAndGetters() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -30,6 +36,9 @@ class HouseTest {
         Assertions.assertEquals(true, house.basement());
     }
 
+    /**
+     * Test setters.
+     */
     @Test
     public void testSetters() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -49,6 +58,9 @@ class HouseTest {
 
     }
 
+    /**
+     * Test equals and hash code.
+     */
     @Test
     public void testEqualsAndHashCode() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));

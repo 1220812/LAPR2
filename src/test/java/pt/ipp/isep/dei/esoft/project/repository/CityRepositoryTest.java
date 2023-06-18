@@ -8,8 +8,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type City repository test.
+ */
 class CityRepositoryTest {
 
+    /**
+     * Validate city.
+     */
     @Test
     void validateCity() {
         CityRepository cityRepository = Repositories.getInstance().getCityRepository();
@@ -20,6 +26,9 @@ class CityRepositoryTest {
         assertTrue(cityRepository.validateCity(city));
     }
 
+    /**
+     * Gets city list.
+     */
     @Test
     void getCityList() {
         CityRepository cityRepository = Repositories.getInstance().getCityRepository();
@@ -30,6 +39,9 @@ class CityRepositoryTest {
         assertTrue(cities.contains(city));
     }
 
+    /**
+     * Create city.
+     */
     @Test
     void createCity() {
         CityRepository cityRepository = Repositories.getInstance().getCityRepository();

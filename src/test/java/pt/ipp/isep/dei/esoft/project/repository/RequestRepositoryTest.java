@@ -11,8 +11,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Request repository test.
+ */
 class RequestRepositoryTest {
 
+    /**
+     * Gets requests.
+     */
     @Test
     void getRequests() {
         RequestRepository requestRepository = new RequestRepository();
@@ -30,6 +36,9 @@ class RequestRepositoryTest {
         assertTrue(requests.contains(request));
     }
 
+    /**
+     * Add.
+     */
     @Test
     void add() {
         RequestRepository requestRepository = new RequestRepository();
@@ -46,6 +55,9 @@ class RequestRepositoryTest {
         assertTrue(result);
     }
 
+    /**
+     * Add request.
+     */
     @Test
     void addRequest() {
         RequestRepository requestRepository = new RequestRepository();
@@ -62,6 +74,9 @@ class RequestRepositoryTest {
         assertEquals(request, addRequest);
     }
 
+    /**
+     * Remove request.
+     */
     @Test
     void removeRequest() {
         RequestRepository requestRepository = new RequestRepository();
@@ -79,6 +94,11 @@ class RequestRepositoryTest {
         assertFalse(requests.contains(request));
     }
 
+    /**
+     * Gets request assigned list.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     void getRequestAssignedList() throws IOException {
         RequestRepository requestRepository = new RequestRepository();
@@ -88,6 +108,11 @@ class RequestRepositoryTest {
         assertEquals(requests.size(), sortedList.size());
     }
 
+    /**
+     * Gets requests sorted.
+     *
+     * @throws IOException the io exception
+     */
     @Test
     void getRequestsSorted() throws IOException {
         RequestRepository requestRepository = new RequestRepository();
@@ -97,6 +122,9 @@ class RequestRepositoryTest {
         assertEquals(requests.size(), requests1.size());
     }
 
+    /**
+     * Gets agent list.
+     */
     @Test
     void getAgentList() {
         RequestRepository requestRepository = new RequestRepository();

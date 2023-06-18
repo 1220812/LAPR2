@@ -4,13 +4,22 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Tax number test.
+ */
 class TaxNumberTest {
+    /**
+     * Test get tax number.
+     */
     @Test
     public void testGetTaxNumber() {
         TaxNumber taxNumber = new TaxNumber("123456789");
         assertEquals("123456789", taxNumber.getTaxNumber());
     }
 
+    /**
+     * Test set tax number.
+     */
     @Test
     public void testSetTaxNumber() {
         TaxNumber taxNumber = new TaxNumber("123456789");
@@ -18,6 +27,9 @@ class TaxNumberTest {
         assertEquals("987654321", taxNumber.getTaxNumber());
     }
 
+    /**
+     * Test equals.
+     */
     @Test
     public void testEquals() {
         TaxNumber taxNumber1 = new TaxNumber("123456789");
@@ -28,12 +40,18 @@ class TaxNumberTest {
         assertFalse(taxNumber1.equals(taxNumber3));
     }
 
+    /**
+     * Test to string.
+     */
     @Test
     public void testToString() {
         TaxNumber taxNumber = new TaxNumber("123456789");
         assertEquals("123456789", taxNumber.toString());
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     public void testClone() {
         TaxNumber taxNumber1 = new TaxNumber("123456789");

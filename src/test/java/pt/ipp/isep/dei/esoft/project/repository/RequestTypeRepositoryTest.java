@@ -8,8 +8,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Request type repository test.
+ */
 class RequestTypeRepositoryTest {
 
+    /**
+     * Gets request type list.
+     */
     @Test
     void getRequestTypeList() {
         RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
@@ -23,6 +29,9 @@ class RequestTypeRepositoryTest {
         assertTrue(requestTypes.contains(requestType1));
     }
 
+    /**
+     * Validate request type.
+     */
     @Test
     void validateRequestType() {
         RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
@@ -31,6 +40,9 @@ class RequestTypeRepositoryTest {
         assertTrue(isValid);
     }
 
+    /**
+     * Add.
+     */
     @Test
     void add() {
         RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
@@ -39,6 +51,9 @@ class RequestTypeRepositoryTest {
         assertTrue(addRequestType);
     }
 
+    /**
+     * Create rent request type.
+     */
     @Test
     void createRentRequestType() {
         RequestTypeRepository requestTypeRepository = new RequestTypeRepository();
@@ -49,6 +64,9 @@ class RequestTypeRepositoryTest {
         assertTrue(requestTypes.contains(requestType));
     }
 
+    /**
+     * Create sell request type.
+     */
     @Test
     void createSellRequestType() {
         RequestTypeRepository requestTypeRepository = new RequestTypeRepository();

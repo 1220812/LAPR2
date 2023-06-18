@@ -8,8 +8,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Request test.
+ */
 class RequestTest {
 
+    /**
+     * Gets request type.
+     */
     @Test
     void getRequestType() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -21,6 +27,9 @@ class RequestTest {
         assertEquals(new RequestType("Sell"), request.getRequestType());
     }
 
+    /**
+     * Sets request type.
+     */
     @Test
     void setRequestType() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -34,6 +43,9 @@ class RequestTest {
         assertEquals(new RequestType("Rent"), request.getRequestType());
     }
 
+    /**
+     * Gets agent.
+     */
     @Test
     void getAgent() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -45,6 +57,9 @@ class RequestTest {
         assertEquals(new Agent("Joao", "912345678", "joao@gmail.com", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), new Agency(1, "agency1", address, "agency1@gmail.com", "123456789"), store, "123456"), request.getAgent());
     }
 
+    /**
+     * Gets owner.
+     */
     @Test
     void getOwner() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -56,6 +71,9 @@ class RequestTest {
         assertEquals(new Owner("Maria", "987654321", "maria@gmail.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), request.getOwner());
     }
 
+    /**
+     * Gets request date.
+     */
     @Test
     void getRequestDate() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -67,6 +85,9 @@ class RequestTest {
         assertEquals(LocalDate.of(2021, 1, 1), request.getRequestDate());
     }
 
+    /**
+     * Gets property.
+     */
     @Test
     void getProperty() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -79,6 +100,9 @@ class RequestTest {
         assertEquals(property1, request.getProperty());
     }
 
+    /**
+     * Gets price.
+     */
     @Test
     void getPrice() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -90,6 +114,9 @@ class RequestTest {
         assertEquals(100000, request.getPrice());
     }
 
+    /**
+     * Sets owner.
+     */
     @Test
     void setOwner() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -103,6 +130,9 @@ class RequestTest {
         assertEquals(new Owner("Joao", "987654321", "maria@gmail.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), request.getOwner());
     }
 
+    /**
+     * Sets price.
+     */
     @Test
     void setPrice() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -116,6 +146,9 @@ class RequestTest {
         assertEquals(200000, request.getPrice());
     }
 
+    /**
+     * Sets agent.
+     */
     @Test
     void setAgent() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -129,6 +162,9 @@ class RequestTest {
         assertEquals(new Agent("Joao", "912445678", "joao@gmail.com", new PassportCardNumber("12345678"), new TaxNumber("123456789"), address, new Role("Agent"), new Agency(1, "agency1", address, "agency1@gmail.com", "123456789"), store, "123456"), request.getAgent());
     }
 
+    /**
+     * Sets property.
+     */
     @Test
     void setProperty() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -142,6 +178,9 @@ class RequestTest {
         assertEquals(property1, request.getProperty());
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     void testClone() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -154,6 +193,9 @@ class RequestTest {
         assertEquals(request1, request);
     }
 
+    /**
+     * Gets store.
+     */
     @Test
     void getStore() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -165,6 +207,9 @@ class RequestTest {
         assertEquals(new Store("Store1", 1), request.getStore());
     }
 
+    /**
+     * Sets store.
+     */
     @Test
     void setStore() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));

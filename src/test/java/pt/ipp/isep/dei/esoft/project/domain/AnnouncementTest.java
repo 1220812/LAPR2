@@ -8,8 +8,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Announcement test.
+ */
 class AnnouncementTest {
 
+    /**
+     * Gets date.
+     */
     @Test
     void getDate() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -21,6 +27,9 @@ class AnnouncementTest {
         assertEquals(LocalDate.of(2021,1,1),announcement.getDate());
     }
 
+    /**
+     * Sets date.
+     */
     @Test
     void setDate() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -34,6 +43,9 @@ class AnnouncementTest {
         assertEquals(LocalDate.of(2021,1,2),announcement.getDate());
     }
 
+    /**
+     * Gets commission.
+     */
     @Test
     void getCommission() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -45,6 +57,9 @@ class AnnouncementTest {
         assertEquals(5,announcement.getCommission());
     }
 
+    /**
+     * Sets commission.
+     */
     @Test
     void setCommission() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -58,6 +73,9 @@ class AnnouncementTest {
         assertEquals(10,announcement.getCommission());
     }
 
+    /**
+     * Gets commission type.
+     */
     @Test
     void getCommissionType() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -69,6 +87,9 @@ class AnnouncementTest {
         assertEquals("per",announcement.getCommissionType());
     }
 
+    /**
+     * Sets commission type.
+     */
     @Test
     void setCommissionType() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -82,6 +103,9 @@ class AnnouncementTest {
         assertEquals("fix",announcement.getCommissionType());
     }
 
+    /**
+     * Gets request type.
+     */
     @Test
     void getRequestType() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -93,6 +117,9 @@ class AnnouncementTest {
         assertEquals(new RequestType("Rent",2),announcement.getRequestType());
     }
 
+    /**
+     * Sets request type.
+     */
     @Test
     void setRequestType() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -106,6 +133,9 @@ class AnnouncementTest {
         assertEquals(new RequestType("Sell"),announcement.getRequestType());
     }
 
+    /**
+     * Gets price.
+     */
     @Test
     void getPrice() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -117,6 +147,9 @@ class AnnouncementTest {
         assertEquals(100000,announcement.getPrice());
     }
 
+    /**
+     * Sets price.
+     */
     @Test
     void setPrice() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -130,6 +163,9 @@ class AnnouncementTest {
         assertEquals(200000,announcement.getPrice());
     }
 
+    /**
+     * Gets store.
+     */
     @Test
     void getStore() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -141,6 +177,9 @@ class AnnouncementTest {
         assertEquals(new Store("Store1",1),announcement.getStore());
     }
 
+    /**
+     * Sets owner.
+     */
     @Test
     void setOwner() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -154,6 +193,9 @@ class AnnouncementTest {
         assertEquals(new Owner("Joao","987654321","joao@gmail.com",address, new TaxNumber("123466789"),new PassportCardNumber("12745678")),announcement.getOwner());
     }
 
+    /**
+     * Sets agent.
+     */
     @Test
     void setAgent() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -167,6 +209,9 @@ class AnnouncementTest {
         assertEquals(new Agent("Maria","987654321","maria@gmail.com",new PassportCardNumber("12745678"),new TaxNumber("123466789"),address,new Role("Agent"),new Agency(1,"agency1",address,"agency@gamil.com","123456789"),store,"123456"),announcement.getAgent());
     }
 
+    /**
+     * Gets owner.
+     */
     @Test
     void getOwner() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -178,6 +223,9 @@ class AnnouncementTest {
         assertEquals(new Owner("Maria","987654321","maria@gmail.com",address, new TaxNumber("123456789"),new PassportCardNumber("12345678")),announcement.getOwner());
     }
 
+    /**
+     * Gets agent.
+     */
     @Test
     void getAgent() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -189,6 +237,9 @@ class AnnouncementTest {
         assertEquals(new Agent("Joao", "912345678","joao@gmail.com",new PassportCardNumber("12345678"),new TaxNumber("123456789"), address,new Role("Agent"),new Agency(1,"agency1",address,"agency1@gmail.com","123456789"),store,"123456"),announcement.getAgent());
     }
 
+    /**
+     * Sets store.
+     */
     @Test
     void setStore() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -202,6 +253,9 @@ class AnnouncementTest {
         assertEquals(new Store("Store2",2),announcement.getStore());
     }
 
+    /**
+     * Exists price.
+     */
     @Test
     void existsPrice() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -214,6 +268,9 @@ class AnnouncementTest {
         assertTrue(result);
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     void testClone() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));

@@ -9,7 +9,13 @@ import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Order test.
+ */
 class OrderTest {
+    /**
+     * Get announcement.
+     */
     @Test
     void getAnnouncement(){
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -21,6 +27,10 @@ class OrderTest {
         Order order = new Order(announcement,100000,"joao@gmail.com");
         assertEquals(announcement, order.getAnnouncement());
     }
+
+    /**
+     * Sets announcement.
+     */
     @Test
     void setAnnouncement() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -36,6 +46,9 @@ class OrderTest {
         assertEquals(announcement1, order.getAnnouncement());
     }
 
+    /**
+     * Sets order price.
+     */
     @Test
     void setOrderPrice() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -50,6 +63,9 @@ class OrderTest {
         assertEquals(150000.0, order.getOrderPrice());
     }
 
+    /**
+     * Gets order price.
+     */
     @Test
     void getOrderPrice() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -62,6 +78,9 @@ class OrderTest {
         assertEquals(100000.0, order.getOrderPrice());
     }
 
+    /**
+     * Gets email.
+     */
     @Test
     void getEmail() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -74,6 +93,9 @@ class OrderTest {
         assertEquals("test@this.app", order.getEmail());
     }
 
+    /**
+     * Sets email.
+     */
     @Test
     void setEmail() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -88,6 +110,9 @@ class OrderTest {
         assertEquals("test", order.getEmail());
     }
 
+    /**
+     * Test equals.
+     */
     @Test
     void testEquals() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -101,6 +126,9 @@ class OrderTest {
         assertTrue(order.equals(order1));
     }
 
+    /**
+     * Test hash code.
+     */
     @Test
     void testHashCode() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -114,6 +142,9 @@ class OrderTest {
         assertEquals(order.hashCode(), order1.hashCode());
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     void testClone() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));

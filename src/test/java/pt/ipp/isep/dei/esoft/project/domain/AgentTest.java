@@ -5,8 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Agent test.
+ */
 class AgentTest {
 
+    /**
+     * Gets role.
+     */
     @Test
     void getRole() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -15,6 +21,9 @@ class AgentTest {
         assertEquals(new Role("Agent"), agent.getRole());
     }
 
+    /**
+     * Sets role.
+     */
     @Test
     void setRole() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -25,6 +34,9 @@ class AgentTest {
         assertEquals(new Role("Manager"), agent.getRole());
     }
 
+    /**
+     * Gets agency.
+     */
     @Test
     void getAgency() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -33,6 +45,9 @@ class AgentTest {
         assertEquals(new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111"), agent.getAgency());
     }
 
+    /**
+     * Sets agency.
+     */
     @Test
     void setAgency() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -44,6 +59,9 @@ class AgentTest {
         assertEquals(new Agency(2, "Agency 2", address, "test1@example.com", "111-111-111"), agent.getAgency());
     }
 
+    /**
+     * Gets store.
+     */
     @Test
     void getStore() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -52,6 +70,9 @@ class AgentTest {
         assertEquals(new Store("Store1", 1), agent.getStore());
     }
 
+    /**
+     * Sets store.
+     */
     @Test
     void setStore() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -63,6 +84,9 @@ class AgentTest {
         assertEquals(new Store("Store2",2), agent.getStore());
     }
 
+    /**
+     * Gets pass.
+     */
     @Test
     void getPass() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -71,6 +95,9 @@ class AgentTest {
         assertEquals("password", agent.getPass());
     }
 
+    /**
+     * Sets pass.
+     */
     @Test
     void setPass() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -81,6 +108,9 @@ class AgentTest {
         assertEquals("newPassword", agent.getPass());
     }
 
+    /**
+     * Gets phone number.
+     */
     @Test
     void getPhoneNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -89,6 +119,9 @@ class AgentTest {
         assertEquals("123456789", agent.getPhoneNumber());
     }
 
+    /**
+     * Sets phone number.
+     */
     @Test
     void setPhoneNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -99,6 +132,9 @@ class AgentTest {
         assertEquals("987654321", agent.getPhoneNumber());
     }
 
+    /**
+     * Gets email address.
+     */
     @Test
     void getEmailAddress() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -107,6 +143,9 @@ class AgentTest {
         assertEquals("john@example.com", agent.getEmailAddress());
     }
 
+    /**
+     * Sets email address.
+     */
     @Test
     void setEmailAddress() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -117,6 +156,9 @@ class AgentTest {
         assertEquals("test@example.com", agent.getEmailAddress());
     }
 
+    /**
+     * Gets name.
+     */
     @Test
     void getName() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -125,6 +167,9 @@ class AgentTest {
         assertEquals("John Doe", agent.getName());
     }
 
+    /**
+     * Sets name.
+     */
     @Test
     void setName() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -135,6 +180,9 @@ class AgentTest {
         assertEquals("Jane Doe", agent.getName());
     }
 
+    /**
+     * Gets tax number.
+     */
     @Test
     void getTaxNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -143,6 +191,9 @@ class AgentTest {
         assertEquals(new TaxNumber("123456789"), agent.getTaxNumber());
     }
 
+    /**
+     * Gets passport card number.
+     */
     @Test
     void getPassportCardNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -151,6 +202,9 @@ class AgentTest {
         assertEquals(new PassportCardNumber("12345678"), agent.getPassportCardNumber());
     }
 
+    /**
+     * Sets tax number.
+     */
     @Test
     void setTaxNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -161,6 +215,9 @@ class AgentTest {
         assertEquals(new TaxNumber("987654321"), agent.getTaxNumber());
     }
 
+    /**
+     * Sets passport card number.
+     */
     @Test
     void setPassportCardNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -171,6 +228,9 @@ class AgentTest {
         assertEquals(new PassportCardNumber("98765432"), agent.getPassportCardNumber());
     }
 
+    /**
+     * Gets address.
+     */
     @Test
     void getAddress() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -179,6 +239,9 @@ class AgentTest {
         assertEquals(address, agent.getAddress());
     }
 
+    /**
+     * Sets address.
+     */
     @Test
     void setAddress() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -190,6 +253,9 @@ class AgentTest {
         assertEquals(address2, agent.getAddress());
     }
 
+    /**
+     * Test equals.
+     */
     @Test
     void testEquals() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -199,6 +265,9 @@ class AgentTest {
         assertEquals(agent1, agent);
     }
 
+    /**
+     * Test hash code.
+     */
     @Test
     public void testHashCode() {
         Agent agent1 = new Agent("John Doe", "john@example.com", "123456789", null, null, null, null, null, null, "password");
@@ -206,6 +275,9 @@ class AgentTest {
         assertEquals(agent1.hashCode(), agent2.hashCode());
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     public void testClone() {
         Agent originalAgent = new Agent("John Doe", "john@example.com", "123456789", null, null, null, null, null, null, "password");

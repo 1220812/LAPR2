@@ -5,8 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Address test.
+ */
 public class AddressTest {
 
+    /**
+     * Create valid address.
+     */
     @Test
     public void createValidAddress() {
         State state = new State("California");
@@ -24,6 +30,9 @@ public class AddressTest {
         assertEquals(city, address.getCity());
     }
 
+    /**
+     * Create address with invalid zip code.
+     */
     @Test
     public void createAddressWithInvalidZipCode() {
         State state = new State("California");
@@ -34,6 +43,9 @@ public class AddressTest {
                 new Address("123 Main St", 1, 5, "invalid", state, district, city));
     }
 
+    /**
+     * Create address with invalid door number.
+     */
     @Test
     public void createAddressWithInvalidDoorNumber() {
         State state = new State("California");
@@ -44,6 +56,9 @@ public class AddressTest {
                 new Address("123 Main St", -1, 5, "90210", state, district, city));
     }
 
+    /**
+     * Sets address attributes.
+     */
     @Test
     public void setAddressAttributes() {
         Address address = new Address();
@@ -68,6 +83,9 @@ public class AddressTest {
         assertEquals(city, address.getCity());
     }
 
+    /**
+     * Test exists zip code.
+     */
     @Test
     public void testExistsZipCode() {
         assertTrue(Address.existsZipCode("90210"));
@@ -75,6 +93,9 @@ public class AddressTest {
         assertFalse(Address.existsZipCode("123456"));
     }
 
+    /**
+     * Test exists door number.
+     */
     @Test
     public void testExistsDoorNumber() {
         assertTrue(Address.existsDoorNumber(1));
@@ -82,6 +103,9 @@ public class AddressTest {
         assertFalse(Address.existsDoorNumber(-1));
     }
 
+    /**
+     * Test not equals.
+     */
     @Test
     public void testNotEquals() {
         State state1 = new State("California");
@@ -96,18 +120,28 @@ public class AddressTest {
 
         Assertions.assertNotEquals(address1, address2);
     }
+
+    /**
+     * Test equals same instance returns true.
+     */
     @Test
     public void testEquals_SameInstance_ReturnsTrue() {
         Address address = new Address("Street 1", 123, 1, "12345", new State(), new District(), new City());
         assertTrue(address.equals(address));
     }
 
+    /**
+     * Test equals null object returns false.
+     */
     @Test
     public void testEquals_NullObject_ReturnsFalse() {
         Address address = new Address("Street 1", 123, 1, "12345", new State(), new District(), new City());
         assertFalse(address.equals(null));
     }
 
+    /**
+     * Test equals different class returns false.
+     */
     @Test
     public void testEquals_DifferentClass_ReturnsFalse() {
         Address address = new Address("Street 1", 123, 1, "12345", new State(), new District(), new City());
@@ -115,6 +149,9 @@ public class AddressTest {
         assertFalse(address.equals(differentClass));
     }
 
+    /**
+     * Test equals different street returns false.
+     */
     @Test
     public void testEquals_DifferentStreet_ReturnsFalse() {
         Address address1 = new Address("Street 1", 123, 1, "12345", new State(), new District(), new City());
@@ -124,6 +161,9 @@ public class AddressTest {
 
     // Additional tests for other attributes
 
+    /**
+     * Test hash code different street returns different hash code.
+     */
     @Test
     public void testHashCode_DifferentStreet_ReturnsDifferentHashCode() {
         Address address1 = new Address("Street 1", 123, 1, "12345", new State(), new District(), new City());
