@@ -142,4 +142,10 @@ public class OrderDecisionController {
     public void removeOrder(Order order){
         orderRepository.removeOrder(order);
     }
+
+    public List<Announcement> getAnnouncements() {
+        return repositories.getAnnouncementRepository().getAnnouncements();
+    }
+
+
 }

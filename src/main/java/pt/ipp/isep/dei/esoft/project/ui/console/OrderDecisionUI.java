@@ -10,6 +10,7 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +22,10 @@ public class OrderDecisionUI implements Runnable {
 
     public void run() {
         Agent agent = controller.getCurrentAgent();
-        List<Announcement> assignedAnnouncementList = controller.getAnnouncementAssignedList(agent);
+        List<Announcement> assignedAnnouncementList = controller.getAnnouncements();
         if (assignedAnnouncementList.isEmpty()) {
             System.out.println("There are no announcements!");
         } else {
-            assignedAnnouncementList = controller.getAnnouncementListSortedByDate(agent);
             int i = 0;
             for (Announcement announcement : assignedAnnouncementList) {
                 i += 1;
@@ -60,7 +60,7 @@ public class OrderDecisionUI implements Runnable {
                     acceptOrder(order, announcement);
                     break;
                 case 2:
-                    declineOrder(order);
+                    declineOrder(order, announcement);
                     break;
                 case 0:
                     System.exit(0);
@@ -72,7 +72,7 @@ public class OrderDecisionUI implements Runnable {
         }
     }
 
-    private void declineOrder(Order order) {
+    private void declineOrder(Order order, Announcement announcement) {
         if (order == null) {
             System.out.println("Invalid order ID!");
         } else if (order.getStatus() == Status.DECLINED) {
@@ -81,6 +81,34 @@ public class OrderDecisionUI implements Runnable {
             controller.removeOrder(order);
             System.out.println("Order declined!");
         }
+
+        Agent agent = controller.getCurrentAgent();
+        controller.acceptOrder(order, announcement);
+        System.out.println("Order accepted!");
+        System.out.println(controller.getAnnouncementListSortedByDate(agent));
+        LocalDate date = LocalDate.now();
+        String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\email";
+        String replyMessage =
+                "Subject: Order update - declined"
+                        + "\nFrom: " + agent.getEmailAddress()
+                        + "\nTo: " + order.getEmail()
+                        + "\nBody:"
+                        + "\nProperty info:"
+                        + "\nProperty type: " + announcement.getProperty().getPropertyType()
+                        + "\nAddress: \n" + announcement.getProperty().getAddress()
+                        + "\nAgent info:"
+                        + "\nName: " + agent.getName()
+                        + "\nPhone number: " + agent.getPhoneNumber()
+                        + "\nReply date: " + date;
+        File newFile = new File(path);
+        PrintWriter printWriter;
+        try {
+            printWriter = new PrintWriter(newFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        printWriter.write(replyMessage);
+        printWriter.close();
     }
 
     private void acceptOrder(Order order, Announcement announcement) {
@@ -93,20 +121,20 @@ public class OrderDecisionUI implements Runnable {
             controller.acceptOrder(order, announcement);
             System.out.println("Order accepted!");
             System.out.println(controller.getAnnouncementListSortedByDate(agent));
-            /**String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\email";
+            LocalDate date = LocalDate.now();
+            String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\email";
              String replyMessage =
              "Subject: Order update - Accepted"
-             + "\nFrom: " + controller.
-             + "\nTo: " + controller.getClientEmail(message)
+             + "\nFrom: " + agent.getEmailAddress()
+             + "\nTo: " + order.getEmail()
              + "\nBody:"
              + "\nProperty info:"
-             + "\nProperty type: " + controller.getPropertyType(announcement)
-             + "\nAddress: \n" + controller.getAddress(announcement)
+             + "\nProperty type: " + announcement.getProperty().getPropertyType()
+             + "\nAddress: \n" + announcement.getProperty().getAddress()
              + "\nAgent info:"
-             + "\nName: " + controller.getAgentName(agent)
-             + "\nPhone number: " + controller.getAgentPhone(agent)
-             + "\nMessage from agent: " + reply
-             + "\nReply date: " + replyDate;
+             + "\nName: " + agent.getName()
+             + "\nPhone number: " + agent.getPhoneNumber()
+             + "\nReply date: " + date;
              File newFile = new File(path);
              PrintWriter printWriter;
              try {
@@ -116,7 +144,7 @@ public class OrderDecisionUI implements Runnable {
              }
              printWriter.write(replyMessage);
              printWriter.close();
-        */}
+        }
     }
 
 }
