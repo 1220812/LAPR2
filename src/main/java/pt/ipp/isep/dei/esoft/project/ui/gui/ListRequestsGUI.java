@@ -1,15 +1,21 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.esoft.project.ui.gui.controllers.ListRequestControllerJavaFx;
 
 import java.io.File;
+import java.io.IOException;
 
 public class ListRequestsGUI extends Application implements Runnable {
+    private ListRequestControllerJavaFx listRequestControllerJavaFx;
     @Override
     public void run() {
         launch();
@@ -19,11 +25,12 @@ public class ListRequestsGUI extends Application implements Runnable {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/resources/fxml/us015.fxml").toURL());
         FXMLLoader fxmlLoader1 = new FXMLLoader(new File("src/main/resources/fxml/us015.fxml").toURL());
+        FXMLLoader fxmlLoader2 = new FXMLLoader(new File("src/main/resources/fxml/us016.fxml").toURL());
         Scene scene = new Scene(fxmlLoader.load());
         Pane pane = fxmlLoader1.load();
+        Pane pane1 = fxmlLoader2.load();
 
         Image iconImage = new Image(("list2.jpg"));
-
 
 
         BackgroundImage backgroundImage = new BackgroundImage(
@@ -33,6 +40,7 @@ public class ListRequestsGUI extends Application implements Runnable {
 
         Background background = new Background(backgroundImage);
         pane.setBackground(background);
+        pane1.setBackground(background);
 
         stage.getIcons().add(iconImage);
 
@@ -42,7 +50,8 @@ public class ListRequestsGUI extends Application implements Runnable {
         stage.show();
 
 
-
     }
+
+
 
 }

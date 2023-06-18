@@ -17,9 +17,11 @@
       <DatePicker fx:id="startDate" layoutX="34.0" layoutY="132.0" onAction="#getBeginDate" prefHeight="26.0" prefWidth="124.0" promptText="Begin Date" />
       <DatePicker fx:id="endDate" layoutX="34.0" layoutY="218.0" onAction="#getEndDate" prefHeight="26.0" prefWidth="124.0" promptText="End Date" />
       <Button fx:id="cancelButton" layoutX="40.0" layoutY="343.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="6.0" prefWidth="50.0" text="cancel" />
-      <Button fx:id="continueButton" alignment="CENTER" layoutX="494.0" layoutY="343.0" mnemonicParsing="false" onAction="#showMessages" text="continue" />
+      <Button fx:id="continueButton" alignment="CENTER" layoutX="494.0" layoutY="343.0" mnemonicParsing="false" onAction="#showMessages" text="Show List" />
       <ListView fx:id="lView" layoutX="206.0" layoutY="70.0" prefHeight="254.0" prefWidth="369.0" />
+      <Button onMouseClicked="#nextPage" text="Próxima Página" />
       <Label layoutX="65.0" layoutY="104.0" prefHeight="17.0" prefWidth="62.0" text="Begin Date" textFill="WHITE" />
       <Label layoutX="65.0" layoutY="191.0" prefHeight="17.0" prefWidth="62.0" text="End Date" textFill="WHITE" />
+
    </children>
 </AnchorPane>
