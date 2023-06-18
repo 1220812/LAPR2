@@ -18,8 +18,8 @@ public class Message implements Serializable {
     /**
      * Constructs a new instance of Message with visit start and end times.
      *
-     * @param newVisitStartTime  the start time of the visit.
-     * @param newVisitEndTime    the end time of the visit.
+     * @param newVisitStartTime the start time of the visit.
+     * @param newVisitEndTime   the end time of the visit.
      */
     public Message(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         this.newVisitStartTime = newVisitStartTime;
@@ -29,9 +29,10 @@ public class Message implements Serializable {
     /**
      * Constructs a new instance of Message with visit details.
      *
-     * @param announcement         the input announcement for the visit.
-     * @param newVisitStartTime  the start time of the visit.
-     * @param newVisitEndTime    the end time of the visit.
+     * @param client            the client
+     * @param announcement      the input announcement for the visit.
+     * @param newVisitStartTime the start time of the visit.
+     * @param newVisitEndTime   the end time of the visit.
      */
     public Message(Client client, Announcement announcement, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         this.client=client;
@@ -39,8 +40,6 @@ public class Message implements Serializable {
         this.newVisitStartTime = newVisitStartTime;
         this.newVisitEndTime = newVisitEndTime;
     }
-
-
 
 
     /**
@@ -55,7 +54,7 @@ public class Message implements Serializable {
     /**
      * Sets the start time of the visit.
      *
-     * @param newVisitStartTime  the start time of the visit.
+     * @param newVisitStartTime the start time of the visit.
      */
     public void setNewVisitStartTime(LocalDateTime newVisitStartTime) {
         this.newVisitStartTime = newVisitStartTime;
@@ -73,7 +72,7 @@ public class Message implements Serializable {
     /**
      * Sets the end time of the visit.
      *
-     * @param newVisitEndTime  the end time of the visit.
+     * @param newVisitEndTime the end time of the visit.
      */
     public void setNewVisitEndTime(LocalDateTime newVisitEndTime) {
         this.newVisitEndTime = newVisitEndTime;
@@ -98,7 +97,7 @@ public class Message implements Serializable {
     /**
      * Sets the phone number of the message sender.
      *
-     * @param phone  the phone number of the message sender.
+     * @param phone the phone number of the message sender.
      */
     public void setPhone(int phone) {
         this.phone = phone;
@@ -125,8 +124,8 @@ public class Message implements Serializable {
     /**
      * Checks if the visit time is valid.
      *
-     * @param newVisitStartTime  the start time of the visit.
-     * @param newVisitEndTime    the end time of the visit.
+     * @param newVisitStartTime the start time of the visit.
+     * @param newVisitEndTime   the end time of the visit.
      * @return true if the visit time is valid, false otherwise.
      */
     public static boolean checkVisitTime(LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
@@ -137,7 +136,7 @@ public class Message implements Serializable {
     /**
      * Checks if the specified day is valid.
      *
-     * @param day  the day to be checked.
+     * @param day the day to be checked.
      * @return true if the day is valid, false otherwise.
      */
     public static boolean checkDay(int day) {
@@ -147,7 +146,7 @@ public class Message implements Serializable {
     /**
      * Checks if the specified month is valid.
      *
-     * @param month  the month to be checked.
+     * @param month the month to be checked.
      * @return true if the month is valid, false otherwise.
      */
     public static boolean checkMonth(int month) {
@@ -157,7 +156,7 @@ public class Message implements Serializable {
     /**
      * Checks if the specified year is valid.
      *
-     * @param year  the year to be checked.
+     * @param year the year to be checked.
      * @return true if the year is valid, false otherwise.
      */
     public static boolean checkYear(int year) {
@@ -167,7 +166,7 @@ public class Message implements Serializable {
     /**
      * Checks if the specified hour is valid.
      *
-     * @param startHour  the hour to be checked.
+     * @param startHour the hour to be checked.
      * @return true if the hour is valid, false otherwise.
      */
     public static boolean checkHour(int startHour) {
@@ -177,7 +176,7 @@ public class Message implements Serializable {
     /**
      * Checks if the specified minute is valid.
      *
-     * @param startMinute  the minute to be checked.
+     * @param startMinute the minute to be checked.
      * @return true if the minute is valid, false otherwise.
      */
     public static boolean checkMinute(int startMinute) {
@@ -187,9 +186,9 @@ public class Message implements Serializable {
     /**
      * Checks if the visit time overlaps with any existing visits.
      *
-     * @param MessageList          the list of existing messages.
-     * @param newVisitStartTime    the start time of the new visit.
-     * @param newVisitEndTime      the end time of the new visit.
+     * @param MessageList       the list of existing messages.
+     * @param newVisitStartTime the start time of the new visit.
+     * @param newVisitEndTime   the end time of the new visit.
      * @return true if there is an overlap, false otherwise.
      */
     public static boolean checkIfValidVisit(List<Message> MessageList, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
@@ -205,18 +204,38 @@ public class Message implements Serializable {
         return false;
     }
 
+    /**
+     * Gets announcement.
+     *
+     * @return the announcement
+     */
     public Announcement getAnnouncement() {
         return announcement;
     }
 
+    /**
+     * Sets announcement.
+     *
+     * @param announcement the announcement
+     */
     public void setAnnouncement(Announcement announcement) {
         this.announcement = announcement;
     }
 
+    /**
+     * Gets agent.
+     *
+     * @return the agent
+     */
     public Agent getAgent() {
         return announcement.getAgent();
     }
 
+    /**
+     * Gets client.
+     *
+     * @return the client
+     */
     public Client getClient() {
         return client;
     }

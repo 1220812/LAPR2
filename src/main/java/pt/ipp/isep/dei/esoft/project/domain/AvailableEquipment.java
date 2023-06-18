@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Available equipment.
+ */
 public class AvailableEquipment implements Serializable {
     /**
      * equipment available
@@ -12,20 +15,25 @@ public class AvailableEquipment implements Serializable {
 
     /**
      * Method that creates an AvailableEquipment object
+     *
      * @param equipment equipment available
      */
-
     public AvailableEquipment(String equipment) {
        this.equipment = equipment;
     }
+
     /**
      * Method to show if the property has equipment
+     *
+     * @return the equipment
      */
     public String getEquipment() {
         return equipment;
     }
+
     /**
      * Method to change the truth value of available equipment
+     *
      * @param equipment changed value
      */
     public void setEquipment(String equipment) {

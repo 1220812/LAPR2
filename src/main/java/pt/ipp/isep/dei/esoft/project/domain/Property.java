@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Property.
+ */
 public class Property implements Serializable {
     /**
      * area of the property
@@ -67,12 +70,13 @@ public class Property implements Serializable {
 
     /**
      * This method creates a new instance of property with the given parameters:
-     * @param area area of the property
+     *
+     * @param area                      area of the property
      * @param distanceFromTheCityCenter distance between the property and the city center
-     * @param address property address
-     * @param propertyType type of property
-     * @param finalPrice final price of the property (price of sell/rent of the property)
-     * @param businessDate business date (date of the sell/rent of the property)
+     * @param address                   property address
+     * @param propertyType              type of property
+     * @param finalPrice                final price of the property (price of sell/rent of the property)
+     * @param businessDate              business date (date of the sell/rent of the property)
      */
     public Property(double area, double distanceFromTheCityCenter, Address address, PropertyType propertyType, double finalPrice, LocalDate businessDate) {
         if (area <= 0) {
@@ -110,7 +114,7 @@ public class Property implements Serializable {
     /**
      * Method to show the area
      *
-     * @return area
+     * @return area area
      */
     public double getArea() {
         return area;
@@ -128,7 +132,7 @@ public class Property implements Serializable {
     /**
      * Method to show the address of the property
      *
-     * @return address
+     * @return address address
      */
     public Address getAddress() {
         return address;
@@ -151,6 +155,7 @@ public class Property implements Serializable {
     public void setDistanceFromTheCityCenter(double distanceFromTheCityCenter) {
         this.distanceFromTheCityCenter = distanceFromTheCityCenter;
     }
+
     /**
      * Method to show the property type
      *
@@ -171,6 +176,7 @@ public class Property implements Serializable {
 
     /**
      * Method that verifies if the property has area
+     *
      * @param area area of the property
      * @return true if the property has area, false if not
      */
@@ -178,10 +184,12 @@ public class Property implements Serializable {
         if (area < 1) { return false; }
         else return true;
     }
+
     /**
      * Method to verify if that exists a distance from the city center
+     *
      * @param distanceFromTheCityCenter distance from the city center
-     * @return  true if the distance from the city center exists, false if not
+     * @return true if the distance from the city center exists, false if not
      */
     public static boolean existsDistanceFromCityCenter(double distanceFromTheCityCenter){
         if (distanceFromTheCityCenter < 1) { return false; }

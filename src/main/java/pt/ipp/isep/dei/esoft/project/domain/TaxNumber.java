@@ -5,6 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Tax number.
+ */
 public class TaxNumber implements Serializable {
     /**
      * tax number
@@ -26,15 +29,19 @@ public class TaxNumber implements Serializable {
         }*/
         this.taxNumber = taxNumber;
     }
+
     /**
      * This method shows the tax number
+     *
      * @return tax number
      */
     public String getTaxNumber() {
         return taxNumber;
     }
+
     /**
      * This method changes the tax number
+     *
      * @param taxNumber changed tax number
      */
     public void setTaxNumber(String taxNumber) {

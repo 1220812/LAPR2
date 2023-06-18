@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * The type Announcement.
+ */
 public class Announcement implements Serializable {
     /**
      * announcement property
@@ -53,8 +56,8 @@ public class Announcement implements Serializable {
      * @param agent          agent responsible for the announcement
      * @param price          announced price
      * @param owner          owner of the property announced
+     * @param store          the store
      */
-
     public Announcement(Property property, LocalDate date, String commissionType, double commission, RequestType requestType, Agent agent, double price, Owner owner, Store store) {
         if (property == null) {
             throw new IllegalArgumentException("Property can't be null");
@@ -93,13 +96,14 @@ public class Announcement implements Serializable {
 
     /**
      * Method that creates an instance of Announcement with the given parameters:
-     * @param property property to announce
-     * @param date date of the announcement
-     * @param commission commission
+     *
+     * @param property    property to announce
+     * @param date        date of the announcement
+     * @param commission  commission
      * @param requestType request type
-     * @param price announced price
-     * @param owner owner of the property announced
-     * @param store store selected by the owner
+     * @param price       announced price
+     * @param owner       owner of the property announced
+     * @param store       store selected by the owner
      */
     public Announcement(Property property, LocalDate date, double commission, RequestType requestType, double price, Owner owner, Store store) {
         if (property == null) {
@@ -128,12 +132,12 @@ public class Announcement implements Serializable {
         this.owner = owner;
         this.store = store;
     }
+
     /**
      * Method that shows the date of the announcement
      *
      * @return date of the announcement
      */
-
     public LocalDate getDate() {
         return date;
     }
@@ -143,7 +147,6 @@ public class Announcement implements Serializable {
      *
      * @param date new date of the announcement
      */
-
     public void setDate(LocalDate date) {
         this.date = date;
     }
@@ -153,7 +156,6 @@ public class Announcement implements Serializable {
      *
      * @return announced property
      */
-
     public Property getProperty() {
         return property;
     }
@@ -163,7 +165,6 @@ public class Announcement implements Serializable {
      *
      * @param property new announced property
      */
-
     public void setProperty(Property property) {
         this.property = property;
     }
@@ -206,78 +207,79 @@ public class Announcement implements Serializable {
 
     /**
      * Method that shows the request type of the announcement
+     *
      * @return request type of the announcement
      */
-
     public RequestType getRequestType() {
         return requestType;
     }
 
     /**
      * Method that changes the request type of the announcement
+     *
      * @param requestType new request type of the announcement
      */
-
     public void setRequestType(RequestType requestType) {
         this.requestType = requestType;
     }
 
     /**
      * Method that shows the announced price
+     *
      * @return announced price
      */
-
     public double getPrice() {
         return price;
     }
 
     /**
      * Method that changes the announced price
+     *
      * @param price new announced price
      */
-
     public void setPrice(double price) {
         this.price = price;
     }
 
     /**
      * Method that shows the store selected by the owner
+     *
      * @return store selected by the owner
      */
-
     public Store getStore() {
         return store;
     }
 
     /**
      * Method that changes owner of the property announced
+     *
      * @param owner new owner of the property announced
      */
-
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
 
     /**
      * Method that changes the agent selected by the owner
+     *
      * @param agent new agent selected by the owner
      */
-
     public void setAgent(Agent agent) {
         this.agent = agent;
     }
 
     /**
      * Method that shows the owner of the property announced
+     *
      * @return owner of the property announced
      */
-
     public Owner getOwner() {
         return owner;
     }
 
     /**
      * Method that shows the agent selected by the owner
+     *
      * @return agent selected by the owner
      */
     public Agent getAgent() {
@@ -286,13 +288,17 @@ public class Announcement implements Serializable {
 
     /**
      * Method that changes the store selected by the owner
+     *
      * @param store new store selected by the owner
      */
     public void setStore(Store store) {
         this.store = store;
     }
+
     /**
      * Method that verifies if exists a property price
+     *
+     * @param price the price
      * @return true if exists a property price, false if not
      */
     public static boolean existsPrice(double price){

@@ -3,28 +3,57 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Booking request feedback.
+ */
 public class BookingRequestFeedback implements Serializable {
 
     private String finalFeedback;
     private String justification;
 
+    /**
+     * Instantiates a new Booking request feedback.
+     *
+     * @param finalFeedback the final feedback
+     * @param justification the justification
+     */
     public BookingRequestFeedback(String finalFeedback, String justification) {
         this.finalFeedback = finalFeedback;
         this.justification = justification;
     }
 
+    /**
+     * Gets final feedback.
+     *
+     * @return the final feedback
+     */
     public String getFinalFeedback() {
         return finalFeedback;
     }
 
+    /**
+     * Sets final feedback.
+     *
+     * @param finalFeedback the final feedback
+     */
     public void setFinalFeedback(String finalFeedback) {
         this.finalFeedback = finalFeedback;
     }
 
+    /**
+     * Gets justification.
+     *
+     * @return the justification
+     */
     public String getJustification() {
         return justification;
     }
 
+    /**
+     * Sets justification.
+     *
+     * @param justification the justification
+     */
     public void setJustification(String justification) {
         this.justification = justification;
     }

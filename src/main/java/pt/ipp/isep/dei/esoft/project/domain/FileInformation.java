@@ -8,43 +8,158 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type File information.
+ */
 public class FileInformation {
+    /**
+     * The Repositories.
+     */
     Repositories repositories = Repositories.getInstance();
+    /**
+     * The Announcement repository.
+     */
     AnnouncementRepository announcementRepository = repositories.getAnnouncementRepository();
+    /**
+     * The Store repository.
+     */
     StoreRepository storeRepository = repositories.getStoreRepository();
+    /**
+     * The User repository.
+     */
     OwnerRepository userRepository = repositories.getOwnerRepository();
+    /**
+     * The Order repository.
+     */
     OrderRepository orderRepository = repositories.getOrderRepository();
+    /**
+     * The constant sidPosition.
+     */
     public static final int sidPosition = 0;
+    /**
+     * The constant ownerNamePosition.
+     */
     public static final int ownerNamePosition = 1;
+    /**
+     * The constant ownerPassportCardNumberPosition.
+     */
     public static final int ownerPassportCardNumberPosition = 2;
+    /**
+     * The constant ownerTaxNumberPosition.
+     */
     public static final int ownerTaxNumberPosition = 3;
+    /**
+     * The constant ownerEmailPosition.
+     */
     public static final int ownerEmailPosition = 4;
+    /**
+     * The constant ownerPhoneNumberPosition.
+     */
     public static final int ownerPhoneNumberPosition = 5;
+    /**
+     * The constant propertyTypePosition.
+     */
     public static final int propertyTypePosition = 6;
+    /**
+     * The constant areaPosition.
+     */
     public static final int areaPosition = 7;
+    /**
+     * The constant propertyAddressPosition.
+     */
     public static final int propertyAddressPosition = 8;
+    /**
+     * The constant distanceFromCityCenterPosition.
+     */
     public static final int distanceFromCityCenterPosition = 9;
+    /**
+     * The constant numberOfBedroomsPosition.
+     */
     public static final int numberOfBedroomsPosition = 10;
+    /**
+     * The constant numberOfBathroomsPosition.
+     */
     public static final int numberOfBathroomsPosition = 11;
+    /**
+     * The constant numberOfParkingSpacesPosition.
+     */
     public static final int numberOfParkingSpacesPosition = 12;
+    /**
+     * The constant propertyCentralHeatingPosition.
+     */
     public static final int propertyCentralHeatingPosition = 13;
+    /**
+     * The constant propertyAirConditioningPosition.
+     */
     public static final int propertyAirConditioningPosition = 14;
+    /**
+     * The constant propertyBasementPosition.
+     */
     public static final int propertyBasementPosition = 15;
+    /**
+     * The constant propertyLoftPosition.
+     */
     public static final int propertyLoftPosition = 16;
+    /**
+     * The constant propertySunExposurePosition.
+     */
     public static final int propertySunExposurePosition = 17;
+    /**
+     * The constant requestedPricePosition.
+     */
     public static final int requestedPricePosition = 18;
+    /**
+     * The constant finalPricePosition.
+     */
     public static final int finalPricePosition = 19;
+    /**
+     * The constant commissionPosition.
+     */
     public static final int commissionPosition = 20;
+    /**
+     * The constant contractDurationPosition.
+     */
     public static final int contractDurationPosition = 21;
+    /**
+     * The constant announcementDatePosition.
+     */
     public static final int announcementDatePosition = 22;
+    /**
+     * The constant businessDatePosition.
+     */
     public static final int businessDatePosition = 23;
+    /**
+     * The constant requestTypePosition.
+     */
     public static final int requestTypePosition = 24;
+    /**
+     * The constant storeIDPosition.
+     */
     public static final int storeIDPosition = 25;
+    /**
+     * The constant storeNamePosition.
+     */
     public static final int storeNamePosition = 26;
+    /**
+     * The constant storeAddressPosition.
+     */
     public static final int storeAddressPosition = 27;
+    /**
+     * The constant storePhoneNumberPosition.
+     */
     public static final int storePhoneNumberPosition = 28;
+    /**
+     * The constant storeEmailPosition.
+     */
     public static final int storeEmailPosition = 29;
 
+    /**
+     * Import file.
+     *
+     * @param filePath the file path
+     * @throws IOException                the io exception
+     * @throws CloneNotSupportedException the clone not supported exception
+     */
     public void importFile(String filePath)throws IOException, CloneNotSupportedException {
         File file = new File(filePath);
         String extension = filePath.substring(filePath.lastIndexOf(".")+1);

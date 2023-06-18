@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Request.
+ */
 public class Request implements Serializable {
     /**
      * Type of request (sale or rent)
@@ -83,11 +86,24 @@ public class Request implements Serializable {
 
     }
 
+    /**
+     * Instantiates a new Request.
+     *
+     * @param startDate the start date
+     * @param enDate    the en date
+     */
     public Request(LocalDate startDate, LocalDate enDate) {
         this.startDate = startDate;
         this.enDate = enDate;
     }
 
+    /**
+     * Check visit time boolean.
+     *
+     * @param newStartTime the new start time
+     * @param newEndTime   the new end time
+     * @return the boolean
+     */
     public static boolean checkVisitTime(LocalDate newStartTime, LocalDate newEndTime) {
         return newEndTime.isAfter(newStartTime);
     }
@@ -96,7 +112,7 @@ public class Request implements Serializable {
     /**
      * Method to show the type
      *
-     * @return type
+     * @return type request type
      */
     public RequestType getRequestType() {
         return requestType;
@@ -112,22 +128,47 @@ public class Request implements Serializable {
     }
 
 
+    /**
+     * Sets request date.
+     *
+     * @param requestDate the request date
+     */
     public void setRequestDate(LocalDate requestDate) {
         this.requestDate = requestDate;
     }
 
+    /**
+     * Gets start date.
+     *
+     * @return the start date
+     */
     public LocalDate getStartDate() {
         return startDate;
     }
 
+    /**
+     * Sets start date.
+     *
+     * @param startDate the start date
+     */
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     * Gets en date.
+     *
+     * @return the en date
+     */
     public LocalDate getEnDate() {
         return enDate;
     }
 
+    /**
+     * Sets en date.
+     *
+     * @param enDate the en date
+     */
     public void setEnDate(LocalDate enDate) {
         this.enDate = enDate;
     }
@@ -135,7 +176,7 @@ public class Request implements Serializable {
     /**
      * Method to show the agent
      *
-     * @return agent
+     * @return agent agent
      */
     public Agent getAgent() {
         return agent;
@@ -144,7 +185,7 @@ public class Request implements Serializable {
     /**
      * Method to show the owner
      *
-     * @return owner
+     * @return owner owner
      */
     public Owner getOwner() {
         return owner;
@@ -162,7 +203,7 @@ public class Request implements Serializable {
     /**
      * Method to show the property
      *
-     * @return property
+     * @return property property
      */
     public Property getProperty() {
         return property;
@@ -171,7 +212,7 @@ public class Request implements Serializable {
     /**
      * Method to show the price
      *
-     * @return price
+     * @return price price
      */
     public double getPrice() {
         return price;
@@ -180,6 +221,7 @@ public class Request implements Serializable {
     /**
      * Method to change the owner
      *
+     * @param owner the owner
      * @return changed owner
      */
     public void setOwner(Owner owner) {
@@ -263,13 +305,32 @@ public class Request implements Serializable {
         return new Request(this.property, this.requestDate, this.agent, this.owner, this.price, this.requestType, this.store);
     }
 
+    /**
+     * Gets store.
+     *
+     * @return the store
+     */
     public Store getStore() {
         return store;
     }
 
+    /**
+     * Sets store.
+     *
+     * @param store the store
+     */
     public void setStore(Store store) {
         this.store = store;
     }
+
+    /**
+     * Gets requests.
+     *
+     * @param RequestList the request list
+     * @param startDate   the start date
+     * @param endDate     the end date
+     * @return the requests
+     */
     public static List<Request> getRequests(List<Request> RequestList, LocalDate startDate, LocalDate endDate) {
         List<Request> filteredRequests = new ArrayList<>();
 
@@ -284,14 +345,32 @@ public class Request implements Serializable {
         return filteredRequests;
     }
 
+    /**
+     * Check day boolean.
+     *
+     * @param startDay the start day
+     * @return the boolean
+     */
     public static boolean checkDay(int startDay) {
         return startDay >= 1 && startDay <= 31;
     }
 
+    /**
+     * Check month boolean.
+     *
+     * @param startMonth the start month
+     * @return the boolean
+     */
     public static boolean checkMonth(int startMonth) {
         return startMonth >= 1 && startMonth <= 12;
     }
 
+    /**
+     * Check year boolean.
+     *
+     * @param startYear the start year
+     * @return the boolean
+     */
     public static boolean checkYear(int startYear) {
         return startYear >= 0;
     }

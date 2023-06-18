@@ -2,6 +2,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.Serializable;
 
+/**
+ * The type Photographs.
+ */
 public class Photographs implements Serializable {
     /**
      * photo id
@@ -23,6 +26,7 @@ public class Photographs implements Serializable {
      * path to png by default
      */
     private final String PATH_TO_PNG_BY_DEFAULT = "[NO DATA]";
+
     /**
      * This method creates the Photo object with default attributes
      */
@@ -31,8 +35,10 @@ public class Photographs implements Serializable {
         this.photoID = count;
         this.photoURI = PATH_TO_PNG_BY_DEFAULT;
     }
+
     /**
      * Creates a new photograph with ID and URI
+     *
      * @param photoURI path to png
      */
     public Photographs(String photoURI){
@@ -40,27 +46,29 @@ public class Photographs implements Serializable {
         this.photoID = count;
         this.photoURI = photoURI;
     }
+
     /**
-     *  Returns the photoID of the Photo
+     * Returns the photoID of the Photo
      *
-     * @return photoID
+     * @return photoID photo id
      */
     public int getPhotoID() {
         return photoID;
     }
 
     /**
-     *  This method changes the photoID of the Photo
-     * @param photoID
+     * This method changes the photoID of the Photo
+     *
+     * @param photoID the photo id
      */
     public void setPhotoID(int photoID) {
         this.photoID = photoID;
     }
 
     /**
-     *  This method returns the photoURL of the Photo
+     * This method returns the photoURL of the Photo
      *
-     * @return
+     * @return photo uri
      */
     public String getPhotoURI() {
         return photoURI;
@@ -68,8 +76,9 @@ public class Photographs implements Serializable {
     }
 
     /**
-     *  This method changes the photoURI of the Photo
-     * @param photoURI
+     * This method changes the photoURI of the Photo
+     *
+     * @param photoURI the photo uri
      */
     public void setPhotoURI(String photoURI) {
         this.photoURI = photoURI;

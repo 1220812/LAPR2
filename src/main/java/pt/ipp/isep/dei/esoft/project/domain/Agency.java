@@ -3,6 +3,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Agency.
+ */
 public class Agency implements Serializable {
 
     /**
@@ -55,7 +58,6 @@ public class Agency implements Serializable {
      * @param emailAddress agency email address
      * @param phoneNumber  agency phone number
      */
-
     public Agency(int id, String designation, Address address, String emailAddress, String phoneNumber) {
         this.id = id;
         this.designation = designation;
@@ -67,7 +69,6 @@ public class Agency implements Serializable {
     /**
      * This method creates a new instance of Agency with all the attributes by default
      */
-
     public Agency() {
         designation = DEFAULT_DESIGNATION;
         address = DEFAULT_ADDRESS;
@@ -96,9 +97,8 @@ public class Agency implements Serializable {
     /**
      * Method to show the ID
      *
-     * @return id
+     * @return id id
      */
-
     public int getID() {
         return id;
     }
@@ -106,9 +106,8 @@ public class Agency implements Serializable {
     /**
      * Method to show the designation
      *
-     * @return designation
+     * @return designation designation
      */
-
     public String getDesignation() {
         return designation;
     }
@@ -116,7 +115,7 @@ public class Agency implements Serializable {
     /**
      * Method to show the address
      *
-     * @return address
+     * @return address address
      */
     public Address getAddress() {
         return address;
@@ -154,7 +153,6 @@ public class Agency implements Serializable {
      *
      * @param designation new designation
      */
-
     public void setDesignation(String designation) {
         this.designation = designation;
     }
@@ -164,7 +162,6 @@ public class Agency implements Serializable {
      *
      * @param emailAddress new email address
      */
-
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
@@ -174,7 +171,6 @@ public class Agency implements Serializable {
      *
      * @param id new ID
      */
-
     public void setId(int id) {
         this.id = id;
     }
@@ -184,7 +180,6 @@ public class Agency implements Serializable {
      *
      * @param phoneNumber new phone number
      */
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }

@@ -3,6 +3,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Order.
+ */
 public class Order implements Serializable {
     /**
      * Decision of the agent on the order (Accepted, Declined or Pending(waiting for decision))
@@ -28,9 +31,10 @@ public class Order implements Serializable {
 
     /**
      * Method that creates a new instance of order
+     *
      * @param announcement selected announcement
-     * @param orderPrice amount offered by the client
-     * @param email client email
+     * @param orderPrice   amount offered by the client
+     * @param email        client email
      */
     public Order(Announcement announcement, double orderPrice, String email) {
         this.announcement = announcement;
@@ -42,8 +46,9 @@ public class Order implements Serializable {
 
     /**
      * Method that creates a new instance of an accepted order
+     *
      * @param announcement selected announcement
-     * @param orderPrice amount offered by the client
+     * @param orderPrice   amount offered by the client
      */
     public Order(Announcement announcement, double orderPrice){
         this.announcement = announcement;
@@ -54,8 +59,9 @@ public class Order implements Serializable {
 
     /**
      * Method that creates a new instance of order
+     *
      * @param announcement selected announcement
-     * @param clientEmail client email
+     * @param clientEmail  client email
      */
     public Order (Announcement announcement, String clientEmail){
         this.announcement = announcement;
@@ -65,13 +71,16 @@ public class Order implements Serializable {
 
     /**
      * Method that returns the selected announcement
+     *
      * @return selected announcement
      */
     public Announcement getAnnouncement() {
         return announcement;
     }
+
     /**
      * Method to change the announcement selected by the client
+     *
      * @param announcement new selected announcement
      */
     public void setAnnouncement(Announcement announcement) {
@@ -80,6 +89,7 @@ public class Order implements Serializable {
 
     /**
      * Method that returns the offered price
+     *
      * @return offered price
      */
     public double getOrderPrice() {
@@ -88,6 +98,7 @@ public class Order implements Serializable {
 
     /**
      * Method to change the order price
+     *
      * @param orderPrice new order price
      */
     public void setOrderPrice(double orderPrice) {
@@ -96,7 +107,8 @@ public class Order implements Serializable {
 
     /**
      * Method that returns the client's email
-     * @return client's email
+     *
+     * @return client 's email
      */
     public String getEmail() {
         return email;
@@ -104,6 +116,7 @@ public class Order implements Serializable {
 
     /**
      * Method to change
+     *
      * @param email new client's email
      */
     public void setEmail(String email) {
@@ -112,25 +125,26 @@ public class Order implements Serializable {
 
     /**
      * Method that returns the order status
+     *
      * @return order status
      */
-
     public Status getStatus() {
         return status;
     }
 
     /**
      * Method to change the order status
+     *
      * @param status new order status
      */
-
     public void setStatus(Status status) {
         this.status = status;
     }
 
     /**
      * Method that returns the order ID
-     * @return orderID
+     *
+     * @return orderID order id
      */
     public int getOrderID() {
         return orderID;
@@ -177,6 +191,12 @@ public class Order implements Serializable {
                 "orderID = " + orderID +
                 ", orderPrice = " + orderPrice;
     }
+
+    /**
+     * To string deals string.
+     *
+     * @return the string
+     */
     public  String toStringDeals(){
         return "Order : " + "\n" +
                 "orderID = " + orderID +

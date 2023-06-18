@@ -2,6 +2,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.Serializable;
 
+/**
+ * The type User.
+ */
 public class User implements Serializable {
 
     // ATTRIBUTES
@@ -22,6 +25,9 @@ public class User implements Serializable {
 
     // CONSTRUCTORS
 
+    /**
+     * Instantiates a new User.
+     */
     public User() {
         this.name = NAME_BY_DEFAULT;
         this.emailAddress = EMAIL_ADDRESS_BY_DEFAULT;
@@ -30,10 +36,12 @@ public class User implements Serializable {
     }
 
     /**
+     * Instantiates a new User.
      *
-     * @param name name
+     * @param name         name
      * @param emailAddress email
-     * @param password pwd
+     * @param password     pwd
+     * @param phoneNumber  the phone number
      */
     public User(String name, String emailAddress, String password, String phoneNumber) {
         this.name = name;
@@ -44,11 +52,12 @@ public class User implements Serializable {
 
     /**
      * This method creates a new instance of User with the following parameters
-     * @param name name of the user
-     * @param emailAddress email address
+     *
+     * @param name               name of the user
+     * @param emailAddress       email address
      * @param passportCardNumber passport card number
-     * @param taxNumber tax number
-     * @param phoneNumber phone number
+     * @param taxNumber          tax number
+     * @param phoneNumber        phone number
      */
     public User(String name, String emailAddress, PassportCardNumber passportCardNumber, TaxNumber taxNumber, String phoneNumber) {
         this.name = name;
@@ -61,7 +70,8 @@ public class User implements Serializable {
 
     /**
      * Method to show the name
-     * @return name
+     *
+     * @return name name
      */
     public String getName() {
         return name;
@@ -69,6 +79,7 @@ public class User implements Serializable {
 
     /**
      * Method to change the name
+     *
      * @param name name
      */
     public void setName(String name) {
@@ -77,15 +88,16 @@ public class User implements Serializable {
 
     /**
      * Method to show the email address
+     *
      * @return email address
      */
-
     public String getEmailAddress() {
         return emailAddress;
     }
 
     /**
      * Method to change the email address
+     *
      * @param emailAddress email
      */
     public void setEmailAddress(String emailAddress) {
@@ -94,15 +106,16 @@ public class User implements Serializable {
 
     /**
      * Method to show the password
-     * @return password
+     *
+     * @return password password
      */
-
     public String getPassword() {
         return password;
     }
 
     /**
      * Method to change the password
+     *
      * @param password pwd
      */
     public void setPassword(String password) {
@@ -111,15 +124,16 @@ public class User implements Serializable {
 
     /**
      * Method to show the phoneNumber
+     *
      * @return phone number
      */
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     /**
      * Method to change the phoneNumber
+     *
      * @param phoneNumber phone number
      */
     public void setPhoneNumber(String phoneNumber) {
@@ -142,12 +156,24 @@ public class User implements Serializable {
         return new User(this.name,this.emailAddress,this.password,this.phoneNumber);
     }
 
+    /**
+     * Exists email boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public static boolean existsEmail(String email) {
         if (!(email.contains("@") && email.contains("."))) {
             return false;
         }
         return true;
     }
+
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return this.emailAddress;
     }

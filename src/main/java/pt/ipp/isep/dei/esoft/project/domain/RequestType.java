@@ -3,6 +3,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Request type.
+ */
 public class RequestType implements Serializable {
     /**
      * Request type
@@ -20,7 +23,8 @@ public class RequestType implements Serializable {
     /**
      * Creates a new instance of request type
      *
-     * @param requestType request type
+     * @param requestType      request type
+     * @param contractDuration the contract duration
      */
     public RequestType(String requestType, double contractDuration) {
         this.requestType = requestType;
@@ -40,7 +44,7 @@ public class RequestType implements Serializable {
     /**
      * Shows the request type
      *
-     * @return
+     * @return request type
      */
     public String getRequestType() {
         return requestType;

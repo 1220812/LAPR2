@@ -3,6 +3,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Owner.
+ */
 public class Owner extends User implements Serializable {
     /**
      * name of the owner
@@ -74,6 +77,7 @@ public class Owner extends User implements Serializable {
 
     /**
      * Method to show the tax number
+     *
      * @return tax number
      */
     public TaxNumber getTaxNumber() {
@@ -82,6 +86,7 @@ public class Owner extends User implements Serializable {
 
     /**
      * Method to show the passport card number
+     *
      * @return passport card number
      */
     public PassportCardNumber getPassportCardNumber() {
@@ -90,6 +95,7 @@ public class Owner extends User implements Serializable {
 
     /**
      * Method to change the tax number
+     *
      * @param taxNumber changed tax number
      */
     public void setTaxNumber(TaxNumber taxNumber) {
@@ -98,6 +104,7 @@ public class Owner extends User implements Serializable {
 
     /**
      * Method to change the passport card number
+     *
      * @param passportCardNumber changed passport card number
      */
     public void setPassportCardNumber(PassportCardNumber passportCardNumber) {
@@ -106,7 +113,8 @@ public class Owner extends User implements Serializable {
 
     /**
      * Method to show the address
-     * @return address
+     *
+     * @return address address
      */
     public Address getAddress() {
         return address;
@@ -114,6 +122,7 @@ public class Owner extends User implements Serializable {
 
     /**
      * Method to change the address
+     *
      * @param address changed address
      */
     public void setAddress(Address address) {
@@ -122,14 +131,14 @@ public class Owner extends User implements Serializable {
 
     /**
      * Creates an instance of Owner with name, phone number, email address, address, tax number and passport card number
-     * @param name Owner's name
-     * @param phoneNumber Owner´s phone number
-     * @param emailAddress Owner's email address
-     * @param address Owner's address
-     * @param taxNumber Owner's tax number
+     *
+     * @param name               Owner's name
+     * @param phoneNumber        Owner´s phone number
+     * @param emailAddress       Owner's email address
+     * @param address            Owner's address
+     * @param taxNumber          Owner's tax number
      * @param passportCardNumber Owner's passport card number
      */
-
     public Owner(String name, String phoneNumber, String emailAddress, Address address, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -141,10 +150,11 @@ public class Owner extends User implements Serializable {
 
     /**
      * Creates an instance of Owner with name, phone number, email address, tax number and passport card number
-     * @param name name of the owner
-     * @param phoneNumber phone number of the owner
-     * @param emailAddress email address of the owner
-     * @param taxNumber tax number of the owner
+     *
+     * @param name               name of the owner
+     * @param phoneNumber        phone number of the owner
+     * @param emailAddress       email address of the owner
+     * @param taxNumber          tax number of the owner
      * @param passportCardNumber passport card number of the owner
      */
     public Owner(String name, String phoneNumber, String emailAddress, TaxNumber taxNumber, PassportCardNumber passportCardNumber){
@@ -157,6 +167,7 @@ public class Owner extends User implements Serializable {
 
     /**
      * Creates an instance of Owner with name
+     *
      * @param name name of the owner
      */
     public Owner(String name){
