@@ -13,6 +13,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Order decision ui.
+ */
 public class OrderDecisionUI implements Runnable {
     private final OrderDecisionController controller = new OrderDecisionController();
 

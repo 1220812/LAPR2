@@ -7,8 +7,14 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.List;
 
+/**
+ * The type Publish order ui.
+ */
 public class PublishOrderUI implements Runnable {
 
+    /**
+     * The Controller.
+     */
     PublishOrderController controller = new PublishOrderController();
 
     /**

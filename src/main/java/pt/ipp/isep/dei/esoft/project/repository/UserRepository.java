@@ -27,16 +27,18 @@ public class UserRepository implements Serializable {
 
     /**
      * Method to add a new employee to the list of employees
+     *
      * @param employee employee added
      */
-
     public void addEmployee(Employee employee) {
         if (validateEmployee(employee)){
             employeeList.add(employee);
         }
     }
+
     /**
      * Method to add a new user to the list of users
+     *
      * @param user user added
      */
     public void addUser(User user){
@@ -44,16 +46,41 @@ public class UserRepository implements Serializable {
             userList.add(user);
         }
     }
+
+    /**
+     * Validate employee boolean.
+     *
+     * @param employee the employee
+     * @return the boolean
+     */
     public boolean validateEmployee(Employee employee){
         return !this.employeeList.contains(employee);
     }
+
+    /**
+     * Get employee list list.
+     *
+     * @return the list
+     */
     public List<Employee> getEmployeeList(){
         return List.copyOf(this.employeeList);
     }
+
+    /**
+     * Get user list list.
+     *
+     * @return the list
+     */
     public List<User> getUserList(){
         return List.copyOf(this.userList);
     }
 
+    /**
+     * Add list.
+     *
+     * @param user the user
+     * @return the list
+     */
     public List<User> add(User user) {
     for (User u : userList) {
         System.out.println(u.toString());
@@ -79,6 +106,12 @@ public class UserRepository implements Serializable {
         return isValid;
     }
 
+    /**
+     * Add list.
+     *
+     * @param employee the employee
+     * @return the list
+     */
     public List<Employee> add(Employee employee) {
 
         employeeList.add(employee);

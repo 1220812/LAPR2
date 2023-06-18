@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+/**
+ * The type Schedule visit ui.
+ */
 public class ScheduleVisitUI implements Runnable {
     private Announcement announcement;
     private int day = 0;
@@ -33,6 +36,9 @@ public class ScheduleVisitUI implements Runnable {
     private  LocalDateTime newVisitStartTime;
 
 
+    /**
+     * The Controller.
+     */
     ScheduleVisitController controller = new ScheduleVisitController();
 
 

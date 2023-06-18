@@ -6,6 +6,9 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.List;
 
+/**
+ * The type Divide ui.
+ */
 public class DivideUI implements Runnable{
     private final DivideController controller = new DivideController();
 
@@ -19,6 +22,10 @@ public class DivideUI implements Runnable{
         showsNumberOfPropertiesByStore();
         controller.divideStores(numberOfStores);
     }
+
+    /**
+     * Shows number of properties by store.
+     */
     public void showsNumberOfPropertiesByStore() {
         List<Store> storesList = controller.getStores();
         for (Store store : storesList) {

@@ -5,17 +5,38 @@ import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 
+/**
+ * The type Register store ui.
+ */
 public class RegisterStoreUI implements Runnable {
 
 
+    /**
+     * The Id.
+     */
     int ID = 0;
 
+    /**
+     * The Phone number.
+     */
     String phoneNumber = "000-000-000";
+    /**
+     * The Address.
+     */
     Address address = null;
+    /**
+     * The Email address.
+     */
     String emailAddress = null;
+    /**
+     * The Designation.
+     */
     String designation = null;
 
 
+    /**
+     * The Controller.
+     */
     RegisterStoreController controller = new RegisterStoreController();
 
 

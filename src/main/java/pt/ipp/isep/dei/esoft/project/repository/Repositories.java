@@ -70,6 +70,9 @@ public class Repositories implements Serializable{
      */
     public final AnnouncementRepository getAnnouncementRepository = new AnnouncementRepository();
 
+    /**
+     * The Booking requests feedback repository.
+     */
     public BookingRequestsFeedbackRepository bookingRequestsFeedbackRepository = new BookingRequestsFeedbackRepository();
 
     private final ReplyRepository replyRepository = new ReplyRepository();
@@ -88,6 +91,11 @@ public class Repositories implements Serializable{
         return instance;
     }
 
+    /**
+     * Gets client repository.
+     *
+     * @return the client repository
+     */
     public ClientRepository getClientRepository() {
         return clientRepository;
     }
@@ -121,6 +129,12 @@ public class Repositories implements Serializable{
     public RoleRepository getRoleRepository() {
         return roleRepository;
     }
+
+    /**
+     * Get employee repository employee repository.
+     *
+     * @return the employee repository
+     */
     public EmployeeRepository getEmployeeRepository(){
         return employeeRepository;
     }
@@ -274,16 +288,27 @@ public class Repositories implements Serializable{
 
     /**
      * Gets property repository.
+     *
      * @return the property repository
      */
     public OrderRepository getOrderRepository() {
         return orderRepository;
     }
 
+    /**
+     * Gets booking requests feedback repository.
+     *
+     * @return the booking requests feedback repository
+     */
     public BookingRequestsFeedbackRepository getBookingRequestsFeedbackRepository() {
         return bookingRequestsFeedbackRepository;
     }
 
+    /**
+     * Gets reply repository.
+     *
+     * @return the reply repository
+     */
     public ReplyRepository getReplyRepository() {
         return replyRepository;
     }

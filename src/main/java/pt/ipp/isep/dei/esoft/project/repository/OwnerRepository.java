@@ -10,17 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Owner repository.
+ */
 public class OwnerRepository implements Serializable {
     private static final long serialVersionUID = 74193049451413887L;
     private static List<Owner> ownerList = new ArrayList<>();
 
 
+    /**
+     * Add owner.
+     *
+     * @param owner the owner
+     */
     public void addOwner(Owner owner) {
         if (validateOwner(owner))
             ownerList.add(owner);
     }
 
 
+    /**
+     * Gets owner list.
+     *
+     * @return the owner list
+     */
     public List<Owner> getOwnerList() {
         return List.copyOf(this.ownerList);
     }
@@ -31,6 +44,13 @@ public class OwnerRepository implements Serializable {
 //        return owner;
 //    }
 
+    /**
+     * Add list.
+     *
+     * @param owner the owner
+     * @return the list
+     * @throws CloneNotSupportedException the clone not supported exception
+     */
     public List<Owner> add(Owner owner) throws CloneNotSupportedException {
 
         ownerList.add(owner);
@@ -54,6 +74,12 @@ public class OwnerRepository implements Serializable {
         return isValid;
     }
 
+    /**
+     * Check owner email boolean.
+     *
+     * @param ownerEmail the owner email
+     * @return the boolean
+     */
     public static boolean checkOwnerEmail(String ownerEmail) {
         for (Owner owner: ownerList) {
             if (ownerEmail.equals(owner.getEmailAddress())) {
@@ -63,6 +89,12 @@ public class OwnerRepository implements Serializable {
         return false;
     }
 
+    /**
+     * Gets owner by email.
+     *
+     * @param email the email
+     * @return the owner by email
+     */
     public Owner getOwnerByEmail(String email) {
         for (Owner owner : ownerList) {
             if (email.equals(owner.getEmailAddress())) {

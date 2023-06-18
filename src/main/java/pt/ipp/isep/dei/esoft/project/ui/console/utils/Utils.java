@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * The type Utils.
+ *
  * @author Paulo Maio pam@isep.ipp.pt
  */
 public class Utils {
@@ -26,6 +28,13 @@ public class Utils {
     }
 
 
+    /**
+     * List and select one t.
+     *
+     * @param <T>  the type parameter
+     * @param list the list
+     * @return the t
+     */
     static public <T> T listAndSelectOne(List<T> list) {
         int len = list.size();
         int option;
@@ -41,6 +50,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Read line from console string.
+     *
+     * @param prompt the prompt
+     * @return the string
+     */
     static public String readLineFromConsole(String prompt) {
         try {
             System.out.println("\n" + prompt);
@@ -55,6 +70,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Read integer from console int.
+     *
+     * @param prompt the prompt
+     * @return the int
+     */
     static public int readIntegerFromConsole(String prompt) {
         do {
             try {
@@ -69,6 +90,12 @@ public class Utils {
         } while (true);
     }
 
+    /**
+     * Read double from console double.
+     *
+     * @param prompt the prompt
+     * @return the double
+     */
     static public double readDoubleFromConsole(String prompt) {
         do {
             try {
@@ -83,6 +110,12 @@ public class Utils {
         } while (true);
     }
 
+    /**
+     * Read date from console date.
+     *
+     * @param prompt the prompt
+     * @return the date
+     */
     static public Date readDateFromConsole(String prompt) {
         do {
             try {
@@ -99,6 +132,12 @@ public class Utils {
         } while (true);
     }
 
+    /**
+     * Confirm boolean.
+     *
+     * @param message the message
+     * @return the boolean
+     */
     static public boolean confirm(String message) {
         String input;
         do {
@@ -108,21 +147,47 @@ public class Utils {
         return input.equalsIgnoreCase("s");
     }
 
+    /**
+     * Show and select one object.
+     *
+     * @param list   the list
+     * @param header the header
+     * @return the object
+     */
     static public Object showAndSelectOne(List list, String header) {
         showList(list, header);
         return selectsObject(list);
     }
 
+    /**
+     * Show and select index int.
+     *
+     * @param list   the list
+     * @param header the header
+     * @return the int
+     */
     static public int showAndSelectIndex(List list, String header) {
         showList(list, header);
         return selectsIndex(list);
     }
+
+    /**
+     * Show and select index 2 int.
+     *
+     * @param announcement the announcement
+     * @return the int
+     */
     public static int showAndSelectIndex2(List<Announcement> announcement) {
         showList2(announcement);
         return selectsIndex2(announcement);
 
     }
 
+    /**
+     * Show list 2.
+     *
+     * @param announcements the announcements
+     */
     static public void showList2(List<Announcement> announcements){
         int index = 0;
         for (Object o : announcements) {
@@ -133,6 +198,13 @@ public class Utils {
         System.out.println();
         System.out.println("0 - Cancel");
     }
+
+    /**
+     * Selects index 2 int.
+     *
+     * @param announcements the announcements
+     * @return the int
+     */
     static public int selectsIndex2(List<Announcement> announcements) {
         String input;
         Integer value;
@@ -149,6 +221,12 @@ public class Utils {
     }
 
 
+    /**
+     * Show list.
+     *
+     * @param list   the list
+     * @param header the header
+     */
     static public void showList(List list, String header) {
         System.out.println(header);
 
@@ -162,6 +240,12 @@ public class Utils {
         System.out.println("0 - Cancel");
     }
 
+    /**
+     * Selects object object.
+     *
+     * @param list the list
+     * @return the object
+     */
     static public Object selectsObject(List list) {
         String input;
         Integer value;
@@ -177,6 +261,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Selects index int.
+     *
+     * @param list the list
+     * @return the int
+     */
     static public int selectsIndex(List list) {
         String input;
         Integer value;
@@ -191,6 +281,13 @@ public class Utils {
 
         return value - 1;
     }
+
+    /**
+     * Read boolean from console boolean.
+     *
+     * @param s the s
+     * @return the boolean
+     */
     public static Boolean readBooleanFromConsole(String s)
     {
         String input;
@@ -200,6 +297,14 @@ public class Utils {
 
         return input.equalsIgnoreCase("y");
     }
+
+    /**
+     * List and select many list.
+     *
+     * @param <T>  the type parameter
+     * @param list the list
+     * @return the list
+     */
     static public <T> List<T> listAndSelectMany(List<T> list) {
         int len = list.size();
         int option;
@@ -214,6 +319,13 @@ public class Utils {
             return list.subList(0, option);
         }
     }
+
+    /**
+     * Serialize.
+     *
+     * @param repo the repo
+     * @throws IOException the io exception
+     */
     public static void serialize(Repositories repo) throws IOException {
 
 
@@ -228,6 +340,13 @@ public class Utils {
         System.out.println("Object has been serialized");
     }
 
+    /**
+     * Deserialize repositories.
+     *
+     * @return the repositories
+     * @throws IOException            the io exception
+     * @throws ClassNotFoundException the class not found exception
+     */
     public static Repositories deserialize() throws IOException, ClassNotFoundException {
         // Reading the object from a file
         FileInputStream file = new FileInputStream(SERIALIZATION_FILENAME);
