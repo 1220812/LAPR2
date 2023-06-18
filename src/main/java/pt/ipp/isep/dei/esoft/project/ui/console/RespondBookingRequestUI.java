@@ -57,6 +57,8 @@ public class RespondBookingRequestUI implements Runnable {
                     + "\nName: " + loggedInAgent.getName()
                     + "\nPhone number: " + loggedInAgent.getPhoneNumber()
                     + "\nMessage from agent: " + reply
+                    + "\nVisit start time: " + message.getNewVisitStartTime()
+                    + "\nVisit end time: " + message.getNewVisitEndTime()
                     + "\nReply date: " + replyDate + "\n\n\n";
             File newFile = new File(path);
             PrintWriter printWriter;
