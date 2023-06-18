@@ -94,8 +94,8 @@ public class OrderRepository implements Serializable {
      *
      * @return list of orders
      */
-    public List<Order> getOrders() {
-        return new ArrayList<>(orders);
+    public static List<Order> getOrders() {
+        return orders;
     }
 
     /**
@@ -103,8 +103,8 @@ public class OrderRepository implements Serializable {
      *
      * @return list of accepted orders
      */
-    public List<Order> getAcceptedOrders() {
-        return new ArrayList<>(acceptedOrders);
+    public static List<Order> getAcceptedOrders() {
+        return acceptedOrders;
     }
 
     /**
@@ -112,8 +112,8 @@ public class OrderRepository implements Serializable {
      *
      * @return list of declined orders
      */
-    public List<Order> getDeclinedOrders() {
-        return new ArrayList<>(declinedOrders);
+    public static List<Order> getDeclinedOrders() {
+        return declinedOrders;
     }
 
     /**

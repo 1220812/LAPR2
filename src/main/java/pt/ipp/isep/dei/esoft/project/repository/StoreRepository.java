@@ -24,8 +24,8 @@ public class StoreRepository implements Serializable {
     }
 
 
-    public List<Store> getStoreList(){
-        return List.copyOf(this.storeList);
+    public static List<Store> getStoreList() {
+        return storeList;
     }
 
     public static Store createStore(String designation, String emailAddress, String phoneNumber, Address address, int ID) {

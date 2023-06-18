@@ -51,6 +51,7 @@ public class ShowLegacyDataUI implements Runnable {
                 }
             } while (flag);
             if (answer.equalsIgnoreCase("Yes")) {
+                controller.clearData();
                 try {
                    controller.importInformationFromFile(path);
                 } catch (IndexOutOfBoundsException e) {
