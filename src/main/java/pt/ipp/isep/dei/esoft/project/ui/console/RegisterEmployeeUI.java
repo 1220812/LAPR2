@@ -121,14 +121,19 @@ public class RegisterEmployeeUI implements Runnable {
         System.out.println();
         System.out.println("####### List of Roles #######");
         role = Utils.listAndSelectOne(controller.getRolesList());
-        if (role == null) return;
+
 
         inputRole = role.toString();
 
         if (inputRole.equals("System Administrator")) {
             SystemAdministrator sa = controller.registerSystemAdministrator(name, email, phone, passportCardNumber, taxNumber, address, role, pass);
-//            System.out.println(sa);
             System.out.println(SystemAdministratorRepository.getSystemAdministratorsList());
+            Employee e = controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+            pass = e.getPass();
+            System.out.println(e);
+            controller.saveEmployee(name, email, pass, role.getDescription());
+            controller.sendRegisteredUserEmail(email, pass);
+            System.out.println();
 
 
         }
@@ -150,30 +155,40 @@ public class RegisterEmployeeUI implements Runnable {
             if (inputRole.equals("Agent")) {
 
                 Agent v = controller.registerAgent(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
-//                System.out.println(v);
                 System.out.println(AgentRepository.getAgentList());
+                Employee e = controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+                pass = e.getPass();
+                System.out.println(e);
+                controller.saveEmployee(name, email, pass, role.getDescription());
+                controller.sendRegisteredUserEmail(email, pass);
+                System.out.println();
 
             } else if (inputRole.equals("Manager Network")) {
 
                 NetworkManager n = controller.RegisterNetworkManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, pass);
-//                System.out.println(n);
                 System.out.println(NetworkManagerRepository.getNetworkManagerList());
+                Employee e = controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+                pass = e.getPass();
+                System.out.println(e);
+                controller.saveEmployee(name, email, pass, role.getDescription());
+                controller.sendRegisteredUserEmail(email, pass);
+                System.out.println();
 
             } else if (inputRole.equals("Store Manager")) {
                 StoreManager s = controller.registerStoreManager(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
-//                System.out.println(s);
                 System.out.println(StoreManagerRepository.getStoreManagerList());
+                Employee e = controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
+                pass = e.getPass();
+                System.out.println(e);
+                controller.saveEmployee(name, email, pass, role.getDescription());
+                controller.sendRegisteredUserEmail(email, pass);
+                System.out.println();
 
             }
         }
-        Employee e = controller.RegisterEmployee(name, email, phone, passportCardNumber, taxNumber, address, role, agency, store, pass);
-        pass = e.getPass();
-        System.out.println(e);
-        controller.saveEmployee(name, email, pass, role.getDescription());
-        controller.sendRegisteredUserEmail(email, pass);
-        System.out.println();
 
-        System.out.println(Repositories.getInstance().getEmployeeRepository().getNewEmployeeList());
+
+
         System.out.println("####### Operation sucess ######");
     }
 }
