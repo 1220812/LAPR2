@@ -8,8 +8,17 @@ import pt.ipp.isep.dei.esoft.project.repository.StoreRepository;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The type Divide controller.
+ */
 public class DivideController implements Serializable {
+    /**
+     * The Store repository.
+     */
     StoreRepository storeRepository = Repositories.getInstance().getStoreRepository();
+    /**
+     * The Brute force.
+     */
     BruteForce bruteForce = new BruteForce();
 
     /**
@@ -30,10 +39,22 @@ public class DivideController implements Serializable {
         bruteForce.storesDivisor(storeRepository.getStoreList(), numberOfStores);
     }
 
+    /**
+     * Gets number of properties.
+     *
+     * @param storeID the store id
+     * @return the number of properties
+     */
     public int getNumberOfProperties(int storeID) {
         return BruteForce.getAnnouncementsByStoreID(storeID).size();
     }
 
+    /**
+     * Properties int.
+     *
+     * @param storesList the stores list
+     * @return the int
+     */
     public int properties(List<Store> storesList) {
         return BruteForce.getTotalNumberOfProperties(storesList);
     }

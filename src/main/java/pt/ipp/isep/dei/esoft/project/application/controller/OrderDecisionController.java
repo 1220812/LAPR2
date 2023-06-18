@@ -12,10 +12,25 @@ import pt.isep.lei.esoft.auth.UserSession;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Order decision controller.
+ */
 public class OrderDecisionController {
+    /**
+     * The Repositories.
+     */
     Repositories repositories = Repositories.getInstance();
+    /**
+     * The Order repository.
+     */
     OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
+    /**
+     * The Announcement repository.
+     */
     AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
+    /**
+     * The Authentication repository.
+     */
     AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
 
     /**
@@ -35,13 +50,23 @@ public class OrderDecisionController {
     public UserSession getCurrentSession(){
         return this.repositories.getAuthenticationRepository().getCurrentUserSession();
     }
+
     /**
      * Method that returns the list of announcements sorted by date of creation
+     *
+     * @param agent the agent
      * @return list of announcements sorted by date of creation
      */
     public List<Announcement> getAnnouncementAssignedList(Agent agent){
         return this.repositories.getAnnouncementRepository.getAnnouncementAssignedList(agent);
     }
+
+    /**
+     * Gets announcement list sorted by date.
+     *
+     * @param agent the agent
+     * @return the announcement list sorted by date
+     */
     public List<Announcement> getAnnouncementListSortedByDate(Agent agent) {
         List<Announcement> announcementList = new ArrayList<>(getAnnouncementAssignedList(agent));
         announcementList.sort(new AnnouncementDateComparator());
@@ -50,6 +75,7 @@ public class OrderDecisionController {
 
     /**
      * Method that returns the list orders sorted by price
+     *
      * @param orderList list of orders
      * @return list of orders sorted by price
      */
@@ -63,9 +89,10 @@ public class OrderDecisionController {
      * The properties are sorted from oldest to most recent, and for each property, the
      * purchase orders are sorted by the amount offered (highest offer first).
      *
+     * @param announcement the announcement
+     * @param orders       the orders
      * @return list of properties with their purchase orders
      */
-
     public List<Order> getOrdersByAnnouncement(Announcement announcement, List<Order> orders) {
         List<Order> announcementOrders = new ArrayList<>();
         for (Order order : orders) {
@@ -78,16 +105,18 @@ public class OrderDecisionController {
 
     /**
      * Method that returns a list of all orders
+     *
      * @return list of all orders
      */
-
     public List<Order> getAllOrders(){
         return orderRepository.getOrders();
     }
 
     /**
      * Method that accepts an order for an announcement, declines the other orders for the same announcement and removes that announcement from the list of announcements
-     * @param order order to be accepted
+     *
+     * @param order        order to be accepted
+     * @param announcement the announcement
      */
     public void acceptOrder(Order order, Announcement announcement){
         orderRepository.acceptOrder(order);
@@ -98,11 +127,18 @@ public class OrderDecisionController {
 
     /**
      * Method that shows the email of the logged user
+     *
      * @return email of the logged user
      */
     public String getUser(){
         return authenticationRepository.getCurrentUserSession().getUserId().getEmail();
     }
+
+    /**
+     * Remove order.
+     *
+     * @param order the order
+     */
     public void removeOrder(Order order){
         orderRepository.removeOrder(order);
     }

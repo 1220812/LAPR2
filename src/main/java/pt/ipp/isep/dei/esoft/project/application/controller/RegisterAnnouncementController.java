@@ -232,22 +232,52 @@ public class RegisterAnnouncementController {
         return this.repositories.getAuthenticationRepository().getCurrentUserSession();
     }
 
+    /**
+     * Gets owner phone.
+     *
+     * @param owner the owner
+     * @return the owner phone
+     */
     public String getOwnerPhone(Owner owner) {
         return owner.getPhoneNumber();
     }
 
+    /**
+     * Gets agent phone.
+     *
+     * @param agent the agent
+     * @return the agent phone
+     */
     public String getAgentPhone(Agent agent) {
         return agent.getPhoneNumber();
     }
 
+    /**
+     * Get property type by announcement list.
+     *
+     * @param announcement the announcement
+     * @return the list
+     */
     public List<PropertyType> getPropertyTypeByAnnouncement(Announcement announcement){
         return Repositories.getInstance().getPropertyTypeRepository().getPropertyType();
     }
 
+    /**
+     * Gets address.
+     *
+     * @param announcement the announcement
+     * @return the address
+     */
     public Address getAddress(Announcement announcement) {
         return announcement.getProperty().getAddress();
     }
 
+    /**
+     * Gets agent name.
+     *
+     * @param agent the agent
+     * @return the agent name
+     */
     public String getAgentName(Agent agent) {
         return agent.getName();
     }
