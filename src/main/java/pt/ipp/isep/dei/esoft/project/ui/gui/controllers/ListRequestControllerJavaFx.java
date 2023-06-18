@@ -156,28 +156,6 @@ public class ListRequestControllerJavaFx implements Initializable {
     }
 
 
-//    @FXML
-//    public void showSelected(ActionEvent event) {
-//        selectedMessage = lView.getSelectionModel().getSelectedItem();
-//        selectedMessage= (pt.ipp.isep.dei.esoft.project.domain.Message) lView.getItems();
-//        setMensagemSelecionada(selectedMessage);
-//
-//        try {
-//            fxmlLoader = new FXMLLoader(new File("src/main/resources/fxml/us016.fxml").toURL());
-//        } catch (MalformedURLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        stage = (Stage) lView.getScene().getWindow();
-//        try {
-//            scene = new Scene(fxmlLoader.load());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        stage.setScene(scene);
-//        stage.show();
-//
-//    }
-
 
 }
 

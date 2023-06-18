@@ -25,10 +25,9 @@ public class ListRequestsGUI extends Application implements Runnable {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/resources/fxml/us015.fxml").toURL());
         FXMLLoader fxmlLoader1 = new FXMLLoader(new File("src/main/resources/fxml/us015.fxml").toURL());
-        FXMLLoader fxmlLoader2 = new FXMLLoader(new File("src/main/resources/fxml/us016.fxml").toURL());
+
         Scene scene = new Scene(fxmlLoader.load());
         Pane pane = fxmlLoader1.load();
-        Pane pane1 = fxmlLoader2.load();
 
         Image iconImage = new Image(("list2.jpg"));
 
@@ -40,7 +39,7 @@ public class ListRequestsGUI extends Application implements Runnable {
 
         Background background = new Background(backgroundImage);
         pane.setBackground(background);
-        pane1.setBackground(background);
+
 
         stage.getIcons().add(iconImage);
 
