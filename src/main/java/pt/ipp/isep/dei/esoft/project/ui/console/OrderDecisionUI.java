@@ -84,10 +84,9 @@ public class OrderDecisionUI implements Runnable {
 
         Agent agent = controller.getCurrentAgent();
         controller.acceptOrder(order, announcement);
-        System.out.println("Order accepted!");
         System.out.println(controller.getAnnouncementListSortedByDate(agent));
         LocalDate date = LocalDate.now();
-        String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\email";
+        String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\emails";
         String replyMessage =
                 "Subject: Order update - declined"
                         + "\nFrom: " + agent.getEmailAddress()
@@ -122,7 +121,7 @@ public class OrderDecisionUI implements Runnable {
             System.out.println("Order accepted!");
             System.out.println(controller.getAnnouncementListSortedByDate(agent));
             LocalDate date = LocalDate.now();
-            String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\email";
+            String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\emails";
              String replyMessage =
              "Subject: Order update - Accepted"
              + "\nFrom: " + agent.getEmailAddress()

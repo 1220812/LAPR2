@@ -1,0 +1,18 @@
+Subject: Order update - declined
+From: agent@this.app
+To: null
+Body:
+Property info:
+Property type: Land
+Address: 
+State = California
+District = Northem
+City = Los Angeles
+Zipcode = 12345
+Street address= Street A
+Door number = 4
+Floor number = 6
+Agent info:
+Name: Agent
+Phone number: 988654321
+Reply date: 2023-06-19

@@ -402,9 +402,9 @@ public class Bootstrap implements Runnable {
         Property property1 = new Property(10000, 10, address1, propertyType1, photoList1);
         Property property2 = new House(address2, 1023, 345, propertyType2, 12, 4, 1, true, new SunExposure("North"), true, photoList2, availableEquipmentList1);
         Property property3 = new Residence(address3, 12023, 3425, propertyType3, 132, 34, 31, photoList2, availableEquipmentList1);
-        LocalDate requestDate1 = LocalDate.of(2021, 1, 1);
+        LocalDate requestDate1 = LocalDate.of(2020, 1, 1);
         LocalDate requestDate2 = LocalDate.of(2021, 2, 2);
-        LocalDate requestDate3 = LocalDate.of(2021, 3, 3);
+        LocalDate requestDate3 = LocalDate.of(2000, 3, 3);
         TaxNumber taxNumber1 = new TaxNumber("123456789");
         TaxNumber taxNumber2 = new TaxNumber("123456789");
         TaxNumber taxNumber3 = new TaxNumber("195451235");
