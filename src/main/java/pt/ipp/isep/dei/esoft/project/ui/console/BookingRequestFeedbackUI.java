@@ -86,7 +86,8 @@ public class BookingRequestFeedbackUI implements Runnable{
                 printWriter.close();
 
 
-            } else if (finalFeedback.equalsIgnoreCase("Yes")) {
+            } else
+                if (finalFeedback.equalsIgnoreCase("Yes")) {
                 String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\emails";
                 LocalDate date = LocalDate.now();
 
