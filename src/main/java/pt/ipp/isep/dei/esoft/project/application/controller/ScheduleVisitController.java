@@ -136,6 +136,10 @@ public class ScheduleVisitController {
         String email = us.getUserId().getEmail();
         return Repositories.getInstance().getClientRepository().getClientByEmail(email);
     }
+
+    public List<Announcement> getAnnouncementList() {
+        return repositories.getAnnouncementRepository.getAnnouncementsList();
+    }
 }
 
 

@@ -118,7 +118,6 @@ public class OrderDecisionUI implements Runnable {
             System.out.println("This order has already been accepted");
         } else {
             controller.acceptOrder(order, announcement);
-            System.out.println("Order accepted!");
             System.out.println(controller.getAnnouncementListSortedByDate(agent));
             LocalDate date = LocalDate.now();
             String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\emails";

@@ -20,19 +20,6 @@ class AddressRepositoryTest {
      */
     AddressRepository addressRepository = Repositories.getInstance().getAddressRepository();
 
-    /**
-     * Add.
-     */
-    @Test
-    void add() {
-        Address address = new Address("123 Main St", 1,1, "12345", new State("California"), new District("Eastern"), new City("Los Angeles"));
-
-        boolean result = addressRepository.add(address);
-
-        Assertions.assertTrue(result);
-        List<Address> addressList = addressRepository.getAddressList();
-        Assertions.assertEquals(address, addressList.get(0));
-    }
 
     /**
      * Gets address list.

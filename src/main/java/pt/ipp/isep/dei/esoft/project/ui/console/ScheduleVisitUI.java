@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.Client;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
+import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
 import pt.ipp.isep.dei.esoft.project.repository.MessageRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
@@ -42,10 +43,14 @@ public class ScheduleVisitUI implements Runnable {
     ScheduleVisitController controller = new ScheduleVisitController();
 
 
+
     public void run() {
         List<Message> MessageList = MessageRepository.getMessageList();
 
         Client loggedInClient = controller.getCurrentClient();
+
+        List<Announcement> AnnouncementList = controller.getAnnouncementList();
+        System.out.println(AnnouncementList.toArray().length);
 
         System.out.println("Schedule a visit:");
 
@@ -55,11 +60,11 @@ public class ScheduleVisitUI implements Runnable {
             System.out.println("####### List of Annoucements #######");
             int inputAnnou;
 
-
-            inputAnnou = Utils.showAndSelectIndex2(controller.getAnnouncement()) + 1;
+            System.out.println(AnnouncementList);
+            inputAnnou = Utils.showAndSelectIndex2(AnnouncementList) + 1;
             if (inputAnnou == 0) return;
 
-            announcement = controller.getAnnouncement().get(inputAnnou - 1);
+            announcement = AnnouncementList.get(inputAnnou - 1);
 
 
             System.out.println("#######Sugest a date to visit the property#######");
