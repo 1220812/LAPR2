@@ -4,9 +4,9 @@
 autonumber
 actor "Agent" as AGENT
 participant "ListRequestsGUI" as UI
-participant ":ListRequestController" as CTRL
-participant ":RequestRepository" as REQREPO
-participant ":sortingMethods.properties" as SM
+participant "controller\n:ListRequestController" as CTRL
+participant "requestRepository\n:RequestRepository" as REQREPO
+participant ":sortingMethods\nSortingMethods.properties" as SM
 
 
 title "US015 - Alternative flux (Sorting Methods)"

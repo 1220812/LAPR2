@@ -2,11 +2,11 @@
 autonumber
 actor "Agent" as AGENT
 participant "ListRequestsGUI" as UI
-participant ":ListRequestController" as CTRL
-participant ":Repositories" as REPO
-participant ":MessageRepository" as REQREPO
-participant ":AuthenticationRepository" as AUTHREPO
-participant ":AgentRepository" as AGENTREPO
+participant "controller\n:ListRequestController" as CTRL
+participant ":repositories\nRepositories" as REPO
+participant ":messageRepository\nMessageRepository" as REQREPO
+participant ":authenticationRepository\nAuthenticationRepository" as AUTHREPO
+participant ":agentRepository\nAgentRepository" as AGENTREPO
 
 title "US015 - Main activity Flux (Sequence Diagram)"
 
