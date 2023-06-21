@@ -46,11 +46,11 @@ public class AnalyseDealsUI implements Runnable {
     }
 
     private int displayRegressionModelOptions() {
-        return Utils.readIntegerFromConsole("Do you wish to use a Simple Linear Regression or a Multiple Linear Regression?\n" + "1 - Simple Linear Regression\n" + "2 - Multiple Linear Regression\n");
+        return Utils.readIntegerFromConsole("Choose the type of regression.\n" + "1 - Simple Linear Regression\n" + "2 - Multiple Linear Regression\n");
     }
 
     private int displayIndependentVariableOptions() {
-        return Utils.readIntegerFromConsole("Please choose a variable to be used as the independent variable.\n" + "1 - Area (in square feet)\n" + "2 - Distance from city center (in miles)\n" +
+        return Utils.readIntegerFromConsole("Choose the independent variable.\n" + "1 - Area\n" + "2 - Distance from city center\n" +
                 "3 - Number of bedrooms\n" + "4 - Number of bathrooms\n" + "5 - Number of parking\n");
     }
 

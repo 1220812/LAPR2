@@ -15,8 +15,7 @@ hide methods
 'class Platform {
 '  -description
 '}
-
-class SendEmailMessage {
+class ReplyMessage{
 }
 
 class Agent {
@@ -71,10 +70,8 @@ class Message {
 
 
 Agent -- Client: Informs >
-(Agent, Client) -- SendEmailMessage: making use of
-
+(Agent, Client) -- ReplyMessage: making use of
 Property "1" -- "*" Message: has >
-SendEmailMessage "1" -- "1" Message: about >
 Agent "1" -- Message: decides >
 Message "*" -- "1" Client: makes <
 Address "1" -- "1" Property: has >
