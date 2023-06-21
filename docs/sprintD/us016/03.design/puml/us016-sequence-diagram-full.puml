@@ -25,7 +25,7 @@ activate ADM
             'create CTRL
             UI -> CTRL** : create
 
-            UI -> CTRL : getBookingRequest()
+            UI -> CTRL : getMessage()
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -43,10 +43,10 @@ activate ADM
                 CTRL -> Message : getMessage()
                 activate Message
 
-                   Message --> CTRL : bookingRequestList
+                   Message --> CTRL : messageList
                 deactivate Message
 
-                CTRL --> UI : bookingRequestList
+                CTRL --> UI : messageList
             deactivate CTRL
 
             UI --> ADM : Shows the list off all booking requests and \n and asks to sleect one
@@ -55,60 +55,19 @@ activate ADM
     ADM -> UI : Selects a booking request and asks to select the option to respond
     activate UI
 
-        UI --> ADM : Asks to accept or decline the booking request
-    deactivate UI
-
-    ADM -> UI : Accepts or declines
-    activate UI
 
     UI --> ADM : Informs about the success of the operation
 
     deactivate UI
 
-    alt if the booking request was rejected
+
+    ADM -> UI : Responding to the booking request
+    activate UI
 
 
+       UI -> CTRL : replyMessage
 
-
-   ADM -> UI : Rejected booking request
-
-   activate UI
-
-   UI -> CTRL : sendEmailBookingRequestRejected(requestId)
-
-
-
-   activate CTRL
-
-   CTRL -> MessageRepository: getBookingRequestById(requestId)
-
-   activate MessageRepository
-
-   MessageRepository --> CTRL : bookingRequest
-
-   deactivate MessageRepository
-
-
-   CTRL -> SendEmailMessage : sendEmailBookingRequestRejected(bookingRequest)
-
-
-   activate SendEmailMessage
-
-   SendEmailMessage --> CTRL :
-
-
-
-   deactivate SendEmailMessage
-
-    else if the booking request was accepted
-
-    ADM -> UI : Accepted booking request
-
-
-
-       UI -> CTRL : sendEmailBookingRequestAccepted(requestId)
-
-      CTRL -> MessageRepository: getBookingRequestById(requestId)
+      CTRL -> MessageRepository: getBookingRequest
 
        activate MessageRepository
 
@@ -117,27 +76,22 @@ activate ADM
        deactivate MessageRepository
 
 
-    CTRL -> SendEmailMessage : sendEmailBookingRequestAccepted(bookingRequest)
+    CTRL -> replyMessage : replyMessage(message)
 
-    activate SendEmailMessage
+    activate replyMessage
 
-    SendEmailMessage --> CTRL :
+    replyMessage --> CTRL : writes message
 
-    deactivate SendEmailMessage
+    deactivate replyMessage
 
-    CTRL -> Booking** : create(bookingRequest)
 
-    CTRL -> MessageRepository : save(booking)
+    CTRL -> MessageRepository : save(message)
 
     activate MessageRepository
 
     MessageRepository --> CTRL :
 
     deactivate MessageRepository
-
-
-
-    end
 
     CTRL --> UI:
 

@@ -85,7 +85,7 @@ RespondBookingRequestUI ..> RespondBookingRequestController
 RespondBookingRequestController ..> Repositories : repositories
 Repositories --> MessageRepository : has a
 
-Agent --> Message: sends a
+Agent --> Message: reply
 MessageRepository --> "1" Message
 
 
