@@ -65,7 +65,6 @@ public class AnalyseDealsController {
         data = getBedrooms(data, 3);
         data = getBathrooms(data, 4);
         data = getNumberOfParkingSpaces(data, 5);
-        System.out.println("ola");
         List<String> output = Statistics.calcMultipleRegression(data, confidenceLevel);
         return multiRegressionToString(output);
     }

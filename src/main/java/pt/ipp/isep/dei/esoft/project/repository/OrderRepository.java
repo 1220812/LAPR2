@@ -211,11 +211,9 @@ public class OrderRepository implements Serializable {
 
     public List<Order> getOrderAcceptedListHousesAndApparts(){
         List<Order> list = new ArrayList<>();
-        PropertyType house = new PropertyType("House");
-        PropertyType apartment = new PropertyType("Apartment");
         for (Order order : acceptedOrders) {
-            PropertyType propertyType = order.getAnnouncement().getProperty().getPropertyType();
-            if (propertyType.equals(house) || propertyType.equals(apartment)) {
+            String type = order.getAnnouncement().getProperty().getPropertyType().toString();
+            if (order.getStatus().equals(Status.ACCEPTED) && (type.equalsIgnoreCase("House") || type.equalsIgnoreCase("Apartment")) ) {
                 list.add(order);
             }
         }
