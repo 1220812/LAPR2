@@ -1,0 +1,25 @@
+Subject: Acceptance to response to booking request
+From: client@this.app
+To: agent@this.app
+Body:
+Property info:
+Property type: Apartment
+Address: 
+State = Nevada
+District = Eastern
+City = New York
+Zipcode = 12346
+Street address= Street B
+Door number = 1
+Floor number = 3
+Agent info:
+Name: Agent
+Phone number: 987654321
+Client info:
+Name: Joao
+Phone number: 987654321
+Visit start time: 2026-01-01T00:00
+Visit end time: 2026-01-01T00:01
+Reply date: 2023-06-20
+
+

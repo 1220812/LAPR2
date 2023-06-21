@@ -38,7 +38,7 @@ public class AnalyseDealsUI implements Runnable {
                 requestData();
             }
         } else if (regressionModel == 2) {
-            controller.calcMultipleRegression(deals, confidenceLevel);
+            System.out.println(controller.calcMultipleRegression(deals, confidenceLevel));
         } else {
             System.out.println("Invalid option. Please try again.");
             requestData();
