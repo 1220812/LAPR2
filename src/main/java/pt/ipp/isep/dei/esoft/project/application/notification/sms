@@ -5,13 +5,13 @@ Body:
 Property info:
 Property type: [Land, Apartment, House]
 Address: 
-State = 1
-District = 1
-City = 1
-Zipcode = 12334
-Street address= 1
+State = sdfghjkl
+District = sdfghjklç
+City = sdfghjklç
+Zipcode = 12345
+Street address= sdfghjklç
 Door number = 2
 Floor number = 0
 Agent info:
 Name: Agent
-Reply date: 2023-06-20
+Reply date: 2023-06-18
