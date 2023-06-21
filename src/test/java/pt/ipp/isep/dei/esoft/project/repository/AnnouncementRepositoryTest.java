@@ -9,8 +9,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Announcement repository test.
+ */
 class AnnouncementRepositoryTest {
 
+    /**
+     * Gets announcements.
+     */
     @Test
     void getAnnouncements() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -25,6 +31,11 @@ class AnnouncementRepositoryTest {
         assertTrue(announcements.contains(announcement));
     }
 
+    /**
+     * Add.
+     *
+     * @throws CloneNotSupportedException the clone not supported exception
+     */
     @Test
     void add() throws CloneNotSupportedException {
         AnnouncementRepository announcementRepository = new AnnouncementRepository();
@@ -38,6 +49,9 @@ class AnnouncementRepositoryTest {
         assertTrue(addedAnnouncement.contains(announcement));
     }
 
+    /**
+     * Validate announcement.
+     */
     @Test
     void validateAnnouncement() {
         AnnouncementRepository announcementRepository = new AnnouncementRepository();
@@ -47,13 +61,16 @@ class AnnouncementRepositoryTest {
         LocalDate date = LocalDate.of(2020, 1, 1);
         Property property = new Property(100, 1000, address, propertyType, 200000, date);
         Announcement announcement = new Announcement(property, date, 5, requestType, 100000, new Owner("John", "912345678", "john@test.com", address, new TaxNumber("123456789"), new PassportCardNumber("12345678")), new Store("Store", 1));
-        boolean valid = AnnouncementRepository.validateAnnouncement(announcement);
+        boolean valid = announcementRepository.validateAnnouncement(announcement);
         assertTrue(valid);
         announcementRepository.addAnnouncement(announcement);
-        boolean valid1 = AnnouncementRepository.validateAnnouncement(announcement);
+        boolean valid1 = announcementRepository.validateAnnouncement(announcement);
         assertFalse(valid1);
     }
 
+    /**
+     * Gets announcements list.
+     */
     @Test
     void getAnnouncementsList() {
         AnnouncementRepository announcementRepository = new AnnouncementRepository();
@@ -68,6 +85,9 @@ class AnnouncementRepositoryTest {
         assertTrue(announcements.contains(announcement));
     }
 
+    /**
+     * Add announcement.
+     */
     @Test
     void addAnnouncement() {
         AnnouncementRepository announcementRepository = new AnnouncementRepository();

@@ -63,13 +63,15 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_AGENT, AuthenticationController.ROLE_AGENT);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_CLIENT, AuthenticationController.ROLE_CLIENT);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_NETWORK_MANAGER, AuthenticationController.ROLE_NETWORK_MANAGER);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_STORE_MANAGER, AuthenticationController.ROLE_STORE_MANAGER);
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin", AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserWithRole("Agent", "agent@this.app", "agent", AuthenticationController.ROLE_AGENT);
         authenticationRepository.addUserWithRole("Agent", "pedro@gmail.com", "agent", AuthenticationController.ROLE_AGENT);
         authenticationRepository.addUserWithRole("Owner", "owner@this.app", "owner", AuthenticationController.ROLE_OWNER);
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd", AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserWithRole("Client", "client@this.app", "client", AuthenticationController.ROLE_CLIENT);
-        authenticationRepository.addUserWithRole("Network Manager", "networkManager@this.app", "network", AuthenticationController.ROLE_NETWORK_MANAGER);
+        authenticationRepository.addUserWithRole("Network Manager", "networkmanager@this.app", "network", AuthenticationController.ROLE_NETWORK_MANAGER);
+        authenticationRepository.addUserWithRole("Store Manager", "storemanager@this.app", "store", AuthenticationController.ROLE_STORE_MANAGER);
     }
 
     private void addAddresses() {
@@ -192,7 +194,7 @@ public class Bootstrap implements Runnable {
         Agency agency1 = new Agency(1, "agency1", address1, "agency1@this.app", "123456789");
         Agency agency2 = new Agency(2, "agency2", address2, "agency2@this.app", "987654321");
         Agent agent1 = new Agent("Joao", "joao@gmail.com", "918734521", passportCardNumber1, taxNumber1, address1, new Role("Agent"), agency1, store1, "joao");
-        Agent agent2 = new Agent("Pedro", "pedro@gmail.com", "915734521", passportCardNumber2, taxNumber2, address2, new Role("Agent"), agency2, store2, "pedro");
+        Agent agent2 = new Agent("agent", "agent@this.app", "915734521", passportCardNumber2, taxNumber2, address2, new Role("Agent"), agency2, store2, "pedro");
         Owner owner1 = new Owner("Maria", "912345678", "maria@gmail.com", address1, taxNumber1, passportCardNumber1);
         Owner owner2 = new Owner("Madalena", "912945678", "madalena@gmail.com", address2, taxNumber2, passportCardNumber2);
         Owner owner3 = new Owner("Manuel", "912545698", "manuel@gmail.com", address2, taxNumber, passportCardNumber3);
@@ -267,7 +269,7 @@ public class Bootstrap implements Runnable {
         Agency agency1 = new Agency(1, "agency1", address1, "agency1@this.app", "123456789");
         Agency agency2 = new Agency(2, "agency2", address2, "agency2@this.app", "987654321");
         Agent agent1 = new Agent("Joao", "joao@gmail.com", "918734521", passportCardNumber1, taxNumber1, address1, new Role("Agent"), agency1, store1, "joao");
-        Agent agent2 = new Agent("Pedro", "pedro@gmail.com", "915734521", passportCardNumber2, taxNumber2, address2, new Role("Agent"), agency2, store2, "pedro");
+        Agent agent2 = new Agent("agent", "agent@this.app", "915734521", passportCardNumber2, taxNumber2, address2, new Role("Agent"), agency2, store2, "pedro");
         Owner owner1 = new Owner("Maria", "912345678", "maria@gmail.com", address1, taxNumber1, passportCardNumber1);
         Owner owner2 = new Owner("Madalena", "912945678", "madalena@gmail.com", address2, taxNumber2, passportCardNumber2);
         Owner owner3 = new Owner("Manuel", "912545698", "manuel@gmail.com", address2, taxNumber, passportCardNumber3);
@@ -287,13 +289,13 @@ public class Bootstrap implements Runnable {
         order4.setStatus(Status.ACCEPTED);
         order5.setStatus(Status.ACCEPTED);
         order6.setStatus(Status.ACCEPTED);
-        orderRepository.add(order1);
-        orderRepository.add(order2);
-        orderRepository.add(order3);
-        orderRepository.add(order);
-        orderRepository.add(order4);
-        orderRepository.add(order5);
-        orderRepository.add(order6);
+        orderRepository.addOrder(order1);
+        orderRepository.addOrder(order2);
+        orderRepository.addOrder(order3);
+        orderRepository.addOrder(order);
+        orderRepository.addOrder(order4);
+        orderRepository.addOrder(order5);
+        orderRepository.addOrder(order6);
     }
 
     private void addMessage() {
@@ -371,6 +373,15 @@ public class Bootstrap implements Runnable {
         photoList1.add(photo1);
         photoList2.add(photo2);
         photoList3.add(photo3);
+        List<AvailableEquipment> availableEquipmentList1 = new ArrayList<>();
+        List<AvailableEquipment> availableEquipmentList2 = new ArrayList<>();
+        List<AvailableEquipment> availableEquipmentList3 = new ArrayList<>();
+        AvailableEquipment availableEquipment1 = new AvailableEquipment("AAA");
+        AvailableEquipment availableEquipment2 = new AvailableEquipment("bbb");
+        AvailableEquipment availableEquipment3 = new AvailableEquipment("CCC");
+        availableEquipmentList1.add(availableEquipment1);
+        availableEquipmentList2.add(availableEquipment2);
+        availableEquipmentList3.add(availableEquipment3);
         RequestType requestType1 = new RequestType("Sale", 0);
         RequestType requestType2 = new RequestType("Sale", 0);
         RequestType requestType3 = new RequestType("Rent", 3);
@@ -389,11 +400,11 @@ public class Bootstrap implements Runnable {
         Address address2 = new Address("Street B", 1, 3, "12346", state2, district2, city2);
         Address address3 = new Address("Street C", 1, 2, "12347", state1, district3, city2);
         Property property1 = new Property(10000, 10, address1, propertyType1, photoList1);
-        Property property2 = new House(address2, 1000, 12, propertyType3, 2, 2, 1, true, true, true, new SunExposure("North"), true, photoList2);
-        Property property3 = new Residence(address3, 300, 2, propertyType2, 2, 1, 1, photoList3, true, false);
-        LocalDate requestDate1 = LocalDate.of(2021, 1, 1);
+        Property property2 = new House(address2, 1023, 345, propertyType2, 12, 4, 1, true, new SunExposure("North"), true, photoList2, availableEquipmentList1);
+        Property property3 = new Residence(address3, 12023, 3425, propertyType3, 132, 34, 31, photoList2, availableEquipmentList1);
+        LocalDate requestDate1 = LocalDate.of(2020, 1, 1);
         LocalDate requestDate2 = LocalDate.of(2021, 2, 2);
-        LocalDate requestDate3 = LocalDate.of(2021, 3, 3);
+        LocalDate requestDate3 = LocalDate.of(2000, 3, 3);
         TaxNumber taxNumber1 = new TaxNumber("123456789");
         TaxNumber taxNumber2 = new TaxNumber("123456789");
         TaxNumber taxNumber3 = new TaxNumber("195451235");

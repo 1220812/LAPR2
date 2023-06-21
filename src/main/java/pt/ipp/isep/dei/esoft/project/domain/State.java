@@ -5,14 +5,19 @@ import pt.ipp.isep.dei.esoft.project.repository.StateRepository;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type State.
+ */
 public class State implements Serializable {
     /**
      * State name
      */
     private String name;
     private static final String DEFAULT_NAME="none";
+
     /**
      * Method that creates a State with name
+     *
      * @param name name of the state
      */
     public State(String name) {
@@ -25,15 +30,19 @@ public class State implements Serializable {
     public State(){
         this.name = DEFAULT_NAME;
     }
+
     /**
      * Method to show the state name
+     *
      * @return state name
      */
     public String getName() {
         return name;
     }
+
     /**
      * Method to change the state name
+     *
      * @param name changed state name
      */
     public void setName(String name) {

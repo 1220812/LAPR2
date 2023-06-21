@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Show legacy data ui.
+ */
 public class ShowLegacyDataUI implements Runnable {
     /**
      * Controller attribute.
@@ -51,6 +54,7 @@ public class ShowLegacyDataUI implements Runnable {
                 }
             } while (flag);
             if (answer.equalsIgnoreCase("Yes")) {
+                controller.clearData();
                 try {
                    controller.importInformationFromFile(path);
                 } catch (IndexOutOfBoundsException e) {

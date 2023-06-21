@@ -7,19 +7,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Sun exposure repository.
+ */
 public class SunExposureRepository implements Serializable {
     private List<SunExposure> sunExposureList = new ArrayList<>();
 
+    /**
+     * Addsun exposure.
+     *
+     * @param sunExposure the sun exposure
+     */
     public void addsunExposure(SunExposure sunExposure){
         if(validateSunExposure(sunExposure))
             sunExposureList.add(sunExposure);
     }
 
 
+    /**
+     * Get sun exposure list list.
+     *
+     * @return the list
+     */
     public List<SunExposure> getSunExposureList(){
         return List.copyOf(this.sunExposureList);
     }
 
+    /**
+     * Add list.
+     *
+     * @param sunExposure the sun exposure
+     * @return the list
+     */
     public List<SunExposure> add(SunExposure sunExposure) {
 
         sunExposureList.add(sunExposure);

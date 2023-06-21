@@ -1,33 +1,84 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Announcement;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Comparators.AnnouncementDateComparator;
 import pt.ipp.isep.dei.esoft.project.domain.Comparators.OrderPriceComparator;
-import pt.ipp.isep.dei.esoft.project.domain.EmailService;
-import pt.ipp.isep.dei.esoft.project.domain.Order;
-import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.repository.AnnouncementRepository;
+import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrderRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.isep.lei.esoft.auth.UserSession;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+/**
+ * The type Order decision controller.
+ */
 public class OrderDecisionController {
+    /**
+     * The Repositories.
+     */
+    Repositories repositories = Repositories.getInstance();
+    /**
+     * The Order repository.
+     */
     OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
+    /**
+     * The Announcement repository.
+     */
     AnnouncementRepository announcementRepository = Repositories.getInstance().getAnnouncementRepository();
-    EmailService emailService = new EmailService();
+    /**
+     * The Authentication repository.
+     */
+    AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
+
+    /**
+     * Gets current agent.
+     *
+     * @return the current agent
+     */
+    public Agent getCurrentAgent() {
+        return this.repositories.getAgentRepository().getAgentByUserSession(getCurrentSession());
+    }
+
+    /**
+     * Get current session user session.
+     *
+     * @return the user session
+     */
+    public UserSession getCurrentSession(){
+        return this.repositories.getAuthenticationRepository().getCurrentUserSession();
+    }
 
     /**
      * Method that returns the list of announcements sorted by date of creation
+     *
+     * @param agent the agent
      * @return list of announcements sorted by date of creation
      */
-    public List<Announcement> getAnnouncementListSortedByDate() {
-        List<Announcement> announcementList = new ArrayList<>(announcementRepository.getAnnouncementsList());
+    public List<Announcement> getAnnouncementAssignedList(Agent agent){
+        return this.repositories.getAnnouncementRepository.getAnnouncementAssignedList(agent);
+    }
+
+    /**
+     * Gets announcement list sorted by date.
+     *
+     * @param agent the agent
+     * @return the announcement list sorted by date
+     */
+    public List<Announcement> getAnnouncementListSortedByDate(Agent agent) {
+        List<Announcement> announcementList = new ArrayList<>(getAnnouncementAssignedList(agent));
         announcementList.sort(new AnnouncementDateComparator());
         return announcementList;
     }
+
+    /**
+     * Method that returns the list orders sorted by price
+     *
+     * @param orderList list of orders
+     * @return list of orders sorted by price
+     */
     public List<Order> getOrderListSortedByPrice(List<Order> orderList){
         orderList.sort(new OrderPriceComparator().reversed());
         return orderList;
@@ -38,9 +89,10 @@ public class OrderDecisionController {
      * The properties are sorted from oldest to most recent, and for each property, the
      * purchase orders are sorted by the amount offered (highest offer first).
      *
+     * @param announcement the announcement
+     * @param orders       the orders
      * @return list of properties with their purchase orders
      */
-
     public List<Order> getOrdersByAnnouncement(Announcement announcement, List<Order> orders) {
         List<Order> announcementOrders = new ArrayList<>();
         for (Order order : orders) {
@@ -52,59 +104,48 @@ public class OrderDecisionController {
     }
 
     /**
-     * Method to accept a purchase order for a property.
-     * When a purchase order is accepted, all other orders for the same property are declined,
-     * @param order the purchase order to accept
-     */
-    public void acceptPurchaseOrder(Order order) {
-        declineOtherOrders(order);
-        String clientEmail = order.getEmail();
-        String message = "Your offer for the property with the order number " + order.getOrderID() +
-                " has been accepted. Congratulations!";
-        emailService.sendMessage(clientEmail, message);
-    }
-
-    /**
-     * Method to decline a purchase order for an announcement.
-     *
-     * @param order the purchase order to be declined
-     */
-    public void declinePurchaseOrder(Order order) {
-        Announcement announcement = order.getAnnouncement();
-        List<Order> orderList = orderRepository.getOrdersByAnnouncement(announcement);
-        orderList.remove(order);
-        String clientEmail = order.getEmail();
-        String message = "Your offer for the property with the order number " + order.getOrderID() +
-                " has been declined. We apologize for any inconvenience caused.";
-        emailService.sendMessage(clientEmail, message);
-    }
-
-    /**
      * Method that returns a list of all orders
+     *
      * @return list of all orders
      */
-
     public List<Order> getAllOrders(){
         return orderRepository.getOrders();
     }
 
     /**
-     * Method that declines all other orders for the same property when one is accepted
-     * @param acceptedOrder accepted order
+     * Method that accepts an order for an announcement, declines the other orders for the same announcement and removes that announcement from the list of announcements
+     *
+     * @param order        order to be accepted
+     * @param announcement the announcement
      */
-    private void declineOtherOrders(Order acceptedOrder) {
-        List<Order> orders = orderRepository.getOrdersByAnnouncement(acceptedOrder.getAnnouncement());
-        Iterator<Order> iterator = orders.iterator();
-        while (iterator.hasNext()) {
-            Order order = iterator.next();
-            if (!order.equals(acceptedOrder)) {
-                order.setStatus(Status.DECLINED);
-                iterator.remove();
-                String clientEmail = order.getEmail();
-                String message = "Your offer for the property with the order number " + order.getOrderID() +
-                        " has been declined. We apologize for any inconvenience caused.";
-                emailService.sendMessage(clientEmail, message);
-            }
-        }
+    public void acceptOrder(Order order, Announcement announcement){
+        orderRepository.acceptOrder(order);
+        orderRepository.removeAllOrdersByAnnouncement(order.getAnnouncement());
+        announcementRepository.removeAnnouncement(announcement);
+        announcementRepository.addFinishedAnnouncement(announcement);
     }
+
+    /**
+     * Method that shows the email of the logged user
+     *
+     * @return email of the logged user
+     */
+    public String getUser(){
+        return authenticationRepository.getCurrentUserSession().getUserId().getEmail();
+    }
+
+    /**
+     * Remove order.
+     *
+     * @param order the order
+     */
+    public void removeOrder(Order order){
+        orderRepository.removeOrder(order);
+    }
+
+    public List<Announcement> getAnnouncements() {
+        return repositories.getAnnouncementRepository().getAnnouncements();
+    }
+
+
 }

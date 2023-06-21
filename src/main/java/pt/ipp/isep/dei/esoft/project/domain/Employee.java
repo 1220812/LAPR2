@@ -8,6 +8,9 @@ import java.util.Objects;
 import  pt.ipp.isep.dei.esoft.project.repository.EmployeeRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
+/**
+ * The type Employee.
+ */
 public class Employee implements Serializable{
     /**
      * The name of the employee.
@@ -77,6 +80,19 @@ public class Employee implements Serializable{
         this.pass = pass;
     }
 
+    /**
+     * Instantiates a new Employee.
+     *
+     * @param name               the name
+     * @param email              the email
+     * @param phoneNumber        the phone number
+     * @param passportCardNumber the passport card number
+     * @param taxNumber          the tax number
+     * @param address            the address
+     * @param role               the role
+     * @param agency             the agency
+     * @param pass               the pass
+     */
     public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, Agency agency, String pass) {
         this.name = name;
         this.email = email;
@@ -89,6 +105,18 @@ public class Employee implements Serializable{
         this.pass = pass;
     }
 
+    /**
+     * Instantiates a new Employee.
+     *
+     * @param name               the name
+     * @param email              the email
+     * @param phoneNumber        the phone number
+     * @param passportCardNumber the passport card number
+     * @param taxNumber          the tax number
+     * @param address            the address
+     * @param role               the role
+     * @param pass               the pass
+     */
     public Employee(String name, String email, String phoneNumber, PassportCardNumber passportCardNumber, TaxNumber taxNumber, Address address, Role role, String pass) {
         this.name = name;
         this.email = email;
@@ -99,6 +127,7 @@ public class Employee implements Serializable{
         this.role = role;
         this.pass = pass;
     }
+
     /**
      * Creates a new Employee object with the given attributes.
      *
@@ -375,7 +404,7 @@ public class Employee implements Serializable{
      * Chech if email is valid
      *
      * @param email the email of the employee
-     * @return boolean
+     * @return boolean boolean
      */
     public static boolean existsEmail(String email) {
         if (!(email.contains("@") && email.contains("."))) {
@@ -388,7 +417,7 @@ public class Employee implements Serializable{
      * Chech if phone number is valid
      *
      * @param phone the phone number of the employee
-     * @return boolean
+     * @return boolean boolean
      */
     public static boolean existsPhone(String phone) {
         if (phone.length() < 9 || phone.length() > 10) {
@@ -402,7 +431,7 @@ public class Employee implements Serializable{
      * Chech if tax number is valid
      *
      * @param taxNumber the tax Number of the employee
-     * @return boolean
+     * @return boolean boolean
      */
     public static boolean existsTaxNumber(String taxNumber) {
         return taxNumber.matches("[0-9]{9}");
@@ -422,7 +451,7 @@ public class Employee implements Serializable{
      * Chech if zipCode  is valid
      *
      * @param zipCode the zipCode of the employee
-     * @return boolean
+     * @return boolean boolean
      */
     public static boolean existsZipCode(int zipCode) {
         if (zipCode < 1000 || zipCode > 100000) {

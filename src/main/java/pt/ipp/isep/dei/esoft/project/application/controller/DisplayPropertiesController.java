@@ -7,18 +7,27 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.List;
 
+/**
+ * The type Display properties controller.
+ */
 public class DisplayPropertiesController {
 
 
+    /**
+     * Get announcement repository announcement repository.
+     *
+     * @return the announcement repository
+     */
     public AnnouncementRepository getAnnouncementRepository(){
         return Repositories.getInstance().getAnnouncementRepository();
     }
 
-//    public List<Announcement> getSpecificAnnouncements(String typeOfBusiness, String typeOfProperty, int numberOfRooms) {
-//         AnnouncementRepository announcementRepository = getAnnouncementsRepository();
-//        return announcementRepository.getSpecificAnnouncements(typeOfBusiness, typeOfProperty, numberOfRooms);
-//    }
 
+    /**
+     * Display announcements.
+     *
+     * @param announcementRepository the announcement repository
+     */
     public void DisplayAnnouncements (AnnouncementRepository announcementRepository) {
         Utils.showList(announcementRepository.getAnnouncementsList(), "Announcements");
     }

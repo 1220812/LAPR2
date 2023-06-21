@@ -6,16 +6,20 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.List;
 
+/**
+ * The type List deals ui.
+ */
 public class ListDealsUI implements Runnable{
+    /**
+     * The Controller.
+     */
     ListDealsController controller = new ListDealsController();
     public void run(){
         int sortingMethod = sortingMethodSelection();
         int sortingOrder = sortingOrderSelection();
-        List<Order> orders;
         List<Order> dealsMade;
         List<Order> dealsMadeSorted;
-        orders = controller.getAllOrders();
-        dealsMade = controller.dealsList(orders);
+        dealsMade = controller.dealsList();
         if(dealsMade.isEmpty()){
             System.out.println("There are no deals made yet!");
         }else{
@@ -32,12 +36,30 @@ public class ListDealsUI implements Runnable{
             }
         }
     }
+
+    /**
+     * Sorting method selection int.
+     *
+     * @return the int
+     */
     public int sortingMethodSelection(){
         return Utils.showAndSelectIndex(controller.showSortingMethods(), "Please select a sorting method: ");
     }
+
+    /**
+     * Sorting order selection int.
+     *
+     * @return the int
+     */
     public int sortingOrderSelection(){
         return Utils.showAndSelectIndex(controller.showSortingOrder(), "Please select a sorting order: ");
     }
+
+    /**
+     * Show deals.
+     *
+     * @param dealsMade the deals made
+     */
     public void showDeals(List<Order> dealsMade) {
         System.out.println("List of deals:");
         System.out.println();

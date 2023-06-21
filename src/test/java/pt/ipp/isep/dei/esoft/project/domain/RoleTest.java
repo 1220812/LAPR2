@@ -4,14 +4,23 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Role test.
+ */
 class RoleTest {
 
+    /**
+     * Gets description.
+     */
     @Test
     void getDescription() {
         Role role = new Role("Manager");
         assertEquals("Manager", role.getDescription());
     }
 
+    /**
+     * Sets description.
+     */
     @Test
     void setDescription() {
         Role role = new Role("Manager");
@@ -20,6 +29,9 @@ class RoleTest {
         assertEquals("Agent", role.getDescription());
     }
 
+    /**
+     * Test equals.
+     */
     @Test
     void testEquals() {
         Role role = new Role("Manager");
@@ -29,6 +41,9 @@ class RoleTest {
         assertNotEquals(role, role2);
     }
 
+    /**
+     * Test hash code.
+     */
     @Test
     void testHashCode() {
         Role role = new Role("Manager");
@@ -38,6 +53,9 @@ class RoleTest {
         assertNotEquals(role.hashCode(), role2.hashCode());
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     void testClone() {
         Role role = new Role("Manager");

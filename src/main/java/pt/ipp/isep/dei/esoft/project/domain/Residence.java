@@ -2,9 +2,13 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Residence.
+ */
 public class Residence extends Property implements Serializable {
     /**
      * Number of bedrooms
@@ -27,20 +31,22 @@ public class Residence extends Property implements Serializable {
      */
     private boolean centralHeating;
 
+    private List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
+
     /**
      * Method that creates a new instance of Residence
      *
      * @param address                residence address
      * @param area                   residence area
      * @param distanceFromCityCentre distance between the residence and the city center
+     * @param propertyType           the property type
      * @param numberOfBathrooms      number of bathrooms
      * @param numberOfBedrooms       number of bedrooms
      * @param numberOfParkingSpaces  number of parking spaces
-     * @param airConditioning        air conditioning
-     * @param centralHeating         central heating
+     * @param photographsList        the photographs list
+     * @param availableEquipmentList the available equipment list
      */
-
-    public Residence(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<Photographs> photographsList, boolean centralHeating, boolean airConditioning) {
+    public Residence(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, List<Photographs> photographsList, List<AvailableEquipment> availableEquipmentList) {
         super(area, distanceFromCityCentre, address, propertyType, photographsList);
         if (numberOfBathrooms < 0) {
             throw new IllegalArgumentException("The number of bathrooms must be positive.");
@@ -54,20 +60,23 @@ public class Residence extends Property implements Serializable {
         this.numberOfBedrooms = numberOfBathrooms;
         this.numberOfBathrooms = numberOfBedrooms;
         this.numberOfParkingSpaces = numberOfParkingSpaces;
-        this.airConditioning = airConditioning;
-        this.centralHeating = centralHeating;
+        this.availableEquipmentList = availableEquipmentList;
     }
+
     /**
      * Method that creates a new instance of Residence with the given parameters:
-     * @param address residence address
-     * @param area residence area
+     *
+     * @param address                residence address
+     * @param area                   residence area
      * @param distanceFromCityCentre distance between the residence and the city center
-     * @param propertyType type of property
-     * @param numberOfBathrooms number of bathrooms
-     * @param numberOfBedrooms number of bedrooms
-     * @param numberOfParkingSpaces number of parking spaces
-     * @param centralHeating central heating
-     * @param airConditioning air conditioning
+     * @param propertyType           type of property
+     * @param numberOfBathrooms      number of bathrooms
+     * @param numberOfBedrooms       number of bedrooms
+     * @param numberOfParkingSpaces  number of parking spaces
+     * @param centralHeating         central heating
+     * @param airConditioning        air conditioning
+     * @param finalPrice             the final price
+     * @param businessDate           the business date
      */
     public Residence(Address address, double area, double distanceFromCityCentre, PropertyType propertyType, int numberOfBathrooms, int numberOfBedrooms, int numberOfParkingSpaces, boolean centralHeating, boolean airConditioning, double finalPrice, LocalDate businessDate) {
         super(area, distanceFromCityCentre, address, propertyType, finalPrice, businessDate);
@@ -86,12 +95,12 @@ public class Residence extends Property implements Serializable {
         this.airConditioning = airConditioning;
         this.centralHeating = centralHeating;
     }
+
     /**
      * Method to show the number of bedrooms
      *
      * @return number of bedrooms
      */
-
     public int getNumberOfBedrooms() {
         return numberOfBedrooms;
     }
@@ -101,7 +110,6 @@ public class Residence extends Property implements Serializable {
      *
      * @param numberOfBedrooms changed number of bedrooms
      */
-
     public void setNumberOfBedrooms(int numberOfBedrooms) {
         this.numberOfBedrooms = numberOfBedrooms;
     }
@@ -111,7 +119,6 @@ public class Residence extends Property implements Serializable {
      *
      * @return number of bathrooms
      */
-
     public int getNumberOfBathrooms() {
         return numberOfBathrooms;
     }
@@ -121,7 +128,6 @@ public class Residence extends Property implements Serializable {
      *
      * @param numberOfBathrooms number of bathrooms
      */
-
     public void setNumberOfBathrooms(int numberOfBathrooms) {
         this.numberOfBathrooms = numberOfBathrooms;
     }
@@ -131,7 +137,6 @@ public class Residence extends Property implements Serializable {
      *
      * @return numberOfParkingSpaces number of parking spaces
      */
-
     public int getNumberOfParkingSpaces() {
         return numberOfParkingSpaces;
     }
@@ -141,25 +146,24 @@ public class Residence extends Property implements Serializable {
      *
      * @param numberOfParkingSpaces number of parking spaces
      */
-
     public void setNumberOfParkingSpaces(int numberOfParkingSpaces) {
         this.numberOfParkingSpaces = numberOfParkingSpaces;
     }
 
     /**
      * Method to change the truth value of the existence of air conditioning
+     *
      * @param airConditioning true if there is air conditioning, false otherwise
      */
-
     public void setAirConditioning(boolean airConditioning) {
         this.airConditioning = airConditioning;
     }
 
     /**
      * Method to change the truth value of the existence of central heating
+     *
      * @param centralHeating true if there is central heating, false otherwise
      */
-
     public void setCentralHeating(boolean centralHeating) {
         this.centralHeating = centralHeating;
     }
@@ -194,6 +198,6 @@ public class Residence extends Property implements Serializable {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nNumber of bedrooms = " + numberOfBedrooms + "\nNumber of bathrooms = " + numberOfBathrooms + "\nParking spaces =" + numberOfParkingSpaces;
+        return super.toString() + "\nNumber of bedrooms = " + numberOfBedrooms + "\nNumber of bathrooms = " + numberOfBathrooms + "\nParking spaces = " + numberOfParkingSpaces + "\nAvailable equipment list: " + availableEquipmentList;
     }
 }

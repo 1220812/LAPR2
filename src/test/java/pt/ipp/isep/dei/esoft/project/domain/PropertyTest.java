@@ -8,8 +8,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Property test.
+ */
 class PropertyTest {
 
+    /**
+     * Gets distance from the city center.
+     */
     @Test
     void getDistanceFromTheCityCenter() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -19,6 +25,9 @@ class PropertyTest {
         assertEquals(100, property.getDistanceFromTheCityCenter());
     }
 
+    /**
+     * Gets area.
+     */
     @Test
     void getArea() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -28,6 +37,9 @@ class PropertyTest {
         assertEquals(1000, property.getArea());
     }
 
+    /**
+     * Sets area.
+     */
     @Test
     void setArea() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -38,6 +50,9 @@ class PropertyTest {
         assertEquals(2000, property.getArea());
     }
 
+    /**
+     * Gets address.
+     */
     @Test
     void getAddress() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -47,6 +62,9 @@ class PropertyTest {
         assertEquals(address, property.getAddress());
     }
 
+    /**
+     * Sets address.
+     */
     @Test
     void setAddress() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -58,6 +76,9 @@ class PropertyTest {
         assertEquals(address2, property.getAddress());
     }
 
+    /**
+     * Sets distance from the city center.
+     */
     @Test
     void setDistanceFromTheCityCenter() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -68,6 +89,9 @@ class PropertyTest {
         assertEquals(2000, property.getDistanceFromTheCityCenter());
     }
 
+    /**
+     * Gets property type.
+     */
     @Test
     void getPropertyType() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -78,6 +102,9 @@ class PropertyTest {
         assertEquals(propertyType, property.getPropertyType());
     }
 
+    /**
+     * Sets property type.
+     */
     @Test
     void setPropertyType() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -89,6 +116,9 @@ class PropertyTest {
         assertEquals(propertyType1, property.getPropertyType());
     }
 
+    /**
+     * Test equals.
+     */
     @Test
     void testEquals() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -103,6 +133,9 @@ class PropertyTest {
         Assertions.assertNotEquals(property1, property2);
     }
 
+    /**
+     * Test hash code.
+     */
     @Test
     void testHashCode() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -117,6 +150,9 @@ class PropertyTest {
         Assertions.assertNotEquals(property1.hashCode(), property2.hashCode());
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     void testClone() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));

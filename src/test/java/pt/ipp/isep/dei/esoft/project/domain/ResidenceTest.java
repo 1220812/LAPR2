@@ -8,15 +8,23 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Residence test.
+ */
 class ResidenceTest {
 
+    /**
+     * Test constructor and getters.
+     */
     @Test
     public void testConstructorAndGetters() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
         List<Photographs> photographsList = new ArrayList<>();
         PropertyType propertyType = new PropertyType("Apartment");
 
-        Residence residence = new Residence(address, 100.0, 5.0, propertyType, 3, 3, 1, photographsList, true, false);
+        List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
+
+        Residence residence = new Residence(address, 100.0, 5.0, propertyType, 3, 3, 1, photographsList,availableEquipmentList);
 
         Assertions.assertEquals(address, residence.getAddress());
         Assertions.assertEquals(100.0, residence.getArea());
@@ -27,11 +35,16 @@ class ResidenceTest {
         Assertions.assertEquals(1, residence.getNumberOfParkingSpaces());
     }
 
+    /**
+     * Test setters.
+     */
     @Test
     public void testSetters() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
         PropertyType propertyType = new PropertyType("Apartment");
-        Residence residence = new Residence(address, 100.0, 5.0, propertyType, 2, 3, 1, new ArrayList<>(), true, false);
+        List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
+        List<Photographs> photographsList = new ArrayList<>();
+        Residence residence = new Residence(address, 100.0, 5.0, propertyType, 2, 3, 1, photographsList,availableEquipmentList);
 
         residence.setNumberOfBathrooms(3);
         residence.setNumberOfBedrooms(4);
@@ -44,15 +57,19 @@ class ResidenceTest {
         Assertions.assertEquals(2, residence.getNumberOfParkingSpaces());
     }
 
+    /**
+     * Test equals and hash code.
+     */
     @Test
     public void testEqualsAndHashCode() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
         List<Photographs> photographsList = new ArrayList<>();
+        List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
         PropertyType propertyType = new PropertyType("Apartment");
 
-        Residence residence1 = new Residence(address, 100.0, 5.0, propertyType, 2, 3, 1, photographsList, true, false);
-        Residence residence2 = new Residence(address, 100.0, 5.0, propertyType, 2, 3, 1, photographsList, true, false);
-        Residence residence3 = new Residence(address, 200.0, 10.0, propertyType, 3, 4, 2, photographsList, true, false);
+        Residence residence1 = new Residence(address, 100.0, 5.0, propertyType, 2, 3, 1, photographsList, availableEquipmentList);
+        Residence residence2 = new Residence(address, 100.0, 5.0, propertyType, 2, 3, 1, photographsList, availableEquipmentList);
+        Residence residence3 = new Residence(address, 200.0, 10.0, propertyType, 3, 4, 2, photographsList,availableEquipmentList );
 
         Assertions.assertEquals(residence1, residence2);
         Assertions.assertNotEquals(residence1, residence3);

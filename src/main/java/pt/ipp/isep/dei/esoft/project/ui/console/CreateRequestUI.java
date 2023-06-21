@@ -8,19 +8,49 @@ import java.util.List;
 import java.util.Optional;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.repository.RequestRepository;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+
+/**
+ * The type Create request ui.
+ */
 public class CreateRequestUI implements Runnable {
+    /**
+     * The Controller.
+     */
     CreateRequestController controller = new CreateRequestController();
 
+    /**
+     * The Area.
+     */
     double area = 0;
+    /**
+     * The Distance from city center.
+     */
     double distanceFromCityCenter = 0;
+    /**
+     * The Price.
+     */
     double price = 0;
+    /**
+     * The Number of bathrooms.
+     */
     int numberOfBathrooms = 0;
 
+    /**
+     * The Number of bedrooms.
+     */
     int numberOfBedrooms = 0;
 
+    /**
+     * The Number of parking spaces.
+     */
     int numberOfParkingSpaces = 0;
 
+    /**
+     * The Number of photos.
+     */
     int numberOfPhotos = 0;
 
     private Boolean inhabitableLoft;
@@ -41,11 +71,19 @@ public class CreateRequestUI implements Runnable {
     private String zipCode;
     private  Property property;
     private Address address;
+    /**
+     * The Request date.
+     */
     public LocalDate requestDate = LocalDate.now();
     private Owner owner;
     private int doorNumber;
     private int floorNumber;
     private RequestType requestType;
+    /**
+     * The Available equipment list.
+     */
+    List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
+    private RequestRepository requestRepository = Repositories.getInstance().getRequestRepository();
 
     public void run() {
         String ownerName = Utils.readLineFromConsole("Insert the owner name: ");
@@ -77,10 +115,10 @@ public class CreateRequestUI implements Runnable {
             property = controller.createLand(area, distanceFromCityCenter, address, propertyType, photographs);
         } else if (inPutType.equals("House")) {
             requestDataForHouse();
-            property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, airConditioning, centralHeating, basement, sunExposure,inhabitableLoft,propertyType,photographs);
+            property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, basement, sunExposure, inhabitableLoft, propertyType, photographs, availableEquipmentList);
         } else if (inPutType.equals("Apartment")) {
             requestDataForApartment();
-            property = controller.createApartment(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, propertyType, photographs, centralHeating, airConditioning);
+            property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, numberOfParkingSpaces, propertyType, photographs, availableEquipmentList);
         }
         System.out.println("Please select on of the request types:");
         System.out.println("1 - Rent");
@@ -156,34 +194,38 @@ public class CreateRequestUI implements Runnable {
         System.out.println("Please select the direction of the sun exposure:");
         System.out.println();
         sunExposure = Utils.listAndSelectOne(controller.getSunExposuresList());
-        String flag2 = Utils.readLineFromConsole("Does the house have an air conditioning? (true/false)");
-        if(flag2.equalsIgnoreCase("true")){
-            airConditioning = true;
-        }else{
-            airConditioning = false;
+        String equipment = Utils.readLineFromConsole("Insert the available equipment: (enter 0 to exit)");
+        if (!(equipment.equals("0"))) {
+            AvailableEquipment availableEquipment = new AvailableEquipment(equipment);
+            availableEquipmentList.add(availableEquipment);
+            System.out.println("Equipment added");
         }
-        String flag3 = Utils.readLineFromConsole("Does the house have a central heating? (true/false)");
-        if(flag3.equalsIgnoreCase("true")){
-            centralHeating = true;
-        }else{
-            centralHeating = false;
+        while (!(equipment.equals("0"))) {
+            equipment = Utils.readLineFromConsole("Insert the available equipment: (enter 0 to exit)");
+            if (!(equipment.equals("0"))) {
+                AvailableEquipment availableEquipment = new AvailableEquipment(equipment);
+                availableEquipmentList.add(availableEquipment);
+                System.out.println("Equipment added");
+            }
         }
     }
-    private void requestDataForApartment(){
+    private void requestDataForApartment() {
         numberOfBathrooms = Utils.readIntegerFromConsole("Insert the number of bathrooms: ");
         numberOfBedrooms = Utils.readIntegerFromConsole("Insert the number of bedrooms: ");
         numberOfParkingSpaces = Utils.readIntegerFromConsole("Insert the number of parking spaces: ");
-        String flag2 = Utils.readLineFromConsole("Does the house have an air conditioning? (true/false)");
-        if(flag2.equalsIgnoreCase("true")){
-            airConditioning = true;
-        }else{
-            airConditioning = false;
+        String equipment = Utils.readLineFromConsole("Insert the available equipment: (enter 0 to exit)");
+        if (!(equipment.equals("0"))) {
+            AvailableEquipment availableEquipment = new AvailableEquipment(equipment);
+            availableEquipmentList.add(availableEquipment);
+            System.out.println("Equipment added");
         }
-        String flag3 = Utils.readLineFromConsole("Does the house have a central heating? (true/false)");
-        if(flag3.equalsIgnoreCase("true")){
-            centralHeating = true;
-        }else{
-            centralHeating = false;
+        while (!(equipment.equals("0"))) {
+            equipment = Utils.readLineFromConsole("Insert the available equipment: (enter 0 to exit)");
+            if (!(equipment.equals("0"))) {
+                AvailableEquipment availableEquipment = new AvailableEquipment(equipment);
+                availableEquipmentList.add(availableEquipment);
+                System.out.println("Equipment added");
+            }
         }
     }
     private void requestDataForAddress(){

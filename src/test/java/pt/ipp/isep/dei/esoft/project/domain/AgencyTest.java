@@ -5,8 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Agency test.
+ */
 class AgencyTest {
 
+    /**
+     * Test equals.
+     */
     @Test
     void testEquals() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -15,6 +21,9 @@ class AgencyTest {
         assertEquals(agency1, agency2);
     }
 
+    /**
+     * Gets id.
+     */
     @Test
     void getID() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -22,6 +31,9 @@ class AgencyTest {
         assertEquals(1, agency1.getID());
     }
 
+    /**
+     * Gets designation.
+     */
     @Test
     void getDesignation() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -29,6 +41,9 @@ class AgencyTest {
         assertEquals("Agency 1", agency1.getDesignation());
     }
 
+    /**
+     * Gets address.
+     */
     @Test
     void getAddress() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -36,6 +51,9 @@ class AgencyTest {
         assertEquals(address, agency1.getAddress());
     }
 
+    /**
+     * Gets phone number.
+     */
     @Test
     void getPhoneNumber() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -43,6 +61,9 @@ class AgencyTest {
         assertEquals("111-111-111", agency1.getPhoneNumber());
     }
 
+    /**
+     * Gets email address.
+     */
     @Test
     void getEmailAddress() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -50,6 +71,9 @@ class AgencyTest {
         assertEquals("test1@example.com", agency1.getEmailAddress());
     }
 
+    /**
+     * Sets address.
+     */
     @Test
     void setAddress() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -60,6 +84,9 @@ class AgencyTest {
         assertEquals(address1, agency1.getAddress());
     }
 
+    /**
+     * Sets designation.
+     */
     @Test
     void setDesignation() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -69,6 +96,9 @@ class AgencyTest {
         assertEquals("Agency 2", agency1.getDesignation());
     }
 
+    /**
+     * Sets email address.
+     */
     @Test
     void setEmailAddress() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -78,6 +108,9 @@ class AgencyTest {
         assertEquals("test2", agency1.getEmailAddress());
     }
 
+    /**
+     * Sets id.
+     */
     @Test
     void setId() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -87,6 +120,9 @@ class AgencyTest {
         assertEquals(2, agency1.getID());
     }
 
+    /**
+     * Sets phone number.
+     */
     @Test
     void setPhoneNumber() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -96,6 +132,9 @@ class AgencyTest {
         assertEquals("111-222-333", agency1.getPhoneNumber());
     }
 
+    /**
+     * Test hash code.
+     */
     @Test
     void testHashCode() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));
@@ -105,6 +144,9 @@ class AgencyTest {
         Assertions.assertEquals(agency1.hashCode(), agency2.hashCode());
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     void testClone() {
         Address address = new Address("123 Main St", 1,2, "12345",new State("California"),new District("East"),new City("Los Angeles"));

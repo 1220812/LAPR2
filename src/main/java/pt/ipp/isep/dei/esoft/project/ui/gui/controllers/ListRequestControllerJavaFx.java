@@ -7,16 +7,16 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.ListRequestsController;
 import pt.ipp.isep.dei.esoft.project.domain.Agent;
-import pt.ipp.isep.dei.esoft.project.domain.Employee;
 import pt.ipp.isep.dei.esoft.project.domain.Message;
-import pt.ipp.isep.dei.esoft.project.domain.Request;
+import pt.ipp.isep.dei.esoft.project.ui.console.RespondBookingRequestUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,10 +25,21 @@ import java.util.ResourceBundle;
 
 public class ListRequestControllerJavaFx implements Initializable {
     private static List<String> content = new ArrayList<>();
+    public pt.ipp.isep.dei.esoft.project.domain.Message Message;
+
+    @FXML
+    public String textBox;
+    @FXML
+    public TextArea text;
+
     @FXML
     private FXMLLoader fxmlLoader;
     @FXML
     private ListView<Message> lView;
+    @FXML
+    private ListView<Message> lView2;
+    @FXML
+    private Message selectedMessage;
     @FXML
     private Button cancelButton;
     @FXML
@@ -46,6 +57,12 @@ public class ListRequestControllerJavaFx implements Initializable {
     @FXML
     private List<Message> list;
     private ListRequestsController controller = new ListRequestsController();
+    @FXML
+    private Object text2;
+
+    public void setMensagemSelecionada(Message selectedMessage) {
+        this.selectedMessage = selectedMessage;
+    }
 
     @FXML
     void cancelButton(ActionEvent event) {
@@ -74,8 +91,6 @@ public class ListRequestControllerJavaFx implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
     }
 
     public void showMessages(ActionEvent event) throws IOException {
@@ -100,6 +115,8 @@ public class ListRequestControllerJavaFx implements Initializable {
                 lView.getItems().add(sortedList.get(i));
             }
         }
+        selectedMessage = lView.getSelectionModel().getSelectedItem();
+        System.out.println(selectedMessage);
     }
 
 
@@ -112,5 +129,34 @@ public class ListRequestControllerJavaFx implements Initializable {
         LocalDate date = endDate.getValue();
         return date;
     }
+
+    @FXML
+    public void nextPage(MouseEvent event) throws IOException {
+        fxmlLoader = new FXMLLoader(new File("src/main/resources/fxml/us016.fxml").toURL());
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        stage.setScene(scene);
+        stage.show();
+        List<Message> selected = new ArrayList<>();
+        selectedMessage = lView.getSelectionModel().getSelectedItem();
+        selected.add(selectedMessage);
+       lView.getItems().add(selected.get(0));
+        for (int i = 0; i < selected.size(); i++) {
+            lView.getItems().add(selected.get(i));
+        }
+
+        System.out.println(selectedMessage);
+
+
+    }
+
+
+
 }
+
 

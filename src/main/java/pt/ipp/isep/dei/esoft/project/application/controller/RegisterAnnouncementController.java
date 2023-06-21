@@ -125,12 +125,11 @@ public class RegisterAnnouncementController {
      * @param parking                the parking
      * @param propertyType           the property type
      * @param photos                 the photos
-     * @param airConditioning        the air conditioning
-     * @param centralHeating         the central heating
+     * @param equipment              the equipment
      * @return the residence
      */
-    public Residence createResidence(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking, PropertyType propertyType, List<Photographs> photos,  boolean airConditioning, boolean centralHeating){
-        return new Residence(address, area, distanceFromCityCenter, propertyType,numberOfBathrooms, numberOfBedrooms, parking, photos, airConditioning, centralHeating);
+    public Residence createResidence(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking, PropertyType propertyType, List<Photographs> photos, List<AvailableEquipment> equipment){
+        return new Residence(address, area, distanceFromCityCenter,propertyType, numberOfBathrooms, numberOfBedrooms, parking, photos, equipment);
     }
 
     /**
@@ -142,18 +141,16 @@ public class RegisterAnnouncementController {
      * @param numberOfBathrooms      the number of bathrooms
      * @param numberOfBedrooms       the number of bedrooms
      * @param parking                the parking
-     * @param airConditioning        the air conditioning
-     * @param centralHeating         the central heating
      * @param basement               the basement
      * @param sunExposure            the sun exposure
      * @param loft                   the loft
      * @param propertyType           the property type
      * @param photos                 the photos
-     * @param requestType            the request type
+     * @param equipment              the equipment
      * @return the house
      */
-    public House createHouse(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking,  boolean airConditioning, boolean centralHeating, boolean basement, SunExposure sunExposure, boolean loft, PropertyType propertyType, List<Photographs> photos, RequestType requestType) {
-        return new House(address, area, distanceFromCityCenter,propertyType, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, photos);
+    public House createHouse(Address address, double area, double distanceFromCityCenter, int numberOfBathrooms, int numberOfBedrooms, int parking, boolean basement, SunExposure sunExposure, boolean loft, PropertyType propertyType, List<Photographs> photos, List<AvailableEquipment> equipment) {
+        return new House(address, area, distanceFromCityCenter,propertyType, numberOfBathrooms, numberOfBedrooms, parking, basement, sunExposure, loft, photos, equipment);
     }
 
     /**
@@ -193,7 +190,7 @@ public class RegisterAnnouncementController {
      * @return the announcement
      */
     public Announcement registerAnnouncement(Announcement announcement){
-        return AnnouncementRepository.addAnnouncement(announcement);
+        return this.repositories.getAnnouncementRepository.addAnnouncement(announcement);
     }
 
     /**
@@ -225,12 +222,63 @@ public class RegisterAnnouncementController {
         return this.repositories.getOwnerRepository().getOwnerByEmail(ownerEmail);
     }
 
-    /**0
+    /**
+     * 0
      * Get current user session.
      *
      * @return the user session
      */
     public UserSession getCurrentSession(){
         return this.repositories.getAuthenticationRepository().getCurrentUserSession();
+    }
+
+    /**
+     * Gets owner phone.
+     *
+     * @param owner the owner
+     * @return the owner phone
+     */
+    public String getOwnerPhone(Owner owner) {
+        return owner.getPhoneNumber();
+    }
+
+    /**
+     * Gets agent phone.
+     *
+     * @param agent the agent
+     * @return the agent phone
+     */
+    public String getAgentPhone(Agent agent) {
+        return agent.getPhoneNumber();
+    }
+
+    /**
+     * Get property type by announcement list.
+     *
+     * @param announcement the announcement
+     * @return the list
+     */
+    public List<PropertyType> getPropertyTypeByAnnouncement(Announcement announcement){
+        return Repositories.getInstance().getPropertyTypeRepository().getPropertyType();
+    }
+
+    /**
+     * Gets address.
+     *
+     * @param announcement the announcement
+     * @return the address
+     */
+    public Address getAddress(Announcement announcement) {
+        return announcement.getProperty().getAddress();
+    }
+
+    /**
+     * Gets agent name.
+     *
+     * @param agent the agent
+     * @return the agent name
+     */
+    public String getAgentName(Agent agent) {
+        return agent.getName();
     }
 }

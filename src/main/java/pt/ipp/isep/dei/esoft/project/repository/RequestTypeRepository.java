@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Request type repository.
+ */
 public class RequestTypeRepository implements Serializable {
     /**
      * Creation of a list to store request types

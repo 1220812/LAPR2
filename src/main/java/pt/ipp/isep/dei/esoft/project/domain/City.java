@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type City.
+ */
 public class City implements Serializable {
     /**
      * City name
@@ -16,6 +19,7 @@ public class City implements Serializable {
 
     /**
      * Creates a new instance of City with name
+     *
      * @param name city name
      */
     public City (String name){
@@ -31,6 +35,7 @@ public class City implements Serializable {
 
     /**
      * Method to show the city name
+     *
      * @return name city name
      */
     public String getName() {
@@ -39,6 +44,7 @@ public class City implements Serializable {
 
     /**
      * Method tho change the city name
+     *
      * @param name changed city name
      */
     public void setName(String name) {

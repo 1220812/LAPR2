@@ -5,45 +5,161 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type File information.
+ */
 public class FileInformation {
+    /**
+     * The Repositories.
+     */
     Repositories repositories = Repositories.getInstance();
+    /**
+     * The Announcement repository.
+     */
     AnnouncementRepository announcementRepository = repositories.getAnnouncementRepository();
+    /**
+     * The Store repository.
+     */
     StoreRepository storeRepository = repositories.getStoreRepository();
-    PropertyRepository propertyRepository = repositories.getPropertyRepository();
+    /**
+     * The User repository.
+     */
     OwnerRepository userRepository = repositories.getOwnerRepository();
+    /**
+     * The Order repository.
+     */
+    OrderRepository orderRepository = repositories.getOrderRepository();
+    /**
+     * The constant sidPosition.
+     */
     public static final int sidPosition = 0;
+    /**
+     * The constant ownerNamePosition.
+     */
     public static final int ownerNamePosition = 1;
+    /**
+     * The constant ownerPassportCardNumberPosition.
+     */
     public static final int ownerPassportCardNumberPosition = 2;
+    /**
+     * The constant ownerTaxNumberPosition.
+     */
     public static final int ownerTaxNumberPosition = 3;
+    /**
+     * The constant ownerEmailPosition.
+     */
     public static final int ownerEmailPosition = 4;
+    /**
+     * The constant ownerPhoneNumberPosition.
+     */
     public static final int ownerPhoneNumberPosition = 5;
+    /**
+     * The constant propertyTypePosition.
+     */
     public static final int propertyTypePosition = 6;
+    /**
+     * The constant areaPosition.
+     */
     public static final int areaPosition = 7;
+    /**
+     * The constant propertyAddressPosition.
+     */
     public static final int propertyAddressPosition = 8;
+    /**
+     * The constant distanceFromCityCenterPosition.
+     */
     public static final int distanceFromCityCenterPosition = 9;
+    /**
+     * The constant numberOfBedroomsPosition.
+     */
     public static final int numberOfBedroomsPosition = 10;
+    /**
+     * The constant numberOfBathroomsPosition.
+     */
     public static final int numberOfBathroomsPosition = 11;
+    /**
+     * The constant numberOfParkingSpacesPosition.
+     */
     public static final int numberOfParkingSpacesPosition = 12;
+    /**
+     * The constant propertyCentralHeatingPosition.
+     */
     public static final int propertyCentralHeatingPosition = 13;
+    /**
+     * The constant propertyAirConditioningPosition.
+     */
     public static final int propertyAirConditioningPosition = 14;
+    /**
+     * The constant propertyBasementPosition.
+     */
     public static final int propertyBasementPosition = 15;
+    /**
+     * The constant propertyLoftPosition.
+     */
     public static final int propertyLoftPosition = 16;
+    /**
+     * The constant propertySunExposurePosition.
+     */
     public static final int propertySunExposurePosition = 17;
+    /**
+     * The constant requestedPricePosition.
+     */
     public static final int requestedPricePosition = 18;
+    /**
+     * The constant finalPricePosition.
+     */
     public static final int finalPricePosition = 19;
+    /**
+     * The constant commissionPosition.
+     */
     public static final int commissionPosition = 20;
+    /**
+     * The constant contractDurationPosition.
+     */
     public static final int contractDurationPosition = 21;
+    /**
+     * The constant announcementDatePosition.
+     */
     public static final int announcementDatePosition = 22;
+    /**
+     * The constant businessDatePosition.
+     */
     public static final int businessDatePosition = 23;
+    /**
+     * The constant requestTypePosition.
+     */
     public static final int requestTypePosition = 24;
+    /**
+     * The constant storeIDPosition.
+     */
     public static final int storeIDPosition = 25;
+    /**
+     * The constant storeNamePosition.
+     */
     public static final int storeNamePosition = 26;
+    /**
+     * The constant storeAddressPosition.
+     */
     public static final int storeAddressPosition = 27;
+    /**
+     * The constant storePhoneNumberPosition.
+     */
     public static final int storePhoneNumberPosition = 28;
+    /**
+     * The constant storeEmailPosition.
+     */
     public static final int storeEmailPosition = 29;
 
+    /**
+     * Import file.
+     *
+     * @param filePath the file path
+     * @throws IOException                the io exception
+     * @throws CloneNotSupportedException the clone not supported exception
+     */
     public void importFile(String filePath)throws IOException, CloneNotSupportedException {
         File file = new File(filePath);
         String extension = filePath.substring(filePath.lastIndexOf(".")+1);
@@ -60,6 +176,9 @@ public class FileInformation {
             District district = null;
             City city = null;
             String zipCode = "";
+            String building = "";
+            String floor = "";
+            String numberOfApartment = "";
             Address propertyAddress = null;
             Address storeAddress = null;
             String line = reader.nextLine();
@@ -111,6 +230,25 @@ public class FileInformation {
                     district = new District(propertyAddress1[2]);
                     zipCode = propertyAddress1[4].trim();
                     propertyAddress = new Address(streetAddress, city, district, state , zipCode);
+                } else if (propertyAddress1.length == 7) {
+                    streetAddress = propertyAddress1[0];
+                    building = propertyAddress1[1];
+                    floor = propertyAddress1[2];
+                    numberOfApartment = propertyAddress1[3];
+                    state = new State(propertyAddress1[5]);
+                    city = new City(propertyAddress1[4]);
+                    zipCode = propertyAddress1[6].trim();
+                    propertyAddress = new Address(streetAddress, building, floor, numberOfApartment, zipCode, state, city);
+                } else if (propertyAddress1.length == 8) {
+                    streetAddress = propertyAddress1[0];
+                    building = propertyAddress1[1];
+                    floor = propertyAddress1[2];
+                    numberOfApartment = propertyAddress1[3];
+                    state = new State(propertyAddress1[6]);
+                    district = new District(propertyAddress1[5]);
+                    city = new City(propertyAddress1[4]);
+                    zipCode = propertyAddress1[7].trim();
+                    propertyAddress = new Address(streetAddress, building, floor, numberOfApartment, zipCode, state, district, city);
                 }
                 if(storeAddress1.length == 4){
                     streetAddress = storeAddress1[0];
@@ -126,14 +264,24 @@ public class FileInformation {
                     zipCode = storeAddress1[4].trim();
                     storeAddress = new Address(streetAddress, city, district, state , zipCode);
                 }
+                List<Store> stores = storeRepository.getStoreList();
                 Store newStore = new Store(storeName, storeAddress, storePhoneNumber, storeEmail, storeID);
-                String[] data1 = announcementDateString.split("-");
-                String[] data2 = businessDateString.split("-");
+                boolean storeExists = false;
+                for (Store store : stores) {
+                    if (store.getDesignation().equals(storeName)) {
+                        storeExists = true;
+                        break;
+                    }
+                }
+                if(!storeExists) {
+                    storeRepository.add(newStore);
+                }
+                String[] data1 = announcementDateString.split("/");
+                String[] data2 = businessDateString.split("/");
                 LocalDate date = LocalDate.of(Integer.parseInt(data1[2].trim()), Integer.parseInt(data1[1].trim()), Integer.parseInt(data1[0].trim()));
                 LocalDate date1 = LocalDate.of(Integer.parseInt(data2[2].trim()), Integer.parseInt(data2[1].trim()), Integer.parseInt(data2[0].trim()));
                 String ownerTaxNumber1 = ownerTaxNumber.replaceAll("-", "");
                 userRepository.add(new Owner(ownerName, ownerPhoneNumber,ownerEmail, new TaxNumber(ownerTaxNumber1), new PassportCardNumber(ownerPassportCardNumber)));
-                storeRepository.add(newStore);
                 if(!propertySunExposure.equals("NA")){
                     boolean basement = Boolean.getBoolean(propertyBasement);
                     boolean loft = Boolean.getBoolean(propertyLoft);
@@ -141,23 +289,27 @@ public class FileInformation {
                     boolean airConditioning = Boolean.getBoolean(propertyAirConditioning);
                     if(propertyType.equalsIgnoreCase("Apartment")){
                         Residence residence = new Residence(propertyAddress, area, distanceFromCityCenter, new PropertyType(propertyType), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, centralHeating, airConditioning, finalPrice, date1);
-                        propertyRepository.addProperty(residence);
-                        announcementRepository.add(new Announcement(residence, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore));
+                        Announcement announcement = new Announcement(residence, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
+                        announcementRepository.add(announcement);
+                        Order order = new Order(announcement, ownerEmail);
+                        orderRepository.addAcceptedOrder(order);
                     } else if (propertyType.equalsIgnoreCase("House")) {
                         House house = new House(propertyAddress, area, distanceFromCityCenter, new PropertyType(propertyType), numberOfBedrooms, numberOfBathrooms, numberOfParkingSpaces, centralHeating, airConditioning, basement, new SunExposure(propertySunExposure), loft, finalPrice, date1);
-                        propertyRepository.addProperty(house);
-                        announcementRepository.add(new Announcement(house, date, commission, new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore));
-                        System.out.println();
+                        Announcement announcement = new Announcement(house, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
+                        announcementRepository.add(announcement);
+                        Order order = new Order(announcement, finalPrice);
+                        orderRepository.addAcceptedOrder(order);
                         }
                 }
                 if(propertyType.equalsIgnoreCase("Land")){
                     Property land = new Property(area, distanceFromCityCenter, propertyAddress ,new PropertyType(propertyType), finalPrice, date1);
-                    propertyRepository.addProperty(land);
-                    announcementRepository.add(new Announcement(land, date, commission, new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore));
+                    Announcement announcement = new Announcement(land, date, commission,new RequestType(requestType, contractDuration), requestedPrice, new Owner(ownerName, ownerPhoneNumber, ownerEmail, new TaxNumber(ownerTaxNumber), new PassportCardNumber(ownerPassportCardNumber)), newStore);
+                    announcementRepository.add(announcement);
+                    Order order = new Order(announcement, ownerEmail);
+                    orderRepository.addAcceptedOrder(order);
                 }
             }
         }
-        System.out.println(announcementRepository.getAnnouncementsList());
     }
 
     private boolean readerVerification(Scanner reader) {

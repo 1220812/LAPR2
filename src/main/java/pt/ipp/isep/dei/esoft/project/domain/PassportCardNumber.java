@@ -5,6 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Passport card number.
+ */
 public class PassportCardNumber implements Serializable {
     /**
      * passport card number
@@ -19,15 +22,19 @@ public class PassportCardNumber implements Serializable {
     public PassportCardNumber(String passportCardNumber) {
         this.passportCardNumber = passportCardNumber;
     }
+
     /**
      * This method shows the passportNumber of the PassportCard
+     *
      * @return passport card number
      */
     public String getPassportCardNumber() {
         return passportCardNumber;
     }
+
     /**
      * This method changes the passportNumber of the PassportCard
+     *
      * @param passportCardNumber changed passport card number
      */
     public void setPassportCardNumber(String passportCardNumber) {

@@ -5,6 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Address.
+ */
 public class Address implements Serializable {
     /**
      * street address
@@ -66,16 +69,29 @@ public class Address implements Serializable {
      * default door number
      */
     private static final int DEFAULT_DOOR_NUMBER = 0;
+    /**
+     * Building of the apartment
+     */
+    private String building;
+    /**
+     * Floor of the apartment
+     */
+    private String floor;
+    /**
+     * Number of the apartment
+     */
+    private String numberOfApartment;
 
     /**
      * Method that creates a new instance of Address
+     *
      * @param streetAddress street address
-     * @param doorNumber door number
-     * @param floorNumber floor number
-     * @param zipCode zip code
-     * @param state state
-     * @param district district
-     * @param city city
+     * @param doorNumber    door number
+     * @param floorNumber   floor number
+     * @param zipCode       zip code
+     * @param state         state
+     * @param district      district
+     * @param city          city
      */
     public Address(String streetAddress, int doorNumber, int floorNumber, String zipCode, State state, District district, City city) {
         if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || district == null || city == null) {
@@ -95,6 +111,63 @@ public class Address implements Serializable {
         this.city = city;
         this.district = district;
     }
+
+    /**
+     * This method creates an instance of address with the following parameters :
+     *
+     * @param streetAddress     street address
+     * @param building          building
+     * @param floor             floor
+     * @param numberOfApartment number of apartment
+     * @param zipCode           zip code
+     * @param state             state
+     * @param district          district
+     * @param city              city
+     */
+    public Address(String streetAddress, String building, String floor, String numberOfApartment, String zipCode, State state, District district, City city){
+        if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || district == null || city == null) {
+            throw new IllegalArgumentException("Invalid arguments.");
+        }
+        if (zipCode.length() != ZIP_CODE_LENGTH || !StringUtils.isNumeric(zipCode)) {
+            throw new IllegalArgumentException("Invalid zip code.");
+        }
+        this.streetAddress = streetAddress;
+        this.building = building;
+        this.floor = floor;
+        this.numberOfApartment = numberOfApartment;
+        this.zipCode = zipCode;
+        this.state = state;
+        this.city = city;
+        this.district = district;
+    }
+
+    /**
+     * This method creates an instance of address with the following parameters :
+     *
+     * @param streetAddress     street address
+     * @param building          building
+     * @param floor             floor
+     * @param numberOfApartment number of apartment
+     * @param zipCode           zip code
+     * @param state             state
+     * @param city              city
+     */
+    public Address(String streetAddress, String building, String floor, String numberOfApartment, String zipCode, State state, City city){
+        if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || city == null) {
+            throw new IllegalArgumentException("Invalid arguments.");
+        }
+        if (zipCode.length() != ZIP_CODE_LENGTH || !StringUtils.isNumeric(zipCode)) {
+            throw new IllegalArgumentException("Invalid zip code.");
+        }
+        this.streetAddress = streetAddress;
+        this.building = building;
+        this.floor = floor;
+        this.numberOfApartment = numberOfApartment;
+        this.zipCode = zipCode;
+        this.state = state;
+        this.city = city;
+    }
+
     /**
      * Creates a new instance of Address with all the attributes by default
      */
@@ -110,11 +183,12 @@ public class Address implements Serializable {
 
     /**
      * This method creates a new instance of Address with the following parameters:
+     *
      * @param streetAddress street address
-     * @param zipCode zip code
-     * @param state state
-     * @param city city
-     * @param district district
+     * @param city          city
+     * @param district      district
+     * @param state         state
+     * @param zipCode       zip code
      */
     public Address(String streetAddress, City city, District district,State state,String zipCode) {
         if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || district == null || city == null) {
@@ -132,9 +206,11 @@ public class Address implements Serializable {
 
     /**
      * This method creates a new instance of Address with the following parameters:
+     *
      * @param streetAddress street address
-     * @param zipCode zip code
-     * @param state state
+     * @param city          the city
+     * @param state         state
+     * @param zipCode       zip code
      */
     public Address(String streetAddress,City city,  State state,String zipCode) {
         if (StringUtils.isBlank(streetAddress) || StringUtils.isBlank(zipCode) || state == null || city == null) {
@@ -151,104 +227,133 @@ public class Address implements Serializable {
 
     /**
      * Method to show the street
-     * @return street
+     *
+     * @return street street address
      */
     public String getStreetAddress() {
         return streetAddress;
     }
+
     /**
      * Method to show the door number
+     *
      * @return door number
      */
     public int getDoorNumber() {
         return doorNumber;
     }
+
     /**
      * Method to show the floor number
+     *
      * @return floor number
      */
     public int getFloorNumber() {
         return floorNumber;
     }
+
     /**
      * Method to show the zip code
+     *
      * @return zip code
      */
     public String getZipCode() {
         return zipCode;
     }
+
     /**
      * Method to show the state
-     * @return state
+     *
+     * @return state state
      */
     public State getState() {
         return state;
     }
+
     /**
      * Method to show the city
-     * @return city
+     *
+     * @return city city
      */
     public City getCity() {
         return city;
     }
+
     /**
      * Method to show the district
-     * @return district
+     *
+     * @return district district
      */
     public District getDistrict() {
         return district;
     }
+
     /**
      * Method to change the street address
+     *
      * @param streetAddress changed street address
      */
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
+
     /**
      * Method to change the door number
+     *
      * @param doorNumber changed door number
      */
     public void setDoorNumber(int doorNumber) {
         this.doorNumber = doorNumber;
     }
+
     /**
      * Method to change the floor number
+     *
      * @param floorNumber changed floor number
      */
     public void setFloorNumber(int floorNumber) {
         this.floorNumber = floorNumber;
     }
+
     /**
      * Method to change the zip code
+     *
      * @param zipCode changed zip code
      */
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
     /**
      * Method to change the state
+     *
      * @param state changed state
      */
     public void setState(State state) {
         this.state = state;
     }
+
     /**
      * Method to change the city
+     *
      * @param city changed city
      */
     public void setCity(City city) {
         this.city = city;
     }
+
     /**
      * Method to change the district
+     *
      * @param district changed district
      */
     public void setDistrict(District district) {
         this.district = district;
     }
+
     /**
      * Method that checks if the zip code exists
+     *
      * @param zipCode zip code
      * @return true if the zip code exists, false otherwise
      */
@@ -256,8 +361,10 @@ public class Address implements Serializable {
         if ((zipCode.length() != ZIP_CODE_LENGTH) || (StringUtils.isBlank(zipCode)) || (!StringUtils.isNumeric(zipCode))) { return false; }
         else return true;
     }
+
     /**
      * Method that checks if the door number exists
+     *
      * @param floorNumber floor number
      * @return true if the door number exists, false otherwise
      */

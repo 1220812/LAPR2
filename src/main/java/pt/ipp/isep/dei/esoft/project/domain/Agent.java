@@ -5,6 +5,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The type Agent.
+ */
 public class Agent implements Serializable {
 /**
  * The type Agent.

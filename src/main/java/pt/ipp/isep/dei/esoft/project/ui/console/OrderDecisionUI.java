@@ -1,30 +1,47 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.OrderDecisionController;
+import pt.ipp.isep.dei.esoft.project.domain.Agent;
 import pt.ipp.isep.dei.esoft.project.domain.Announcement;
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 import pt.ipp.isep.dei.esoft.project.domain.Status;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDecisionUI implements Runnable{
+/**
+ * The type Order decision ui.
+ */
+public class OrderDecisionUI implements Runnable {
     private final OrderDecisionController controller = new OrderDecisionController();
-    public void run(){
-        int selection = showAndSelectAnnouncement();
-        Announcement announcement = controller.getAnnouncementListSortedByDate().get(selection);
-        listOrders(announcement);
-    }
-    private int showAndSelectAnnouncement (){
-        int selection;
-        selection=Utils.showAndSelectIndex(controller.getAnnouncementListSortedByDate(),"Please select one announcement to display the orders on that announcement!");
-        while (selection > controller.getAnnouncementListSortedByDate().size() || selection < 0) {
-            System.out.println("Invalid option!");
-            selection = Utils.readIntegerFromConsole("Please select one announcement to display the orders on that announcement!");
+
+    public void run() {
+        Agent agent = controller.getCurrentAgent();
+        List<Announcement> assignedAnnouncementList = controller.getAnnouncements();
+        if (assignedAnnouncementList.isEmpty()) {
+            System.out.println("There are no announcements!");
+        } else {
+            int i = 0;
+            for (Announcement announcement : assignedAnnouncementList) {
+                i += 1;
+                System.out.println(i);
+                System.out.println("Date = " + announcement.getDate());
+                System.out.println("Property = " + announcement.getProperty());
+            }
+            int assignedAnnouncement = Utils.readIntegerFromConsole("Select one of the announcements:");
+            while (assignedAnnouncement < 1 || assignedAnnouncement > assignedAnnouncementList.size()) {
+                assignedAnnouncement = Utils.readIntegerFromConsole("Select a valid announcement:");
+            }
+            Announcement announcementChosen = assignedAnnouncementList.get(assignedAnnouncement - 1);
+            listOrders(announcementChosen);
         }
-        return selection;
     }
+
     private void listOrders(Announcement announcement) {
         List<Order> emptyOrderList = new ArrayList<>();
         List<Order> allOrders = controller.getAllOrders();
@@ -40,10 +57,10 @@ public class OrderDecisionUI implements Runnable{
             int option = Utils.readIntegerFromConsole("Please choose an option!");
             switch (option) {
                 case 1:
-                    acceptOrder(order);
+                    acceptOrder(order, announcement);
                     break;
                 case 2:
-                    declineOrder(order);
+                    declineOrder(order, announcement);
                     break;
                 case 0:
                     System.exit(0);
@@ -54,24 +71,78 @@ public class OrderDecisionUI implements Runnable{
             }
         }
     }
-    private void declineOrder(Order order){
-        if(order == null){
+
+    private void declineOrder(Order order, Announcement announcement) {
+        if (order == null) {
             System.out.println("Invalid order ID!");
-        } else if(order.getStatus() == Status.DECLINED){
+        } else if (order.getStatus() == Status.DECLINED) {
             System.out.println("This order has already been declined");
-        } else{
-            controller.declinePurchaseOrder(order);
+        } else {
+            controller.removeOrder(order);
             System.out.println("Order declined!");
         }
+
+        Agent agent = controller.getCurrentAgent();
+        controller.acceptOrder(order, announcement);
+        System.out.println(controller.getAnnouncementListSortedByDate(agent));
+        LocalDate date = LocalDate.now();
+        String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\emails";
+        String replyMessage =
+                "Subject: Order update - declined"
+                        + "\nFrom: " + agent.getEmailAddress()
+                        + "\nTo: " + order.getEmail()
+                        + "\nBody:"
+                        + "\nProperty info:"
+                        + "\nProperty type: " + announcement.getProperty().getPropertyType()
+                        + "\nAddress: \n" + announcement.getProperty().getAddress()
+                        + "\nAgent info:"
+                        + "\nName: " + agent.getName()
+                        + "\nPhone number: " + agent.getPhoneNumber()
+                        + "\nReply date: " + date;
+        File newFile = new File(path);
+        PrintWriter printWriter;
+        try {
+            printWriter = new PrintWriter(newFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        printWriter.write(replyMessage);
+        printWriter.close();
     }
-    private void acceptOrder(Order order){
-        if(order == null){
+
+    private void acceptOrder(Order order, Announcement announcement) {
+        Agent agent = controller.getCurrentAgent();
+        if (order == null) {
             System.out.println("Invalid order ID!");
-        } else if(order.getStatus() == Status.ACCEPTED){
+        } else if (order.getStatus() == Status.ACCEPTED) {
             System.out.println("This order has already been accepted");
-        } else{
-            controller.acceptPurchaseOrder(order);
-            System.out.println("Order accepted!");
+        } else {
+            controller.acceptOrder(order, announcement);
+            System.out.println(controller.getAnnouncementListSortedByDate(agent));
+            LocalDate date = LocalDate.now();
+            String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\emails";
+             String replyMessage =
+             "Subject: Order update - Accepted"
+             + "\nFrom: " + agent.getEmailAddress()
+             + "\nTo: " + order.getEmail()
+             + "\nBody:"
+             + "\nProperty info:"
+             + "\nProperty type: " + announcement.getProperty().getPropertyType()
+             + "\nAddress: \n" + announcement.getProperty().getAddress()
+             + "\nAgent info:"
+             + "\nName: " + agent.getName()
+             + "\nPhone number: " + agent.getPhoneNumber()
+             + "\nReply date: " + date;
+             File newFile = new File(path);
+             PrintWriter printWriter;
+             try {
+             printWriter = new PrintWriter(newFile);
+             } catch (FileNotFoundException e) {
+             throw new RuntimeException(e);
+             }
+             printWriter.write(replyMessage);
+             printWriter.close();
         }
     }
+
 }

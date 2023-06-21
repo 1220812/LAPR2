@@ -10,12 +10,26 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type List deals controller.
+ */
 public class ListDealsController {
+    /**
+     * The Order repository.
+     */
     OrderRepository orderRepository = Repositories.getInstance().getOrderRepository();
+    /**
+     * The Bubble sort.
+     */
     BubbleSort bubbleSort = new BubbleSort();
+    /**
+     * The Insertion sort.
+     */
     InsertionSort insertionSort = new InsertionSort();
+
     /**
      * Method that shows the sorting methods
+     *
      * @return list of sorting methods
      */
     public List<String> showSortingMethods(){
@@ -27,6 +41,7 @@ public class ListDealsController {
 
     /**
      * Method that shows the sorting order
+     *
      * @return list of sorting order
      */
     public List<String> showSortingOrder(){
@@ -35,33 +50,22 @@ public class ListDealsController {
         sortingOrder.add("Descending");
         return sortingOrder;
     }
-    /**
-     * This method returns a list of the all the accepted orders(deals) on the system
-     * @return list of accepted orders
-     */
-    public List<Order> dealsList(List<Order> orders){
-        List<Order> dealsMade = new ArrayList<>();
-        for (Order order: orders) {
-            if(order.getStatus().equals(Status.ACCEPTED)){
-                dealsMade.add(order);
-            }
-        }
-        return dealsMade;
-    }
 
     /**
-     * Method that returns a list of all the orders
-     * @return list of orders
+     * This method returns a list of the all the accepted orders(deals) on the system
+     *
+     * @return list of accepted orders
      */
-    public List<Order> getAllOrders(){
-        return orderRepository.getOrders();
+    public List<Order> dealsList(){
+        return orderRepository.getAcceptedOrders();
     }
 
     /**
      * Method that sorts the deals by the selected sorting method and order
-     * @param dealsList list of deals
+     *
+     * @param dealsList     list of deals
      * @param sortingMethod selected sorting method
-     * @param sortingOrder selected sorting order
+     * @param sortingOrder  selected sorting order
      * @return list of deals sorted
      */
     public List <Order> sortDeals(List<Order> dealsList, int sortingMethod, int sortingOrder){

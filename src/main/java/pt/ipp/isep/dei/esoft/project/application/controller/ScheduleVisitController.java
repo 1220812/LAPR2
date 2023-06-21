@@ -14,6 +14,9 @@ import java.util.List;
  */
 public class ScheduleVisitController {
 
+    /**
+     * The Repositories.
+     */
     Repositories repositories = Repositories.getInstance();
 
     /**
@@ -76,12 +79,11 @@ public class ScheduleVisitController {
     }
 
 
-
     /**
      * Adds a new message for scheduling a visit.
      *
-     * @param name              the name of the message sender.
-     * @param phone             the phone number of the message sender.
+     * @param client            the client
+     * @param announcement      the announcement
      * @param newVisitStartTime the start time of the visit.
      * @param newVisitEndTime   the end time of the visit.
      * @return the created Message object.
@@ -113,15 +115,30 @@ public class ScheduleVisitController {
         return Message.checkVisitTime(newVisitStartTime, newVisitEndTime);
     }
 
+    /**
+     * Check email boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public boolean checkEmail(String email) {
         return (Employee.existsEmail(email));
     }
 
+    /**
+     * Gets current client.
+     *
+     * @return the current client
+     */
     public Client getCurrentClient() {
         AuthenticationRepository rep = Repositories.getInstance().getAuthenticationRepository();
         UserSession us = rep.getCurrentUserSession();
         String email = us.getUserId().getEmail();
         return Repositories.getInstance().getClientRepository().getClientByEmail(email);
+    }
+
+    public List<Announcement> getAnnouncementList() {
+        return repositories.getAnnouncementRepository.getAnnouncementsList();
     }
 }
 

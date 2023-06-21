@@ -8,8 +8,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Available equipment repository test.
+ */
 class AvailableEquipmentRepositoryTest {
 
+    /**
+     * Add.
+     */
     @Test
     void add() {
         AvailableEquipmentRepository repo = new AvailableEquipmentRepository();
@@ -21,6 +27,9 @@ class AvailableEquipmentRepositoryTest {
         assertTrue(list.contains(equipment));
     }
 
+    /**
+     * Validate available equipment.
+     */
     @Test
     void validateAvailableEquipment() {
         AvailableEquipmentRepository repo = new AvailableEquipmentRepository();
@@ -29,6 +38,9 @@ class AvailableEquipmentRepositoryTest {
         assertFalse(repo.validateAvailableEquipment(equipment));
     }
 
+    /**
+     * Gets available equipment list.
+     */
     @Test
     void getAvailableEquipmentList() {
         AvailableEquipmentRepository repo = new AvailableEquipmentRepository();

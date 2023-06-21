@@ -2,9 +2,10 @@ package pt.ipp.isep.dei.esoft.project.domain.SortingMethods;
 
 import pt.ipp.isep.dei.esoft.project.domain.Order;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class InsertionSort {
+public class InsertionSort implements Serializable {
     /**
      * This method uses the insertion sort algorithm to sort the list of orders by ascending order of the area of the property announced
      * @param orderList list of orders to be sorted

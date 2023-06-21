@@ -15,6 +15,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Respond booking request ui.
+ */
 public class RespondBookingRequestUI implements Runnable {
 
     private RespondBookingRequestController controller= new RespondBookingRequestController();
@@ -34,27 +37,32 @@ public class RespondBookingRequestUI implements Runnable {
         if(list.isEmpty()){
             System.out.println("At the moment there are no pending booking requests.");
         }else{
-            Message message = (Message) Utils.showAndSelectOne(list, "Select the booking request to reply to:");
+            System.out.println("Select the booking request to reply to:");
+            Message message = (Message) Utils.listAndSelectOne(list);
             System.out.println(message.toString());
             String reply = Utils.readLineFromConsole("Write reply message to booking request:");
             LocalDate replyDate = LocalDate.now();
 
-            String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\ui\\console\\emails\\emails";
+            String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\emails";
             Announcement announcement = controller.getAnnouncement(message);
-            String print =
+
+            Agent loggedInAgent = controller.getCurrentAgent();
+
+            String replyMessage =
                     "Subject: Response to booking request"
-                    + "\nFrom: " + controller.getAgentEmail(agent)
+                    + "\nFrom: " + loggedInAgent.getEmailAddress()
                     + "\nTo: " + controller.getClientEmail(message)
                     + "\nBody:"
                     + "\nProperty info:"
                     + "\nProperty type: " + controller.getPropertyType(announcement)
-                    + "\nAddress: " + controller.getAddress(announcement)
+                    + "\nAddress: \n" + controller.getAddress(announcement)
                     + "\nAgent info:"
-                    + "\nName: " + controller.getAgentName(agent)
-                    + "\nPhone number: " + controller.getAgentPhone(agent)
+                    + "\nName: " + loggedInAgent.getName()
+                    + "\nPhone number: " + loggedInAgent.getPhoneNumber()
                     + "\nMessage from agent: " + reply
-                    + "\nReply date: " + replyDate;
-
+                    + "\nVisit start time: " + message.getNewVisitStartTime()
+                    + "\nVisit end time: " + message.getNewVisitEndTime()
+                    + "\nReply date: " + replyDate + "\n\n\n";
             File newFile = new File(path);
             PrintWriter printWriter;
             try {
@@ -62,11 +70,11 @@ public class RespondBookingRequestUI implements Runnable {
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-            printWriter.write(print);
+            printWriter.write(replyMessage);
             printWriter.close();
-            newFile.deleteOnExit();
 
-            controller.replyMessage(message);
+
+            controller.replyMessage(message, replyMessage);
         }
     }
 }

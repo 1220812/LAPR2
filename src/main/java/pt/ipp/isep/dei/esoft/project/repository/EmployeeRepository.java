@@ -12,7 +12,11 @@ import java.util.stream.Collectors;
 public class EmployeeRepository implements Serializable {
     private  List<Employee> NewEmployeeList = new ArrayList<>();
 
+    /**
+     * Instantiates a new Employee repository.
+     */
     public EmployeeRepository(){}
+
     /**
      * Add new employee.
      *
@@ -112,6 +116,12 @@ public class EmployeeRepository implements Serializable {
     }
 
 
+    /**
+     * Gets employee by email.
+     *
+     * @param email the email
+     * @return the employee by email
+     */
     public Employee getEmployeeByEmail(String email) {
         for (Employee employee : NewEmployeeList) {
             if (email.equals(employee.getEmail())) {

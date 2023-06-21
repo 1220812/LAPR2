@@ -7,11 +7,9 @@ import pt.ipp.isep.dei.esoft.project.domain.SortingMethods.MergeSort;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -19,7 +17,13 @@ import java.util.Properties;
  */
 public class MessageRepository implements Serializable {
     private static final long serialVersionUID = -2164261031341973438L;
+    /**
+     * The Message list.
+     */
     static List<Message> MessageList;
+    /**
+     * The Message complete list.
+     */
     static List<Message> MessageCompleteList;
 
     /**
@@ -64,14 +68,13 @@ public class MessageRepository implements Serializable {
     }
 
     /**
-     * Adds a new message to the repository.
+     * Add message message.
      *
-     * @param name              the name of the message sender.
-     * @param phone             the phone number of the message sender.
-     * @param inputAnnou        the input announcement for the visit.
-     * @param newVisitStartTime the start time of the visit.
-     * @param newVisitEndTime   the end time of the visit.
-     * @return the created Message object.
+     * @param client            the client
+     * @param announcement      the announcement
+     * @param newVisitStartTime the new visit start time
+     * @param newVisitEndTime   the new visit end time
+     * @return the message
      */
     public static Message addMessage(Client client, Announcement announcement, LocalDateTime newVisitStartTime, LocalDateTime newVisitEndTime) {
         Message message = new Message(client, announcement, newVisitStartTime, newVisitEndTime);
@@ -79,6 +82,12 @@ public class MessageRepository implements Serializable {
         return message;
     }
 
+    /**
+     * Gets request assigned list.
+     *
+     * @param agent the agent
+     * @return the request assigned list
+     */
     public List<Message> getRequestAssignedList(Agent agent) {
         List<Message> assignedList = new ArrayList<>();
         for (Message message : this.MessageList) {
@@ -89,21 +98,50 @@ public class MessageRepository implements Serializable {
         return assignedList;
     }
 
+    /**
+     * Gets client.
+     *
+     * @param message the message
+     * @return the client
+     */
     public Client getClient(Message message) {
         return message.getClient();
     }
 
+    /**
+     * Gets announcement.
+     *
+     * @param message the message
+     * @return the announcement
+     */
     public Announcement getAnnouncement(Message message) {
         return message.getAnnouncement();
     }
 
+    /**
+     * Remove message message.
+     *
+     * @param message the message
+     * @return the message
+     */
     public static Message removeMessage(Message message) {
         getMessageList().remove(message);
         return message;
     }
+
+    /**
+     * The Final list.
+     */
     List<Message> finalList = new ArrayList<>();
 
 
+    /**
+     * Gets message sorted.
+     *
+     * @param messageList the message list
+     * @return the message sorted
+     * @throws IOException the io exception
+     */
     public List<Message> getMessageSorted(List<Message> messageList) throws IOException {
         Properties properties = System.getProperties();
         properties.load(new FileReader("src/main/resources/sortingMethods.properties"));
@@ -127,4 +165,28 @@ public class MessageRepository implements Serializable {
         return finalList;
     }
 
+    /**
+     * Gets request completed list.
+     *
+     * @param client the client
+     * @return the request completed list
+     */
+    public List<Message> getRequestCompletedList(Client client) {
+        List<Message> assignedCompletedList = new ArrayList<>();
+        for (Message message : this.MessageCompleteList) {
+            if (message.getClient().getEmailAddress().equalsIgnoreCase(client.getEmailAddress())) {
+                assignedCompletedList.add(message);
+            }
+        }
+        return assignedCompletedList;
+    }
+
+    /**
+     * Gets message complete list.
+     *
+     * @return the message complete list
+     */
+    public List<Message> getMessageCompleteList() {
+        return MessageCompleteList;
+    }
 }

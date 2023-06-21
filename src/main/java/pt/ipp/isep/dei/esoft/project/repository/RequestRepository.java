@@ -13,23 +13,41 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
+/**
+ * The type Request repository.
+ */
 public class RequestRepository implements Serializable {
+    private static final long serialVersionUID = -958191308379930267L;
     /**
-     * List of requests
+     * The Request list.
      */
     List<Request> requestList = new ArrayList<>();
 
+    /**
+     * The Accepted request list.
+     */
     List<Request> acceptedRequestList = new ArrayList<>();
 
+    /**
+     * The Declined request list.
+     */
     List<Request> declinedRequestList = new ArrayList<>();
 
     /**
      * Get property types
+     *
+     * @return the requests
      */
     public List<Request> getRequests() {
         return List.copyOf(requestList);
     }
 
+    /**
+     * Add boolean.
+     *
+     * @param request the request
+     * @return the boolean
+     */
     public boolean add(Request request) {
 
         if(validateRequest(request)){
@@ -38,23 +56,47 @@ public class RequestRepository implements Serializable {
         return false;
     }
 
+    /**
+     * Add request request.
+     *
+     * @param request the request
+     * @return the request
+     */
     public  Request addRequest(Request request) {
         if (validateRequest(request))
             requestList.add(request);
         return request;
     }
 
+    /**
+     * Remove request request.
+     *
+     * @param request the request
+     * @return the request
+     */
     public Request removeRequest(Request request) {
         requestList.remove(request);
         return request;
     }
 
 
+    /**
+     * Add accepted list.
+     *
+     * @param request the request
+     * @return the list
+     */
     public List<Request> addAccepted(Request request) {
         acceptedRequestList.add(request);
         return acceptedRequestList;
     }
 
+    /**
+     * Add declined list.
+     *
+     * @param request the request
+     * @return the list
+     */
     public List<Request> addDeclined(Request request) {
 
         declinedRequestList.add(request);
@@ -67,6 +109,12 @@ public class RequestRepository implements Serializable {
         return isValid;
     }
 
+    /**
+     * Gets request assigned list.
+     *
+     * @param agent the agent
+     * @return the request assigned list
+     */
     public List<Request> getRequestAssignedList(Agent agent) {
         List<Request> assignedList = new ArrayList<>();
         for (Request request : this.requestList) {
@@ -77,6 +125,9 @@ public class RequestRepository implements Serializable {
         return assignedList;
     }
 
+    /**
+     * The Final list.
+     */
     List<Request> finalList = new ArrayList<>();
 
 //    public List<Request> getRequestsSorted(List<Request> requestList) throws IOException {
@@ -103,6 +154,12 @@ public class RequestRepository implements Serializable {
 //        return finalList;
 //    }
 
+    /**
+     * Gets agent list.
+     *
+     * @param agent the agent
+     * @return the agent list
+     */
     public List<Request> getAgentList(Agent agent) {
         List<Request> newList = new ArrayList<>();
         for (int i = 0 ; i < requestList.size(); i++){
@@ -113,6 +170,14 @@ public class RequestRepository implements Serializable {
         return newList;
     }
 
+    /**
+     * Gets sorted visit request list.
+     *
+     * @param list  the list
+     * @param begin the begin
+     * @param end   the end
+     * @return the sorted visit request list
+     */
     public List<Request> getSortedVisitRequestList(List<Request> list, LocalDate begin, LocalDate end) {
         List<Request> newList = new ArrayList<>();
         ZoneId zId = ZoneId.systemDefault();
@@ -137,5 +202,15 @@ public class RequestRepository implements Serializable {
 
         }
         return newList;
+    }
+
+    /**
+     * Gets requests sorted.
+     *
+     * @param requests the requests
+     * @return the requests sorted
+     */
+    public List<Request> getRequestsSorted(List<Request> requests) {
+        return requestList;
     }
 }

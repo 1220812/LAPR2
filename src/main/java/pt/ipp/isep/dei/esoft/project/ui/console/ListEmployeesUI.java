@@ -4,9 +4,15 @@ import pt.ipp.isep.dei.esoft.project.application.controller.ListEmployeesControl
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterStoreController;
 import pt.ipp.isep.dei.esoft.project.domain.Employee;
 
+/**
+ * The type List employees ui.
+ */
 public class ListEmployeesUI implements Runnable {
 
 
+    /**
+     * The Controller.
+     */
     ListEmployeesController controller = new ListEmployeesController();
 
     @Override

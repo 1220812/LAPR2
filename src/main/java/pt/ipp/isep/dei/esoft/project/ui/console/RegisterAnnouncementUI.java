@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,9 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Photographs;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+/**
+ * The type Register announcement ui.
+ */
 public class RegisterAnnouncementUI implements Runnable {
 
     private final RegisterAnnouncementController controller = new RegisterAnnouncementController();
@@ -48,7 +54,10 @@ public class RegisterAnnouncementUI implements Runnable {
     private double commission;
     private final String DEFAULT_REQUESTTYPE = "Sell";
     private final double DEFAULT_CONTRACTDURATION = 0;
-    List<AvailableEquipment> availableEquipment = new ArrayList<>();
+    /**
+     * The Available equipment list.
+     */
+    List<AvailableEquipment> availableEquipmentList = new ArrayList<>();
 
     private PropertyType propertyType;
     private Agent agent;
@@ -66,8 +75,7 @@ public class RegisterAnnouncementUI implements Runnable {
         ownerEmail = ler.nextLine();
         if (!controller.checkOwnerExistence(ownerEmail)) {
             System.out.println("Owner not registed, please register Owner.");
-        }
-        else {
+        } else {
             System.out.println("Property type:");
             propertyType = Utils.listAndSelectOne(controller.getPropertyType());
             if (propertyType == null) return;
@@ -96,7 +104,7 @@ public class RegisterAnnouncementUI implements Runnable {
 
 
             zipCode = Utils.readLineFromConsole("Insert the zip code: ");
-            while (zipCode==null || zipCode.length() != 5){
+            while (zipCode == null || zipCode.length() != 5) {
                 zipCode = Utils.readLineFromConsole("Please insert a valid zip code.");
             }
 
@@ -154,7 +162,20 @@ public class RegisterAnnouncementUI implements Runnable {
                     parking = Utils.readIntegerFromConsole("Please select a valid number of parking spaces.");
                 }
 
-                availableEquipment = Utils.listAndSelectMany(controller.getAvailableEquipmentList());
+                String equipment = Utils.readLineFromConsole("Insert the available equipment: (enter 0 to exit)");
+                if (!(equipment.equals("0"))) {
+                    AvailableEquipment availableEquipment = new AvailableEquipment(equipment);
+                    availableEquipmentList.add(availableEquipment);
+                    System.out.println("Equipment added");
+                }
+                while (!(equipment.equals("0"))) {
+                    equipment = Utils.readLineFromConsole("Insert the available equipment: (enter 0 to exit)");
+                    if (!(equipment.equals("0"))) {
+                        AvailableEquipment availableEquipment = new AvailableEquipment(equipment);
+                        availableEquipmentList.add(availableEquipment);
+                        System.out.println("Equipment added");
+                    }
+                }
 
 
                 if (inputPropertyType.equalsIgnoreCase("House")) {
@@ -195,9 +216,9 @@ public class RegisterAnnouncementUI implements Runnable {
             if (inputPropertyType.equalsIgnoreCase("Land")) {
                 property = controller.createProperty(area, distanceFromCityCenter, address, propertyType, photos);
             } else if (inputPropertyType.equalsIgnoreCase("Apartment")) {
-                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, airConditioning, centralHeating);
+                property = controller.createResidence(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, propertyType, photos, availableEquipmentList);
             } else if (inputPropertyType.equalsIgnoreCase("House")) {
-                property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, airConditioning, centralHeating, basement, sunExposure, loft, propertyType, photos, requestType);
+                property = controller.createHouse(address, area, distanceFromCityCenter, numberOfBathrooms, numberOfBedrooms, parking, basement, sunExposure, loft, propertyType, photos, availableEquipmentList);
             }
             announcement = controller.createAnnouncement(property, date, commissionType, commission, requestType, propertyType, agent, store, owner, price);
 
@@ -208,9 +229,32 @@ public class RegisterAnnouncementUI implements Runnable {
                 flag = Utils.readLineFromConsole("Insert valid option. (y/n)");
             if (flag.equalsIgnoreCase("y")) {
                 controller.registerAnnouncement(announcement);
-                System.out.println("Announcement registered successfully");
-            }
-            else if(flag.equalsIgnoreCase("n")) {
+                String path = "src\\main\\java\\pt\\ipp\\isep\\dei\\esoft\\project\\application\\notification\\sms";
+
+                String replyMessage =
+                        "Subject: Announcement request registed"
+                                + "\nFrom: " + controller.getAgentPhone(agent)
+                                + "\nTo: " + controller.getOwnerPhone(owner)
+                                + "\nBody:"
+                                + "\nProperty info:"
+                                + "\nProperty type: " + controller.getPropertyTypeByAnnouncement(announcement)
+                                + "\nAddress: \n" + controller.getAddress(announcement)
+                                + "\nAgent info:"
+                                + "\nName: " + controller.getAgentName(agent)
+                                + "\nReply date: " + date;
+
+                File newFile = new File(path);
+                PrintWriter printWriter;
+                try {
+                    printWriter = new PrintWriter(newFile);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                printWriter.write(replyMessage);
+                printWriter.close();
+
+                System.out.println("Announcement registered and sms sent successfully");
+            } else if (flag.equalsIgnoreCase("n")) {
                 System.out.println("Operation canceled");
             }
         }

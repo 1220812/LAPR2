@@ -12,12 +12,16 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * The type Authentication ui.
+ *
  * @author Paulo Maio pam@isep.ipp.pt
  */
-
 public class AuthenticationUI implements Runnable {
     private final AuthenticationController ctrl;
 
+    /**
+     * Instantiates a new Authentication ui.
+     */
     public AuthenticationUI() {
         ctrl = new AuthenticationController();
     }
@@ -49,6 +53,8 @@ public class AuthenticationUI implements Runnable {
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_AGENT, new AgentUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_CLIENT, new ClientUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_NETWORK_MANAGER, new NetworkUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_STORE_MANAGER, new StoreUI()));
+
 
 
         //TODO: Complete with other user roles and related RoleUI

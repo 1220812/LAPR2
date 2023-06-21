@@ -2,20 +2,25 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.*;
 
+/**
+ * The type Email service.
+ */
 public class EmailService implements Serializable {
+
     /**
      * Method that sends an email to the user with the password when he registers in the system
+     *
      * @param email user´s email
-     * @param pass user´s password
+     * @param pass  user´s password
      */
-
     public static void sendEmail(String email, String pass) {
         System.out.println("Password ("+ pass+") was sent to the user´s email ("+email+")");
     }
 
     /**
      * Method to wright to a file
-     * @param fileName name of the file generated
+     *
+     * @param fileName  name of the file generated
      * @param emailText text to be written in the file
      */
     public static void writeToFile(String fileName, String emailText){
@@ -32,8 +37,9 @@ public class EmailService implements Serializable {
 
     /**
      * This method sends an email to the client
+     *
      * @param clientEmail client's email
-     * @param message sending message
+     * @param message     sending message
      */
     public void sendMessage(String clientEmail, String message) {
         String emailText = "Dear client " + clientEmail + ",\n\n" +

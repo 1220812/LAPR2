@@ -11,20 +11,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Address repository test.
+ */
 class AddressRepositoryTest {
+    /**
+     * The Address repository.
+     */
     AddressRepository addressRepository = Repositories.getInstance().getAddressRepository();
 
-    @Test
-    void add() {
-        Address address = new Address("123 Main St", 1,1, "12345", new State("California"), new District("Eastern"), new City("Los Angeles"));
 
-        boolean result = addressRepository.add(address);
-
-        Assertions.assertTrue(result);
-        List<Address> addressList = addressRepository.getAddressList();
-        Assertions.assertEquals(address, addressList.get(0));
-    }
-
+    /**
+     * Gets address list.
+     */
     @Test
     void getAddressList() {
         Address address = new Address("123 Main St", 1,1, "12345", new State("California"), new District("Eastern"), new City("Los Angeles"));

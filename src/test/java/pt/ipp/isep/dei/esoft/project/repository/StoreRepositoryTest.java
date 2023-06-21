@@ -7,8 +7,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Store repository test.
+ */
 class StoreRepositoryTest {
 
+    /**
+     * Add store.
+     */
     @Test
     void addStore() {
         StoreRepository storeRepository = new StoreRepository();
@@ -19,6 +25,9 @@ class StoreRepositoryTest {
         assertTrue(stores.contains(store));
     }
 
+    /**
+     * Gets store list.
+     */
     @Test
     void getStoreList() {
         StoreRepository storeRepository = new StoreRepository();
@@ -32,6 +41,9 @@ class StoreRepositoryTest {
         assertTrue(stores.contains(store1));
     }
 
+    /**
+     * Create store.
+     */
     @Test
     void createStore() {
         StoreRepository storeRepository = new StoreRepository();
@@ -41,6 +53,11 @@ class StoreRepositoryTest {
         assertTrue(stores.contains(store));
     }
 
+    /**
+     * Add.
+     *
+     * @throws CloneNotSupportedException the clone not supported exception
+     */
     @Test
     void add() throws CloneNotSupportedException {
         StoreRepository storeRepository = new StoreRepository();

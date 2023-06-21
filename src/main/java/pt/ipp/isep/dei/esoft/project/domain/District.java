@@ -2,6 +2,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import java.io.Serializable;
 
+/**
+ * The type District.
+ */
 public class District implements Serializable {
     /**
      * District name
@@ -14,6 +17,7 @@ public class District implements Serializable {
 
     /**
      * Creates a new instance of district with name
+     *
      * @param name district name
      */
     public District (String name){
@@ -29,6 +33,7 @@ public class District implements Serializable {
 
     /**
      * Method to show the name of the district
+     *
      * @return district name
      */
     public String getName() {
@@ -37,6 +42,7 @@ public class District implements Serializable {
 
     /**
      * Method to change the name of the district
+     *
      * @param name changed district name
      */
     public void setName(String name) {

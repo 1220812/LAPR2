@@ -4,8 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Network manager test.
+ */
 class NetworkManagerTest {
 
+    /**
+     * Gets name.
+     */
     @Test
     void getName() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -14,6 +20,9 @@ class NetworkManagerTest {
         assertEquals("John Doe", networkManager.getName());
     }
 
+    /**
+     * Sets name.
+     */
     @Test
     void setName() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -24,6 +33,9 @@ class NetworkManagerTest {
         assertEquals("Jane Doe", networkManager.getName());
     }
 
+    /**
+     * Gets phone number.
+     */
     @Test
     void getPhoneNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -32,6 +44,9 @@ class NetworkManagerTest {
         assertEquals("123456789", networkManager.getPhoneNumber());
     }
 
+    /**
+     * Sets phone number.
+     */
     @Test
     void setPhoneNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -42,6 +57,9 @@ class NetworkManagerTest {
         assertEquals("987654321", networkManager.getPhoneNumber());
     }
 
+    /**
+     * Gets email address.
+     */
     @Test
     void getEmailAddress() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -50,6 +68,9 @@ class NetworkManagerTest {
         assertEquals("john@example.com", networkManager.getEmailAddress());
     }
 
+    /**
+     * Sets email address.
+     */
     @Test
     void setEmailAddress() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -60,6 +81,9 @@ class NetworkManagerTest {
         assertEquals("example", networkManager.getEmailAddress());
     }
 
+    /**
+     * Gets tax number.
+     */
     @Test
     void getTaxNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -68,6 +92,9 @@ class NetworkManagerTest {
         assertEquals(new TaxNumber("123456789"), networkManager.getTaxNumber());
     }
 
+    /**
+     * Sets tax number.
+     */
     @Test
     void setTaxNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -78,6 +105,9 @@ class NetworkManagerTest {
         assertEquals(new TaxNumber("987654321"), networkManager.getTaxNumber());
     }
 
+    /**
+     * Gets passport card number.
+     */
     @Test
     void getPassportCardNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -86,6 +116,9 @@ class NetworkManagerTest {
         assertEquals(new PassportCardNumber("12345678"), networkManager.getPassportCardNumber());
     }
 
+    /**
+     * Sets passport card number.
+     */
     @Test
     void setPassportCardNumber() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -96,6 +129,9 @@ class NetworkManagerTest {
         assertEquals(new PassportCardNumber("98765432"), networkManager.getPassportCardNumber());
     }
 
+    /**
+     * Gets role.
+     */
     @Test
     void getRole() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -104,6 +140,9 @@ class NetworkManagerTest {
         assertEquals(new Role("Network Manager"), networkManager.getRole());
     }
 
+    /**
+     * Sets role.
+     */
     @Test
     void setRole() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -114,6 +153,9 @@ class NetworkManagerTest {
         assertEquals(new Role("Network Manager 2"), networkManager.getRole());
     }
 
+    /**
+     * Gets agency.
+     */
     @Test
     void getAgency() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -122,6 +164,9 @@ class NetworkManagerTest {
         assertEquals(new Agency(1, "Agency 1", address, "test1@example.com", "111-111-111"), networkManager.getAgency());
     }
 
+    /**
+     * Sets agency.
+     */
     @Test
     void setAgency() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -132,6 +177,9 @@ class NetworkManagerTest {
         assertEquals(new Agency(2, "Agency 2", address, "test@example", "222-222-222"), networkManager.getAgency());
     }
 
+    /**
+     * Gets pass.
+     */
     @Test
     void getPass() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -140,6 +188,9 @@ class NetworkManagerTest {
         assertEquals("password", networkManager.getPass());
     }
 
+    /**
+     * Sets pass.
+     */
     @Test
     void setPass() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));
@@ -150,6 +201,9 @@ class NetworkManagerTest {
         assertEquals("password2", networkManager.getPass());
     }
 
+    /**
+     * Test clone.
+     */
     @Test
     void testClone() {
         Address address = new Address("123 Main St", 1, 2, "12345", new State("California"), new District("East"), new City("Los Angeles"));

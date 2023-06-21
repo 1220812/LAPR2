@@ -2,6 +2,7 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
+skinparam lyne type ortho
 
 'left to right direction
 
@@ -22,50 +23,107 @@ class Employee{
 name
 phoneNumber
 emailAddress
-taxNumber
-passportCardNumber
 }
 
-class Decision{
-decision
+class Agent{
 }
 
 class Order{
 orderNumber
 clientEmail
 price
-announcement
 }
 
 
-class User{
+class Customer{
 name
 phoneNumber
 emailAddress
-taxNumber
-passportCardNumber
 }
 
 class Announcement{
 localDate
 property
-comissionType
-comission
+commissionType
+commission
 requestType
 }
 
-class EmailService{
-informationEmail
+class Property{
+area
+distanceFromTheCityCentre
+price
 }
 
+class Residence{
+numberOfBedrooms
+numberOfBathrooms
+numberOfParkingSpaces
+availableEquipment
+}
 
-Employee "1" -- "*" Decision : makes >
+class House{
+existenceOfABasement
+inhabitableLoft
+}
+
+class SunExposure{
+direction
+}
+
+class PropertyType{
+propertyType
+}
+
+class PassportCardNumber{
+passportCardNumber
+}
+
+class District{
+districtName
+}
+
+class State{
+state
+}
+
+class City{
+cityName
+}
+
+class Address{
+doorNumber
+floorNumber
+street
+postalCode
+}
+
+class TaxNumber{
+taxNumber
+}
+
+class PassportCardNumber{
+passportCardNumber
+}
+
 Announcement "1" -- "1" Property : announces >
-User "1" -- "1...*" Order : makes
 Order "*" -- "1" Announcement : > on
-Employee "1" --"*" Order : analyzes >
-Decision "1" -- "1" Order : has <
-Decision -- EmailService : depending on <
-EmailService -- User : informing about the decision >
+Agent "1" --"*" Order : analyzes >
+Agent --|> Employee : is a
+Residence ---|> Property : is a
+House --|> Residence : is a
+House -- SunExposure : has >
+Customer -- "1" TaxNumber : has >
+Customer -- "1" PassportCardNumber : has >
+Employee --- "1" TaxNumber : has >
+Employee -- "1" PassportCardNumber : has >
+Property -- Address : has >
+Address -- City : has >
+City -- District : is in >
+District -- State : is in >
+Customer -- Address : has >
+Property -- "1" PropertyType : has >
+Customer --- "*" Order : makes >
+
 
 @enduml
