@@ -13,7 +13,6 @@ public class BubbleSort implements Serializable {
 
     public List<Message> sortByDate(List<Message> messageList) {
         List<Message> tempList = new ArrayList<>(messageList);
-
         int n = tempList.size();
         boolean swapped;
         for (int i = 0; i < n - 1; i++) {
@@ -76,6 +75,4 @@ public class BubbleSort implements Serializable {
             }
         }
     }
-
-
 }

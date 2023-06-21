@@ -81,6 +81,7 @@
 ### Interface Constraints
 
 * The application graphical interface is to be developed in JavaFX 11.
+* Images 
 
 ### Physical Constraints
 
