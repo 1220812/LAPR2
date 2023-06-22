@@ -23,9 +23,12 @@ REQREPO -> SM : System.getProperties()
 activate SM
 
 SM --> REQREPO : returns algorithm
+deactivate
 
 REQREPO --> CTRL : sortedList
+deactivate
 
 CTRL --> UI : sortedList
+deactivate
 
 @enduml

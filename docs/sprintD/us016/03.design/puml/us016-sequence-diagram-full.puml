@@ -13,7 +13,6 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "MessageRepository:\nMessageRepository" as MessageRepository
 participant "Message" as Message
-participant "bookingRepository:\nBookingRepository" as BookingRepository
 
 activate ADM
 
@@ -66,6 +65,7 @@ activate ADM
 
 
        UI -> CTRL : replyMessage
+       activate CTRL
 
       CTRL -> MessageRepository: getBookingRequest
 
