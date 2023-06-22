@@ -81,7 +81,7 @@
 ### Interface Constraints
 
 * The application graphical interface is to be developed in JavaFX 11.
-* Images 
+* Images and diagrams must be stored in SVG format.
 
 ### Physical Constraints
 
