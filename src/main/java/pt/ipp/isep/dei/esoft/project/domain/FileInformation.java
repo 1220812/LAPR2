@@ -276,8 +276,8 @@ public class FileInformation {
                 if(!storeExists) {
                     storeRepository.add(newStore);
                 }
-                String[] data1 = announcementDateString.split("/");
-                String[] data2 = businessDateString.split("/");
+                String[] data1 = announcementDateString.split("-");
+                String[] data2 = businessDateString.split("-");
                 LocalDate date = LocalDate.of(Integer.parseInt(data1[2].trim()), Integer.parseInt(data1[1].trim()), Integer.parseInt(data1[0].trim()));
                 LocalDate date1 = LocalDate.of(Integer.parseInt(data2[2].trim()), Integer.parseInt(data2[1].trim()), Integer.parseInt(data2[0].trim()));
                 String ownerTaxNumber1 = ownerTaxNumber.replaceAll("-", "");
